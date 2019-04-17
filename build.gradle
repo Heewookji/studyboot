@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'eclipse-wtp' // 자바 웹 프로젝트 플러그인
+    id 'war' // 웹 아카이브 파일(.war)을 다루는 플러그인
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:26.0-jre'
+    testImplementation 'junit:junit:4.12'
+}
