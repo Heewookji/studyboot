@@ -34,11 +34,8 @@
     - 해당 상세 정보에서 스터디가 생성된지 얼마 안된 스터디라 활동량과 전체 평점이 없다면,
         - 시스템은 생성된지 얼마 안된 스터디임을 출력하고 기본 값으로 설정한 값을 출력해 보여준다.
 
-## UI 프로토타입
 
-### 스터디 목록
-
-#### 대안 흐름(Alternaive Flows)
+### 대안 흐름(Alternaive Flows)
 
  - 1.1 액터는 원하는 카테고리가 없을 경우 검색창에 자신이 원하는 스터디를 검색한다.
  - 1.2 시스템은 해당 검색어를 키워드로 등록된 스터디의 목록을 출력한다.
@@ -51,5 +48,7 @@
 <img src="./UI/studylist01.png" width="400"/>
 <img src="./UI/studylist02.png" width="400"/>
 <img src="./UI/studylist03.png" width="400"/>
+<img src="./UI/스터디상세.png" width="400"/>
+<img src="./UI/스터디상세2.png" width="400"/>
 
 
