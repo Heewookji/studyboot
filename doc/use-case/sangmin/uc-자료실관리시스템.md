@@ -1,4 +1,4 @@
-# UC001 - 자료실 관리(Cloud System)
+# UC001 - 자료실 관리 시스템(Cloud System)
 파일을 등록, 조회, 수정, 삭제 하는 유스케이스다.
 
 ## 주 액터(Primary Actor)
