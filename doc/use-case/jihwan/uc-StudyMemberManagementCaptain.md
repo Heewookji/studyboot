@@ -1,7 +1,7 @@
-#UC - 멤버관리 시스템(uc-StudyMemberManagementCaptain)
+#UC - 스터디 멤버관리 시스템(StudyMemberManagementCaptain)
 - 멤버를 추방, 스터디장의 권한 위임을 할 수 있는 유스케이스이다.
 
-## 주 액터(Primay Acto)
+## 주 액터(Primary Actor)
 스터디 장
 
 ## 보조 액터(Secondary Actor)
@@ -16,7 +16,7 @@
 - 멤버를 추방 하였다.
 - 멤버에게 권한을 위임 하였다.
 
-## 시나리오(Flow of Evnets)
+## 시나리오(Flow of Events)
 
 ### 멤버 추방
 1. 액터는 멤버 상세 조회 폼에서 추방 버튼을 클릭 한다.

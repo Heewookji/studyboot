@@ -1,7 +1,7 @@
-#UC - 멤버관리 시스템(uc-StudyMemberManagement)
+#UC - 스터디 멤버관리 시스템(StudyMemberManagement)
 - 멤버를 조회, 신고하고, 쪽지를 보내는 유스케이스이다.
 
-## 주 액터(Primay Acto)
+## 주 액터(Primary Actor)
 스터디 원
 
 ## 보조 액터(Secondary Actor)
@@ -17,7 +17,7 @@
 - 멤버를 신고하였다.
 - 멤버에게 쪽지를 보냈다.
 
-## 시나리오(Flow of Evnets)
+## 시나리오(Flow of Events)
 
 ### 멤버 조회하기 (스터디 장도 가능)
 1. 액터는 해당 스터디를 클릭하면 좌측에 멤버 목록을 확인한다. 

@@ -1,7 +1,7 @@
 #UC - 스터디 가입(Study Join)
 개설된 스터디에 대해 가입을 신청하는 유스케이스이다.
 
-## 주 액터(Primay Acto)
+## 주 액터(Primary Actor)
 스터디 원
 
 ## 보조 액터(Secondary Actor)
@@ -15,7 +15,7 @@
 - 다른 페이지로 이동하였다.
 - 스터디에 가입 하였다.
 
-## 시나리오(Flow of Evnets)
+## 시나리오(Flow of Events)
 
 ### 기본 흐름(Basic Flows)
 - 1. 액터는 스터디 조회 후 원하는 스터디를 클릭한다.
