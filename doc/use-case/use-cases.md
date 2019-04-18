@@ -29,7 +29,7 @@
 
 <img src="./diagram/usecase-03.jpg" width="400">
 
-<img src="./diagram/usecase-03.jpg" width="400">
+<img src="./diagram/usecase-04.jpg" width="400">
 
 
 ### [회원가입](sanghyun/uc-회원가입.md)(비회원)
