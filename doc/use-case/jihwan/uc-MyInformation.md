@@ -33,4 +33,4 @@
 - 3.3 새 비밀번호와 새 비밀번호 확인의 값이 일치하지 않을 경우 알림 문구를 출력한다.
 
 ### 내 정보
-![내 정보](./images/uc-studyMember.png)
+![내 정보](./images/uc-myInformation.png)

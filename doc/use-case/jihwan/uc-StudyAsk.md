@@ -28,4 +28,4 @@
 ### 예외 흐름(Exception Flows)
 
 ### 스터디 문의
-![스터디 문의](./images/uc-studyJoin&Ask.png)
+![스터디 문의](./images/uc-studyAsk.png)
