@@ -1,4 +1,4 @@
-# UC005 - 스터디 게시판 관리(Study Board Management)
+# UC - 스터디 게시판 관리(Study Board Management)
 
 스터디 게시글을 등록, 조회, 변경, 삭제하는 유스케이스이다.
 
