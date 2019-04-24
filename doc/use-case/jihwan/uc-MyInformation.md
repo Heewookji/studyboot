@@ -1,8 +1,8 @@
 #UC - 내 정보(Login)
 회원 가입시 입력한 정보를 조회, 변경하는 유스케이스이다.
 
-## 주 액터(Primay Acto)
-스터디 원, 스터디 장
+## 주 액터(Primary Actor)
+스터디 원
 
 ## 보조 액터(Secondary Actor)
 
@@ -14,7 +14,7 @@
 - 다른 페이지로 이동하였다.
 - 정보를 변경 하였다.
 
-## 시나리오(Flow of Evnets)
+## 시나리오(Flow of Events) (스터디 장도 가능)
 
 ### 기본 흐름(Basic Flows)
 - 1. 액터가 마이페이지에서 내 정보 버튼을 클릭할 때 이 유스케이스를 시작한다.
@@ -33,4 +33,4 @@
 - 3.3 새 비밀번호와 새 비밀번호 확인의 값이 일치하지 않을 경우 알림 문구를 출력한다.
 
 ### 내 정보
-![내 정보](./images/uc-studyMember.png)
+![내 정보](./images/uc-myInformation.png)

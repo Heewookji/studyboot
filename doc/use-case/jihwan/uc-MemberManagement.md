@@ -1,7 +1,7 @@
-#UC -회원관리 시스템(uc-MemberManagement)
+#UC -회원관리 시스템(MemberManagement)
 - 가입한 회원들을 관리자가 관리하는 유스케이스
 
-## 주 액터(Primay Acto)
+## 주 액터(Primary Actor)
 관리자
 
 ## 보조 액터(Secondary Actor)
@@ -14,7 +14,7 @@
 - 회원을 상세 조회를 하였다.
 - 회원을 추방 하였다.
 
-## 시나리오(Flow of Evnets)
+## 시나리오(Flow of Events)
 
 ### 회원 상세조회 
 - 1. 액터는 회원 관리 탭을 클릭한다.
