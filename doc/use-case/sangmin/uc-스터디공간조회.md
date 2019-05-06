@@ -36,7 +36,9 @@
 
 ### 스터디룸 조회 목록
 
-<img src="./UI/space.png" width="400"/>
+<img src="./UI/spacelist.png" width="400"/>
+<img src="./UI/spacedetail.png" width="400"/>
+<img src="./UI/spacedetail2.png" width="400"/>
 
 
 
