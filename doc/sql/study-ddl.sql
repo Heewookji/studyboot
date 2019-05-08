@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS sms_apl_std RESTRICT;
 DROP TABLE IF EXISTS sms_pick_std RESTRICT;
 
 -- 회원 자료실
-DROP TABLE IF EXISTS sms_member_arch RESTRICT;
+DROP TABLE IF EXISTS sms_member_arch RESTRICT;  
 
 -- 회원 평점 정보
 DROP TABLE IF EXISTS sms_member_rate_info RESTRICT;
@@ -122,7 +122,7 @@ CREATE TABLE sms_member (
   age       INTEGER      NOT NULL COMMENT '나이', -- 나이
   tel       VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo     VARCHAR(255) NOT NULL COMMENT '사진', -- 사진
-  admin     BOOLEAN      NOT NULL COMMENT '관리자여부', -- 관리자여부
+  admin     BOOLEAN      NOT NULL DEFAULT false COMMENT '관리자여부', -- 관리자여부
   adr_lms   CHAR(6)      NOT NULL COMMENT '활동지역' -- 활동지역
 )
 COMMENT '회원';
