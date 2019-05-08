@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS sms_apl_std RESTRICT;
 DROP TABLE IF EXISTS sms_pick_std RESTRICT;
 
 -- 회원 자료실
-DROP TABLE IF EXISTS sms_member_arch RESTRICT;  
+DROP TABLE IF EXISTS sms_member_arch RESTRICT;
 
 -- 회원 평점 정보
 DROP TABLE IF EXISTS sms_member_rate_info RESTRICT;
@@ -330,7 +330,7 @@ CREATE TABLE sms_std_member (
   end_state_cls_id INTEGER NULL     COMMENT '탙퇴추방완료분류번호', -- 탙퇴추방완료분류번호
   join_date        DATE    NOT NULL DEFAULT current_date() COMMENT '스터디 가입일', -- 스터디 가입일
   end_date         DATE    NULL     COMMENT '스터디원 종료일', -- 스터디원 종료일
-  leader           BOOLEAN NOT NULL COMMENT '스터디장여부', -- 스터디장여부
+  leader           BOOLEAN NOT NULL DEFAULT false COMMENT '스터디장여부', -- 스터디장여부
   atn_pct          DOUBLE  NULL     COMMENT '스터디 출석율', -- 스터디 출석율
   arch_cnt         INTEGER NULL     COMMENT '업로드 횟수' -- 업로드 횟수
 )
