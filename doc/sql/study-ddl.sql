@@ -1,5 +1,5 @@
--- 회원 평가
-DROP TABLE IF EXISTS sms_member_rate RESTRICT;
+-- 스터디 종료 지표
+DROP TABLE IF EXISTS sms_member_endrate RESTRICT;
 
 -- 회원
 DROP TABLE IF EXISTS sms_member RESTRICT;
@@ -94,19 +94,18 @@ DROP TABLE IF EXISTS sms_rest_day RESTRICT;
 -- 스터디 활동일
 DROP TABLE IF EXISTS sms_std_day RESTRICT;
 
--- 회원 평가
-CREATE TABLE sms_member_rate (
+-- 스터디 종료 지표
+CREATE TABLE sms_member_endrate (
   member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   cmplt_pct DOUBLE  NULL     COMMENT '완료율', -- 완료율
   drop_pct  DOUBLE  NULL     COMMENT '탈퇴율', -- 탈퇴율
-  exile_pct DOUBLE  NULL     COMMENT '추방률', -- 추방률
-  rate_dt   DATE    NULL     COMMENT '평가일' -- 평가일
+  exile_pct DOUBLE  NULL     COMMENT '추방률' -- 추방률
 )
-COMMENT '회원 평가';
+COMMENT '스터디 종료 지표';
 
--- 회원 평가
-ALTER TABLE sms_member_rate
-  ADD CONSTRAINT PK_sms_member_rate -- 회원 평가 기본키
+-- 스터디 종료 지표
+ALTER TABLE sms_member_endrate
+  ADD CONSTRAINT PK_sms_member_endrate -- 스터디 종료 지표 기본키
     PRIMARY KEY (
       member_id -- 회원번호
     );
@@ -117,8 +116,9 @@ CREATE TABLE sms_member (
   pwd       VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
   email     VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
   nick_name VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
-  join_date DATE         NULL     COMMENT '가입일', -- 가입일
+  join_date DATE         NULL     DEFAULT current_date() COMMENT '가입일', -- 가입일
   name      VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  rate      DOUBLE       NOT NULL DEFAULT 3.0 COMMENT '현재평점', -- 현재평점
   age       INTEGER      NOT NULL COMMENT '나이', -- 나이
   tel       VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo     VARCHAR(255) NOT NULL COMMENT '사진', -- 사진
@@ -146,14 +146,13 @@ ALTER TABLE sms_member
 -- 스터디
 CREATE TABLE sms_std (
   std_id      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
-  member_id   INTEGER      NOT NULL COMMENT '스터디장번호', -- 스터디장번호
   adr_lms     CHAR(6)      NOT NULL COMMENT '활동지역', -- 활동지역
   cls_lms     CHAR(6)      NOT NULL COMMENT '스터디분류', -- 스터디분류
   name        VARCHAR(50)  NOT NULL COMMENT '스터디 이름', -- 스터디 이름
   photo       VARCHAR(255) NOT NULL COMMENT '스터디 사진', -- 스터디 사진
   sdt         DATE         NOT NULL COMMENT '스터디 시작일', -- 스터디 시작일
   edt         DATE         NOT NULL COMMENT '스터디 종료일', -- 스터디 종료일
-  rcrtm_state BOOLEAN      NOT NULL COMMENT '모집상태여부', -- 모집상태여부
+  rcrtm_state BOOLEAN      NOT NULL DEFAULT true COMMENT '모집상태여부', -- 모집상태여부
   goal        VARCHAR(100) NOT NULL COMMENT '스터디 목표', -- 스터디 목표
   cont        TEXT         NOT NULL COMMENT '스터디 설명', -- 스터디 설명
   prsn        INTEGER      NOT NULL COMMENT '스터디 최대인원' -- 스터디 최대인원
@@ -175,7 +174,7 @@ CREATE TABLE sms_std_schdl (
   std_schdl_id INTEGER     NOT NULL COMMENT '스터디일정번호', -- 스터디일정번호
   std_id       INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
   name         VARCHAR(50) NOT NULL COMMENT '이름', -- 이름
-  schdl_dt     DATETIME    NOT NULL COMMENT '일시', -- 일시
+  schdl_dt     DATETIME    NOT NULL DEFAULT current_timestamp() COMMENT '일시', -- 일시
   memo         TEXT        NULL     COMMENT '메모' -- 메모
 )
 COMMENT '스터디일정';
@@ -196,7 +195,7 @@ CREATE TABLE sms_std_arch (
   std_id      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
   member_id   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   file_path   VARCHAR(255) NOT NULL COMMENT '파일경로', -- 파일경로
-  rgstr_dt    DATETIME     NOT NULL COMMENT '등록일시' -- 등록일시
+  rgstr_dt    DATETIME     NOT NULL DEFAULT current_timestamp() COMMENT '등록일시' -- 등록일시
 )
 COMMENT '스터디자료실';
 
@@ -206,6 +205,12 @@ ALTER TABLE sms_std_arch
     PRIMARY KEY (
       std_arch_id -- 자료실번호
     );
+
+-- 스터디자료실 유니크 인덱스
+CREATE UNIQUE INDEX UIX_sms_std_arch
+  ON sms_std_arch ( -- 스터디자료실
+    file_path ASC -- 파일경로
+  );
 
 ALTER TABLE sms_std_arch
   MODIFY COLUMN std_arch_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '자료실번호';
@@ -237,7 +242,7 @@ CREATE TABLE sms_msg (
   send_id INTEGER  NOT NULL COMMENT '보내는회원번호', -- 보내는회원번호
   recv_id INTEGER  NOT NULL COMMENT '받는회원번호', -- 받는회원번호
   cont    TEXT     NOT NULL COMMENT '내용', -- 내용
-  dt      DATETIME NOT NULL COMMENT '일시' -- 일시
+  dt      DATETIME NOT NULL DEFAULT current_timestamp() COMMENT '일시' -- 일시
 )
 COMMENT '쪽지';
 
@@ -256,11 +261,11 @@ CREATE TABLE sms_std_board (
   std_board_id INTEGER      NOT NULL COMMENT '스터디게시판번호', -- 스터디게시판번호
   std_id       INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
   member_id    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  ntc          BOOLEAN      NOT NULL COMMENT '공지사항여부', -- 공지사항여부
+  ntc          BOOLEAN      NOT NULL DEFAULT false COMMENT '공지사항여부', -- 공지사항여부
   title        VARCHAR(100) NOT NULL COMMENT '제목', -- 제목
   cont         TEXT         NOT NULL COMMENT '내용', -- 내용
-  rgstr_dt     DATETIME     NOT NULL COMMENT '등록일시', -- 등록일시
-  vw_cnt       INTEGER      NOT NULL COMMENT '조회수' -- 조회수
+  rgstr_dt     DATETIME     NOT NULL DEFAULT current_timestamp() COMMENT '등록일시', -- 등록일시
+  vw_cnt       INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '스터디 게시판';
 
@@ -323,8 +328,8 @@ CREATE TABLE sms_std_member (
   std_id           INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
   member_id        INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   end_state_cls_id INTEGER NULL     COMMENT '탙퇴추방완료분류번호', -- 탙퇴추방완료분류번호
-  join_date        DATE    NOT NULL COMMENT '스터디 가입일', -- 스터디 가입일
-  end_date         DATE    NULL     COMMENT '스터디 종료일', -- 스터디 종료일
+  join_date        DATE    NOT NULL DEFAULT current_date() COMMENT '스터디 가입일', -- 스터디 가입일
+  end_date         DATE    NULL     COMMENT '스터디원 종료일', -- 스터디원 종료일
   leader           BOOLEAN NOT NULL COMMENT '스터디장여부', -- 스터디장여부
   atn_pct          DOUBLE  NULL     COMMENT '스터디 출석율', -- 스터디 출석율
   arch_cnt         INTEGER NULL     COMMENT '업로드 횟수' -- 업로드 횟수
@@ -345,7 +350,7 @@ CREATE TABLE sms_rprt_inqry (
   cls_id        INTEGER  NOT NULL COMMENT '게시판분류번호', -- 게시판분류번호
   inqry_id      INTEGER  NOT NULL COMMENT '문의자번호', -- 문의자번호
   sspct_id      INTEGER  NULL     COMMENT '피신고자번호', -- 피신고자번호
-  send_dt       DATETIME NOT NULL COMMENT '보낸 일시', -- 보낸 일시
+  send_dt       DATETIME NOT NULL DEFAULT current_timestamp() COMMENT '보낸 일시', -- 보낸 일시
   cont          TEXT     NOT NULL COMMENT '내용' -- 내용
 )
 COMMENT '문의신고게시판';
@@ -521,8 +526,8 @@ CREATE TABLE sms_apl_std (
   member_id INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   std_id    INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
   dtrm      VARCHAR(100) NOT NULL COMMENT '스터디 각오', -- 스터디 각오
-  state     BOOLEAN      NOT NULL COMMENT '상태', -- 상태
-  apl_date  DATE         NOT NULL COMMENT '신청일' -- 신청일
+  state     BOOLEAN      NOT NULL DEFAULT false COMMENT '열람여부', -- 열람여부
+  apl_date  DATE         NOT NULL DEFAULT current_date() COMMENT '신청일' -- 신청일
 )
 COMMENT '신청 스터디';
 
@@ -554,7 +559,7 @@ CREATE TABLE sms_member_arch (
   member_arch_id INTEGER      NOT NULL COMMENT '회원자료실 번호', -- 회원자료실 번호
   member_id      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   file_path      VARCHAR(255) NOT NULL COMMENT '파일경로', -- 파일경로
-  rgstr_dt       DATETIME     NOT NULL COMMENT '등록일시' -- 등록일시
+  rgstr_dt       DATETIME     NOT NULL DEFAULT current_timestamp() COMMENT '등록일시' -- 등록일시
 )
 COMMENT '회원 자료실';
 
@@ -565,14 +570,21 @@ ALTER TABLE sms_member_arch
       member_arch_id -- 회원자료실 번호
     );
 
+-- 회원 자료실 유니크 인덱스
+CREATE UNIQUE INDEX UIX_sms_member_arch
+  ON sms_member_arch ( -- 회원 자료실
+    file_path ASC -- 파일경로
+  );
+
 ALTER TABLE sms_member_arch
   MODIFY COLUMN member_arch_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원자료실 번호';
 
 -- 회원 평점 정보
 CREATE TABLE sms_member_rate_info (
-  member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  rate_sum  DOUBLE  NULL     COMMENT '평점 총합', -- 평점 총합
-  rate_cnt  INTEGER NULL     COMMENT '평가 횟수' -- 평가 횟수
+  member_rate_info_id INTEGER NOT NULL COMMENT '회원 평점 정보 키', -- 회원 평점 정보 키
+  member_id           INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  rate                DOUBLE  NOT NULL COMMENT '평점', -- 평점
+  rate_dt             DATE    NOT NULL DEFAULT current_date() COMMENT '평가일' -- 평가일
 )
 COMMENT '회원 평점 정보';
 
@@ -580,7 +592,7 @@ COMMENT '회원 평점 정보';
 ALTER TABLE sms_member_rate_info
   ADD CONSTRAINT PK_sms_member_rate_info -- 회원 평점 정보 기본키
     PRIMARY KEY (
-      member_id -- 회원번호
+      member_rate_info_id -- 회원 평점 정보 키
     );
 
 -- 게시판분류
@@ -596,6 +608,12 @@ ALTER TABLE sms_board_cls
     PRIMARY KEY (
       cls_id -- 게시판분류번호
     );
+
+-- 게시판분류 유니크 인덱스
+CREATE UNIQUE INDEX UIX_sms_board_cls
+  ON sms_board_cls ( -- 게시판분류
+    cls_name ASC -- 분류명
+  );
 
 ALTER TABLE sms_board_cls
   MODIFY COLUMN cls_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '게시판분류번호';
@@ -613,6 +631,12 @@ ALTER TABLE sms_end_state_cls
     PRIMARY KEY (
       end_state_cls_id -- 탈퇴추방완료분류번호
     );
+
+-- 탈퇴추방완료분류 유니크 인덱스
+CREATE UNIQUE INDEX UIX_sms_end_state_cls
+  ON sms_end_state_cls ( -- 탈퇴추방완료분류
+    name ASC -- 이름
+  );
 
 ALTER TABLE sms_end_state_cls
   MODIFY COLUMN end_state_cls_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '탈퇴추방완료분류번호';
@@ -682,24 +706,14 @@ ALTER TABLE sms_std_day
       std_day  -- 활동일
     );
 
--- 회원 평가
-ALTER TABLE sms_member_rate
-  ADD CONSTRAINT FK_sms_member_TO_sms_member_rate -- 회원 -> 회원 평가
+-- 스터디 종료 지표
+ALTER TABLE sms_member_endrate
+  ADD CONSTRAINT FK_sms_member_TO_sms_member_endrate -- 회원 -> 스터디 종료 지표
     FOREIGN KEY (
       member_id -- 회원번호
     )
     REFERENCES sms_member ( -- 회원
       member_id -- 회원번호
-    );
-
--- 스터디
-ALTER TABLE sms_std
-  ADD CONSTRAINT FK_Temporary_TO_sms_std -- 스터디장 -> 스터디
-    FOREIGN KEY (
-      member_id -- 스터디장번호
-    )
-    REFERENCES Temporary ( -- 스터디장
-      member_id -- 스터디장번호
     );
 
 -- 스터디일정
@@ -1002,11 +1016,11 @@ ALTER TABLE sms_member_arch
 
 -- 회원 평점 정보
 ALTER TABLE sms_member_rate_info
-  ADD CONSTRAINT FK_sms_member_rate_TO_sms_member_rate_info -- 회원 평가 -> 회원 평점 정보
+  ADD CONSTRAINT FK_sms_member_TO_sms_member_rate_info -- 회원 -> 회원 평점 정보
     FOREIGN KEY (
       member_id -- 회원번호
     )
-    REFERENCES sms_member_rate ( -- 회원 평가
+    REFERENCES sms_member ( -- 회원
       member_id -- 회원번호
     );
 
