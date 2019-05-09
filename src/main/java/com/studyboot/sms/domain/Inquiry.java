@@ -11,22 +11,29 @@ public class Inquiry implements Cloneable, Serializable {
   private int inquiryPersonNo;
   private int suspectPersonNo;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
   private Date createdDate;
  
   private String contents;
+  
+  private BoardCls cls;
+  private Member inquiryPerson;
+  private Member suspectPerson;
   
   @Override
   public Inquiry clone() throws CloneNotSupportedException {
     return (Inquiry) super.clone();
   }
-  
 
+  
+  
 @Override
 public String toString() {
 	return "Inquiry [no=" + no + ", clsNo=" + clsNo + ", inquiryPersonNo=" + inquiryPersonNo + ", suspectPersonNo="
-			+ suspectPersonNo + ", createdDate=" + createdDate + ", contents=" + contents + "]";
+			+ suspectPersonNo + ", createdDate=" + createdDate + ", contents=" + contents + ", cls=" + cls
+			+ ", inquiryPerson=" + inquiryPerson + ", suspectPerson=" + suspectPerson + "]";
 }
+
 
 
 public int getNo() {
@@ -76,6 +83,29 @@ public String getContents() {
 public void setContents(String contents) {
 	this.contents = contents;
 }
-  
+
+public BoardCls getCls() {
+	return cls;
+}
+
+public void setCls(BoardCls cls) {
+	this.cls = cls;
+}
+
+public Member getInquiryPerson() {
+	return inquiryPerson;
+}
+
+public void setInquiryPerson(Member inquiryPerson) {
+	this.inquiryPerson = inquiryPerson;
+}
+
+public Member getSuspectPerson() {
+	return suspectPerson;
+}
+
+public void setSuspectPerson(Member suspectPerson) {
+	this.suspectPerson = suspectPerson;
+}
   
 }

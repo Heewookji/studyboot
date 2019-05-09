@@ -12,7 +12,7 @@ var trGenerator = Handlebars.compile(templateSrc);
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
   
-  $.getJSON('../../app/json/board/list?pageNo=' + pn + '&pageSize=' + pageSize, 
+  $.getJSON('../app/json/inquiry/list?pageNo=' + pn + '&pageSize=' + pageSize, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
@@ -64,7 +64,7 @@ loadList(1);
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {
   // 제목을 클릭했을 때 view.html로 전환시키기
-  $('.bit-view-link').click((e) => {
+  $('.stdinqry-view-link').click((e) => {
     e.preventDefault();
     window.location.href = 'view.html?no=' + 
       $(e.target).attr('data-no');

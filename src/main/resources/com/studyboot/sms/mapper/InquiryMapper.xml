@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.InquiryDao">
+  
+  
+  <resultMap type="inquiry" id="inquiryMap">
+    <id column="rprt_inqry_id" property="no"/>
+    <result column="cls_id" property="clsNo"/>
+    <result column="inqry_id" property="inquiryPersonNo"/>
+    <result column="sspct_id" property="suspectPersonNo"/>
+    <result column="cont" property="contents"/>
+    <result column="send_dt" property="createdDate"/>
+  </resultMap>
+  
+   <resultMap type="inquiry" id="inquiryMap2">
+    <id column="rprt_inqry_id" property="no"/>
+    <result column="cls_id" property="clsNo"/>
+    <result column="inqry_id" property="inquiryPersonNo"/>
+    <result column="sspct_id" property="suspectPersonNo"/>
+    <result column="cont" property="contents"/>
+    <result column="send_dt" property="createdDate"/>
+    
+    
+    <association property="inquiryPerson" javaType="member">
+     <id column="inqry_id"        property="no"/>
+      <result column="inqry_name"  property="name"/>
+    </association>
+    
+    <association property="suspectPerson" javaType="member">
+     <id column="sspct_id"        property="no"/>
+      <result column="sspct_name"  property="name"/>
+    </association>
+    
+    <association property="cls" javaType="BoardCls">
+    <result column="cls_id" property="no"/>
+      <result column="cls_name"  property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  
+  <sql id="select1">
+    select 
+      rprt_inqry_id,
+      cls_id,
+      inqry_id,
+      sspct_id, 
+      cont, 
+      send_dt
+    from 
+      sms_rprt_inqry
+  </sql>
+  
+  <sql id="select2">
+  select 
+      c.rprt_inqry_id,
+      c.cont, 
+      c.send_dt,
+      c.inqry_id,
+      c.sspct_id,
+      i.name as inqry_name,
+      s.name as sspct_name,
+      p.cls_name
+    from 
+      sms_rprt_inqry c
+      left outer join sms_board_cls p on c.cls_id = p.cls_id
+      left outer join sms_member i on c.inqry_id = i.member_id
+      left outer join sms_member s on c.sspct_id = s.member_id
+      </sql>
+
+  
+  
+  <select id="findAll" resultMap="inquiryMap2" parameterType="map">
+    <include refid="select2"/>
+    order by 
+      rprt_inqry_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="findByNo" resultMap="inquiryMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+       = #{value}
+  </select>
+  
+  <insert id="insert" parameterType="inquiry">
+    insert into sms_inqry(cont) 
+    values(#{contents})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from sms_rprt_inqry 
+    where rprt_inqry_id = #{no}
+  </delete>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from sms_rprt_inqry
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+

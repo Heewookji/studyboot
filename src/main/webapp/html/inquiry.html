@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Study</title>
   <link rel="stylesheet" href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/java-web-project/css/common.css">
-  <link rel="stylesheet" href="/java-web-project/css/header.css">
-  <link rel="stylesheet" href="inqryboard.css">
+  <link rel="stylesheet" href="/Study-Web-Project/css/common.css">
+  <link rel="stylesheet" href="/Study-Web-Project/css/header.css">
+  <link rel="stylesheet" href="inquiry.css">
 </head>
 <body>
 
@@ -16,7 +16,8 @@
 <h1>문의/신고</h1>
 
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     #
   </button>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
@@ -25,7 +26,7 @@
   </div>
 </div>
 
-<div class="bit-list">
+<div class="stdinqry-list">
 <table class="table table-hover">
 <thead>
   <tr> 
@@ -38,7 +39,7 @@
 </thead>
 <tbody></tbody>
 </table>
-</div><!-- .bit-list -->
+</div><!-- .stdinqry-list -->
 
 <nav aria-label="목록 페이지 이동">
   <ul class="pagination justify-content-center">
@@ -58,9 +59,10 @@
 {{#each list}}
 <tr>
   <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
+  <td>{{cls.name}}</td>
+  <td><a class='stdinqry-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
+  <td>{{inquiryPerson.name}}</td>
   <td>{{createdDate}}</td>
-  <td>{{viewCount}}</td>
 </tr>
 {{/each}}
 
@@ -70,6 +72,7 @@
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="inquiry.js"></script>
 </body>
 </html>
 
