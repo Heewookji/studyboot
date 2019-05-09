@@ -11,27 +11,35 @@
   }
   #left {
     float: left;
-    width: 300px;
+    width: 200px;
+    margin-left: 200px;
   }
   .content {
     float: left;
-    width: 500px;
+    width: 800px;
     height: 1000px;
   }
   .container {
     margin-left: 200px;
     border: 1px green solid;
   }
+  .study {
+    float:left;
+    border: 1px red solid;
+    width: 150px;
+    height: 200px;
 </style>
 </head>
 <body>
 
-<div class="container">
-
-<header>
-  헤더 부분
+  
+  <header>
+  <h1>
+      헤더 부분
+  </h1>
     <hr>
-</header>
+  </header>
+  
 
 <div id="left">
   <h1>IT</h1>
@@ -54,28 +62,24 @@
   </ul>
 </div>
 <div class="content">
-  <div>
-    대 > 중 > 소
+  <div style="height:80px; width:780px;">
+    <span>대 > 중 > 소</span> 
+    <button style=>분류</button>
   </div>
-  <div>
-    <table border="1px;">
-      <thead>
-        <th>dd</th>
-        <th>dd</th>
-        <th>dd</th>
-        <th>dd</th>
-      </thead>
-      <tbody>
-        <td>dddddd</td>
-        <td>dddddd</td>
-        <td>dddddd</td>
-        <td>dddddd</td>
-      </tbody>
-    </table>
+  <div style="width:780px; height:900px;">
+    <div class="study"></div>
+    <div class="study"></div> 
+    <div class="study"></div>
+    <div class="study"></div>
+    <div class="study"></div>
+    <div class="study"></div>
+    <div class="study"></div>
+    <div class="study"></div>
+    
+    
   </div>
 </div>
 
-</div> <!-- .container -->
 
 </body>
 </html>
