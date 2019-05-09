@@ -67,19 +67,46 @@
     <button style=>분류</button>
   </div>
   <div style="width:780px; height:900px;">
-    <div class="study"></div>
-    <div class="study"></div> 
-    <div class="study"></div>
-    <div class="study"></div>
-    <div class="study"></div>
-    <div class="study"></div>
-    <div class="study"></div>
-    <div class="study"></div>
+    <table class="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">번호</th>
+    <th scope="col">이름</th>
+    <th scope="col">사진</th>
+    <th scope="col">목표</th>
+  </tr>
+</thead>
+<tbody></tbody>
+</table>
     
     
   </div>
 </div>
 
+<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <th>{{no}}</th>
+  <td>{{name}}</td>
+  <td>{{photo}}</td>
+  <td>{{goal}}</td>
+</tr>
+{{/each}}
+</script>
 
+<script src="/java-web-project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/java-web-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/java-web-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/java-web-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="studygroup.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+

@@ -2,10 +2,12 @@ package com.studyboot.sms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.StudyService;
 
+@Service
 public class StudyServiceImpl implements StudyService {
   
   StudyDao studyDao;
