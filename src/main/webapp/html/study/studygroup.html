@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+  div {
+    border: 1px red solid;
+    width: 300px;
+    margin: 10px;
+  }
+  #left {
+    float: left;
+    width: 200px;
+    margin-left: 200px;
+  }
+  .content {
+    float: left;
+    width: 800px;
+    height: 1000px;
+  }
+  .container {
+    margin-left: 200px;
+    border: 1px green solid;
+  }
+  .study {
+    float:left;
+    border: 1px red solid;
+    width: 150px;
+    height: 200px;
+</style>
+</head>
+<body>
+
+  
+  <header>
+  <h1>
+      헤더 부분
+  </h1>
+    <hr>
+  </header>
+  
+
+<div id="left">
+  <h1>IT</h1>
+  <hr>
+  <ul>
+    <h3>카테고리</h3>
+    <li>중분류</li>
+    <li>중분류</li>
+    <li>중분류</li>
+    <li>중분류</li>
+    <li>중분류</li>
+    <li>중분류</li>
+  </ul>
+  <ul>
+    <h3>필터</h3>
+    <li>지역</li>
+    <p>평점</p>
+    <h3>지도로 보기</h3>
+    <h3>스터디 생성하기</h3>
+  </ul>
+</div>
+<div class="content">
+  <div style="height:80px; width:780px;">
+    <span>대 > 중 > 소</span> 
+    <button style=>분류</button>
+  </div>
+  <div style="width:780px; height:900px;">
+    <table class="table table-hover">
+<thead>
+  <tr>
+    <th scope="col">번호</th>
+    <th scope="col">이름</th>
+    <th scope="col">사진</th>
+    <th scope="col">목표</th>
+  </tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+    
+    
+  </div>
+</div>
+
+<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <th>{{no}}</th>
+  <td>{{name}}</td>
+  <td>{{photo}}</td>
+  <td>{{goal}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="studygroup.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

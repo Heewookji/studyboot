@@ -17,7 +17,7 @@ import com.studyboot.sms.service.StudyService;
 public class StudyController {
   
   @Autowired StudyService studyService;
-  
+  /*
   @PostMapping("add")
   public Object add(Study study) {
     HashMap<String,Object> content = new HashMap<>();
@@ -52,7 +52,7 @@ public class StudyController {
     Study study = studyService.get(no);
     return study;
   }
-  
+  */
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
@@ -84,7 +84,7 @@ public class StudyController {
     
     return content;
   }
-  
+  /*
   @PostMapping("update")
   public Object update(Study study) {
     HashMap<String,Object> content = new HashMap<>();
@@ -98,7 +98,7 @@ public class StudyController {
       content.put("message", e.getMessage());
     }
     return content;
-  }
+  }*/
 }
 
 
