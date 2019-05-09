@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.StudyDao">
+  
+  <resultMap type="study" id="studyMap">
+    <id column="std_id" property="no"/>
+    <result column="name" property="name"/>
+    <result column="adr_lms" property="address"/>
+    <result column="cls_lms" property="cls"/>
+    <result column="photo" property="photo"/>
+    <result column="sdt" property="startDate"/>
+    <result column="edt" property="endDate"/>
+    <result column="rcrtm_state" property="state"/>
+    <result column="goal" property="goal"/>
+    <result column="cont" property="contents"/>
+    <result column="prsn" property="personnel"/>
+  </resultMap>
+  
+  
+  <sql id="select1">
+    select
+      std_id,
+      adr_lms,
+      cls_lms,
+      name,
+      photo,
+      sdt,
+      edt,
+      rcrtm_state,
+      goal,
+      cont,
+      prsn
+    from
+      sms_std
+  </sql>
+  
+  <select id="findAll" resultMap="studyMap" parameterType="map">
+    select
+      std_id,
+      name,
+      photo,
+      goal
+    from
+      sms_std
+    order by
+      std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+ 
+  <select id="findByNo" resultMap="studyMap" parameterType="int">
+    select
+      std_id,
+      adr_lms,
+      cls_lms,
+      name,
+      photo,
+      sdt,
+      edt,
+      rcrtm_state,
+      goal,
+      cont,
+      prsn
+    from
+      sms_std
+    where 
+      std_id = #{value}
+  </select>
+
+  <update id="increaseCount" parameterType="int">
+    update sms_std 
+    set 
+      vw_cnt = vw_cnt + 1 
+    where std_id = #{value}
+  </update>
+
+  <insert id="insert" parameterType="study">
+    insert into sms_std(name, adr_lms, cls_lms, goal, sdt, edt, cont, prsn) 
+    values(#name}, #{address}, #{cls}, #{goal}, #{startDate}, #{endDate}, #{contents}, #{personnel})
+  </insert>
+
+  <update id="update" parameterType="board">
+    update sms_std
+    set 
+      goal = #{goal},
+      adr_lms = #{address},
+      photo = #{photo},
+      cont = #{contents},
+      prsn = #{personnel},
+      rcrtm_state = #{state}
+    where std_id = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from sms_std
+    where std_id = #{no}
+  </delete>
+
+   <select id="countAll" resultType="int">
+    select count(*) from sms_std
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
