@@ -16,7 +16,7 @@ import com.studyboot.sms.service.SpaceService;
 public class SpaceController {
   
   @Autowired SpaceService spaceService;
-  
+  /*
   @PostMapping("add")
   public Object add(Space space) {
     HashMap<String,Object> content = new HashMap<>();
@@ -51,7 +51,7 @@ public class SpaceController {
     Space space = spaceService.get(no);
     return space;
   }
-  
+  */
   @GetMapping("list")
   public Object list() {
     
@@ -62,7 +62,7 @@ public class SpaceController {
     
     return content;
   }
-  
+  /*
   @PostMapping("update")
   public Object update(Space space) {
     HashMap<String,Object> content = new HashMap<>();
@@ -77,6 +77,7 @@ public class SpaceController {
     }
     return content;
   }
+  */
 }
 
 

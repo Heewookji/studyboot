@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.Space">
+  
+  <resultMap type="space" id="spaceMap">
+    <id column="space_id" property="no"/>
+    <result column="name" property="name"/>
+    <result column="adr_lms" property="address"/>
+    <result column="adr_dtl" property="addressDetail"/>
+    <result column="tel" property="tel"/>
+    <result column="intro" property="intro"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="studyMap" parameterType="map">
+    select
+      name,
+      tel,
+      intro
+    from
+      sms_space
+    order by
+      std_id desc
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

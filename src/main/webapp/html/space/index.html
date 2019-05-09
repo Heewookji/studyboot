@@ -3,69 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>스터디 공간</title>
-  <style>
-
-    .left {
-      background-color: bisque;
-      float:left; 
-      height: 920px;
-      width: 70%; 
-    }
-
-    .right {
-      background-color: cornflowerblue;
-      height:220px;
-      width:28%;
-      float:right;
-      margin: 5px;
-    }
-
-    div > img {
-      float:left;
-      background-color:khaki;
-      width:40%;
-      height:100%;
-    }
-
-    h2, div > p {
-      text-align: center;
-    }
-
-
-  </style>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
+<section id="" class="left"></section>
 
-<div id="" class="left"></div>
-
-<div id="right1" class="right">
-  <img src="" alt="" id="">
-  <div>
-    <h2>지환 카페1</h2>
-    <p>111-1111</p>
-    <p>스터디 공간 소개입니다</p>
-  </div>
-</div>
-
-<div id="right2" class="right">
-  <img src="" alt="" id="">
-  <div>
-    <h2>지환 카페2</h2>
-    <p>222-2222</p>
-    <p>스터디 공간 소개입니다</p>
-  </div>
-</div>
-
-<div id="right3" class="right">
-  <img src="" alt="" id="">
-  <div>
-    <h2>현우 카페1</h2>
-    <p>333-3333</p>
-    <p>스터디 공간 소개입니다</p>
-  </div>
-</div>
-
-<div id="right4" class="right">
+<div>
   <img src="" alt="" id="">
   <div>
     <h2>현우 카페2</h2>
@@ -73,6 +16,22 @@
     <p>스터디 공간 소개입니다</p>
   </div>
 </div>
+
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<div>
+    <h2>{{name}}</h2>
+    <p>{{tel}}</p>
+    <p>{{intro}}</p>
+</div>
+{{/each}}
+</script>
+
+<script src="/study-web-project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/study-web-project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/study-web-project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/study-web-project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="index.js"></script>
 
 </body>
 </html>
