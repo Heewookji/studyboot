@@ -3,6 +3,7 @@ package com.studyboot.sms.domain;
 import java.sql.Date;
 
 public class Study {
+  
   private int no;
   private String name;
   private int address;
