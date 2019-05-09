@@ -84,7 +84,7 @@
     values(#name}, #{address}, #{cls}, #{goal}, #{startDate}, #{endDate}, #{contents}, #{personnel})
   </insert>
 
-  <update id="update" parameterType="board">
+  <update id="update" parameterType="study">
     update sms_std
     set 
       goal = #{goal},
