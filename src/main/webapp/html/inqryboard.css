@@ -1,0 +1,30 @@
+th:nth-child(1) {
+  width: 80px;
+}
+
+th:nth-child(2) {
+  text-align: left;
+  width: 100px;
+}
+
+th:nth-child(3) {
+  text-align: center;
+  width: 400px;
+}
+
+th:nth-child(4) {
+  text-align: center;
+  width: 200px;
+}
+
+
+th:nth-child(5) {
+  text-align: center;
+  width: 200px;
+}
+
+
+td:nth-child(4) {
+  text-align: center;
+}
+
