@@ -34,7 +34,11 @@ public class inquiryServiceImpl implements InquiryService {
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     
-    return inquiryDao.findAll(params);
+    List<Inquiry> list = inquiryDao.findAll(params);
+    System.out.println(list);
+    
+    
+    return list;
   }
   
   @Override
