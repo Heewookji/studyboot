@@ -4,22 +4,20 @@
   <meta charset="UTF-8">
   <title>게시물</title>
   <link rel="stylesheet" href="view.css">
-  
+</head>
+
 <body>
   
 <script id="div-template" type="text/x-handlebars-template">
-{{#each list}}
+{{#each detail}}
 <div>
-  <img src="" alt="" id="">
-    <h2>{{name}}</h2>
-    <p>{{tel}}</p>
-    <p>{{intro}}</p>
+  <h2>{{name}}</h2>
+  <p>{{intro}}</p>
+  <p>{{tagName}}</p>
+  <p>{{filePath}}</p>
 </div>
 {{/each}}
 </script>
-
-
-
 
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>

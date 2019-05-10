@@ -23,21 +23,22 @@
     <result column="tel" property="tel"/>
     <result column="intro" property="intro"/>
     
-    <collection property="tags" javaType="spaceTag">
+    <collection property="tags" ofType="spaceTag">
       <id column="tag_id" property="no"/>
-      <result column="name" property="name"/>
+      <result column="name" property="tagName"/>
       <result column="space_id" property="spaceNo"/>
     </collection>
     
-    <collection property="files" javaType="spacePhoto">
+    <collection property="files" ofType="spacePhoto">
       <id column="space_photo_id" property="no"/>
       <result column="photo" property="filePath"/>
       <result column="space_id" property="spaceNo"/>
     </collection>
   </resultMap>
   
-  <select id="findAll" resultMap="spaceMap" parameterType="map">
+  <select id="findAll" resultMap="spaceMap">
     select
+      space_id,
       name,
       tel,
       intro

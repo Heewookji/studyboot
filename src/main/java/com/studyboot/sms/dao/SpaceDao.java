@@ -1,7 +1,6 @@
 package com.studyboot.sms.dao;
 
 import java.util.List;
-import java.util.Map;
 import com.studyboot.sms.domain.Space;
 
 public interface SpaceDao {

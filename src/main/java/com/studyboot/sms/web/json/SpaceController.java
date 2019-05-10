@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Space;
 import com.studyboot.sms.service.SpaceService;
@@ -55,12 +56,13 @@ public class SpaceController {
 //  }
   
   @GetMapping("detail")
-  public Object detail(int no) {
+  public Object detail(
+      @RequestParam int no) {
     
     HashMap<String,Object> content = new HashMap<>();
-    List<Space> spaceTag = spaceService.get(no);
+    List<Space> spaceTag = spaceService.detail(no);
     
-    content.put("list", spaceTag);
+    content.put("detail", spaceTag);
     
     return content;
   }

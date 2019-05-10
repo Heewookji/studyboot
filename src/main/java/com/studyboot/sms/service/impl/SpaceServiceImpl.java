@@ -1,6 +1,5 @@
 package com.studyboot.sms.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.SpaceDao;
@@ -36,7 +35,7 @@ public class SpaceServiceImpl implements SpaceService {
 //  }
 //  
   @Override
-  public List<Space> get(int no) {
+  public List<Space> detail(int no) {
     
     return spaceDao.findByNo(no);
   }

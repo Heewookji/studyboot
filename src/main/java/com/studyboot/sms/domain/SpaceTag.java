@@ -4,7 +4,7 @@ public class SpaceTag {
   
   private int no;
   private int spaceNo;
-  private String name;
+  private String tagName;
   public int getNo() {
     return no;
   }
@@ -17,11 +17,12 @@ public class SpaceTag {
   public void setSpaceNo(int spaceNo) {
     this.spaceNo = spaceNo;
   }
-  public String getName() {
-    return name;
+  public String getTagName() {
+    return tagName;
   }
-  public void setName(String name) {
-    this.name = name;
+  public void setTagName(String tagName) {
+    this.tagName = tagName;
   }
-
+  
+  
 }
