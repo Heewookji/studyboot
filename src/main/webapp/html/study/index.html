@@ -1,34 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-  div {
-    border: 1px red solid;
-    width: 300px;
-    margin: 10px;
-  }
-  #left {
-    float: left;
-    width: 200px;
-    margin-left: 200px;
-  }
-  .content {
-    float: left;
-    width: 800px;
-    height: 1000px;
-  }
-  .container {
-    margin-left: 200px;
-    border: 1px green solid;
-  }
-  .study {
-    float:left;
-    border: 1px red solid;
-    width: 150px;
-    height: 200px;
-</style>
+  <meta charset="UTF-8">
+  <title>스터디 그룹</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
@@ -90,7 +65,7 @@
 {{#each list}}
 <tr>
   <th>{{no}}</th>
-  <td>{{name}}</td>
+  <td><a class="study-view-link" href="#" data-no="{{no}}">{{name}}</a></td>
   <td>{{photo}}</td>
   <td>{{goal}}</td>
 </tr>
@@ -100,7 +75,7 @@
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="studygroup.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
 

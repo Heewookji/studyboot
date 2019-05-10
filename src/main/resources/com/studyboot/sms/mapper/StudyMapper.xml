@@ -60,6 +60,7 @@
       cls_lms,
       name,
       photo,
+      day,
       sdt,
       edt,
       rcrtm_state,
@@ -72,13 +73,15 @@
       std_id = #{value}
   </select>
 
+<!-- 
   <update id="increaseCount" parameterType="int">
     update sms_std 
     set 
       vw_cnt = vw_cnt + 1 
     where std_id = #{value}
   </update>
-
+ -->
+ 
   <insert id="insert" parameterType="study">
     insert into sms_std(name, adr_lms, cls_lms, goal, sdt, edt, cont, prsn) 
     values(#name}, #{address}, #{cls}, #{goal}, #{startDate}, #{endDate}, #{contents}, #{personnel})

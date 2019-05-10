@@ -1,13 +1,13 @@
-.left {
+#spaceMap {
 	background-color: bisque;
 	float: left;
 	height: 920px;
 	width: 70%;
 }
 
-div {
+div > div {
 	background-color: cornflowerblue;
-	height: 220px;
+	height: 180px;
 	width: 28%;
 	float: right;
 	margin: 5px;

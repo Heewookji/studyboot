@@ -30,18 +30,13 @@ public class SpaceServiceImpl implements SpaceService {
 //    // 그래도 일관된 프로그래밍을 위해 Command 객체는 항상 Service 객체를 경유하여 DAO를 사용해야 한다.
 //    return spaceDao.insert(space);
 //  }
-//  
-//  @Override
-//  public Space get(int no) {
-//    // 이제 조금 서비스 객체가 뭔가를 하는 구만.
-//    // Command 객체는 데이터를 조회한 후 조회수를 높이는 것에 대해 신경 쓸 필요가 없어졌다.
-//    Space space = spaceDao.findByNo(no);
-//    if (space != null) {
-//      spaceDao.increaseCount(no);
-//    }
-//    return space;
-//  }
-//  
+  
+  @Override
+  public Space get(int no) {
+    Space space = spaceDao.findByNo(no);
+    return space;
+  }
+  
 //  @Override
 //  public int update(Space space) {
 //    // 이 메서드도 별로 할 일이 없다.

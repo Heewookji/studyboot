@@ -1,6 +1,7 @@
 package com.studyboot.sms.domain;
 
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Study {
   
@@ -9,8 +10,14 @@ public class Study {
   private int address;
   private int cls;
   private String photo;
+  private int day;
+  
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date startDate;
+  
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date endDate;
+  
   private boolean state;
   private String goal;
   private String contents;
@@ -19,8 +26,9 @@ public class Study {
   @Override
   public String toString() {
     return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
-        + ", photo=" + photo + ", startDate=" + startDate + ", endDate=" + endDate + ", state="
-        + state + ", goal=" + goal + ", contents=" + contents + ", personnel=" + personnel + "]";
+        + ", photo=" + photo + ", day=" + day + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", state=" + state + ", goal=" + goal + ", contents=" + contents + ", personnel="
+        + personnel + "]";
   }
   
   public int getNo() {
@@ -52,6 +60,12 @@ public class Study {
   }
   public void setPhoto(String photo) {
     this.photo = photo;
+  }
+  public int getDay() {
+    return day;
+  }
+  public void setDay(int day) {
+    this.day = day;
   }
   public Date getStartDate() {
     return startDate;
