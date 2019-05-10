@@ -17,6 +17,13 @@ public class Space {
   private SpaceTag spaceTag;
   private SpacePhoto spacePhoto;
   
+  @Override
+  public String toString() {
+    return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
+        + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
+        + files + ", spaceTag=" + spaceTag + ", spacePhoto=" + spacePhoto + "]";
+  }
+  
   public int getNo() {
     return no;
   }

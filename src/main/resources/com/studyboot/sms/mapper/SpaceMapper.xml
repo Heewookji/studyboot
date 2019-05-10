@@ -25,7 +25,7 @@
     
     <collection property="tags" ofType="spaceTag">
       <id column="tag_id" property="no"/>
-      <result column="name" property="tagName"/>
+      <result column="tag_name" property="tagName"/>
       <result column="space_id" property="spaceNo"/>
     </collection>
     
@@ -48,9 +48,13 @@
   
   <select id="findByNo" resultMap="spaceTagMap" parameterType="int">
     select
+      s.space_id,
       s.name,
       s.intro,
-      p.photo
+      p.space_photo_id,
+      p.photo,
+      t.tag_id,
+      t.name as tag_name
     from
       sms_space s
         inner join sms_tag t on s.space_id = t.space_id
