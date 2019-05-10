@@ -50,7 +50,6 @@
     select
       s.name,
       s.intro,
-      t.name,
       p.photo
     from
       sms_space s
