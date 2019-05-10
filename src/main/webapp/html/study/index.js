@@ -1,6 +1,6 @@
 var tbody = $('tbody'),
-templateSrc = $('#tr-template').html(), // script 태그에서 템플릿 데이터를 꺼낸다.
-trGenerator = Handlebars.compile(templateSrc); 
+  templateSrc = $('#tr-template').html(), // script 태그에서 템플릿 데이터를 꺼낸다.
+  trGenerator = Handlebars.compile(templateSrc); 
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList() {
@@ -15,7 +15,13 @@ function loadList() {
 // 페이지를 출력한 후 1페이지를 로딩한다.
 loadList();
 
-
+$(document.body).bind('loaded-list', () => {
+  $('.study-view-link').click((e) => {
+    e.preventDefault();
+    window.location.href = 'view.html?no=' +
+      $(e.target).attr('data-no');
+  });
+});
 
 
 
