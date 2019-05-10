@@ -17,7 +17,7 @@ import com.studyboot.sms.service.StudyService;
 public class StudyController {
   
   @Autowired StudyService studyService;
-  /*
+  
   @PostMapping("add")
   public Object add(Study study) {
     HashMap<String,Object> content = new HashMap<>();
@@ -31,6 +31,7 @@ public class StudyController {
     return content;
   }
   
+  /*
   @GetMapping("delete")
   public Object delete(int no) {
   

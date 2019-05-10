@@ -11,11 +11,12 @@
     <result column="name" property="name"/>
     <result column="adr_lms" property="address"/>
     <result column="cls_lms" property="cls"/>
+    <result column="goal" property="goal"/>
     <result column="photo" property="photo"/>
+    <result column="day" property="day"/>
     <result column="sdt" property="startDate"/>
     <result column="edt" property="endDate"/>
     <result column="rcrtm_state" property="state"/>
-    <result column="goal" property="goal"/>
     <result column="cont" property="contents"/>
     <result column="prsn" property="personnel"/>
   </resultMap>
@@ -83,8 +84,28 @@
  -->
  
   <insert id="insert" parameterType="study">
-    insert into sms_std(name, adr_lms, cls_lms, goal, sdt, edt, cont, prsn) 
-    values(#name}, #{address}, #{cls}, #{goal}, #{startDate}, #{endDate}, #{contents}, #{personnel})
+    insert into sms_std(
+      name,
+      adr_lms,
+      cls_lms,
+      goal,
+      photo,
+      day,
+      sdt,
+      edt,
+      cont,
+      prsn)
+    values(
+      #{name},
+      #{address},
+      #{cls},
+      #{goal},
+      #{photo},
+      #{day},
+      #{startDate},
+      #{endDate},
+      #{contents},
+      #{personnel})
   </insert>
 
   <update id="update" parameterType="study">
