@@ -36,9 +36,9 @@ public class StudyServiceImpl implements StudyService {
   public Study get(int no) {
 
     Study study = studyDao.findByNo(no);
-    if (study != null) {
-      studyDao.increaseCount(no);
-    }
+//    if (study != null) {
+//      studyDao.increaseCount(no);
+//    }
     return study;
   }
 

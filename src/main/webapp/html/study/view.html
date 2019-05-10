@@ -20,6 +20,11 @@
       width: 700px;
       height: 800px;
     }
+    
+    .right-conts{
+    width:380px;
+    height: 100px;
+    }
   </style>
 </head>
 <body>
@@ -28,18 +33,52 @@
 
 <!-- container -->
 <div class="container">
-  <div class="right_bar" style="float: right; height: 300px;">
+
+  <div class="right_bar" style="float: right; width:400px; height: 700px;">
+  
+  <div class="right-conts">
+  <h2>활동지역</h2>
+  </div>
+  
+  <div class="right-conts">
+  <h2>요일</h2>
+  <input type="text" readonly id="day">
+  </div>
+  
+  <div class="right-conts">
+  <h2>분류</h2>
+   <input type="text" readonly id="cls">
+  </div>
+  
+  <div class="right-conts">
+  <h2>시작일~종료일</h2>
+   <input type="text" readonly id="sdt">~
+    <input type="text" readonly id="edt"> 
+  </div>
+  
+  <div class="right-conts">
+  <h2>현재인원</h2>
+   <input type="text" readonly id="prsn">
+  </div>
+  
+  <div class="right-conts">
+  <h2>구성원</h2>
+  </div>
+  
   </div>
   
   <div class="study_detail">
     <div class="study_title">
       <h2>스터디 이름</h2>
+      <input type="text" readonly id="name">
     </div>
     <div class="study_goal">
       <h2>스터디 목표</h2>
+      <input type="text" readonly id="goal">
     </div>
     <div class="study_cont">
       <h2>스터디 설명</h2>
+      <textarea readonly id="contents"></textarea>
     </div>
     <div class="contents">
       <h2>스터디 상위권</h2>

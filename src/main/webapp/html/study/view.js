@@ -69,6 +69,11 @@ function loadData(no) {
     document.querySelector('#name').value = data.name;
     document.querySelector('#goal').value = data.goal;
     document.querySelector('#contents').value = data.contents;
+    document.querySelector('#day').value = data.day;
+    document.querySelector('#cls').value = data.cls;
+    document.querySelector('#sdt').value = data.startDate;
+    document.querySelector('#edt').value = data.endDate;
+    document.querySelector('#prsn').value = data.personnel;
   };
   xhr.open('GET', '../../app/json/study/detail?no=' + no, true);
   xhr.send();
