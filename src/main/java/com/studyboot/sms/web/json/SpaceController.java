@@ -46,10 +46,23 @@ public class SpaceController {
   }
   
    */
+  
+//  @GetMapping("detail")
+//  public Object detail(int no) {
+//    
+//    Space space = spaceService.get(no);
+//    return space;
+//  }
+  
   @GetMapping("detail")
   public Object detail(int no) {
-    Space space = spaceService.get(no);
-    return space;
+    
+    HashMap<String,Object> content = new HashMap<>();
+    List<Space> spaceTag = spaceService.get(no);
+    
+    content.put("list", spaceTag);
+    
+    return content;
   }
   
   @GetMapping("list")

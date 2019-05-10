@@ -19,9 +19,7 @@ public class SpaceServiceImpl implements SpaceService {
   @Override
   public List<Space> list() {
     
-    HashMap<String,Object> params = new HashMap<>();
-    
-    return spaceDao.findAll(params);
+    return spaceDao.findAll();
   }
   
 //  @Override
@@ -31,10 +29,16 @@ public class SpaceServiceImpl implements SpaceService {
 //    return spaceDao.insert(space);
 //  }
   
+//  @Override
+//  public Space get(int no) {
+//    Space space = spaceDao.findByNo(no);
+//    return space;
+//  }
+//  
   @Override
-  public Space get(int no) {
-    Space space = spaceDao.findByNo(no);
-    return space;
+  public List<Space> get(int no) {
+    
+    return spaceDao.findByNo(no);
   }
   
 //  @Override

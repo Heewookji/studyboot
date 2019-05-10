@@ -43,8 +43,6 @@
       intro
     from
       sms_space
-    order by
-      space_id desc
   </select>
   
   <select id="findByNo" resultMap="spaceTagMap" parameterType="int">
@@ -57,7 +55,7 @@
       sms_space s
         inner join sms_tag t on s.space_id = t.space_id
         inner join sms_space_photo p on s.space_id = p.space_id
-    where s.space_id = 101;
+    where s.space_id = #{value}
   </select>
   
 </mapper>
