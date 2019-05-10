@@ -91,9 +91,6 @@ DROP TABLE IF EXISTS sms_intr RESTRICT;
 -- 공간휴일
 DROP TABLE IF EXISTS sms_rest_day RESTRICT;
 
--- 스터디 활동일
-DROP TABLE IF EXISTS sms_std_day RESTRICT;
-
 -- 스터디 종료 지표
 CREATE TABLE sms_member_endrate (
   member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
@@ -150,6 +147,7 @@ CREATE TABLE sms_std (
   cls_lms     CHAR(6)      NOT NULL COMMENT '스터디분류', -- 스터디분류
   name        VARCHAR(50)  NOT NULL COMMENT '스터디 이름', -- 스터디 이름
   photo       VARCHAR(255) NOT NULL COMMENT '스터디 사진', -- 스터디 사진
+  day         INTEGER      NOT NULL COMMENT '스터디 활동일', -- 스터디 활동일
   sdt         DATE         NOT NULL COMMENT '스터디 시작일', -- 스터디 시작일
   edt         DATE         NOT NULL COMMENT '스터디 종료일', -- 스터디 종료일
   rcrtm_state BOOLEAN      NOT NULL DEFAULT true COMMENT '모집상태여부', -- 모집상태여부
@@ -691,21 +689,6 @@ ALTER TABLE sms_rest_day
       rest_day  -- 휴일
     );
 
--- 스터디 활동일
-CREATE TABLE sms_std_day (
-  std_id  INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-  std_day DATE    NOT NULL COMMENT '활동일' -- 활동일
-)
-COMMENT '스터디 활동일';
-
--- 스터디 활동일
-ALTER TABLE sms_std_day
-  ADD CONSTRAINT PK_sms_std_day -- 스터디 활동일 기본키
-    PRIMARY KEY (
-      std_id,  -- 스터디번호
-      std_day  -- 활동일
-    );
-
 -- 스터디 종료 지표
 ALTER TABLE sms_member_endrate
   ADD CONSTRAINT FK_sms_member_TO_sms_member_endrate -- 회원 -> 스터디 종료 지표
@@ -1042,14 +1025,4 @@ ALTER TABLE sms_rest_day
     )
     REFERENCES sms_space ( -- 공간
       space_id -- 공간 번호
-    );
-
--- 스터디 활동일
-ALTER TABLE sms_std_day
-  ADD CONSTRAINT FK_sms_std_TO_sms_std_day -- 스터디 -> 스터디 활동일
-    FOREIGN KEY (
-      std_id -- 스터디번호
-    )
-    REFERENCES sms_std ( -- 스터디
-      std_id -- 스터디번호
     );

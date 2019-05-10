@@ -61,14 +61,12 @@ insert into sms_rest_day(space_id, rest_day) values('101', '2019-5-20');
 insert into sms_rest_day(space_id, rest_day) values('102', '2019-6-1');
 
 
-
-/*
 -- 스터디룸 예약
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
 values ('501', '201', '1', '1', '2019-5-5', '4.0', '좋아요' );
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
 values ('502', '202', '2', '2', '2019-5-10', '3.0', '그저그래요' );
-*/
+
 
 
 
