@@ -43,6 +43,21 @@ public class InquiryServiceImpl implements InquiryService {
   }
   
   @Override
+  public List<Inquiry> search(int pageNo, int pageSize, String keyword) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    
+    int memberNo = inquiryDao.findByKeyword(keyword);
+    
+    	
+  	params.put("member_id", memberNo);
+    
+    return inquiryDao.searchByMemberNo(params);
+  }
+  
+  @Override
   public int add(Inquiry inquiry) {
     // 이 메서드도 하는 일이 없다.
     // 그래도 일관된 프로그래밍을 위해 Command 객체는 항상 Service 객체를 경유하여 DAO를 사용해야 한다.
@@ -66,6 +81,17 @@ public class InquiryServiceImpl implements InquiryService {
     // 전체 게시물의 개수
     return inquiryDao.countAll(pageCls);
   }
+  
+  @Override
+  public int size(String keyword) {
+  
+  int memberNo = inquiryDao.findByKeyword(keyword);
+  
+	  return inquiryDao.countAllByMemberNo(memberNo);
+	  
+  }
+  
+  
 }
 
 

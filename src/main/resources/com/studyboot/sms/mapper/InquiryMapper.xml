@@ -73,6 +73,15 @@
       </sql>
 
   
+  <select id="searchByMemberNo" resultMap="inquiryMap2" parameterType="map">
+    <include refid="select2"/>
+     where inqry_id = #{member_id}
+    order by 
+      rprt_inqry_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
   
   <select id="findAll" resultMap="inquiryMap2" parameterType="map">
     <include refid="select2"/>
@@ -102,12 +111,29 @@
     where rprt_inqry_id = #{no}
   </delete>
   
+  
+  <select id="findByKeyword" resultType="int" parameterType="string">
+    select member_id from sms_member
+   <where>
+        name like #{value}
+    </where>   
+  </select>
+  
   <select id="countAll" resultType="int" parameterType="int">
     select count(*) from sms_rprt_inqry
       <if test="value != 0">
       where cls_id = #{value}
       </if>
   </select>
+  
+  <select id="countAllByMemberNo" resultType="int" parameterType="int">
+    select count(*) from sms_rprt_inqry
+      <if test="value != 0">
+      where inqry_id = #{value}
+      </if>
+  </select>
+  
+  
 </mapper>
 
 
