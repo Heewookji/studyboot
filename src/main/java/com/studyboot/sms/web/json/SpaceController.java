@@ -60,7 +60,8 @@ public class SpaceController {
       @RequestParam int no) {
     
     HashMap<String,Object> content = new HashMap<>();
-    List<Space> spaceTag = spaceService.detail(no);
+    System.out.println(spaceService.detail(no));
+    Space spaceTag = spaceService.detail(no);
     
     content.put("detail", spaceTag);
     

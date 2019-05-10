@@ -6,6 +6,11 @@ public class SpacePhoto {
   private int spaceNo;
   private String filePath;
   
+  @Override
+  public String toString() {
+    return "SpacePhoto [no=" + no + ", spaceNo=" + spaceNo + ", filePath=" + filePath + "]";
+  }
+  
   public int getNo() {
     return no;
   }
@@ -24,4 +29,5 @@ public class SpacePhoto {
   public void setFilePath(String filePath) {
     this.filePath = filePath;
   }
+
 }

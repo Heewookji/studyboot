@@ -5,6 +5,12 @@ public class SpaceTag {
   private int no;
   private int spaceNo;
   private String tagName;
+  
+  @Override
+  public String toString() {
+    return "SpaceTag [no=" + no + ", spaceNo=" + spaceNo + ", tagName=" + tagName + "]";
+  }
+  
   public int getNo() {
     return no;
   }
@@ -23,6 +29,5 @@ public class SpaceTag {
   public void setTagName(String tagName) {
     this.tagName = tagName;
   }
-  
   
 }

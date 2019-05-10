@@ -35,7 +35,7 @@ public class SpaceServiceImpl implements SpaceService {
 //  }
 //  
   @Override
-  public List<Space> detail(int no) {
+  public Space detail(int no) {
     
     return spaceDao.findByNo(no);
   }
