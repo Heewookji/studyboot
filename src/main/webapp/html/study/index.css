@@ -1,0 +1,28 @@
+div {
+  border: 1px red solid;
+  width: 300px;
+  margin: 10px;
+}
+
+#left {
+  float: left;
+  width: 200px;
+  margin-left: 200px;
+}
+
+.content {
+  float: left;
+  width: 800px;
+  height: 1000px;
+}
+
+.container {
+  margin-left: 200px;
+  border: 1px green solid;
+}
+
+.study {
+  float:left;
+  border: 1px red solid;
+  width: 150px;
+  height: 200px;

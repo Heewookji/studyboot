@@ -46,13 +46,14 @@ public class StudyController {
     }
     return content;
   }
+   */
   
   @GetMapping("detail")
   public Object detail(int no) {
     Study study = studyService.get(no);
     return study;
   }
-  */
+  
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
