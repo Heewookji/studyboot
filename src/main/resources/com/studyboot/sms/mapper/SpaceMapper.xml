@@ -15,7 +15,7 @@
     <result column="intro" property="intro"/>
   </resultMap>
   
-  <resultMap type="space" id="spaceMap">
+  <resultMap type="space" id="spaceTagMap">
     <id column="space_id" property="no"/>
     <result column="name" property="name"/>
     <result column="adr_lms" property="address"/>
@@ -23,11 +23,11 @@
     <result column="tel" property="tel"/>
     <result column="intro" property="intro"/>
     
-    <association property="tags" javaType="spaceTag">
+    <collection property="tags" javaType="spaceTag">
       <id column="tag_id" property="no"/>
       <result column="name" property="name"/>
       <result column="space_id" property="spaceNo"/>
-    </association>
+    </collection>
     
     <collection property="files" javaType="spacePhoto">
       <id column="space_photo_id" property="no"/>
@@ -47,7 +47,7 @@
       space_id desc
   </select>
   
-  <select id="findByNo" resultMap="spaceMap" parameterType="int">
+  <select id="findByNo" resultMap="spaceTagMap" parameterType="int">
     select
       s.name,
       s.intro,
