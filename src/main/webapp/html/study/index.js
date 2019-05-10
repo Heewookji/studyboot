@@ -10,8 +10,14 @@ function loadList() {
     
     // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
     $(trGenerator(obj)).appendTo(tbody);
+    
+ // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+    $(document.body).trigger('loaded-list');
+    
   });
 };
+
+
 // 페이지를 출력한 후 1페이지를 로딩한다.
 loadList();
 
