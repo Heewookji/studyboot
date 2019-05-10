@@ -76,6 +76,9 @@
   
   <select id="findAll" resultMap="inquiryMap2" parameterType="map">
     <include refid="select2"/>
+      <if test="cls != null">
+        where cls_name = #{cls}
+      </if>
     order by 
       rprt_inqry_id desc
     <if test="size != null and rowNo != null">
@@ -99,8 +102,11 @@
     where rprt_inqry_id = #{no}
   </delete>
   
-  <select id="countAll" resultType="int">
+  <select id="countAll" resultType="int" parameterType="int">
     select count(*) from sms_rprt_inqry
+      <if test="value != 0">
+      where cls_id = #{value}
+      </if>
   </select>
 </mapper>
 

@@ -10,7 +10,7 @@ public interface InquiryDao {
   List<Inquiry> findAll(Map<String,Object> params);
   Inquiry findByNo(int no);
   int delete(int no);
-  int countAll();
+  int countAll(int pageCls);
 }
 
 

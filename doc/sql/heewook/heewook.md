@@ -15,3 +15,14 @@
    - detail , add
 
  
+select
+      s.name,
+      s.intro,
+      t.name,
+      p.photo
+    from
+      sms_space s
+      left outer join sms_tag t on s.space_id = t.space_id
+      left outer join sms_space_photo p on s.space_id = p.space_id
+    where
+      s.space_id = 101;

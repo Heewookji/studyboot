@@ -4,18 +4,18 @@ var pageNo = 1,
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
-    currCls = $('#dropdownMenuButton currCls'),
+    currCls = $('#dropdownMenuButton > span'),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc);
 
-currCls = 
+
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn) {
+function loadList(pn, cls) {
   
-  $.getJSON('../../app/json/inquiry/list?pageNo=' + pn + '&pageSize=' + pageSize, 
+  $.getJSON('../../app/json/inquiry/list?pageNo=' + pn + '&pageSize=' + pageSize + '&pageCls=' + cls,
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
@@ -59,6 +59,24 @@ $('#nextPage > a').click((e) => {
   e.preventDefault();
   loadList(pageNo + 1);
 });
+
+$('#bothClsPage').click((e) => {
+	  e.preventDefault();
+	  currCls.html("모두");
+	  loadList(1);
+	});
+$('#inqryPage').click((e) => {
+	  e.preventDefault();
+	  currCls.html("문의");
+	  loadList(1, "문의");
+	});
+$('#sspctPage').click((e) => {
+	  e.preventDefault();
+	  currCls.html("신고");
+	  loadList(1, "신고");
+	});
+
+
 
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.

@@ -59,13 +59,24 @@ public class InquiryController {
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize) {
+      @RequestParam(defaultValue="3") int pageSize,
+      @RequestParam String pageCls) {
     
+	int clsNo = 1;
+	switch(pageCls){
+	case "문의": clsNo = 1; break;
+	case "신고": clsNo = 2; break;
+	default: clsNo = 0; pageCls = null;
+	}
+	//if (pageCls.equals("undefined")) 
+	   
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
-    int rowCount = inquiryService.size();
+    int rowCount = inquiryService.size(clsNo);
+    System.out.println(rowCount);
  
     int totalPage = rowCount / pageSize;
+    
     if (rowCount % pageSize > 0)
       totalPage++;
     
@@ -74,7 +85,10 @@ public class InquiryController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
     
-    List<Inquiry> inquirys = inquiryService.list(pageNo, pageSize);
+    
+    
+    
+    List<Inquiry> inquirys = inquiryService.list(pageNo, pageSize, pageCls);
     
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", inquirys);
