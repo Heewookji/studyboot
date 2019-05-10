@@ -11,6 +11,7 @@ public class Space {
   private String tel;
   private String intro;
   
+  private List<SpaceTag> tags;
   private List<SpacePhoto> files;
 
   public int getNo() {
@@ -67,6 +68,14 @@ public class Space {
 
   public void setFiles(List<SpacePhoto> files) {
     this.files = files;
+  }
+
+  public List<SpaceTag> getTags() {
+    return tags;
+  }
+
+  public void setTags(List<SpaceTag> tags) {
+    this.tags = tags;
   }
   
 }

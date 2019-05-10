@@ -45,12 +45,13 @@ public class SpaceController {
     return content;
   }
   
+   */
   @GetMapping("detail")
   public Object detail(int no) {
     Space space = spaceService.get(no);
     return space;
   }
-  */
+  
   @GetMapping("list")
   public Object list() {
     
