@@ -31,7 +31,9 @@ public class InquiryController {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-    System.out.println(".");
+    System.out.println("git test");
+    System.out.println("git test");
+    System.out.println("git test");
     return content;
   }
   
