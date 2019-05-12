@@ -13,8 +13,7 @@ public interface InquiryDao {
 	Inquiry findByNo(int no);
 	int delete(int no);
 	int countAll(int pageCls);
-	int countAllByMemberNo(int memberNo);
-	int findByKeyword(String keyword);
+	int countAllByMemberNo(List<Integer> memberNos);
 }
 
 

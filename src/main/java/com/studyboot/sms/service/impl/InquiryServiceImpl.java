@@ -37,24 +37,19 @@ public class InquiryServiceImpl implements InquiryService {
     
     List<Inquiry> list = inquiryDao.findAll(params);
     
-    System.out.println(list);
-    
     return list;
   }
   
   @Override
-  public List<Inquiry> search(int pageNo, int pageSize, String keyword) {
+  public List<Inquiry> search(int pageNo, int pageSize, List<Integer> memberNos) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
-    
-    int memberNo = inquiryDao.findByKeyword(keyword);
-    
-    	
-  	params.put("member_id", memberNo);
-    
-    return inquiryDao.searchByMemberNo(params);
+  	params.put("member_ids", memberNos);
+  	System.out.println(memberNos);
+    List<Inquiry> list = inquiryDao.searchByMemberNo(params);
+    return list;
   }
   
   @Override
@@ -83,13 +78,14 @@ public class InquiryServiceImpl implements InquiryService {
   }
   
   @Override
-  public int size(String keyword) {
+  public int size(List<Integer> memberNos) {
   
-  int memberNo = inquiryDao.findByKeyword(keyword);
-  
-	  return inquiryDao.countAllByMemberNo(memberNo);
+	int count = inquiryDao.countAllByMemberNo(memberNos);
+	  return count;
 	  
   }
+  
+  
   
   
 }

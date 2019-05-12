@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.studyboot.sms.domain.Inquiry;
 import com.studyboot.sms.service.InquiryService;
+import com.studyboot.sms.service.MemberService;
 
 
 // AJAX 기반 JSON 데이터를 다루는 컨트롤러
@@ -20,6 +21,7 @@ import com.studyboot.sms.service.InquiryService;
 public class InquiryController {
   
   @Autowired InquiryService inquiryService;
+  @Autowired MemberService memberService;
   
   @PostMapping("add")
   public Object add(Inquiry inquiry) {
@@ -31,7 +33,6 @@ public class InquiryController {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-    System.out.println("finish test");
     return content;
   }
   
@@ -62,12 +63,28 @@ public class InquiryController {
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
       @RequestParam String keyword) {
-    
+	  
+	  
+	  HashMap<String,Object> content = new HashMap<>();
 	   
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
-    int rowCount = inquiryService.size(keyword);
- 
+    
+    List<Integer> memberNos = memberService.findMemberNoByKeyword(keyword);
+    
+    if (memberNos.size() == 0) {
+    	content.put("pageNo", 0);
+    	return content;
+    }
+    
+    
+    int rowCount = inquiryService.size(memberNos);
+    
+    if (rowCount == 0) {
+    	content.put("pageNo", 0);
+    	return content;
+    }
+    
     int totalPage = rowCount / pageSize;
     
     if (rowCount % pageSize > 0)
@@ -78,9 +95,8 @@ public class InquiryController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
     
-    List<Inquiry> inquirys = inquiryService.search(pageNo, pageSize, keyword);
+    List<Inquiry> inquirys = inquiryService.search(pageNo, pageSize, memberNos);
     
-    HashMap<String,Object> content = new HashMap<>();
     content.put("list", inquirys);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
@@ -95,7 +111,6 @@ public class InquiryController {
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
       @RequestParam String pageCls) {
-    System.out.println("0");
 	int clsNo = 1;
 	switch(pageCls){
 	case "문의": clsNo = 1; break;

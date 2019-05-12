@@ -75,7 +75,10 @@
   
   <select id="searchByMemberNo" resultMap="inquiryMap2" parameterType="map">
     <include refid="select2"/>
-     where inqry_id = #{member_id}
+     where inqry_id = 
+      <foreach collection="member_ids" item="member_id" separator="or">
+    #{member_id}
+    </foreach>
     order by 
       rprt_inqry_id desc
     <if test="size != null and rowNo != null">
@@ -112,12 +115,6 @@
   </delete>
   
   
-  <select id="findByKeyword" resultType="int" parameterType="string">
-    select member_id from sms_member
-   <where>
-        name like #{value}
-    </where>   
-  </select>
   
   <select id="countAll" resultType="int" parameterType="int">
     select count(*) from sms_rprt_inqry
@@ -126,10 +123,13 @@
       </if>
   </select>
   
-  <select id="countAllByMemberNo" resultType="int" parameterType="int">
+  <select id="countAllByMemberNo" resultType="int" parameterType="list">
     select count(*) from sms_rprt_inqry
-      <if test="value != 0">
-      where inqry_id = #{value}
+      <if test="list != null">
+      where inqry_id =
+      <foreach collection="list" item="member_id" separator="or">
+      #{member_id}
+    </foreach>
       </if>
   </select>
   

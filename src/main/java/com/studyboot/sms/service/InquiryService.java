@@ -10,6 +10,6 @@ public interface InquiryService {
 	Inquiry get(int no);
 	int delete(int no);
 	int size(int pageCls);
-	List<Inquiry> search(int pageNo, int pageSize, String keyword);
-	int size(String keyword);
+	List<Inquiry> search(int pageNo, int pageSize, List<Integer> membernos);
+	int size(List<Integer> memberNos);
 }
