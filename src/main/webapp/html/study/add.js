@@ -25,7 +25,12 @@ $('#add-btn').click(function() {
 }); // add-btn
 
 
-
+//뒤로가기 -진행중
+//$(window).on('beforeunload', function() {
+//  if ($('.aaaa').val()) {
+//    return '작성 중인 글이 있습니다.';
+//  }
+//});
 
 
 
