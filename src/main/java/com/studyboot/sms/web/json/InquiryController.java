@@ -31,7 +31,6 @@ public class InquiryController {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-    System.out.println(".");
     return content;
   }
   
