@@ -80,8 +80,10 @@ function loadData(no) {
 }
 
 
-
-
+// 목록으로 돌아가기
+$('#goback-btn').click(function() {
+  window.history.go(-1);
+});
 
 
 
