@@ -61,7 +61,7 @@ public class SpaceController {
     
     HashMap<String,Object> content = new HashMap<>();
     
-    System.out.println(spaceService.detail(no));
+//    System.out.println(spaceService.detail(no));
     
     Space spaceTag = spaceService.detail(no);
     

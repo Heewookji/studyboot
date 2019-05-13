@@ -45,6 +45,7 @@ public class SpaceServiceImpl implements SpaceService {
     space.setSpaceConvenienceInfo(sc);
     
     return space;
+    
   }
   
 //  @Override

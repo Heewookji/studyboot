@@ -14,6 +14,7 @@ function loadDetail(no) {
     url : "../../app/json/space/detail?no=" + no,
     data : {name:'name', intro:'intro'},
     success : function(data) {
+    	console.log(data.detail);
       $('#name').append(data.detail.name),
       $('#intro').append(data.detail.intro)
     },
@@ -24,7 +25,6 @@ function loadDetail(no) {
 
   $.getJSON('../../app/json/space/detail?no=' + no, 
       function(obj) {
-
     $(trGenerator(obj)).appendTo(section);
 
   });
