@@ -53,36 +53,38 @@ function loadList(pn, cls, keyword) {
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1);
+  loadList(pageNo - 1, currCls.html(), keyword);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1);
+  loadList(pageNo + 1, currCls.html(), keyword);
 });
 
 $('#bothClsPage').click((e) => {
 	  e.preventDefault();
 	  currCls.html("모두");
+	  keyword = '';
 	  loadList(1);
 	});
 
 $('#inqryPage').click((e) => {
 	  e.preventDefault();
 	  currCls.html("문의");
+	  keyword = '';
 	  loadList(1, "문의");
 	});
 $('#sspctPage').click((e) => {
 	  e.preventDefault();
 	  currCls.html("신고");
+	  keyword = '';
 	  loadList(1, "신고");
 	});
 
 $('#inqry-search-btn').click((e) => {
 	
 	keyword = $("#inqry-search").val();
-	alert(currCls.html());
-	loadList(1, currCls, keyword);
+	loadList(1, currCls.html(), keyword);
 	});
 
 
