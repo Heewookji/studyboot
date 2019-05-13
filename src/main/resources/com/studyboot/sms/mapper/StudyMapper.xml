@@ -73,6 +73,28 @@
     where 
       std_id = #{value}
   </select>
+  
+  
+  <select id="findByNo" resultMap="spaceTagMap" parameterType="int">
+    select
+      s.std_id,
+      s.adr_lms,
+      s.cls_lms,
+      s.name,
+      s.photo,
+      s.day,
+      s.sdt,
+      s.edt,
+      s.rcrtm_state,
+      s.goal,
+      s.cont,
+      s.prsn,
+      m.aver_rate
+    from
+      sms_std s
+        inner join sms_std_member m on s.std_id = m.std_id
+    where s.std_id = #{value}
+  </select>
 
 <!-- 
   <update id="increaseCount" parameterType="int">

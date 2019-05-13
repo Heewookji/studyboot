@@ -1,7 +1,5 @@
 package com.studyboot.sms.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,7 @@ public class StudyMemberServiceImpl implements StudyMemberService {
   
   MemberRateDao memberRateDao;
   StudyMemberDao studyMemberDao;
+  double averRate;
   
   public StudyMemberServiceImpl(MemberRateDao memberRateDao, StudyMemberDao studyMemberDao) {
     this.memberRateDao = memberRateDao;
@@ -24,25 +23,26 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 
   @Override
   public List<MemberRate> list(int studyNo) {
-    List<MemberRate> rate = new ArrayList<>();
     
+    List<MemberRate> rateList = memberRateDao.findAll(studyNo);
+    double totalRate = 0;
     
+    for (MemberRate rate : rateList) {
+      totalRate += rate.getRate();
+    }
+    averRate = totalRate / rateList.size();
+    System.out.println("평균 평점 값: ====> " + averRate);
     
-    return memberRateDao.findAll(studyNo);
-  }
-
-  @Override
-  public StudyMember findRate(Map<String, Object> rate) {
-    // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public int updateRate(StudyMember studyMember) {
-    // TODO Auto-generated method stub
-    return 0;
+  public int findRate(Map<String, Object> rate) {
+    
+    StudyMember studyMember = studyMemberDao.findRate(rate);
+    studyMember.setAverRate(averRate);
+    
+    return studyMemberDao.updateRate(studyMember);
   }
-
-
   
 }
