@@ -12,17 +12,14 @@
   
    - 신고만, 문의만 필터링
    - 리스트에서 회원 이름에 따라 검색
-   - detail , add
+   - detail , add x
 
- 
-select
-      s.name,
-      s.intro,
-      t.name,
-      p.photo
-    from
-      sms_space s
-      left outer join sms_tag t on s.space_id = t.space_id
-      left outer join sms_space_photo p on s.space_id = p.space_id
-    where
-      s.space_id = 101;
+
+2019/05/13
+
+1. 문의/신고 게시판
+
+  - 리스트 완료
+  - detail
+  
+  

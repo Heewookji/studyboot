@@ -68,25 +68,55 @@
 </nav>
 </div><!-- .container -->
 
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewCls"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <th scope='row'>{{no}}</th>
   <td>{{cls.name}}</td>
-  <td><a class='stdinqry-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
+  <td>
+<a class='stdinqry-view-link' href='#' data-toggle="modal"
+data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
+</td>
   <td>{{inquiryPerson.name}}</td>
   <td>{{createdDate}}</td>
 </tr>
 {{/each}}
+</script>
 
+<script id="view-template" type="text/x-handlebars-template">
 
 </script>
+
+
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="index.js"></script>
+<script src="view.js"></script>
 </body>
 </html>
 
