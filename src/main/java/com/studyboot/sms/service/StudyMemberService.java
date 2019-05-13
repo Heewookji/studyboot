@@ -8,7 +8,5 @@ import com.studyboot.sms.domain.StudyMember;
 public interface StudyMemberService {
   
   List<MemberRate> list(int studyNo);
-  StudyMember findRate(Map<String, Object> rate);
-  int updateRate(StudyMember studyMember);
-  
+  int findRate(Map<String, Object> rate);
 }

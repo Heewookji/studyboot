@@ -11,6 +11,7 @@ public class Study {
   private int cls;
   private String photo;
   private int day;
+  private double rate;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date startDate;
@@ -26,9 +27,9 @@ public class Study {
   @Override
   public String toString() {
     return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
-        + ", photo=" + photo + ", day=" + day + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", state=" + state + ", goal=" + goal + ", contents=" + contents + ", personnel="
-        + personnel + "]";
+        + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", startDate=" + startDate
+        + ", endDate=" + endDate + ", state=" + state + ", goal=" + goal + ", contents=" + contents
+        + ", personnel=" + personnel + "]";
   }
   
   public int getNo() {
@@ -67,6 +68,12 @@ public class Study {
   public void setDay(int day) {
     this.day = day;
   }
+  public double getRate() {
+    return rate;
+  }
+  public void setRate(double rate) {
+    this.rate = rate;
+  }
   public Date getStartDate() {
     return startDate;
   }
@@ -103,5 +110,5 @@ public class Study {
   public void setPersonnel(int personnel) {
     this.personnel = personnel;
   }
-
+  
 }
