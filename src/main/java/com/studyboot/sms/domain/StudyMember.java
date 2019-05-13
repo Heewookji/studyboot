@@ -12,8 +12,7 @@ public class StudyMember {
   private boolean leader;
   private double attendance;
   private int upload;
-  private double rate;
-  private Date rateDate;
+  private Rate rate;
   
   @Override
   public String toString() {
@@ -69,18 +68,6 @@ public class StudyMember {
   }
   public void setUpload(int upload) {
     this.upload = upload;
-  }
-  public double getRate() {
-    return rate;
-  }
-  public void setRate(double rate) {
-    this.rate = rate;
-  }
-  public Date getRateDate() {
-    return rateDate;
-  }
-  public void setRateDate(Date rateDate) {
-    this.rateDate = rateDate;
   }
   
 }
