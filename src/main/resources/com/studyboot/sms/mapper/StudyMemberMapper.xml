@@ -19,7 +19,7 @@
   </resultMap>
   
   
-  <select id="findRate" resultType="studyMemberMap" parameterType="map">
+  <select id="findRate" resultMap="studyMemberMap" parameterType="map">
      select
       aver_rate
     from
