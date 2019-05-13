@@ -35,7 +35,6 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
   values(6, 2, 4, 5, '4번 회원의 5번 회원에 대한 신고 내용이 들어갑니다.');
 
 
-
   
   
   
