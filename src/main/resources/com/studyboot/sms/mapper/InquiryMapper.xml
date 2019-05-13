@@ -146,8 +146,21 @@
   </select>
   
   <insert id="insert" parameterType="inquiry">
-    insert into sms_rprt_inqry(cont) 
-    values(#{contents})
+    insert into 
+    sms_rprt_inqry
+    (cls_id,
+    inqry_id,
+    <if test="suspectPersonNo != 0">
+    sspct_id,
+    </if>
+    cont) 
+    values
+    (#{clsNo},
+    #{inquiryPersonNo},
+    <if test="suspectPersonNo != 0">
+    #{suspectPersonNo},
+    </if>
+    #{contents})
   </insert>
   
   <delete id="delete" parameterType="int">

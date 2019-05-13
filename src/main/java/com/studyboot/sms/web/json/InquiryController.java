@@ -26,6 +26,7 @@ public class InquiryController {
   @PostMapping("add")
   public Object add(Inquiry inquiry) {
     HashMap<String,Object> content = new HashMap<>();
+    
     try {
       inquiryService.add(inquiry);
       content.put("status", "success");
@@ -33,6 +34,7 @@ public class InquiryController {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
+    
     return content;
   }
 

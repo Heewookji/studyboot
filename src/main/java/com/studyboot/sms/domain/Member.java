@@ -19,7 +19,7 @@ public class Member implements Cloneable, Serializable {
 	private String tel;
 	private int age;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date registeredDate;
 	
 	private boolean admin;
