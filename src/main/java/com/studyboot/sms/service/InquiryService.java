@@ -6,10 +6,8 @@ import com.studyboot.sms.domain.Inquiry;
 
 public interface InquiryService {
 	int add(Inquiry inquiry);
-	List<Inquiry> list(int pageNo, int pageSize, String pageCls);
+	List<Inquiry> list(int pageNo, int pageSize, int clsNo, List<Integer> memberNos);
 	Inquiry get(int no);
 	int delete(int no);
-	int size(int pageCls);
-	List<Inquiry> search(int pageNo, int pageSize, List<Integer> membernos);
-	int size(List<Integer> memberNos);
+	int size(int clsNo, List<Integer> memberNos);
 }

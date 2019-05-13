@@ -58,53 +58,6 @@ public class InquiryController {
     return inquiry;
   }
 
-  @GetMapping("search")
-  public Object search(
-      @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize,
-      @RequestParam String keyword) {
-
-
-    HashMap<String,Object> content = new HashMap<>();
-
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
-
-    List<Integer> memberNos = memberService.findMemberNoByKeyword(keyword);
-
-    if (memberNos.size() == 0) {
-      content.put("pageNo", 0);
-      return content;
-    }
-
-
-    int rowCount = inquiryService.size(memberNos);
-
-    if (rowCount == 0) {
-      content.put("pageNo", 0);
-      return content;
-    }
-
-    int totalPage = rowCount / pageSize;
-
-    if (rowCount % pageSize > 0)
-      totalPage++;
-
-    if (pageNo < 1) 
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-
-    List<Inquiry> inquirys = inquiryService.search(pageNo, pageSize, memberNos);
-
-    content.put("list", inquirys);
-    content.put("pageNo", pageNo);
-    content.put("pageSize", pageSize);
-    content.put("totalPage", totalPage);
-
-    return content;
-  }
-
 
   @GetMapping("list")
   public Object list(
@@ -119,51 +72,51 @@ public class InquiryController {
     switch(pageCls){
       case "문의": clsNo = 1; break;
       case "신고": clsNo = 2; break;
-      default: clsNo = 0; pageCls = null;
+      case "undefined": clsNo = 0;
     }
 
     List<Inquiry> inquirys;
+    List<Integer> memberNos = null;
 
     if(!keyword.equals("undefined")) {
-
-      List<Integer> memberNos = memberService.findMemberNoByKeyword(keyword);
-
+      memberNos = memberService.findMemberNoByKeyword(keyword);
+      
       if (memberNos.size() == 0) {
         content.put("pageNo", 0);
         return content;
       }
+    } 
+    
+    if (pageSize < 3 || pageSize > 8) 
+      pageSize = 3;
+    
 
-      if (pageSize < 3 || pageSize > 8) 
-        pageSize = 3;
-      
-      int rowCount = inquiryService.size(clsNo, memberNos);
+    int rowCount = inquiryService.size(clsNo, memberNos);
+    
+    
+    int totalPage = rowCount / pageSize;
 
-      int totalPage = rowCount / pageSize;
+    if (rowCount % pageSize > 0)
+      totalPage++;
 
-      if (rowCount % pageSize > 0)
-        totalPage++;
-
-      if (pageNo < 1) 
-        pageNo = 1;
-      else if (pageNo > totalPage)
-        pageNo = totalPage;
-
-
-
-
-      inquirys = inquiryService.list(pageNo, pageSize, pageCls, null);
+    if (pageNo < 1) 
+      pageNo = 1;
+    else if (pageNo > totalPage)
+      pageNo = totalPage;
 
 
+    inquirys = inquiryService.list(pageNo, pageSize, clsNo, memberNos);
+    
 
-      content.put("list", inquirys);
-      content.put("pageNo", pageNo);
-      content.put("pageSize", pageSize);
-      content.put("totalPage", totalPage);
+    content.put("list", inquirys);
+    content.put("pageNo", pageNo);
+    content.put("pageSize", pageSize);
+    content.put("totalPage", totalPage);
 
-      return content;
-    }
-
+    return content;
   }
+
+}
 
 
 

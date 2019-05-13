@@ -44,11 +44,11 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
   values(9, 2, 5, 4, '5번 회원의 4번 회원에 대한 신고 내용이 들어갑니다.');
 
   insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
-  values(10, 1, 2, '3번 회원의 문의 내용이 들어갑니다.');
+  values(10, 1, 2, '2번 회원의 문의 내용이 들어갑니다.');
   insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
-  values(11, 1, 3, '4번 회원의 문의 내용이 들어갑니다.');
+  values(11, 1, 3, '3번 회원의 문의 내용이 들어갑니다.');
   insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
-  values(12, 1, 4, '5번 회원의 문의 내용이 들어갑니다.');
+  values(12, 1, 4, '4번 회원의 문의 내용이 들어갑니다.');
   
   
   

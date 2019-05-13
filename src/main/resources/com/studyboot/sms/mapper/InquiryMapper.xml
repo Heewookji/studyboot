@@ -73,24 +73,26 @@
       </sql>
 
   
-  <select id="searchByMemberNo" resultMap="inquiryMap2" parameterType="map">
-    <include refid="select2"/>
-     where inqry_id = 
-      <foreach collection="member_ids" item="member_id" separator="or">
-    #{member_id}
-    </foreach>
-    order by 
-      rprt_inqry_id desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-  
   <select id="findAll" resultMap="inquiryMap2" parameterType="map">
     <include refid="select2"/>
-      <if test="cls != null">
-        where cls_name = #{cls}
+    <if test="cls != 0 or member_ids != null">
+      where 
+      <if test="cls != 0">
+      p.cls_id = #{cls}
       </if>
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      and (
+      </if>
+      <foreach collection="member_ids" item="member_id" separator="or">
+      inqry_id = 
+      #{member_id}
+    </foreach>
+    <if test="cls != 0">
+      )
+    </if>
+    </if>
+    </if>
     order by 
       rprt_inqry_id desc
     <if test="size != null and rowNo != null">
@@ -115,21 +117,25 @@
   </delete>
   
   
-  
-  <select id="countAll" resultType="int" parameterType="int">
+  <select id="countByClsAndMember" resultType="int" parameterType="map">
     select count(*) from sms_rprt_inqry
-      <if test="value != 0">
-      where cls_id = #{value}
+      <if test="cls != 0 or member_ids != null">
+      where 
+      <if test="cls != 0">
+      cls_id = #{cls}
       </if>
-  </select>
-  
-  <select id="countAllByMemberNo" resultType="int" parameterType="list">
-    select count(*) from sms_rprt_inqry
-      <if test="list != null">
-      where inqry_id =
-      <foreach collection="list" item="member_id" separator="or">
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      and (
+      </if>
+      <foreach collection="member_ids" item="member_id" separator="or">
+      inqry_id = 
       #{member_id}
     </foreach>
+    <if test="cls != 0">
+      )
+    </if>
+    </if>
       </if>
   </select>
   

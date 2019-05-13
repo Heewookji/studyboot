@@ -5,7 +5,7 @@ var pageNo = 1,
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
     currCls = $('#dropdownMenuButton > span'),
-    searchKeyword = $("#inqry-search").val(),
+    keyword = $("#inqry-search").val(),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
@@ -50,48 +50,6 @@ function loadList(pn, cls, keyword) {
   
 } // loadList()
 
-function searchList(pn, keyword) {
-	  
-	  $.getJSON('../../app/json/inquiry/search?pageNo=' + pn + '&pageSize=' + pageSize + '&keyword=' + keyword,
-	    function(obj) {
-	      // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
-		  
-	      pageNo = obj.pageNo;
-	      
-	      // TR 태그를 생성하여 테이블 데이터를 갱신한다.
-	      tbody.html(''); // 이전에 출력한 내용을 제거한다.
-	      
-	      if (pageNo == 0){
-	    	  tbody.html("게시물이 없습니다.");
-	    	  prevPageLi.addClass('disabled');
-	    	  nextPageLi.addClass('disabled');
-	      } else {
-	      
-	      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
-	      $(trGenerator(obj)).appendTo(tbody);
-	      
-	      // 현재 페이지의 번호를 갱신한다.
-	      currSpan.html(String(pageNo));
-	      
-	      // 1페이지일 경우 버튼을 비활성화 한다.
-	      if (pageNo == 1) {
-	        prevPageLi.addClass('disabled');
-	      } else {
-	        prevPageLi.removeClass('disabled');
-	      } 
-	        
-	      // 마지막 페이지일 경우 버튼을 비활성화 한다.
-	      if (pageNo == obj.totalPage) {
-	        nextPageLi.addClass('disabled');
-	      } else {
-	        nextPageLi.removeClass('disabled');
-	      }
-	      
-	      // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
-	      $(document.body).trigger('loaded-list');
-	      
-	      }}); // Bitcamp.getJSON()
-	} // searchList()
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
@@ -122,8 +80,9 @@ $('#sspctPage').click((e) => {
 
 $('#inqry-search-btn').click((e) => {
 	
-	searchKeyword = $("#inqry-search").val();
-	searchList(1, searchKeyword);
+	keyword = $("#inqry-search").val();
+	alert(currCls.html());
+	loadList(1, currCls, keyword);
 	});
 
 
