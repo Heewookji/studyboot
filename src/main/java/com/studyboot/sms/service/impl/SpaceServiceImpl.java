@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.SpaceDao;
 import com.studyboot.sms.domain.Space;
+import com.studyboot.sms.domain.SpaceConvenienceInfo;
 import com.studyboot.sms.service.SpaceService;
 
 @Service
@@ -37,7 +38,13 @@ public class SpaceServiceImpl implements SpaceService {
   @Override
   public Space detail(int no) {
     
-    return spaceDao.findByNo(no);
+    List<SpaceConvenienceInfo> sc = spaceDao.findConvByNo(no);
+    
+    Space space = spaceDao.findByNo(no);
+    
+    space.setSpaceConvenienceInfo(sc);
+    
+    return space;
   }
   
 //  @Override
