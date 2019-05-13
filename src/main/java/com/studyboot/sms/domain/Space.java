@@ -13,15 +13,16 @@ public class Space {
 
   private List<SpaceTag> tags;
   private List<SpacePhoto> files;
-
-  private SpaceTag spaceTag;
-  private SpacePhoto spacePhoto;
+  
+  private List<SpaceConvenienceInfo> spaceConvenienceInfo;
+  private List<SpaceConvenience> spaceConvenience;
   
   @Override
   public String toString() {
     return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
         + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
-        + files + ", spaceTag=" + spaceTag + ", spacePhoto=" + spacePhoto + "]";
+        + files + ", spaceConvenienceInfo=" + spaceConvenienceInfo + ", spaceConvenience="
+        + spaceConvenience + "]";
   }
   
   public int getNo() {
@@ -72,17 +73,17 @@ public class Space {
   public void setFiles(List<SpacePhoto> files) {
     this.files = files;
   }
-  public SpaceTag getSpaceTag() {
-    return spaceTag;
+  public List<SpaceConvenienceInfo> getSpaceConvenienceInfo() {
+    return spaceConvenienceInfo;
   }
-  public void setSpaceTag(SpaceTag spaceTag) {
-    this.spaceTag = spaceTag;
+  public void setSpaceConvenienceInfo(List<SpaceConvenienceInfo> spaceConvenienceInfo) {
+    this.spaceConvenienceInfo = spaceConvenienceInfo;
   }
-  public SpacePhoto getSpacePhoto() {
-    return spacePhoto;
+  public List<SpaceConvenience> getSpaceConvenience() {
+    return spaceConvenience;
   }
-  public void setSpacePhoto(SpacePhoto spacePhoto) {
-    this.spacePhoto = spacePhoto;
+  public void setSpaceConvenience(List<SpaceConvenience> spaceConvenience) {
+    this.spaceConvenience = spaceConvenience;
   }
-  
+
 }
