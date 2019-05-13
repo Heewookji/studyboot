@@ -5,17 +5,17 @@ var pageNo = 1,
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
     currCls = $('#dropdownMenuButton > span'),
+    searchKeyword = $("#inqry-search").val(),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc);
 
-
-
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn, cls) {
+function loadList(pn, cls, keyword) {
   
-  $.getJSON('../../app/json/inquiry/list?pageNo=' + pn + '&pageSize=' + pageSize + '&pageCls=' + cls,
+  $.getJSON('../../app/json/inquiry/list?pageNo=' + pn + '&pageSize=' + pageSize
+		  + '&pageCls=' + cls + "&keyword=" + keyword,
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
@@ -91,7 +91,6 @@ function searchList(pn, keyword) {
 	      $(document.body).trigger('loaded-list');
 	      
 	      }}); // Bitcamp.getJSON()
-	  
 	} // searchList()
 
 $('#prevPage > a').click((e) => {
@@ -109,6 +108,7 @@ $('#bothClsPage').click((e) => {
 	  currCls.html("모두");
 	  loadList(1);
 	});
+
 $('#inqryPage').click((e) => {
 	  e.preventDefault();
 	  currCls.html("문의");
@@ -119,8 +119,11 @@ $('#sspctPage').click((e) => {
 	  currCls.html("신고");
 	  loadList(1, "신고");
 	});
+
 $('#inqry-search-btn').click((e) => {
-	searchList(1, $("#inqry-search").val());
+	
+	searchKeyword = $("#inqry-search").val();
+	searchList(1, searchKeyword);
 	});
 
 

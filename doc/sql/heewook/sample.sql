@@ -19,6 +19,7 @@ insert into sms_board_cls (cls_id, cls_name)
   values(2, '신고');
 
 -- 문의/신고 게시물 생성
+
   -- 문의 게시물
 insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
   values(1, 1, 2, '2번 회원의 문의 내용이 들어갑니다.');
@@ -26,6 +27,7 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
   values(2, 1, 3, '3번 회원의 문의 내용이 들어갑니다.');
   insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
   values(3, 1, 4, '4번 회원의 문의 내용이 들어갑니다.');
+  
   -- 신고 게시물
   insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
   values(4, 2, 2, 3, '2번 회원의 3번 회원에 대한 신고 내용이 들어갑니다.');
@@ -34,8 +36,19 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
   insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
   values(6, 2, 4, 5, '4번 회원의 5번 회원에 대한 신고 내용이 들어갑니다.');
 
+insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
+  values(7, 2, 3, 2, '3번 회원의 2번 회원에 대한 신고 내용이 들어갑니다.');
+  insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
+  values(8, 2, 4, 2, '4번 회원의 2번 회원에 대한 신고 내용이 들어갑니다.');
+  insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
+  values(9, 2, 5, 4, '5번 회원의 4번 회원에 대한 신고 내용이 들어갑니다.');
 
-
+  insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
+  values(10, 1, 2, '3번 회원의 문의 내용이 들어갑니다.');
+  insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
+  values(11, 1, 3, '4번 회원의 문의 내용이 들어갑니다.');
+  insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, cont)
+  values(12, 1, 4, '5번 회원의 문의 내용이 들어갑니다.');
   
   
   
