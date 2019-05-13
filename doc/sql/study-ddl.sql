@@ -330,7 +330,8 @@ CREATE TABLE sms_std_member (
 	end_date         DATE    NULL     COMMENT '스터디원 종료일', -- 스터디원 종료일
 	leader           BOOLEAN NOT NULL DEFAULT false COMMENT '스터디장여부', -- 스터디장여부
 	atn_pct          DOUBLE  NULL     COMMENT '스터디 출석율', -- 스터디 출석율
-	arch_cnt         INTEGER NULL     COMMENT '업로드 횟수' -- 업로드 횟수
+	arch_cnt         INTEGER NULL     COMMENT '업로드 횟수', -- 업로드 횟수
+	aver_rate        DOUBLE  NULL     COMMENT '전체평점' -- 전체평점
 )
 COMMENT '스터디회원';
 
@@ -579,10 +580,11 @@ ALTER TABLE sms_member_arch
 
 -- 회원 평점 정보
 CREATE TABLE sms_member_rate_info (
-	std_id    INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-	member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	rate      DOUBLE  NOT NULL COMMENT '평점', -- 평점
-	rate_dt   DATE    NOT NULL DEFAULT current_date() COMMENT '평가일' -- 평가일
+	member_rate_info_id INTEGER NOT NULL COMMENT '회원평점 번호', -- 회원평점 번호
+	std_id              INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+	member_id           INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+	rate                DOUBLE  NOT NULL COMMENT '평점', -- 평점
+	rate_dt             DATE    NOT NULL DEFAULT current_date() COMMENT '평가일' -- 평가일
 )
 COMMENT '회원 평점 정보';
 
@@ -590,9 +592,11 @@ COMMENT '회원 평점 정보';
 ALTER TABLE sms_member_rate_info
 	ADD CONSTRAINT PK_sms_member_rate_info -- 회원 평점 정보 기본키
 		PRIMARY KEY (
-			std_id,    -- 스터디번호
-			member_id  -- 회원번호
+			member_rate_info_id -- 회원평점 번호
 		);
+
+ALTER TABLE sms_member_rate_info
+	MODIFY COLUMN member_rate_info_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원평점 번호';
 
 -- 게시판분류
 CREATE TABLE sms_board_cls (

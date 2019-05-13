@@ -34,8 +34,24 @@
       <result column="photo" property="filePath"/>
       <result column="space_id" property="spaceNo"/>
     </collection>
+    
   </resultMap>
-  
+
+  <resultMap type="space" id="spaceConvenienceMap">
+    <id column="space_id" property="no"/>
+ 
+  <collection property="spaceConvenienceInfo" ofType="spaceConvenienceInfo">
+    <id column="conv_id" property="convenienceNo"/>
+    <id column="space_id" property="spaceNo"/>
+    <result column="note" property="note"/>
+  </collection>
+    
+    <collection property="spaceConvenience" ofType="spaceConvenience">
+      <id column="conv_id" property="no"/>
+      <result column="name" property="name"/>
+    </collection>
+  </resultMap>
+
   <select id="findAll" resultMap="spaceMap">
     select
       space_id,
@@ -60,6 +76,19 @@
         inner join sms_tag t on s.space_id = t.space_id
         inner join sms_space_photo p on s.space_id = p.space_id
     where s.space_id = #{value}
+  </select>
+  
+  <select id="findConvByNo" resultMap="spaceConvenienceMap" parameterType="int">
+    select
+      s.space_id,
+      sc.note,
+      c.name,
+      c.conv_id
+    from
+      sms_space_conv_info sc
+        inner join sms_space s on s.space_id = sc.space_id
+        inner join sms_conv c on sc.conv_id = c.conv_id
+    where sc.space_id = #{value}
   </select>
   
 </mapper>
