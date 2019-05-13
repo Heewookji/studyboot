@@ -53,8 +53,10 @@ public class InquiryController {
   }
 
   @GetMapping("detail")
-  public Object detail(int no) {
+  public Object detail(@RequestParam int no) {
+    
     Inquiry inquiry = inquiryService.get(no);
+    
     return inquiry;
   }
 

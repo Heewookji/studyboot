@@ -1,97 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Study</title>
-  <link rel="stylesheet" href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/Study-Web-Project/css/common.css">
-  <link rel="stylesheet" href="/Study-Web-Project/css/header.css">
-  <link rel="stylesheet" href="inquiry.css">
+<meta charset="UTF-8">
+<title>Study</title>
+<link rel="stylesheet"
+ href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="view.css">
 </head>
 <body>
 
-<header class=""></header>
+ <header class=""></header>
 
-<div class="container">
-<h1>문의/신고</h1>
-
-
-
-<nav class="navbar navbar-light">
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
-  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <span id="currCls">
-   모두
-  </span>
-  </button>
-  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#" id="bothClsPage">모두</a>
-    <a class="dropdown-item" href="#" id="inqryPage">문의</a>
-    <a class="dropdown-item" href="#" id="sspctPage">신고</a>
-  </div>
-</div>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" id="inqry-search" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" id="inqry-search-btn" type="button">사용자 검색</button>
-  </form>
-</nav>
-
-<div class="stdinqry-list">
-<table class="table table-hover">
-<thead>
-  <tr> 
-    <th scope="col">번호</th>
-    <th scope="col">분류</th>
-    <th scope="col">내용</th>
-    <th scope="col">보낸 회원</th>
-    <th scope="col">보낸 일시</th>
-  </tr>
-</thead>
-
-<tbody></tbody>
+ <div class="container">
+  <h1>문의/신고</h1>
 
 
-</table>
-</div><!-- .stdinqry-list -->
 
-<nav aria-label="목록 페이지 이동">
-  <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
-  </ul>
-</nav>
-</div><!-- .container -->
-
-
-<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="viewCls"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+  <nav class="navbar navbar-light">
+   <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button"
+     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+     aria-expanded="false">
+     <span id="currCls"> 모두 </span>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right"
+     aria-labelledby="dropdownMenuButton">
+     <a class="dropdown-item" href="#" id="bothClsPage">모두</a> <a
+      class="dropdown-item" href="#" id="inqryPage">문의</a> <a
+      class="dropdown-item" href="#" id="sspctPage">신고</a>
     </div>
+   </div>
+   <form class="form-inline">
+    <input class="form-control mr-sm-2" id="inqry-search" type="search"
+     placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0"
+     id="inqry-search-btn" type="button">사용자 검색</button>
+   </form>
+  </nav>
+
+  <div class="stdinqry-list">
+   <table class="table table-hover">
+    <thead>
+     <tr>
+      <th scope="col">번호</th>
+      <th scope="col">분류</th>
+      <th scope="col">내용</th>
+      <th scope="col">보낸 회원</th>
+      <th scope="col">보낸 일시</th>
+     </tr>
+    </thead>
+
+    <tbody></tbody>
+
+
+   </table>
   </div>
+  <!-- .stdinqry-list -->
+
+  <nav aria-label="목록 페이지 이동">
+   <ul class="pagination justify-content-center">
+    <li id="prevPage" class="page-item"><a class="page-link"
+     href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="currPage" class="page-item active"><span
+     class="page-link">1</span></li>
+    <li id="nextPage" class="page-item "><a class="page-link"
+     href="?pageNo=2&pageSize=3">다음</a></li>
+   </ul>
+  </nav>
+ </div>
+ <!-- .container -->
+
+
+ <div class="modal fade" id="viewModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"
+   role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h5 class="modal-title" id="viewCls">dfdf</h5>
+     <span id="viewDate"></span>
+     <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    <div class="modal-body">
+  <h5>Popover in a modal</h5>
+  <p>This <a href="#" role="button" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on click.</p>
+  <hr>
+  <h5>Tooltips in a modal</h5>
+  <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a> have tooltips on hover.</p>
 </div>
+     <!-- <div class="row">
+      <div class="col-md-4" id="viewNo"></div>
+      <div class="col-md-4" id="viewInquiryName"></div>
+      <hr>
+      <p id="viewContents"></p>
+      <hr>
+      <h5>Tooltips in a modal</h5>
+      <p id="viewSuspectName"></p>
+      <hr>
+     </div> -->
+    <div class="modal-footer">
+     <button type="button" class="btn btn-secondary"
+      data-dismiss="modal">닫기</button>
+     <button type="button" class="btn btn-primary">답장하기</button>
+    </div>
+   </div>
+  </div>
+ </div>
 
 
-<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template" type="text/x-handlebars-template">
+ <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+ <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <th scope='row'>{{no}}</th>
@@ -106,17 +130,20 @@ data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
 {{/each}}
 </script>
 
-<script id="view-template" type="text/x-handlebars-template">
+ <script id="view-template" type="text/x-handlebars-template">
 
 </script>
 
 
-<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="index.js"></script>
-<script src="view.js"></script>
+ <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
+ <script
+  src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+ <script
+  src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script
+  src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="index.js"></script>
+ <script src="view.js"></script>
 </body>
 </html>
 

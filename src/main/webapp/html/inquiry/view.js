@@ -1,26 +1,34 @@
 var currCls = $('#dropdownMenuButton > span'),
-    templateSrc = $('#view-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+templateSrc = $('#view-template').html();
 
-//Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-var trGenerator = Handlebars.compile(templateSrc);
 
-  
-  $.getJSON('../../app/json/inquiry/list?pageNo=' + pn + '&pageSize=' + pageSize
-		  + '&pageCls=' + cls + "&keyword=" + keyword,
-      tbody.html(''); // 이전에 출력한 내용을 제거한다.
-      
-      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
-      $(trGenerator(obj)).appendTo(tbody);
-      
-      $(document.body).trigger('loaded-list');
-      
-    }); // Bitcamp.getJSON()
-  
-$('.stdinqry-view-link').click((e) => {
-	  e.preventDefault();
-	  alert("!");
-	});
+function loadDetail(no) {
 
+    $.getJSON('../../app/json/inquiry/detail?no=' + no, function(obj) {
+	
+	$(viewCls).html(obj.cls.name);
+	$(viewDate).html(obj.createdDate);
+	
+	$(viewNo).html(obj.no);
+	$(viewInquiryName).html(
+		obj.inquiryPerson.name + obj.inquiryPerson.email + obj.inquiryPerson.registeredDate);
+	$(viewContents).html(obj.contents);
+	
+	$(viewSuspectName).html(obj.suspectPerson.name);
+	$(viewSuspectEmail).html(obj.suspectPerson.email);
+	$(viewSuspectRegiDate).html(obj.suspectPerson.registeredDate);
+
+    });
+
+}
+
+
+$(document.body).bind('loaded-list', () => {
+    $('.stdinqry-view-link').click((e) => {
+	e.preventDefault();
+	loadDetail($(e.target).attr('data-no'));
+    });
+});
 
 
 

@@ -16,7 +16,7 @@
     <result column="send_dt" property="createdDate"/>
   </resultMap>
   
-   <resultMap type="inquiry" id="inquiryMap2">
+   <resultMap type="inquiry" id="inquiryListMap">
     <id column="rprt_inqry_id" property="no"/>
     <result column="cls_id" property="clsNo"/>
     <result column="inqry_id" property="inquiryPersonNo"/>
@@ -43,17 +43,35 @@
   </resultMap>
   
   
-  <sql id="select1">
-    select 
-      rprt_inqry_id,
-      cls_id,
-      inqry_id,
-      sspct_id, 
-      cont, 
-      send_dt
-    from 
-      sms_rprt_inqry
-  </sql>
+  <resultMap type="inquiry" id="inquiryDetailMap">
+    <id column="rprt_inqry_id" property="no"/>
+    <result column="cls_id" property="clsNo"/>
+    <result column="inqry_id" property="inquiryPersonNo"/>
+    <result column="sspct_id" property="suspectPersonNo"/>
+    <result column="cont" property="contents"/>
+    <result column="send_dt" property="createdDate"/>
+    
+    <association property="inquiryPerson" javaType="member">
+     <id column="inqry_id"        property="no"/>
+      <result column="inqry_name"  property="name"/>
+       <result column="inqry_email"  property="email"/>
+        <result column="inqry_date"  property="registeredDate"/>
+    </association>
+    
+    <association property="suspectPerson" javaType="member">
+     <id column="sspct_id"        property="no"/>
+      <result column="sspct_name"  property="name"/>
+          <result column="sspct_email"  property="email"/>
+        <result column="sspct_date"  property="registeredDate"/>
+    </association>
+    
+    <association property="cls" javaType="boardCls">
+    <result column="cls_id" property="no"/>
+      <result column="cls_name"  property="name"/>
+    </association>
+    
+  </resultMap>
+  
   
   <sql id="select2">
   select 
@@ -71,9 +89,30 @@
       left outer join sms_member i on c.inqry_id = i.member_id
       left outer join sms_member s on c.sspct_id = s.member_id
       </sql>
+      
+      <sql id="detail">
+      select 
+      c.rprt_inqry_id,
+      c.cont, 
+      c.send_dt,
+      c.inqry_id,
+      c.sspct_id,
+      i.name as inqry_name,
+      i.email as inqry_email,
+      i.join_date as inqry_date,
+      s.name as sspct_name,
+      s.email as sspct_email,
+      s.join_date as sspct_date,
+      p.cls_name
+      from 
+      sms_rprt_inqry c
+      left outer join sms_board_cls p on c.cls_id = p.cls_id
+      left outer join sms_member i on c.inqry_id = i.member_id
+      left outer join sms_member s on c.sspct_id = s.member_id
+      </sql>
 
   
-  <select id="findAll" resultMap="inquiryMap2" parameterType="map">
+  <select id="findAll" resultMap="inquiryListMap" parameterType="map">
     <include refid="select2"/>
     <if test="cls != 0 or member_ids != null">
       where 
@@ -100,14 +139,14 @@
     </if>
   </select>
   
-  <select id="findByNo" resultMap="inquiryMap" parameterType="int">
-    <include refid="select1"/>
+  <select id="findByNo" resultMap="inquiryDetailMap" parameterType="int">
+   <include refid="detail"/>
     where 
-       = #{value}
+      rprt_inqry_id = #{value}
   </select>
   
   <insert id="insert" parameterType="inquiry">
-    insert into sms_inqry(cont) 
+    insert into sms_rprt_inqry(cont) 
     values(#{contents})
   </insert>
   

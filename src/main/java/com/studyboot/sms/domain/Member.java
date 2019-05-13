@@ -2,6 +2,7 @@ package com.studyboot.sms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Member implements Cloneable, Serializable {
 	
@@ -18,7 +19,10 @@ public class Member implements Cloneable, Serializable {
 	private String photo;
 	private String tel;
 	private int age;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
 	private Date registeredDate;
+	
 	private boolean admin;
 	private String address;
 	
