@@ -1,11 +1,12 @@
 package com.studyboot.sms.dao;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+import com.studyboot.sms.domain.StudyMember;
 
 public interface StudyMemberDao {
 	
-	List<Integer> findByKeyword(HashMap<String, Object> keywordMap);
+  StudyMember findRate(Map<String, Object> rate);
+  int updateRate(StudyMember studyMember);
 }
 
 

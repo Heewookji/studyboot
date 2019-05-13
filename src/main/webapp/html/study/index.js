@@ -28,11 +28,10 @@ function loadList(pn) {
 //페이지를 출력한 후 1페이지를 로딩한다.
 loadList(1);
 
+// 스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하 도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
   if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-
     loadList(pageNo + 1);
-
   }
 });
 

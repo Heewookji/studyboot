@@ -12,13 +12,13 @@ public class StudyMember {
   private boolean leader;
   private double attendance;
   private int upload;
-  private Rate rate;
+  private double averRate;
   
   @Override
   public String toString() {
     return "StudyMember [studyNo=" + studyNo + ", memberNo=" + memberNo + ", endNo=" + endNo
         + ", joinDate=" + joinDate + ", endDate=" + endDate + ", leader=" + leader + ", attendance="
-        + attendance + ", upload=" + upload + ", rate=" + rate + ", rateDate=" + rateDate + "]";
+        + attendance + ", upload=" + upload + ", averRate=" + averRate + "]";
   }
   
   public int getStudyNo() {
@@ -68,6 +68,12 @@ public class StudyMember {
   }
   public void setUpload(int upload) {
     this.upload = upload;
+  }
+  public double getAverRate() {
+    return averRate;
+  }
+  public void setAverRate(double averRate) {
+    this.averRate = averRate;
   }
   
 }

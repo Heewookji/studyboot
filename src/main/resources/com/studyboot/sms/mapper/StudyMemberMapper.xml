@@ -6,17 +6,37 @@
   
 <mapper namespace="com.studyboot.sms.dao.StudyMemberDao">
   
+  <resultMap type="studyMember" id="studyMemberMap">
+    <id column="std_id" property="studyNo"/>
+    <id column="member_id" property="memberNo"/>
+    <result column="end_state_cls_id" property="endNo"/>
+    <result column="join_date" property="joinDate"/>
+    <result column="end_date" property="endDate"/>
+    <result column="reader" property="leader"/>
+    <result column="atn_pct" property="attendance"/>
+    <result column="arch_cnt" property="upload"/>
+    <result column="aver_rate" property="averRate"/>
+  </resultMap>
   
   
-  <select id="findByKeyword" resultType="int" parameterType="map">
-    select member_id from sms_member
-   <where>
-   <if test="keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'"/>
-        name like #{pattern1}
-    </if>
-    </where>   
+  <select id="findRate" resultType="studyMemberMap" parameterType="map">
+     select
+      aver_rate
+    from
+      sms_std_member
+    where
+      std_id = #{studyNo} and memeber_id = #{memberNo}
   </select>
+  
+  <update id="updateRate" parameterType="studyMember">
+    update sms_std_member
+    set 
+      aver_rate = #{averRate}
+    where
+      std_id = #{studyNo} and member_id = #{memberNo}
+  </update>
+  
+  
   
 </mapper>
 

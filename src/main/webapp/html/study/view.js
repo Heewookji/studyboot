@@ -74,6 +74,7 @@ function loadData(no) {
     document.querySelector('#sdt').value = data.startDate;
     document.querySelector('#edt').value = data.endDate;
     document.querySelector('#prsn').value = data.personnel;
+    document.querySelector('#rate').value = data.rate;
   };
   xhr.open('GET', '../../app/json/study/detail?no=' + no, true);
   xhr.send();
@@ -81,6 +82,8 @@ function loadData(no) {
 
 
 // 목록으로 돌아가기
+// 무한스크롤 하고 상세보기 클릭했을 때 기존에 무한 스크롤한 리스트를 그대로 보여주고 싶은데 기존 리스트를 그대로 유지 하지 않고
+// 리프래시 한 것처럼 출력됨.
 $('#goback-btn').click(function() {
   window.history.go(-1);
 });
