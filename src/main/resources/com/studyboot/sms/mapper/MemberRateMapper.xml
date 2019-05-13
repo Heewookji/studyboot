@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.MemberRateDao">
+  
+  <resultMap type="memberRate" id="memberRateMap">
+    <id column="member_rate_info_id" property="memberRateNo"/>
+    <result column="std_id" property="studyNo"/>
+    <result column="member_id" property="memberNo"/>
+    <result column="rate" property="rate"/>
+    <result column="rate_dt" property="rateDate"/>
+  </resultMap>
+  
+  
+  
+  <select id="findAll" resultMap="memberRateMap" parameterType="int">
+     select
+      member_rate_info_id,
+      std_id,
+      member_id,
+      rate,
+      rate_dt
+    from
+      sms_member_rate_info
+    where
+      std_id = #{value}
+  </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
