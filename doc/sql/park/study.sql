@@ -65,5 +65,20 @@ insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(14, 11, 'servlet');
 insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(15, 11, 'list');
 
 
+-- 회원 평점 정보
+-- 회원 평점 정보 키, 회원 번호 , 평점 , 평가일
 
+insert into sms_member_rate_info(std_id, member_id, rate, rate_dt) values(1, 2, 3.0, 20190513);
+insert into sms_member_rate_info(std_id, member_id, rate, rate_dt) values(1, 3, 2.5, 20190513);
+insert into sms_member_rate_info(std_id, member_id, rate, rate_dt) values(1, 4, 4.0, 20191013);
+insert into sms_member_rate_info(std_id, member_id, rate, rate_dt) values(1, 5, 4.0, 20190513);
+
+-- 스터디 회원 정보
+insert into sms_std_member(std_id, member_id) values(1,2);
+insert into sms_std_member(std_id, member_id) values(1,3);
+insert into sms_std_member(std_id, member_id) values(1,4);
+insert into sms_std_member(std_id, member_id) values(1,5);
+
+                               
+                               
 
