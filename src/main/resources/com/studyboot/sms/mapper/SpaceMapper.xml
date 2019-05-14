@@ -31,25 +31,52 @@
     
     <collection property="files" ofType="spacePhoto">
       <id column="space_photo_id" property="no"/>
-      <result column="photo" property="filePath"/>
+      <result column="filePath" property="filePath"/>
       <result column="space_id" property="spaceNo"/>
     </collection>
     
+    <collection property="rooms" ofType="spaceRoom">
+      <id column="space_room_id" property="no"/>
+      <result column="space_id" property="spaceNo"/>
+      <result column="name" property="name"/>
+      <result column="photo" property="photo"/>
+      <result column="prsn" property="personnel"/>
+      <result column="price" property="price"/>
+    </collection>
   </resultMap>
 
   <resultMap type="space" id="spaceConvenienceMap">
     <id column="space_id" property="no"/>
  
-  <collection property="spaceConvenienceInfo" ofType="spaceConvenienceInfo">
+  <collection property="spaceConvenienceInfos" ofType="spaceConvenienceInfo">
     <id column="conv_id" property="convenienceNo"/>
     <id column="space_id" property="spaceNo"/>
     <result column="note" property="note"/>
   </collection>
     
-    <collection property="spaceConvenience" ofType="spaceConvenience">
+    <collection property="spaceConveniences" ofType="spaceConvenience">
       <id column="conv_id" property="no"/>
       <result column="name" property="name"/>
     </collection>
+  </resultMap>
+
+  <resultMap type="space" id="spaceReviewMap">
+    <id column="space_id" property="no"/>
+
+    <association property="studyMember" javaType="studyMember">
+      <result column="std_id" property="studyNo"/>
+      <result column="member_id"  property="memberNo"/>
+    </association>    
+
+    <collection property="bookings" ofType="spaceRoomBooking">
+      <id column="space_bkng_id" property="no"/>
+      <result column="space_room_id" property="roomNo"/>
+      <result column="std_id" property="studyNo"/>
+      <result column="member_id" property="memberId"/>
+      <result column="rating" property="rating"/>
+      <result column="review" property="review"/>
+    </collection>
+    
   </resultMap>
 
   <select id="findAll" resultMap="spaceMap">
@@ -68,17 +95,23 @@
       s.name,
       s.intro,
       p.space_photo_id,
-      p.photo,
+      p.photo as filePath,
       t.tag_id,
-      t.name as tag_name
+      t.name as tag_name,
+      r.space_room_id,
+      r.name,
+      r.photo,
+      r.prsn,
+      r.price
     from
       sms_space s
         inner join sms_tag t on s.space_id = t.space_id
         inner join sms_space_photo p on s.space_id = p.space_id
+        inner join sms_space_room r on s.space_id = r.space_id
     where s.space_id = #{value}
   </select>
   
-  <select id="findConvByNo" resultMap="spaceConvenienceMap" parameterType="int">
+  <select id="findConv" resultMap="spaceConvenienceMap" parameterType="int">
     select
       s.space_id,
       sc.note,
@@ -90,5 +123,23 @@
         inner join sms_conv c on sc.conv_id = c.conv_id
     where sc.space_id = #{value}
   </select>
+  
+  <select id="findBooking" resultMap="spaceReviewMap" parameterType="int">
+    select
+      b.space_bkng_id,
+      b.space_room_id,
+      m.member_id,
+      m.std_id,
+      r.space_id,
+      b.rating,
+      b.review
+    from
+      sms_space_room_bkng b
+        inner join sms_space_room r on b.space_room_id = r.space_room_id
+        inner join sms_std_member m on b.member_id = m.member_id 
+        and b.std_id = m.std_id
+    where 
+      r.space_id = #{value}
+  </select>  
   
 </mapper>

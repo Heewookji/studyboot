@@ -13,8 +13,6 @@
   <div>
     <div id='name'></div>
     <div id='intro'></div>
-    <div id='tags'></div>
-    <div id='files'></div>
   </div>
   
 <script id="div-template" type="text/x-handlebars-template">
@@ -30,23 +28,43 @@
 </div>
 {{/each}}
 
-{{#each detail.spaceConvenienceInfo}}
+{{! 이중 each문 - 편의시설 종류, 이름 }}
+{{#each detail.spaceConvenienceInfos}}
 <div>
-  {{#each spaceConvenience}}
-    <div>{{no}}</div>
+  {{#each spaceConveniences}}
     <div>{{name}}</div>
   {{/each}}
 </div>
 {{/each}}
 
-{{#each detail.spaceConvenienceInfo}}
+{{! 이중 each문 - 편의시설 비고 }}
+{{#each detail.spaceConvenienceInfos}}
 <div>
-  {{#each spaceConvenienceInfo}}
+  {{#each spaceConvenienceInfos}}
     <div>{{note}}</div>
   {{/each}}
 </div>
 {{/each}}
 
+{{#each detail.rooms}}
+<div>
+  {{name}}
+  {{personnel}}
+  {{photo}}
+  {{price}}
+</div>
+{{/each}}
+
+{{#each detail.bookings}}
+<div>
+  {{#each bookings}}
+      <div>
+        {{review}}
+        {{rating}}
+      </div>
+  {{/each}}
+</div>
+{{/each}}
 
 </script>
   

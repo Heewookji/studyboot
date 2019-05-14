@@ -38,6 +38,21 @@
   
   
   
+  
+    <select id="findByStudy" resultMap="memberRateMap" parameterType="int">
+     select
+      member_rate_info_id,
+      std_id,
+      member_id,
+      rate,
+      rate_dt
+    from
+      sms_member_rate_info
+    where
+      std_id = #{value}
+  </select>
+  
+  
 </mapper>
 
 

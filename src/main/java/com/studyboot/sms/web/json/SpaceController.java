@@ -63,9 +63,9 @@ public class SpaceController {
     
 //    System.out.println(spaceService.detail(no));
     
-    Space spaceTag = spaceService.detail(no);
+    Space spaceInfo = spaceService.detail(no);
     
-    content.put("detail", spaceTag);
+    content.put("detail", spaceInfo);
     
     return content;
   }

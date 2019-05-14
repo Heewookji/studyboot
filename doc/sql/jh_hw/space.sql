@@ -63,7 +63,17 @@ insert into sms_rest_day(space_id, rest_day) values('102', '2019-6-1');
 
 -- 스터디룸 예약
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
-values ('501', '201', '1', '1', '2019-5-5', '4.0', '좋아요' );
+values ('501', '201', '1', '2', '2019-5-5', '4.0', '좋아요' );
+
+insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
+values ('503', '201', '1', '3', '2019-5-5', '3.0', '공부 잘 하고 갑니다~' );
+
+insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
+values ('504', '201', '1', '4', '2019-5-5', '1.0', '와이파이가 잘 잡히지 않네요.' );
+
+insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
+values ('505', '201', '1', '5', '2019-5-5', '5.0', '시설도 좋고 사장님도 좋으세요.' );
+
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_dt, rating, review) 
 values ('502', '202', '2', '2', '2019-5-10', '3.0', '그저그래요' );
 

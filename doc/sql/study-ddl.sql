@@ -153,7 +153,8 @@ CREATE TABLE sms_std (
 	rcrtm_state BOOLEAN      NOT NULL DEFAULT true COMMENT '모집상태여부', -- 모집상태여부
 	goal        VARCHAR(100) NOT NULL COMMENT '스터디 목표', -- 스터디 목표
 	cont        TEXT         NOT NULL COMMENT '스터디 설명', -- 스터디 설명
-	prsn        INTEGER      NOT NULL COMMENT '스터디 최대인원' -- 스터디 최대인원
+	prsn        INTEGER      NOT NULL COMMENT '스터디 최대인원', -- 스터디 최대인원
+	rate        DOUBLE       NOT NULL DEFAULT 0.0 COMMENT '스터디원 평균 평점' -- 스터디원 평균 평점
 )
 COMMENT '스터디';
 
@@ -330,8 +331,7 @@ CREATE TABLE sms_std_member (
 	end_date         DATE    NULL     COMMENT '스터디원 종료일', -- 스터디원 종료일
 	leader           BOOLEAN NOT NULL DEFAULT false COMMENT '스터디장여부', -- 스터디장여부
 	atn_pct          DOUBLE  NULL     COMMENT '스터디 출석율', -- 스터디 출석율
-	arch_cnt         INTEGER NULL     COMMENT '업로드 횟수', -- 업로드 횟수
-	aver_rate        DOUBLE  NULL     COMMENT '전체평점' -- 전체평점
+	arch_cnt         INTEGER NULL     COMMENT '업로드 횟수' -- 업로드 횟수
 )
 COMMENT '스터디회원';
 
@@ -583,6 +583,7 @@ CREATE TABLE sms_member_rate_info (
 	member_rate_info_id INTEGER NOT NULL COMMENT '회원평점 번호', -- 회원평점 번호
 	std_id              INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
 	member_id           INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+	confirm_member_id   INTEGER NOT NULL COMMENT '평가한 회원 번호', -- 평가한 회원 번호
 	rate                DOUBLE  NOT NULL COMMENT '평점', -- 평점
 	rate_dt             DATE    NOT NULL DEFAULT current_date() COMMENT '평가일' -- 평가일
 )
@@ -1012,6 +1013,16 @@ ALTER TABLE sms_member_rate_info
 		REFERENCES sms_std_member ( -- 스터디회원
 			std_id,    -- 스터디번호
 			member_id  -- 회원번호
+		);
+
+-- 회원 평점 정보
+ALTER TABLE sms_member_rate_info
+	ADD CONSTRAINT FK_sms_member_TO_sms_member_rate_info -- 회원 -> 회원 평점 정보
+		FOREIGN KEY (
+			confirm_member_id -- 평가한 회원 번호
+		)
+		REFERENCES sms_member ( -- 회원
+			member_id -- 회원번호
 		);
 
 -- 관심분야
