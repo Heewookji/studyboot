@@ -19,6 +19,7 @@
     <result column="rcrtm_state" property="state"/>
     <result column="cont" property="contents"/>
     <result column="prsn" property="personnel"/>
+    <result column="rate" property="rate"/>
   </resultMap>
   
   
@@ -67,13 +68,31 @@
       rcrtm_state,
       goal,
       cont,
-      prsn
+      prsn,
+      rate
     from
       sms_std
     where 
       std_id = #{value}
   </select>
   
+  <select id="findMemberRateByNo" resultType="double" parameterType="int">
+    select
+      m.rate
+    from
+      sms_std s
+      inner join sms_std_member sm on s.std_id = sm.std_id
+      inner join sms_member m on sm.member_id = m.member_id
+    where 
+      s.std_id = #{value}
+  </select>
+  
+  <update id="updateRate" parameterType="study">
+    update sms_std
+    set 
+      rate = #{rate}
+    where std_id = #{no}
+  </update>
 
 <!-- 
   <update id="increaseCount" parameterType="int">
