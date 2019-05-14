@@ -6,17 +6,25 @@
   
 <mapper namespace="com.studyboot.sms.dao.StudyMemberDao">
   
-  <resultMap type="studyMember" id="studyMemberMap">
+  <resultMap type="memberRate" id="memberRateMap">
+    <id column="member_rate_info_id" property="memberRateNo"/>
     <id column="std_id" property="studyNo"/>
     <id column="member_id" property="memberNo"/>
-    <result column="end_state_cls_id" property="endNo"/>
-    <result column="join_date" property="joinDate"/>
-    <result column="end_date" property="endDate"/>
-    <result column="reader" property="leader"/>
-    <result column="atn_pct" property="attendance"/>
-    <result column="arch_cnt" property="upload"/>
-    <result column="aver_rate" property="averRate"/>
+    <id column="confirm_member_id" property="confirmNo"/>
+    <result column="rate" property="rate"/>
+    <result column="rate_dt" property="rateDate"/>
   </resultMap>
+  
+  <select id="findAll" resultMap="memberRateMap" parameterType="map">
+  	select * from sms_member_rate_info
+  	where std_id = #{studyNo} and member_id = #{memberNo}
+  </select>
+  
+  <update id="updateRate" parameterType="map">
+  	
+  </update>
+  
+  
   
   
   <select id="findRate" resultMap="studyMemberMap" parameterType="map">
