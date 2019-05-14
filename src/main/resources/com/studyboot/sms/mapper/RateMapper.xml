@@ -4,60 +4,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.studyboot.sms.dao.StudyMemberDao">
+<mapper namespace="com.studyboot.sms.dao.RateDao">
   
-  <resultMap type="memberRate" id="memberRateMap">
+  <resultMap type="rate" id="rateMap">
     <id column="member_rate_info_id" property="memberRateNo"/>
     <id column="std_id" property="studyNo"/>
-    <id column="member_id" property="memberNo"/>
+    <id column="member_id" property="no"/>
     <id column="confirm_member_id" property="confirmNo"/>
     <result column="rate" property="rate"/>
     <result column="rate_dt" property="rateDate"/>
   </resultMap>
   
-  <select id="findAll" resultMap="memberRateMap" parameterType="map">
+  <select id="findAll" resultMap="rateMap" parameterType="map">
   	select * from sms_member_rate_info
-  	where std_id = #{studyNo} and member_id = #{memberNo}
-  </select>
-  
-  <update id="updateRate" parameterType="map">
-  	
-  </update>
-  
-  
-  
-  
-  <select id="findRate" resultMap="studyMemberMap" parameterType="map">
-     select
-      aver_rate
-    from
-      sms_std_member
-    where
-      std_id = #{studyNo} and memeber_id = #{memberNo}
-  </select>
-  
-  <update id="updateRate" parameterType="studyMember">
-    update sms_std_member
-    set 
-      aver_rate = #{averRate}
-    where
-      std_id = #{studyNo} and member_id = #{memberNo}
-  </update>
-  
-  
-  
-  
-    <select id="findByStudy" resultMap="memberRateMap" parameterType="int">
-     select
-      member_rate_info_id,
-      std_id,
-      member_id,
-      rate,
-      rate_dt
-    from
-      sms_member_rate_info
-    where
-      std_id = #{value}
+  	where std_id = #{studyNo} and member_id = #{no}
   </select>
   
   

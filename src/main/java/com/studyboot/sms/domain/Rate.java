@@ -6,14 +6,14 @@ public class Rate {
   
   private int memberRateNo;
   private int studyNo;
-  private int memberNo;
+  private int no;
   private int confirmNo;
   private double rate;
   private Date rateDate;
   
   @Override
   public String toString() {
-    return "Rate [memberRateNo=" + memberRateNo + ", studyNo=" + studyNo + ", memberNo=" + memberNo
+    return "Rate [memberRateNo=" + memberRateNo + ", studyNo=" + studyNo + ", memberNo=" + no
         + ", confirmNo=" + confirmNo + ", rate=" + rate + ", rateDate=" + rateDate + "]";
   }
   
@@ -30,10 +30,10 @@ public class Rate {
     this.studyNo = studyNo;
   }
   public int getMemberNo() {
-    return memberNo;
+    return no;
   }
   public void setMemberNo(int memberNo) {
-    this.memberNo = memberNo;
+    this.no = memberNo;
   }
   public int getConfirmNo() {
     return confirmNo;
