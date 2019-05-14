@@ -19,13 +19,15 @@ public class Space {
   private List<SpaceConvenience> spaceConveniences;
   
   private List<SpaceRoomBooking> bookings;
+  private StudyMember studyMember;
   
   @Override
   public String toString() {
     return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
         + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
         + files + ", rooms=" + rooms + ", spaceConvenienceInfos=" + spaceConvenienceInfos
-        + ", spaceConveniences=" + spaceConveniences + ", bookings=" + bookings + "]";
+        + ", spaceConveniences=" + spaceConveniences + ", bookings=" + bookings + ", studyMember="
+        + studyMember + "]";
   }
   
   public int getNo() {
@@ -101,6 +103,14 @@ public class Space {
 
   public void setBookings(List<SpaceRoomBooking> bookings) {
     this.bookings = bookings;
+  }
+
+  public StudyMember getStudyMember() {
+    return studyMember;
+  }
+
+  public void setStudyMember(StudyMember studyMember) {
+    this.studyMember = studyMember;
   }
   
 }

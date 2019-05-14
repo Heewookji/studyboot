@@ -49,26 +49,23 @@
 {{#each detail.rooms}}
 <div>
   {{name}}
-</div>
-{{/each}}
-
-{{#each detail.rooms}}
-<div>
   {{personnel}}
-</div>
-{{/each}}
-
-{{#each detail.rooms}}
-<div>
   {{photo}}
-</div>
-{{/each}}
-
-{{#each detail.rooms}}
-<div>
   {{price}}
 </div>
 {{/each}}
+
+{{#each detail.bookings}}
+<div>
+  {{#each bookings}}
+      <div>
+        {{review}}
+        {{rating}}
+      </div>
+  {{/each}}
+</div>
+{{/each}}
+
 </script>
   
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>

@@ -48,7 +48,6 @@ public class SpaceServiceImpl implements SpaceService {
     space.setSpaceConvenienceInfos(sc);
     space.setBookings(srb);
     
-    
     System.out.println(space);
     
     return space;
