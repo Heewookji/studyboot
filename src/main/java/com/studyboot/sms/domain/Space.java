@@ -18,12 +18,14 @@ public class Space {
   private List<SpaceConvenienceInfo> spaceConvenienceInfos;
   private List<SpaceConvenience> spaceConveniences;
   
+  private List<SpaceRoomBooking> bookings;
+  
   @Override
   public String toString() {
     return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
         + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
         + files + ", rooms=" + rooms + ", spaceConvenienceInfos=" + spaceConvenienceInfos
-        + ", spaceConveniences=" + spaceConveniences + "]";
+        + ", spaceConveniences=" + spaceConveniences + ", bookings=" + bookings + "]";
   }
   
   public int getNo() {
@@ -92,7 +94,13 @@ public class Space {
   public void setSpaceConveniences(List<SpaceConvenience> spaceConveniences) {
     this.spaceConveniences = spaceConveniences;
   }
-  
-  
+
+  public List<SpaceRoomBooking> getBookings() {
+    return bookings;
+  }
+
+  public void setBookings(List<SpaceRoomBooking> bookings) {
+    this.bookings = bookings;
+  }
   
 }

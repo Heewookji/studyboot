@@ -60,6 +60,26 @@
     </collection>
   </resultMap>
 
+  <resultMap type="spaceRoomBooking" id="SpaceRoomBooking">
+    <id column="space_bkng_id" property="no"/>
+    <result column="space_room_id" property="roomNo"/>
+    <result column="std_id" property="studyNo"/>
+    <result column="member_id" property="memberId"/>
+    <result column="rating" property="rating"/>
+    <result column="review" property="review"/>
+ 
+  <collection property="spaceConvenienceInfos" ofType="spaceConvenienceInfo">
+    <id column="conv_id" property="convenienceNo"/>
+    <id column="space_id" property="spaceNo"/>
+    <result column="note" property="note"/>
+  </collection>
+    
+    <collection property="spaceConveniences" ofType="spaceConvenience">
+      <id column="conv_id" property="no"/>
+      <result column="name" property="name"/>
+    </collection>
+  </resultMap>
+
   <select id="findAll" resultMap="spaceMap">
     select
       space_id,
@@ -92,7 +112,7 @@
     where s.space_id = #{value}
   </select>
   
-  <select id="findConvByNo" resultMap="spaceConvenienceMap" parameterType="int">
+  <select id="findConv" resultMap="spaceConvenienceMap" parameterType="int">
     select
       s.space_id,
       sc.note,
@@ -104,5 +124,23 @@
         inner join sms_conv c on sc.conv_id = c.conv_id
     where sc.space_id = #{value}
   </select>
+  
+  <select id="findBooking" resultMap="spaceConvenienceMap" parameterType="int">
+    select
+      b.space_bkng_id,
+      b.space_room_id,
+      m.member_id,
+      m.std_id,
+      r.space_id,
+      b.rating,
+      b.review
+    from
+      sms_space_room_bkng b
+        inner join sms_space_room r on b.space_room_id = r.space_room_id
+        inner join sms_std_member m on b.member_id = m.member_id 
+        and b.std_id = m.std_id
+    where 
+      r.space_id = #{value}
+  </select>  
   
 </mapper>
