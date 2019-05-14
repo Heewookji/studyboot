@@ -6,5 +6,4 @@ import com.studyboot.sms.domain.Rate;
 
 public interface RateDao {
   List<Rate> findAll(Map<String, Object> params);
-  int updateRate(Rate rate);
 }

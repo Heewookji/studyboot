@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Study;
+import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyService;
 
 
@@ -17,6 +18,7 @@ import com.studyboot.sms.service.StudyService;
 public class StudyController {
   
   @Autowired StudyService studyService;
+  @Autowired RateService rateService;
   
   @PostMapping("add")
   public Object add(Study study) {
@@ -86,6 +88,18 @@ public class StudyController {
     content.put("totalPage", totalPage);
     
     return content;
+  }
+  
+  // 테스트용
+  @GetMapping("rate")
+  public Object rate(int nom, int no) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("no", nom);
+    params.put("studyNo", no);
+    
+    rateService.updateRate(params);
+    return params;
   }
   
   /*

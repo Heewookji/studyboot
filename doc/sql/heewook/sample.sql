@@ -12,7 +12,12 @@ insert into sms_member (member_id, pwd, email, name, nick_name, age, tel, photo,
   values(4, '1111', 'user4@test.com', 'user4', 'nick4', 4.5, 24, '010-4444-4444', 'photo4.jpg', '444444');
   insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
   values(5, '1111', 'user5@test.com', 'user5', 'nick5', 5.0, 25, '010-5555-5555', 'photo5.jpg','555555');
+insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
+  values(6, '1111', 'user6@test.com', 'user4', 'nick4', 4.5, 24, '010-4444-4444', 'photo4.jpg', '444444');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
+  values(7, '1111', 'user7@test.com', 'user5', 'nick5', 5.0, 25, '010-5555-5555', 'photo5.jpg','555555');
 
+  
 -- 게시판 분류 (문의,신고)생성
 insert into sms_board_cls (cls_id, cls_name)
   values(1, '문의');

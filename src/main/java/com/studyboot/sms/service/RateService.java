@@ -1,8 +1,8 @@
 package com.studyboot.sms.service;
 
-import com.studyboot.sms.domain.Rate;
+import java.util.Map;
 
 public interface RateService {
   
-  int updateRate(Rate rate);
+  int updateRate(Map<String, Object> params);
 }
