@@ -31,22 +31,30 @@
     
     <collection property="files" ofType="spacePhoto">
       <id column="space_photo_id" property="no"/>
-      <result column="photo" property="filePath"/>
+      <result column="filePath" property="filePath"/>
       <result column="space_id" property="spaceNo"/>
     </collection>
     
+    <collection property="rooms" ofType="spaceRoom">
+      <id column="space_room_id" property="no"/>
+      <result column="space_id" property="spaceNo"/>
+      <result column="name" property="name"/>
+      <result column="photo" property="photo"/>
+      <result column="prsn" property="personnel"/>
+      <result column="price" property="price"/>
+    </collection>
   </resultMap>
 
   <resultMap type="space" id="spaceConvenienceMap">
     <id column="space_id" property="no"/>
  
-  <collection property="spaceConvenienceInfo" ofType="spaceConvenienceInfo">
+  <collection property="spaceConvenienceInfos" ofType="spaceConvenienceInfo">
     <id column="conv_id" property="convenienceNo"/>
     <id column="space_id" property="spaceNo"/>
     <result column="note" property="note"/>
   </collection>
     
-    <collection property="spaceConvenience" ofType="spaceConvenience">
+    <collection property="spaceConveniences" ofType="spaceConvenience">
       <id column="conv_id" property="no"/>
       <result column="name" property="name"/>
     </collection>
@@ -68,13 +76,19 @@
       s.name,
       s.intro,
       p.space_photo_id,
-      p.photo,
+      p.photo as filePath,
       t.tag_id,
-      t.name as tag_name
+      t.name as tag_name,
+      r.space_room_id,
+      r.name,
+      r.photo,
+      r.prsn,
+      r.price
     from
       sms_space s
         inner join sms_tag t on s.space_id = t.space_id
         inner join sms_space_photo p on s.space_id = p.space_id
+        inner join sms_space_room r on s.space_id = r.space_id
     where s.space_id = #{value}
   </select>
   

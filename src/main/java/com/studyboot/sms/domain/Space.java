@@ -13,16 +13,17 @@ public class Space {
 
   private List<SpaceTag> tags;
   private List<SpacePhoto> files;
+  private List<SpaceRoom> rooms;
   
-  private List<SpaceConvenienceInfo> spaceConvenienceInfo;
-  private List<SpaceConvenience> spaceConvenience;
+  private List<SpaceConvenienceInfo> spaceConvenienceInfos;
+  private List<SpaceConvenience> spaceConveniences;
   
   @Override
   public String toString() {
     return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
         + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
-        + files + ", spaceConvenienceInfo=" + spaceConvenienceInfo + ", spaceConvenience="
-        + spaceConvenience + "]";
+        + files + ", rooms=" + rooms + ", spaceConvenienceInfos=" + spaceConvenienceInfos
+        + ", spaceConveniences=" + spaceConveniences + "]";
   }
   
   public int getNo() {
@@ -73,17 +74,25 @@ public class Space {
   public void setFiles(List<SpacePhoto> files) {
     this.files = files;
   }
-  public List<SpaceConvenienceInfo> getSpaceConvenienceInfo() {
-    return spaceConvenienceInfo;
+  public List<SpaceRoom> getRooms() {
+    return rooms;
   }
-  public void setSpaceConvenienceInfo(List<SpaceConvenienceInfo> spaceConvenienceInfo) {
-    this.spaceConvenienceInfo = spaceConvenienceInfo;
+  public void setRooms(List<SpaceRoom> rooms) {
+    this.rooms = rooms;
   }
-  public List<SpaceConvenience> getSpaceConvenience() {
-    return spaceConvenience;
+  public List<SpaceConvenienceInfo> getSpaceConvenienceInfos() {
+    return spaceConvenienceInfos;
   }
-  public void setSpaceConvenience(List<SpaceConvenience> spaceConvenience) {
-    this.spaceConvenience = spaceConvenience;
+  public void setSpaceConvenienceInfos(List<SpaceConvenienceInfo> spaceConvenienceInfos) {
+    this.spaceConvenienceInfos = spaceConvenienceInfos;
   }
-
+  public List<SpaceConvenience> getSpaceConveniences() {
+    return spaceConveniences;
+  }
+  public void setSpaceConveniences(List<SpaceConvenience> spaceConveniences) {
+    this.spaceConveniences = spaceConveniences;
+  }
+  
+  
+  
 }

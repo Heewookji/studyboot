@@ -42,7 +42,9 @@ public class SpaceServiceImpl implements SpaceService {
     
     Space space = spaceDao.findByNo(no);
     
-    space.setSpaceConvenienceInfo(sc);
+    space.setSpaceConvenienceInfos(sc);
+    
+    System.out.println(space);
     
     return space;
     

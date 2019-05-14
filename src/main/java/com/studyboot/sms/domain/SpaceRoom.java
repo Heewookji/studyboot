@@ -7,8 +7,12 @@ public class SpaceRoom {
   private String photo;
   private int personnel;
   private int price;
-  
-  private Space space;
+
+  @Override
+  public String toString() {
+    return "SpaceRoom [no=" + no + ", spaceNo=" + spaceNo + ", name=" + name + ", photo=" + photo
+        + ", personnel=" + personnel + ", price=" + price + "]";
+  }
 
   public int getNo() {
     return no;
@@ -56,14 +60,6 @@ public class SpaceRoom {
 
   public void setPrice(int price) {
     this.price = price;
-  }
-
-  public Space getSpace() {
-    return space;
-  }
-
-  public void setSpace(Space space) {
-    this.space = space;
   }
   
 }
