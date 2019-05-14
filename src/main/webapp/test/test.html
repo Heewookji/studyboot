@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Study</title>
+<link rel="stylesheet"
+ href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link href='/Study-Web-Project/node_modules/@fullcalendar/core/main.css'
+ rel='stylesheet' />
+<link
+ href='/Study-Web-Project/node_modules/@fullcalendar/daygrid/main.css'
+ rel='stylesheet' />
+<!--  <link
+ href='/Study-Web-Project/test/test.css'
+ rel='stylesheet' /> -->
+</head>
+<body>
+
+ <div id='calendar'></div>
+
+ <a type="hidden" data-toggle="modal"
+       data-target="#calModal" id="cal-btn"></a>
+
+
+<div class="modal fade" id="calModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"
+   role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h5 class="modal-title" id="formTitle"></h5>
+     <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    <div class="modal-body">
+     <form>
+      <div class="form-group sspctForm-Format std-invisible">
+       <label for="recipient-name" class="col-form-label">신고:</label>
+       <span class="form-control" id="sspctName"></span>
+       <input type="hidden" id="inqryNo">
+       <span class="std-invisible" id="inqryName"></span>
+       <input type="hidden" id="sspctNo">
+       <input type="hidden" id="inqryClsNo">
+      </div>
+      <div class="form-group">
+       <label for="recipient-name" class="col-form-label">내용:</label>
+       <input type="text" class="form-control" id="inqryContents">
+      </div>
+     </form>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-secondary"
+      data-dismiss="modal">닫기</button>
+     <button type="button" class="btn btn-primary" id="inqryAdd-btn">제출하기</button>
+    </div>
+   </div>
+  </div>
+ </div>
+
+
+<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
+ <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+ <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src='/Study-Web-Project/node_modules/@fullcalendar/core/locales/ko.js'></script>
+ <script src='/Study-Web-Project/node_modules/@fullcalendar/core/main.js'></script>
+ <script src='/Study-Web-Project/node_modules/@fullcalendar/daygrid/main.js'></script>
+ <script src='/Study-Web-Project/node_modules/@fullcalendar/interaction/main.js'></script>
+ <script src='/Study-Web-Project/test/test.js'></script>
+</body>
+</html>
+
+
