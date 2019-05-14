@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>게시물</title>
+  <link rel="stylesheet" href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="view.css">
 </head>
 
 <body>
 
+<div id="tag"></div>
+<div id="name"></div>
+<div id="intro"></div>
+<div id="convName"></div>
+<div id="filePath"></div>
+
+<div id="roomInfo"></div>
+<!-- <div> reservation </div> -->
+<!-- <div> averageRating </div> -->
+<div id="spaceReview"></div>
+
 <section></section>
 
-  <div>
-    <div id='name'></div>
-    <div id='intro'></div>
-  </div>
-  
-<script id="div-template" type="text/x-handlebars-template">
+<script id="div-tag" type="text/x-handlebars-template">
 {{#each detail.tags}}
 <div>
   {{tagName}}
 </div>
 {{/each}}
+</script>
 
-{{#each detail.files}}
-<div>
-  {{filePath}}
-</div>
-{{/each}}
-
-{{! 이중 each문 - 편의시설 종류, 이름 }}
+<script id="div-convName" type="text/x-handlebars-template">
 {{#each detail.spaceConvenienceInfos}}
 <div>
   {{#each spaceConveniences}}
@@ -36,16 +38,17 @@
   {{/each}}
 </div>
 {{/each}}
+</script>
 
-{{! 이중 each문 - 편의시설 비고 }}
-{{#each detail.spaceConvenienceInfos}}
+<script id="div-spacePhoto" type="text/x-handlebars-template">
+{{#each detail.files}}
 <div>
-  {{#each spaceConvenienceInfos}}
-    <div>{{note}}</div>
-  {{/each}}
+  {{filePath}}
 </div>
 {{/each}}
+</script>
 
+<script id="div-roomInfo" type="text/x-handlebars-template">
 {{#each detail.rooms}}
 <div>
   {{name}}
@@ -54,7 +57,9 @@
   {{price}}
 </div>
 {{/each}}
+</script>
 
+<script id="div-spaceReview" type="text/x-handlebars-template">
 {{#each detail.bookings}}
 <div>
   {{#each bookings}}
@@ -65,9 +70,18 @@
   {{/each}}
 </div>
 {{/each}}
-
 </script>
-  
+
+<!-- 편의시설 비고
+{{#each detail.spaceConvenienceInfos}}
+<div id="convNote">
+  {{#each spaceConvenienceInfos}}
+    <div>{{note}}</div>
+  {{/each}}
+</div>
+{{/each}}
+-->
+
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

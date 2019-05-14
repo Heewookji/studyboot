@@ -13,13 +13,13 @@ div > div {
 	margin: 5px;
 }
 
-div>img {
+#img {
 	float: left;
 	background-color: khaki;
 	width: 40%;
 	height: 100%;
 }
 
-h2, div>p {
+h2, div > p {
 	text-align: center;
 }
