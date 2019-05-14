@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="/Study-Web-Project/css/common.css">
 <link rel="stylesheet" href="/Study-Web-Project/css/header.css">
 <link rel="stylesheet" href="index.css">
-<link rel="stylesheet" href="view.css">
 </head>
 <body>
 
@@ -59,27 +58,28 @@
    </table>
   </div>
   <!-- .stdinqry-list -->
-<div class="container">
-  <div class="row">
-    <div class="col">
-    </div>
+  <div class="container">
+   <div class="row">
+    <div class="col"></div>
     <div class="col-9">
-  <nav aria-label="목록 페이지 이동">
-   <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item"><a class="page-link"
-     href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="page-item active"><span
-     class="page-link">1</span></li>
-    <li id="nextPage" class="page-item "><a class="page-link"
-     href="?pageNo=2&pageSize=3">다음</a></li>
-   </ul>
-  </nav>
+     <nav aria-label="목록 페이지 이동">
+      <ul class="pagination justify-content-center">
+       <li id="prevPage" class="page-item"><a class="page-link"
+        href="?pageNo=0&pageSize=3">이전</a></li>
+       <li id="currPage" class="page-item active"><span
+        class="page-link">1</span></li>
+       <li id="nextPage" class="page-item "><a class="page-link"
+        href="?pageNo=2&pageSize=3">다음</a></li>
+      </ul>
+     </nav>
     </div>
-    <div class="col">
-  <button type="button" id="addForm-btn" class="btn btn-light">문의하기</button>
-    </div>
+    <div>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+       data-target="#addModal" id="inqryForm-btn">문의
+       </button>
+       </div>
+   </div>
   </div>
-</div>
  </div>
  <!-- .container -->
 
@@ -98,23 +98,65 @@
      </button>
     </div>
     <div class="modal-body">
-  <p><span id="viewNo"></span><span id="viewInquiryName">
-  </span><span id="viewInquiryEmail"></span><span id="viewInquiryRegiDate"></span></p>
-  <hr>
-  <p><span id="viewContents"></span></p>
-  
-     <p><span id="viewSuspectName">
-  </span><span id="viewSuspectEmail"></span><span id="viewSuspectRegiDate"></span></p>
-</div>
+     <p><span id="viewInquiryText"></span>
+      <input id="viewNo" type="hidden"></input>
+     </p>
+     <hr>
+     <p>
+      <span id="viewContents"></span>
+     </p>
+     <p>
+     <span id="viewSuspectText"></span>
+     </p>
+    </div>
     <div class="modal-footer">
      <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">닫기</button>
+      data-dismiss="modal" id="detailClose-btn">닫기</button>
+      <button type="button" class="btn btn-primary" id="inqryRemove-btn">삭제하기</button>
      <button type="button" class="btn btn-primary">답장하기</button>
     </div>
    </div>
   </div>
  </div>
 
+
+
+ <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"
+   role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h5 class="modal-title" id="formTitle"></h5>
+     <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    <div class="modal-body">
+     <form>
+      <div class="form-group sspctForm-Format std-invisible">
+       <label for="recipient-name" class="col-form-label">신고:</label>
+       <span class="form-control" id="sspctName"></span>
+       <input type="hidden" id="inqryNo">
+       <span class="std-invisible" id="inqryName"></span>
+       <input type="hidden" id="sspctNo">
+       <input type="hidden" id="inqryClsNo">
+      </div>
+      <div class="form-group">
+       <label for="recipient-name" class="col-form-label">내용:</label>
+       <input type="text" class="form-control" id="inqryContents">
+      </div>
+     </form>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-secondary"
+      data-dismiss="modal">닫기</button>
+     <button type="button" class="btn btn-primary" id="inqryAdd-btn">제출하기</button>
+    </div>
+   </div>
+  </div>
+ </div>
 
  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
  <script id="tr-template" type="text/x-handlebars-template">
@@ -126,7 +168,12 @@
 <a class='stdinqry-view-link' href='#' data-toggle="modal" 
 data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
 </td>
-  <td>{{inquiryPerson.name}}</td>
+  <td>
+<a href='#' class='sspctForm-btn'
+ data-toggle="modal" 
+data-target="#addModal"
+data-content='{{inquiryPerson.name}}' data-no='{{inquiryPersonNo}}'>{{inquiryPerson.name}}</a>
+</td>
   <td>{{createdDate}}</td>
 </tr>
 {{/each}}
@@ -135,6 +182,7 @@ data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
  <script id="view-template" type="text/x-handlebars-template">
 
 </script>
+
 
 
  <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
