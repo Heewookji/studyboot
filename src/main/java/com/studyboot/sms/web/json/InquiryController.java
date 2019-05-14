@@ -97,6 +97,10 @@ public class InquiryController {
 
     int rowCount = inquiryService.size(clsNo, memberNos);
     
+    if (rowCount == 0) {
+      content.put("pageNo", 0);
+      return content;
+    }
     
     int totalPage = rowCount / pageSize;
 

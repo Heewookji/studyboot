@@ -9,28 +9,39 @@ function loadDetail(no) {
 	$(viewCls).html(obj.cls.name);
 	$(viewDate).html(obj.createdDate);
 	
-	$(viewNo).html('문의   ' + obj.no + '번 ');
-	$(viewInquiryName).html('문의 회원   ' +obj.inquiryPerson.name +'님 ');
-	$(viewInquiryEmail).html('이메일 '+ obj.inquiryPerson.email)
-	$(viewInquiryRegiDate).html('가입일 ' +obj.inquiryPerson.registeredDate);
+	$(viewNo).val(obj.no);
+	
+	$(viewInquiryText).html('문의   ' + obj.no + '번 '
+	+ '문의 회원   ' +obj.inquiryPerson.name +'님 '
+	+ '이메일 '+ obj.inquiryPerson.email
+	+ '가입일 ' +obj.inquiryPerson.registeredDate);
 	
 	$(viewContents).html(obj.contents);
 	
 	if(obj.suspectPerson){
-	$(viewSuspectName).html('피신고 회원  ' +obj.suspectPerson.name+'님 ');
-	$(viewSuspectEmail).html('이메일 '+obj.suspectPerson.email);
-	$(viewSuspectRegiDate).html('가입일 ' +obj.suspectPerson.registeredDate);
-	} else{
 	    
-	$(viewSuspectName).html('');
-	$(viewSuspectEmail).html('');
-	$(viewSuspectRegiDate).html('');
+	 $(viewSuspectText).html('피신고 회원  ' +obj.suspectPerson.name+'님 '
+	+ '이메일 '+obj.suspectPerson.email
+	+ '가입일 ' +obj.suspectPerson.registeredDate);
+	 
+	} else{
+	  $(viewSuspectText).html('');
 	}
 	
-	
+	$(document.body).trigger('loaded-detail');
     });
 
 }
+
+
+
+$('#inqryRemove-btn').click((e) => {
+    
+    $.getJSON('../../app/json/inquiry/delete?no=' + $(viewNo).val(),
+	    function(obj) {
+	location.reload();
+})
+});
 
 
 $(document.body).bind('loaded-list', () => {
