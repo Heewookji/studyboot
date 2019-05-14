@@ -16,7 +16,7 @@
   
   
   
-  <select id="findAll" resultMap="memberRateMap" parameterType="int">
+  <select id="findByStudy" resultMap="memberRateMap" parameterType="int">
      select
       member_rate_info_id,
       std_id,

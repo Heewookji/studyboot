@@ -24,7 +24,7 @@ public class StudyMemberServiceImpl implements StudyMemberService {
   @Override
   public List<MemberRate> list(int studyNo) {
     
-    List<MemberRate> rateList = memberRateDao.findAll(studyNo);
+    List<MemberRate> rateList = memberRateDao.findByStudy(studyNo);
     double totalRate = 0;
     
     for (MemberRate rate : rateList) {

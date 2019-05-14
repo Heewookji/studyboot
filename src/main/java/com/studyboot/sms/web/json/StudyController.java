@@ -51,6 +51,7 @@ public class StudyController {
   
   @GetMapping("detail")
   public Object detail(int no) {
+    studyService.updateRate(no);
     Study study = studyService.get(no);
     return study;
   }
