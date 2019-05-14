@@ -154,7 +154,7 @@ CREATE TABLE sms_std (
 	goal        VARCHAR(100) NOT NULL COMMENT '스터디 목표', -- 스터디 목표
 	cont        TEXT         NOT NULL COMMENT '스터디 설명', -- 스터디 설명
 	prsn        INTEGER      NOT NULL COMMENT '스터디 최대인원', -- 스터디 최대인원
-	rate        DOUBLE       NULL     DEFAULT 0.0 COMMENT '스터디원 평균 평점' -- 스터디원 평균 평점
+	rate        DOUBLE       NOT NULL DEFAULT 0.0 COMMENT '스터디원 평균 평점' -- 스터디원 평균 평점
 )
 COMMENT '스터디';
 
@@ -583,7 +583,7 @@ CREATE TABLE sms_member_rate_info (
 	member_rate_info_id INTEGER NOT NULL COMMENT '회원평점 번호', -- 회원평점 번호
 	std_id              INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
 	member_id           INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	confirm_member_id   INTEGER NULL     COMMENT '평가한 회원 번호', -- 평가한 회원 번호
+	confirm_member_id   INTEGER NOT NULL COMMENT '평가한 회원 번호', -- 평가한 회원 번호
 	rate                DOUBLE  NOT NULL COMMENT '평점', -- 평점
 	rate_dt             DATE    NOT NULL DEFAULT current_date() COMMENT '평가일' -- 평가일
 )
