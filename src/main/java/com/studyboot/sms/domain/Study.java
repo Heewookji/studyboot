@@ -23,14 +23,10 @@ public class Study {
   private String goal;
   private String contents;
   private int personnel;
+  private int memberAge;
+  private double attendance;
+  private double endrate;
   
-  @Override
-  public String toString() {
-    return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
-        + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", startDate=" + startDate
-        + ", endDate=" + endDate + ", state=" + state + ", goal=" + goal + ", contents=" + contents
-        + ", personnel=" + personnel + "]";
-  }
   
   public int getNo() {
     return no;
@@ -109,6 +105,24 @@ public class Study {
   }
   public void setPersonnel(int personnel) {
     this.personnel = personnel;
+  }
+  public int getMemberAge() {
+    return memberAge;
+  }
+  public void setMemberAge(int memberAge) {
+    this.memberAge = memberAge;
+  }
+  public double getAttendance() {
+    return attendance;
+  }
+  public void setAttendance(double attendance) {
+    this.attendance = attendance;
+  }
+  public double getEndrate() {
+    return endrate;
+  }
+  public void setEndrate(double endrate) {
+    this.endrate = endrate;
   }
   
 }
