@@ -11,15 +11,14 @@
 <body>
   <div class="container">
     <div class="row">
-      <div id="name" ></div>
-      <div id="tag" class="col"></div>
+      <div id="name" class="col-4"></div>
+      <div id="tag" class="col-2"></div>
     </div>
-
-    <div id="intro"></div>
-    <div id="convName"></div>
-    <div id="filePath"></div>
-    <div id="roomInfo"></div>
-    <div id="spaceReview"></div>
+    <div id="intro" class="row"></div>
+    <div id="convName" class="row justify-content-start"></div>
+    <div id="filePath" class="row justify-content-start"></div>
+    <div id="roomInfo" class="row justify-content-start"></div>
+    <div id="spaceReview" class="row"></div>
   </div>
 
   <!-- <div> reservation </div> -->
@@ -35,9 +34,9 @@
 
   <script id="div-convName" type="text/x-handlebars-template">
 {{#each detail.spaceConvenienceInfos}}
-<div>
+<div class="col-2">
   {{#each spaceConveniences}}
-    <div>{{name}}</div>
+    <div">{{name}}</div>
   {{/each}}
 </div>
 {{/each}}
@@ -52,14 +51,22 @@
 </script>
 
   <script id="div-roomInfo" type="text/x-handlebars-template">
-{{#each detail.rooms}}
-<div>
-  {{name}}
-  {{personnel}}
-  {{photo}}
-  {{price}}
+  {{#each detail.rooms}}
+<div class="col-3">
+  <div id="roomPhoto">
+    {{photo}}
+  </div>
+  <div id="roomName">
+    {{name}}
+  </div>
+  <div id="roomPersonnel">
+    {{personnel}}
+  </div>
+  <div id="roomPrice">
+    {{price}}
+  </div>
 </div>
-{{/each}}
+  {{/each}}
 </script>
 
   <script id="div-spaceReview" type="text/x-handlebars-template">
@@ -67,8 +74,10 @@
 <div>
   {{#each bookings}}
       <div>
-        {{review}}
         {{rating}}
+      </div>
+      <div>
+        {{review}}
       </div>
   {{/each}}
 </div>
