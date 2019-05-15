@@ -85,7 +85,7 @@ insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rat
 insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(1, 5, 7, 2.0, 20191013);
 
 -- 스터디 회원 정보
-insert into sms_std_member(std_id, member_id) values(1,2);
+insert into sms_std_member(std_id, member_id,leader) values(1,2,true);
 insert into sms_std_member(std_id, member_id) values(1,3);
 insert into sms_std_member(std_id, member_id) values(1,4);
 insert into sms_std_member(std_id, member_id) values(1,5);

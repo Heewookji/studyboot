@@ -11,107 +11,89 @@
  href='/Study-Web-Project/node_modules/@fullcalendar/daygrid/main.css'
  rel='stylesheet' />
 <link href='/Study-Web-Project/test/test.css' rel='stylesheet' />
+<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
 </head>
 <body>
 
-    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-     data-target="#calModal" id="booking-btn">calendar
-    </button>
+ <button type="button" class="btn btn-outline-primary"
+  data-toggle="modal" data-target="#calModal" id="booking-btn">calendar</button>
 
 
- <a type="hidden" data-target="#calModal"
-  id="cal-btn"></a>
+ <a type="hidden" data-target="#calModal" id="cal-btn"></a>
 
 
 
- <div class="modal fade" id="calModal" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+ <div class="modal invisible" id="calModal" tabindex="-1" role="dialog"
+  data-focus="false" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"
    role="document">
    <div class="modal-content">
     <div class="modal-header">
-     <h5 class="modal-title" id="formTitle"></h5>
+     <h5 class="modal-title" id="formTitle">스터디룸 예약</h5>
      <button type="button" class="close" data-dismiss="modal"
       aria-label="Close">
       <span aria-hidden="true">&times;</span>
      </button>
     </div>
     <div class="modal-body">
-    <div class="container-fluid">
-     <div id="calendar"></div>
-  <div class="row justify-content-md-center">
-   <div class="col-md-auto">
-   <button type="button" class="btn btn-outline-primary" 
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">08:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">09:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">10:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">11:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">12:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">13:00
-    </button>
-    <button type="button" class="btn btn-outline-primary" 
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">14:00
-    </button>
-   </div>
-  </div>
-  <div class="row justify-content-md-center">
-   <div class="col-md-auto">
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">15:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">16:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">17:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">18:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">19:00
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">20:00
-    </button>
-     <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">21:00
-    </button>
-   </div>
-  </div>
-  </div>
-     <form>
-      <div class="form-group sspctForm-Format std-invisible">
-       <label for="recipient-name" class="col-form-label">신고:</label> <span
-        class="form-control" id="sspctName"></span> <input type="hidden"
-        id="inqryNo"> <span class="std-invisible" id="inqryName"></span>
-       <input type="hidden" id="sspctNo"> <input type="hidden"
-        id="inqryClsNo">
+     <div class="container-fluid">
+      <div id="calendar"></div>
+      <div class="row justify-content-md-center">
+       <div class="col-md-auto">
+        <button type="button" class="btn btn-outline-primary cal-time">08:00</button>
+        <button type="button" class="btn btn-outline-primary cal-time">09:00</button>
+        <button type="button" class="btn btn-outline-primary cal-time">10:00</button>
+        <button type="button" class="btn btn-outline-primary cal-time">11:00</button>
+        <button type="button" class="btn btn-outline-primary cal-time">12:00</button>
+        <button type="button" class="btn btn-outline-primary cal-time">13:00</button>
+        <button type="button" class="btn btn-outline-primary cal-time">14:00</button>
+       </div>
       </div>
-      <div class="form-group">
-       <label for="recipient-name" class="col-form-label">내용:</label> <input
-        type="text" class="form-control" id="inqryContents">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+       <button type="button" class="btn btn-outline-primary cal-time">15:00</button>
+       <button type="button" class="btn btn-outline-primary cal-time">16:00</button>
+       <button type="button" class="btn btn-outline-primary cal-time">17:00</button>
+       <button type="button" class="btn btn-outline-primary cal-time">18:00</button>
+       <button type="button" class="btn btn-outline-primary cal-time">19:00</button>
+       <button type="button" class="btn btn-outline-primary cal-time">20:00</button>
+       <button type="button" class="btn btn-outline-primary cal-time">21:00</button>
       </div>
-     </form>
+     </div>
     </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">닫기</button>
-     <button type="button" class="btn btn-primary" id="inqryAdd-btn">제출하기</button>
-    </div>
+    <form></form>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+    <button type="button" class="btn btn-primary" id="inqryAdd-btn">예약하기</button>
    </div>
   </div>
  </div>
+ </div>
+ 
+
+
+ <script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <th scope='row'>{{no}}</th>
+  <td>{{cls.name}}</td>
+  <td>
+<a class='stdinqry-view-link' href='#' data-toggle="modal" 
+data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
+</td>
+  <td>
+<a href='#' class='sspctForm-btn'
+ data-toggle="modal" 
+data-target="#addModal"
+data-content='{{inquiryPerson.name}}' data-no='{{inquiryPersonNo}}'>{{inquiryPerson.name}}</a>
+</td>
+  <td>{{createdDate}}</td>
+</tr>
+{{/each}}
+</script>
 
 
  <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
