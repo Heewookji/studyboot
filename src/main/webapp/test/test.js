@@ -14,8 +14,6 @@ function loadBookedInfo(spaceNo, date) {
 }
 
 
-
-
 $(document).on('DOMContentLoaded', function (e) {
 
     var calendarEl = document.getElementById('calendar');
@@ -31,9 +29,23 @@ $(document).on('DOMContentLoaded', function (e) {
 
 $('#calModal').on('shown.bs.modal', function (e) {
     window.calendar.render();
-    $('#calModal').removeClass("invisible");
     $(document.body).trigger('loaded-cal');
 });
+
+
+//$("#calendar").fullCalendar({
+//	
+//	dayClick: function() {
+//    },
+//    weekends: false,
+//    showNonCurrentDates: false,
+//    locale: 'pt-br',
+//    render: true
+//});
+//
+//$(".ui .full-calendar").addClass('modal');
+    
+
 
 $(document.body).bind('cal-dateClick', () => {
 
