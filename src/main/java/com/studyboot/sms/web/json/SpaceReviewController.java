@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.SpaceReview;
 import com.studyboot.sms.service.SpaceService;
 
-@RestController("json/SpaceController")
+@RestController("json/SpaceReviewController")
 @RequestMapping("/json/space")
 public class SpaceReviewController {
 
