@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물</title>
-<link rel="stylesheet"
-  href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="view.css">
 </head>
 
@@ -18,7 +17,7 @@
     <div id="convName" class="row justify-content-start"></div>
     <div id="filePath" class="row justify-content-start"></div>
     <div id="roomInfo" class="row justify-content-start"></div>
-    <a href="reviewForm.html">후기 등록</a>
+    <a href="reviewForm.html" id="reviewForm-btn">후기 등록</a>
     <div id="spaceReview" class="row"></div>
   </div>
 
@@ -95,14 +94,16 @@
 {{/each}}
 -->
 
-  <script
-    src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
-  <script
-    src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-  <script
-    src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script
-    src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <form>
+    <h4>내용</h4>
+    <input type="number" id="rating-form"><br /> <input type="text" id="review-form"><br />
+    <button type="button" id="add-btn">등록</button>
+  </form>
+
+  <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="view.js"></script>
 
 </body>
