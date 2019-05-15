@@ -60,24 +60,41 @@
     </collection>
   </resultMap>
 
-  <resultMap type="space" id="spaceReviewMap">
+  <resultMap type="space" id="spaceBookingMap"> <!-- 공간예약 -->
     <id column="space_id" property="no"/>
 
     <association property="studyMember" javaType="studyMember">
-      <result column="std_id" property="studyNo"/>
+      <id column="std_id" property="studyNo"/>
       <result column="member_id"  property="memberNo"/>
     </association>    
 
     <collection property="bookings" ofType="spaceRoomBooking">
       <id column="space_bkng_id" property="no"/>
       <result column="space_room_id" property="roomNo"/>
+      <result column="space_id" property="spaceNo"/>
       <result column="std_id" property="studyNo"/>
       <result column="member_id" property="memberId"/>
+      <result column="bkng_sdt" property="bookingStartDate"/>
+      <result column="bkng_edt" property="bookingEndDate"/>
+    </collection>
+  </resultMap>
+  
+  <resultMap type="space" id="spaceReviewMap"> <!-- 공간후기 -->
+    <id column="space_id" property="no"/>
+
+    <association property="member" javaType="member">
+      <id column="member_id" property="no"/>
+    </association>    
+
+    <collection property="spaceReview" ofType="spaceReview">
+      <id column="space_review_id" property="no"/>
+      <result column="member_id" property="memberNo"/>
+      <result column="space_id" property="spaceNo"/>
       <result column="rating" property="rating"/>
       <result column="review" property="review"/>
     </collection>
-    
   </resultMap>
+  
 
   <select id="findAll" resultMap="spaceMap">
     select
@@ -124,22 +141,37 @@
     where sc.space_id = #{value}
   </select>
   
-  <select id="findBooking" resultMap="spaceReviewMap" parameterType="int">
+  <select id="findBooking" resultMap="spaceBookingMap" parameterType="int">
     select
       b.space_bkng_id,
       b.space_room_id,
-      m.member_id,
-      m.std_id,
-      r.space_id,
-      b.rating,
-      b.review
+      b.bkng_sdt,
+      b.bkng_edt,
+      sm.member_id,
+      sm.std_id,
+      r.space_id
     from
       sms_space_room_bkng b
         inner join sms_space_room r on b.space_room_id = r.space_room_id
-        inner join sms_std_member m on b.member_id = m.member_id 
-        and b.std_id = m.std_id
+        inner join sms_std_member sm on b.member_id = sm.member_id 
+        and b.std_id = sm.std_id
     where 
       r.space_id = #{value}
   </select>  
+  
+  <select id="findReview" resultMap="spaceReviewMap" parameterType="int">
+    select
+      s.space_id,
+      m.member_id,
+      r.space_id,
+      r.member_id,
+      r.rating,
+      r.review
+    from
+      sms_space_review r
+        inner join sms_space s on s.space_id = r.space_id
+        inner join sms_member m on r.member_id = m.member_id
+    where s.space_id = #{value}
+  </select>
   
 </mapper>

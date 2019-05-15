@@ -7,18 +7,16 @@ public class SpaceRoomBooking {
   private int no;
   private int roomNo;
   private int studyNo;
-  private int memberId;
-  private Date bookingDate;
-  private int rating;
-  private String review;
+  private int memberNo;
+  private Date bookingStartDate;
+  private Date bookingEndDate;
   
   @Override
   public String toString() {
     return "SpaceRoomBooking [no=" + no + ", roomNo=" + roomNo + ", studyNo=" + studyNo
-        + ", memberId=" + memberId + ", bookingDate=" + bookingDate + ", rating=" + rating
-        + ", review=" + review + "]";
+        + ", memberNo=" + memberNo + ", bookingStartDate=" + bookingStartDate + ", bookingEndDate="
+        + bookingEndDate + "]";
   }
-  
   public int getNo() {
     return no;
   }
@@ -37,29 +35,23 @@ public class SpaceRoomBooking {
   public void setStudyNo(int studyNo) {
     this.studyNo = studyNo;
   }
-  public int getMemberId() {
-    return memberId;
+  public int getMemberNo() {
+    return memberNo;
   }
-  public void setMemberId(int memberId) {
-    this.memberId = memberId;
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
   }
-  public Date getBookingDate() {
-    return bookingDate;
+  public Date getBookingStartDate() {
+    return bookingStartDate;
   }
-  public void setBookingDate(Date bookingDate) {
-    this.bookingDate = bookingDate;
+  public void setBookingStartDate(Date bookingStartDate) {
+    this.bookingStartDate = bookingStartDate;
   }
-  public int getRating() {
-    return rating;
+  public Date getBookingEndDate() {
+    return bookingEndDate;
   }
-  public void setRating(int rating) {
-    this.rating = rating;
-  }
-  public String getReview() {
-    return review;
-  }
-  public void setReview(String review) {
-    this.review = review;
+  public void setBookingEndDate(Date bookingEndDate) {
+    this.bookingEndDate = bookingEndDate;
   }
   
 }
