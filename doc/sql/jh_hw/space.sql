@@ -91,4 +91,4 @@ insert into sms_space_review(space_review_id, member_id, space_id, rating, revie
 values ('604', '5', '101', '4.0', '사장님이 친절해요');
 
 insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
-values ('605', '6', '101', '3.5', '좋아요');
+values ('605', '3', '101', '3.5', '좋아요');

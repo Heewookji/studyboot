@@ -40,15 +40,12 @@ public class SpaceServiceImpl implements SpaceService {
   @Override
   public Space detail(int no) {
     
-    
     Space space = spaceDao.findByNo(no);
     
     List<SpaceConvenienceInfo> sc = spaceDao.findConv(no);
-    List<SpaceRoomBooking> srb = spaceDao.findBooking(no);
     List<SpaceReview> sr = spaceDao.findReview(no);
     
     space.setSpaceConvenienceInfos(sc);
-    space.setBookings(srb);
     space.setSpaceReview(sr);
     
     System.out.println(space);
