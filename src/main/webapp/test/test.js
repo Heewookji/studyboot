@@ -10,10 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
     });
     calendar.render();
-
     $(document.body).trigger('loaded-cal');
 });
 
-
-
-
+$(document.body).bind('loaded-cal', () => {
+    
+    $('#inqryPage').click((e) => {
+	$('cal-btn').attr('data-toggle', 'modal');
+	});
+    
+});

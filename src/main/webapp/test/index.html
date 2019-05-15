@@ -14,65 +14,15 @@
 </head>
 <body>
 
-
- <div class="container">
-  <div id='calendar'></div>
-  <div class="row justify-content-md-center">
-   <div class="col-md-auto">
-    <button type="button" class="btn btn-outline-primary" 
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">08:00 ~ 08:50
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+     data-target="#calModal" id="booking-btn">calendar
     </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">09:00 ~ 09:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">10:00 ~ 10:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">11:00 ~ 11:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">12:00 ~ 12:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">13:00 ~ 13:50
-    </button>
-    <button type="button" class="btn btn-outline-primary" 
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">14:00 ~ 14:50
-    </button>
-   </div>
-  </div>
-  <div class="row justify-content-md-center">
-   <div class="col-md-auto">
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">15:00 ~ 15:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">16:00 ~ 16:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">17:00 ~ 17:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">18:00 ~ 18:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">19:00 ~ 19:50
-    </button>
-    <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">20:00 ~ 20:50
-    </button>
-     <button type="button" class="btn btn-outline-primary"
-     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">21:00 ~ 21:50
-    </button>
-   </div>
-  </div>
- </div>
 
 
-
- <a type="hidden" data-toggle="modal" data-target="#calModal"
+ <a type="hidden" data-target="#calModal"
   id="cal-btn"></a>
+
+
 
  <div class="modal fade" id="calModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -87,6 +37,59 @@
      </button>
     </div>
     <div class="modal-body">
+    <div class="container-fluid">
+     <div id="calendar"></div>
+  <div class="row justify-content-md-center">
+   <div class="col-md-auto">
+   <button type="button" class="btn btn-outline-primary" 
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">08:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">09:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">10:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">11:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">12:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">13:00
+    </button>
+    <button type="button" class="btn btn-outline-primary" 
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">14:00
+    </button>
+   </div>
+  </div>
+  <div class="row justify-content-md-center">
+   <div class="col-md-auto">
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">15:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">16:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">17:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">18:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">19:00
+    </button>
+    <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">20:00
+    </button>
+     <button type="button" class="btn btn-outline-primary"
+     data-dismiss="modal" data-target="#addModal" id="inqryForm-btn">21:00
+    </button>
+   </div>
+  </div>
+  </div>
      <form>
       <div class="form-group sspctForm-Format std-invisible">
        <label for="recipient-name" class="col-form-label">신고:</label> <span
