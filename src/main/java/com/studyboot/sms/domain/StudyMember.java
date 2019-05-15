@@ -1,24 +1,27 @@
 package com.studyboot.sms.domain;
 
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class StudyMember {
+@SuppressWarnings("serial")
+public class StudyMember extends Member {
   
   private int studyNo;
   private int memberNo;
   private int endNo;
   private Date joinDate;
+  
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date endDate;
   private boolean leader;
   private double attendance;
   private int upload;
-  private double averRate;
   
   @Override
   public String toString() {
     return "StudyMember [studyNo=" + studyNo + ", memberNo=" + memberNo + ", endNo=" + endNo
         + ", joinDate=" + joinDate + ", endDate=" + endDate + ", leader=" + leader + ", attendance="
-        + attendance + ", upload=" + upload + ", averRate=" + averRate + "]";
+        + attendance + ", upload=" + upload + "]";
   }
   
   public int getStudyNo() {
@@ -68,12 +71,6 @@ public class StudyMember {
   }
   public void setUpload(int upload) {
     this.upload = upload;
-  }
-  public double getAverRate() {
-    return averRate;
-  }
-  public void setAverRate(double averRate) {
-    this.averRate = averRate;
   }
   
 }

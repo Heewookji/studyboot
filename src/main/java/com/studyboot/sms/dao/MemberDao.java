@@ -8,7 +8,7 @@ public interface MemberDao {
 	
 	List<Integer> findByKeyword(HashMap<String, Object> keywordMap);
 	Member findByNo(int no);
-	int updateRate(Member member);
+	int update(Member member);
 	
 	
 }
