@@ -173,13 +173,14 @@ ALTER TABLE sms_std
 
 -- 스터디일정
 CREATE TABLE sms_std_schdl (
-  std_schdl_id INTEGER     NOT NULL COMMENT '스터디일정번호', -- 스터디일정번호
-  std_id       INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
-  member_id    INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-  name         VARCHAR(50) NOT NULL COMMENT '이름', -- 이름
-  schdl_sdt    DATETIME    NOT NULL DEFAULT current_timestamp() COMMENT '시작 일시', -- 시작 일시
-  schdl_edt    DATETIME    NOT NULL COMMENT '종료 일시', -- 종료 일시
-  memo         TEXT        NULL     COMMENT '메모' -- 메모
+  std_schdl_id  INTEGER     NOT NULL COMMENT '스터디일정번호', -- 스터디일정번호
+  std_id        INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
+  member_id     INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  space_bkng_id INTEGER     NULL     COMMENT '스터디룸예약번호', -- 스터디룸예약번호
+  name          VARCHAR(50) NOT NULL COMMENT '이름', -- 이름
+  schdl_sdt     DATETIME    NOT NULL DEFAULT current_timestamp() COMMENT '시작 일시', -- 시작 일시
+  schdl_edt     DATETIME    NOT NULL COMMENT '종료 일시', -- 종료 일시
+  memo          TEXT        NULL     COMMENT '메모' -- 메모
 )
 COMMENT '스터디일정';
 
@@ -748,6 +749,16 @@ ALTER TABLE sms_std_schdl
     REFERENCES sms_std_member ( -- 스터디회원
       std_id,    -- 스터디번호
       member_id  -- 회원번호
+    );
+
+-- 스터디일정
+ALTER TABLE sms_std_schdl
+  ADD CONSTRAINT FK_sms_space_room_bkng_TO_sms_std_schdl -- 스터디룸 예약 -> 스터디일정
+    FOREIGN KEY (
+      space_bkng_id -- 스터디룸예약번호
+    )
+    REFERENCES sms_space_room_bkng ( -- 스터디룸 예약
+      space_bkng_id -- 스터디룸예약번호
     );
 
 -- 스터디자료실

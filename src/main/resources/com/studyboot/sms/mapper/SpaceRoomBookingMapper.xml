@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.SpaceRoomBookingDao">
+  
+  
+  <resultMap type="spaceRoomBooking" id="spaceRoomBookingMap">
+    <id column="space_id" property="spaceNo"/>
+    <id column="space_room_id" property="roomNo"/>
+    <id column="bkng_sdt" property="bookingStartDate"/>
+  </resultMap>
+  
+  <select id="findAllBookedByDate" resultMap="spaceRoomBookingMap" parameterType="map">
+  select   
+  space_id,
+  space_room_id, 
+  bkng_sdt   
+  from    
+  sms_space_room_bkng   
+  where 
+  space_id = #{space_id} 
+  and date(bkng_sdt) = #{date};
+  </select>
+  
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

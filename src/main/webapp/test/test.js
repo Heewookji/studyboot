@@ -1,4 +1,21 @@
 
+function loadBookedInfo(spaceNo, date) {
+
+    $.getJSON('../app/json/spaceroombooking/listbooked?spaceNo=' + spaceNo + "&date=" + date, function(obj) {
+
+	for (l of obj.list){
+	    console.log(l.roomNo);
+	    console.log(l.bookingStartDate);
+	}
+
+	$(document.body).trigger('loaded-listbooked');
+    });
+
+}
+
+
+
+
 $(document).on('DOMContentLoaded', function (e) {
 
     var calendarEl = document.getElementById('calendar');
@@ -6,6 +23,7 @@ $(document).on('DOMContentLoaded', function (e) {
 	plugins : [ 'dayGrid', 'interaction'],
 	selectable: true,
 	dateClick: function(info) {
+	    window.calInfo = info;
 	    $(document.body).trigger('cal-dateClick');
 	}
     });
@@ -13,22 +31,27 @@ $(document).on('DOMContentLoaded', function (e) {
 
 $('#calModal').on('shown.bs.modal', function (e) {
     window.calendar.render();
-	$('#calModal').removeClass("invisible");
+    $('#calModal').removeClass("invisible");
     $(document.body).trigger('loaded-cal');
 });
 
 $(document.body).bind('cal-dateClick', () => {
-    
+
     var list = new Array();
-    
+
+
+
     $(".cal-time").each(function(index, item){
-	   list.push($(item).text());
+	list.push($(item).text());
     });
-    
-    
+
+
+    loadBookedInfo(101, window.calInfo.dateStr);
+
+
     for (l of list) {
-	
+
     }
-    
+
 
 });

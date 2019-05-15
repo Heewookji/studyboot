@@ -220,22 +220,20 @@ insert into sms_rest_day(space_id, rest_day) values('102', '2019-6-1');
 
 -- 스터디룸 예약
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_sdt, bkng_edt,space_id) 
-values ('501', '201', '1', '2', '2019-5-5', '2019-5-5',101);
+values (1, '201', '1', '2', '2019-5-5', '2019-5-5',101);
 
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_sdt, bkng_edt,space_id) 
-values ('503', '201', '1', '3', '2019-5-5', '2019-5-5',101);
+values (2, '201', '1', '3', '2019-5-5', '2019-5-5',101);
 
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_sdt, bkng_edt,space_id) 
-values ('504', '201', '1', '4', '2019-5-5', '2019-5-5',101);
+values (3, '201', '1', '4', '2019-5-5', '2019-5-5',101);
 
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_sdt, bkng_edt,space_id) 
-values ('505', '201', '1', '5', '2019-5-5','2019-5-5',101);
+values (4, '201', '1', '5', '2019-5-5','2019-5-5',101);
 
 insert into sms_space_room_bkng(space_bkng_id, space_room_id, std_id, member_id, bkng_sdt, bkng_edt,space_id) 
-values ('502', '202', '2', '2', '2019-5-10', '2019-5-10',101);
+values (5, '202', '2', '2', '2019-5-10', '2019-5-10',101);
 
-
- -- 공간 예약 데이터 생성
   
   insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
   values (201,101,1,2,'2019-05-17 09:00','2019-05-17 09:50');
