@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Space;
+import com.studyboot.sms.domain.SpaceReview;
 import com.studyboot.sms.service.SpaceService;
 
 
@@ -16,12 +18,11 @@ import com.studyboot.sms.service.SpaceService;
 public class SpaceController {
   
   @Autowired SpaceService spaceService;
-  /*
   @PostMapping("add")
-  public Object add(Space space) {
+  public Object add(SpaceReview spaceReview) {
     HashMap<String,Object> content = new HashMap<>();
     try {
-      spaceService.add(space);
+      spaceService.addReview(spaceReview);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
@@ -30,6 +31,7 @@ public class SpaceController {
     return content;
   }
   
+  /*
   @GetMapping("delete")
   public Object delete(int no) {
   

@@ -174,4 +174,18 @@
     where s.space_id = #{value}
   </select>
   
+  <insert id="insertReview" parameterType="spaceReview">
+    insert into sms_space_review(
+      space_review_id,
+      member_id,
+      space_id,
+      rating,
+      review)
+    values(
+      #{memberNo},
+      #{spaceNo},
+      #{rating},
+      #{review})
+  </insert>
+  
 </mapper>

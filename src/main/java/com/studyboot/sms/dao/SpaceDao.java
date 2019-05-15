@@ -7,7 +7,7 @@ import com.studyboot.sms.domain.SpaceReview;
 import com.studyboot.sms.domain.SpaceRoomBooking;
 
 public interface SpaceDao {
-//  int insert(Space space);
+  int insertReview(SpaceReview spaceReview);
   List<Space> findAll();
   Space findByNo(int no);
   List<SpaceConvenienceInfo> findConv(int no);

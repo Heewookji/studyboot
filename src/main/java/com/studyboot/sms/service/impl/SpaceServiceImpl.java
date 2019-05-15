@@ -24,12 +24,10 @@ public class SpaceServiceImpl implements SpaceService {
     return spaceDao.findAll();
   }
   
-//  @Override
-//  public int add(Space space) {
-//    // 이 메서드도 하는 일이 없다.
-//    // 그래도 일관된 프로그래밍을 위해 Command 객체는 항상 Service 객체를 경유하여 DAO를 사용해야 한다.
-//    return spaceDao.insert(space);
-//  }
+  @Override
+  public int addReview(SpaceReview spaceReview) {
+    return spaceDao.insertReview(spaceReview);
+  }
   
 //  @Override
 //  public Space get(int no) {
@@ -40,12 +38,15 @@ public class SpaceServiceImpl implements SpaceService {
   @Override
   public Space detail(int no) {
     
+    
     Space space = spaceDao.findByNo(no);
     
     List<SpaceConvenienceInfo> sc = spaceDao.findConv(no);
+    List<SpaceRoomBooking> srb = spaceDao.findBooking(no);
     List<SpaceReview> sr = spaceDao.findReview(no);
     
     space.setSpaceConvenienceInfos(sc);
+    space.setBookings(srb);
     space.setSpaceReview(sr);
     
     System.out.println(space);
