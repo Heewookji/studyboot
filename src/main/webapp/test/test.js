@@ -26,10 +26,6 @@ $(document.body).bind('cal-dateClick', () => {
     });
     
     
-    
-    
-    
-    
     for (l of list) {
 	
     }
