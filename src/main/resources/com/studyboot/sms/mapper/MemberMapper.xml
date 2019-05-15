@@ -33,7 +33,7 @@
     </where>   
   </select>
 
-  <update id="updateRate" parameterType="member">
+  <update id="update" parameterType="member">
     update sms_member
     set 
       rate = #{rate}
