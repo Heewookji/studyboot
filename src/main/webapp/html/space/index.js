@@ -19,7 +19,9 @@ loadList();
 
 $(document.body).bind('loaded-list', () => {
   $('.space-view-link').click((e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    
+    // location은 페이지 로딩과 관련되어 쓰인다.
     window.location.href = 'view.html?no=' + $(e.target).attr('space-no');
   });
 });
