@@ -78,7 +78,7 @@
       <div>
         {{review}}
       </div>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#review-update-modal" review-no='{{no}}'>수정</button>
+      <button type="button" class="btn btn-primary updateBtn" data-toggle="modal" data-target="#review-update-modal" review-no='{{no}}'>수정</button>
       <button class="delete-review" review-no='{{no}}'>삭제</button>
 </div>
 {{/each}}
@@ -138,7 +138,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="update-btn">수정</button>
+        <button type="button" class="btn btn-primary" id="update-btn" data-no="" >수정</button>
       </div>
     </div>
   </div>
