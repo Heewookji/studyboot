@@ -108,9 +108,26 @@ public class StudyServiceImpl implements StudyService {
   }
 
   @Override
-  public int size() {
-
-    return studyDao.countAll();
+  public int size(String clsNo) {
+    
+    int count = 0;
+    HashMap<String,Object> params = new HashMap<>();    
+    
+    if (clsNo.length() == 2) {
+      params.put("clsNo", clsNo);
+      params.put("size", 2);
+      count= studyDao.countAll(params);
+    } else if (clsNo.length() == 4) {
+      params.put("clsNo", clsNo);
+      params.put("size", 4);
+      count= studyDao.countAll(params);
+    } else {
+      params.put("clsNo", clsNo);
+      params.put("size", 6);
+      count= studyDao.countAll(params);
+    }
+    
+    return count;
   }
   
   

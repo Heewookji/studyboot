@@ -1,7 +1,8 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 6,
+pageSize = 3,
 map,
+init = false,
 clsNo,
 clsTitle,
 tbody = $('tbody'),
@@ -15,14 +16,24 @@ function loadList(pageNo, clsNo) {
 
     $.getJSON('../../app/json/study/list?pageNo=' + pageNo + '&pageSize=' + pageSize + '&clsNo=' + clsNo,
 	    function(obj) {
-	if (pageNo == obj.totalPage) {
+	
+	console.log( pageNo, obj.totalPage);
+	//현재 끝페이지까지 왔고, 처음 출력이 아니라면(이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
+	if (pageNo > obj.totalPage && init) {
 	    return;
 	}
 	// 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
 	pageNo = obj.pageNo;
+	
+	if(pageNo == 0){
+	    return;
+	}
 
 	$(trGenerator(obj)).appendTo(tbody);
 
+	
+	init = true;
+	
 	// 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
 	$(document.body).trigger('loaded-list');
     });
@@ -39,9 +50,6 @@ function loadMediumTitle(clsNo) {
     });
 };
 
-
-
-
 //페이지를 출력한 후 pageNo 와 clsNo를 넘겨주고 로딩한다.
 if (param) {
     clsNo = param.split('&')[0].split('=')[1];
@@ -55,7 +63,7 @@ if (param) {
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하 도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	loadList(pageNo + 1, clsNo);
+	loadList(++pageNo, clsNo);
     }
 });
 
@@ -70,6 +78,7 @@ $(document.body).bind('loaded-list', () => {
 
 $(document.body).bind('loaded-mediumtitle', () => {
 $('.mcls-btn').click(function(e) {
+    pageNo = 1;
     tbody.html('');
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo);

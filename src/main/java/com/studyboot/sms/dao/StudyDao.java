@@ -13,7 +13,7 @@ public interface StudyDao {
   //int increaseCount(int no);
   int update(Study study);
   int delete(int no);
-  int countAll();
+  int countAll(HashMap<String, Object> params);
   List<Study> findAllByLargeFilter(HashMap<String, Object> params);
   List<Study> findAllByMediumFilter(HashMap<String, Object> params);
   List<Study> findAllBySmallFilter(HashMap<String, Object> params);

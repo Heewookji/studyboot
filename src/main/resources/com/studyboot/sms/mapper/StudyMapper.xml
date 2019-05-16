@@ -188,9 +188,20 @@
     delete from sms_std
     where std_id = #{no}
   </delete>
-
-   <select id="countAll" resultType="int">
+  
+   <select id="countAll" resultType="int" parameterType="map">
     select count(*) from sms_std
+    where
+    <if test="size == 2">
+    LEFT(cls_lms,2) = #{clsNo}
+    </if>
+     <if test="size == 4">
+    LEFT(cls_lms,4) = #{clsNo}
+    </if>
+     <if test="size == 6">
+    LEFT(cls_lms,6) = #{clsNo}
+    </if>
+  
   </select>
 </mapper>
 

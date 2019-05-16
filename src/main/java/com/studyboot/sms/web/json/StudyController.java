@@ -62,20 +62,30 @@ public class StudyController {
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "3") int pageSize,
+      @RequestParam int pageSize,
       @RequestParam String clsNo) {
     
     // 페이징
     if (pageSize < 3 || pageSize > 8) {
       pageSize = 3;
     }
+    HashMap<String,Object> content = new HashMap<>();
     
-    int rowCount = studyService.size();
+    int rowCount = studyService.size(clsNo);
+    
+    System.out.println(rowCount);
+    
+    if (rowCount == 0) {
+      content.put("pageNo", 0);
+      return content;
+    }
+    
     int totalPage = rowCount / pageSize;
     
     if (rowCount % pageSize > 0) {
       totalPage++;
     }
+    
     
     if (pageNo < 1) {
       pageNo = 1;
@@ -88,7 +98,7 @@ public class StudyController {
     
       studys = studyService.list(pageNo, pageSize, clsNo);
     
-    HashMap<String,Object> content = new HashMap<>();
+    
     content.put("list", studys);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
