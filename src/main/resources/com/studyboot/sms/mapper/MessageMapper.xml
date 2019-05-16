@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.MessageDao">
+  
+
+  <resultMap type="message" id="messageMap">
+    <id column="msg_id" property="messageNo"/>
+    <result column="send_id" property="sendNo"/>
+    <result column="recv_id" property="recvNo"/>
+    <result column="cont" property="contents"/>
+    <result column="dt" property="date"/>
+  </resultMap>
+  
+  <resultMap type="message" id="messageListMap">
+    <id column="msg_id" property="messageNo"/>
+    <result column="send_id" property="sendNo"/>
+    <result column="recv_id" property="recvNo"/>
+    <result column="cont" property="contents"/>
+    <result column="dt" property="date"/>
+    
+    <association property="messagePerson" javaType="member">
+     <id column="message_id"        property="no"/>
+      <result column="massage_nick"  property="nickName"/>
+    </association>
+    
+  </resultMap>
+  
+   <sql id="select2">
+  select 
+      i.nick_name,
+      c.cont,
+      c.dt
+    from 
+      sms_msg c
+      left outer join sms_member i on c.send_id = i.member_id
+    where
+      recv_id = #{recv_id};
+      </sql>
+  
+  <select id="findAll" resultMap="messageListMap" parameterType="map">
+     select 
+      c.send_id,
+      c.cont,
+      c.dt,
+      i.nick_Name as massage_nick
+    from 
+      sms_msg c
+      left outer join sms_member i on c.send_id = i.member_id
+    where
+      recv_id = 6
+    order by 
+      msg_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from sms_msg where recv_id = 6
+  </select>
+  
+  <!-- 
+  <select id="findAll" resultMap="inquiryListMap" parameterType="map">
+    <include refid="select2"/>
+    <if test="cls != 0 or member_ids != null">
+      where 
+      <if test="cls != 0">
+      p.cls_id = #{cls}
+      </if>
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      and (
+      </if>
+      <foreach collection="member_ids" item="member_id" separator="or">
+      inqry_id = 
+      #{member_id}
+    </foreach>
+    <if test="cls != 0">
+      )
+    </if>
+    </if>
+    </if>
+    order by 
+      rprt_inqry_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="findByNo" resultMap="inquiryDetailMap" parameterType="int">
+   <include refid="detail"/>
+    where 
+      rprt_inqry_id = #{value}
+  </select>
+  
+  <insert id="insert" parameterType="inquiry">
+    insert into 
+    sms_rprt_inqry
+    (cls_id,
+    inqry_id,
+    <if test="suspectPersonNo != 0">
+    sspct_id,
+    </if>
+    cont) 
+    values
+    (#{clsNo},
+    #{inquiryPersonNo},
+    <if test="suspectPersonNo != 0">
+    #{suspectPersonNo},
+    </if>
+    #{contents})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from sms_rprt_inqry 
+    where rprt_inqry_id = #{no}
+  </delete>
+  
+  
+  <select id="countByClsAndMember" resultType="int" parameterType="map">
+    select count(*) from sms_rprt_inqry
+      <if test="cls != 0 or member_ids != null">
+      where 
+      <if test="cls != 0">
+      cls_id = #{cls}
+      </if>
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      and (
+      </if>
+      <foreach collection="member_ids" item="member_id" separator="or">
+      inqry_id = 
+      #{member_id}
+    </foreach>
+    <if test="cls != 0">
+      )
+    </if>
+    </if>
+      </if>
+  </select>
+  
+  
+ -->
+</mapper>
+
+
+ 
