@@ -3,7 +3,10 @@ var param = location.href.split('?')[1],
       reviewForm = document.getElementById("review-form"),
       section = $('section'),
       i = 0,
-      spaceNo;
+      spaceNo,
+			review,
+			reviewNo = review;
+
 
 if (param) {
   spaceNo = param.split('=')[1];
@@ -16,6 +19,7 @@ function loadDetail(no) {
     url : "../../app/json/space/detail?no=" + no,
     data : {name:'name', intro:'intro'},
     success : function(data) {
+    	review = $(data.detail.spaceReview.spaceReviews);
       console.log(data.detail); // detail은 controller에서 키값으로 보낸 것.
       $('#name').append(data.detail.name),
       $('#intro').append(data.detail.intro)
@@ -24,25 +28,6 @@ function loadDetail(no) {
       alert("에러가 발생했습니다.");
     }
   });
-
-  
-  $('#delete-btn').click( () => {
-  	$(data.detail.spaceReview.spaceReview)
-  	$.ajax({
-  		url : "../../app/json/space/delete/review",
-  		type : "GET",
-  		data : {no:'', memberNo:''},
-  		success : function(data) {
-  			alert('삭제되었습니다');
-  			location.href = 'view.html?no=' + spaceNo;
-  		},
-  		error : function(request, status, error) {
-  			alert('삭제 실패');
-  		}
-  	})
-  	
-  });
-  
   
   $.getJSON('../../app/json/space/detail?no=' + no, 
       function(obj) {
@@ -65,11 +50,13 @@ function loadDetail(no) {
     var templateSpaceReview = $('#div-spaceReview').html();
     var trSpaceReviewGenerator = Handlebars.compile(templateSpaceReview);
     $(trSpaceReviewGenerator(obj)).appendTo($(spaceReview));
+    
+    $(document.body).trigger('loaded-detail');
   });
 }
 
 // $('#add-btn').click( function() {
-$('#add-btn').click( () => {
+$('#add-btn').click( (e) => {
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
@@ -87,6 +74,26 @@ $('#add-btn').click( () => {
       alert("등록에 실패 했습니다.");
     }
   });
+});
+
+
+$(document.body).bind('loaded-detail', () => {
+$('.delete-review').click((e) => {
+	alert($(e.target).attr('review-no'));
+	$.ajax({
+		url : "../../app/json/space/delete/review",
+		type : "GET",
+		data : {no:'', memberNo:''},
+		success : function(data) {
+			alert('삭제되었습니다');
+			location.href = 'view.html?no=' + spaceNo;
+		},
+		error : function(request, status, error) {
+			alert('삭제 실패');
+		}
+	})
+	
+});
 });
 
 

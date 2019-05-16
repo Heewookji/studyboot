@@ -72,15 +72,13 @@
   <script id="div-spaceReview" type="text/x-handlebars-template">
 {{#each detail.spaceReview}}
 <div>
-  {{#each spaceReview}}
       <div>
         {{rating}}
       </div>
       <div>
         {{review}}
       </div>
-      <button id="update-btn">수정</button><button id="delete-btn">삭제</button>
-  {{/each}}
+      <button id="update-btn">수정</button><button class="delete-review" id="delete-btn" review-no='{{no}}'>삭제</button>
 </div>
 {{/each}}
 </script>
