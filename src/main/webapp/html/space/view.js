@@ -25,6 +25,25 @@ function loadDetail(no) {
     }
   });
 
+  
+  $('#delete-btn').click( () => {
+  	$(data.detail.spaceReview.spaceReview)
+  	$.ajax({
+  		url : "../../app/json/space/delete/review",
+  		type : "GET",
+  		data : {no:'', memberNo:''},
+  		success : function(data) {
+  			alert('삭제되었습니다');
+  			location.href = 'view.html?no=' + spaceNo;
+  		},
+  		error : function(request, status, error) {
+  			alert('삭제 실패');
+  		}
+  	})
+  	
+  });
+  
+  
   $.getJSON('../../app/json/space/detail?no=' + no, 
       function(obj) {
     var templateTag = $('#div-tag').html();
@@ -49,9 +68,8 @@ function loadDetail(no) {
   });
 }
 
-
-
-$('#add-btn').click(function() {
+// $('#add-btn').click( function() {
+$('#add-btn').click( () => {
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
@@ -70,6 +88,8 @@ $('#add-btn').click(function() {
     }
   });
 });
+
+
 
 
 

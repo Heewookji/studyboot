@@ -2,6 +2,7 @@ package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,14 +28,13 @@ public class SpaceReviewController {
     return content;
   }
 
-  /*
-  @GetMapping("delete")
-  public Object delete(int no) {
+  @GetMapping("delete/review")
+  public Object delete(SpaceReview spaceReview) {
 
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (spaceService.delete(no) == 0) 
-        throw new RuntimeException("해당 번호의 공간이 없습니다.");
+      if (spaceService.deleteReview(spaceReview) == 0)
+        throw new RuntimeException("해당 리뷰가 없습니다.");
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -43,6 +43,7 @@ public class SpaceReviewController {
     }
     return content;
   }
+  /*
 
   @PostMapping("update")
   public Object update(Space space) {
