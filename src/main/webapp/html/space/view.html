@@ -95,7 +95,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="add/review">
           <div class="form-group">
             <label for="rating-form" class="col-form-label">별점</label>
             <input type="text" class="form-control" id="rating-form">
@@ -108,19 +108,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">등록</button>
+        <button type="button" class="btn btn-primary" id="add-btn">등록</button>
       </div>
     </div>
   </div>
 </div>
-
-<script id="review-form" type="text/x-handlebars-template">
-  <form>
-    <h4>내용</h4>
-    <input type="number" id="rating-form"><br /> <input type="text" id="review-form"><br />
-    <button type="button" id="add-btn">등록</button>
-  </form>
-</script>
 
   <!-- 편의시설 비고
 {{#each detail.spaceConvenienceInfos}}
