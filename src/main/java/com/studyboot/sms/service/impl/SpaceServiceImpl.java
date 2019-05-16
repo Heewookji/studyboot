@@ -29,8 +29,8 @@ public class SpaceServiceImpl implements SpaceService {
   }
   
   @Override
-  public int deleteReview(SpaceReview spaceReview) {
-    return spaceDao.deleteReview(spaceReview);
+  public int deleteReview(int no) {
+    return spaceDao.deleteReview(no);
   }
   
 //  @Override

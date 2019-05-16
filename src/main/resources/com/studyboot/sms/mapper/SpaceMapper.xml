@@ -17,12 +17,9 @@
   </resultMap>
   
   
-  <resultMap type="space" id="spaceTagMap">
+  <resultMap type="space" id="spaceDetailMap">
     <id column="space_id" property="no"/>
     <result column="name" property="name"/>
-    <result column="adr_lms" property="address"/>
-    <result column="adr_dtl" property="addressDetail"/>
-    <result column="tel" property="tel"/>
     <result column="intro" property="intro"/>
     
     <collection property="tags" ofType="spaceTag">
@@ -98,7 +95,7 @@
       sms_space
   </select>
   
-  <select id="findByNo" resultMap="spaceTagMap" parameterType="int">
+  <select id="findByNo" resultMap="spaceDetailMap" parameterType="int">
     select
       s.space_id,
       s.name,
@@ -162,10 +159,9 @@
       #{review})
   </insert>
   
-  <delete id="deleteReview" parameterType="spaceReview">
+  <delete id="deleteReview" parameterType="int">
     delete from sms_space_review
-    where space_review_id = #{no}
-      and member_id = #{memberNo}
+    where space_review_id = #{value}
   </delete>
   
   
