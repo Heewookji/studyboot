@@ -1,3 +1,5 @@
+var pageNo = 1,
+pageSize = 6;
 
 function loadBookedInfo(spaceNo, date) {
 
@@ -66,4 +68,25 @@ $(document.body).bind('cal-dateClick', () => {
     }
 
 
+});
+
+function loadListLarge(pn) {
+    
+    $.getJSON('../app/json/study/list?pageNo=' + pn + '&pageSize=' + pageSize + '&clsNo=' + 11,
+	    function(obj) {
+	if (pageNo == obj.totalPage) {
+	    return;
+	}
+	// 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
+	pageNo = obj.pageNo;
+	console.log(obj);
+	// 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+	$(document.body).trigger('loaded-list');
+	
+    });
+};
+
+
+$('#add-btn').click(function() {
+    loadListLarge(pageNo);
 });

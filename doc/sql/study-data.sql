@@ -103,11 +103,14 @@ insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 11, 'php');
 insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 11, 'c/c++');
 insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(15, 11, 'javascript');
 
-insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(11, 11, 'spring');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(12, 11, 'log4j');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(13, 11, 'jsp');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(14, 11, 'servlet');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, name) values(15, 11, 'list');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 12, '광고대행');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 13, '재테크');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 11, 'spring');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 11, 'log4j');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 11, 'django');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 12, '전단지');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 13, '부동산');
 
 
 -- 회원 평점 정보

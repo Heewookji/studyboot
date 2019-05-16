@@ -85,15 +85,7 @@ public class StudyController {
     // 카테고리 분류
     List<Study> studys;
     
-    if (clsNo.length() == 2) {
-      studys = studyService.listLarge(pageNo, pageSize, clsNo);
-      
-    } else if (clsNo.length() == 4) {
-      studys = studyService.listMedium(pageNo, pageSize, clsNo);
-      
-    } else {
-      studys = studyService.listSmall(pageNo, pageSize, clsNo);
-    }
+      studys = studyService.list(pageNo, pageSize, clsNo);
     
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", studys);

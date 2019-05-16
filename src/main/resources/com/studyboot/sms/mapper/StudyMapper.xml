@@ -40,7 +40,7 @@
       sms_std
   </sql>
   
-  <select id="findAllByFilter" resultMap="studyMap" parameterType="map">
+  <select id="findAllByLargeFilter" resultMap="studyMap" parameterType="map">
     select
       s.std_id,
       s.name,
@@ -60,9 +60,54 @@
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
-    where
-      cls_lms = #{
   </select>
+  
+  <select id="findAllByMediumFilter" resultMap="studyMap" parameterType="map">
+    select
+      s.std_id,
+      s.name,
+      s.rate,
+      s.photo,
+      s.goal,
+      c.name as cls_name
+    from
+      sms_std s
+      inner join sms_std_cls_m c 
+    <bind name="pattern1" value="clsNo + '%'"/>
+      on s.cls_lms like #{pattern1}
+    where
+      c.cls_m_id = RIGHT(#{clsNo},2)
+      and c.cls_l_id = LEFT(#{clsNo},2)
+    order by
+      std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="findAllBySmallFilter" resultMap="studyMap" parameterType="map">
+    select
+      s.std_id,
+      s.name,
+      s.rate,
+      s.photo,
+      s.goal,
+      c.name as cls_name
+    from
+      sms_std s
+      inner join sms_std_cls_s c 
+      on s.cls_lms = #{clsNo}
+    where
+      c.cls_s_id = RIGHT(#{clsNo},2)
+      and c.cls_m_id = MID(#{clsNo},3,2)
+      and c.cls_l_id = LEFT(#{clsNo},2)
+    order by
+      std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
  
   <select id="findByNo" resultMap="studyMap" parameterType="int">
     select
