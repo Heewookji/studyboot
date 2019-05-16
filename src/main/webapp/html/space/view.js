@@ -1,7 +1,9 @@
 var param = location.href.split('?')[1],
-section = $('section'),
-i = 0,
-spaceNo;
+      ratingForm = document.getElementById("rating-form"),
+      reviewForm = document.getElementById("review-form"),
+      section = $('section'),
+      i = 0,
+      spaceNo;
 
 if (param) {
   spaceNo = param.split('=')[1];
@@ -48,8 +50,6 @@ function loadDetail(no) {
 }
 
 
-var ratingForm = document.getElementById("rating-form");
-var reviewForm = document.getElementById("review-form");
 
 $('#add-btn').click(function() {
   $.ajax({
