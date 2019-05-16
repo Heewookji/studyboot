@@ -23,8 +23,6 @@ public class SpaceController {
     
     HashMap<String,Object> content = new HashMap<>();
     
-//  System.out.println(spaceService.detail(no));
-    
     Space spaceInfo = spaceService.detail(no);
     
     content.put("detail", spaceInfo);

@@ -6,12 +6,14 @@ import com.studyboot.sms.domain.SpaceConvenienceInfo;
 import com.studyboot.sms.domain.SpaceReview;
 
 public interface SpaceDao {
-  int insertReview(SpaceReview spaceReview);
-  int deleteReview(int no);
   List<Space> findAll();
   Space findByNo(int no);
   List<SpaceConvenienceInfo> findConv(int no);
   List<SpaceReview> findReview(int no);
+
+  int insertReview(SpaceReview spaceReview);
+  int deleteReview(int no);
+  int updateReview(SpaceReview spaceReview);
 //  int update(Space space);
 //  int countAll();
 }

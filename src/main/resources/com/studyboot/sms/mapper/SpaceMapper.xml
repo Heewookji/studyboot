@@ -163,10 +163,14 @@
     delete from sms_space_review
     where space_review_id = #{value}
   </delete>
-  
-  
-  
-  
+
+  <update id="updateReview" parameterType="spaceReview">
+    update sms_space_review
+    set 
+      rating = #{rating} ,
+      review = #{review}
+    where space_review_id = #{no}
+  </update>
   
   
   

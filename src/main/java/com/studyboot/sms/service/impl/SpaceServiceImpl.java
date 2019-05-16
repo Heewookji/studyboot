@@ -50,20 +50,17 @@ public class SpaceServiceImpl implements SpaceService {
     space.setSpaceConvenienceInfos(sc);
     space.setSpaceReview(sr);
     
-    System.out.println(space);
-    
     return space;
-    
+  }
+
+  @Override
+  public int updateReview(SpaceReview spaceReview) {
+
+    return spaceDao.updateReview(spaceReview);
   }
 
   
-//  @Override
-//  public int update(Space space) {
-//    // 이 메서드도 별로 할 일이 없다.
-//    // 그냥 DAO를 실행시키고 리턴 값을 그대로 전달한다.
-//    return spaceDao.update(space);
-//  }
-//  
+  
 //  @Override
 //  public int delete(int no) {
 //    // 이 메서드도 그냥 DAO에 명령을 전달하는 일을 한다.

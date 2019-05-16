@@ -1,6 +1,8 @@
 var param = location.href.split('?')[1],
 ratingForm = document.getElementById("rating-form"),
 reviewForm = document.getElementById("review-form"),
+reviewUpdateForm = document.getElementById("review-update-form"),
+ratingUpdateForm = document.getElementById("rating-update-form"),
 section = $('section'),
 i = 0,
 spaceNo;
@@ -57,7 +59,7 @@ function loadDetail(no) {
 }
 
 //$('#add-btn').click( function() {
-$('#add-btn').click( (e) => {
+$('#add-btn').click( () => {
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
@@ -99,7 +101,27 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
   });
 });
 
+$(document.body).bind('loaded-detail', () => {
+  $('#update-btn').click((e) => {
+      $.ajax({
+        url : "../../app/json/space/update/review",
+        type : "POST",
+        data : {
+          no : $(e.target).attr('review-no'),
+          rating: $(ratingUpdateForm).val(),
+          review: $(reviewUpdateForm).val()
+        },
+        success : function() {
+          alert('수정 되었습니다.');
+          location.reload();
+        },
+        error : function(request, status, error) {
+          alert('수정 실패');
+        }
+      })
 
+  });
+});
 
 
 

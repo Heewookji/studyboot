@@ -9,6 +9,7 @@ public interface SpaceService {
   int addReview(SpaceReview spaceReview);
   Space detail(int no);
   int deleteReview(int no);
+  int updateReview(SpaceReview spaceReview);
 //  int update(Space board);
 //  int delete(int no);
 //  int size();
