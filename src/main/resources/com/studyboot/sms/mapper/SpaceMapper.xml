@@ -176,7 +176,6 @@
   
   <insert id="insertReview" parameterType="spaceReview">
     insert into sms_space_review(
-      space_review_id,
       member_id,
       space_id,
       rating,

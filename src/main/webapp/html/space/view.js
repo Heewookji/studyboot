@@ -14,7 +14,7 @@ function loadDetail(no) {
     url : "../../app/json/space/detail?no=" + no,
     data : {name:'name', intro:'intro'},
     success : function(data) {
-      console.log(data.detail);
+      console.log(data.detail); // detail은 controller에서 키값으로 보낸 것.
       $('#name').append(data.detail.name),
       $('#intro').append(data.detail.intro)
     },
@@ -47,22 +47,29 @@ function loadDetail(no) {
   });
 }
 
-$('#add-btn').click = () => {
+
+var ratingForm = document.getElementById("rating-form");
+var reviewForm = document.getElementById("review-form");
+
+$('#add-btn').click(function() {
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
-    dataType : "text",
     data : {
       memberNo: 3,
       spaceNo: spaceNo,
-      rating: $(rating-form).val(),
-      review: $(review-form).val()
+      rating: $(ratingForm).val(),
+      review: $(reviewForm).val()
     },
     success : function(data) {
-      $('#name').append(data.detail.name)
+      alert("후기가 등록 되었습니다.");
+      location.href = 'view.html?no=' + spaceNo;
     },
     error : function(request, status, error) {
-      alert("에러가 발생했습니다.");
+      alert("등록에 실패 했습니다.");
     }
   });
-};
+});
+
+
+
