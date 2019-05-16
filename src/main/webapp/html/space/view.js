@@ -3,10 +3,7 @@ var param = location.href.split('?')[1],
       reviewForm = document.getElementById("review-form"),
       section = $('section'),
       i = 0,
-      spaceNo,
-			review,
-			reviewNo = review;
-
+      spaceNo;
 
 if (param) {
   spaceNo = param.split('=')[1];
@@ -19,7 +16,6 @@ function loadDetail(no) {
     url : "../../app/json/space/detail?no=" + no,
     data : {name:'name', intro:'intro'},
     success : function(data) {
-    	review = $(data.detail.spaceReview.spaceReviews);
       console.log(data.detail); // detail은 controller에서 키값으로 보낸 것.
       $('#name').append(data.detail.name),
       $('#intro').append(data.detail.intro)
@@ -61,14 +57,13 @@ $('#add-btn').click( (e) => {
     url : "../../app/json/space/add/review",
     type : "POST",
     data : {
-      memberNo: 3,
+    	memberNo: 3,
       spaceNo: spaceNo,
       rating: $(ratingForm).val(),
       review: $(reviewForm).val()
     },
     success : function(data) {
-      alert("후기가 등록 되었습니다.");
-      location.href = 'view.html?no=' + spaceNo;
+      location.reload();
     },
     error : function(request, status, error) {
       alert("등록에 실패 했습니다.");
@@ -79,19 +74,19 @@ $('#add-btn').click( (e) => {
 
 $(document.body).bind('loaded-detail', () => {
 $('.delete-review').click((e) => {
-	alert($(e.target).attr('review-no'));
-	$.ajax({
-		url : "../../app/json/space/delete/review",
-		type : "GET",
-		data : {no:'', memberNo:''},
-		success : function(data) {
-			alert('삭제되었습니다');
-			location.href = 'view.html?no=' + spaceNo;
-		},
-		error : function(request, status, error) {
-			alert('삭제 실패');
-		}
-	})
+	if ( confirm('정말 삭제하시겠습니까?') ) {
+		$.ajax({
+			url : "../../app/json/space/delete/review",
+			type : "GET",
+			data : {no : $(e.target).attr('review-no')},
+			success : function() {
+				location.reload();
+			},
+			error : function(request, status, error) {
+				alert('삭제 실패');
+			}
+		})
+	}
 	
 });
 });
