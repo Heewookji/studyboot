@@ -1,25 +1,27 @@
 var param = location.href.split('?')[1],
-      ratingForm = document.getElementById("rating-form"),
-      reviewForm = document.getElementById("review-form"),
-      section = $('section'),
-      i = 0,
-      spaceNo,
-			review,
-			reviewNo = review;
-
+ratingForm = document.getElementById("rating-form"),
+reviewForm = document.getElementById("review-form"),
+reviewUpdateForm = document.getElementById("review-update-form"),
+ratingUpdateForm = document.getElementById("rating-update-form"),
+section = $('section'),
+i = 0,
+spaceNo;
 
 if (param) {
   spaceNo = param.split('=')[1];
   loadDetail(spaceNo)
 }
 
+//겟 방식은 getJson으로 처리하고
+//post 방식은 ajax는 get방식과 post방식 모두 처리 할 수 있다. (보통 post로 씀)
 function loadDetail(no) {
 
   $.ajax({
+    // json/space/detail이 붙은 controller로 이동하고 ?(물음표) 뒤에 값은 파라미터 값으로 보내준다. 
+    // + 이후에 있는 controller의 no는 파라미터 명이다.
     url : "../../app/json/space/detail?no=" + no,
     data : {name:'name', intro:'intro'},
     success : function(data) {
-    	review = $(data.detail.spaceReview.spaceReviews);
       console.log(data.detail); // detail은 controller에서 키값으로 보낸 것.
       $('#name').append(data.detail.name),
       $('#intro').append(data.detail.intro)
@@ -28,7 +30,7 @@ function loadDetail(no) {
       alert("에러가 발생했습니다.");
     }
   });
-  
+
   $.getJSON('../../app/json/space/detail?no=' + no, 
       function(obj) {
     var templateTag = $('#div-tag').html();
@@ -50,25 +52,25 @@ function loadDetail(no) {
     var templateSpaceReview = $('#div-spaceReview').html();
     var trSpaceReviewGenerator = Handlebars.compile(templateSpaceReview);
     $(trSpaceReviewGenerator(obj)).appendTo($(spaceReview));
-    
-    $(document.body).trigger('loaded-detail');
+
+    $(document.body).trigger('loaded-detail'); // trigger가 'loaded-detail'을 실행 시킨다.
+    // tirgger와 bind는 세트!!
   });
 }
 
-// $('#add-btn').click( function() {
-$('#add-btn').click( (e) => {
+//$('#add-btn').click( function() {
+$('#add-btn').click( () => {
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
     data : {
-      memberNo: 3,
+      memberNo: 3, // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
       spaceNo: spaceNo,
-      rating: $(ratingForm).val(),
+      rating: $(ratingForm).val(), // rating-form 태그의 값을 가져와서 담는다.
       review: $(reviewForm).val()
     },
     success : function(data) {
-      alert("후기가 등록 되었습니다.");
-      location.href = 'view.html?no=' + spaceNo;
+      location.reload();
     },
     error : function(request, status, error) {
       alert("등록에 실패 했습니다.");
@@ -76,27 +78,50 @@ $('#add-btn').click( (e) => {
   });
 });
 
+//handlebars가 비동기 방식이라 trigger, bind 사용
+$(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라는 이름을 갖는 bind를 실행시킨다.
+  $('.delete-review').click((e) => {
+    if ( confirm('정말 삭제하시겠습니까?') ) {
+      $.ajax({
+        url : "../../app/json/space/delete/review",
+        type : "GET",
+        data : {
+             // $(e.target).attr('review-no')는 review-no의 값을 가져온다.
+          no : $(e.target).attr('review-no')
+        },
+        success : function() {
+          location.reload();
+        },
+        error : function(request, status, error) {
+          alert('삭제 실패');
+        }
+      })
+    }
+
+  });
+});
 
 $(document.body).bind('loaded-detail', () => {
-$('.delete-review').click((e) => {
-	alert($(e.target).attr('review-no'));
-	$.ajax({
-		url : "../../app/json/space/delete/review",
-		type : "GET",
-		data : {no:'', memberNo:''},
-		success : function(data) {
-			alert('삭제되었습니다');
-			location.href = 'view.html?no=' + spaceNo;
-		},
-		error : function(request, status, error) {
-			alert('삭제 실패');
-		}
-	})
-	
-});
-});
+  $('#update-btn').click((e) => {
+      $.ajax({
+        url : "../../app/json/space/update/review",
+        type : "POST",
+        data : {
+          no : $(e.target).attr('review-no'),
+          rating: $(ratingUpdateForm).val(),
+          review: $(reviewUpdateForm).val()
+        },
+        success : function() {
+          alert('수정 되었습니다.');
+          location.reload();
+        },
+        error : function(request, status, error) {
+          alert('수정 실패');
+        }
+      })
 
-
+  });
+});
 
 
 

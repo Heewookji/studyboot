@@ -14,22 +14,15 @@ public class Space {
   private List<SpaceTag> tags;
   private List<SpacePhoto> files;
   private List<SpaceRoom> rooms;
-  
   private List<SpaceConvenienceInfo> spaceConvenienceInfos;
-  private List<SpaceConvenience> spaceConveniences;
-  
-  private List<SpaceRoomBooking> bookings;
   private List<SpaceReview> spaceReview;
-  private StudyMember studyMember;
-  private Member member;
   
   @Override
   public String toString() {
     return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
         + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
         + files + ", rooms=" + rooms + ", spaceConvenienceInfos=" + spaceConvenienceInfos
-        + ", spaceConveniences=" + spaceConveniences + ", spaceReview=" + spaceReview
-        + ", bookings=" + bookings + ", studyMember=" + studyMember + ", member=" + member + "]";
+        + ", spaceReview=" + spaceReview + "]";
   }
   public int getNo() {
     return no;
@@ -91,35 +84,13 @@ public class Space {
   public void setSpaceConvenienceInfos(List<SpaceConvenienceInfo> spaceConvenienceInfos) {
     this.spaceConvenienceInfos = spaceConvenienceInfos;
   }
-  public List<SpaceConvenience> getSpaceConveniences() {
-    return spaceConveniences;
-  }
-  public void setSpaceConveniences(List<SpaceConvenience> spaceConveniences) {
-    this.spaceConveniences = spaceConveniences;
-  }
   public List<SpaceReview> getSpaceReview() {
     return spaceReview;
   }
   public void setSpaceReview(List<SpaceReview> spaceReview) {
     this.spaceReview = spaceReview;
   }
-  public List<SpaceRoomBooking> getBookings() {
-    return bookings;
-  }
-  public void setBookings(List<SpaceRoomBooking> bookings) {
-    this.bookings = bookings;
-  }
-  public StudyMember getStudyMember() {
-    return studyMember;
-  }
-  public void setStudyMember(StudyMember studyMember) {
-    this.studyMember = studyMember;
-  }
-  public Member getMember() {
-    return member;
-  }
-  public void setMember(Member member) {
-    this.member = member;
-  }
+  
+  
   
 }

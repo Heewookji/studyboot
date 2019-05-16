@@ -17,7 +17,7 @@
     <div id="convName" class="row justify-content-start"></div>
     <div id="filePath" class="row justify-content-start"></div>
     <div id="roomInfo" class="row justify-content-start"></div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">리뷰 등록</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#review-add-modal">리뷰 등록</button>
     <div id="spaceReview" class="row"></div>
   </div>
 
@@ -78,17 +78,18 @@
       <div>
         {{review}}
       </div>
-      <button id="update-btn">수정</button><button class="delete-review" id="delete-btn" review-no='{{no}}'>삭제</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#review-update-modal" review-no='{{no}}'>수정</button>
+      <button class="delete-review" review-no='{{no}}'>삭제</button>
 </div>
 {{/each}}
 </script>
 
 <!-- 후기 등록 폼(modal) -->
-<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="review-add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">리뷰 등록</h5>
+        <h5 class="modal-title" id="modal-add-label">리뷰 등록</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -108,6 +109,36 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
         <button type="button" class="btn btn-primary" id="add-btn">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 후기 수정 폼 -->
+<div class="modal fade" id="review-update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-update-label">리뷰 수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="add/review">
+          <div class="form-group">
+            <label for="rating-update-form" class="col-form-label">별점</label>
+            <input type="text" class="form-control" id="rating-update-form">
+          </div>
+          <div class="form-group">
+            <label for="review-update-form" class="col-form-label">후기</label>
+            <textarea class="form-control" id="review-update-form"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="update-btn">수정</button>
       </div>
     </div>
   </div>

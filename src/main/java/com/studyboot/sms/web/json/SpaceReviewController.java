@@ -29,11 +29,11 @@ public class SpaceReviewController {
   }
 
   @GetMapping("delete/review")
-  public Object delete(SpaceReview spaceReview) {
+  public Object delete(int no) {
 
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (spaceService.deleteReview(spaceReview) == 0)
+      if (spaceService.deleteReview(no) == 0)
         throw new RuntimeException("해당 리뷰가 없습니다.");
       content.put("status", "success");
 
@@ -43,14 +43,17 @@ public class SpaceReviewController {
     }
     return content;
   }
-  /*
 
-  @PostMapping("update")
-  public Object update(Space space) {
+  @PostMapping("update/review")
+  public Object update(SpaceReview spaceReview) {
+    System.out.println("---------------------------------------------------------");
+    System.out.println(spaceReview);
+    System.out.println("---------------------------------------------------------");
+    
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (spaceService.update(space) == 0) 
-        throw new RuntimeException("해당 번호의 공간이 없습니다.");
+      if (spaceService.updateReview(spaceReview) == 0) 
+        throw new RuntimeException("해당 리뷰가 없습니다.");
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -59,7 +62,6 @@ public class SpaceReviewController {
     }
     return content;
   }
-   */
 }
 
 
