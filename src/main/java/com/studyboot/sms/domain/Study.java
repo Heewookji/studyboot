@@ -26,7 +26,7 @@ public class Study {
   private int memberAge;
   private double attendance;
   private double endrate;
-  
+  private String clsName;
   
   public int getNo() {
     return no;
@@ -123,6 +123,12 @@ public class Study {
   }
   public void setEndrate(double endrate) {
     this.endrate = endrate;
+  }
+  public String getClsName() {
+    return clsName;
+  }
+  public void setClsName(String clsName) {
+    this.clsName = clsName;
   }
   
 }
