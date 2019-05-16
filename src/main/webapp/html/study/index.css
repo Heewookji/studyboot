@@ -1,9 +1,9 @@
-div {
+/* div {
   border: 1px red solid;
   width: 300px;
   margin: 10px;
 }
-
+*/
 #left {
   float: left;
   width: 200px;
@@ -16,7 +16,7 @@ div {
   height: 1000px;
 }
 
-.container {
+/* .container {
   margin-left: 200px;
   border: 1px green solid;
 }
@@ -25,4 +25,4 @@ div {
   float:left;
   border: 1px red solid;
   width: 150px;
-  height: 200px;
+  height: 200px;  */

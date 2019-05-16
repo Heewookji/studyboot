@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>스터디 그룹</title>
+  <link rel="stylesheet"
+ href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
-  
   <header>
   <h1>
       헤더 부분
@@ -15,12 +17,74 @@
     <hr>
   </header>
   
+<div class="modal fade" id="stdAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">스터디 생성</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+        <form action="add" class="study-add-form">
+        
+    <div class="form-group">
+       <label for="name" class="col-form-label">스터디 이름</label>
+       <input type="text" class="form-control" id="name" name="name">
+       
+      <label for="cls" class="">스터디 분류</label>
+      <input type="text" class="form-control" id="cls" name='cls'>
+      
+      <label for="address" class="">스터디 지역</label>
+      <input type="text" class="form-control" id="address" name='address'>
+      
+      <label for="goal" class="">스터디 목표</label>
+      <input type="text" class="form-control" id="goal" name='goal'>
+      
+  </div>
+    
+  <div class="study-add study-add">
+      <label for="photo" class="">스터디 사진</label>
+      <input type="text" class="form-control" id="photo" name='photo'>
+      
+      <label for="day" class="">스터디 요일</label>
+      <input type="text" class="form-control" id="day" name='day'>
+      
+      <label for="personnel" class="">스터디 인원</label>
+      <input type="text" class="form-control" id="personnel" name='personnel'>
+  </div>
+  
+    <div class="study-add study-add">
+      <label for="startDate" class="">스터디 기간</label>
+        <input type="text" class="form-control" id="startDate" name='startDate'> ~ 
+        <input type="text" class="form-control" id="endDate" name='endDate'>
+    
+      <label for="contents" class="">스터디 설명</label>
+        <textarea class="form-control" id="contents" name='contents' cols="150" rows="7"></textarea>
+      </div>
+      
+      
+        </form>
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">생성</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div id="left">
   <h1>IT</h1>
   <hr>
-  <ul>
     <h3>카테고리</h3>
+  <ul>
     <li>중분류</li>
     <li>중분류</li>
     <li>중분류</li>
@@ -28,15 +92,19 @@
     <li>중분류</li>
     <li>중분류</li>
   </ul>
-  <ul>
     <h3>필터</h3>
+  <ul>
     <li>지역</li>
+  </ul>
     <p>평점</p>
     <h3>지도로 보기</h3>
-    <h3><a href="add.html">스터디 생성하기</a></h3>
-  </ul>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stdAddModal">
+  스터디 생성하기
+</button>
 </div>
 <div class="content">
+
+
   <div style="height:80px; width:780px;">
     <span>대 > 중 > 소</span> 
     <button style=>분류</button>
@@ -52,11 +120,8 @@
   </tr>
 </thead>
 <tbody>
-
 </tbody>
 </table>
-    
-    
   </div>
 </div>
 
@@ -72,8 +137,10 @@
 {{/each}}
 </script>
 
+
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="index.js"></script>
 </body>
