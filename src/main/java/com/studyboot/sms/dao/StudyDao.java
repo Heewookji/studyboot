@@ -7,7 +7,7 @@ import com.studyboot.sms.domain.Study;
 public interface StudyDao {
   
   int insert(Study study);
-  List<Study> findAll(Map<String,Object> param);
+  List<Study> findAllByFilter(Map<String,Object> param);
   Study findByNo(int no);
   //int increaseCount(int no);
   int update(Study study);

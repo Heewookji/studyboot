@@ -21,13 +21,36 @@ public class StudyServiceImpl implements StudyService {
   }
 
   @Override
-  public List<Study> list(int pageNo, int pageSize) {
+  public List<Study> listLarge(int pageNo, int pageSize, String clsNo) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("clsNo", clsNo);
     
-    return studyDao.findAll(params);
+    return studyDao.findAllByFilter(params);
+  }
+  
+  @Override
+  public List<Study> listMedium(int pageNo, int pageSize, String clsNo) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("clsNo", clsNo);
+    
+    return studyDao.findAllByFilter(params);
+  }
+  
+  @Override
+  public List<Study> listSmall(int pageNo, int pageSize, String clsNo) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("clsNo", clsNo);
+    
+    return studyDao.findAllByFilter(params);
   }
 
   @Override
