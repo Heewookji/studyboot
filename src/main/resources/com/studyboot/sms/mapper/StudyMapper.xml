@@ -43,6 +43,7 @@
     select
       std_id,
       name,
+      rate,
       photo,
       goal
     from
@@ -109,7 +110,7 @@
       #{contents},
       #{personnel},
       0)
-      <!-- rate 컬럼이 not null 이므로 null 허용 또는 디폴트 값을 줘야함 -->
+      <!-- rate 컬럼에 0 말고 생성하는 스터디장의 평점을 넣어준다. -->
   </insert>
 
   <update id="update" parameterType="study">
