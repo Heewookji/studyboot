@@ -19,38 +19,25 @@ public class StudyServiceImpl implements StudyService {
     this.studyDao = studyDao;
     this.studyMemberDao = studyMemberDao;
   }
-
-  @Override
-  public List<Study> listLarge(int pageNo, int pageSize, String clsNo) {
-    
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("size", pageSize);
-    params.put("rowNo", (pageNo - 1) * pageSize);
-    params.put("clsNo", clsNo);
-    
-    return studyDao.findAllByFilter(params);
-  }
   
   @Override
-  public List<Study> listMedium(int pageNo, int pageSize, String clsNo) {
+  public List<Study> list(int pageNo, int pageSize, String clsNo) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("clsNo", clsNo);
     
-    return studyDao.findAllByFilter(params);
-  }
-  
-  @Override
-  public List<Study> listSmall(int pageNo, int pageSize, String clsNo) {
+    List<Study> list;
     
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("size", pageSize);
-    params.put("rowNo", (pageNo - 1) * pageSize);
-    params.put("clsNo", clsNo);
-    
-    return studyDao.findAllByFilter(params);
+    if (clsNo.length() == 2) {
+      list = studyDao.findAllByLargeFilter(params);
+    } else if (clsNo.length() == 4) {
+      list = studyDao.findAllByMediumFilter(params);
+    } else {
+      list = studyDao.findAllBySmallFilter(params);
+    }
+    return list;
   }
 
   @Override

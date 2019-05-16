@@ -310,13 +310,15 @@ COMMENT '스터디중분류';
 ALTER TABLE sms_std_cls_m
   ADD CONSTRAINT PK_sms_std_cls_m -- 스터디중분류 기본키
     PRIMARY KEY (
-      cls_m_id -- 중분류번호
+      cls_m_id, -- 중분류번호
+      cls_l_id  -- 대분류번호
     );
 
 -- 스터디소분류
 CREATE TABLE sms_std_cls_s (
   cls_s_id CHAR(2)     NOT NULL COMMENT '소분류번호', -- 소분류번호
   cls_m_id CHAR(2)     NOT NULL COMMENT '중분류번호', -- 중분류번호
+  cls_l_id CHAR(2)     NOT NULL COMMENT '대분류번호', -- 대분류번호
   name     VARCHAR(50) NOT NULL COMMENT '이름' -- 이름
 )
 COMMENT '스터디소분류';
@@ -325,7 +327,9 @@ COMMENT '스터디소분류';
 ALTER TABLE sms_std_cls_s
   ADD CONSTRAINT PK_sms_std_cls_s -- 스터디소분류 기본키
     PRIMARY KEY (
-      cls_s_id -- 소분류번호
+      cls_s_id, -- 소분류번호
+      cls_m_id, -- 중분류번호
+      cls_l_id  -- 대분류번호
     );
 
 -- 스터디회원
@@ -509,13 +513,15 @@ COMMENT '활동지역 중분류';
 ALTER TABLE sms_adr_m
   ADD CONSTRAINT PK_sms_adr_m -- 활동지역 중분류 기본키
     PRIMARY KEY (
-      adr_m_id -- 주소 중분류 번호
+      adr_m_id, -- 주소 중분류 번호
+      adr_l_id  -- 주소 대분류 번호
     );
 
 -- 활동지역 소분류
 CREATE TABLE sms_adr_s (
   adr_s_id   CHAR(2)     NOT NULL COMMENT '주소 소분류 번호', -- 주소 소분류 번호
   adr_m_id   CHAR(2)     NOT NULL COMMENT '주소 중분류 번호', -- 주소 중분류 번호
+  adr_l_id   CHAR(2)     NOT NULL COMMENT '주소 대분류 번호', -- 주소 대분류 번호
   adr_s_name VARCHAR(50) NOT NULL COMMENT '읍동면' -- 읍동면
 )
 COMMENT '활동지역 소분류';
@@ -524,7 +530,9 @@ COMMENT '활동지역 소분류';
 ALTER TABLE sms_adr_s
   ADD CONSTRAINT PK_sms_adr_s -- 활동지역 소분류 기본키
     PRIMARY KEY (
-      adr_s_id -- 주소 소분류 번호
+      adr_s_id, -- 주소 소분류 번호
+      adr_m_id, -- 주소 중분류 번호
+      adr_l_id  -- 주소 대분류 번호
     );
 
 -- 신청 스터디
@@ -822,10 +830,12 @@ ALTER TABLE sms_std_cls_m
 ALTER TABLE sms_std_cls_s
   ADD CONSTRAINT FK_sms_std_cls_m_TO_sms_std_cls_s -- 스터디중분류 -> 스터디소분류
     FOREIGN KEY (
-      cls_m_id -- 중분류번호
+      cls_m_id, -- 중분류번호
+      cls_l_id  -- 대분류번호
     )
     REFERENCES sms_std_cls_m ( -- 스터디중분류
-      cls_m_id -- 중분류번호
+      cls_m_id, -- 중분류번호
+      cls_l_id  -- 대분류번호
     );
 
 -- 스터디회원
@@ -998,10 +1008,12 @@ ALTER TABLE sms_adr_m
 ALTER TABLE sms_adr_s
   ADD CONSTRAINT FK_sms_adr_m_TO_sms_adr_s -- 활동지역 중분류 -> 활동지역 소분류
     FOREIGN KEY (
-      adr_m_id -- 주소 중분류 번호
+      adr_m_id, -- 주소 중분류 번호
+      adr_l_id  -- 주소 대분류 번호
     )
     REFERENCES sms_adr_m ( -- 활동지역 중분류
-      adr_m_id -- 주소 중분류 번호
+      adr_m_id, -- 주소 중분류 번호
+      adr_l_id  -- 주소 대분류 번호
     );
 
 -- 신청 스터디

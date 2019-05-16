@@ -1,5 +1,6 @@
 package com.studyboot.sms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.studyboot.sms.domain.Study;
@@ -13,4 +14,7 @@ public interface StudyDao {
   int update(Study study);
   int delete(int no);
   int countAll();
+  List<Study> findAllByLargeFilter(HashMap<String, Object> params);
+  List<Study> findAllByMediumFilter(HashMap<String, Object> params);
+  List<Study> findAllBySmallFilter(HashMap<String, Object> params);
 }
