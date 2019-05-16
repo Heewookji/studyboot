@@ -51,7 +51,7 @@ $('#add-btn').click = () => {
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
-    dataType : "text" ,
+    dataType : "text",
     data : {
       memberNo: 3,
       spaceNo: spaceNo,
@@ -59,9 +59,7 @@ $('#add-btn').click = () => {
       review: $(review-form).val()
     },
     success : function(data) {
-      console.log(data.detail);
-      $('#name').append(data.detail.name),
-      $('#intro').append(data.detail.intro)
+      $('#name').append(data.detail.name)
     },
     error : function(request, status, error) {
       alert("에러가 발생했습니다.");

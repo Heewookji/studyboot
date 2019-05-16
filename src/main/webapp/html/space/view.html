@@ -17,7 +17,7 @@
     <div id="convName" class="row justify-content-start"></div>
     <div id="filePath" class="row justify-content-start"></div>
     <div id="roomInfo" class="row justify-content-start"></div>
-    <a href="reviewForm.html" id="reviewForm-btn">후기 등록</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">리뷰 등록</button>
     <div id="spaceReview" class="row"></div>
   </div>
 
@@ -84,6 +84,44 @@
 {{/each}}
 </script>
 
+<!-- 후기 등록 폼(modal) -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">리뷰 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="rating-form" class="col-form-label">별점</label>
+            <input type="text" class="form-control" id="rating-form">
+          </div>
+          <div class="form-group">
+            <label for="review-form" class="col-form-label">후기</label>
+            <textarea class="form-control" id="review-form"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="review-form" type="text/x-handlebars-template">
+  <form>
+    <h4>내용</h4>
+    <input type="number" id="rating-form"><br /> <input type="text" id="review-form"><br />
+    <button type="button" id="add-btn">등록</button>
+  </form>
+</script>
+
   <!-- 편의시설 비고
 {{#each detail.spaceConvenienceInfos}}
 <div id="convNote">
@@ -93,12 +131,6 @@
 </div>
 {{/each}}
 -->
-
-  <form>
-    <h4>내용</h4>
-    <input type="number" id="rating-form"><br /> <input type="text" id="review-form"><br />
-    <button type="button" id="add-btn">등록</button>
-  </form>
 
   <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
