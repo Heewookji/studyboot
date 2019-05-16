@@ -18,7 +18,14 @@ insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, pr
 values('200010', '000006', '스터디7', '사진7', 16, '2019-05-17', '2019-06-17', '골드 합격', '열심히 공부합시다7.', 5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
 values('100002', '000007', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
-
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('100002', '111111', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('100002', '111211', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('100002', '111311', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('100002', '111144', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
 
 
 -- 회원 생성
