@@ -1,13 +1,15 @@
-var pageNo = 1,
-pageSize = 3,
+var param = location.href.split('?')[1],
+pageNo = 1,
+pageSize = 6,
+clsNo,
 tbody = $('tbody'),
 templateSrc = $('#tr-template').html(), // script 태그에서 템플릿 데이터를 꺼낸다.
 trGenerator = Handlebars.compile(templateSrc); 
 
 //JSON 형식의 데이터 목록 가져오기
-function loadList(pn) {
+function loadList(pageNo, clsNo) {
 
-  $.getJSON('../../app/json/study/list?pageNo=' + pn + '&pageSize=' + pageSize,
+  $.getJSON('../../app/json/study/list?pageNo=' + pageNo + '&pageSize=' + pageSize + '&clsNo=' + clsNo,
       function(obj) {
     
     if (pageNo == obj.totalPage) {
@@ -25,13 +27,16 @@ function loadList(pn) {
 };
 
 
-//페이지를 출력한 후 1페이지를 로딩한다.
-loadList(1);
+// 페이지를 출력한 후 pageNo 와 clsNo를 넘겨주고 로딩한다.
+if (param) {
+  clsNo = param.split('=')[1];
+  loadList(pageNo, clsNo);
+}
 
 // 스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하 도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
   if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    loadList(pageNo + 1);
+    loadList(pageNo + 1, clsNo);
   }
 });
 

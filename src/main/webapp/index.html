@@ -5,8 +5,24 @@
 <title>Welcome!</title>
 </head>
 <body>
+
+<button></button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="11">IT</button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="12">서비스</button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="13">금융</button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="14">예체능</button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="15">인문</button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="16">공학</button>
+
+<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script>
-location.href="html/home";
+$('.cls-btn').click((e) => {
+  window.location.href = './html/study/index.html?clsNo=' + $(e.target).attr('data-no');
+});
+
 </script>
 </body>
 </html>
