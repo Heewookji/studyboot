@@ -8,7 +8,6 @@ public class SpaceReview {
   private double rating;
   private String review;
   
-  
   @Override
   public String toString() {
     return "SpaceReview [no=" + no + ", memberNo=" + memberNo + ", spaceNo=" + spaceNo + ", rating="

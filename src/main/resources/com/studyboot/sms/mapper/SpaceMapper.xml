@@ -6,6 +6,7 @@
   
 <mapper namespace="com.studyboot.sms.dao.SpaceDao">
 
+<!-- 인덱스 리스트 -->
   <resultMap type="space" id="spaceMap">
     <id column="space_id" property="no"/>
     <result column="name" property="name"/>
@@ -14,6 +15,7 @@
     <result column="tel" property="tel"/>
     <result column="intro" property="intro"/>
   </resultMap>
+  
   
   <resultMap type="space" id="spaceTagMap">
     <id column="space_id" property="no"/>
@@ -44,23 +46,30 @@
       <result column="price" property="price"/>
     </collection>
   </resultMap>
-
-  <resultMap type="space" id="spaceConvenienceMap">
-    <id column="space_id" property="no"/>
- 
-  <collection property="spaceConvenienceInfos" ofType="spaceConvenienceInfo">
+  
+  
+<!--       ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ    -->
+  <resultMap type="spaceConvenienceInfo" id="spaceConvenienceMap">
     <id column="conv_id" property="convenienceNo"/>
     <id column="space_id" property="spaceNo"/>
     <result column="note" property="note"/>
+ 
+  <collection property="spaceConveniences" ofType="SpaceConvenience">
+    <id column="conv_id" property="no"/>
+    <result column="name" property="name"/>
   </collection>
-    
-    <collection property="spaceConveniences" ofType="spaceConvenience">
-      <id column="conv_id" property="no"/>
-      <result column="name" property="name"/>
-    </collection>
-  </resultMap>
+</resultMap>
 
-  <resultMap type="space" id="spaceBookingMap"> <!-- 공간예약 -->
+ <!-- 공간후기 --> <!-- 완료!!! -->
+  <resultMap type="spaceReview" id="spaceReviewMap">
+      <id column="space_review_id" property="no"/>
+    <id column="space_id" property="spaceNo"/>
+     <id column="member_id" property="memberNo"/>
+      <result column="rating" property="rating"/>
+      <result column="review" property="review"/>
+  </resultMap>
+  
+<!--   <resultMap type="space" id="spaceBookingMap"> 공간예약
     <id column="space_id" property="no"/>
 
     <association property="studyMember" javaType="studyMember">
@@ -77,16 +86,7 @@
       <result column="bkng_sdt" property="bookingStartDate"/>
       <result column="bkng_edt" property="bookingEndDate"/>
     </collection>
-  </resultMap>
-  
-  <resultMap type="spaceReview" id="spaceReviewMap"> <!-- 공간후기 -->
-      <id column="space_review_id" property="no"/>
-    <id column="space_id" property="spaceNo"/>
-     <id column="member_id" property="memberNo"/>
-      <result column="rating" property="rating"/>
-      <result column="review" property="review"/>
-  </resultMap>
-  
+  </resultMap> -->
 
   <select id="findAll" resultMap="spaceMap">
     select
@@ -132,25 +132,7 @@
         inner join sms_conv c on sc.conv_id = c.conv_id
     where sc.space_id = #{value}
   </select>
-  
-  <select id="findBooking" resultMap="spaceBookingMap" parameterType="int">
-    select
-      b.space_bkng_id,
-      b.space_room_id,
-      b.bkng_sdt,
-      b.bkng_edt,
-      sm.member_id,
-      sm.std_id,
-      r.space_id
-    from
-      sms_space_room_bkng b
-        inner join sms_space_room r on b.space_room_id = r.space_room_id
-        inner join sms_std_member sm on b.member_id = sm.member_id 
-        and b.std_id = sm.std_id
-    where 
-      r.space_id = #{value}
-  </select>  
-  
+
   <select id="findReview" resultMap="spaceReviewMap" parameterType="int">
     select
       r.space_review_id,
@@ -185,5 +167,31 @@
     where space_review_id = #{no}
       and member_id = #{memberNo}
   </delete>
+  
+  
+  
+  
+  
+  
+  
+  
+    
+<!--   <select id="findBooking" resultMap="spaceBookingMap" parameterType="int">
+    select
+      b.space_bkng_id,
+      b.space_room_id,
+      b.bkng_sdt,
+      b.bkng_edt,
+      sm.member_id,
+      sm.std_id,
+      r.space_id
+    from
+      sms_space_room_bkng b
+        inner join sms_space_room r on b.space_room_id = r.space_room_id
+        inner join sms_std_member sm on b.member_id = sm.member_id 
+        and b.std_id = sm.std_id
+    where 
+      r.space_id = #{value}
+  </select>   -->
   
 </mapper>
