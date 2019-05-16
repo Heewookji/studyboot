@@ -3,9 +3,11 @@ package com.studyboot.sms.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.studyboot.sms.dao.StudyClsDao;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
 import com.studyboot.sms.domain.Study;
+import com.studyboot.sms.domain.StudyCls;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.StudyService;
 
@@ -14,10 +16,12 @@ public class StudyServiceImpl implements StudyService {
   
   StudyDao studyDao;
   StudyMemberDao studyMemberDao;
+  StudyClsDao studyClsDao;
   
-  public StudyServiceImpl(StudyDao studyDao, StudyMemberDao studyMemberDao) {
+  public StudyServiceImpl(StudyDao studyDao, StudyMemberDao studyMemberDao, StudyClsDao studyClsDao) {
     this.studyDao = studyDao;
     this.studyMemberDao = studyMemberDao;
+    this.studyClsDao = studyClsDao;
   }
   
   @Override
@@ -108,5 +112,31 @@ public class StudyServiceImpl implements StudyService {
 
     return studyDao.countAll();
   }
+  
+  
+  public List<StudyCls> clsList(String clsNo){
+    
+    List<StudyCls> list;
+    
+    if(clsNo.length() == 2){
+     list = studyClsDao.findMediumClsName(clsNo);
+    } else {
+      list = studyClsDao.findSmallClsName(clsNo);
+    }
+    
+    for(StudyCls c : list) {
+      if(c.getClsLargeNo() == null)
+        c.setClsLargeNo("");
+      if(c.getClsMediumNo() == null)
+        c.setClsMediumNo("");
+      if(c.getClsSmallNo() == null)
+        c.setClsSmallNo("");
+      c.setClsNo(c.getClsLargeNo()+c.getClsMediumNo()+c.getClsSmallNo());
+    }
+    
+    return list;
+  }
+  
+  
   
 }

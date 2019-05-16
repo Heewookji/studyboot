@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Study;
+import com.studyboot.sms.domain.StudyCls;
 import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyService;
 
@@ -155,6 +156,17 @@ public class StudyController {
     }
     return content;
   }*/
+  
+  @GetMapping("category")
+  public Object category(
+      @RequestParam String clsNo) {
+    HashMap<String,Object> content = new HashMap<>();
+    
+    List<StudyCls> list = studyService.clsList(clsNo);
+    content.put("list", list);
+    return content;
+  }
+  
 }
 
 

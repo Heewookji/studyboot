@@ -6,7 +6,6 @@
 </head>
 <body>
 
-<button></button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="11">IT</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="12">서비스</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="13">금융</button>
@@ -20,7 +19,7 @@
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script>
 $('.cls-btn').click((e) => {
-  window.location.href = './html/study/index.html?clsNo=' + $(e.target).attr('data-no');
+  window.location.href = './html/study/index.html?clsNo=' + $(e.target).attr('data-no') + '&clsTitle=' + $(e.target).text();
 });
 
 </script>

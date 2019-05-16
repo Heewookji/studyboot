@@ -81,17 +81,16 @@
 
 
 <div id="left">
-  <h1>IT</h1>
+  <h1 id="clsTitle">IT</h1>
   <hr>
     <h3>카테고리</h3>
-  <ul>
-    <li>중분류</li>
-    <li>중분류</li>
-    <li>중분류</li>
-    <li>중분류</li>
-    <li>중분류</li>
-    <li>중분류</li>
-  </ul>
+    
+    
+  <div id="mediumTitle">
+  
+  
+  </div>
+  
     <h3>필터</h3>
   <ul>
     <li>지역</li>
@@ -136,6 +135,22 @@
   <td>{{photo}}</td>
   <td>{{goal}}</td>
 </tr>
+{{/each}}
+</script>
+
+<script id="tr-template-mcls" type="text/x-handlebars-template">
+{{#each list}}
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle mcls-btn" type="button" data-no="{{clsNo}}"
+id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{name}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
 {{/each}}
 </script>
 

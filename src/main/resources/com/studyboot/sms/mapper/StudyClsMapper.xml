@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.StudyClsDao">
+
+<resultMap type="studyCls" id="cls">
+    <id column="cls_m_id" property="clsMediumNo"/>
+    <id column="cls_l_id" property="clsLargeNo"/>
+    <id column="cls_s_id" property="clsSmallNo"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+  
+  
+  <select id="findMediumClsName" resultMap="cls" parameterType="string">
+    select 
+      name,
+      cls_m_id,
+      cls_l_id
+    from
+      sms_std_cls_m 
+    where 
+    cls_l_id = #{value}
+  </select>
+  
+  
+ 
+  <select id="findSmallClsName" resultType="map" parameterType="string">
+    select 
+      name,
+      cls_s_id,
+      cls_m_id,
+      cls_l_id
+    from 
+      sms_std_cls_s 
+    where 
+    cls_m_id = RIGHT(#{clsNo},2)
+    and cls_l_id = LEFT(#{clsNo},2)
+  </select>
+  
+  
+</mapper>

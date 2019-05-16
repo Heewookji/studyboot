@@ -3,6 +3,7 @@ var param = location.href.split('?')[1];
 // param 변수는 값이 있으면 true를 리턴한다.
 if (param) {
   // loadData 함수를 호출한다. param 변수를 =로 나누어 파라미터의 값을 구한다.
+    
   loadData(param.split('=')[1]);
 }
   
