@@ -187,4 +187,10 @@
       #{review})
   </insert>
   
+  <delete id="deleteReview" parameterType="spaceReview">
+    delete from sms_space_review
+    where space_review_id = #{no}
+      and member_id = #{memberNo}
+  </delete>
+  
 </mapper>

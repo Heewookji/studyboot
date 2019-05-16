@@ -28,6 +28,11 @@ public class SpaceServiceImpl implements SpaceService {
     return spaceDao.insertReview(spaceReview);
   }
   
+  @Override
+  public int deleteReview(SpaceReview spaceReview) {
+    return spaceDao.deleteReview(spaceReview);
+  }
+  
 //  @Override
 //  public Space get(int no) {
 //    Space space = spaceDao.findByNo(no);
@@ -50,6 +55,7 @@ public class SpaceServiceImpl implements SpaceService {
     return space;
     
   }
+
   
 //  @Override
 //  public int update(Space space) {
