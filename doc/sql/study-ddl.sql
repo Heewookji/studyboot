@@ -719,6 +719,9 @@ ALTER TABLE sms_space_review
       space_review_id -- 공간후기번호
     );
 
+ALTER TABLE sms_space_review
+  MODIFY COLUMN space_review_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '공간후기번호';
+
 -- 스터디 종료 지표
 ALTER TABLE sms_member_endrate
   ADD CONSTRAINT FK_sms_member_TO_sms_member_endrate -- 회원 -> 스터디 종료 지표

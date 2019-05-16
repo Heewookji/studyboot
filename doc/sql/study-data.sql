@@ -250,6 +250,15 @@ values (5, '202', '2', '2', '2019-5-10', '2019-5-10',101);
      insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
   values (204,102,1,2,'2019-05-17 20:00','2019-05-17 20:50');
   
-
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('601', '2', '101', '3.0', '그저그래요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('602', '3', '101', '5.0', '완벽합니다 너무 좋네요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('603', '4', '101', '1.5', '에어컨이 잘 안나오네요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('604', '5', '101', '4.0', '사장님이 친절해요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('605', '3', '101', '3.5', '좋아요');
 
 
