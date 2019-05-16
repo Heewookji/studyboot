@@ -72,7 +72,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">생성</button>
+        <button type="button" class="btn btn-primary" id="add-btn">생성</button>
       </div>
     </div>
   </div>
@@ -115,6 +115,7 @@
   <tr>
     <th scope="col">번호</th>
     <th scope="col">이름</th>
+    <th scope="col">평점</th>
     <th scope="col">사진</th>
     <th scope="col">목표</th>
   </tr>
@@ -131,6 +132,7 @@
 <tr>
   <th>{{no}}</th>
   <td><a class="study-view-link" href="#" data-no="{{no}}">{{name}}</a></td>
+  <td>{{rate}}</td>
   <td>{{photo}}</td>
   <td>{{goal}}</td>
 </tr>

@@ -56,6 +56,7 @@ document.querySelector('#update-btn').onclick = () => {
 }; // update-btn
 */
 
+// 스터디 상세 데이터를 불러오는 함수
 function loadData(no) {
   
   $.getJSON('../../app/json/study/detail?no=' + no,
