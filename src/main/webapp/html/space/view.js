@@ -5,6 +5,7 @@ reviewUpdateForm = document.getElementById("review-update-form"),
 ratingUpdateForm = document.getElementById("rating-update-form"),
 section = $('section'),
 i = 0,
+updateNo,
 spaceNo;
 
 if (param) {
@@ -86,7 +87,7 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
         url : "../../app/json/space/delete/review",
         type : "GET",
         data : {
-             // $(e.target).attr('review-no')는 review-no의 값을 가져온다.
+          // $(e.target).attr('review-no')는 review-no의 값을 가져온다.
           no : $(e.target).attr('review-no')
         },
         success : function() {
@@ -98,28 +99,40 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
       })
     }
 
+
   });
 });
 
-$(document.body).bind('loaded-detail', () => {
-  $('#update-btn').click((e) => {
-      $.ajax({
-        url : "../../app/json/space/update/review",
-        type : "POST",
-        data : {
-          no : $(e.target).attr('review-no'),
-          rating: $(ratingUpdateForm).val(),
-          review: $(reviewUpdateForm).val()
-        },
-        success : function() {
-          alert('수정 되었습니다.');
-          location.reload();
-        },
-        error : function(request, status, error) {
-          alert('수정 실패');
-        }
-      })
 
+$(document.body).bind('loaded-detail', () => {
+  
+  $('.updateBtn').click((e) => {
+    updateNo = $(e.target).attr('review-no');
+  });
+  
+});
+
+
+$(document.body).bind('loaded-detail', () => {
+  
+  $('#update-btn').click((e) => {
+    //alert($(e.target).attr('data-no'));
+    $.ajax({
+      url : "../../app/json/space/update/review",
+      type : "POST",
+      data : {
+        no : updateNo,
+        rating: $(ratingUpdateForm).val(),
+        review: $(reviewUpdateForm).val()
+      },
+      success : function() {
+        alert('수정 되었습니다.');
+        location.reload();
+      },
+      error : function(request, status, error) {
+        alert('수정 실패');
+      }
+    })
   });
 });
 
