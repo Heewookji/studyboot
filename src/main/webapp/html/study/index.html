@@ -145,12 +145,16 @@
 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{name}}
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+  <div class="dropdown-menu smallTitle" id="smallClsTitle{{clsNo}}" aria-labelledby="dropdownMenuButton">
+
   </div>
 </div>
+{{/each}}
+</script>
+
+<script id="tr-template-scls" type="text/x-handlebars-template">
+{{#each list}}
+    <a class="dropdown-item scls-btn" href="#" data-no="{{clsNo}}">{{name}}</a>
 {{/each}}
 </script>
 

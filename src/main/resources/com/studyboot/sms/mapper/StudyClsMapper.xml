@@ -28,7 +28,7 @@
   
   
  
-  <select id="findSmallClsName" resultType="map" parameterType="string">
+  <select id="findSmallClsName" resultMap="cls" parameterType="string">
     select 
       name,
       cls_s_id,

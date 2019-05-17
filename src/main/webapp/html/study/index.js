@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 2,
+pageSize = 3,
 map,
 init = false,
 clsNo,
@@ -9,7 +9,9 @@ tbody = $('tbody'),
 templateSrc = $('#tr-template').html(), // script 태그에서 템플릿 데이터를 꺼낸다.
 trGenerator = Handlebars.compile(templateSrc),
 templateSrcMediumCls = $('#tr-template-mcls').html(), // script 태그에서 템플릿 데이터를 꺼낸다.
-trGeneratorMediumCls = Handlebars.compile(templateSrcMediumCls); 
+trGeneratorMediumCls = Handlebars.compile(templateSrcMediumCls),
+templateSrcSmallCls = $('#tr-template-scls').html(), // script 태그에서 템플릿 데이터를 꺼낸다.
+trGeneratorSmallCls = Handlebars.compile(templateSrcSmallCls); 
 
 //JSON 형식의 데이터 목록 가져오기
 function loadList(pageNo, clsNo) {
@@ -38,13 +40,20 @@ function loadList(pageNo, clsNo) {
 };
 
 function loadMediumTitle(clsNo) {
-
     $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
 	    function(obj) {
 	
 	$(trGeneratorMediumCls(obj)).appendTo('#mediumTitle');
 	
 	$(document.body).trigger('loaded-mediumtitle');
+    });
+};
+
+function loadSmallTitle(clsNo) {
+    $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
+	    function(obj) {
+	$(trGeneratorSmallCls(obj)).appendTo('#smallClsTitle' + clsNo);
+	$(document.body).trigger('loaded-smalltitle');
     });
 };
 
@@ -78,6 +87,18 @@ $(document.body).bind('loaded-mediumtitle', () => {
 $('.mcls-btn').click(function(e) {
     pageNo = 1;
     tbody.html('');
+    $('.smallTitle').html('');
+    clsNo = $(e.target).attr('data-no');
+    loadList(pageNo, clsNo);
+    loadSmallTitle(clsNo);
+});
+});
+
+$(document.body).bind('loaded-smalltitle', () => {
+$('.scls-btn').click(function(e) {
+    e.preventDefault();
+    pageNo = 1;
+    tbody.html('');
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo);
 });
@@ -107,7 +128,8 @@ $('#add-btn').click(function() {
 	    }
 	}
     });
-}); // add-btn / 제이슨 형식으로 데이터 보내기 할때 오류발생해서 인코드URI 방식으로 보냈음
+}); 
+// add-btn / 제이슨 형식으로 데이터 보내기 할때 오류발생해서 인코드URI 방식으로 보냈음
 
 
 
@@ -121,8 +143,4 @@ $('#add-btn').click(function() {
 //if ($(e).val().length > 0)
 //return '작성 중인 글이 있습니다.';
 //}
-
 //});
-
-
-
