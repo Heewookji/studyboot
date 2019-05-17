@@ -66,14 +66,14 @@ public class StudyController {
       @RequestParam String clsNo) {
     
     // 페이징
-    if (pageSize < 3 || pageSize > 8) {
-      pageSize = 3;
-    }
+//    if (pageSize < 3 || pageSize > 8) {
+//      pageSize = 3;
+//    }
+    
     HashMap<String,Object> content = new HashMap<>();
     
     int rowCount = studyService.size(clsNo);
     
-    System.out.println(rowCount);
     
     if (rowCount == 0) {
       content.put("pageNo", 0);
