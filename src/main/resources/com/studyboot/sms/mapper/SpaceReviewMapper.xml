@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.SpaceReviewDao">
+
+  <resultMap type="spaceReview" id="spaceReviewMap">
+      <id column="space_review_id" property="no"/>
+    <id column="space_id" property="spaceNo"/>
+     <id column="member_id" property="memberNo"/>
+      <result column="rating" property="rating"/>
+      <result column="review" property="review"/>
+  </resultMap>
+  
+  <insert id="insertReview" parameterType="spaceReview">
+    insert into sms_space_review(
+      member_id,
+      space_id,
+      rating,
+      review)
+    values(
+      #{memberNo},
+      #{spaceNo},
+      #{rating},
+      #{review})
+  </insert>
+  
+  <delete id="deleteReview" parameterType="int">
+    delete from sms_space_review
+    where space_review_id = #{value}
+  </delete>
+
+  <update id="updateReview" parameterType="spaceReview">
+    update sms_space_review
+    set 
+      rating = #{rating} ,
+      review = #{review}
+    where space_review_id = #{no}
+  </update>
+  
+</mapper>
