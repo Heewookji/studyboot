@@ -7,17 +7,18 @@ import com.studyboot.sms.service.SpaceReviewService;
 
 @Service
 public class SpaceReviewServiceImpl implements SpaceReviewService {
-  
+
   SpaceReviewDao spaceReviewDao;
-  
+
   public SpaceReviewServiceImpl(SpaceReviewDao spaceReviewDao) {
     this.spaceReviewDao = spaceReviewDao;
   }
+
   @Override
   public int addReview(SpaceReview spaceReview) {
     return spaceReviewDao.insertReview(spaceReview);
   }
-  
+
   @Override
   public int deleteReview(int no) {
     return spaceReviewDao.deleteReview(no);
@@ -25,10 +26,9 @@ public class SpaceReviewServiceImpl implements SpaceReviewService {
 
   @Override
   public int updateReview(SpaceReview spaceReview) {
-
     return spaceReviewDao.updateReview(spaceReview);
   }
-
+  
 }
 
 

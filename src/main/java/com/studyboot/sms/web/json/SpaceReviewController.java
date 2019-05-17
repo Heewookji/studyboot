@@ -17,6 +17,7 @@ public class SpaceReviewController {
 
   @PostMapping("add/review")
   public Object add(SpaceReview spaceReview) {
+    
     HashMap<String,Object> content = new HashMap<>();
     try {
       spaceReviewService.addReview(spaceReview);
@@ -46,9 +47,6 @@ public class SpaceReviewController {
 
   @PostMapping("update/review")
   public Object update(SpaceReview spaceReview) {
-    System.out.println("---------------------------------------------------------");
-    System.out.println(spaceReview);
-    System.out.println("---------------------------------------------------------");
     
     HashMap<String,Object> content = new HashMap<>();
     try {
@@ -62,6 +60,7 @@ public class SpaceReviewController {
     }
     return content;
   }
+  
 }
 
 

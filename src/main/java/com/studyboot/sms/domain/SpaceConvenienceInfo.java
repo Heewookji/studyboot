@@ -40,5 +40,4 @@ public class SpaceConvenienceInfo {
     this.spaceConveniences = spaceConveniences;
   }
   
-
 }

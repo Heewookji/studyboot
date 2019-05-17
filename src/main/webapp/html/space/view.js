@@ -1,11 +1,12 @@
 var param = location.href.split('?')[1],
-ratingForm = document.getElementById("rating-form"),
-reviewForm = document.getElementById("review-form"),
-reviewUpdateForm = document.getElementById("review-update-form"),
-ratingUpdateForm = document.getElementById("rating-update-form"),
-section = $('section'),
+ratingForm = $("#rating-form"),
+reviewForm = $("#review-form"),
+reviewUpdateForm = $("#review-update-form"),
+ratingUpdateForm = $("#rating-update-form"),
+spaceName = $('#space-name'),
+//section = $('section'),
 i = 0,
-updateNo,
+updateNo, // 리뷰 수정 시 모달 폼에게 key값 전달하기 위한 변수
 spaceNo;
 
 if (param) {
@@ -24,7 +25,7 @@ function loadDetail(no) {
     data : {name:'name', intro:'intro'},
     success : function(data) {
       console.log(data.detail); // detail은 controller에서 키값으로 보낸 것.
-      $('#name').append(data.detail.name),
+      $(spaceName).append(data.detail.name),
       $('#intro').append(data.detail.intro)
     },
     error : function(request, status, error) {
@@ -61,6 +62,7 @@ function loadDetail(no) {
 
 //$('#add-btn').click( function() {
 $('#add-btn').click( () => {
+	
   $.ajax({
     url : "../../app/json/space/add/review",
     type : "POST",
@@ -81,6 +83,7 @@ $('#add-btn').click( () => {
 
 //handlebars가 비동기 방식이라 trigger, bind 사용
 $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라는 이름을 갖는 bind를 실행시킨다.
+ 
   $('.delete-review').click((e) => {
     if ( confirm('정말 삭제하시겠습니까?') ) {
       $.ajax({
@@ -98,23 +101,20 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
         }
       })
     }
-
-
   });
 });
 
 
 $(document.body).bind('loaded-detail', () => {
-  
+
   $('.updateBtn').click((e) => {
     updateNo = $(e.target).attr('review-no');
   });
-  
 });
 
 
 $(document.body).bind('loaded-detail', () => {
-  
+
   $('#update-btn').click((e) => {
     //alert($(e.target).attr('data-no'));
     $.ajax({
@@ -135,6 +135,3 @@ $(document.body).bind('loaded-detail', () => {
     })
   });
 });
-
-
-

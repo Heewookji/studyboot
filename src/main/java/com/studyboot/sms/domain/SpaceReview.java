@@ -13,6 +13,7 @@ public class SpaceReview {
     return "SpaceReview [no=" + no + ", memberNo=" + memberNo + ", spaceNo=" + spaceNo + ", rating="
         + rating + ", review=" + review + "]";
   }
+  
   public int getNo() {
     return no;
   }

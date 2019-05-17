@@ -24,6 +24,7 @@ public class Space {
         + files + ", rooms=" + rooms + ", spaceConvenienceInfos=" + spaceConvenienceInfos
         + ", spaceReview=" + spaceReview + "]";
   }
+  
   public int getNo() {
     return no;
   }
@@ -90,7 +91,5 @@ public class Space {
   public void setSpaceReview(List<SpaceReview> spaceReview) {
     this.spaceReview = spaceReview;
   }
-  
-  
   
 }

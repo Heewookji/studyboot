@@ -29,5 +29,5 @@ public class SpacePhoto {
   public void setFilePath(String filePath) {
     this.filePath = filePath;
   }
-
+  
 }
