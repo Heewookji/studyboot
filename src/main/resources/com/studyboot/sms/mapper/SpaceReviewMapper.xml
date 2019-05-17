@@ -6,7 +6,6 @@
   
 <mapper namespace="com.studyboot.sms.dao.SpaceReviewDao">
 
- <!-- 공간후기 --> <!-- 완료!!! -->
   <resultMap type="spaceReview" id="spaceReviewMap">
       <id column="space_review_id" property="no"/>
     <id column="space_id" property="spaceNo"/>
@@ -14,23 +13,6 @@
       <result column="rating" property="rating"/>
       <result column="review" property="review"/>
   </resultMap>
-  
-  
-  <select id="findReview" resultMap="spaceReviewMap" parameterType="int">
-    select
-      r.space_review_id,
-      s.space_id,
-      m.member_id,
-      r.space_id,
-      r.member_id,
-      r.rating,
-      r.review
-    from
-      sms_space_review r
-        inner join sms_space s on s.space_id = r.space_id
-        inner join sms_member m on r.member_id = m.member_id
-    where s.space_id = #{value}
-  </select>
   
   <insert id="insertReview" parameterType="spaceReview">
     insert into sms_space_review(
