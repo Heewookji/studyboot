@@ -65,15 +65,14 @@ public class StudyController {
       @RequestParam int pageSize,
       @RequestParam String clsNo) {
     
-    // 페이징
-//    if (pageSize < 3 || pageSize > 8) {
-//      pageSize = 3;
-//    }
+    // 페이지 사이즈
+    if (pageSize < 3 || pageSize > 8) {
+      pageSize = 3;
+    }
     
     HashMap<String,Object> content = new HashMap<>();
     
     int rowCount = studyService.size(clsNo);
-    
     
     if (rowCount == 0) {
       content.put("pageNo", 0);
@@ -93,11 +92,7 @@ public class StudyController {
       pageNo = totalPage;
     }
     
-    // 카테고리 분류
-    List<Study> studys;
-    
-      studys = studyService.list(pageNo, pageSize, clsNo);
-    
+    List<Study> studys = studyService.list(pageNo, pageSize, clsNo);
     
     content.put("list", studys);
     content.put("pageNo", pageNo);

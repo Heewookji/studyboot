@@ -3,7 +3,6 @@ var param = location.href.split('?')[1];
 // param 변수는 값이 있으면 true를 리턴한다.
 if (param) {
   // loadData 함수를 호출한다. param 변수를 =로 나누어 파라미터의 값을 구한다.
-    
   loadData(param.split('=')[1]);
 }
   
@@ -83,8 +82,8 @@ function loadData(no) {
 
 
 // 목록으로 돌아가기
-// 무한스크롤 하고 상세보기 클릭했을 때 기존에 무한 스크롤한 리스트를 그대로 보여주고 싶은데 기존 리스트를 그대로 유지 하지 않고
-// 리프래시 한 것처럼 출력됨.
+// 무한스크롤 하고 상세보기 클릭했을 때 기존에 무한 스크롤한 리스트를 그대로 보여주고 싶은데
+// 기존 리스트를 그대로 유지 하지 않고 리프래시 한 것처럼 출력됨.
 $('#goback-btn').click(function() {
   window.history.go(-1);
 });
