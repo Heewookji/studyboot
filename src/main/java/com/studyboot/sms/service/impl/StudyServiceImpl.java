@@ -18,7 +18,11 @@ public class StudyServiceImpl implements StudyService {
   StudyMemberDao studyMemberDao;
   StudyClsDao studyClsDao;
   
-  public StudyServiceImpl(StudyDao studyDao, StudyMemberDao studyMemberDao, StudyClsDao studyClsDao) {
+  public StudyServiceImpl(
+      StudyDao studyDao,
+      StudyMemberDao studyMemberDao,
+      StudyClsDao studyClsDao) {
+    
     this.studyDao = studyDao;
     this.studyMemberDao = studyMemberDao;
     this.studyClsDao = studyClsDao;
@@ -111,7 +115,7 @@ public class StudyServiceImpl implements StudyService {
   public int size(String clsNo) {
     
     int count = 0;
-    HashMap<String,Object> params = new HashMap<>();    
+    HashMap<String,Object> params = new HashMap<>();
     
     if (clsNo.length() == 2) {
       params.put("clsNo", clsNo);
@@ -131,7 +135,7 @@ public class StudyServiceImpl implements StudyService {
   }
   
   
-  public List<StudyCls> clsList(String clsNo){
+  public List<StudyCls> clsList(String clsNo) {
     
     List<StudyCls> list;
     
@@ -148,6 +152,7 @@ public class StudyServiceImpl implements StudyService {
         c.setClsMediumNo("");
       if(c.getClsSmallNo() == null)
         c.setClsSmallNo("");
+      
       c.setClsNo(c.getClsLargeNo()+c.getClsMediumNo()+c.getClsSmallNo());
     }
     

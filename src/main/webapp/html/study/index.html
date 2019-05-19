@@ -16,7 +16,8 @@
   </h1>
     <hr>
   </header>
-  
+
+<!-- 스터디 생성 -->
 <div class="modal fade" id="stdAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -76,19 +77,16 @@
       </div>
     </div>
   </div>
-</div>
+</div> <!-- #stdAddModal -->
 
-
-
+<!-- 왼쪽 카테고리 -->
 <div id="left">
-  <h1 id="clsTitle">IT</h1>
+  <h1 id="clsTitle"></h1>
   <hr>
-    <h3>카테고리</h3>
-    
-    
+  <h3>카테고리</h3>
+  
+  <!-- 중분류(소분류) -->
   <div id="mediumTitle">
-  
-  
   </div>
   
     <h3>필터</h3>
@@ -100,9 +98,10 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stdAddModal">
   스터디 생성하기
 </button>
-</div>
-<div class="content">
+</div> <!-- #left -->
 
+<!-- 스터디 목록 -->
+<div class="content">
 
   <div style="height:80px; width:780px;">
     <span>대 > 중 > 소</span> 
@@ -123,9 +122,10 @@
 </tbody>
 </table>
   </div>
-</div>
+</div> <!-- .content -->
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+<!-- 스터디 리스트 -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
@@ -138,6 +138,7 @@
 {{/each}}
 </script>
 
+<!-- 카테고리 중분류 -->
 <script id="tr-template-mcls" type="text/x-handlebars-template">
 {{#each list}}
 <div class="dropdown">
@@ -152,6 +153,7 @@ id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expande
 {{/each}}
 </script>
 
+<!-- 카테고리 소분류 -->
 <script id="tr-template-scls" type="text/x-handlebars-template">
 {{#each list}}
     <a class="dropdown-item scls-btn" href="#" data-no="{{clsNo}}">{{name}}</a>

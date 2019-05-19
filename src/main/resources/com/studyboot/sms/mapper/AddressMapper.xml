@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.AddressDao">
+
+<resultMap type="address" id="address">
+    <id column="adr_l_id" property="addressLargeNo"/>
+    <id column="adr_m_id" property="addressMediumNo"/>
+    <id column="adr_s_id" property="addressSmallNo"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  
+  <select id="findLargeAddressName" resultMap="address">
+    select 
+      name,
+      adr_l_id
+    from
+      sms_adr_l
+  </select>
+  
+  <select id="findMediumAddressName" resultMap="address" parameterType="string">
+    select 
+      name,
+      adr_m_id,
+      adr_l_id
+    from
+      sms_adr_m 
+    where 
+      adr_l_id = #{value}
+  </select>
+  
+  <select id="findSmallAddressName" resultMap="address" parameterType="string">
+    select 
+      name,
+      adr_s_id,
+      adr_m_id,
+      adr_l_id
+    from 
+      sms_adr_s
+    where 
+      adr_m_id = RIGHT(#{value},2)
+      and adr_l_id = LEFT(#{value},2)
+  </select>
+  
+  
+</mapper>

@@ -102,38 +102,6 @@ public class StudyController {
     return content;
   }
   
-//  @GetMapping("list")
-//  public Object list(
-//      @RequestParam(defaultValue = "1") int pageNo,
-//      @RequestParam(defaultValue = "3") int pageSize) {
-//    
-//    if (pageSize < 3 || pageSize > 8) {
-//      pageSize = 3;
-//    }
-//    
-//    int rowCount = studyService.size();
-//    int totalPage = rowCount / pageSize;
-//    
-//    if (rowCount % pageSize > 0) {
-//      totalPage++;
-//    }
-//    
-//    if (pageNo < 1) {
-//      pageNo = 1;
-//    } else if (pageNo > totalPage) {
-//      pageNo = totalPage;
-//    }
-//    
-//    List<Study> studys = studyService.list(pageNo, pageSize);
-//    HashMap<String,Object> content = new HashMap<>();
-//    content.put("list", studys);
-//    content.put("pageNo", pageNo);
-//    content.put("pageSize", pageSize);
-//    content.put("totalPage", totalPage);
-//    
-//    return content;
-//  }
-  
   // 테스트용
   @GetMapping("rate")
   public Object rate(int nom, int no) {
@@ -162,6 +130,7 @@ public class StudyController {
     return content;
   }*/
   
+  // 스터디 리스트 페이지에서 카테고리 목록 정보를 다룬다.
   @GetMapping("category")
   public Object category(
       @RequestParam String clsNo) {
