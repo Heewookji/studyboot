@@ -10,16 +10,19 @@ public class Message implements Cloneable, Serializable {
   private int sendNo;
   private int recvNo;
   private String contents;
+  private String title;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
   private Date date;
   
   private Member messagePerson;
+  
 
   @Override
   public String toString() {
     return "Message [messageNo=" + messageNo + ", sendNo=" + sendNo + ", recvNo=" + recvNo
-        + ", contents=" + contents + ", date=" + date + ", messagePerson=" + messagePerson + "]";
+        + ", contents=" + contents + ", title=" + title + ", date=" + date + ", messagePerson="
+        + messagePerson + "]";
   }
 
   public int getMessageNo() {
@@ -52,6 +55,14 @@ public class Message implements Cloneable, Serializable {
 
   public void setContents(String contents) {
     this.contents = contents;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public Date getDate() {
