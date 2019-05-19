@@ -20,9 +20,6 @@
   data-toggle="modal" data-target="#calModal" id="booking-btn">calendar</button>
 
 
- <button type="button" class="btn btn-outline-primary"
-  id="add-btn">stdLargeFilter - IT </button>
-
  <a type="hidden" data-target="#calModal" id="cal-btn"></a>
 
 
@@ -43,7 +40,32 @@
     <div class="modal-body">
      <div class="container-fluid">
       <div id="calendar"></div>
-      <div class="row justify-content-md-center">
+      
+      
+      <div id="time-btn">
+      
+      </div>
+      
+      
+      <div id="roomList">
+      
+      </div>
+      
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-secondary"
+      data-dismiss="modal">닫기</button>
+     <button type="button" class="btn btn-primary" id="inqryAdd-btn">예약하기</button>
+    </div>
+   </div>
+  </div>
+ </div>
+
+
+
+ <script id="time-button-template" type="text/x-handlebars-template">
+<div class="row justify-content-md-center">
        <div class="col-md-auto">
         <button type="button" class="btn btn-outline-primary cal-time">08:00</button>
         <button type="button" class="btn btn-outline-primary cal-time">09:00</button>
@@ -53,7 +75,6 @@
         <button type="button" class="btn btn-outline-primary cal-time">13:00</button>
         <button type="button" class="btn btn-outline-primary cal-time">14:00</button>
        </div>
-      </div>
       <div class="row justify-content-md-center">
         <div class="col-md-auto">
        <button type="button" class="btn btn-outline-primary cal-time">15:00</button>
@@ -65,35 +86,16 @@
        <button type="button" class="btn btn-outline-primary cal-time">21:00</button>
       </div>
      </div>
-    </div>
-    <form></form>
-   </div>
-   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-    <button type="button" class="btn btn-primary" id="inqryAdd-btn">예약하기</button>
-   </div>
-  </div>
- </div>
- </div>
- 
+     </div>
+</script>
 
-
- <script id="tr-template" type="text/x-handlebars-template">
+<script id="room-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th scope='row'>{{no}}</th>
-  <td>{{cls.name}}</td>
-  <td>
-<a class='stdinqry-view-link' href='#' data-toggle="modal" 
-data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
-</td>
-  <td>
-<a href='#' class='sspctForm-btn'
- data-toggle="modal" 
-data-target="#addModal"
-data-content='{{inquiryPerson.name}}' data-no='{{inquiryPersonNo}}'>{{inquiryPerson.name}}</a>
-</td>
-  <td>{{createdDate}}</td>
+ <td>{{photo}} /</td>
+  <td>{{name}} /</td>
+ <td>{{personnel}} /</td>
+ <td>{{price}} /</td>
 </tr>
 {{/each}}
 </script>
@@ -104,15 +106,16 @@ data-content='{{inquiryPerson.name}}' data-no='{{inquiryPersonNo}}'>{{inquiryPer
   src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
  <script
   src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
- <script
-  src='/Study-Web-Project/node_modules/@fullcalendar/core/locales/ko.js'></script>
- <script
-  src='/Study-Web-Project/node_modules/@fullcalendar/core/main.js'></script>
+ <script src='/Study-Web-Project/node_modules/@fullcalendar/core/main.js'></script>
+ <script src='/Study-Web-Project/node_modules/@fullcalendar/core/locales/ko.js'></script>
  <script
   src='/Study-Web-Project/node_modules/@fullcalendar/daygrid/main.js'></script>
  <script
   src='/Study-Web-Project/node_modules/@fullcalendar/interaction/main.js'></script>
+   <script
+  src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
  <script src='/Study-Web-Project/test/test.js'></script>
+ 
 </body>
 </html>
 

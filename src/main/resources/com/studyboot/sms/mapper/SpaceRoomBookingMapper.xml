@@ -10,7 +10,7 @@
   <resultMap type="spaceRoomBooking" id="spaceRoomBookingMap">
     <id column="space_id" property="spaceNo"/>
     <id column="space_room_id" property="roomNo"/>
-    <id column="bkng_sdt" property="bookingStartDate"/>
+    <result column="bkng_sdt" property="bookingStartDate"/>
   </resultMap>
   
   <select id="findAllBookedByDate" resultMap="spaceRoomBookingMap" parameterType="map">
@@ -22,8 +22,23 @@
   sms_space_room_bkng   
   where 
   space_id = #{space_id} 
-  and date(bkng_sdt) = #{date};
+  and 
+  date(bkng_sdt) = #{date}
   </select>
+  
+  <select id="findAllBookedByDateTime" resultMap="spaceRoomBookingMap" parameterType="map">
+  select   
+  space_id,
+  space_room_id, 
+  bkng_sdt   
+  from    
+  sms_space_room_bkng   
+  where 
+  space_id = #{space_id} 
+  and bkng_sdt = #{date}
+  </select>
+  
+  
   
   
 </mapper>

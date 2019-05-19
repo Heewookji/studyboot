@@ -267,6 +267,16 @@ values (5, '202', '2', '2', '2019-5-10', '2019-5-10',101);
   values (203,101,1,2,'2019-05-17 14:00','2019-05-17 14:50');
      insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
   values (204,102,1,2,'2019-05-17 20:00','2019-05-17 20:50');
+     insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
+  values (202,101,1,2,'2019-05-17 09:00','2019-05-17 09:50');
+    insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
+  values (203,101,1,2,'2019-05-17 09:00','2019-05-17 09:50');
+   insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
+  values (201,101,1,2,'2019-05-17 13:00','2019-05-17 13:50');
+    insert into sms_space_room_bkng ( space_room_id, space_id, std_id, member_id, bkng_sdt, bkng_edt)
+  values (203,101,1,2,'2019-05-17 13:00','2019-05-17 13:50');
+
+  
   
 insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
 values ('601', '2', '101', '3.0', '그저그래요');

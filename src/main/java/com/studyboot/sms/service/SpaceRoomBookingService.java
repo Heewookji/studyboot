@@ -5,5 +5,6 @@ import java.util.List;
 import com.studyboot.sms.domain.SpaceRoomBooking;
 
 public interface SpaceRoomBookingService {
-  List<SpaceRoomBooking> listBooked(int spaceNo, Date date);
+  List<SpaceRoomBooking> listBookedByDate(int spaceNo, Date date);
+  List<SpaceRoomBooking> listBookedByDateTime(int spaceNo, Date date);
 }

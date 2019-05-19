@@ -18,13 +18,25 @@ public class SpaceRoomBookingServiceImpl implements SpaceRoomBookingService {
   }
 
   @Override
-  public List<SpaceRoomBooking> listBooked(int spaceNo, Date date) {
+  public List<SpaceRoomBooking> listBookedByDate(int spaceNo, Date date) {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("space_id", spaceNo);
     params.put("date", date);
 
     List<SpaceRoomBooking> list = spaceRoomBookingDao.findAllBookedByDate(params);
+
+    return list;
+  }
+  
+  @Override
+  public List<SpaceRoomBooking> listBookedByDateTime(int spaceNo, Date date) {
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("space_id", spaceNo);
+    params.put("date", date);
+
+    List<SpaceRoomBooking> list = spaceRoomBookingDao.findAllBookedByDateTime(params);
 
     return list;
   }
