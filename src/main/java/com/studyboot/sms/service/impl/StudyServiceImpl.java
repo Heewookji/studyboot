@@ -1,5 +1,6 @@
 package com.studyboot.sms.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -7,7 +8,6 @@ import com.studyboot.sms.dao.AddressDao;
 import com.studyboot.sms.dao.StudyClsDao;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
-import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyCls;
 import com.studyboot.sms.domain.StudyMember;
@@ -43,7 +43,6 @@ public class StudyServiceImpl implements StudyService {
     params.put("clsNo", clsNo);
     
     List<Study> list;
-    List<Address> addressList;
     
     if (clsNo.length() == 2) {
       list = studyDao.findAllByLargeFilter(params);
@@ -54,11 +53,29 @@ public class StudyServiceImpl implements StudyService {
     }
     
     if (addressNo.length() == 0) {
-      
+      return list;
     }
     
+    List<Study> resultList = new ArrayList<>();
     
-    return list;
+    for (Study s : list) {
+      if (addressNo.length() == 2 &&
+          addressNo.equals(s.getAddress().substring(0, 2))) {
+        
+        resultList.add(s);
+        
+      } else if (addressNo.length() == 4 &&
+          addressNo.equals(s.getAddress().substring(0, 4))) {
+        
+        resultList.add(s);
+        
+      } else if (addressNo.equals(s.getAddress())) {
+        resultList.add(s);
+      }
+    }
+    System.out.println(resultList);
+    
+    return resultList;
   }
 
   @Override

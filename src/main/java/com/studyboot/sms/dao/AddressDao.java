@@ -5,8 +5,8 @@ import com.studyboot.sms.domain.StudyCls;
 
 public interface AddressDao {
   List<StudyCls> findLargeAddressName();
-  List<StudyCls> findMediumAddressName(String clsNo);
-  List<StudyCls> findSmallAddressName(String clsNo);
+  List<StudyCls> findMediumAddressName(String addressNo);
+  List<StudyCls> findSmallAddressName(String addressNo);
 }
 
 
