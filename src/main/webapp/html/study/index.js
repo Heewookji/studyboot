@@ -1,7 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
 pageSize = 3,
-init = false,
 addressNo,
 clsNo,
 clsTitle,
@@ -34,7 +33,7 @@ function loadList(pageNo, clsNo, addressNo) {
       + '&addressNo=' + addressNo,
       function(obj) {
 
-    console.log(pageNo, obj.totalPage, addressNo);
+    console.log(pageNo, obj.totalPage,  addressNo, clsNo);
 
     // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
     // (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
@@ -81,15 +80,16 @@ function loadAddress(addressNo) {
     // addressNo 값이 없을 때(대분류), 2자리(중분류), 4자리(소분류)
     if (addressNo == undefined) {
       $(trGeneratorLargeAddress(obj)).appendTo('.largeAddress');
+      $(document.body).trigger('loaded-largeAddress');
       
     } else if (addressNo.length == 2) {
       $(trGeneratorMediumAddress(obj)).appendTo('.mediumAddress');
-      
+      $(document.body).trigger('loaded-mediumAddress');
     } else if (addressNo.length == 4) {
       $(trGeneratorSmallAddress(obj)).appendTo('.smallAddress');
+      $(document.body).trigger('loaded-smallAddress');
     }
     
-    $(document.body).trigger('loaded-address');
   });
 };
 
@@ -101,7 +101,7 @@ if (param) {
   $('#clsTitle').html(clsTitle);
   loadList(pageNo, clsNo, addressNo);
   loadMediumTitle(clsNo);
-  loadAddress(addressNo);
+  loadAddress();
 }
 
 // 스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
@@ -144,17 +144,19 @@ $(document.body).bind('loaded-smalltitle', () => {
 });
 
 // 필터 - 지역 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
-$(document.body).bind('loaded-address', () => {
+$(document.body).bind('loaded-largeAddress', () => {
   $('.ladr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
     tbody.html('');
     $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
+    $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     addressNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo);
     loadAddress(addressNo);
   });
-  
+});
+  $(document.body).bind('loaded-mediumAddress', () => {
   $('.madr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
@@ -164,7 +166,8 @@ $(document.body).bind('loaded-address', () => {
     loadList(pageNo, clsNo, addressNo);
     loadAddress(addressNo);
   });
-  
+});
+  $(document.body).bind('loaded-smallAddress', () => {
   $('.sadr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
