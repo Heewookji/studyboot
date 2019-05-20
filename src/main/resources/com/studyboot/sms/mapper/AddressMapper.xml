@@ -11,6 +11,9 @@
     <id column="adr_m_id" property="addressMediumNo"/>
     <id column="adr_s_id" property="addressSmallNo"/>
     <result column="name" property="name"/>
+    <result column="l_name" property="largeName"/>
+    <result column="m_name" property="mediumName"/>
+    <result column="s_name" property="smallName"/>
   </resultMap>
   
   <select id="findLargeAddressName" resultMap="address">
@@ -45,19 +48,16 @@
       and adr_l_id = LEFT(#{value},2)
   </select>
   
-  <select id="findFullAddressName" resultMap="address"  parameterType="string">
+  <select id="findFullAddressName" resultMap="address"  parameterType="int">
     select 
-      s.adr_s_id,
-      s.adr_m_id,
-      s.adr_l_id,
-      l.name,
-      m.name,
-      s.name
+      l.name as l_name,
+      m.name as m_name,
+      s.name as s_name
     from
       sms_adr_s s
       inner join sms_adr_m m on s.adr_m_id = m.adr_m_id
       inner join sms_adr_l l on m.adr_l_id = l.adr_l_id
-   where s.adr_s_id = #{value}
+    where s.adr_s_id = #{value}
   </select>
   
 </mapper>

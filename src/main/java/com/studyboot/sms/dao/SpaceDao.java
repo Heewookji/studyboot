@@ -10,6 +10,8 @@ public interface SpaceDao {
   Space findByNo(int no);
   List<SpaceConvenienceInfo> findConv(int no);
   List<SpaceReview> findReview(int no);
+  Space findByAddress(int no);
+  
 }
 
 

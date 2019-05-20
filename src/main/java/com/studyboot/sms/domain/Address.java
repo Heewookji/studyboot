@@ -8,10 +8,15 @@ public class Address {
   private String addressNo;
   private String name;
   
+  private String largeName;
+  private String mediumName;
+  private String smallName;
+  
   @Override
   public String toString() {
     return "Address [addressLargeNo=" + addressLargeNo + ", addressMediumNo=" + addressMediumNo
         + ", addressSmallNo=" + addressSmallNo + ", addressNo=" + addressNo + ", name=" + name
+        + ", largeName=" + largeName + ", mediumName=" + mediumName + ", smallName=" + smallName
         + "]";
   }
   
@@ -44,6 +49,30 @@ public class Address {
   }
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getLargeName() {
+    return largeName;
+  }
+
+  public void setLargeName(String largeName) {
+    this.largeName = largeName;
+  }
+
+  public String getMediumName() {
+    return mediumName;
+  }
+
+  public void setMediumName(String mediumName) {
+    this.mediumName = mediumName;
+  }
+
+  public String getSmallName() {
+    return smallName;
+  }
+
+  public void setSmallName(String smallName) {
+    this.smallName = smallName;
   }
   
 }
