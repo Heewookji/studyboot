@@ -1,6 +1,6 @@
 package com.studyboot.sms.domain;
 
-public class StudyCls {
+public class Cls {
   
   private String clsMediumNo;
   private String clsLargeNo;

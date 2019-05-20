@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.Address;
+import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.domain.Study;
-import com.studyboot.sms.domain.StudyCls;
+import com.studyboot.sms.service.AddressService;
+import com.studyboot.sms.service.ClsService;
 import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyService;
 
@@ -19,7 +22,9 @@ import com.studyboot.sms.service.StudyService;
 public class StudyController {
   
   @Autowired StudyService studyService;
+  @Autowired ClsService clsService;
   @Autowired RateService rateService;
+  @Autowired AddressService addressService;
   
   @PostMapping("add")
   public Object add(Study study) {
@@ -140,10 +145,20 @@ public class StudyController {
       @RequestParam String clsNo) {
     HashMap<String,Object> content = new HashMap<>();
     
-    List<StudyCls> list = studyService.clsList(clsNo);
+    List<Cls> list = clsService.clsList(clsNo);
     content.put("list", list);
     return content;
   }
+  
+//주소 목록 정보를 다룬다.
+ @GetMapping("addresscategory")
+ public Object addressCategory(
+     @RequestParam String addressNo) {
+   HashMap<String,Object> content = new HashMap<>();
+   List<Address> list = addressService.addressList(addressNo);
+   content.put("list", list);
+   return content;
+ }
   
 }
 

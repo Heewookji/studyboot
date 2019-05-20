@@ -2,7 +2,7 @@ package com.studyboot.sms.service;
 
 import java.util.List;
 import com.studyboot.sms.domain.Study;
-import com.studyboot.sms.domain.StudyCls;
+import com.studyboot.sms.domain.Cls;
 
 public interface StudyService {
   
@@ -13,5 +13,4 @@ public interface StudyService {
   int delete(int no);
   int size(String clsNo, String addressNo);
   List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo);
-  List<StudyCls> clsList(String clsNo);
 }

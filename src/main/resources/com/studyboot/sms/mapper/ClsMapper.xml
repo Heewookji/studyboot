@@ -4,9 +4,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.studyboot.sms.dao.StudyClsDao">
+<mapper namespace="com.studyboot.sms.dao.ClsDao">
 
-<resultMap type="studyCls" id="cls">
+<resultMap type="cls" id="cls">
     <id column="cls_m_id" property="clsMediumNo"/>
     <id column="cls_l_id" property="clsLargeNo"/>
     <id column="cls_s_id" property="clsSmallNo"/>

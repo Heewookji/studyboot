@@ -1,12 +1,10 @@
 package com.studyboot.sms.dao;
 
 import java.util.List;
-import com.studyboot.sms.domain.StudyCls;
+import com.studyboot.sms.domain.Address;
 
 public interface AddressDao {
-  List<StudyCls> findLargeAddressName();
-  List<StudyCls> findMediumAddressName(String addressNo);
-  List<StudyCls> findSmallAddressName(String addressNo);
+  List<Address> findAddressName();
 }
 
 
