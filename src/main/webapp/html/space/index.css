@@ -1,11 +1,10 @@
 #spaceMap {
-	background-color: bisque;
 	float: left;
 	height: 920px;
 	width: 70%;
 }
 
-div > div {
+.spaceList {
 	background-color: cornflowerblue;
 	height: 180px;
 	width: 28%;
