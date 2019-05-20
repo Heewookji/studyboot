@@ -11,7 +11,7 @@ public interface StudyService {
   int updateRate(int no);
   int update(Study study);
   int delete(int no);
-  int size(String clsNo);
+  int size(String clsNo, String addressNo);
   List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo);
   List<StudyCls> clsList(String clsNo);
 }

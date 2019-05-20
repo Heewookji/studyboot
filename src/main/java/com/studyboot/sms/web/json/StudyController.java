@@ -74,8 +74,7 @@ public class StudyController {
     HashMap<String,Object> content = new HashMap<>();
     
     // clsNo와 일치하는 스터디 개수를 불러온다.
-    int rowCount = studyService.size(clsNo);
-    
+    int rowCount = studyService.size(clsNo, addressNo);
     if (rowCount == 0) {
       content.put("pageNo", 0);
       return content;

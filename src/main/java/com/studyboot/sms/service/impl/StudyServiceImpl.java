@@ -1,6 +1,5 @@
 package com.studyboot.sms.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -41,6 +40,8 @@ public class StudyServiceImpl implements StudyService {
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("clsNo", clsNo);
+    params.put("addressNo", addressNo);
+    params.put("addressNoSize", addressNo.length());
     
     List<Study> list;
     
@@ -52,30 +53,7 @@ public class StudyServiceImpl implements StudyService {
       list = studyDao.findAllBySmallFilter(params);
     }
     
-    if (addressNo.length() == 0) {
       return list;
-    }
-    
-    List<Study> resultList = new ArrayList<>();
-    
-    for (Study s : list) {
-      if (addressNo.length() == 2 &&
-          addressNo.equals(s.getAddress().substring(0, 2))) {
-        
-        resultList.add(s);
-        
-      } else if (addressNo.length() == 4 &&
-          addressNo.equals(s.getAddress().substring(0, 4))) {
-        
-        resultList.add(s);
-        
-      } else if (addressNo.equals(s.getAddress())) {
-        resultList.add(s);
-      }
-    }
-    System.out.println(resultList);
-    
-    return resultList;
   }
 
   @Override
@@ -142,26 +120,16 @@ public class StudyServiceImpl implements StudyService {
   }
 
   @Override
-  public int size(String clsNo) {
+  public int size(String clsNo, String addressNo) {
     
-    int count = 0;
     HashMap<String,Object> params = new HashMap<>();
     
-    if (clsNo.length() == 2) {
-      params.put("clsNo", clsNo);
-      params.put("size", 2);
-      count= studyDao.countAll(params);
-    } else if (clsNo.length() == 4) {
-      params.put("clsNo", clsNo);
-      params.put("size", 4);
-      count= studyDao.countAll(params);
-    } else {
-      params.put("clsNo", clsNo);
-      params.put("size", 6);
-      count= studyDao.countAll(params);
-    }
+    params.put("clsNo", clsNo);
+    params.put("size", clsNo.length());
+    params.put("addressNo", addressNo);
+    params.put("addressSize", addressNo.length());
     
-    return count;
+    return  studyDao.countAll(params);
   }
   
   
