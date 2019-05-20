@@ -6,13 +6,13 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-<section id="spaceMap"></section>
+<div id="spaceMap"></div>
 
 <div id="list"></div>
 
 <script id="div-template" type="text/x-handlebars-template">
 {{#each list}}
-<div>
+<div class='spaceList'>
     <img src="" alt="" id="img">
     <h2><a class='space-view-link' href='#' space-no='{{no}}'>{{name}}</h2>
     <p><a class='space-view-link' href='#' space-no='{{no}}'>{{tel}}</p>
@@ -25,6 +25,8 @@
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bd4a361827f9fda7a1fc3a936af5b48c"></script>
+<script src="map.js"></script>
 <script src="index.js"></script>
 
 </body>
