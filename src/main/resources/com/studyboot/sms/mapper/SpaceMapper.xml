@@ -65,6 +65,7 @@
     select
       space_id,
       name,
+      
       tel,
       intro
     from
