@@ -65,6 +65,7 @@
     select
       space_id,
       name,
+      
       tel,
       intro
     from
@@ -120,6 +121,16 @@
         inner join sms_space s on s.space_id = r.space_id
         inner join sms_member m on r.member_id = m.member_id
     where s.space_id = #{value}
+  </select>
+  
+  <select id="findByAddress" resultMap="spaceMap" parameterType="int">
+    select
+      adr_lms,
+      adr_dtl
+    from
+      sms_space
+   where
+      space_id = #{value}
   </select>
     
 <!--    <select id="findBooking" resultMap="spaceBookingMap" parameterType="int">

@@ -2,6 +2,7 @@ var param = location.href.split('?')[1],
 pageNo = 1,
 pageSize = 3,
 init = false,
+addressNo,
 clsNo,
 clsTitle,
 tbody = $('tbody'),
@@ -16,12 +17,15 @@ templateSrcSmallCls = $('#tr-template-scls').html(),
 trGeneratorSmallCls = Handlebars.compile(templateSrcSmallCls); 
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pageNo, clsNo) {
+function loadList(pageNo, clsNo, addressNo) {
 
-  $.getJSON('../../app/json/study/list?pageNo=' + pageNo + '&pageSize=' + pageSize + '&clsNo=' + clsNo,
+  $.getJSON('../../app/json/study/list?pageNo=' + pageNo
+      + '&pageSize=' + pageSize
+      + '&clsNo=' + clsNo
+      + '&addressNo=' + addressNo,
       function(obj) {
 
-    console.log( pageNo, obj.totalPage);
+    console.log(pageNo, obj.totalPage, addressNo);
 
     // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
     // (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.

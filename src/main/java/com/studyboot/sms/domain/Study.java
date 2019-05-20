@@ -7,8 +7,8 @@ public class Study {
   
   private int no;
   private String name;
-  private int address;
-  private int cls;
+  private String address;
+  private String cls;
   private String photo;
   private int day;
   private double rate;
@@ -28,6 +28,14 @@ public class Study {
   private double endrate;
   private String clsName;
   
+  @Override
+  public String toString() {
+    return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
+        + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", startDate=" + startDate
+        + ", endDate=" + endDate + ", state=" + state + ", goal=" + goal + ", contents=" + contents
+        + ", personnel=" + personnel + ", memberAge=" + memberAge + ", attendance=" + attendance
+        + ", endrate=" + endrate + ", clsName=" + clsName + "]";
+  }
   public int getNo() {
     return no;
   }
@@ -40,16 +48,16 @@ public class Study {
   public void setName(String name) {
     this.name = name;
   }
-  public int getAddress() {
+  public String getAddress() {
     return address;
   }
-  public void setAddress(int address) {
+  public void setAddress(String address) {
     this.address = address;
   }
-  public int getCls() {
+  public String getCls() {
     return cls;
   }
-  public void setCls(int cls) {
+  public void setCls(String cls) {
     this.cls = cls;
   }
   public String getPhoto() {

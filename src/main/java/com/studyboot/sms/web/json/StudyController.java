@@ -63,7 +63,8 @@ public class StudyController {
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
       @RequestParam int pageSize,
-      @RequestParam String clsNo) {
+      @RequestParam String clsNo,
+      @RequestParam String addressNo) {
     
     // 페이지 사이즈
     if (pageSize < 3 || pageSize > 8) {
@@ -72,8 +73,8 @@ public class StudyController {
     
     HashMap<String,Object> content = new HashMap<>();
     
-    int rowCount = studyService.size(clsNo);
-    
+    // clsNo와 일치하는 스터디 개수를 불러온다.
+    int rowCount = studyService.size(clsNo, addressNo);
     if (rowCount == 0) {
       content.put("pageNo", 0);
       return content;
@@ -85,14 +86,17 @@ public class StudyController {
       totalPage++;
     }
     
-    
     if (pageNo < 1) {
       pageNo = 1;
     } else if (pageNo > totalPage) {
       pageNo = totalPage;
     }
     
-    List<Study> studys = studyService.list(pageNo, pageSize, clsNo);
+    if (addressNo.equals("undefined")) {
+      addressNo = "";
+    }
+    
+    List<Study> studys = studyService.list(pageNo, pageSize, clsNo, addressNo);
     
     content.put("list", studys);
     content.put("pageNo", pageNo);

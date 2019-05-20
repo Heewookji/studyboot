@@ -3,38 +3,106 @@
 
 -- 스터디 생성 입력
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('000000', '111111', '스터디1', '사진1', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
+values('121111', '111111', '스터디1', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('010001', '111111', '스터디2', '사진2', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
+values('111112', '111112', '스터디2', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100000', '111212', '스터디3', '사진3', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
+values('121211', '111211', '스터디3', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('002000', '111213', '스터디4', '사진4', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
+values('111212', '111212', '스터디4', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('001200', '111312', '스터디5', '사진5', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+values('121311', '111311', '스터디5', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100100', '111411', '스터디6', '사진6', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+values('111312', '111312', '스터디6', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('200010', '121112', '스터디7', '사진7', 16, '2019-05-17', '2019-06-17', '골드 합격', '열심히 공부합시다7.', 5);
+values('121411', '111411', '스터디7', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '131211', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
-insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '111111', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
-insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '111211', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
-insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '111311', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
-insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '111144', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+values('111412', '111412', '스터디8', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '121111', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+values('111111', '121111', '스터디9', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '131111', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+values('121112', '121112', '스터디10', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '141111', '스터디8', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+values('111211', '121211', '스터디11', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
-values('100002', '111112', '스터디django', '사진8', 32, '2019-05-18', '2019-06-18', '플레 합격', '열심히 공부합시다8.', 2);
+values('121212', '121212', '스터디12', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('111311', '121311', '스터디13', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('121312', '121312', '스터디14', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('111411', '121411', '스터디15', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('121412', '121412', '스터디16', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131111', '131111', '스터디17', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131112', '131112', '스터디18', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131211', '131211', '스터디19', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131212', '131212', '스터디20', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131311', '131311', '스터디21', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131312', '131312', '스터디22', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131411', '131411', '스터디23', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('131412', '131412', '스터디24', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141111', '141111', '스터디25', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141112', '141112', '스터디26', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141211', '141211', '스터디27', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141212', '141212', '스터디28', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141311', '141311', '스터디29', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141312', '141312', '스터디30', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141411', '141411', '스터디31', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('141412', '141412', '스터디32', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151111', '151111', '스터디33', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151112', '151112', '스터디34', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151211', '151211', '스터디35', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151212', '151212', '스터디36', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151311', '151311', '스터디37', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151312', '151312', '스터디38', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151411', '151411', '스터디39', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('151412', '151412', '스터디40', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161111', '161111', '스터디41', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161112', '161112', '스터디42', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161211', '161211', '스터디43', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.', 6);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161212', '161212', '스터디44', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161311', '161311', '스터디45', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161312', '161312', '스터디46', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.', 5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161411', '161411', '스터디47', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn)
+values('161412', '161412', '스터디48', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.', 3);
 
 -- 회원 생성
   -- 관리자
@@ -79,23 +147,101 @@ insert into sms_std_member(std_id, member_id) values(2,5);
 
 
 -- 활동 지역
-insert into sms_adr_l(adr_l_id, name) values(11, '서울');
-insert into sms_adr_l(adr_l_id, name) values(12, '경기도');
-insert into sms_adr_l(adr_l_id, name) values(13, '인천');
-insert into sms_adr_l(adr_l_id, name) values(14, '대구');
-insert into sms_adr_l(adr_l_id, name) values(15, '부산');
+insert into sms_adr_l(adr_l_id, name) values(11, '수도권');
+insert into sms_adr_l(adr_l_id, name) values(12, '강원권');
+insert into sms_adr_l(adr_l_id, name) values(13, '춘천권');
+insert into sms_adr_l(adr_l_id, name) values(14, '호남권');
+insert into sms_adr_l(adr_l_id, name) values(15, '대경권');
+insert into sms_adr_l(adr_l_id, name) values(16, '동남권');
+insert into sms_adr_l(adr_l_id, name) values(55, '서울시');
 
-insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 11, '강남구');
-insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 11, '송파구');
-insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 11, '노원구');
-insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 11, '강동구');
-insert into sms_adr_m(adr_m_id, adr_l_id, name) values(15, 11, '마포구');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 11, '수도권-1');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 11, '수도권-2');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 11, '수도권-3');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 11, '수도권-4');
 
-insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 11, '일원동');
-insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 11, '개포동');
-insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(13, 11, 11, '대치동');
-insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(14, 11, 11, '수서동');
-insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(15, 11, 11, '논현동');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 12, '강원권-1');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 12, '강원권-2');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 12, '강원권-3');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 12, '강원권-4');
+
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 13, '춘천권-1');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 13, '춘천권-2');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 13, '춘천권-3');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 13, '춘천권-4');
+
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 14, '호남권-1');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 14, '호남권-2');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 14, '호남권-3');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 14, '호남권-4');
+
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 15, '대경권-1');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 15, '대경권-2');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 15, '대경권-3');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 15, '대경권-4');
+
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 16, '동남권-1');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 16, '동남권-2');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 16, '동남권-3');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 16, '동남권-4');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(55, 55, '강남구');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(66, 55, '종로구');
+
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 11, '수도권-1-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 11, '수도권-1-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 12, 11, '수도권-2-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 12, 11, '수도권-2-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 11, '수도권-3-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 11, '수도권-3-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 11, '수도권-4-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 11, '수도권-4-2');
+
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 12, '강원권-1-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 12, '강원권-1-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 12, 12, '강원권-2-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 12, 12, '강원권-2-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 12, '강원권-3-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 12, '강원권-3-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 12, '강원권-4-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 12, '강원권-4-2');
+
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 13, '춘천권-1-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 13, '춘천권-1-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 12, 13, '춘천권-2-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 12, 13, '춘천권-2-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 13, '춘천권-3-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 13, '춘천권-3-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 13, '춘천권-4-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 13, '춘천권-4-2');
+
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 14, '호남권-1-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 14, '호남권-1-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 12, 14, '호남권-2-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 12, 14, '호남권-2-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 14, '호남권-3-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 14, '호남권-3-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 14, '호남권-4-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 14, '호남권-4-2');
+
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 15, '대경권-1-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 15, '대경권-1-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 12, 15, '대경권-2-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 12, 15, '대경권-2-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 15, '대경권-3-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 15, '대경권-3-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 15, '대경권-4-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 15, '대경권-4-2');
+
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 16, '동남권-1-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 16, '동남권-1-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 12, 16, '동남권-2-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 12, 16, '동남권-2-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 16, '동남권-3-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 16, '동남권-3-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 16, '동남권-4-1');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 16, '동남권-4-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(55, 55, 55, '역삼동');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(66, 66, 55, '종로2가');
 
 -- 스터디 분류
 insert into sms_std_cls_l(cls_l_id, name) values(11, 'IT');
@@ -105,20 +251,90 @@ insert into sms_std_cls_l(cls_l_id, name) values(14, '예체능');
 insert into sms_std_cls_l(cls_l_id, name) values(15, '인문');
 insert into sms_std_cls_l(cls_l_id, name) values(16, '공학');
 
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 11, 'java');
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 11, 'python');
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 11, 'php');
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 11, 'c/c++');
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(15, 11, 'javascript');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 11, 'it-1');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 11, 'it-2');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 11, 'it-3');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 11, 'it-4');
 
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 12, '광고대행');
-insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 13, '재테크');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 12, '서비스-1');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 12, '서비스-2');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 12, '서비스-3');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 12, '서비스-4');
 
-insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 11, 'spring');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 11, 'log4j');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 11, 'django');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 12, '전단지');
-insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 13, '부동산');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 13, '금융-1');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 13, '금융-2');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 13, '금융-3');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 13, '금융-4');
+
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 14, '예체능-1');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 14, '예체능-2');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 14, '예체능-3');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 14, '예체능-4');
+
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 15, '인문-1');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 15, '인문-2');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 15, '인문-3');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 15, '인문-4');
+
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 16, '공학-1');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 16, '공학-2');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(13, 16, '공학-3');
+insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(14, 16, '공학-4');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 11, 'it-1-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 11, 'it-1-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 11, 'it-2-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 12, 11, 'it-2-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 13, 11, 'it-3-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 13, 11, 'it-3-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 14, 11, 'it-4-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 11, 'it-4-2');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 12, '서비스-1-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 12, '서비스-1-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 12, '서비스-2-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 12, 12, '서비스-2-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 13, 12, '서비스-3-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 13, 12, '서비스-3-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 14, 12, '서비스-4-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 12, '서비스-4-2');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 13, '금융-1-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 13, '금융-1-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 13, '금융-2-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 12, 13, '금융-2-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 13, 13, '금융-3-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 13, 13, '금융-3-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 14, 13, '금융-4-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 13, '금융-4-2');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 14, '예체능-1-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 14, '예체능-1-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 14, '예체능-2-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 12, 14, '예체능-2-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 13, 14, '예체능-3-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 13, 14, '예체능-3-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 14, 14, '예체능-4-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 14, '예체능-4-2');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 15, '인문-1-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 15, '인문-1-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 15, '인문-2-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 12, 15, '인문-2-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 13, 15, '인문-3-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 13, 15, '인문-3-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 14, 15, '인문-4-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 15, '인문-4-2');
+
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 11, 16, '공학-1-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 11, 16, '공학-1-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 12, 16, '공학-2-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 12, 16, '공학-2-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 13, 16, '공학-3-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 13, 16, '공학-3-2');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(11, 14, 16, '공학-4-1');
+insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 16, '공학-4-2');
+
 
 
 -- 회원 평점 정보
@@ -174,11 +390,11 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
 
   
   -- 공간 데이터 입력
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '111111', '비트동', '111-222', '지환 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '222222', '비트동', '111-222', '현우 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '333333', '비트동', '111-222', '상민 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '444444', '비트동', '111-222', '상현 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '555555', '비트동', '111-222', '희욱 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '555555', '819-4 YBM빌딩 2층', '111-222', '지환 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '666655', '9 YMCA빌딩 7층', '111-222', '현우 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '111111', '비트동', '111-222', '상민 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '111111', '비트동', '111-222', '상현 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '111111', '비트동', '111-222', '희욱 카페 입니다.');
 
 -- 공간 스터디룸 데이터 입력
 insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '1번방.jgp', '4', '20000');

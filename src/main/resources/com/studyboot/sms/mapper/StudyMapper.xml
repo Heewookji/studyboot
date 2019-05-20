@@ -39,11 +39,18 @@
     from
       sms_std
   </sql>
-  
+<!--   <if test="cls != 0 or member_ids != null">
+      <if test="cls != 0">
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      </if>
+    </foreach> -->
   <select id="findAllByLargeFilter" resultMap="studyMap" parameterType="map">
     select
       s.std_id,
       s.name,
+      s.adr_lms,
+      s.cls_lms,
       s.rate,
       s.photo,
       s.goal,
@@ -55,6 +62,15 @@
       on s.cls_lms like #{pattern1}
     where
       c.cls_l_id like #{pattern1}
+      <if test="addressNoSize == 2">
+      and LEFT(s.adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 4">
+      and LEFT(s.adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 6">
+      and s.adr_lms = #{addressNo}
+      </if>
     order by
       std_id desc
     <if test="size != null and rowNo != null">
@@ -66,6 +82,8 @@
     select
       s.std_id,
       s.name,
+      s.adr_lms,
+      s.cls_lms,
       s.rate,
       s.photo,
       s.goal,
@@ -78,6 +96,15 @@
     where
       c.cls_m_id = RIGHT(#{clsNo},2)
       and c.cls_l_id = LEFT(#{clsNo},2)
+       <if test="addressNoSize == 2">
+      and LEFT(s.adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 4">
+      and LEFT(s.adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 6">
+      and s.adr_lms = #{addressNo}
+      </if>
     order by
       std_id desc
     <if test="size != null and rowNo != null">
@@ -89,6 +116,8 @@
     select
       s.std_id,
       s.name,
+      s.adr_lms,
+      s.cls_lms,
       s.rate,
       s.photo,
       s.goal,
@@ -101,6 +130,15 @@
       c.cls_s_id = RIGHT(#{clsNo},2)
       and c.cls_m_id = MID(#{clsNo},3,2)
       and c.cls_l_id = LEFT(#{clsNo},2)
+       <if test="addressNoSize == 2">
+      and LEFT(s.adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 4">
+      and LEFT(s.adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 6">
+      and s.adr_lms = #{addressNo}
+      </if>
     order by
       std_id desc
     <if test="size != null and rowNo != null">
@@ -194,14 +232,40 @@
     where
     <if test="size == 2">
     LEFT(cls_lms,2) = #{clsNo}
+    <if test="addressSize == 2">
+      and LEFT(adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressSize == 4">
+      and LEFT(adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressSize == 6">
+      and adr_lms = #{addressNo}
+      </if>
     </if>
      <if test="size == 4">
     LEFT(cls_lms,4) = #{clsNo}
+     <if test="addressSize == 2">
+      and LEFT(adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressSize == 4">
+      and LEFT(adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressSize == 6">
+      and adr_lms = #{addressNo}
+    </if>
     </if>
      <if test="size == 6">
     LEFT(cls_lms,6) = #{clsNo}
+     <if test="addressSize == 2">
+      and LEFT(adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressSize == 4">
+      and LEFT(adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressSize == 6">
+      and adr_lms = #{addressNo}
     </if>
-  
+    </if>
   </select>
 </mapper>
 

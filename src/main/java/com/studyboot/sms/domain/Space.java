@@ -6,7 +6,7 @@ public class Space {
 
   private int no;
   private String name;
-  private int address;
+  private String address;
   private String addressDetail;
   private String tel;
   private String intro;
@@ -37,10 +37,10 @@ public class Space {
   public void setName(String name) {
     this.name = name;
   }
-  public int getAddress() {
+  public String getAddress() {
     return address;
   }
-  public void setAddress(int address) {
+  public void setAddress(String address) {
     this.address = address;
   }
   public String getAddressDetail() {
@@ -91,5 +91,7 @@ public class Space {
   public void setSpaceReview(List<SpaceReview> spaceReview) {
     this.spaceReview = spaceReview;
   }
+
+  
   
 }
