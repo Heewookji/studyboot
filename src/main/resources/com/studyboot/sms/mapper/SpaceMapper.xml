@@ -65,7 +65,8 @@
     select
       space_id,
       name,
-      
+      adr_lms,
+      adr_dtl,
       tel,
       intro
     from
@@ -106,7 +107,7 @@
         inner join sms_conv c on sc.conv_id = c.conv_id
     where sc.space_id = #{value}
   </select>
-<!--   
+  
   <select id="findReview" resultMap="spaceReviewMap" parameterType="int">
     select
       r.space_review_id,
@@ -121,7 +122,7 @@
         inner join sms_space s on s.space_id = r.space_id
         inner join sms_member m on r.member_id = m.member_id
     where s.space_id = #{value}
-  </select> -->
+  </select>
   
 <!--    <select id="findBooking" resultMap="spaceBookingMap" parameterType="int">
     select
