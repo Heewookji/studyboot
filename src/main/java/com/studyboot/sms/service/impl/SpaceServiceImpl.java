@@ -1,11 +1,13 @@
 package com.studyboot.sms.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.AddressDao;
 import com.studyboot.sms.dao.SpaceDao;
+import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Space;
 import com.studyboot.sms.domain.SpaceConvenienceInfo;
 import com.studyboot.sms.domain.SpaceReview;
@@ -16,10 +18,12 @@ public class SpaceServiceImpl implements SpaceService {
 
   SpaceDao spaceDao;
   AddressDao addressDao;
+  Address address;
   
-  public SpaceServiceImpl(SpaceDao spaceDao, AddressDao addressDao) {
+  public SpaceServiceImpl(SpaceDao spaceDao, AddressDao addressDao, Address address) {
     this.spaceDao = spaceDao;
     this.addressDao = addressDao;
+    this.address = address;
   }
 
   @Override
@@ -43,9 +47,9 @@ public class SpaceServiceImpl implements SpaceService {
   }
   
   @Override
-  public String spaceAddress(Map<String, Object> listMap) {
+  @SuppressWarnings("unchecked")
+  public Map<String, Object> spaceAddress(Map<String, Object> listMap) {
     List<Space> spaceLists = (List<Space>) listMap.get("list");
-
     
     List<String> address = new ArrayList<>();
     List<String> addressDetail = new ArrayList<>();
@@ -58,6 +62,7 @@ public class SpaceServiceImpl implements SpaceService {
     List<Integer> largeNo = new ArrayList<>();
     List<Integer> mediumNo = new ArrayList<>();
     List<Integer> smallNo = new ArrayList<>();
+    List<Address> fullAddressName = new ArrayList<>();
     
     for (int i = 0; i < address.size(); i++) {
       String addSplit = address.get(i); // 55 55 55 // 11 11 11 // 22 22 22
@@ -66,12 +71,16 @@ public class SpaceServiceImpl implements SpaceService {
       mediumNo.add(Integer.parseInt(addSplit.substring(2, 3)));
       smallNo.add(Integer.parseInt(addSplit.substring(4, 5)));
       
-      addressDao.findFullAddressName(smallNo.get(i));
+      fullAddressName.add(addressDao.findFullAddressName(smallNo.get(i)));
     }
     
+    HashMap<String, Object> addressMap = new HashMap<>();
+    
+    addressMap.put("fullName", fullAddressName);
+    addressMap.put("addressDetail", addressDetail);
     
     
-    return null;
+    return addressMap;
   }
 }
 

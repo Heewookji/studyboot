@@ -7,5 +7,5 @@ import com.studyboot.sms.domain.Space;
 public interface SpaceService {
   List<Space> list();
   Space detail(int no);
-  String spaceAddress(Map<String, Object> map);
+  Map<String, Object> spaceAddress(Map<String, Object> map);
 }
