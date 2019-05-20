@@ -153,6 +153,7 @@ insert into sms_adr_l(adr_l_id, name) values(13, '춘천권');
 insert into sms_adr_l(adr_l_id, name) values(14, '호남권');
 insert into sms_adr_l(adr_l_id, name) values(15, '대경권');
 insert into sms_adr_l(adr_l_id, name) values(16, '동남권');
+insert into sms_adr_l(adr_l_id, name) values(55, '서울시');
 
 insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 11, '수도권-1');
 insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 11, '수도권-2');
@@ -183,7 +184,8 @@ insert into sms_adr_m(adr_m_id, adr_l_id, name) values(11, 16, '동남권-1');
 insert into sms_adr_m(adr_m_id, adr_l_id, name) values(12, 16, '동남권-2');
 insert into sms_adr_m(adr_m_id, adr_l_id, name) values(13, 16, '동남권-3');
 insert into sms_adr_m(adr_m_id, adr_l_id, name) values(14, 16, '동남권-4');
-
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(55, 55, '강남구');
+insert into sms_adr_m(adr_m_id, adr_l_id, name) values(66, 55, '종로구');
 
 insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 11, 11, '수도권-1-1');
 insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 11, 11, '수도권-1-2');
@@ -238,6 +240,8 @@ insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 13, 16, '�
 insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 13, 16, '동남권-3-2');
 insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(11, 14, 16, '동남권-4-1');
 insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(12, 14, 16, '동남권-4-2');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(55, 55, 55, '역삼동');
+insert into sms_adr_s(adr_s_id, adr_m_id, adr_l_id, name) values(66, 66, 55, '종로2가');
 
 -- 스터디 분류
 insert into sms_std_cls_l(cls_l_id, name) values(11, 'IT');
@@ -386,11 +390,11 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
 
   
   -- 공간 데이터 입력
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '111111', '비트동', '111-222', '지환 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '222222', '비트동', '111-222', '현우 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '333333', '비트동', '111-222', '상민 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '444444', '비트동', '111-222', '상현 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '555555', '비트동', '111-222', '희욱 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '555555', '819-4 YBM빌딩 2층', '111-222', '지환 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '666655', '9 YMCA빌딩 7층', '111-222', '현우 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '111111', '비트동', '111-222', '상민 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '111111', '비트동', '111-222', '상현 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '111111', '비트동', '111-222', '희욱 카페 입니다.');
 
 -- 공간 스터디룸 데이터 입력
 insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '1번방.jgp', '4', '20000');
