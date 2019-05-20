@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.AddressDao;
-import com.studyboot.sms.dao.StudyClsDao;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
 import com.studyboot.sms.domain.Study;
-import com.studyboot.sms.domain.StudyCls;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.StudyService;
 
@@ -17,18 +15,15 @@ public class StudyServiceImpl implements StudyService {
   
   StudyDao studyDao;
   StudyMemberDao studyMemberDao;
-  StudyClsDao studyClsDao;
   AddressDao addressDao;
   
   public StudyServiceImpl(
       StudyDao studyDao,
       StudyMemberDao studyMemberDao,
-      StudyClsDao studyClsDao,
       AddressDao addressDao) {
     
     this.studyDao = studyDao;
     this.studyMemberDao = studyMemberDao;
-    this.studyClsDao = studyClsDao;
     this.addressDao = addressDao;
   }
   
@@ -130,31 +125,6 @@ public class StudyServiceImpl implements StudyService {
     params.put("addressSize", addressNo.length());
     
     return  studyDao.countAll(params);
-  }
-  
-  
-  public List<StudyCls> clsList(String clsNo) {
-    
-    List<StudyCls> list;
-    
-    if(clsNo.length() == 2){
-     list = studyClsDao.findMediumClsName(clsNo);
-    } else {
-      list = studyClsDao.findSmallClsName(clsNo);
-    }
-    
-    for(StudyCls c : list) {
-      if(c.getClsLargeNo() == null)
-        c.setClsLargeNo("");
-      if(c.getClsMediumNo() == null)
-        c.setClsMediumNo("");
-      if(c.getClsSmallNo() == null)
-        c.setClsSmallNo("");
-      
-      c.setClsNo(c.getClsLargeNo()+c.getClsMediumNo()+c.getClsSmallNo());
-    }
-    
-    return list;
   }
   
   
