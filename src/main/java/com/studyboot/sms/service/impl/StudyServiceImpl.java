@@ -3,9 +3,11 @@ package com.studyboot.sms.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.studyboot.sms.dao.AddressDao;
 import com.studyboot.sms.dao.StudyClsDao;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
+import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyCls;
 import com.studyboot.sms.domain.StudyMember;
@@ -17,19 +19,23 @@ public class StudyServiceImpl implements StudyService {
   StudyDao studyDao;
   StudyMemberDao studyMemberDao;
   StudyClsDao studyClsDao;
+  AddressDao addressDao;
   
   public StudyServiceImpl(
       StudyDao studyDao,
       StudyMemberDao studyMemberDao,
-      StudyClsDao studyClsDao) {
+      StudyClsDao studyClsDao,
+      AddressDao addressDao) {
     
     this.studyDao = studyDao;
     this.studyMemberDao = studyMemberDao;
     this.studyClsDao = studyClsDao;
+    this.addressDao = addressDao;
   }
   
   @Override
-  public List<Study> list(int pageNo, int pageSize, String clsNo) {
+  public List<Study> list(
+      int pageNo, int pageSize, String clsNo, String addressNo) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
@@ -37,6 +43,7 @@ public class StudyServiceImpl implements StudyService {
     params.put("clsNo", clsNo);
     
     List<Study> list;
+    List<Address> addressList;
     
     if (clsNo.length() == 2) {
       list = studyDao.findAllByLargeFilter(params);
@@ -45,6 +52,12 @@ public class StudyServiceImpl implements StudyService {
     } else {
       list = studyDao.findAllBySmallFilter(params);
     }
+    
+    if (addressNo.length() == 0) {
+      
+    }
+    
+    
     return list;
   }
 
