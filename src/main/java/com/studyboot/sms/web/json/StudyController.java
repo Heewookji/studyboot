@@ -76,6 +76,10 @@ public class StudyController {
       pageSize = 3;
     }
     
+    if (addressNo.equals("undefined")) {
+      addressNo = "";
+    }
+    
     HashMap<String,Object> content = new HashMap<>();
     
     // clsNo와 일치하는 스터디 개수를 불러온다.
@@ -97,9 +101,6 @@ public class StudyController {
       pageNo = totalPage;
     }
     
-    if (addressNo.equals("undefined")) {
-      addressNo = "";
-    }
     
     List<Study> studys = studyService.list(pageNo, pageSize, clsNo, addressNo);
     

@@ -79,7 +79,7 @@ function loadAddress(addressNo) {
       function(obj) {
     
     // addressNo 값이 없을 때(대분류), 2자리(중분류), 4자리(소분류)
-    if (addressNo == 'undefined') {
+    if (addressNo == undefined) {
       $(trGeneratorLargeAddress(obj)).appendTo('.largeAddress');
       
     } else if (addressNo.length == 2) {
@@ -101,6 +101,7 @@ if (param) {
   $('#clsTitle').html(clsTitle);
   loadList(pageNo, clsNo, addressNo);
   loadMediumTitle(clsNo);
+  loadAddress(addressNo);
 }
 
 // 스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-

@@ -232,18 +232,21 @@
     where
     <if test="size == 2">
     LEFT(cls_lms,2) = #{clsNo}
-    <if test="addressSize == 2">
-      and LEFT(adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressSize == 4">
-      and LEFT(adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressSize == 6">
-      and adr_lms = #{addressNo}
+    <if test="addressSize != 0">
+      <if test="addressSize == 2">
+        and LEFT(adr_lms,2) = #{addressNo}
+        </if>
+         <if test="addressSize == 4">
+        and LEFT(adr_lms,4) = #{addressNo}
+        </if>
+         <if test="addressSize == 6">
+        and adr_lms = #{addressNo}
+        </if>
       </if>
     </if>
      <if test="size == 4">
     LEFT(cls_lms,4) = #{clsNo}
+    <if test="addressSize != 0">
      <if test="addressSize == 2">
       and LEFT(adr_lms,2) = #{addressNo}
       </if>
@@ -252,10 +255,12 @@
       </if>
        <if test="addressSize == 6">
       and adr_lms = #{addressNo}
+      </if>
     </if>
     </if>
      <if test="size == 6">
     LEFT(cls_lms,6) = #{clsNo}
+    <if test="addressSize != 0">
      <if test="addressSize == 2">
       and LEFT(adr_lms,2) = #{addressNo}
       </if>
@@ -264,6 +269,7 @@
       </if>
        <if test="addressSize == 6">
       and adr_lms = #{addressNo}
+      </if>
     </if>
     </if>
   </select>
