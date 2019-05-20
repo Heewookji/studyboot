@@ -90,9 +90,36 @@
   </div>
   
     <h3>필터</h3>
-  <ul>
-    <li>지역</li>
-  </ul>
+  
+  <!-- 지역 분류 -->
+  <div id="addressTitle">
+  <p>지역</p>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle mcls-btn"
+        type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">시도</button>
+      <div class="dropdown-menu largeAddress"
+        aria-labelledby="dropdownMenuButton"></div>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle mcls-btn"
+        type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">시군구</button>
+      <div class="dropdown-menu mediumAddress"
+        aria-labelledby="dropdownMenuButton"></div>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle mcls-btn"
+        type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">동읍면</button>
+      <div class="dropdown-menu smallAddress"
+        aria-labelledby="dropdownMenuButton"></div>
+    </div>
+  </div>
+  
     <p>평점</p>
     <h3>지도로 보기</h3>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stdAddModal">
@@ -160,6 +187,26 @@ id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expande
 {{/each}}
 </script>
 
+<!-- 지역 대분류 -->
+<script id="tr-template-ladr" type="text/x-handlebars-template">
+{{#each list}}
+    <a class="dropdown-item ladr-btn" href="#" data-no="{{addressNo}}">{{name}}</a>
+{{/each}}
+</script>
+
+<!-- 지역 중분류 -->
+<script id="tr-template-madr" type="text/x-handlebars-template">
+{{#each list}}
+    <a class="dropdown-item madr-btn" href="#" data-no="{{addressNo}}">{{name}}</a>
+{{/each}}
+</script>
+
+<!-- 지역 소분류 -->
+<script id="tr-template-sadr" type="text/x-handlebars-template">
+{{#each list}}
+    <a class="dropdown-item sadr-btn" href="#" data-no="{{addressNo}}">{{name}}</a>
+{{/each}}
+</script>
 
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
