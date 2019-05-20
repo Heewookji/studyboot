@@ -21,7 +21,7 @@
 				<button class="btn btn-primary dropdown-toggle" type="button"
 					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
-					<span id="currCls"> 받은 쪽지함 </span>
+					<span id="currCls">받은 쪽지함</span>
 				</button>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
@@ -50,7 +50,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">보낸 회원</th>
+						<th scope="col" id="message">보낸 회원</th>
 						<th scope="col">제목</th>
 						<th scope="col">날짜</th>
 					</tr>
@@ -59,7 +59,6 @@
 				<tbody></tbody>
 			</table>
 		</div>
-
 
 		<!-- .stdinqry-list -->
 		<div class="container">
@@ -90,7 +89,8 @@
    role="document">
    <div class="modal-content">
     <div class="modal-header">
-     <h5 class="modal-title" id="nick_name"></h5>
+     <h5 class="modal-title" id="nickName"></h5>
+     <span id="viewNo"></span>
      <button type="button" class="close" data-dismiss="modal"
       aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -104,7 +104,7 @@
     <div class="modal-footer">
      <button type="button" class="btn btn-secondary"
       data-dismiss="modal" id="detailClose-btn">닫기</button>
-      <button type="button" class="btn btn-primary" id="inqryRemove-btn">삭제하기</button>
+      <button type="button" class="btn btn-primary" id="messageRemove-btn">삭제하기</button>
      <button type="button" class="btn btn-primary">답장하기</button>
     </div>
    </div>
@@ -148,8 +148,30 @@
 		</div>
 	</div>
 
-	<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-	<script id="tr-template" type="text/x-handlebars-template">
+
+<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+<script id="ms-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <td>
+<a href='#' class='sspctForm-btn'
+ data-toggle="modal" 
+data-target="#addModal"
+data-content='{{messagePerson.nickName}}' data-no='{{recvNo}}'>{{messagePerson.nickName}}</a>
+</td>
+
+  <td align="center">
+<a class='message-view-link' href='#' data-toggle="modal" 
+data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
+</td>
+
+  <td align="center">{{date}}</td>
+
+</tr>
+{{/each}}
+</script>
+<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+<script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <td>
@@ -169,6 +191,9 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
 </tr>
 {{/each}}
 </script>
+
+
+
 
 	<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 	<script

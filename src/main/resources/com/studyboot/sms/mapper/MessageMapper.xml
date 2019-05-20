@@ -8,7 +8,7 @@
   
 
   <resultMap type="message" id="messageMap">
-    <id column="msg_id" property="messageNo"/>
+    <id column="msg_id" property="no"/>
     <result column="send_id" property="sendNo"/>
     <result column="recv_id" property="recvNo"/>
     <result column="titl" property="title"/>
@@ -17,7 +17,7 @@
   </resultMap>
   
   <resultMap type="message" id="messageListMap">
-    <id column="msg_id" property="messageNo"/>
+    <id column="msg_id" property="no"/>
     <result column="send_id" property="sendNo"/>
     <result column="recv_id" property="recvNo"/>
     <result column="titl" property="title"/>
@@ -28,7 +28,20 @@
      <id column="message_id"        property="no"/>
       <result column="massage_nick"  property="nickName"/>
     </association>
+  </resultMap>
+  
+  <resultMap type="message" id="messageDetailMap">
+    <id column="msg_id" property="no"/>
+    <result column="send_id" property="sendNo"/>
+    <result column="recv_id" property="recvNo"/>
+    <result column="titl" property="title"/>
+    <result column="cont" property="contents"/>
+    <result column="dt" property="date"/>
     
+    <association property="messagePerson" javaType="member">
+     <id column="message_id"        property="no"/>
+      <result column="massage_nick"  property="nickName"/>
+    </association>
   </resultMap>
   
    <sql id="select2">
@@ -45,6 +58,7 @@
   
   <select id="findAll" resultMap="messageListMap" parameterType="map">
      select 
+      c.msg_id,
       c.send_id,
       c.titl,
       c.dt,
@@ -61,103 +75,52 @@
     </if>
   </select>
   
-  <select id="countAll" resultType="int">
-    select count(*) from sms_msg where recv_id = 6
-  </select>
-  
-  <select id="findByNo" resultMap="messageMap" parameterType="int">
-    select
-      send_id,
-      cont
-    from
-      sms_msg
-    where 
-      msg_id = #{value}s
-  </select>
-  
-  <!-- 
-  <select id="findAll" resultMap="inquiryListMap" parameterType="map">
-    <include refid="select2"/>
-    <if test="cls != 0 or member_ids != null">
-      where 
-      <if test="cls != 0">
-      p.cls_id = #{cls}
-      </if>
-      <if test="member_ids != null">
-      <if test="cls != 0">
-      and (
-      </if>
-      <foreach collection="member_ids" item="member_id" separator="or">
-      inqry_id = 
-      #{member_id}
-    </foreach>
-    <if test="cls != 0">
-      )
-    </if>
-    </if>
-    </if>
+  <select id="findAll2" resultMap="messageListMap" parameterType="map">
+     select 
+       c.msg_id, 
+       c.recv_id, 
+       c.titl, 
+       c.dt, 
+       i.nick_Name as massage_nick 
+     from 
+       sms_msg c 
+       left outer join sms_member i on recv_id = i.member_id 
+    where send_id=6
     order by 
-      rprt_inqry_id desc
+      msg_id desc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
   </select>
   
-  <select id="findByNo" resultMap="inquiryDetailMap" parameterType="int">
-   <include refid="detail"/>
-    where 
-      rprt_inqry_id = #{value}
+  <select id="countAll" resultType="int">
+    select count(*) from sms_msg where recv_id = 6
   </select>
   
-  <insert id="insert" parameterType="inquiry">
-    insert into 
-    sms_rprt_inqry
-    (cls_id,
-    inqry_id,
-    <if test="suspectPersonNo != 0">
-    sspct_id,
-    </if>
-    cont) 
-    values
-    (#{clsNo},
-    #{inquiryPersonNo},
-    <if test="suspectPersonNo != 0">
-    #{suspectPersonNo},
-    </if>
-    #{contents})
-  </insert>
+  <select id="countAll2" resultType="int">
+    select count(*) from sms_msg where send_id = 6
+  </select>
+  
+  <select id="findByNo" resultMap="messageDetailMap" parameterType="int">
+    select 
+      c.msg_id,
+      c.cont,
+      c.dt,
+      i.nick_Name as massage_nick
+    from 
+      sms_msg c
+      left outer join sms_member i on c.send_id = i.member_id
+    where 
+      msg_id = #{value}
+  </select>
   
   <delete id="delete" parameterType="int">
-    delete from sms_rprt_inqry 
-    where rprt_inqry_id = #{no}
+    delete from sms_msg
+    where msg_id = #{no}
   </delete>
   
-  
-  <select id="countByClsAndMember" resultType="int" parameterType="map">
-    select count(*) from sms_rprt_inqry
-      <if test="cls != 0 or member_ids != null">
-      where 
-      <if test="cls != 0">
-      cls_id = #{cls}
-      </if>
-      <if test="member_ids != null">
-      <if test="cls != 0">
-      and (
-      </if>
-      <foreach collection="member_ids" item="member_id" separator="or">
-      inqry_id = 
-      #{member_id}
-    </foreach>
-    <if test="cls != 0">
-      )
-    </if>
-    </if>
-      </if>
-  </select>
-  
-  
- -->
 </mapper>
 
-
- 
+    <!--  
+select c.msg_id, c.recv_id, c.titl, c.dt, i.nick_Name as massage_nick from sms_msg c left outer join sms_member i on recv_id = i.member_id where send_id=6;
+ -->

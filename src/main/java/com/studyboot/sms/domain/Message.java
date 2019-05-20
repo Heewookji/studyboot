@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Message implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
 
-  private int messageNo;
+  private int no;
   private int sendNo;
   private int recvNo;
   private String contents;
@@ -17,20 +17,19 @@ public class Message implements Cloneable, Serializable {
   
   private Member messagePerson;
   
-
   @Override
   public String toString() {
-    return "Message [messageNo=" + messageNo + ", sendNo=" + sendNo + ", recvNo=" + recvNo
-        + ", contents=" + contents + ", title=" + title + ", date=" + date + ", messagePerson="
-        + messagePerson + "]";
+    return "Message [no=" + no + ", sendNo=" + sendNo + ", recvNo=" + recvNo + ", contents="
+        + contents + ", title=" + title + ", date=" + date + ", messagePerson=" + messagePerson
+        + "]";
   }
 
-  public int getMessageNo() {
-    return messageNo;
+  public int getNo() {
+    return no;
   }
 
-  public void setMessageNo(int messageNo) {
-    this.messageNo = messageNo;
+  public void setNo(int no) {
+    this.no = no;
   }
 
   public int getSendNo() {
@@ -84,5 +83,5 @@ public class Message implements Cloneable, Serializable {
   public static long getSerialversionuid() {
     return serialVersionUID;
   }
-  
+
 }

@@ -24,7 +24,7 @@ public class MessageController {
   @PostMapping("add")
   public Object add(Inquiry inquiry) {
     HashMap<String,Object> content = new HashMap<>();
-    
+
     try {
       inquiryService.add(inquiry);
       content.put("status", "success");
@@ -32,16 +32,18 @@ public class MessageController {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
-    
+
     return content;
   }
+
+   */
 
   @GetMapping("delete")
   public Object delete(int no) {
 
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (inquiryService.delete(no) == 0) 
+      if (messageService.delete(no) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
 
@@ -52,43 +54,53 @@ public class MessageController {
     return content;
   }
 
+
   @GetMapping("detail")
   public Object detail(@RequestParam int no) {
-    
-    Inquiry inquiry = inquiryService.get(no);
-    
-    return inquiry;
+
+    Message message = messageService.get(no);
+
+    return message;
   }
 
-*/
+
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize
-//      @RequestParam String pageCls,
-//      @RequestParam String keyword
+      //      @RequestParam String pageCls,
+      //      @RequestParam String keyword
       ) {
-//
-//    int clsNo = 0;
-//    switch(pageCls){
-//      case "문의": clsNo = 1; break;
-//      case "신고": clsNo = 2; break;
-//      case "undefined": clsNo = 0;
-//    }
-//    List<Integer> memberNos = null;
+    //    Message messages = new Message();
+    //    int sendNo = messages.getSendNo();
+    //    int recvNo = messages.getRecvNo();
+    //
+    //    if (no == recvNo) 
+    //      messageService.list(pageNo, pageSize);
+    //
+    //    if (no == sendNo) 
+    //      messageService.list2(pageNo, pageSize);
 
-//    if(!keyword.equals("undefined")) {
-//      memberNos = memberService.findMemberNoByKeyword(keyword);
-//      
-//      if (memberNos.size() == 0) {
-//        content.put("pageNo", 0);
-//        return content;
-//      }
-//    } 
-    
+    //    int clsNo = 0;
+    //    switch(pageCls){
+    //      case "문의": clsNo = 1; break;
+    //      case "신고": clsNo = 2; break;
+    //      case "undefined": clsNo = 0;
+    //    }
+    //    List<Integer> memberNos = null;
+
+    //    if(!keyword.equals("undefined")) {
+    //      memberNos = memberService.findMemberNoByKeyword(keyword);
+    //      
+    //      if (memberNos.size() == 0) {
+    //        content.put("pageNo", 0);
+    //        return content;
+    //      }
+    //    } 
+
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
-    
+
 
     int rowCount = messageService.size();    
     int totalPage = rowCount / pageSize;
@@ -102,6 +114,38 @@ public class MessageController {
 
 
     List<Message> message = messageService.list(pageNo, pageSize);
+
+    HashMap<String,Object> content = new HashMap<>();
+    content.put("list", message);
+    content.put("pageNo", pageNo);
+    content.put("pageSize", pageSize);
+    content.put("totalPage", totalPage);
+
+    return content;
+  }
+  
+  @GetMapping("listsend")
+  public Object list2(
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="3") int pageSize
+      ) {
+    
+    if (pageSize < 3 || pageSize > 8) 
+      pageSize = 3;
+
+
+    int rowCount = messageService.size2();    
+    int totalPage = rowCount / pageSize;
+    if (rowCount % pageSize > 0)
+      totalPage++;
+
+    if (pageNo < 1) 
+      pageNo = 1;
+    else if (pageNo > totalPage)
+      pageNo = totalPage;
+
+
+    List<Message> message = messageService.list2(pageNo, pageSize);
 
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", message);

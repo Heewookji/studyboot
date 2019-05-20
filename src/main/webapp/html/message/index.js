@@ -4,12 +4,14 @@ tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
 nextPageLi = $('#nextPage'),
 currSpan = $('#currPage > span'),
-templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+templateSrc = $('#tr-template').html(),
+templateSrcSend = $('#ms-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 
 
 
 var trGenerator = Handlebars.compile(templateSrc);
+var trGeneratorSend = Handlebars.compile(templateSrcSend);
 
 function loadList(pn) {
 
@@ -55,40 +57,101 @@ function loadList(pn) {
 } // loadList()
 
 
+
+function loadList2(pn) {
+
+  $.getJSON('../../app/json/message/listsend?pageNo=' + pn + '&pageSize=' + pageSize,
+      function(obj2) {
+
+    tbody.html('');
+
+    if(obj2.pageNo != 0){
+
+      pageNo = obj2.pageNo;
+
+      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
+      $(trGeneratorSend(obj2)).appendTo(tbody);
+
+      // 현재 페이지의 번호를 갱신한다.
+      currSpan.html(String(pageNo));
+
+      // 1페이지일 경우 버튼을 비활성화 한다.
+      if (pageNo == 1) {
+        prevPageLi.addClass('disabled');
+      } else {
+        prevPageLi.removeClass('disabled');
+      }
+
+      // 마지막 페이지일 경우 버튼을 비활성화 한다.
+      if (pageNo == obj2.totalPage) {
+        nextPageLi.addClass('disabled');
+      } else {
+        nextPageLi.removeClass('disabled');
+      }
+
+    } else{
+      currSpan.html(obj2.pageNo);
+      prevPageLi.addClass('disabled');
+      nextPageLi.addClass('disabled');
+    } 
+    // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+    $(document.body).trigger('loaded-list');
+
+  }); // Bitcamp.getJSON()
+
+} // loadList()
+
+loadList(1);
+
+
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1);
+  if ($('#currCls').text() == '받은 쪽지함') {
+    loadList(pageNo - 1);
+  }
+  if ($('#currCls').text() == '보낸 쪽지함') {
+    loadList2(pageNo - 1);
+  }
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1);
+  if ($('#currCls').text() == '받은 쪽지함') {
+    loadList(pageNo + 1);
+  }
+  if ($('#currCls').text() == '보낸 쪽지함') {
+    loadList2(pageNo + 1);
+  }
 });
 
-//스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
-$(document.body).bind('loaded-list', () => {
-  $('.message-view-link').click((e) => {
-    e.preventDefault();
-    window.location.href = 'view.html?no=' +
-    $(e.target).attr('data-no');
-  });
+$('#recvPage').click((e) => {
+  e.preventDefault();
+  currCls.html("받은 쪽지함");
+  $(message).html("보낸 회원");
+  loadList(1);
 });
 
-loadList(1);
+$('#sendPage').click((e) => {
+  e.preventDefault();
+  currCls.html("보낸 쪽지함");
+  $(message).html("받은 회원");
+  loadList2(1);
+});
 
-//$('#bothClsPage').click((e) => {
+
+
+////스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
+//$(document.body).bind('loaded-list', () => {
+//$('.message-view-link').click((e) => {
 //e.preventDefault();
-//currCls.html("모두");
-//keyword = '';
-//loadList(1);
+//window.location.href = 'view.js?no=' +
+//$(e.target).attr('data-no');
+//});
 //});
 
-//$('#inqryPage').click((e) => {
-//e.preventDefault();
-//currCls.html("문의");
-//keyword = '';
-//loadList(1, "문의");
-//});
+
+
+
 //$('#sspctPage').click((e) => {
 //e.preventDefault();
 //currCls.html("신고");

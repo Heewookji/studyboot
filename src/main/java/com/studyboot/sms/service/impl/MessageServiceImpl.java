@@ -27,8 +27,29 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
+  public List<Message> list2(int pageNo, int pageSize) {
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+
+    return messageDao.findAll2(params);
+  }
+
+  @Override
   public int size() {
     return messageDao.countAll();
+//    
+//    HashMap<String,Object> params = new HashMap<>();
+//    params.put("member_ids", memberNos);
+//
+//    int count = messageDao.countByClsAndMember(params);
+//    return count;
+  }
+  
+  @Override
+  public int size2() {
+    return messageDao.countAll2();
 //    
 //    HashMap<String,Object> params = new HashMap<>();
 //    params.put("member_ids", memberNos);
@@ -41,16 +62,16 @@ public class MessageServiceImpl implements MessageService {
   public Message get(int no) {
     return messageDao.findByNo(no);
   }
+  
+  @Override
+  public int delete(int no) {
+    return messageDao.delete(no);
+  }
+  
 /*
   @Override
   public int add(Inquiry inquiry) {
     return inquiryDao.insert(inquiry);
-  }
-
-
-  @Override
-  public int delete(int no) {
-    return inquiryDao.delete(no);
   }
 
   @Override
