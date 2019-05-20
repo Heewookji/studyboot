@@ -7,8 +7,9 @@ public interface AddressDao {
   List<Address> findLargeAddressName();
   List<Address> findMediumAddressName(String addressNo);
   List<Address> findSmallAddressName(String addressNo);
-  Address findFullAddressName(int no);
   List<Address> findAddressName();
+
+  //Address findFullAddressName(int no);
 }
 
 

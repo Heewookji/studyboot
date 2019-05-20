@@ -8,19 +8,22 @@ import com.studyboot.sms.service.AddressService;
 
 @Service
 public class AddressServiceImpl implements AddressService {
-  
+
   AddressDao addressDao;
-  
+
   public AddressServiceImpl(
       AddressDao addressDao) {
     this.addressDao = addressDao;
   }
 
-  @Override
-  public List<Address> addressList(String addressNo) {
-    return addressDao.findAddressName();
+
+  @Override 
+  public List<Address> addressList(String addressNo) { 
+    
+    return addressDao.findAddressName(); 
   }
-  
-  
-  
+
+
+
+
 }

@@ -34,10 +34,10 @@ public class SpaceController {
   public Object list() {
     
     List<Space> spaces = spaceService.list();
-    
+
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", spaces);
-    content.put("address", spaceService.spaceAddress(content));
+    //content.put("address", spaceService.spaceAddress(content));
     
     return content;
   }
