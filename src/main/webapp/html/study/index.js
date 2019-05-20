@@ -14,13 +14,13 @@ templateSrcMediumCls = $('#tr-template-mcls').html(),
 trGeneratorMediumCls = Handlebars.compile(templateSrcMediumCls),
 // script 태그에서 템플릿 데이터를 꺼낸다. - 카테고리 소분류
 templateSrcSmallCls = $('#tr-template-scls').html(),
-trGeneratorSmallCls = Handlebars.compile(templateSrcSmallCls);
+trGeneratorSmallCls = Handlebars.compile(templateSrcSmallCls),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 대분류
 templateSrcLargeAddress = $('#tr-template-ladr').html(),
-trGeneratorLargeAddress = Handlebars.compile(templateSrcLargeAddress); 
+trGeneratorLargeAddress = Handlebars.compile(templateSrcLargeAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 중분류
 templateSrcMediumAddress = $('#tr-template-madr').html(),
-trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress); 
+trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 소분류
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
 trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
