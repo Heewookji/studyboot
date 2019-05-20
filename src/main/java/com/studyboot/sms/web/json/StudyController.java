@@ -154,6 +154,10 @@ public class StudyController {
  @GetMapping("addresscategory")
  public Object addressCategory(
      @RequestParam String addressNo) {
+   
+   if (addressNo.equals("undefined")) {
+     addressNo = "";
+   }
    HashMap<String,Object> content = new HashMap<>();
    List<Address> list = addressService.addressList(addressNo);
    content.put("list", list);
