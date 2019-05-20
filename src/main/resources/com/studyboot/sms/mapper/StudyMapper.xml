@@ -44,6 +44,7 @@
     select
       s.std_id,
       s.name,
+      s.adr_lms,
       s.rate,
       s.photo,
       s.goal,
@@ -66,6 +67,7 @@
     select
       s.std_id,
       s.name,
+      s.adr_lms,
       s.rate,
       s.photo,
       s.goal,
@@ -89,6 +91,7 @@
     select
       s.std_id,
       s.name,
+      s.adr_lms,
       s.rate,
       s.photo,
       s.goal,
