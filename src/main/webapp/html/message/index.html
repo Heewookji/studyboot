@@ -51,7 +51,7 @@
 				<thead>
 					<tr>
 						<th scope="col">보낸 회원</th>
-						<th scope="col">내용</th>
+						<th scope="col">제목</th>
 						<th scope="col">날짜</th>
 					</tr>
 				</thead>
@@ -84,15 +84,13 @@
 	</div>
 	<!-- .container -->
 
-	<!-- 
  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"
    role="document">
    <div class="modal-content">
     <div class="modal-header">
-     <h5 class="modal-title" id="viewCls"></h5>
-     <span id="viewDate"></span>
+     <h5 class="modal-title" id="nick_name"></h5>
      <button type="button" class="close" data-dismiss="modal"
       aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -101,13 +99,6 @@
     <div class="modal-body">
      <p><span id="viewInquiryText"></span>
       <input id="viewNo" type="hidden"></input>
-     </p>
-     <hr>
-     <p>
-      <span id="viewContents"></span>
-     </p>
-     <p>
-     <span id="viewSuspectText"></span>
      </p>
     </div>
     <div class="modal-footer">
@@ -119,7 +110,6 @@
    </div>
   </div>
  </div>
- -->
 
 
 	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
@@ -162,16 +152,16 @@
 	<script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th>
+  <td>
 <a href='#' class='sspctForm-btn'
  data-toggle="modal" 
 data-target="#addModal"
 data-content='{{messagePerson.nickName}}' data-no='{{sendNo}}'>{{messagePerson.nickName}}</a>
-</th>
+</td>
 
   <td align="center">
-<a class='stdinqry-view-link' href='#' data-toggle="modal" 
-data-target="#viewModal" data-no='{{no}}'>{{contents}}</a>
+<a class='message-view-link' href='#' data-toggle="modal" 
+data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
 </td>
 
   <td align="center">{{date}}</td>
