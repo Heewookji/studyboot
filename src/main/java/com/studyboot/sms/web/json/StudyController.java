@@ -63,8 +63,10 @@ public class StudyController {
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
       @RequestParam int pageSize,
-      @RequestParam String clsNo) {
+      @RequestParam String clsNo,
+      @RequestParam String addressNo) {
     
+    System.out.println(addressNo);
     // 페이지 사이즈
     if (pageSize < 3 || pageSize > 8) {
       pageSize = 3;
@@ -92,7 +94,7 @@ public class StudyController {
       pageNo = totalPage;
     }
     
-    List<Study> studys = studyService.list(pageNo, pageSize, clsNo);
+    List<Study> studys = studyService.list(pageNo, pageSize, clsNo, addressNo);
     
     content.put("list", studys);
     content.put("pageNo", pageNo);
