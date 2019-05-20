@@ -37,9 +37,8 @@ public class SpaceController {
     
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", spaces);
-
-    spaceService.spaceAddress(content);
-
+    content.put("address", spaceService.spaceAddress(content));
+    
     return content;
   }
 
