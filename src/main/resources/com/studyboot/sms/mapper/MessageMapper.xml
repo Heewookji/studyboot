@@ -11,6 +11,7 @@
     <id column="msg_id" property="messageNo"/>
     <result column="send_id" property="sendNo"/>
     <result column="recv_id" property="recvNo"/>
+    <result column="titl" property="title"/>
     <result column="cont" property="contents"/>
     <result column="dt" property="date"/>
   </resultMap>
@@ -19,6 +20,7 @@
     <id column="msg_id" property="messageNo"/>
     <result column="send_id" property="sendNo"/>
     <result column="recv_id" property="recvNo"/>
+    <result column="titl" property="title"/>
     <result column="cont" property="contents"/>
     <result column="dt" property="date"/>
     
@@ -44,7 +46,7 @@
   <select id="findAll" resultMap="messageListMap" parameterType="map">
      select 
       c.send_id,
-      c.cont,
+      c.titl,
       c.dt,
       i.nick_Name as massage_nick
     from 
@@ -61,6 +63,16 @@
   
   <select id="countAll" resultType="int">
     select count(*) from sms_msg where recv_id = 6
+  </select>
+  
+  <select id="findByNo" resultMap="messageMap" parameterType="int">
+    select
+      send_id,
+      cont
+    from
+      sms_msg
+    where 
+      msg_id = #{value}s
   </select>
   
   <!-- 

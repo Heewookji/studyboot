@@ -37,16 +37,16 @@ public class MessageServiceImpl implements MessageService {
 //    return count;
   }
 
+  @Override
+  public Message get(int no) {
+    return messageDao.findByNo(no);
+  }
 /*
   @Override
   public int add(Inquiry inquiry) {
     return inquiryDao.insert(inquiry);
   }
 
-  @Override
-  public Inquiry get(int no) {
-    return inquiryDao.findByNo(no);
-  }
 
   @Override
   public int delete(int no) {
