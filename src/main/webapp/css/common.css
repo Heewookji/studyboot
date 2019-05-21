@@ -4,3 +4,12 @@
   display: none;
 }
 
+.clsTag {
+ 
+ background-color: none;
+}
+
+#rateRange {
+ 
+ width: 100px;
+}

@@ -23,28 +23,7 @@
     <result column="cls_name" property="clsName"/>
   </resultMap>
   
-  <sql id="select1">
-    select
-      std_id,
-      adr_lms,
-      cls_lms,
-      name,
-      photo,
-      sdt,
-      edt,
-      rcrtm_state,
-      goal,
-      cont,
-      prsn
-    from
-      sms_std
-  </sql>
-<!--   <if test="cls != 0 or member_ids != null">
-      <if test="cls != 0">
-      <if test="member_ids != null">
-      <if test="cls != 0">
-      </if>
-    </foreach> -->
+  
   <select id="findAllByLargeFilter" resultMap="studyMap" parameterType="map">
     select
       s.std_id,
@@ -62,6 +41,7 @@
       on s.cls_lms like #{pattern1}
     where
       c.cls_l_id like #{pattern1}
+      and s.rate >= #{rateValue}
       <if test="addressNoSize == 2">
       and LEFT(s.adr_lms,2) = #{addressNo}
       </if>
@@ -96,6 +76,7 @@
     where
       c.cls_m_id = RIGHT(#{clsNo},2)
       and c.cls_l_id = LEFT(#{clsNo},2)
+      and s.rate >= #{rateValue}
        <if test="addressNoSize == 2">
       and LEFT(s.adr_lms,2) = #{addressNo}
       </if>
@@ -130,6 +111,7 @@
       c.cls_s_id = RIGHT(#{clsNo},2)
       and c.cls_m_id = MID(#{clsNo},3,2)
       and c.cls_l_id = LEFT(#{clsNo},2)
+      and s.rate >= #{rateValue}
        <if test="addressNoSize == 2">
       and LEFT(s.adr_lms,2) = #{addressNo}
       </if>
