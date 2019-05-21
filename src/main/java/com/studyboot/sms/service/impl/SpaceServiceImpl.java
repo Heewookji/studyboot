@@ -45,16 +45,13 @@ public class SpaceServiceImpl implements SpaceService {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
-  public Map<String, Object> spaceAddress(Map<String, Object> listMap) {
+  public Map<String, Object> spaceAddress(List<Space> spaceList) {
 
     // 컨트롤러에서 Map으로 공간 리스트를 받아옴 
-    List<Space> spaceLists = (List<Space>) listMap.get("list");
-
     List<String> address = new ArrayList<>();
     List<String> addressDetail = new ArrayList<>();
 
-    for (Space space : spaceLists) {
+    for (Space space : spaceList) {
       address.add(space.getAddress()); // 리스트에 저장된 공간정보(111111)을 빼내서 새로운 리스트에 담는다.
       addressDetail.add(space.getAddressDetail());
     }

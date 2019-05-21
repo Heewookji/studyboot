@@ -1,6 +1,5 @@
 package com.studyboot.sms.web.json;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,13 +39,12 @@ public class SpaceController {
     List<Space> spaces = spaceService.list();
 
     HashMap<String,Object> content = new HashMap<>();
-    content.put("list", spaces);
-   
+    
     //content.put("address", spaceService.spaceAddress(content));  
     //--> 이렇게 하면 앞단에서 열기 어려워서 수정함
     
     // ServiceImplement에서 상세주소와 풀네임 주소를 받아온 후 Map에 저장한다.
-    Map<String, Object> addressMap = spaceService.spaceAddress(content);  
+    Map<String, Object> addressMap = spaceService.spaceAddress(spaces);  
     
     // 45줄에서 저장한 값을 바로 get한 후 content에 다시 담는다.
 //    content.put("fullName", addressMap.get("fullName"));
@@ -54,8 +52,6 @@ public class SpaceController {
     
     List<Address> fullAddressName = (List<Address>) addressMap.get("fullName");
     List<String> detailAddressName = (List<String>) addressMap.get("addressDetail");
-    
-    List<String> address = new ArrayList<>();
     
     
     for(int i = 0; i < fullAddressName.size(); i++) {
@@ -65,11 +61,14 @@ public class SpaceController {
       
       String fullAddress = largeName + " " + mediumName + " " +smallName ;
       
-      String fullDetailAddress = fullAddress + detailAddressName.get(i);
-      address.add(fullDetailAddress);
+      String completedAddress = fullAddress + detailAddressName.get(i);
+      
+      spaces.get(i).setCompletedAddress(completedAddress);
+      
     }
     
-    content.put("address", address);
+    System.out.println(spaces);
+    content.put("list", spaces);
     
     return content;
   }
