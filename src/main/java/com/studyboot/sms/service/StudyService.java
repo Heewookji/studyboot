@@ -2,7 +2,6 @@ package com.studyboot.sms.service;
 
 import java.util.List;
 import com.studyboot.sms.domain.Study;
-import com.studyboot.sms.domain.Cls;
 
 public interface StudyService {
   
@@ -11,6 +10,6 @@ public interface StudyService {
   int updateRate(int no);
   int update(Study study);
   int delete(int no);
-  int size(String clsNo, String addressNo);
-  List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo);
+  int size(String clsNo, String addressNo, double rateValue);
+  List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo, double rateValue);
 }

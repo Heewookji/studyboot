@@ -29,7 +29,7 @@ public class StudyServiceImpl implements StudyService {
   
   @Override
   public List<Study> list(
-      int pageNo, int pageSize, String clsNo, String addressNo) {
+      int pageNo, int pageSize, String clsNo, String addressNo, double rateValue) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
@@ -37,6 +37,7 @@ public class StudyServiceImpl implements StudyService {
     params.put("clsNo", clsNo);
     params.put("addressNo", addressNo);
     params.put("addressNoSize", addressNo.length());
+    params.put("rateValue", rateValue);
     
     List<Study> list;
     
@@ -115,7 +116,7 @@ public class StudyServiceImpl implements StudyService {
   }
 
   @Override
-  public int size(String clsNo, String addressNo) {
+  public int size(String clsNo, String addressNo , double rateValue) {
     
     HashMap<String,Object> params = new HashMap<>();
     

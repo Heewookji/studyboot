@@ -120,7 +120,10 @@
     </div>
   </div>
   
-    <p>평점</p>
+   <label for="rateRange">평점</label>
+<input type="range" class="custom-range" min="1" max="5" step="0.5" id="rateRange">
+<span id="rangeText">3</span>
+
     <h3>지도로 보기</h3>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stdAddModal">
   스터디 생성하기
@@ -137,37 +140,25 @@
       </ol>
     </nav>
   </div>
-  <div style="width:780px; height:900px;">
-    <table class="table table-hover">
-<thead>
-  <tr>
-    <th scope="col">번호</th>
-    <th scope="col">이름</th>
-    <th scope="col">평점</th>
-    <th scope="col">사진</th>
-    <th scope="col">목표</th>
-  </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
+  <div style="width:780px; height:900px;" id="card-div">
   </div>
 </div> <!-- .content -->
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+
 <!-- 스터디 리스트 -->
-<script id="tr-template" type="text/x-handlebars-template">
+<script id="card-template" type="text/x-handlebars-template">
 {{#each list}}
-<tr>
-  <th>{{no}}</th>
-  <td><a class="study-view-link" href="#" data-no="{{no}}">{{name}}</a></td>
-  <td>{{rate}}</td>
-  <td>{{photo}}</td>
-  <td>{{goal}}</td>
-</tr>
+<div class="card" style="width: 18rem;">
+  <img src="../../upload/images/test.png" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a class="study-view-link" href="#" data-no="{{no}}">{{name}}</a>
+    <p class="card-text">{{rate}}</p>
+    <p class="card-text">{{goal}}</p>
+  </div>
+</div>
 {{/each}}
 </script>
-
 <!-- 카테고리 중분류 -->
 <script id="tr-template-mcls" type="text/x-handlebars-template">
 {{#each list}}
