@@ -11,7 +11,8 @@
 <button type="button" class="btn btn-secondary cls-btn" data-no="13">금융</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="14">예체능</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="15">인문</button>
-<button type="button" class="btn btn-secondary cls-btn" data-no="16">공학</button>
+<button type="button" class="btn btn-secondary cls-btn" data-no="16">공학</button><br>
+<button type="button" class="btn btn-secondary msg-btn" data-no="16">쪽지</button>
 
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -22,6 +23,8 @@ $('.cls-btn').click((e) => {
   window.location.href = './html/study/index.html?clsNo=' + $(e.target).attr('data-no') + '&clsTitle=' + $(e.target).text();
 });
 
+$('.msg-btn').click((e) => {
+  window.location.href = './html/message/index.html'});
 </script>
 </body>
 </html>
