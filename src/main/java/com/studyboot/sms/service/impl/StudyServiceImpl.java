@@ -29,15 +29,19 @@ public class StudyServiceImpl implements StudyService {
   
   @Override
   public List<Study> list(
-      int pageNo, int pageSize, String clsNo, String addressNo, double rateValue) {
+      int pageNo, int pageSize,
+      String clsNo, String addressNo,
+      double rateValue, String keyword) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("clsNo", clsNo);
+    params.put("clsNoSize", clsNo.length());
     params.put("addressNo", addressNo);
     params.put("addressNoSize", addressNo.length());
     params.put("rateValue", rateValue);
+    params.put("keyword", keyword);
     
     List<Study> list;
     
@@ -116,7 +120,8 @@ public class StudyServiceImpl implements StudyService {
   }
 
   @Override
-  public int size(String clsNo, String addressNo , double rateValue) {
+  public int size(
+      String clsNo, String addressNo , double rateValue, String keyword) {
     
     HashMap<String,Object> params = new HashMap<>();
     
@@ -124,6 +129,7 @@ public class StudyServiceImpl implements StudyService {
     params.put("size", clsNo.length());
     params.put("addressNo", addressNo);
     params.put("addressSize", addressNo.length());
+    params.put("keyword", keyword);
     
     return  studyDao.countAll(params);
   }

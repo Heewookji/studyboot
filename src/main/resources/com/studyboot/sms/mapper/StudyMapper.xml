@@ -23,6 +23,49 @@
     <result column="cls_name" property="clsName"/>
   </resultMap>
   
+  <!-- 스터디 리스트 통합 -->
+  <select id="findAll" resultMap="studyMap" parameterType="map">
+    select
+      std_id,
+      name,
+      adr_lms,
+      cls_lms,
+      rate,
+      photo,
+      goal,
+    from
+      sms_std
+    <where>
+      rate >= #{rateValue}
+      <if test="clsNoSize == 2">
+      and LEFT(cls_lms, 2) = #{rateValue}
+      </if>
+      <if test="clsNoSize == 4">
+      and LEFT(cls_lms, 4) = #{rateValue}
+      </if>
+      <if test="clsNoSize == 6">
+      and cls_lms = #{rateValue}
+      </if>
+      <if test="addressNoSize == 2">
+      and LEFT(adr_lms,2) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 4">
+      and LEFT(adr_lms,4) = #{addressNo}
+      </if>
+       <if test="addressNoSize == 6">
+      and adr_lms = #{addressNo}
+      </if>
+      <if test="keyword != null">
+      and 
+      </if>
+    </where>
+    order by
+      std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
   
   <select id="findAllByLargeFilter" resultMap="studyMap" parameterType="map">
     select
@@ -50,6 +93,9 @@
       </if>
        <if test="addressNoSize == 6">
       and s.adr_lms = #{addressNo}
+      </if>
+      <if test="keyword != null">
+      and 
       </if>
     order by
       std_id desc
