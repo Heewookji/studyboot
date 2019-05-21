@@ -15,9 +15,8 @@ function loadList() {
 
   $.getJSON('../../app/json/space/list', 
       function(obj) {
-  	
     spaceObj = obj;
-
+    
     $(trGenerator(obj)).appendTo('#list');
 
     $(document.body).trigger('loaded-list');
@@ -28,7 +27,6 @@ loadList();
 
 $(document.body).bind('loaded-list', () => {
   
-  loadAddress(spaceObj);
 
   $('.space-view-link').click((e) => {
     // e.preventDefault();
@@ -39,10 +37,13 @@ $(document.body).bind('loaded-list', () => {
 });
 
 
+$(document.body).bind('loaded-map', () => {
+  
+	loadAddress(spaceObj);
+	
+});
 
 
-
-//////////////////////////////////////
 
 
  function loadAddress (spaceObj) {
@@ -52,11 +53,7 @@ $(document.body).bind('loaded-list', () => {
  }
  
  
-
-
-
-
-
+ 
 
 
 geocoder.addressSearch('서울시 강남구 역삼동 819-4 YBM빌딩 2층', function(result, status) {
@@ -127,5 +124,8 @@ function displayMarker(locPosition, message) {
   infowindow.open(map, marker);
 
   // 지도 중심좌표를 접속위치로 변경합니다
-  map.setCenter(locPosition);      
+  map.setCenter(locPosition);
+  
+  $(document.body).trigger('loaded-map');
+  
 }
