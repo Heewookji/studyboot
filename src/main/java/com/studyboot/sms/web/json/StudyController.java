@@ -82,9 +82,12 @@ public class StudyController {
     if (addressNo.equals("undefined")) {
       addressNo = "";
     }
-    
+    if (clsNo.equals("undefined")) {
+      clsNo = "";
+    }
+    //매퍼에서 키워드를 조건문 keyword != null 로 비교하기 위하여. 안그러면 keywordSize != 0로 해야한다.
     if (keyword.equals("undefined")) {
-      keyword = "";
+      keyword = null;
     }
     
     HashMap<String,Object> content = new HashMap<>();
@@ -93,6 +96,7 @@ public class StudyController {
     int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword);
     if (rowCount == 0) {
       content.put("pageNo", 0);
+      content.put("rowCount", rowCount);
       return content;
     }
     
@@ -112,6 +116,7 @@ public class StudyController {
     List<Study> studys = studyService.list(
         pageNo, pageSize, clsNo, addressNo, rateValue, keyword);
     
+    //리스트에 출력할 주소는 따로 꽂아준다. 
     for(Study study : studys) {
       String addressName = addressService.addressFullName(study.getAddress());
       study.setAddressName(addressName);
@@ -119,6 +124,7 @@ public class StudyController {
     
     
     content.put("list", studys);
+    content.put("rowCount", rowCount);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);

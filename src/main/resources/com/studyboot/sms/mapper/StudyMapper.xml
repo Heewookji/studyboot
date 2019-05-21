@@ -3,304 +3,335 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.studyboot.sms.dao.StudyDao">
-  
-  <resultMap type="study" id="studyMap">
-    <id column="std_id" property="no"/>
-    <result column="name" property="name"/>
-    <result column="adr_lms" property="address"/>
-    <result column="cls_lms" property="cls"/>
-    <result column="goal" property="goal"/>
-    <result column="photo" property="photo"/>
-    <result column="day" property="day"/>
-    <result column="sdt" property="startDate"/>
-    <result column="edt" property="endDate"/>
-    <result column="rcrtm_state" property="state"/>
-    <result column="cont" property="contents"/>
-    <result column="prsn" property="personnel"/>
-    <result column="rate" property="rate"/>
-    <result column="cls_name" property="clsName"/>
-  </resultMap>
-  
-  <!-- 스터디 리스트 통합 -->
-  <select id="findAll" resultMap="studyMap" parameterType="map">
-    select
-      std_id,
-      name,
-      adr_lms,
-      cls_lms,
-      rate,
-      photo,
-      goal,
-    from
-      sms_std
-    <where>
-      rate >= #{rateValue}
-      <if test="clsNoSize == 2">
-      and LEFT(cls_lms, 2) = #{rateValue}
-      </if>
-      <if test="clsNoSize == 4">
-      and LEFT(cls_lms, 4) = #{rateValue}
-      </if>
-      <if test="clsNoSize == 6">
-      and cls_lms = #{rateValue}
-      </if>
-      <if test="addressNoSize == 2">
-      and LEFT(adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 4">
-      and LEFT(adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 6">
-      and adr_lms = #{addressNo}
-      </if>
-      <if test="keyword != null">
-      and 
-      </if>
-    </where>
-    order by
-      std_id desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-  
-  
-  <select id="findAllByLargeFilter" resultMap="studyMap" parameterType="map">
-    select
-      s.std_id,
-      s.name,
-      s.adr_lms,
-      s.cls_lms,
-      s.rate,
-      s.photo,
-      s.goal,
-      c.name as cls_name
-    from
-      sms_std s
-      inner join sms_std_cls_l c 
-    <bind name="pattern1" value="clsNo + '%'"/>
-      on s.cls_lms like #{pattern1}
-    where
-      c.cls_l_id like #{pattern1}
-      and s.rate >= #{rateValue}
-      <if test="addressNoSize == 2">
-      and LEFT(s.adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 4">
-      and LEFT(s.adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 6">
-      and s.adr_lms = #{addressNo}
-      </if>
-      <if test="keyword != null">
-      and 
-      </if>
-    order by
-      std_id desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-  
-  <select id="findAllByMediumFilter" resultMap="studyMap" parameterType="map">
-    select
-      s.std_id,
-      s.name,
-      s.adr_lms,
-      s.cls_lms,
-      s.rate,
-      s.photo,
-      s.goal,
-      c.name as cls_name
-    from
-      sms_std s
-      inner join sms_std_cls_m c 
-    <bind name="pattern1" value="clsNo + '%'"/>
-      on s.cls_lms like #{pattern1}
-    where
-      c.cls_m_id = RIGHT(#{clsNo},2)
-      and c.cls_l_id = LEFT(#{clsNo},2)
-      and s.rate >= #{rateValue}
-       <if test="addressNoSize == 2">
-      and LEFT(s.adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 4">
-      and LEFT(s.adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 6">
-      and s.adr_lms = #{addressNo}
-      </if>
-    order by
-      std_id desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-  
-  <select id="findAllBySmallFilter" resultMap="studyMap" parameterType="map">
-    select
-      s.std_id,
-      s.name,
-      s.adr_lms,
-      s.cls_lms,
-      s.rate,
-      s.photo,
-      s.goal,
-      c.name as cls_name
-    from
-      sms_std s
-      inner join sms_std_cls_s c 
-      on s.cls_lms = #{clsNo}
-    where
-      c.cls_s_id = RIGHT(#{clsNo},2)
-      and c.cls_m_id = MID(#{clsNo},3,2)
-      and c.cls_l_id = LEFT(#{clsNo},2)
-      and s.rate >= #{rateValue}
-       <if test="addressNoSize == 2">
-      and LEFT(s.adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 4">
-      and LEFT(s.adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressNoSize == 6">
-      and s.adr_lms = #{addressNo}
-      </if>
-    order by
-      std_id desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-  
- 
-  <select id="findByNo" resultMap="studyMap" parameterType="int">
-    select
-      std_id,
-      adr_lms,
-      cls_lms,
-      name,
-      photo,
-      day,
-      sdt,
-      edt,
-      rcrtm_state,
-      goal,
-      cont,
-      prsn,
-      rate
-    from
-      sms_std
-    where 
-      std_id = #{value}
-  </select>
-  
-<!-- 
-  <update id="increaseCount" parameterType="int">
-    update sms_std 
-    set 
-      vw_cnt = vw_cnt + 1 
-    where std_id = #{value}
-  </update>
- -->
- 
-  <insert id="insert" parameterType="study">
-    insert into sms_std(
-      name,
-      adr_lms,
-      cls_lms,
-      goal,
-      photo,
-      day,
-      sdt,
-      edt,
-      cont,
-      prsn,
-      rate)
-    values(
-      #{name},
-      #{address},
-      #{cls},
-      #{goal},
-      #{photo},
-      #{day},
-      #{startDate},
-      #{endDate},
-      #{contents},
-      #{personnel},
-      0)
-      <!-- rate 컬럼에 0 말고 생성하는 스터디장의 평점을 넣어준다. -->
-  </insert>
 
-  <update id="update" parameterType="study">
-    update sms_std
-    set 
-      name = #{name},
-      adr_lms = #{address},
-      cls_lms = #{cls},
-      goal = #{goal},
-      photo = #{photo},
-      day = #{day},
-      sdt = #{startDate},
-      edt = #{endDate},
-      cont = #{contents},
-      prsn = #{personnel},
-      rate = #{rate}
-    where std_id = #{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from sms_std
-    where std_id = #{no}
-  </delete>
-  
-   <select id="countAll" resultType="int" parameterType="map">
-    select count(*) from sms_std
-    where
-    <if test="size == 2">
-    LEFT(cls_lms,2) = #{clsNo}
-    <if test="addressSize != 0">
-      <if test="addressSize == 2">
-        and LEFT(adr_lms,2) = #{addressNo}
-        </if>
-         <if test="addressSize == 4">
-        and LEFT(adr_lms,4) = #{addressNo}
-        </if>
-         <if test="addressSize == 6">
-        and adr_lms = #{addressNo}
-        </if>
-      </if>
-    </if>
-     <if test="size == 4">
-    LEFT(cls_lms,4) = #{clsNo}
-    <if test="addressSize != 0">
-     <if test="addressSize == 2">
-      and LEFT(adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressSize == 4">
-      and LEFT(adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressSize == 6">
-      and adr_lms = #{addressNo}
-      </if>
-    </if>
-    </if>
-     <if test="size == 6">
-    LEFT(cls_lms,6) = #{clsNo}
-    <if test="addressSize != 0">
-     <if test="addressSize == 2">
-      and LEFT(adr_lms,2) = #{addressNo}
-      </if>
-       <if test="addressSize == 4">
-      and LEFT(adr_lms,4) = #{addressNo}
-      </if>
-       <if test="addressSize == 6">
-      and adr_lms = #{addressNo}
-      </if>
-    </if>
-    </if>
-  </select>
+<mapper namespace="com.studyboot.sms.dao.StudyDao">
+
+	<resultMap type="study" id="studyMap">
+		<id column="std_id" property="no" />
+		<result column="name" property="name" />
+		<result column="adr_lms" property="address" />
+		<result column="cls_lms" property="cls" />
+		<result column="goal" property="goal" />
+		<result column="photo" property="photo" />
+		<result column="day" property="day" />
+		<result column="sdt" property="startDate" />
+		<result column="edt" property="endDate" />
+		<result column="rcrtm_state" property="state" />
+		<result column="cont" property="contents" />
+		<result column="prsn" property="personnel" />
+		<result column="rate" property="rate" />
+		<result column="cls_name" property="clsName" />
+	</resultMap>
+
+	<!-- 스터디 리스트 통합 -->
+	<select id="findAll" resultMap="studyMap" parameterType="map">
+		select
+		std_id,
+		name,
+		adr_lms,
+		cls_lms,
+		rate,
+		photo,
+		goal
+		from
+		sms_std
+		<where>
+			rate >= #{rateValue}
+			<if test="clsNoSize != 0">
+				and
+				<if test="clsNoSize == 2">
+					LEFT(cls_lms, 2) = #{clsNo}
+				</if>
+				<if test="clsNoSize == 4">
+					LEFT(cls_lms, 4) = #{clsNo}
+				</if>
+				<if test="clsNoSize == 6">
+					cls_lms = #{clsNo}
+				</if>
+			</if>
+
+			<if test="addressNoSize != 0">
+				and
+				<if test="addressNoSize == 2">
+					LEFT(adr_lms,2) = #{addressNo}
+				</if>
+				<if test="addressNoSize == 4">
+					LEFT(adr_lms,4) = #{addressNo}
+				</if>
+				<if test="addressNoSize == 6">
+					adr_lms = #{addressNo}
+				</if>
+			</if>
+
+			<if test="keyword != null">
+				<bind name="pattern1" value="'%' + keyword + '%'" />
+				and (
+				name like #{pattern1}
+				or goal like #{pattern1}
+				or cont like
+				#{pattern1}
+				)
+				<if test="findedClsNosByKeyword != null">
+					or
+					<foreach collection="findedClsNosByKeyword" item="k"
+						separator="or">
+						cls_lms = #{k}
+					</foreach>
+				</if>
+			</if>
+		</where>
+		order by
+		std_id desc
+		<if test="size != null and rowNo != null">
+			limit #{rowNo}, #{size}
+		</if>
+	</select>
+
+
+	<select id="findAllByLargeFilter" resultMap="studyMap"
+		parameterType="map">
+		select
+		s.std_id,
+		s.name,
+		s.adr_lms,
+		s.cls_lms,
+		s.rate,
+		s.photo,
+		s.goal,
+		c.name as cls_name
+		from
+		sms_std s
+		inner join sms_std_cls_l c
+		<bind name="pattern1" value="clsNo + '%'" />
+		on s.cls_lms like #{pattern1}
+		where
+		c.cls_l_id like #{pattern1}
+		and
+		s.rate >= #{rateValue}
+		<if test="addressNoSize == 2">
+			and LEFT(s.adr_lms,2) = #{addressNo}
+		</if>
+		<if test="addressNoSize == 4">
+			and LEFT(s.adr_lms,4) = #{addressNo}
+		</if>
+		<if test="addressNoSize == 6">
+			and s.adr_lms = #{addressNo}
+		</if>
+		order by
+		std_id desc
+		<if test="size != null and rowNo != null">
+			limit #{rowNo}, #{size}
+		</if>
+	</select>
+
+	<select id="findAllByMediumFilter" resultMap="studyMap"
+		parameterType="map">
+		select
+		s.std_id,
+		s.name,
+		s.adr_lms,
+		s.cls_lms,
+		s.rate,
+		s.photo,
+		s.goal,
+		c.name as cls_name
+		from
+		sms_std s
+		inner join sms_std_cls_m c
+		<bind name="pattern1" value="clsNo + '%'" />
+		on s.cls_lms like #{pattern1}
+		where
+		c.cls_m_id = RIGHT(#{clsNo},2)
+		and
+		c.cls_l_id = LEFT(#{clsNo},2)
+		and s.rate >= #{rateValue}
+		<if test="addressNoSize == 2">
+			and LEFT(s.adr_lms,2) = #{addressNo}
+		</if>
+		<if test="addressNoSize == 4">
+			and LEFT(s.adr_lms,4) = #{addressNo}
+		</if>
+		<if test="addressNoSize == 6">
+			and s.adr_lms = #{addressNo}
+		</if>
+		order by
+		std_id desc
+		<if test="size != null and rowNo != null">
+			limit #{rowNo}, #{size}
+		</if>
+	</select>
+
+	<select id="findAllBySmallFilter" resultMap="studyMap"
+		parameterType="map">
+		select
+		s.std_id,
+		s.name,
+		s.adr_lms,
+		s.cls_lms,
+		s.rate,
+		s.photo,
+		s.goal,
+		c.name as cls_name
+		from
+		sms_std s
+		inner join sms_std_cls_s c
+		on s.cls_lms
+		= #{clsNo}
+		where
+		c.cls_s_id = RIGHT(#{clsNo},2)
+		and c.cls_m_id =
+		MID(#{clsNo},3,2)
+		and c.cls_l_id = LEFT(#{clsNo},2)
+		and s.rate >=
+		#{rateValue}
+		<if test="addressNoSize == 2">
+			and LEFT(s.adr_lms,2) = #{addressNo}
+		</if>
+		<if test="addressNoSize == 4">
+			and LEFT(s.adr_lms,4) = #{addressNo}
+		</if>
+		<if test="addressNoSize == 6">
+			and s.adr_lms = #{addressNo}
+		</if>
+		order by
+		std_id desc
+		<if test="size != null and rowNo != null">
+			limit #{rowNo}, #{size}
+		</if>
+	</select>
+
+
+	<select id="findByNo" resultMap="studyMap" parameterType="int">
+		select
+		std_id,
+		adr_lms,
+		cls_lms,
+		name,
+		photo,
+		day,
+		sdt,
+		edt,
+		rcrtm_state,
+		goal,
+		cont,
+		prsn,
+		rate
+		from
+		sms_std
+		where
+		std_id = #{value}
+	</select>
+
+	<!-- <update id="increaseCount" parameterType="int"> update sms_std set 
+		vw_cnt = vw_cnt + 1 where std_id = #{value} </update> -->
+
+	<insert id="insert" parameterType="study">
+		insert into sms_std(
+		name,
+		adr_lms,
+		cls_lms,
+		goal,
+		photo,
+		day,
+		sdt,
+		edt,
+		cont,
+		prsn,
+		rate)
+		values(
+		#{name},
+		#{address},
+		#{cls},
+		#{goal},
+		#{photo},
+		#{day},
+		#{startDate},
+		#{endDate},
+		#{contents},
+		#{personnel},
+		0)
+		<!-- rate 컬럼에 0 말고 생성하는 스터디장의 평점을 넣어준다. -->
+	</insert>
+
+	<update id="update" parameterType="study">
+		update sms_std
+		set
+		name =
+		#{name},
+		adr_lms = #{address},
+		cls_lms = #{cls},
+		goal = #{goal},
+		photo =
+		#{photo},
+		day = #{day},
+		sdt = #{startDate},
+		edt = #{endDate},
+		cont =
+		#{contents},
+		prsn = #{personnel},
+		rate = #{rate}
+		where std_id = #{no}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from sms_std
+		where
+		std_id = #{no}
+	</delete>
+
+
+
+	<select id="countAll" resultType="int" parameterType="map">
+		select count(*) from sms_std
+		<where>
+			rate >= #{rateValue}
+			<if test="size != 0">
+				and
+				<if test="size == 2">
+					LEFT(cls_lms,2) = #{clsNo}
+				</if>
+				<if test="size == 4">
+					LEFT(cls_lms,4) = #{clsNo}
+				</if>
+				<if test="size == 6">
+					cls_lms = #{clsNo}
+				</if>
+			</if>
+
+			<if test="addressSize != 0">
+				and
+				<if test="addressSize == 2">
+					LEFT(adr_lms,2) = #{addressNo}
+				</if>
+				<if test="addressSize == 4">
+					LEFT(adr_lms,4) = #{addressNo}
+				</if>
+				<if test="addressSize == 6">
+					adr_lms = #{addressNo}
+				</if>
+			</if>
+
+			<if test="keyword != null">
+				<bind name="pattern1" value="'%' + keyword + '%'" />
+				and (
+				name like #{pattern1}
+				or goal like #{pattern1}
+				or cont like
+				#{pattern1}
+				)
+				<if test="findedClsNosByKeyword != null">
+					or
+					<foreach collection="findedClsNosByKeyword" item="k"
+						separator="or">
+						cls_lms = #{k}
+					</foreach>
+				</if>
+			</if>
+		</where>
+
+	</select>
+
+
 </mapper>
 
 

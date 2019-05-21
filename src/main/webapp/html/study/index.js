@@ -39,8 +39,15 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword) {
       
       function(obj) {
 
-    console.log(pageNo, obj.totalPage,  addressNo, clsNo, rateValue, keyword);
-
+    console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
+	    'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
+	    'rateValue=' + rateValue, 'keyword=' + keyword);
+    
+    //keyword 검색된 스터디 개수 알려준다.(기존 분류제목에)
+    if(keyword != undefined){
+    $('#clsTitle').html(obj.rowCount + "개의 검색결과");
+    }
+    
     // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
     // (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
     if (pageNo > obj.totalPage) {
@@ -99,12 +106,20 @@ function loadAddress(addressNo) {
   });
 };
 
-// 페이지를 출력한 후 pageNo 와 clsNo를 넘겨주고 로딩한다.
+// 페이지를 출력한 후 pageNo 와 clsNo,keyword를 넘겨주고 로딩한다.
 if (param) {
-  clsNo = param.split('&')[0].split('=')[1];
+    //빈 문자열이 들어가는 것을 방지하기 위해. undefined 로 넣어주기 위해 조건문 썻음
+    if(param.split('&')[0].split('=')[1].length != 0){
+	clsNo = param.split('&')[0].split('=')[1];
+    }
+    
   largeClsNo = param.split('&')[0].split('=')[1];
   clsTitle = param.split('&')[1].split('=')[1];
   clsTitle = decodeURIComponent(clsTitle);
+  keyword = decodeURIComponent(param.split('&')[2].split('=')[1]);
+  
+  pageNo = 1;
+  
   $('#clsTitle').html(clsTitle);
   $('#large-tag > button').text(clsTitle);
   loadList(pageNo, clsNo, addressNo, rateValue, keyword);
@@ -246,8 +261,9 @@ $('#rateRange').change(function() {
 });
 
 // 검색 필터
-$('#inqry-search-btn').click((e) => {
-
+$('#search-btn').click((e) => {
+  pageNo = 1;
+  tbody.html('');
   keyword = $("#study-search").val();
   loadList(pageNo, clsNo, addressNo, rateValue, keyword);
 });

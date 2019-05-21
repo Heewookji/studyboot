@@ -12,6 +12,7 @@ public interface StudyDao {
   int update(Study study);
   int delete(int no);
   int countAll(Map<String, Object> params);
+  List<Study> findAll(Map<String, Object> params);
   List<Study> findAllByLargeFilter(Map<String, Object> params);
   List<Study> findAllByMediumFilter(Map<String, Object> params);
   List<Study> findAllBySmallFilter(Map<String, Object> params);

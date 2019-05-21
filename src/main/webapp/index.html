@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome!</title>
+ <link rel="stylesheet"
+ href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
+<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
+
 </head>
 <body>
+<header>
+<nav class="navbar navbar-light">
+   <form class="form-inline">
+    <input class="form-control mr-sm-2" id="study-search" type="search"
+     placeholder="분야별" aria-label="Search">
+    <button class="btn btn-outline-primary my-2 my-sm-0"
+     id="search-btn" type="button">사용자 검색</button>
+   </form>
+  </nav>
+</header>
 
 <button type="button" class="btn btn-secondary cls-btn" data-no="11">IT</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="12">서비스</button>
@@ -22,22 +37,6 @@
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script>
-$('.cls-btn').click((e) => {
-  window.location.href = './html/study/index.html?clsNo='+ $(e.target).attr('data-no') + '&clsTitle=' + $(e.target).text();
-});
-
-$('.msg-btn').click((e) => {
-  window.location.href = './html/message/index.html'});
-  
-$('.cal-btn').click((e) => {
-    window.location.href = './test/test.html'});
-
-$('.inqry-btn').click((e) => {
-    window.location.href = './html/inquiry/index.html'});
-    
-$('.space-btn').click((e) => {
-  window.location.href = './html/space/index.html'});
-</script>
+<script src="index.js"></script>
 </body>
 </html>
