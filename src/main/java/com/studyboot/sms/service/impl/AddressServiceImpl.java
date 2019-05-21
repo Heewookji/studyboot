@@ -40,7 +40,29 @@ public class AddressServiceImpl implements AddressService {
     return list;
   }
 
+  @Override
+  public String addressFullName(String addressNo) {
+    
+    HashMap<String, Object> params = new HashMap<>(); // dao에 값을 보내기 위한 Map
+    
+      
+    String smallNo = addressNo.substring(0, 2); // 공간정보를 쪼갠다.
+    String mediumNo = addressNo.substring(2, 4);
+    String largeNo = addressNo.substring(4, 6);
+      
+      params.put("smallNo", smallNo);
+      params.put("mediumNo", mediumNo);
+      params.put("largeNo", largeNo);
+      
+      Address address = addressDao.findFullAddressName(params);
 
+      String fullAddress = 
+          address.getLargeName() + " " 
+        + address.getMediumName() + " " 
+         + address.getSmallName() ;
+      
+      return fullAddress;
+  }
 
 
 }

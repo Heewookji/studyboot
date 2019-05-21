@@ -5,4 +5,5 @@ import com.studyboot.sms.domain.Address;
 
 public interface AddressService {
   List<Address> addressList(String addressNo);
+  String addressFullName(String addressNo);
 }

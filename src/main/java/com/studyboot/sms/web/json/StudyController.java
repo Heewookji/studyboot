@@ -72,7 +72,6 @@ public class StudyController {
       @RequestParam String addressNo,
       @RequestParam double rateValue) {
     
-    System.out.println(rateValue);
     
     // 페이지 사이즈
     if (pageSize < 3 || pageSize > 8) {
@@ -106,6 +105,12 @@ public class StudyController {
     
     
     List<Study> studys = studyService.list(pageNo, pageSize, clsNo, addressNo, rateValue);
+    
+    for(Study study : studys) {
+      String addressName = addressService.addressFullName(study.getAddress());
+      study.setAddressName(addressName);
+    }
+    
     
     content.put("list", studys);
     content.put("pageNo", pageNo);
