@@ -39,25 +39,23 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public int size() {
-    return messageDao.countAll();
-//    
-//    HashMap<String,Object> params = new HashMap<>();
-//    params.put("member_ids", memberNos);
-//
-//    int count = messageDao.countByClsAndMember(params);
-//    return count;
+  public int size(List<Integer> memberNos) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("member_ids", memberNos);
+
+    int count = messageDao.countAll(params);
+    return count;
   }
   
   @Override
-  public int size2() {
-    return messageDao.countAll2();
-//    
-//    HashMap<String,Object> params = new HashMap<>();
-//    params.put("member_ids", memberNos);
-//
-//    int count = messageDao.countByClsAndMember(params);
-//    return count;
+  public int size2(List<Integer> memberNos) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("member_ids", memberNos);
+
+    int count = messageDao.countAll2(params);
+    return count;
   }
 
   @Override

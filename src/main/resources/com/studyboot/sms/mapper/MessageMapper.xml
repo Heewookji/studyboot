@@ -112,30 +112,33 @@
     </if>
   </select>
   
-  <select id="countAll" resultType="int">
+  <select id="countAll" resultType="int" parameterType="map">
     select count(*) from sms_msg
-  </select>
-  <!-- countAll
-        where 
-      <if test="member_ids != null">
-      <foreach collection="member_ids" item="member_id" separator="or">
+    where 
+    <if test="member_ids != null">
+    <foreach collection="member_ids" item="member_id" separator="or">
       send_id = 
       #{member_id}
     </foreach>
     </if>
-   -->
-  <select id="countAll2" resultType="int">
-    select count(*) from sms_msg
+    <if test="member_ids == null">
+      recv_id=6
+    </if>
   </select>
-  <!-- countAll2
-   where 
+  
+  <select id="countAll2" resultType="int" parameterType="map">
+    select count(*) from sms_msg
+    where 
       <if test="member_ids != null">
       <foreach collection="member_ids" item="member_id" separator="or">
       recv_id = 
       #{member_id}
     </foreach>
     </if>
-   -->
+    <if test="member_ids == null">
+      send_id=6
+    </if>
+  </select>
   
   <select id="findByNo" resultMap="messageDetailMap" parameterType="int">
     select 

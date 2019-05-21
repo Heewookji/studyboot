@@ -40,7 +40,7 @@
         <bind name="pattern1" value="'%' + keyword + '%'"/>
         nick_name like #{pattern1}
     </if>
-    </where>   
+    </where>
   </select>
 
   <update id="update" parameterType="member">

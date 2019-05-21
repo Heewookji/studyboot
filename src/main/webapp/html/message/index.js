@@ -108,20 +108,20 @@ function loadList2(pn, keyword) {
 $('#prevPage > a').click((e) => {
   e.preventDefault();
   if ($('#currCls').text() == '받은 쪽지함') {
-    loadList(pageNo - 1);
+    loadList(pageNo - 1, keyword);
   }
   if ($('#currCls').text() == '보낸 쪽지함') {
-    loadList2(pageNo - 1);
+    loadList2(pageNo - 1, keyword);
   }
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
   if ($('#currCls').text() == '받은 쪽지함') {
-    loadList(pageNo + 1);
+    loadList(pageNo + 1, keyword);
   }
   if ($('#currCls').text() == '보낸 쪽지함') {
-    loadList2(pageNo + 1);
+    loadList2(pageNo + 1, keyword);
   }
 });
 

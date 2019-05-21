@@ -75,7 +75,7 @@ public class MessageController {
     List<Message> message;
     List<Integer> memberNos = null;
 
-    if(!keyword.equals("undefined")) {
+    if(!keyword.equals("undefined") && !keyword.equals("")) {
       memberNos = memberService.findMemberNoMsg(keyword);
 
       if (memberNos.size() == 0) {
@@ -87,9 +87,15 @@ public class MessageController {
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
-
-    int rowCount = messageService.size();    
+    int rowCount = messageService.size(memberNos); 
+    
+    if (rowCount == 0) {
+      content.put("pageNo", 0);
+      return content;
+    }
+    
     int totalPage = rowCount / pageSize;
+    
     if (rowCount % pageSize > 0)
       totalPage++;
 
@@ -98,14 +104,12 @@ public class MessageController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
 
-
     message = messageService.list(pageNo, pageSize, memberNos);
 
     content.put("list", message);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
-
 
     return content;
   }
@@ -122,7 +126,7 @@ public class MessageController {
     List<Message> message;
     List<Integer> memberNos = null;
 
-    if(!keyword.equals("undefined")) {
+    if(!keyword.equals("undefined") && !keyword.equals("")) {
       memberNos = memberService.findMemberNoMsg(keyword);
 
       if (memberNos.size() == 0) {
@@ -134,9 +138,15 @@ public class MessageController {
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
-
-    int rowCount = messageService.size2();    
+    int rowCount = messageService.size2(memberNos); 
+    
+    if (rowCount == 0) {
+      content.put("pageNo", 0);
+      return content;
+    }
+    
     int totalPage = rowCount / pageSize;
+    
     if (rowCount % pageSize > 0)
       totalPage++;
 
@@ -145,14 +155,12 @@ public class MessageController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
 
-
     message = messageService.list2(pageNo, pageSize, memberNos);
 
     content.put("list", message);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
-
 
     return content;
   }
