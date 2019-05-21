@@ -17,23 +17,23 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public List<Message> list(int pageNo, int pageSize, String keyword) {
+  public List<Message> list(int pageNo, int pageSize, List<Integer> memberNos) {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
-    params.put("keyword",keyword);
+    params.put("member_ids", memberNos);
 
     return messageDao.findAll(params);
   }
 
   @Override
-  public List<Message> list2(int pageNo, int pageSize, String keyword) {
+  public List<Message> list2(int pageNo, int pageSize, List<Integer> memberNos) {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
-    params.put("keyword",keyword);
+    params.put("member_ids", memberNos);
 
     return messageDao.findAll2(params);
   }

@@ -26,6 +26,16 @@ public class MemberServiceImpl implements MemberService {
 	  return memberDao.findByKeyword(keywordMap);
 	  
   }
+
+  @Override
+  public List<Integer> findMemberNoMsg(String keyword) {
+
+    HashMap<String,Object> keywordMap = new HashMap<>();
+      keywordMap.put("keyword", keyword);
+      
+    return memberDao.findByKeywordMsg(keywordMap);
+    
+  }
 }
 
 
