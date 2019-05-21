@@ -10,6 +10,8 @@ public interface StudyService {
   int updateRate(int no);
   int update(Study study);
   int delete(int no);
-  int size(String clsNo, String addressNo, double rateValue);
-  List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo, double rateValue);
+  int size(
+      String clsNo, String addressNo, double rateValue, String keyword);
+  List<Study> list(
+      int pageNo, int pageSize, String clsNo, String addressNo, double rateValue, String keyword);
 }

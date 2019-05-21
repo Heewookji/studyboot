@@ -11,10 +11,14 @@
 </head>
 <body>
   <header>
-  <h1>
-      헤더 부분
-  </h1>
-    <hr>
+  <nav class="navbar navbar-light">
+   <form class="form-inline">
+    <input class="form-control mr-sm-2" id="study-search" type="search"
+     placeholder="분야별" aria-label="Search">
+    <button class="btn btn-outline-primary my-2 my-sm-0"
+     id="inqry-search-btn" type="button">사용자 검색</button>
+   </form>
+  </nav>
   </header>
 
 <!-- 스터디 생성 -->
@@ -96,7 +100,7 @@
   <p>지역</p>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle"
-        type="button" id="dropdownMenuButton"
+        type="button" id="largeAddressButton"
         data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">시도</button>
       <div class="dropdown-menu largeAddress"
@@ -104,7 +108,7 @@
     </div>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle"
-        type="button" id="dropdownMenuButton"
+        type="button" id="mediumAddressButton"
         data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">시군구</button>
       <div class="dropdown-menu mediumAddress"
@@ -112,7 +116,7 @@
     </div>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle"
-        type="button" id="dropdownMenuButton"
+        type="button" id="smallAddressButton"
         data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">동읍면</button>
       <div class="dropdown-menu smallAddress"
