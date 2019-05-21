@@ -4,11 +4,30 @@ var container = document.getElementById('spaceMap'), //지도를 담을 영역�
 		level: 2 //지도의 레벨(확대, 축소 정도)
 		}, 
 	  map = new daum.maps.Map(container, options), //지도 생성 및 객체 리턴
-		geocoder = new daum.maps.services.Geocoder(),
-		positions = {
-      title: '지환카페',
-      address: '서울시 강남구 역삼동 819-4 YBM빌딩 2층'
-		};
+		geocoder = new daum.maps.services.Geocoder();
+		
+		geocoder.addressSearch('서울시 강남구 역삼동 819-4 YBM빌딩 2층', function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+
+	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">지환카페</div>'
+	        });
+	        
+	        infowindow.open(map, marker);
+	    } 
+	});
+		
 		
 if (navigator.geolocation) {
   
