@@ -104,8 +104,6 @@ function loadList2(pn, keyword) {
 
 } // loadList()
 
-loadList(1);
-
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
@@ -151,6 +149,8 @@ if ($('#currCls').text() == '보낸 쪽지함') {
   loadList2(1, keyword);
 }
 });
+
+loadList(1);
 
 ////스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
 //$(document.body).bind('loaded-list', () => {

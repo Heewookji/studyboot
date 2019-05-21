@@ -68,40 +68,22 @@ public class MessageController {
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
-      @RequestParam String keyword
-      //      @RequestParam String pageCls,
-      ) {
-    //    Message messages = new Message();
-    //    int sendNo = messages.getSendNo();
-    //    int recvNo = messages.getRecvNo();
-    //
-    //    if (no == recvNo) 
-    //      messageService.list(pageNo, pageSize);
-    //
-    //    if (no == sendNo) 
-    //      messageService.list2(pageNo, pageSize);
+      @RequestParam String keyword) {
 
-    //    int clsNo = 0;
-    //    switch(pageCls){
-    //      case "문의": clsNo = 1; break;
-    //      case "신고": clsNo = 2; break;
-    //      case "undefined": clsNo = 0;
-    //    }
-    //    List<Integer> memberNos = null;
+    HashMap<String,Object> content = new HashMap<>();
 
-    //    if(!keyword.equals("undefined")) {
-    //      memberNos = memberService.findMemberNoByKeyword(keyword);
-    //      
-    //      if (memberNos.size() == 0) {
-    //        content.put("pageNo", 0);
-    //        return content;
-    //      }
-    //    } 
-   
-    if(keyword.equals("undefined")) {
-     keyword = null;
-    } 
-    
+    List<Message> message;
+    List<Integer> memberNos = null;
+
+    if(!keyword.equals("undefined")) {
+      memberNos = memberService.findMemberNoMsg(keyword);
+
+      if (memberNos.size() == 0) {
+        content.put("pageNo", 0);
+        return content;
+      }
+    }
+
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
@@ -117,14 +99,13 @@ public class MessageController {
       pageNo = totalPage;
 
 
-    List<Message> message = messageService.list(pageNo, pageSize, keyword);
+    message = messageService.list(pageNo, pageSize, memberNos);
 
-    HashMap<String,Object> content = new HashMap<>();
     content.put("list", message);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
-    
+
 
     return content;
   }
@@ -136,10 +117,20 @@ public class MessageController {
       @RequestParam String keyword
       ) {
 
-    if(keyword.equals("undefined")) {
-      keyword = null;
-     } 
-    
+    HashMap<String,Object> content = new HashMap<>();
+
+    List<Message> message;
+    List<Integer> memberNos = null;
+
+    if(!keyword.equals("undefined")) {
+      memberNos = memberService.findMemberNoMsg(keyword);
+
+      if (memberNos.size() == 0) {
+        content.put("pageNo", 0);
+        return content;
+      }
+    }
+
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
@@ -155,13 +146,13 @@ public class MessageController {
       pageNo = totalPage;
 
 
-    List<Message> message = messageService.list2(pageNo, pageSize, keyword);
+    message = messageService.list2(pageNo, pageSize, memberNos);
 
-    HashMap<String,Object> content = new HashMap<>();
     content.put("list", message);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
+
 
     return content;
   }
