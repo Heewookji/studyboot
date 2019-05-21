@@ -67,9 +67,9 @@ public class MessageController {
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize
+      @RequestParam(defaultValue="3") int pageSize,
+      @RequestParam String keyword
       //      @RequestParam String pageCls,
-      //      @RequestParam String keyword
       ) {
     //    Message messages = new Message();
     //    int sendNo = messages.getSendNo();
@@ -97,7 +97,11 @@ public class MessageController {
     //        return content;
     //      }
     //    } 
-
+   
+    if(keyword.equals("undefined")) {
+     keyword = null;
+    } 
+    
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
@@ -113,22 +117,28 @@ public class MessageController {
       pageNo = totalPage;
 
 
-    List<Message> message = messageService.list(pageNo, pageSize);
+    List<Message> message = messageService.list(pageNo, pageSize, keyword);
 
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", message);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
     content.put("totalPage", totalPage);
+    
 
     return content;
   }
-  
+
   @GetMapping("listsend")
   public Object list2(
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize
+      @RequestParam(defaultValue="3") int pageSize,
+      @RequestParam String keyword
       ) {
+
+    if(keyword.equals("undefined")) {
+      keyword = null;
+     } 
     
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
@@ -145,7 +155,7 @@ public class MessageController {
       pageNo = totalPage;
 
 
-    List<Message> message = messageService.list2(pageNo, pageSize);
+    List<Message> message = messageService.list2(pageNo, pageSize, keyword);
 
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", message);

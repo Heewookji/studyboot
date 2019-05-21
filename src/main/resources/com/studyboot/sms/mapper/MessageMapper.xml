@@ -56,6 +56,7 @@
       recv_id = #{recv_id};
       </sql>
   
+  
   <select id="findAll" resultMap="messageListMap" parameterType="map">
      select 
       c.msg_id,
@@ -66,8 +67,13 @@
     from 
       sms_msg c
       left outer join sms_member i on c.send_id = i.member_id
-    where
+    <where>
       recv_id = 6
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'"/>
+        and i.nick_Name like #{pattern1} 
+      </if>
+    </where>
     order by 
       msg_id desc
     <if test="size != null and rowNo != null">
@@ -85,7 +91,13 @@
      from 
        sms_msg c 
        left outer join sms_member i on recv_id = i.member_id 
-    where send_id=6
+    <where>
+      send_id = 6
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'"/>
+        and i.nick_Name like #{pattern1} 
+      </if>
+    </where>
     order by 
       msg_id desc
     <if test="size != null and rowNo != null">

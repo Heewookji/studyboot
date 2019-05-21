@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class SpaceController {
     return content;
   }
 
+  @SuppressWarnings("unchecked")
   @GetMapping("list")
   public Object list() {
     
@@ -47,66 +49,30 @@ public class SpaceController {
     Map<String, Object> addressMap = spaceService.spaceAddress(content);  
     
     // 45줄에서 저장한 값을 바로 get한 후 content에 다시 담는다.
-    content.put("fullName", addressMap.get("fullName"));
-    content.put("addressDetail", addressMap.get("addressDetail"));
+//    content.put("fullName", addressMap.get("fullName"));
+//    content.put("addressDetail", addressMap.get("addressDetail"));
     
-    System.out.println(content);
+    List<Address> fullAddressName = (List<Address>) addressMap.get("fullName");
+    List<String> detailAddressName = (List<String>) addressMap.get("addressDetail");
     
-    return content;
-  }
-
-  /*
-  @PostMapping("add")
-  public Object add(SpaceReview spaceReview) {
-    HashMap<String,Object> content = new HashMap<>();
-    try {
-      spaceService.addReview(spaceReview);
-      content.put("status", "success");
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("message", e.getMessage());
-    }
-    return content;
-  }
-  
-  @GetMapping("delete")
-  public Object delete(int no) {
-  
-    HashMap<String,Object> content = new HashMap<>();
-    try {
-      if (spaceService.delete(no) == 0) 
-        throw new RuntimeException("해당 번호의 공간이 없습니다.");
-      content.put("status", "success");
+    List<String> address = new ArrayList<>();
+    
+    
+    for(int i = 0; i < fullAddressName.size(); i++) {
+      String largeName = fullAddressName.get(i).getLargeName();
+      String mediumName = fullAddressName.get(i).getMediumName();
+      String smallName = fullAddressName.get(i).getSmallName();
       
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("message", e.getMessage());
-    }
-    return content;
-  }
-  
-  @GetMapping("detail")
-  public Object detail(int no) {
-    
-    Space space = spaceService.get(no);
-    return space;
-  }
-  
-  @PostMapping("update")
-  public Object update(Space space) {
-    HashMap<String,Object> content = new HashMap<>();
-    try {
-      if (spaceService.update(space) == 0) 
-        throw new RuntimeException("해당 번호의 공간이 없습니다.");
-      content.put("status", "success");
+      String fullAddress = largeName + " " + mediumName + " " +smallName ;
       
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("message", e.getMessage());
+      String fullDetailAddress = fullAddress + detailAddressName.get(i);
+      address.add(fullDetailAddress);
     }
+    
+    content.put("address", address);
+    
     return content;
   }
-   */
   
 }
 

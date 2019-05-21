@@ -4,6 +4,7 @@ tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
 nextPageLi = $('#nextPage'),
 currSpan = $('#currPage > span'),
+keyword = $("#message-search").val(),
 templateSrc = $('#tr-template').html(),
 templateSrcSend = $('#ms-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
@@ -13,10 +14,10 @@ templateSrcSend = $('#ms-template').html(); // script 태그에서 템플릿 데
 var trGenerator = Handlebars.compile(templateSrc);
 var trGeneratorSend = Handlebars.compile(templateSrcSend);
 
-function loadList(pn) {
+function loadList(pn, keyword) {
 
   $.getJSON('../../app/json/message/list?pageNo=' + pn + '&pageSize=' + pageSize
-      + "&keyword=" + keyword
+      + "&keyword=" + keyword,
       function(obj) {
 
     tbody.html('');
@@ -59,9 +60,10 @@ function loadList(pn) {
 
 
 
-function loadList2(pn) {
+function loadList2(pn, keyword) {
 
-  $.getJSON('../../app/json/message/listsend?pageNo=' + pn + '&pageSize=' + pageSize,
+  $.getJSON('../../app/json/message/listsend?pageNo=' + pn + '&pageSize=' + pageSize
+      + "&keyword=" + keyword,
       function(obj2) {
 
     tbody.html('');
@@ -139,7 +141,16 @@ $('#sendPage').click((e) => {
   loadList2(1);
 });
 
-
+// 검색 클릭이벤트 발생
+$('#message-search-btn').click((e) => {
+keyword = $("#message-search").val();
+if ($('#currCls').text() == '받은 쪽지함') {
+  loadList(1, keyword);
+}
+if ($('#currCls').text() == '보낸 쪽지함') {
+  loadList2(1, keyword);
+}
+});
 
 ////스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
 //$(document.body).bind('loaded-list', () => {
@@ -160,11 +171,9 @@ $('#sendPage').click((e) => {
 //loadList(1, "신고");
 //});
 
-//$('#inqry-search-btn').click((e) => {
 
-//keyword = $("#inqry-search").val();
-//loadList(1, currCls.html(), keyword);
-//});
+
+
 
 
 //$(document.body).bind('loaded-list', () => {

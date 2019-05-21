@@ -517,11 +517,21 @@ values(7, 6, "제목4","7번이 6번에게 쪽지 보냄7");
 insert into sms_msg(send_id, recv_id, titl, cont)
 values(7, 6, "제목5","7번이 6번에게 쪽지 보냄8");
 insert into sms_msg(send_id, recv_id, titl, cont)
-values(7, 6, "제목6","7번이 6번에게 쪽지 보냄9");
+values(2, 6, "제목6","7번이 6번에게 쪽지 보냄1");
 insert into sms_msg(send_id, recv_id, titl, cont)
-values(7, 6, "제목7","7번이 6번에게 쪽지 보냄10");
+values(3, 6, "제목7","7번이 6번에게 쪽지 보냄1");
 insert into sms_msg(send_id, recv_id, titl, cont)
-values(7, 6, "제목8","7번이 6번에게 쪽지 보냄11");
+values(4, 6, "제목8","7번이 6번에게 쪽지 보냄1");
+insert into sms_msg(send_id, recv_id, titl, cont)
+values(5, 6, "제목4","7번이 6번에게 쪽지 보냄1");
+insert into sms_msg(send_id, recv_id, titl, cont)
+values(2, 6, "제목5","7번이 6번에게 쪽지 보냄1");
+insert into sms_msg(send_id, recv_id, titl, cont)
+values(4, 6, "제목6","7번이 6번에게 쪽지 보냄1");
+insert into sms_msg(send_id, recv_id, titl, cont)
+values(2, 6, "제목7","7번이 6번에게 쪽지 보냄1");
+insert into sms_msg(send_id, recv_id, titl, cont)
+values(5, 6, "제목8","7번이 6번에게 쪽지 보냄1");
 
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 5, "제목1","6번이 5번에게 쪽지 보냄1");
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 5, "제목2","6번이 5번에게 쪽지 보냄2");
