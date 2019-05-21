@@ -9,6 +9,6 @@ public interface MessageService {
   //  int add(Inquiry inquiry);
   Message get(int no);
   int delete(int no);
-  int size();
-  int size2();
+  int size(List<Integer> memberNos);
+  int size2(List<Integer> memberNos);
 }

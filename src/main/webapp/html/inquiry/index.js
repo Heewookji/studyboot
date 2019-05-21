@@ -95,7 +95,7 @@ $('#inqry-search-btn').click((e) => {
     loadList(1, currCls.html(), keyword);
 });
 
-loadList(1);
+loadList(1,);
 
 $(document.body).bind('loaded-list', () => {
 
