@@ -12,7 +12,10 @@
 <button type="button" class="btn btn-secondary cls-btn" data-no="14">예체능</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="15">인문</button>
 <button type="button" class="btn btn-secondary cls-btn" data-no="16">공학</button><br>
-<button type="button" class="btn btn-secondary msg-btn" data-no="16">쪽지</button>
+<button type="button" class="btn btn-secondary msg-btn">쪽지</button><br>
+<button type="button" class="btn btn-secondary cal-btn">캘린더</button><br>
+<button type="button" class="btn btn-secondary inqry-btn">문의게시판</button><br>
+
 
 <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -25,6 +28,12 @@ $('.cls-btn').click((e) => {
 
 $('.msg-btn').click((e) => {
   window.location.href = './html/message/index.html'});
+  
+$('.cal-btn').click((e) => {
+    window.location.href = './test/test.html'});
+
+$('.inqry-btn').click((e) => {
+    window.location.href = './html/inquiry/index.html'});
 </script>
 </body>
 </html>
