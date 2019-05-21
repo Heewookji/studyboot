@@ -32,44 +32,22 @@ public class SpaceController {
     return content;
   }
 
-  @SuppressWarnings("unchecked")
   @GetMapping("list")
   public Object list() {
     
+    // 데이터 베이스에서 공간에 대한 정보 리스트를 받아온다.
     List<Space> spaces = spaceService.list();
 
+    // index.html에 보내기 위한 content를 만든다.
     HashMap<String,Object> content = new HashMap<>();
     
-    //content.put("address", spaceService.spaceAddress(content));  
-    //--> 이렇게 하면 앞단에서 열기 어려워서 수정함
+    // serviceImplement에 정보 목록을 넣어주며 호출한다.
+    //Space의 변수 completedAddress에 완성된 값을 담는 역할을 한다.
+    spaceService.spaceAddress(spaces);  
     
-    // ServiceImplement에서 상세주소와 풀네임 주소를 받아온 후 Map에 저장한다.
-    Map<String, Object> addressMap = spaceService.spaceAddress(spaces);  
-    
-    // 45줄에서 저장한 값을 바로 get한 후 content에 다시 담는다.
-//    content.put("fullName", addressMap.get("fullName"));
-//    content.put("addressDetail", addressMap.get("addressDetail"));
-    
-    List<Address> fullAddressName = (List<Address>) addressMap.get("fullName");
-    List<String> detailAddressName = (List<String>) addressMap.get("addressDetail");
-    
-    
-    for(int i = 0; i < fullAddressName.size(); i++) {
-      String largeName = fullAddressName.get(i).getLargeName();
-      String mediumName = fullAddressName.get(i).getMediumName();
-      String smallName = fullAddressName.get(i).getSmallName();
-      
-      String fullAddress = largeName + " " + mediumName + " " +smallName ;
-      
-      String completedAddress = fullAddress + detailAddressName.get(i);
-      
-      spaces.get(i).setCompletedAddress(completedAddress);
-      
-    }
-    
-    System.out.println(spaces);
     content.put("list", spaces);
     
+    System.out.println(spaces);
     return content;
   }
   
