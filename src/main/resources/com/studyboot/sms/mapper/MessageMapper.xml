@@ -67,37 +67,37 @@
     from 
       sms_msg c
       left outer join sms_member i on c.send_id = i.member_id
-    <where>
-      recv_id = 6
-      <if test="keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'"/>
-        and i.nick_Name like #{pattern1} 
-      </if>
-    </where>
+    where
+      <if test="member_ids != null">
+      <foreach collection="member_ids" item="member_id" separator="or">
+      send_id = 
+      #{member_id}
+    </foreach>
+    </if>
     order by 
       msg_id desc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
   </select>
-  
+
   <select id="findAll2" resultMap="messageListMap" parameterType="map">
      select 
-       c.msg_id, 
-       c.recv_id, 
-       c.titl, 
-       c.dt, 
-       i.nick_Name as massage_nick 
-     from 
-       sms_msg c 
-       left outer join sms_member i on recv_id = i.member_id 
-    <where>
-      send_id = 6
-      <if test="keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'"/>
-        and i.nick_Name like #{pattern1} 
-      </if>
-    </where>
+      c.msg_id,
+      c.send_id,
+      c.titl,
+      c.dt,
+      i.nick_Name as massage_nick
+    from 
+      sms_msg c
+      left outer join sms_member i on c.send_id = i.member_id
+    where
+      <if test="member_ids != null">
+      <foreach collection="member_ids" item="member_id" separator="or">
+      recv_id = 
+      #{member_id}
+    </foreach>
+    </if>
     order by 
       msg_id desc
     <if test="size != null and rowNo != null">
@@ -106,11 +106,25 @@
   </select>
   
   <select id="countAll" resultType="int">
-    select count(*) from sms_msg where recv_id = 6
+    select count(*) from sms_msg
+      where 
+      <if test="member_ids != null">
+      <foreach collection="member_ids" item="member_id" separator="or">
+      send_id = 
+      #{member_id}
+    </foreach>
+    </if>
   </select>
   
   <select id="countAll2" resultType="int">
-    select count(*) from sms_msg where send_id = 6
+    select count(*) from sms_msg
+      where 
+      <if test="member_ids != null">
+      <foreach collection="member_ids" item="member_id" separator="or">
+      recv_id = 
+      #{member_id}
+    </foreach>
+    </if>
   </select>
   
   <select id="findByNo" resultMap="messageDetailMap" parameterType="int">

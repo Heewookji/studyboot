@@ -32,6 +32,16 @@
     </if>
     </where>   
   </select>
+  
+  <select id="findByKeywordMsg" resultType="int" parameterType="map">
+    select member_id from sms_member
+   <where>
+   <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'"/>
+        nick_name like #{pattern1}
+    </if>
+    </where>   
+  </select>
 
   <update id="update" parameterType="member">
     update sms_member
