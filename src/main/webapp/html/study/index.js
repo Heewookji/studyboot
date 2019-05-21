@@ -3,6 +3,7 @@ pageNo = 1,
 pageSize = 3,
 addressNo,
 clsNo,
+largeClsNo,
 clsTitle,
 tbody = $('tbody'),
 // script 태그에서 템플릿 데이터를 꺼낸다. - 스터디 목록
@@ -96,9 +97,11 @@ function loadAddress(addressNo) {
 // 페이지를 출력한 후 pageNo 와 clsNo를 넘겨주고 로딩한다.
 if (param) {
   clsNo = param.split('&')[0].split('=')[1];
+  largeClsNo = param.split('&')[0].split('=')[1];
   clsTitle = param.split('&')[1].split('=')[1];
   clsTitle = decodeURIComponent(clsTitle);
   $('#clsTitle').html(clsTitle);
+  $('#large-tag > button').text(clsTitle);
   loadList(pageNo, clsNo, addressNo);
   loadMediumTitle(clsNo);
   loadAddress();
@@ -129,6 +132,17 @@ $(document.body).bind('loaded-mediumtitle', () => {
     clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
     loadList(pageNo, clsNo, addressNo);
     loadSmallTitle(clsNo); // 카테고리 소분류 목록 불러오기
+    
+    // 빵부스러기
+    $('#small-tag').remove();
+    $('#medium-tag').remove();
+    $('#large-tag > button').prop('disabled', false);
+    clsName = $(e.target).text();
+    dataNo = $(e.target).attr('data-no');
+    var $mediumTag = 
+      $('<li class="breadcrumb-item" id="medium-tag"><button class="btn btn-link" data-no="'+ dataNo +'" disabled>' + clsName+ '</button></li>');
+    $('#cls-tag').append($mediumTag);
+    $(document.body).trigger('loaded-medium-tag');
   });
 });
 
@@ -140,6 +154,14 @@ $(document.body).bind('loaded-smalltitle', () => {
     tbody.html('');
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo);
+    
+    // 빵부스러기
+    $('#small-tag').remove();
+    $('#medium-tag > button').prop('disabled', false);
+    clsName = $(e.target).text();
+    var $smallTag = 
+      $('<li class="breadcrumb-item active" id="small-tag"><button class="btn btn-link" disabled>' + clsName+ '</button></li>');
+    $('#cls-tag').append($smallTag);
   });
 });
 
@@ -156,7 +178,8 @@ $(document.body).bind('loaded-largeAddress', () => {
     loadAddress(addressNo);
   });
 });
-  $(document.body).bind('loaded-mediumAddress', () => {
+
+$(document.body).bind('loaded-mediumAddress', () => {
   $('.madr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
@@ -167,7 +190,8 @@ $(document.body).bind('loaded-largeAddress', () => {
     loadAddress(addressNo);
   });
 });
-  $(document.body).bind('loaded-smallAddress', () => {
+
+$(document.body).bind('loaded-smallAddress', () => {
   $('.sadr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
@@ -177,6 +201,27 @@ $(document.body).bind('loaded-largeAddress', () => {
   });
 });
 
+// 카테고리 breadcrumb 
+$('#large-tag > button').click(function(e) {
+  e.preventDefault();
+  pageNo = 1;
+  tbody.html('');
+  clsNo = largeClsNo;
+  loadList(pageNo, clsNo, addressNo);
+  $('#small-tag').remove();
+  $('#medium-tag').remove();
+});
+
+$(document.body).bind('loaded-medium-tag', () => {
+  $('#medium-tag > button').click(function(e) {
+    e.preventDefault();
+    pageNo = 1;
+    tbody.html('');
+    clsNo = $(e.target).attr('data-no');
+    loadList(pageNo, clsNo, addressNo);
+    $('#small-tag').remove();
+  });
+});
 
 $('#add-btn').click(function() {
   jQuery.ajax({
