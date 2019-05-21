@@ -55,8 +55,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue) {
 //    $(trGenerator(obj)).appendTo(tbody);
 //    for(var j = 0; j < obj.list.length/3 ; )
 //    for(var i = 0; i < 3; i++){
-    $(cardGenerator(obj)).appendTo(tbody);
-//    }
+    $(cardGenerator(obj)).appendTo(tbody);    }
 
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
