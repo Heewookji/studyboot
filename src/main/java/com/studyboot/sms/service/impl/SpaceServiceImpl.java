@@ -44,21 +44,23 @@ public class SpaceServiceImpl implements SpaceService {
     return space;
   }
 
+  // 숫자로된 공간주소를 한글로 바꾸는 역할을 하는 메서드
   @Override
-  public Map<String, Object> spaceAddress(List<Space> spaceList) {
-
-    // 컨트롤러에서 Map으로 공간 리스트를 받아옴 
+  public void spaceAddress(List<Space> spaceList) {
+    // 컨트롤러에서 공간 정보 리스트를 받아옴
+    
     List<String> address = new ArrayList<>();
     List<String> addressDetail = new ArrayList<>();
 
+    // 공간 정보 리스트에서 숫자로된 주소(111111)과 상세주소만 찾은 후 리스트에 담는다.
     for (Space space : spaceList) {
-      address.add(space.getAddress()); // 리스트에 저장된 공간정보(111111)을 빼내서 새로운 리스트에 담는다.
+      address.add(space.getAddress());
       addressDetail.add(space.getAddressDetail());
     }
-
+    
     List<Address> fullAddressName = new ArrayList<>();
 
-    HashMap<String, Object> daoMap = new HashMap<>();
+    HashMap<String, Object> daoMap = new HashMap<>(); // dao에 값을 보내기 위한 Map
     
     // 58줄에서 새로운 리스트에 저장된 숫자를 쪼개기 위한 반복문
     for (int i = 0; i < address.size(); i++) {
@@ -68,20 +70,29 @@ public class SpaceServiceImpl implements SpaceService {
       int mediumNo = Integer.parseInt(addSplit.substring(2, 4));
       int largeNo = Integer.parseInt(addSplit.substring(4, 6));
       
-      daoMap.put("smallNo", smallNo); // dao의 파라미터 타입이 map이기 때문에 hashMap에 put을 한다.
+      // dao의 파라미터 타입이 map이기 때문에 hashMap에 put을 한다.
+      daoMap.put("smallNo", smallNo);
       daoMap.put("mediumNo", mediumNo);
       daoMap.put("largeNo", largeNo);
       
+      // dao에 값을 전달하여 주소 정보를 받아오고, fullAddressName에 정보를 저장한다.
       fullAddressName.add(addressDao.findFullAddressName(daoMap));
     }
 
-    HashMap<String, Object> addressMap = new HashMap<>();
-
-    addressMap.put("fullName", fullAddressName);
-    addressMap.put("addressDetail", addressDetail);
-
-    return addressMap;
+    for(int i = 0; i < fullAddressName.size(); i++) {
+      // 객체에서 주소 각각의 이름을 꺼내서 하나의 String으로 바꾼다.
+      String fullAddress = 
+          fullAddressName.get(i).getLargeName() + " " 
+        + fullAddressName.get(i).getMediumName() + " " 
+         + fullAddressName.get(i).getSmallName() ;
+     
+      // 위에서 합친 주소에 상세주소를 합친다.
+      String completedAddress = fullAddress + " " + addressDetail.get(i);
+      
+      spaceList.get(i).setCompletedAddress(completedAddress);
+    }
   }
+  
 }
 
 
