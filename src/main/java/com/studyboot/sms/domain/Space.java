@@ -17,14 +17,15 @@ public class Space {
   private List<SpaceConvenienceInfo> spaceConvenienceInfos;
   private List<SpaceReview> spaceReview;
   
+  private String completedAddress;
+  
   @Override
   public String toString() {
     return "Space [no=" + no + ", name=" + name + ", address=" + address + ", addressDetail="
-        + addressDetail + ", tel=" + tel + ", intro=" + intro + ", tags=" + tags + ", files="
-        + files + ", rooms=" + rooms + ", spaceConvenienceInfos=" + spaceConvenienceInfos
-        + ", spaceReview=" + spaceReview + "]";
+        + addressDetail + ", tel=" + tel + ", intro=" + intro + ", completedAddress="
+        + completedAddress + ", tags=" + tags + ", files=" + files + ", rooms=" + rooms
+        + ", spaceConvenienceInfos=" + spaceConvenienceInfos + ", spaceReview=" + spaceReview + "]";
   }
-  
   public int getNo() {
     return no;
   }
@@ -61,6 +62,12 @@ public class Space {
   public void setIntro(String intro) {
     this.intro = intro;
   }
+  public String getCompletedAddress() {
+    return completedAddress;
+  }
+  public void setCompletedAddress(String completedAddress) {
+    this.completedAddress = completedAddress;
+  }
   public List<SpaceTag> getTags() {
     return tags;
   }
@@ -91,7 +98,5 @@ public class Space {
   public void setSpaceReview(List<SpaceReview> spaceReview) {
     this.spaceReview = spaceReview;
   }
-
-  
   
 }
