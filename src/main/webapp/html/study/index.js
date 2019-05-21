@@ -210,6 +210,7 @@ $('#large-tag > button').click(function(e) {
   loadList(pageNo, clsNo, addressNo);
   $('#small-tag').remove();
   $('#medium-tag').remove();
+  $('#large-tag > button').prop('disabled', true);
 });
 
 $(document.body).bind('loaded-medium-tag', () => {
@@ -220,6 +221,7 @@ $(document.body).bind('loaded-medium-tag', () => {
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo);
     $('#small-tag').remove();
+    $('#medium-tag > button').prop('disabled', true);
   });
 });
 
