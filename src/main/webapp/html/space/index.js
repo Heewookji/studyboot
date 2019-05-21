@@ -6,13 +6,15 @@ function loadList() {
 
   $.getJSON('../../app/json/space/list', 
       function(obj) {
-
-    $(trGenerator(obj)).appendTo('#list');
+  	console.log(obj);
+  	$(trGenerator(obj)).appendTo('#list');
 
     $(document.body).trigger('loaded-list');
   }); // Bitcamp.getJSON()
-
+  
+  
 } // loadList()
+
 
 loadList();
 
