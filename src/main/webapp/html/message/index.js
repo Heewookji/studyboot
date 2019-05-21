@@ -15,7 +15,8 @@ var trGeneratorSend = Handlebars.compile(templateSrcSend);
 
 function loadList(pn) {
 
-  $.getJSON('../../app/json/message/list?pageNo=' + pn + '&pageSize=' + pageSize,
+  $.getJSON('../../app/json/message/list?pageNo=' + pn + '&pageSize=' + pageSize
+      + "&keyword=" + keyword
       function(obj) {
 
     tbody.html('');
