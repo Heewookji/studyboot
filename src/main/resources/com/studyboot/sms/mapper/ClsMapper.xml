@@ -7,8 +7,8 @@
 <mapper namespace="com.studyboot.sms.dao.ClsDao">
 
 <resultMap type="cls" id="cls">
-    <id column="cls_m_id" property="clsMediumNo"/>
     <id column="cls_l_id" property="clsLargeNo"/>
+    <id column="cls_m_id" property="clsMediumNo"/>
     <id column="cls_s_id" property="clsSmallNo"/>
     <result column="name" property="name"/>
   </resultMap>
@@ -25,6 +25,13 @@
     s.name like #{pattern1} or m.name like #{pattern1} or l.name like #{pattern1}
   </select>
   
+  <select id="findLargeClsName" resultMap="cls">
+    select 
+      name,
+      cls_l_id
+    from
+      sms_std_cls_l
+  </select>
   
   <select id="findMediumClsName" resultMap="cls" parameterType="string">
     select 

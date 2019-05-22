@@ -19,20 +19,24 @@ public class ClsServiceImpl implements ClsService {
   
   public List<Cls> clsList(String clsNo) {
     
-    List<Cls> list;
+    List<Cls> list = null;
     
-    if(clsNo.length() == 2){
-     list = clsDao.findMediumClsName(clsNo);
-    } else {
+    if (clsNo.length() == 0) {
+      list = clsDao.findLargeClsName();
+      
+    } else if(clsNo.length() == 2) {
+      list = clsDao.findMediumClsName(clsNo);
+      
+    } else if (clsNo.length() == 4) {
       list = clsDao.findSmallClsName(clsNo);
     }
     
-    for(Cls c : list) {
-      if(c.getClsLargeNo() == null)
+    for (Cls c : list) {
+      if (c.getClsLargeNo() == null)
         c.setClsLargeNo("");
-      if(c.getClsMediumNo() == null)
+      if (c.getClsMediumNo() == null)
         c.setClsMediumNo("");
-      if(c.getClsSmallNo() == null)
+      if (c.getClsSmallNo() == null)
         c.setClsSmallNo("");
       
       c.setClsNo(c.getClsLargeNo()+c.getClsMediumNo()+c.getClsSmallNo());
