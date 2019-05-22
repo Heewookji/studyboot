@@ -59,7 +59,7 @@ function loadAddress (spaceObj) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new daum.maps.InfoWindow({
-          content: '<div style="width:150px;text-align:center;padding:6px 0;">'+val.name+'</div>'
+          content: '<div style="width:150px; text-align:center; padding:6px 0;">'+val.name+'</div>'
         });
         infowindow.open(map, marker);
       } 
