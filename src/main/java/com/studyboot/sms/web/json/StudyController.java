@@ -68,11 +68,12 @@ public class StudyController {
   public Object list(
       @RequestParam(defaultValue = "1") int pageNo,
       @RequestParam int pageSize,
-      @RequestParam String clsNo,
+      @RequestParam List<String> clsNo,
       @RequestParam String addressNo,
       @RequestParam double rateValue,
       @RequestParam String keyword) {
     
+    System.out.println(clsNo.get(0));
     
     // 페이지 사이즈
     if (pageSize < 3 || pageSize > 8) {
@@ -83,7 +84,7 @@ public class StudyController {
       addressNo = "";
     }
     if (clsNo.equals("undefined")) {
-      clsNo = "";
+      //clsNo = "";
     }
     //매퍼에서 키워드를 조건문 keyword != null 로 비교하기 위하여. 안그러면 keywordSize != 0로 해야한다.
     if (keyword.equals("undefined")) {
@@ -93,7 +94,7 @@ public class StudyController {
     HashMap<String,Object> content = new HashMap<>();
     
     // clsNo와 일치하는 스터디 개수를 불러온다.
-    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword);
+    int rowCount = studyService.size("11", addressNo, rateValue, keyword);
     if (rowCount == 0) {
       content.put("pageNo", 0);
       content.put("rowCount", rowCount);
@@ -114,7 +115,7 @@ public class StudyController {
     
     
     List<Study> studys = studyService.list(
-        pageNo, pageSize, clsNo, addressNo, rateValue, keyword);
+        pageNo, pageSize, "11", addressNo, rateValue, keyword);
     
     //리스트에 출력할 주소는 따로 꽂아준다. 
     for(Study study : studys) {
@@ -165,6 +166,10 @@ public class StudyController {
   public Object category(
       @RequestParam String clsNo) {
     HashMap<String,Object> content = new HashMap<>();
+    
+    if (clsNo.equals("undefined")) {
+      clsNo = "";
+    }
     
     List<Cls> list = clsService.clsList(clsNo);
     content.put("list", list);
