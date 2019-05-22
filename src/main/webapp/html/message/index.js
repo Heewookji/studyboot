@@ -179,14 +179,14 @@ $checkAll.change(function () {
 });
 
 $(document.body).bind('loaded-list', () => {
+  
 $('#messageForm-btn').click((e) => {
 $('#recv_id').val("");
 $('#message_contents').val("");
 $('#title').val("");
 $('#sendNo').val(6);
-
 $('.sspctForm-Format').removeClass('std-invisible');
-  });
+});
 
 $('.sspctForm-btn').click((e) => {
 $('#message_contents').val("");
@@ -194,6 +194,14 @@ $('#title').val("");
 $('.sspctForm-Format').removeClass('std-invisible');
 $('#recv_id').val($(e.target).attr('data-content'));
 $('#sendNo').val(6);
+});
+
+$('#msg-response').click((e) => {
+  $('#message_contents').val("");
+  $('#title').val("");
+  $('.sspctForm-Format').removeClass('std-invisible');
+  $('#recv_id').val($('#nickName').html());
+  $('#sendNo').val(6);
 });
 
 });
