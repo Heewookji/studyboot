@@ -26,8 +26,7 @@
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="dropdownMenuButton">
 					<a class="dropdown-item" href="#" id="recvPage">받은 쪽지함</a> <a
-						class="dropdown-item" href="#" id="sendPage">보낸 쪽지함</a> <a
-						class="dropdown-item" href="#" id="sspctPage">보관함</a>
+						class="dropdown-item" href="#" id="sendPage">보낸 쪽지함</a> 
 				</div>
 			</div>
 
@@ -50,9 +49,10 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
+					    <th id=check><input type="checkbox" name="allCheck" id="checkAll"/></th>
 						<th scope="col" id="message">보낸 회원</th>
-						<th scope="col">제목</th>
-						<th scope="col">날짜</th>
+						<th scope="col" class="check">제목</th>
+						<th scope="col" class="check">날짜</th>
 					</tr>
 				</thead>
 
@@ -76,8 +76,10 @@
 						</ul>
 					</nav>
 				</div>
-
-
+        <div class="col">
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+        id="msg-Delete-btn">삭제</button>
+       </div>
 			</div>
 		</div>
 	</div>
@@ -154,6 +156,7 @@
 <script id="ms-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
+<th><input type="checkbox" name="listCheck" value={{no}}></th>
   <td>
 <a href='#' class='sspctForm-btn'
  data-toggle="modal" 
@@ -167,14 +170,15 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
 </td>
 
   <td align="center">{{date}}</td>
-
 </tr>
 {{/each}}
 </script>
+
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
+<th><input type="checkbox" name="listCheck" value={{no}}></th>
   <td>
 <a href='#' class='sspctForm-btn'
  data-toggle="modal" 
@@ -188,13 +192,9 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
 </td>
 
   <td align="center">{{date}}</td>
-
 </tr>
 {{/each}}
 </script>
-
-
-
 
 	<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
 	<script
