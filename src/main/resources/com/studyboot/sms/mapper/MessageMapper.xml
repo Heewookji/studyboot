@@ -158,8 +158,22 @@
     where msg_id = #{no}
   </delete>
   
+  <insert id="insert" parameterType="message">
+    insert into sms_msg(
+      send_id,
+      recv_id,
+      titl,
+      cont)
+    values(
+      #{sendNo},
+      #{recvNo},
+      #{title},
+      #{contents}
+    )
+    
+  
+  </insert>
+  
 </mapper>
 
-    <!--  
-select c.msg_id, c.recv_id, c.titl, c.dt, i.nick_Name as massage_nick from sms_msg c left outer join sms_member i on recv_id = i.member_id where send_id=6;
- -->
+ 

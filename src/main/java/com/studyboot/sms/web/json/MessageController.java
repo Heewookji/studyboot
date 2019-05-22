@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Message;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MessageService;
@@ -20,13 +22,17 @@ public class MessageController {
   @Autowired MessageService messageService;
   @Autowired MemberService memberService;
 
-  /*
   @PostMapping("add")
-  public Object add(Inquiry inquiry) {
+  public Object add(Message message, Member member) {
+    
     HashMap<String,Object> content = new HashMap<>();
-
+    
+    String nickName = member.getNickName();
+    int memberNo = memberService.findById(nickName);
+    message.setRecvNo(memberNo);
+  
     try {
-      inquiryService.add(inquiry);
+      messageService.add(message);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
@@ -35,8 +41,6 @@ public class MessageController {
 
     return content;
   }
-
-   */
 
   @GetMapping("delete")
   public Object delete(int no) {

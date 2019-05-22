@@ -118,7 +118,7 @@
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="formTitle"></h5>
+					<h5 class="modal-title" id="formTitle" align="center" style="width: 768px;">쪽지 보내기</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -127,22 +127,23 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group sspctForm-Format std-invisible">
-							<label for="recipient-name" class="col-form-label">신고:</label> <span
-								class="form-control" id="sspctName"></span> <input type="hidden"
-								id="inqryNo"> <span class="std-invisible" id="inqryName"></span>
-							<input type="hidden" id="sspctNo"> <input type="hidden"
-								id="inqryClsNo">
+							<label for="recipient-name" class="col-form-label">받는 회원</label>
+							<input class="form-control" id="recv_id" style="width: 300px;"></input>
+							<input type="hidden" id="sendNo"></input>
+							<label for="recipient-name" class="col-form-label">제목</label>
+							<input class="form-control" id="title"></input>
 						</div>
 						<div class="form-group">
-							<label for="recipient-name" class="col-form-label">내용:</label> <input
-								type="text" class="form-control" id="inqryContents">
+							<label for="recipient-name" class="col-form-label">내용</label> 
+							<textarea style="width: 768px; height: 500px;"
+							class="form-control" id="message_contents"></textarea>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="inqryAdd-btn">제출하기</button>
+					<button type="button" class="btn btn-primary" id="messageAdd-btn">보내기</button>
 				</div>
 			</div>
 		</div>

@@ -53,6 +53,17 @@
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select * from sms_member where member_id = #{value}
   </select>
+  
+  
+   <select id="findById" resultType="int" parameterType="string">
+    select 
+      member_id 
+    from 
+      sms_member
+    where
+      nick_name = #{nickName}
+  </select>
+  
 </mapper>
 
 
