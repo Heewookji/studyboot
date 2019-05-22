@@ -37,11 +37,13 @@ public class StudyServiceImpl implements StudyService {
       double rateValue, String keyword) {
     
     HashMap<String,Object> params = new HashMap<>();
-    
-    //키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
-    //그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
+
+//    키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
+//    그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
     if(keyword != null) {
-    List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(keyword);
+      HashMap<String,Object> clsParam = new HashMap<>();
+      clsParam.put("keyword", keyword);
+    List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
     
     if(findedClsNosByKeyword.size() != 0) {
       params.put("findedClsNosByKeyword", findedClsNosByKeyword);
@@ -134,10 +136,10 @@ public class StudyServiceImpl implements StudyService {
       String clsNo, String addressNo , double rateValue, String keyword) {
     
     HashMap<String,Object> params = new HashMap<>();
-    
     if(keyword != null) {
-      List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(keyword);
-      
+      HashMap<String,Object> clsParam = new HashMap<>();
+      clsParam.put("keyword", keyword);
+      List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
       if(findedClsNosByKeyword.size() != 0) {
         params.put("findedClsNosByKeyword", findedClsNosByKeyword);
       }

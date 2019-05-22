@@ -13,15 +13,15 @@
     <result column="name" property="name"/>
   </resultMap>
   
-  <select id="findedClsNoByKeyword" resultType="string" parameterType="string">
+  <select id="findedClsNoByKeyword" resultType="string" parameterType="map">
     select 
-      CONCAT(s.cls_s_id, s.cls_m_id, s.cls_l_id)
+      CONCAT(s.cls_l_id, s.cls_m_id, s.cls_s_id)
     from
       sms_std_cls_s s
-        inner join sms_std_cls_m m on s.cls_m_id = m.cls_m_id
+        inner join sms_std_cls_m m on (s.cls_m_id = m.cls_m_id and s.cls_l_id = m.cls_l_id  )
         inner join sms_std_cls_l l on s.cls_l_id = l.cls_l_id
     where 
-    <bind name="pattern1" value="'%' + value + '%'"/>
+    <bind name="pattern1" value="'%' + keyword + '%'"/>
     s.name like #{pattern1} or m.name like #{pattern1} or l.name like #{pattern1}
   </select>
   
