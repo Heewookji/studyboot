@@ -24,13 +24,13 @@ public class MessageController {
 
   @PostMapping("add")
   public Object add(Message message, Member member) {
-    
+
     HashMap<String,Object> content = new HashMap<>();
-    
+
     String nickName = member.getNickName();
     int memberNo = memberService.findById(nickName);
     message.setRecvNo(memberNo);
-  
+
     try {
       messageService.add(message);
       content.put("status", "success");
@@ -58,9 +58,30 @@ public class MessageController {
     return content;
   }
 
+  @GetMapping("delete2")
+  public Object delete2(int[] test) {
+
+    HashMap<String,Object> content = new HashMap<>();
+    System.out.println(test.length);
+    try {
+      
+      for (int i = 0; i <= test.length; i++) {
+        messageService.delete(test[i]);
+      }
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+
 
   @GetMapping("detail")
-  public Object detail(@RequestParam int no) {
+  public Object detail(@RequestParam int no, int data) {
+
+    System.out.println(data);
 
     Message message = messageService.get(no);
 
@@ -92,14 +113,14 @@ public class MessageController {
       pageSize = 3;
 
     int rowCount = messageService.size(memberNos); 
-    
+
     if (rowCount == 0) {
       content.put("pageNo", 0);
       return content;
     }
-    
+
     int totalPage = rowCount / pageSize;
-    
+
     if (rowCount % pageSize > 0)
       totalPage++;
 
@@ -143,14 +164,14 @@ public class MessageController {
       pageSize = 3;
 
     int rowCount = messageService.size2(memberNos); 
-    
+
     if (rowCount == 0) {
       content.put("pageNo", 0);
       return content;
     }
-    
+
     int totalPage = rowCount / pageSize;
-    
+
     if (rowCount % pageSize > 0)
       totalPage++;
 

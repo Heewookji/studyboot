@@ -163,23 +163,42 @@ loadList(1);
 //});
 //});
 
+// 체크박스 설정
+var $checkAll = $('#checkAll');
+$checkAll.change(function () {
+    var $this = $(this);
+    var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
+    // console.log(checked);
+    $('input:checkbox[name="listCheck"]').prop('checked', checked);
+});
 
+var boxes = $('input:checkbox[name="listCheck"]');
+console.log(boxes);
+boxes.change(function () {
+    // 첫 번째 방법
+//    var selectAll = true;
+//    var count = boxes.length;
+//    var i = 0;
+//    for (; i < count; i++) {
+//        if (!boxes[i].checked) {
+//            selectAll = false;
+//            break;
+//        }
+//    }
+    // 두 번째 방법
+    var boxLength = boxes.length;
+    // 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
+    var checkedLength = $('input:checkbox[name="listCheck"]:checked').length;
+    var selectAll = (boxLength == checkedLength);
+    console.log(selectAll);
 
+    $checkAll.prop('checked', selectAll);
 
-//$('#sspctPage').click((e) => {
-//e.preventDefault();
-//currCls.html("신고");
-//keyword = '';
-//loadList(1, "신고");
-//});
-
-
-
-
-
+});
+ /* 처음 화면이 출력되면 체크박스의 값이 없음으로 boxes의 랭스가 0으로 변화하지 않는다.. 
+  * 이부분을 해결할 방법을 찾아야 됨*/ 
 
 $(document.body).bind('loaded-list', () => {
-
 $('#messageForm-btn').click((e) => {
 $('#recv_id').val("");
 $('#message_contents').val("");
@@ -213,33 +232,38 @@ contents: $(message_contents).val()
 success: function(data){
 var obj = JSON.parse(data);
 location.reload();
-   }   
+   },
+error: function(){
+  alert("닉네임을 확인해주세요.");
+  $(recv_id).val("");
+     }
  });
 });
 
-/*
-//add-btn URI인코딩 방식으로 보냈음
-$('#messageAdd-btn').click(function() {
-  jQuery.ajax({
-    url:"'../../app/json/message/add'",
-    type:"POST",
-    data:  "messagePerson.nickName=" + encodeURIComponent($("#recv_id").val()) +
-    "&sendNo=" + encodeURIComponent($("#cls").val()) +  
-    "&title=" + encodeURIComponent($("#address").val()) +
-    "&goal=" + encodeURIComponent($("#goal").val()) +
-    contentType: "application/x-www-form-urlencoded",
-    success: function(data) {
-      if (data.status == 'success') {
-        alert("저장되었습니다.");
-        location.href = 'index.html';
-      } else {
-        alert("잠시 후에 시도해주세요.");
-      }
-    }
+
+$('#msg-Delete-btn').click((e) => {
+  var test = [];
+  $("input[name=listCheck]:checked").each(function() {
+    test.push($(this).val());
   });
+  
+  $.getJSON('../../app/json/message/delete2?test=' + test,
+      function(obj) {
+  location.reload();
+})
 });
 
-*/
+
+
+
+
+
+
+
+
+
+
+
 
 
 
