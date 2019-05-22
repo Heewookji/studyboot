@@ -178,54 +178,68 @@ loadList(1);
 
 
 
-//$(document.body).bind('loaded-list', () => {
+$(document.body).bind('loaded-list', () => {
 
-//$('#inqryForm-btn').click((e) => {
-//$('.sspctForm-Format').addClass('std-invisible');
-//$('#inqryName').html("홍길동");
-//$('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
-//$('#sspctName').val("");
-//$('#inqryNo').val(1);
-//$('#sspctNo').val(0);
-//$('#inqryClsNo').val(1);
-//});
+$('#messageForm-btn').click((e) => {
+$('#recv_id').val("");
+$('#message_contents').val("");
+$('#title').val("");
+$('#sendNo').val(6);
 
-//$('.sspctForm-btn').click((e) => {
-//$('.sspctForm-Format').removeClass('std-invisible');
-//$('#inqryName').html("홍길동");
-//$('#formTitle').html($('#inqryName').html() +"님  신고"+ " 내용을 적어주세요");
-//$('#sspctName').html($(e.target).attr('data-content'));
-//$('#inqryNo').val(1);
-//$('#sspctNo').val($(e.target).attr('data-no'));
-//$('#inqryClsNo').val(2);
-//});
-//});
+$('.sspctForm-Format').removeClass('std-invisible');
+  });
 
+$('.sspctForm-btn').click((e) => {
+$('#message_contents').val("");
+$('#title').val("");
+$('.sspctForm-Format').removeClass('std-invisible');
+$('#recv_id').val($(e.target).attr('data-content'));
+$('#sendNo').val(6);
+});
 
+});
 
-//$('#inqryAdd-btn').click((e) => {
-//$.ajax({
-//url:'../../app/json/message/add',
-//type: 'post',
-//dataType: 'text',
-//data: {
-//clsNo: $(inqryClsNo).val(),
-//contents:$(inqryContents).val(),
-//inquiryPersonNo: $(inqryNo).val(),
-//suspectPersonNo: $(sspctNo).val()
-//},
-//success: function(data){
-//var obj = JSON.parse(data);
-//location.reload();
-//}
-//});
+$('#messageAdd-btn').click((e) => {
+$.ajax({
+url:'../../app/json/message/add',
+type: 'post',
+dataType: 'text',
+data: {
+nickName : $(recv_id).val(),
+sendNo: $(sendNo).val(),
+title: $(title).val(),
+contents: $(message_contents).val()
+},
+success: function(data){
+var obj = JSON.parse(data);
+location.reload();
+   }   
+ });
+});
 
-//});
+/*
+//add-btn URI인코딩 방식으로 보냈음
+$('#messageAdd-btn').click(function() {
+  jQuery.ajax({
+    url:"'../../app/json/message/add'",
+    type:"POST",
+    data:  "messagePerson.nickName=" + encodeURIComponent($("#recv_id").val()) +
+    "&sendNo=" + encodeURIComponent($("#cls").val()) +  
+    "&title=" + encodeURIComponent($("#address").val()) +
+    "&goal=" + encodeURIComponent($("#goal").val()) +
+    contentType: "application/x-www-form-urlencoded",
+    success: function(data) {
+      if (data.status == 'success') {
+        alert("저장되었습니다.");
+        location.href = 'index.html';
+      } else {
+        alert("잠시 후에 시도해주세요.");
+      }
+    }
+  });
+});
 
-
-
-
-
+*/
 
 
 

@@ -10,6 +10,7 @@ public interface MemberDao {
 	List<Integer> findByKeywordMsg(HashMap<String, Object> keywordMap);
 	Member findByNo(int no);
 	int update(Member member);
+	int findById(String nickName);
 	
 }
 

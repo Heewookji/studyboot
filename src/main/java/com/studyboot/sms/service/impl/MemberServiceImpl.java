@@ -36,6 +36,12 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.findByKeywordMsg(keywordMap);
     
   }
+
+  @Override
+  public int findById(String nickName) {
+    
+    return memberDao.findById(nickName);
+  }
 }
 
 
