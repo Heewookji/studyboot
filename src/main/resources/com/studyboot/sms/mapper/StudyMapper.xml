@@ -68,9 +68,7 @@
 				and (
 				name like #{pattern1}
 				or goal like #{pattern1}
-				or cont like
-				#{pattern1}
-				)
+				or cont like #{pattern1}
 				<if test="findedClsNosByKeyword != null">
 					or
 					<foreach collection="findedClsNosByKeyword" item="k"
@@ -78,6 +76,7 @@
 						cls_lms = #{k}
 					</foreach>
 				</if>
+				)
 			</if>
 		</where>
 		order by
@@ -316,9 +315,7 @@
 				and (
 				name like #{pattern1}
 				or goal like #{pattern1}
-				or cont like
-				#{pattern1}
-				)
+				or cont like #{pattern1}
 				<if test="findedClsNosByKeyword != null">
 					or
 					<foreach collection="findedClsNosByKeyword" item="k"
@@ -326,6 +323,7 @@
 						cls_lms = #{k}
 					</foreach>
 				</if>
+				)
 			</if>
 		</where>
 

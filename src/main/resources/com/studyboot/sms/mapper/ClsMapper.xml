@@ -13,7 +13,7 @@
     <result column="name" property="name"/>
   </resultMap>
   
-  <select id="findClsNoByKeyword" resultType="string" parameterType="string">
+  <select id="findedClsNoByKeyword" resultType="string" parameterType="string">
     select 
       CONCAT(s.cls_s_id, s.cls_m_id, s.cls_l_id)
     from
