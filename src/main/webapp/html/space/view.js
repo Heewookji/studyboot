@@ -15,12 +15,12 @@ if (param) {
 }
 
 //겟 방식은 getJson으로 처리하고
-//post 방식은 ajax는 get방식과 post방식 모두 처리 할 수 있다. (보통 post로 씀)
+//post 방식은 get방식과 post방식 모두 처리 할 수 있다. (보통 post로 씀)
 function loadDetail(no) {
 
   $.ajax({
     // json/space/detail이 붙은 controller로 이동하고 ?(물음표) 뒤에 값은 파라미터 값으로 보내준다. 
-    // + 이후에 있는 controller의 no는 파라미터 명이다.
+    // + 이후에 있는 no는 controller의 파라미터 명이다.
     url : "../../app/json/space/detail?no=" + no,
     data : {name:'name', intro:'intro'},
     success : function(data) {
