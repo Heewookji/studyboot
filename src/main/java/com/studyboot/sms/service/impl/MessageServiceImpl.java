@@ -68,25 +68,10 @@ public class MessageServiceImpl implements MessageService {
     return messageDao.delete(no);
   }
   
-/*
   @Override
-  public int add(Inquiry inquiry) {
-    return inquiryDao.insert(inquiry);
+  public int add(Message message) {
+    return messageDao.insert(message);
   }
-
-  @Override
-  public int size(int clsNo, List<Integer> memberNos) {
-    
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("cls", clsNo);
-    params.put("member_ids", memberNos);
-
-    int count = inquiryDao.countByClsAndMember(params);
-    return count;
-  }
-*/
-
-
 
 }
 
