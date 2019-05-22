@@ -79,9 +79,7 @@ public class MessageController {
 
 
   @GetMapping("detail")
-  public Object detail(@RequestParam int no, int data) {
-
-    System.out.println(data);
+  public Object detail(@RequestParam int no) {
 
     Message message = messageService.get(no);
 
