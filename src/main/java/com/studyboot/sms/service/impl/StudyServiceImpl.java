@@ -29,7 +29,39 @@ public class StudyServiceImpl implements StudyService {
     this.studyMemberDao = studyMemberDao;
     this.addressDao = addressDao;
   }
+
   
+  
+  @Override
+  public List<Study> list(int pageNo, int pageSize, List<String> clsNo, String addressNo,
+      double rateValue, String keyword) {
+
+    HashMap<String,Object> params = new HashMap<>();
+
+//    키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
+//    그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
+      HashMap<String,Object> clsParam = new HashMap<>();
+      clsParam.put("keyword", keyword);
+    List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
+    
+    if(findedClsNosByKeyword.size() != 0) {
+      params.put("findedClsNosByKeyword", findedClsNosByKeyword);
+    }
+    
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("clsNo", clsNo);
+    params.put("addressNo", addressNo);
+    params.put("addressNoSize", addressNo.length());
+    params.put("rateValue", rateValue);
+    params.put("keyword", keyword);
+    
+    List<Study> list;
+    
+    list = studyDao.findAllByKeyword(params);
+    
+      return list;
+  }
   @Override
   public List<Study> list(
       int pageNo, int pageSize,
@@ -153,6 +185,28 @@ public class StudyServiceImpl implements StudyService {
     
     return  studyDao.countAll(params);
   }
+  
+  @Override
+  public int size(
+      List<String> clsNo, String addressNo , double rateValue, String keyword) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+      HashMap<String,Object> clsParam = new HashMap<>();
+      clsParam.put("keyword", keyword);
+      List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
+      if(findedClsNosByKeyword.size() != 0) {
+        params.put("findedClsNosByKeyword", findedClsNosByKeyword);
+      }
+    params.put("clsNo", clsNo);
+    params.put("addressNo", addressNo);
+    params.put("addressSize", addressNo.length());
+    params.put("keyword", keyword);
+    params.put("rateValue", rateValue);
+    
+    return  studyDao.countAllByKeyword(params);
+  }
+
+  
   
   
   

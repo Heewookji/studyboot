@@ -85,119 +85,66 @@
 			limit #{rowNo}, #{size}
 		</if>
 	</select>
+	
+	<select id="findAllByKeyword" resultMap="studyMap" parameterType="map">
+    select
+    std_id,
+    name,
+    adr_lms,
+    cls_lms,
+    rate,
+    photo,
+    goal
+    from
+    sms_std
+    <where>
+      rate >= #{rateValue}
+         <if test="clsNo != null">
+        and (
+         <foreach collection="clsNo" item="c" separator="or">
+         IF ( LENGTH(#{c}) = 2,  LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) = #{c})
+          </foreach>
+          )
+      </if>
+      
+      <if test="addressNoSize != 0">
+        and
+        <if test="addressNoSize == 2">
+          LEFT(adr_lms,2) = #{addressNo}
+        </if>
+        <if test="addressNoSize == 4">
+          LEFT(adr_lms,4) = #{addressNo}
+        </if>
+        <if test="addressNoSize == 6">
+          adr_lms = #{addressNo}
+        </if>
+      </if>
 
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and (
+        name like #{pattern1}
+        or goal like #{pattern1}
+        or cont like #{pattern1}
+        <if test="findedClsNosByKeyword != null">
+          or
+          <foreach collection="findedClsNosByKeyword" item="k"
+            separator="or">
+            cls_lms = #{k}
+          </foreach>
+        </if>
+        )
+      </if>
+      
+    </where>
+    order by
+    std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+	
 
-	<select id="findAllByLargeFilter" resultMap="studyMap"
-		parameterType="map">
-		select
-		s.std_id,
-		s.name,
-		s.adr_lms,
-		s.cls_lms,
-		s.rate,
-		s.photo,
-		s.goal,
-		c.name as cls_name
-		from
-		sms_std s
-		inner join sms_std_cls_l c
-		<bind name="pattern1" value="clsNo + '%'" />
-		on s.cls_lms like #{pattern1}
-		where
-		c.cls_l_id like #{pattern1}
-		and
-		s.rate >= #{rateValue}
-		<if test="addressNoSize == 2">
-			and LEFT(s.adr_lms,2) = #{addressNo}
-		</if>
-		<if test="addressNoSize == 4">
-			and LEFT(s.adr_lms,4) = #{addressNo}
-		</if>
-		<if test="addressNoSize == 6">
-			and s.adr_lms = #{addressNo}
-		</if>
-		order by
-		std_id desc
-		<if test="size != null and rowNo != null">
-			limit #{rowNo}, #{size}
-		</if>
-	</select>
-
-	<select id="findAllByMediumFilter" resultMap="studyMap"
-		parameterType="map">
-		select
-		s.std_id,
-		s.name,
-		s.adr_lms,
-		s.cls_lms,
-		s.rate,
-		s.photo,
-		s.goal,
-		c.name as cls_name
-		from
-		sms_std s
-		inner join sms_std_cls_m c
-		<bind name="pattern1" value="clsNo + '%'" />
-		on s.cls_lms like #{pattern1}
-		where
-		c.cls_m_id = RIGHT(#{clsNo},2)
-		and
-		c.cls_l_id = LEFT(#{clsNo},2)
-		and s.rate >= #{rateValue}
-		<if test="addressNoSize == 2">
-			and LEFT(s.adr_lms,2) = #{addressNo}
-		</if>
-		<if test="addressNoSize == 4">
-			and LEFT(s.adr_lms,4) = #{addressNo}
-		</if>
-		<if test="addressNoSize == 6">
-			and s.adr_lms = #{addressNo}
-		</if>
-		order by
-		std_id desc
-		<if test="size != null and rowNo != null">
-			limit #{rowNo}, #{size}
-		</if>
-	</select>
-
-	<select id="findAllBySmallFilter" resultMap="studyMap"
-		parameterType="map">
-		select
-		s.std_id,
-		s.name,
-		s.adr_lms,
-		s.cls_lms,
-		s.rate,
-		s.photo,
-		s.goal,
-		c.name as cls_name
-		from
-		sms_std s
-		inner join sms_std_cls_s c
-		on s.cls_lms
-		= #{clsNo}
-		where
-		c.cls_s_id = RIGHT(#{clsNo},2)
-		and c.cls_m_id =
-		MID(#{clsNo},3,2)
-		and c.cls_l_id = LEFT(#{clsNo},2)
-		and s.rate >=
-		#{rateValue}
-		<if test="addressNoSize == 2">
-			and LEFT(s.adr_lms,2) = #{addressNo}
-		</if>
-		<if test="addressNoSize == 4">
-			and LEFT(s.adr_lms,4) = #{addressNo}
-		</if>
-		<if test="addressNoSize == 6">
-			and s.adr_lms = #{addressNo}
-		</if>
-		order by
-		std_id desc
-		<if test="size != null and rowNo != null">
-			limit #{rowNo}, #{size}
-		</if>
-	</select>
 
 
 	<select id="findByNo" resultMap="studyMap" parameterType="int">
@@ -328,6 +275,52 @@
 		</where>
 
 	</select>
+	
+	
+	
+	<select id="countAllByKeyword" resultType="int" parameterType="map">
+    select count(*) from sms_std
+    <where>
+      rate >= #{rateValue}
+      <if test="clsNo != null">
+        and (
+         <foreach collection="clsNo" item="c" separator="or">
+         IF ( LENGTH(#{c}) = 2,  LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) = #{c})
+          </foreach>
+          )
+      </if>
+
+      <if test="addressSize != 0">
+        and
+        <if test="addressSize == 2">
+          LEFT(adr_lms,2) = #{addressNo}
+        </if>
+        <if test="addressSize == 4">
+          LEFT(adr_lms,4) = #{addressNo}
+        </if>
+        <if test="addressSize == 6">
+          adr_lms = #{addressNo}
+        </if>
+      </if>
+
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and (
+        name like #{pattern1}
+        or goal like #{pattern1}
+        or cont like #{pattern1}
+        <if test="findedClsNosByKeyword != null">
+          or
+          <foreach collection="findedClsNosByKeyword" item="k"
+            separator="or">
+            cls_lms = #{k}
+          </foreach>
+        </if>
+        )
+      </if>
+    </where>
+
+  </select>
 
 
 </mapper>

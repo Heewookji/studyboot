@@ -16,7 +16,7 @@
     <input class="form-control mr-sm-2" id="study-search" type="search"
      placeholder="분야별" aria-label="Search">
     <button class="btn btn-outline-primary my-2 my-sm-0"
-     id="search-btn" type="button">검색</button>
+     id="search-btn" type="button">사용자 검색</button>
    </form>
   </nav>
   </header>
@@ -165,17 +165,27 @@
 {{/each}}
 </script>
 <!-- 카테고리 중분류 -->
-<script id="tr-template-mcls" type="text/x-handlebars-template">
+
+<script id="tr-template-checklist" type="text/x-handlebars-template">
 {{#each list}}
-<div class="dropdown">
+
+<div>
+<div class="form-check" style="display: inline">
+  <input class="form-check-input lcheck{{clsNo}}" type="checkbox" value="{{clsNo}}" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+     {{name}}
+  </label>
+</div>
+<div class="dropdown" style="display: inline">
   <button class="btn btn-secondary dropdown-toggle mcls-btn" type="button" data-no="{{clsNo}}"
 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{name}}
   </button>
   <div class="dropdown-menu smallTitle" id="smallClsTitle{{clsNo}}" aria-labelledby="dropdownMenuButton">
-
   </div>
 </div>
+
+</div>
+
 {{/each}}
 </script>
 
@@ -211,7 +221,7 @@ id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expande
 <script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="index.js"></script>
+<script src="search.js"></script>
 </body>
 </html>
 

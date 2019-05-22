@@ -32,5 +32,5 @@ $('.space-btn').click((e) => {
 $('#search-btn').click((e) => {
     pageNo = 1;
     keyword = $("#study-search").val();
-    window.location.href = './html/study/index.html?clsNo=' + '&clsTitle=' + '&keyword=' + keyword;
+    window.location.href = './html/study/search.html?keyword=' + keyword;
   });

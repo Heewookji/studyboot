@@ -2,18 +2,19 @@ var param = location.href.split('?')[1],
 pageNo = 1,
 pageSize = 6,
 addressNo,
-clsNo,
+clsNo = [],
 rateValue = 3,
 largeClsNo,
+mediumClsNo,
 clsTitle,
 keyword,
 tbody = $('#card-div'),
 //card 리스트 출력 - 스터디 목록
 cardTemplateSrc = $('#card-template').html(),
 cardGenerator = Handlebars.compile(cardTemplateSrc),
-//script 태그에서 템플릿 데이터를 꺼낸다. - 카테고리 대,중분류
-templateSrcMediumCls = $('#tr-template-mcls').html(),
-trGeneratorMediumCls = Handlebars.compile(templateSrcMediumCls),
+//검색시에 대분류 체크박스리스트 출력한다.
+templateSrcCheckList = $('#tr-template-checklist').html(),
+trGeneratorCheckList = Handlebars.compile(templateSrcCheckList),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 카테고리 중,소분류
 templateSrcSmallCls = $('#tr-template-scls').html(),
 trGeneratorSmallCls = Handlebars.compile(templateSrcSmallCls),
@@ -29,9 +30,9 @@ trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress);
 
 
 //JSON 형식의 데이터 목록 가져오기
-function loadList(pageNo, clsNo, addressNo, rateValue, keyword) {
+function searchList(pageNo, clsNo, addressNo, rateValue, keyword) {
 
-    $.getJSON('../../app/json/study/list?pageNo=' + pageNo
+    $.getJSON('../../app/json/study/search?pageNo=' + pageNo
 	    + '&pageSize=' + pageSize
 	    + '&clsNo=' + clsNo
 	    + '&addressNo=' + addressNo 
@@ -44,6 +45,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword) {
 		'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
 		'rateValue=' + rateValue, 'keyword=' + keyword);
 
+	// keyword 검색된 스터디 개수 알려준다.(기존 분류제목에)
 
 	// 현재 끝페이지까지 왔고, 처음 출력이 아니라면
 	// (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
@@ -56,6 +58,10 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword) {
 	if (pageNo == 0){
 	    return;
 	}
+	
+	if(keyword != undefined){
+	    $('#clsTitle').html(obj.rowCount + "개의 검색결과");
+	} 
 
 	$(cardGenerator(obj)).appendTo(tbody);
 
@@ -64,13 +70,13 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword) {
     });
 };
 
-//카테고리 분류 로딩 함수
-function loadCategoryTitle(clsNo) {
+function loadCheckList(clsNo) {
     $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
 	    function(obj) {
-	    $(trGeneratorMediumCls(obj)).appendTo('#categoryTitle');
 
-	$(document.body).trigger('loaded-categorytitle');
+	$(trGeneratorCheckList(obj)).appendTo('#categoryTitle');
+	
+	$(document.body).trigger('loaded-checklist');
     });
 };
 
@@ -106,28 +112,17 @@ function loadAddress(addressNo) {
 
 //페이지를 출력한 후 pageNo 와 clsNo, keyword를 넘겨주고 로딩한다.
 if (param) {
-    // 빈 문자열이 들어가는 것을 방지하기 위해. undefined 로 넣어주기 위해 조건문 썻음
-    if(param.split('&')[0].split('=')[1].length != 0){
-	clsNo = param.split('&')[0].split('=')[1];
-    }
-
-    largeClsNo = param.split('&')[0].split('=')[1];
-    clsTitle = param.split('&')[1].split('=')[1];
-    clsTitle = decodeURIComponent(clsTitle);
-
+	keyword = decodeURIComponent(param.split('=')[1]);
     pageNo = 1;
-
-    $('#clsTitle').html(clsTitle);
-    $('#large-tag > button').text(clsTitle);
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword);
-    loadCategoryTitle(clsNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    loadCheckList(clsNo);
     loadAddress();
 }
 
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	loadList(++pageNo, clsNo, addressNo, rateValue, keyword);
+	searchList(++pageNo, clsNo, addressNo, rateValue, keyword);
     }
 });
 
@@ -141,27 +136,39 @@ $(document.body).bind('loaded-list', () => {
 });
 
 //카테고리 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
-$(document.body).bind('loaded-categorytitle', () => {
+$(document.body).bind('loaded-checklist', () => {
     $('.mcls-btn').click(function(e) {
-	pageNo = 1; // 페이지 초기화
-	tbody.html(''); // 스터디 목록 초기화
 	$('.smallTitle').html(''); // 카테고리 소분류 목록 초기화
-	clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword);
-	loadSmallTitle(clsNo); // 카테고리 소분류 목록 불러오기
+	mediumClsNo = $(e.target).attr('data-no');
+	loadSmallTitle(mediumClsNo); // 카테고리 소분류 목록 불러오기
 
 	// 빵부스러기
-
+	$('#large-tag').remove();
 	$('#small-tag').remove();
 	$('#medium-tag').remove();
 	$('#large-tag > button').prop('disabled', false);
+	
 	clsName = $(e.target).text();
 	var $mediumTag = 
-	    $('<li class="breadcrumb-item" id="medium-tag"><button class="btn btn-link" data-no="'+ clsNo +'" disabled>' + clsName+ '</button></li>');
+	    $('<li class="breadcrumb-item" id="medium-tag"><button class="btn btn-link" data-no="'+ mediumClsNo +'" disabled>' + clsName+ '</button></li>');
 	$('#cls-tag').append($mediumTag);
 	$(document.body).trigger('loaded-medium-tag');
     });
     
+    $('.form-check .form-check-input').change(function(e) {
+	
+	pageNo = 1; // 페이지 초기화
+	tbody.html(''); // 스터디 목록 초기화
+	
+	if($('.lcheck' + $(this).val()).is(":checked")){
+	    clsNo.push($(this).val());
+	} else {
+	    var index = clsNo.indexOf($(this).val());
+	    clsNo.splice(index,1);
+	}
+	console.log(clsNo);
+	searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+	});
 });
 
 //카테고리 하위 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
@@ -171,7 +178,7 @@ $(document.body).bind('loaded-smalltitle', () => {
 	pageNo = 1;
 	tbody.html('');
 	clsNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+	searchList(pageNo, clsNo, addressNo, rateValue, keyword);
 	
 	// 빵부스러기
 	$('#small-tag').remove();
@@ -195,7 +202,7 @@ $(document.body).bind('loaded-largeAddress', () => {
 	$('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
 	$('#largeAddressButton').text($(e.target).text()); // 지역 대분류 버튼 이름 변경
 	addressNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+	searchList(pageNo, clsNo, addressNo, rateValue, keyword);
 	loadAddress(addressNo);
     });
 });
@@ -209,7 +216,7 @@ $(document.body).bind('loaded-mediumAddress', () => {
 	$('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
 	$('#mediumAddressButton').text($(e.target).text()); // 지역 중분류 버튼 이름 변경
 	addressNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+	searchList(pageNo, clsNo, addressNo, rateValue, keyword);
 	loadAddress(addressNo);
     });
 });
@@ -221,7 +228,7 @@ $(document.body).bind('loaded-smallAddress', () => {
 	tbody.html('');
 	$('#smallAddressButton').text($(e.target).text()); // 지역 소분류 버튼 이름 변경
 	addressNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+	searchList(pageNo, clsNo, addressNo, rateValue, keyword);
     });
 });
 
@@ -231,7 +238,7 @@ $('#large-tag > button').click(function(e) {
     pageNo = 1;
     tbody.html('');
     clsNo = largeClsNo;
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
     $('#small-tag').remove();
     $('#medium-tag').remove();
     $('#large-tag > button').prop('disabled', true);
@@ -243,7 +250,7 @@ $(document.body).bind('loaded-medium-tag', () => {
 	pageNo = 1;
 	tbody.html('');
 	clsNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+	searchList(pageNo, clsNo, addressNo, rateValue, keyword);
 	$('#small-tag').remove();
 	$('#medium-tag > button').prop('disabled', true);
     });
@@ -255,14 +262,15 @@ $('#rateRange').change(function() {
     pageNo = 1;
     tbody.html('');
     rateValue = $('#rateRange').val();
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
 });
 
 //검색 필터
 $('#search-btn').click((e) => {
     pageNo = 1;
+    tbody.html('');
     keyword = $("#study-search").val();
-    window.location.href = './search.html?keyword=' + keyword;
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
 });
 
 
