@@ -3,14 +3,17 @@ pageNo,
 clsNo,
 addressNo,
 rateValue = 3,
-keyword
-;
+keyword;
 	
 
 
 
 $('.cls-btn').click((e) => {
-  window.location.href = './html/study/index.html?clsNo='+ $(e.target).attr('data-no') + '&clsTitle=' + $(e.target).text();
+  window.location.href =
+    './html/study/index.html?clsNo='
+    + $(e.target).attr('data-no')
+    + '&clsTitle=' + $(e.target).text()
+    + '&keyword=';
 });
 
 $('.msg-btn').click((e) => {
