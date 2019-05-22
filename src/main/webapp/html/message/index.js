@@ -129,6 +129,7 @@ $('#recvPage').click((e) => {
   e.preventDefault();
   currCls.html("받은 쪽지함");
   $(message).html("보낸 회원");
+  keyword = '';
   loadList(1);
 });
 
@@ -136,6 +137,7 @@ $('#sendPage').click((e) => {
   e.preventDefault();
   currCls.html("보낸 쪽지함");
   $(message).html("받은 회원");
+  keyword = '';
   loadList2(1);
 });
 
