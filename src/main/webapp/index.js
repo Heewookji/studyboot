@@ -6,7 +6,11 @@ rateValue = 3,
 keyword;
 	
 
-
+$(document).ready(function() {
+  $('#study-header').load('',function() {
+    
+  })
+})
 
 $('.cls-btn').click((e) => {
   window.location.href =
