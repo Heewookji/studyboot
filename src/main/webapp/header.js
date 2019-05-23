@@ -1,10 +1,9 @@
 $( document ).ready(function() {
     $("#js-header").load("./header.html", function(){
-	 $(document.body).trigger('loaded-header');
+	$(document.body).trigger('loaded-header');
     });
-  
-});
 
+});
 
 $(document.body).bind('loaded-header', () => {
     // initialization of go to
@@ -15,25 +14,35 @@ $(document.body).bind('loaded-header', () => {
 
     // initialization of HSDropdown component
     $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
-      afterOpen: function(){
-        $(this).find('input[type="search"]').focus();
-      }
+	afterOpen: function(){
+	    $(this).find('input[type="search"]').focus();
+	}
     });
+
+    // initialization of HSScrollBar component
+    $.HSCore.components.HSScrollBar.init($('.js-scrollbar'));
 
     // initialization of masonry
     $('.masonry-grid').imagesLoaded().then(function () {
-      $('.masonry-grid').masonry({
-        columnWidth: '.masonry-grid-sizer',
-        itemSelector: '.masonry-grid-item',
-        percentPosition: true
-      });
+	$('.masonry-grid').masonry({
+	    columnWidth: '.masonry-grid-sizer',
+	    itemSelector: '.masonry-grid-item',
+	    percentPosition: true
+	});
     });
 
     // initialization of popups
     $.HSCore.components.HSPopup.init('.js-fancybox');
-    
-    // initialization of header
-    $.HSCore.components.HSHeader.init($('#js-header'));
-    $.HSCore.helpers.HSHamburgers.init('.hamburger');
-  });
+
+});
+
+
+$(document.body).bind('loaded-header', () => {
+	// initialization of header
+	$.HSCore.components.HSHeader.init($('#js-header'));
+	$.HSCore.helpers.HSHamburgers.init('.hamburger');
+});
+
+
+
 
