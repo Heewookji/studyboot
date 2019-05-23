@@ -1,7 +1,6 @@
 var currCls = $('#dropdownMenuButton > span'),
 templateSrc = $('#view-template').html();
 
-
 function loadDetail(no) {
 
     $.getJSON('../../app/json/message/detail?no=' + no, function(obj) {
@@ -15,8 +14,6 @@ function loadDetail(no) {
     });
 
 }
-
-
 
 $('#messageRemove-btn').click((e) => {
     

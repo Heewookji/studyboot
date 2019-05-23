@@ -107,6 +107,7 @@ function loadList2(pn, keyword) {
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
+  $('#checkAll').prop('checked', false);
   if ($('#currCls').text() == '받은 쪽지함') {
     loadList(pageNo - 1, keyword);
   }
@@ -117,6 +118,7 @@ $('#prevPage > a').click((e) => {
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
+  $('#checkAll').prop('checked', false);
   if ($('#currCls').text() == '받은 쪽지함') {
     loadList(pageNo + 1, keyword);
   }
@@ -130,6 +132,7 @@ $('#recvPage').click((e) => {
   currCls.html("받은 쪽지함");
   $(message).html("보낸 회원");
   keyword = '';
+  $('#checkAll').prop('checked', false);
   loadList(1);
 });
 
@@ -138,6 +141,7 @@ $('#sendPage').click((e) => {
   currCls.html("보낸 쪽지함");
   $(message).html("받은 회원");
   keyword = '';
+  $('#checkAll').prop('checked', false);
   loadList2(1);
 });
 
@@ -154,59 +158,35 @@ if ($('#currCls').text() == '보낸 쪽지함') {
 
 loadList(1);
 
-////스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
-//$(document.body).bind('loaded-list', () => {
-//$('.message-view-link').click((e) => {
-//e.preventDefault();
-//window.location.href = 'view.js?no=' +
-//$(e.target).attr('data-no');
-//});
-//});
-
 // 체크박스 설정
 var $checkAll = $('#checkAll');
 $checkAll.change(function () {
     var $this = $(this);
     var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
-    // console.log(checked);
+    
     $('input:checkbox[name="listCheck"]').prop('checked', checked);
+    
+    var boxes = $('input:checkbox[name="listCheck"]');
+    
+    var $checklist = $('#chk');
+    $checklist.change(function () {
+        var boxLength = boxes.length;
+        var checkedLength = $('input:checkbox[name="listCheck"]:checked').length;
+        var selectAll = (boxLength == checkedLength);
+        console.log(selectAll);
+        $checkAll.prop('checked', selectAll);
+    });
 });
-
-var boxes = $('input:checkbox[name="listCheck"]');
-console.log(boxes);
-boxes.change(function () {
-    // 첫 번째 방법
-//    var selectAll = true;
-//    var count = boxes.length;
-//    var i = 0;
-//    for (; i < count; i++) {
-//        if (!boxes[i].checked) {
-//            selectAll = false;
-//            break;
-//        }
-//    }
-    // 두 번째 방법
-    var boxLength = boxes.length;
-    // 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
-    var checkedLength = $('input:checkbox[name="listCheck"]:checked').length;
-    var selectAll = (boxLength == checkedLength);
-    console.log(selectAll);
-
-    $checkAll.prop('checked', selectAll);
-
-});
- /* 처음 화면이 출력되면 체크박스의 값이 없음으로 boxes의 랭스가 0으로 변화하지 않는다.. 
-  * 이부분을 해결할 방법을 찾아야 됨*/ 
 
 $(document.body).bind('loaded-list', () => {
+  
 $('#messageForm-btn').click((e) => {
 $('#recv_id').val("");
 $('#message_contents').val("");
 $('#title').val("");
 $('#sendNo').val(6);
-
 $('.sspctForm-Format').removeClass('std-invisible');
-  });
+});
 
 $('.sspctForm-btn').click((e) => {
 $('#message_contents').val("");
@@ -214,6 +194,14 @@ $('#title').val("");
 $('.sspctForm-Format').removeClass('std-invisible');
 $('#recv_id').val($(e.target).attr('data-content'));
 $('#sendNo').val(6);
+});
+
+$('#msg-response').click((e) => {
+  $('#message_contents').val("");
+  $('#title').val("");
+  $('.sspctForm-Format').removeClass('std-invisible');
+  $('#recv_id').val($('#nickName').html());
+  $('#sendNo').val(6);
 });
 
 });
