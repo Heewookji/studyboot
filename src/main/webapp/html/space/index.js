@@ -11,8 +11,7 @@ spaceObj,
 coords= new Array();
 
 //JSON 형식의 데이터 목록 가져오기
-function loadList() {
-
+$(document).ready(function loadList() {
   $.getJSON('../../app/json/space/list',  function(obj) {
     spaceObj = obj.list;
 
@@ -21,9 +20,7 @@ function loadList() {
     $(document.body).trigger('loaded-list');
 
   }); // Bitcamp.getJSON()
-} // loadList()
-
-loadList();
+}); // loadList()
 
 $(document.body).bind('loaded-list', () => {
 
