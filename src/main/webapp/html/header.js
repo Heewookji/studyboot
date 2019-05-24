@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $("#js-header").load("../header.html", function(){
+    $("#js-header").load("/studyboot/html/header.html", function(){
 	$(document.body).trigger('loaded-header');
     });
 

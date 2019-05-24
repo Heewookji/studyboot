@@ -35,7 +35,12 @@ $(document.body).bind('loaded-header', () => {
     // initialization of header
     $.HSCore.components.HSHeader.init($('#js-header'));
     $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+// initialization of carousel
+$.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+
 });
+
 
 
 $(document.body).bind('loaded-header', () => {
