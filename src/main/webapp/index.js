@@ -9,10 +9,7 @@ $( document ).ready(function() {
 $(document.body).bind('loaded-header', () => {
     // initialization of go to
     $.HSCore.components.HSGoTo.init('.js-go-to');
-
-    // initialization of carousel
-    $.HSCore.components.HSCarousel.init('.js-carousel');
-
+  
     // initialization of HSDropdown component
     $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
 	afterOpen: function(){
@@ -35,9 +32,11 @@ $(document.body).bind('loaded-header', () => {
     // initialization of header
     $.HSCore.components.HSHeader.init($('#js-header'));
     $.HSCore.helpers.HSHamburgers.init('.hamburger');
+    
 
-// initialization of carousel
-$.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+ // initialization of carousel
+    $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+
 
 });
 
