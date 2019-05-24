@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>스터디 그룹</title>
-  <link rel="stylesheet"
- href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
-<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
-  <link rel="stylesheet" href="index.css">
+  <!-- Title -->
+<title>Classic Header - White Background | Unify - Responsive
+ Website Template</title>
+
+<!-- Required Meta Tags Always Come First -->
+<meta charset="utf-8">
+<meta name="viewport"
+ content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../Unify/favicon.ico">
+<!-- Google Fonts -->
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
+<!-- CSS Global Icons -->
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify-components.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify-globals.css">
+
+<!-- CSS Customization -->
+<link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 </head>
+
 <body>
-  <header>
-  <nav class="navbar navbar-light">
+
+  <!-- Header -->
+ <header id="js-header"
+  class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+  data-header-fix-moment="300"> </header>
+ <!-- End Header -->
+  
+<!--   <nav class="navbar navbar-light">
    <form class="form-inline">
     <input class="form-control mr-sm-2" id="study-search" type="search"
      placeholder="분야별" aria-label="Search">
     <button class="btn btn-outline-primary my-2 my-sm-0"
      id="search-btn" type="button">검색</button>
    </form>
-  </nav>
-  </header>
+  </nav> -->
 
 <!-- 스터디 생성 -->
 <div class="modal fade" id="stdAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -207,11 +259,47 @@ id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expande
 {{/each}}
 </script>
 
-<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="index.js"></script>
+<!-- JS Global Compulsory -->
+ <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+ <script
+  src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+ <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+ <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+ <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+
+ <!-- JS Implementing Plugins -->
+ <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+ <script
+  src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+ <script
+  src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+ <script src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+ <script
+  src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+ <script
+  src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+ <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+ <script src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+
+ <!-- JS Unify -->
+ <script src="../../Unify/assets/js/hs.core.js"></script>
+
+ <script src="../../Unify/assets/js/components/hs.header.js"></script>
+ <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+
+ <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
+ <script src="../../Unify/assets/js/components/hs.scrollbar.js"></script>
+ <script src="../../Unify/assets/js/components/hs.popup.js"></script>
+ <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+
+ <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+
+ <!-- JS Custom -->
+ <script src="../../Unify/assets/js/custom.js"></script>
+ <script src="../header.js"></script>
+ <script src="index.js"></script>
+ <!-- JS Plugins Init. -->
 </body>
 </html>
 
