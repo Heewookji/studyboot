@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Title -->
+<title>MyPage</title>
+
+<!-- Required Meta Tags Always Come First -->
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../Unify/favicon.ico">
+<!-- Google Fonts -->
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
+<!-- CSS Global Icons -->
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/css/unify-components.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify-globals.css">
+
+<!-- CSS Customization -->
+<link rel="stylesheet" href="../../Unify/assets/css/custom.css">
+
+<style>
+.studyboot {
+  float: left;
+  margin-top: 200px;
+}
+
+#myRate {
+  margin: 30px;
+}
+
+#myImage {
+  border: 1px solid red;
+  margin: 30px;
+  width: 100px;
+  height: 30px;
+}
+
+.sb-calendar {
+  border: 1px solid red;
+  margin: 100px;
+  width: 1000px;
+  height: 500px;
+}
+
+footer {
+  clear: both;
+}
+</style>
+
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header id="js-header"
+    class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+    data-header-fix-moment="300"> </header>
+  <!-- End Header -->
+
+  <!-- 나의 평점 -->
+  <div class="modal fade" id="stdAddModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">스터디 생성</h5>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form action="add" class="study-add-form">
+
+            <div class="form-group">
+              <label for="name" class="col-form-label">스터디 이름</label> <input
+                type="text" class="form-control" id="name" name="name">
+
+              <label for="cls" class="">스터디 분류</label> <input
+                type="text" class="form-control" id="cls" name='cls'>
+
+              <label for="address" class="">스터디 지역</label> <input
+                type="text" class="form-control" id="address"
+                name='address'> <label for="goal" class="">스터디
+                목표</label> <input type="text" class="form-control" id="goal"
+                name='goal'>
+
+            </div>
+
+            <div class="study-add study-add">
+              <label for="photo" class="">스터디 사진</label> <input
+                type="text" class="form-control" id="photo" name='photo'>
+
+              <label for="day" class="">스터디 요일</label> <input
+                type="text" class="form-control" id="day" name='day'>
+
+              <label for="personnel" class="">스터디 인원</label> <input
+                type="text" class="form-control" id="personnel"
+                name='personnel'>
+            </div>
+
+            <div class="study-add study-add">
+              <label for="startDate" class="">스터디 기간</label> <input
+                type="text" class="form-control" id="startDate"
+                name='startDate'> ~ <input type="text"
+                class="form-control" id="endDate" name='endDate'>
+
+              <label for="contents" class="">스터디 설명</label>
+              <textarea class="form-control" id="contents"
+                name='contents' cols="150" rows="7"></textarea>
+            </div>
+
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" id="add-btn">생성</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #stdAddModal -->
+
+  <!-- 왼쪽 사이드바 -->
+  <nav class="studyboot" style="width: 200px">
+    <h1>MyPage</h1>
+    <hr>
+
+    <div>
+      <div class="btn btn-primary" id="myRate">
+        <div>나의 평점</div>
+        <div>별점</div>
+      </div>
+      <div id="myImage">사진</div>
+      <hr>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#stdAddModal">내 스터디</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#stdAddModal">내 정보</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary sb-message">쪽지함</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#stdAddModal">문의 하기</button>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#stdAddModal">회원 탈퇴</button>
+    </div>
+
+  </nav>
+  <!-- #sidebar-left -->
+
+  <section class="studyboot">
+  
+  <!-- News -->
+  <div class="container g-pt-100">
+    <div class="g-px-30--lg">
+      <!-- Heading -->
+      <div class="g-max-width-645 text-center mx-auto g-mb-30">
+        <button>진행중인 스터디</button>
+        <button>신청한 스터디</button>
+        <button>찜한 스터디</button>
+      </div>
+      <!-- End Heading -->
+
+      <!-- News Carousel -->
+      <div class="js-carousel u-carousel-v5 g-mx-minus-15"
+        data-slides-show="3" data-slides-scroll="1"
+        data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+        data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+        data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+        data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+        data-responsive='[{
+                 "breakpoint": 992,
+                 "settings": {
+                   "slidesToShow": 2
+                 }
+               }, {
+                 "breakpoint": 768,
+                 "settings": {
+                   "slidesToShow": 1
+                 }
+               }, {
+                 "breakpoint": 554,
+                 "settings": {
+                   "slidesToShow": 1
+                 }
+               }]'>
+
+
+        <div
+          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+          <!-- Blog Classic Blocks -->
+          <article>
+            <img class="img-fluid w-100"
+              src="/studyboot/images/studyimage.jpg"
+              alt="Image Description">
+            <div class="g-bg-white g-pa-20">
+              <span
+                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                June 2017</span>
+              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                <a
+                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                  href="#">Exclusive interview with InVision's CEO</a>
+              </h2>
+              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                Valberg is the founder and CEO of InVision. If you are a
+                designer...</p>
+              <a class="g-font-size-13" href="#">Read more...</a>
+            </div>
+          </article>
+          <!-- End Blog Classic Blocks -->
+        </div>
+
+        <div
+          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+          <!-- Blog Classic Blocks -->
+          <article>
+            <img class="img-fluid w-100"
+              src="/studyboot/images/studyimage.jpg"
+              alt="Image Description">
+            <div class="g-bg-white g-pa-20">
+              <span
+                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                June 2017</span>
+              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                <a
+                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                  href="#">Exclusive interview with InVision's CEO</a>
+              </h2>
+              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                Valberg is the founder and CEO of InVision. If you are a
+                designer...</p>
+              <a class="g-font-size-13" href="#">Read more...</a>
+            </div>
+          </article>
+          <!-- End Blog Classic Blocks -->
+        </div>
+
+
+        <div
+          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+          <!-- Blog Classic Blocks -->
+          <article>
+            <img class="img-fluid w-100"
+              src="/studyboot/images/studyimage.jpg"
+              alt="Image Description">
+            <div class="g-bg-white g-pa-20">
+              <span
+                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                June 2017</span>
+              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                <a
+                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                  href="#">Exclusive interview with InVision's CEO</a>
+              </h2>
+              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                Valberg is the founder and CEO of InVision. If you are a
+                designer...</p>
+              <a class="g-font-size-13" href="#">Read more...</a>
+            </div>
+          </article>
+          <!-- End Blog Classic Blocks -->
+        </div>
+
+        <div
+          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+          <!-- Blog Classic Blocks -->
+          <article>
+            <img class="img-fluid w-100"
+              src="/studyboot/images/studyimage.jpg"
+              alt="Image Description">
+            <div class="g-bg-white g-pa-20">
+              <span
+                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                June 2017</span>
+              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                <a
+                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                  href="#">Exclusive interview with InVision's CEO</a>
+              </h2>
+              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                Valberg is the founder and CEO of InVision. If you are a
+                designer...</p>
+              <a class="g-font-size-13" href="#">Read more...</a>
+            </div>
+          </article>
+          <!-- End Blog Classic Blocks -->
+        </div>
+
+        <div
+          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+          <!-- Blog Classic Blocks -->
+          <article>
+            <img class="img-fluid w-100"
+              src="/studyboot/images/studyimage.jpg"
+              alt="Image Description">
+            <div class="g-bg-white g-pa-20">
+              <span
+                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                June 2017</span>
+              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                <a
+                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                  href="#">Exclusive interview with InVision's CEO</a>
+              </h2>
+              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                Valberg is the founder and CEO of InVision. If you are a
+                designer...</p>
+              <a class="g-font-size-13" href="#">Read more...</a>
+            </div>
+          </article>
+          <!-- End Blog Classic Blocks -->
+        </div>
+        
+      </div>
+      <!-- End News Carousel -->
+    </div>
+  </div>
+  <!-- End News -->
+  
+  <div class="sb-calendar">캘린더</div>
+  
+  </section>
+  
+  <!-- footer -->
+  <footer id="js-footer"></footer>
+
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+
+  <!-- 스터디 리스트 -->
+  <script id="card-template" type="text/x-handlebars-template">
+{{#each list}}
+<div class="card" style="width: 250px; float: left; padding:10px;">
+  <img src="../../upload/images/test.png" class="card-img-top" alt="...">
+  <div class="card-body">
+    <a class="study-view-link" href="#" data-no="{{no}}">{{name}}</a>
+    <p class="card-text">{{rate}}</p>
+    <p class="card-text">{{goal}}</p>
+    <p class="card-text">{{addressName}}</p>
+  </div>
+</div>
+{{/each}}
+  </script>
+
+  <!-- JS Global Compulsory -->
+  <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+  <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+  <script
+    src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script
+    src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/hs.core.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.header.js"></script>
+  <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
+  <script src="../../Unify/assets/js/components/hs.scrollbar.js"></script>
+  <script src="../../Unify/assets/js/components/hs.popup.js"></script>
+  <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+
+  <!-- JS Custom -->
+  <script src="../../Unify/assets/js/custom.js"></script>
+  <script src="../header.js"></script>
+  <script src="../footer.js"></script>
+  <script src="index.js"></script>
+  <!-- JS Plugins Init. -->
+</body>
+</html>
+
+
+
+
+
+
+
+
