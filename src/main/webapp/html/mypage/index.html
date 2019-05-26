@@ -57,8 +57,7 @@
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 
 <style>
-.studyboot {
-  float: left;
+#studyboot {
   margin-top: 200px;
 }
 
@@ -161,9 +160,9 @@ footer {
     </div>
   </div>
   <!-- 나의 평점 -->
-  
+
   <!-- inquiry modal -->
-  <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+  <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg"
       role="document">
@@ -179,11 +178,11 @@ footer {
           <form>
             <div class="form-group sspctForm-Format std-invisible">
               <label for="recipient-name" class="col-form-label">신고:</label>
-              <span class="form-control" id="sspctName"></span>
-              <input type="hidden" id="inqryNo">
-              <span class="std-invisible" id="inqryName"></span>
-              <input type="hidden" id="sspctNo">
-              <input type="hidden" id="inqryClsNo">
+              <span class="form-control" id="sspctName"></span> <input
+                type="hidden" id="inqryNo"> <span
+                class="std-invisible" id="inqryName"></span> <input
+                type="hidden" id="sspctNo"> <input type="hidden"
+                id="inqryClsNo">
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">내용:</label>
@@ -202,64 +201,91 @@ footer {
   </div>
   <!-- inquiry modal -->
 
-  <!-- 왼쪽 사이드바 -->
-  <nav class="studyboot" style="width: 200px">
-    <h1>MyPage</h1>
-    <hr>
+  <!-- content -->
+  <div class="container g-pt-70 g-pb-30" id="studyboot">
+    <div class="row">
+      <!-- Profile Settings -->
+      <div class="col-lg-3 g-mb-50">
+        <aside
+          class="g-brd-around g-brd-gray-light-v4 rounded g-px-20 g-py-30">
+          <!-- Profile Picture -->
+          <div class="text-center g-pos-rel g-mb-30">
+            <div class="btn btn-primary" id="myRate">
+              <div>나의 평점</div>
+              <div>별점</div>
+            </div>
+            <div class="g-width-100 g-height-100 mx-auto mb-3">
+              <img class="img-fluid rounded-circle"
+                src="assets/img-temp/100x100/img1.jpg" alt="Image Decor">
+            </div>
 
-    <div>
-      <div class="btn btn-primary" id="myRate">
-        <div>나의 평점</div>
-        <div>별점</div>
+            <span class="d-block g-font-weight-500">James Collins</span>
+
+            <span
+              class="u-icon-v3 u-icon-size--xs g-color-white--hover g-bg-primary--hover rounded-circle g-pos-abs g-top-0 g-right-15 g-cursor-pointer"
+              title="Change Profile Picture" data-toggle="tooltip"
+              data-placement="top"> <i
+              class="icon-finance-067 u-line-icon-pro"></i>
+            </span>
+          </div>
+          <!-- End Profile Picture -->
+
+          <hr class="g-brd-gray-light-v4 g-my-30">
+
+          <!-- Profile Settings List -->
+          <ul class="list-unstyled mb-0">
+            <li class="g-py-3"><a
+              class="d-block align-middle active u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover g-color-primary--parent-active g-bg-gray-light-v5--active rounded g-pa-3"
+              href="page-login-security-1.html"> <span
+                class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i
+                  class="icon-finance-135 u-line-icon-pro"></i></span> 내 스터디
+            </a></li>
+            <li class="g-py-3"><a
+              class="d-block align-middle active u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover g-color-primary--parent-active g-bg-gray-light-v5--active rounded g-pa-3"
+              href="view.html"> <span
+                class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i
+                  class="icon-finance-135 u-line-icon-pro"></i></span> 내 정보
+            </a></li>
+            <li class="g-py-3"><a
+              class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3"
+              href="../message/index.html"> <span
+                class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i
+                  class="icon-medical-022 u-line-icon-pro"></i></span> 쪽지함
+            </a></li>
+            <li class="g-py-3"><a
+              class="d-block align-middle u-link-v5 g-color-text g-color-primary--hover g-bg-gray-light-v5--hover rounded g-pa-3"
+              href="#" data-toggle="modal" data-target="#inqryModal"
+              id="inqryForm-btn"> <span
+                class="u-icon-v1 g-color-gray-dark-v5 mr-2"><i
+                  class="icon-medical-022 u-line-icon-pro"></i></span> 문의하기
+            </a></li>
+          </ul>
+          <!-- End Profile Settings List -->
+        </aside>
       </div>
-      <div id="myImage">사진</div>
-      <hr>
-    </div>
+      <!-- End Profile Settings -->
 
-    <div>
-      <button type="button" class="btn btn-primary" data-toggle="modal"
-        data-target="#stdAddModal">내 스터디</button>
-    </div>
-    <div>
-      <button type="button" class="btn btn-primary" data-toggle="modal"
-        data-target="#stdAddModal">내 정보</button>
-    </div>
-    <div>
-      <button type="button" class="btn btn-primary sb-message">쪽지함</button>
-    </div>
-    <div>
-      <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-       data-target="#addModal" id="inqryForm-btn">문의 하기</button>
-    </div>
-    <div>
-      <button type="button" class="btn btn-primary" data-toggle="modal"
-        data-target="#stdAddModal">회원 탈퇴</button>
-    </div>
+      <!-- mypage Main -->
+      <div class="col-lg-9 g-mb-50">
+        <!-- News -->
+        <div class="container g-pt-100">
+          <div class="g-px-30--lg">
+            <!-- Heading -->
+            <div class="g-max-width-645 text-center mx-auto g-mb-30">
+              <button>진행중인 스터디</button>
+              <button>신청한 스터디</button>
+              <button>찜한 스터디</button>
+            </div>
+            <!-- End Heading -->
 
-  </nav>
-  <!-- #sidebar-left -->
-
-  <section class="studyboot">
-  
-  <!-- News -->
-  <div class="container g-pt-100">
-    <div class="g-px-30--lg">
-      <!-- Heading -->
-      <div class="g-max-width-645 text-center mx-auto g-mb-30">
-        <button>진행중인 스터디</button>
-        <button>신청한 스터디</button>
-        <button>찜한 스터디</button>
-      </div>
-      <!-- End Heading -->
-
-      <!-- News Carousel -->
-      <div class="js-carousel u-carousel-v5 g-mx-minus-15"
-        data-slides-show="3" data-slides-scroll="1"
-        data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-        data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-        data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-        data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-        data-responsive='[{
+            <!-- News Carousel -->
+            <div class="js-carousel u-carousel-v5 g-mx-minus-15"
+              data-slides-show="3" data-slides-scroll="1"
+              data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+              data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+              data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+              data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+              data-responsive='[{
                  "breakpoint": 992,
                  "settings": {
                    "slidesToShow": 2
@@ -277,142 +303,151 @@ footer {
                }]'>
 
 
-        <div
-          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-          <!-- Blog Classic Blocks -->
-          <article>
-            <img class="img-fluid w-100"
-              src="/studyboot/images/studyimage.jpg"
-              alt="Image Description">
-            <div class="g-bg-white g-pa-20">
-              <span
-                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
-                June 2017</span>
-              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-                <a
-                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-                  href="#">Exclusive interview with InVision's CEO</a>
-              </h2>
-              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
-                Valberg is the founder and CEO of InVision. If you are a
-                designer...</p>
-              <a class="g-font-size-13" href="#">Read more...</a>
-            </div>
-          </article>
-          <!-- End Blog Classic Blocks -->
-        </div>
+              <div
+                class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+                <!-- Blog Classic Blocks -->
+                <article>
+                  <img class="img-fluid w-100"
+                    src="/studyboot/images/studyimage.jpg"
+                    alt="Image Description">
+                  <div class="g-bg-white g-pa-20">
+                    <span
+                      class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                      June 2017</span>
+                    <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                      <a
+                        class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                        href="#">Exclusive interview with InVision's
+                        CEO</a>
+                    </h2>
+                    <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                      Valberg is the founder and CEO of InVision. If you
+                      are a designer...</p>
+                    <a class="g-font-size-13" href="#">Read more...</a>
+                  </div>
+                </article>
+                <!-- End Blog Classic Blocks -->
+              </div>
 
-        <div
-          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-          <!-- Blog Classic Blocks -->
-          <article>
-            <img class="img-fluid w-100"
-              src="/studyboot/images/studyimage.jpg"
-              alt="Image Description">
-            <div class="g-bg-white g-pa-20">
-              <span
-                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
-                June 2017</span>
-              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-                <a
-                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-                  href="#">Exclusive interview with InVision's CEO</a>
-              </h2>
-              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
-                Valberg is the founder and CEO of InVision. If you are a
-                designer...</p>
-              <a class="g-font-size-13" href="#">Read more...</a>
-            </div>
-          </article>
-          <!-- End Blog Classic Blocks -->
-        </div>
+              <div
+                class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+                <!-- Blog Classic Blocks -->
+                <article>
+                  <img class="img-fluid w-100"
+                    src="/studyboot/images/studyimage.jpg"
+                    alt="Image Description">
+                  <div class="g-bg-white g-pa-20">
+                    <span
+                      class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                      June 2017</span>
+                    <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                      <a
+                        class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                        href="#">Exclusive interview with InVision's
+                        CEO</a>
+                    </h2>
+                    <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                      Valberg is the founder and CEO of InVision. If you
+                      are a designer...</p>
+                    <a class="g-font-size-13" href="#">Read more...</a>
+                  </div>
+                </article>
+                <!-- End Blog Classic Blocks -->
+              </div>
 
 
-        <div
-          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-          <!-- Blog Classic Blocks -->
-          <article>
-            <img class="img-fluid w-100"
-              src="/studyboot/images/studyimage.jpg"
-              alt="Image Description">
-            <div class="g-bg-white g-pa-20">
-              <span
-                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
-                June 2017</span>
-              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-                <a
-                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-                  href="#">Exclusive interview with InVision's CEO</a>
-              </h2>
-              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
-                Valberg is the founder and CEO of InVision. If you are a
-                designer...</p>
-              <a class="g-font-size-13" href="#">Read more...</a>
-            </div>
-          </article>
-          <!-- End Blog Classic Blocks -->
-        </div>
+              <div
+                class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+                <!-- Blog Classic Blocks -->
+                <article>
+                  <img class="img-fluid w-100"
+                    src="/studyboot/images/studyimage.jpg"
+                    alt="Image Description">
+                  <div class="g-bg-white g-pa-20">
+                    <span
+                      class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                      June 2017</span>
+                    <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                      <a
+                        class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                        href="#">Exclusive interview with InVision's
+                        CEO</a>
+                    </h2>
+                    <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                      Valberg is the founder and CEO of InVision. If you
+                      are a designer...</p>
+                    <a class="g-font-size-13" href="#">Read more...</a>
+                  </div>
+                </article>
+                <!-- End Blog Classic Blocks -->
+              </div>
 
-        <div
-          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-          <!-- Blog Classic Blocks -->
-          <article>
-            <img class="img-fluid w-100"
-              src="/studyboot/images/studyimage.jpg"
-              alt="Image Description">
-            <div class="g-bg-white g-pa-20">
-              <span
-                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
-                June 2017</span>
-              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-                <a
-                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-                  href="#">Exclusive interview with InVision's CEO</a>
-              </h2>
-              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
-                Valberg is the founder and CEO of InVision. If you are a
-                designer...</p>
-              <a class="g-font-size-13" href="#">Read more...</a>
-            </div>
-          </article>
-          <!-- End Blog Classic Blocks -->
-        </div>
+              <div
+                class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+                <!-- Blog Classic Blocks -->
+                <article>
+                  <img class="img-fluid w-100"
+                    src="/studyboot/images/studyimage.jpg"
+                    alt="Image Description">
+                  <div class="g-bg-white g-pa-20">
+                    <span
+                      class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                      June 2017</span>
+                    <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                      <a
+                        class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                        href="#">Exclusive interview with InVision's
+                        CEO</a>
+                    </h2>
+                    <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                      Valberg is the founder and CEO of InVision. If you
+                      are a designer...</p>
+                    <a class="g-font-size-13" href="#">Read more...</a>
+                  </div>
+                </article>
+                <!-- End Blog Classic Blocks -->
+              </div>
 
-        <div
-          class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-          <!-- Blog Classic Blocks -->
-          <article>
-            <img class="img-fluid w-100"
-              src="/studyboot/images/studyimage.jpg"
-              alt="Image Description">
-            <div class="g-bg-white g-pa-20">
-              <span
-                class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
-                June 2017</span>
-              <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-                <a
-                  class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-                  href="#">Exclusive interview with InVision's CEO</a>
-              </h2>
-              <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
-                Valberg is the founder and CEO of InVision. If you are a
-                designer...</p>
-              <a class="g-font-size-13" href="#">Read more...</a>
+              <div
+                class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
+                <!-- Blog Classic Blocks -->
+                <article>
+                  <img class="img-fluid w-100"
+                    src="/studyboot/images/studyimage.jpg"
+                    alt="Image Description">
+                  <div class="g-bg-white g-pa-20">
+                    <span
+                      class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
+                      June 2017</span>
+                    <h2 class="h5 g-color-black g-font-weight-600 mb-3">
+                      <a
+                        class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+                        href="#">Exclusive interview with InVision's
+                        CEO</a>
+                    </h2>
+                    <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
+                      Valberg is the founder and CEO of InVision. If you
+                      are a designer...</p>
+                    <a class="g-font-size-13" href="#">Read more...</a>
+                  </div>
+                </article>
+                <!-- End Blog Classic Blocks -->
+              </div>
+
             </div>
-          </article>
-          <!-- End Blog Classic Blocks -->
+            <!-- End News Carousel -->
+          </div>
         </div>
-        
+        <!-- End News -->
+
+        <div class="sb-calendar">캘린더</div>
       </div>
-      <!-- End News Carousel -->
+      <!-- End mypage Main -->
     </div>
   </div>
-  <!-- End News -->
-  
-  <div class="sb-calendar">캘린더</div>
-  
-  </section>
-  
+
+  <section class="studyboot"></section>
+
   <!-- footer -->
   <footer id="js-footer"></footer>
 
