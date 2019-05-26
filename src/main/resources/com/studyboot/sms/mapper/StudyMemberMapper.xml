@@ -16,7 +16,7 @@
     <result column="join_date" property="registeredDate"/>
     <result column="name" property="name"/>
     <result column="rate" property="rate"/>
-    <result column="age" property="age"/>
+    <result column="birth" property="birth"/>
     <result column="tel" property="tel"/>
     <result column="photo" property="photo"/>
     <result column="admin" property="admin"/>
@@ -33,7 +33,7 @@
   <select id="findStudyMembersByNo" resultMap="studyMemberMap" parameterType="int">
     select
       m.rate,
-      m.age,
+      m.birth,
       sm.atn_pct
     from
       sms_std_member sm

@@ -149,7 +149,7 @@ public class StudyController {
       addressNo = "";
     }
     if (clsNo.equals("undefined")) {
-      //clsNo = "";
+      clsNo = "";
     }
     //매퍼에서 키워드를 조건문 keyword != null 로 비교하기 위하여. 안그러면 keywordSize != 0로 해야한다.
     if (keyword.equals("undefined")) {
