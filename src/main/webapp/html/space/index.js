@@ -15,16 +15,16 @@ $(document).ready(function loadList() {
   $.getJSON('../../app/json/space/list',  function(obj) {
     spaceObj = obj.list;
 
-    loadAddress(spaceObj);
     $(trGenerator(obj)).appendTo('#list');
     $(document.body).trigger('loaded-list');
+    loadAddress(spaceObj);
 
   }); // Bitcamp.getJSON()
 }); // loadList()
 
 $(document.body).bind('loaded-list', () => {
 
-  $('.space-view-link').click((e) => {
+  $('.u-link-v2').click((e) => {
     // e.preventDefault();
     // location은 페이지 로딩과 관련되어 쓰인다.
     window.location.href = 'view.html?no=' + $(e.target).attr('space-no');
