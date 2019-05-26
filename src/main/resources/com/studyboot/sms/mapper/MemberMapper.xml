@@ -14,7 +14,7 @@
     <result column="join_date" property="registeredDate"/>
     <result column="name" property="name"/>
     <result column="rate" property="rate"/>
-    <result column="age" property="age"/>
+    <result column="birth" property="birth"/>
     <result column="tel" property="tel"/>
     <result column="photo" property="photo"/>
     <result column="admin" property="admin"/>

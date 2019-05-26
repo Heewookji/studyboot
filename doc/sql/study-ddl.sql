@@ -119,11 +119,12 @@ CREATE TABLE sms_member (
   join_date DATE         NULL     DEFAULT current_date() COMMENT '가입일', -- 가입일
   name      VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
   rate      DOUBLE       NOT NULL DEFAULT 3.0 COMMENT '현재평점', -- 현재평점
-  age       INTEGER      NOT NULL COMMENT '나이', -- 나이
+  birth     DATE         NOT NULL COMMENT '생년월일', -- 생년월일
   tel       VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo     VARCHAR(255) NOT NULL COMMENT '사진', -- 사진
   admin     BOOLEAN      NOT NULL DEFAULT false COMMENT '관리자여부', -- 관리자여부
-  adr_lms   CHAR(6)      NOT NULL COMMENT '활동지역' -- 활동지역
+  adr_lms   CHAR(6)      NOT NULL COMMENT '활동지역', -- 활동지역
+  cls_lms   CHAR(6)      NOT NULL COMMENT '관심분야' -- 관심분야
 )
 COMMENT '회원';
 

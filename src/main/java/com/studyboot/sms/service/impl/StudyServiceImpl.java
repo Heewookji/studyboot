@@ -1,5 +1,7 @@
 package com.studyboot.sms.service.impl;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -113,8 +115,13 @@ public class StudyServiceImpl implements StudyService {
     int totalAge = 0;
     double totalAttendance = 0;
     
+    //생년월일과 현재날짜의 차로 나이를 계산한다.
     for (StudyMember sm : memberList) {
-      totalAge += sm.getAge();
+      LocalDate birth = sm.getBirth().toLocalDate();
+      LocalDate now = LocalDate.now();
+      Period period = Period.between(birth, now);
+      int age = period.getYears() + 1;
+      totalAge += age;
       totalAttendance += sm.getAttendance();
     }
     totalAge /= memberList.size();

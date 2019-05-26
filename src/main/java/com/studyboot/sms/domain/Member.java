@@ -17,20 +17,25 @@ public class Member implements Cloneable, Serializable {
   private String email;
   private String photo;
   private String tel;
-  private int age;
+  
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  private Date birth;
 
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date registeredDate;
 
   private boolean admin;
   private String address;
-
+  
+  
+  
+  
   @Override
   public String toString() {
     return "Member [no=" + no + ", rate=" + rate + ", password=" + password + ", name=" + name
         + ", nickName=" + nickName + ", email=" + email + ", photo=" + photo + ", tel=" + tel
-        + ", age=" + age + ", registeredDate=" + registeredDate + ", admin=" + admin + ", address="
-        + address + "]";
+        + ", birth=" + birth + ", registeredDate=" + registeredDate + ", admin=" + admin
+        + ", address=" + address + "]";
   }
   public int getNo() {
     return no;
@@ -80,11 +85,11 @@ public class Member implements Cloneable, Serializable {
   public void setTel(String tel) {
     this.tel = tel;
   }
-  public int getAge() {
-    return age;
+  public Date getBirth() {
+    return birth;
   }
-  public void setAge(int age) {
-    this.age = age;
+  public void setBirth(Date birth) {
+    this.birth = birth;
   }
   public Date getRegisteredDate() {
     return registeredDate;
@@ -105,4 +110,7 @@ public class Member implements Cloneable, Serializable {
     this.address = address;
   }
 
+  
+  
+  
 }

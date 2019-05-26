@@ -1,17 +1,67 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Study</title>
-<link rel="stylesheet"
- href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
-<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
-<link rel="stylesheet" href="index.css">
-</head>
-<body>
+<html lang="en">
 
- <header class=""></header>
+<head>
+<!-- Title -->
+<title>Classic Header - White Background | Unify - Responsive
+ Website Template</title>
+
+<!-- Required Meta Tags Always Come First -->
+<meta charset="utf-8">
+<meta name="viewport"
+ content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="/studyboot/Unify/favicon.ico">
+<!-- Google Fonts -->
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/bootstrap/offcanvas.css">
+<!-- CSS Global Icons -->
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet" href="/studyboot/Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+<link rel="stylesheet" href="/studyboot/Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/hamburgers/hamburgers.min.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/fancybox/jquery.fancybox.css">
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="/studyboot/Unify/assets/css/unify.css">
+
+<!-- CSS Customization -->
+<link rel="stylesheet" href="/studyboot/css/common.css">
+</head>
+
+<body>
+ <!-- Header -->
+ <header id="js-header"
+  class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+  data-header-fix-moment="300"> </header>
+ <!-- End Header -->
+
 
  <div class="container">
   <h1>문의/신고</h1>
@@ -82,8 +132,10 @@
   </div>
  </div>
  <!-- .container -->
+ 
 
 
+ <!-- 문의상세보기 모달폼 -->
  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"
@@ -118,9 +170,11 @@
    </div>
   </div>
  </div>
+ 
+ <!-- 문의상세보기 모달폼 end -->
 
 
-
+ <!-- 문의하기 모달폼 -->
  <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg"
@@ -157,6 +211,13 @@
    </div>
   </div>
  </div>
+  <!-- 문의하기 모달폼 end-->
+  
+  
+   <!--  footer -->
+ <footer id="js-footer"> </footer>
+  <!--  footer end -->
+  
 
  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
  <script id="tr-template" type="text/x-handlebars-template">
@@ -180,19 +241,56 @@ data-content='{{inquiryPerson.name}}' data-no='{{inquiryPersonNo}}'>{{inquiryPer
 </script>
 
 
+ <!-- JS Global Compulsory -->
+ <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>
+ <script
+  src="/studyboot/Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/popper.js/popper.min.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
 
- <script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+
+ <!-- JS Implementing Plugins -->
+ <script src="/studyboot/Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
  <script
-  src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  src="/studyboot/Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
  <script
-  src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  src="/studyboot/Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
  <script
-  src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
- <script src="index.js"></script>
+  src="/studyboot/Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+ <script
+  src="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+
+ <!-- JS Unify -->
+ <script src="/studyboot/Unify/assets/js/hs.core.js"></script>
+
+ <script src="/studyboot/Unify/assets/js/components/hs.header.js"></script>
+ <script src="/studyboot/Unify/assets/js/helpers/hs.hamburgers.js"></script>
+
+ <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
+ <script src="/studyboot/Unify/assets/js/components/hs.scrollbar.js"></script>
+ <script src="/studyboot/Unify/assets/js/components/hs.popup.js"></script>
+ <script src="/studyboot/Unify/assets/js/components/hs.carousel.js"></script>
+
+ <script src="/studyboot/Unify/assets/js/components/hs.go-to.js"></script>
+
+ <!-- JS Custom -->
+ <script src="/studyboot/Unify/assets/js/custom.js"></script>
+ <script src="/studyboot/html/header.js"></script>
+  <script src="/studyboot/html/footer.js"></script>
+ 
+ <script src="/studyboot/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="index.js"></script>
  <script src="view.js"></script>
-</body>
-</html>
 
+ 
+ <!-- JS Plugins Init. -->
+</body>
+
+</html>
 
 
 

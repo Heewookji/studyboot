@@ -106,21 +106,21 @@ values('161412', '161412', '스터디48', '사진', 127, '2019-05-16', '2019-06-
 
 -- 회원 생성
   -- 관리자
-insert into sms_member (member_id, pwd, email, name, nick_name, age, tel, photo, admin, adr_lms)
-  values(1, '1111', 'user1@test.com', 'user1', 'nick1', 21, '010-1111-1111', 'photo1.jpg', true, '111111');
+insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, photo, admin, adr_lms, cls_lms)
+  values(1, '1111', 'user1@test.com', 'user1', 'nick1', '1993-05-16', '010-1111-1111', 'photo1.jpg', true, '111111', '111111');
   -- 일반
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
-  values(2, '1111', 'user2@test.com', 'user2', 'nick2', 3.5, 22, '010-2222-2222', 'photo2.jpg', '222222');
- insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
-  values(3, '1111', 'user3@test.com', 'user3', 'nick3', 4.0, 23, '010-3333-3333', 'photo3.jpg', '333333');
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
-  values(4, '1111', 'user4@test.com', 'user4', 'nick4', 4.5, 24, '010-4444-4444', 'photo4.jpg', '444444');
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
-  values(5, '1111', 'user5@test.com', 'user5', 'nick5', 5.0, 25, '010-5555-5555', 'photo5.jpg','555555');
-insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
-  values(6, '1111', 'user6@test.com', 'user6', 'nick6', 4.5, 24, '010-4444-4444', 'photo4.jpg', '444444');
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, age, tel, photo, adr_lms)
-  values(7, '1111', 'user7@test.com', 'user7', 'nick7', 5.0, 25, '010-5555-5555', 'photo5.jpg','555555');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms, cls_lms)
+  values(2, '1111', 'user2@test.com', 'user2', 'nick2', 3.5, '1993-05-16', '010-2222-2222', 'photo2.jpg', '222222', '111211');
+ insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms, cls_lms)
+  values(3, '1111', 'user3@test.com', 'user3', 'nick3', 4.0, '1997-05-16', '010-3333-3333', 'photo3.jpg', '333333', '111113');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms, cls_lms)
+  values(4, '1111', 'user4@test.com', 'user4', 'nick4', 4.5, '1990-05-16', '010-4444-4444', 'photo4.jpg', '444444', '121111');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms, cls_lms)
+  values(5, '1111', 'user5@test.com', 'user5', 'nick5', 5.0, '1983-05-16', '010-5555-5555', 'photo5.jpg','555555', '131211');
+insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms, cls_lms)
+  values(6, '1111', 'user6@test.com', 'user6', 'nick6', 4.5, '1999-05-16', '010-4444-4444', 'photo4.jpg', '444444', '121512');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms, cls_lms)
+  values(7, '1111', 'user7@test.com', 'user7', 'nick7', 5.0, '1988-05-16', '010-5555-5555', 'photo5.jpg','555555', '121221');
 
 
   
@@ -250,6 +250,7 @@ insert into sms_std_cls_l(cls_l_id, name) values(13, '금융');
 insert into sms_std_cls_l(cls_l_id, name) values(14, '예체능');
 insert into sms_std_cls_l(cls_l_id, name) values(15, '인문');
 insert into sms_std_cls_l(cls_l_id, name) values(16, '공학');
+insert into sms_std_cls_l(cls_l_id, name) values(17, '외국어');
 
 insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(11, 11, 'it-1');
 insert into sms_std_cls_m(cls_m_id, cls_l_id, name) values(12, 11, 'it-2');
@@ -392,7 +393,7 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
   -- 공간 데이터 입력
 insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '555555', '819-4 YBM빌딩 2층', '111-222', '지환 카페 입니다.');
 insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '666655', '9 YMCA빌딩 7층', '111-222', '현우 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '111111', '825-35', '상민 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '111111', '825-35', '111-222', '상민 카페 입니다.');
 insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '111111', '820-11', '111-222', '상현 카페 입니다.');
 insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '111111', '825-18', '111-222', '희욱 카페 입니다.');
 

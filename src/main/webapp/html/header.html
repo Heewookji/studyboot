@@ -27,13 +27,13 @@
     id="header-search">
     <input
      class="form-control g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-left-50 g-px-20"
-     placeholder="Enter keyword">
+     placeholder="Enter keyword" id="study-search">
     <div class="input-group-append">
      <span
       class="input-group-text g-bg-white border-0 g-rounded-right-50">
       <button
        class="btn btn-sm u-btn-primary rounded-circle"
-       type="submit"><i class="fa fa-search"></i></button>
+       type="submit" id="search-btn"><i class="fa fa-search"></i></button>
      </span>
     </div>
    </div>
@@ -42,19 +42,17 @@
     class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg"
     id="navBar">
     <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-     <li class="nav-item g-mx-20--lg"><a href="#"
-      class="nav-link px-0">Home </a></li>
-     <li class="nav-item g-mx-20--lg"><a href="#"
-      class="nav-link px-0">Features </a></li>
-     <li class="nav-item g-mx-20--lg active"><a href="#"
-      class="nav-link px-0">Shortcodes <span class="sr-only">(current)</span>
+     <li class="nav-item g-mx-20--lg std-invisible"><a href="#"
+      class="nav-link px-0">MyPage </a></li>
+     <li class="nav-item g-mx-20--lg std-invisible"><a href="#"
+      class="nav-link px-0">Study <span class="sr-only"></span>
      </a></li>
      <li class="nav-item g-mx-20--lg"><a href="#"
-      class="nav-link px-0">Pages </a></li>
+      class="nav-link px-0">Space </a></li>
      <li class="nav-item g-mx-20--lg"><a href="#"
-      class="nav-link px-0">Demos </a></li>
-     <li class="nav-item g-ml-20--lg g-mr-0--lg"><a href="#"
-      class="nav-link px-0">What's New </a></li>
+      class="nav-link px-0">Login </a></li>
+     <li class="nav-item g-ml-20--lg g-mr-0--lg"><a href="/studyboot/html/auth/register.html"
+      class="nav-link px-0">Register </a></li>
     </ul>
    </div>
    <!-- End Navigation -->
@@ -82,20 +80,19 @@
     id="navBar">
     <ul class="navbar-nav text-uppercase g-font-weight-600 mx-auto">
      <li class="nav-item g-mx-60--lg"><a href="#"
-      class="nav-link px-0">IT </a></li>
+      class="nav-link px-0 cls-btn" data-no="11">IT </a></li>
      <li class="nav-item g-mx-60--lg"><a href="#"
-      class="nav-link px-0">외국어 </a></li>
-     <li class="nav-item g-mx-60--lg"><a href="#"
-      class="nav-link px-0">서비스 </a></li>
+      class="nav-link px-0 cls-btn" data-no="12">서비스 </a></li>
      <li class="nav-item g-mx-60--lg active"><a href="#"
-      class="nav-link px-0">금융 <span class="sr-only">(current)</span>
-     </a></li>
+      class="nav-link px-0 cls-btn" data-no="13">금융</a></li>
      <li class="nav-item g-mx-60--lg"><a href="#"
-      class="nav-link px-0">예체능 </a></li>
+      class="nav-link px-0 cls-btn" data-no="14">예체능 </a></li>
      <li class="nav-item g-mx-60--lg"><a href="#"
-      class="nav-link px-0">인문 </a></li>
-     <li class="nav-item g-mx-60--lg g-mr-0--lg"><a href="#"
-      class="nav-link px-0">공학 </a></li>
+      class="nav-link px-0 cls-btn" data-no="15">인문 </a></li>
+     <li class="nav-item g-mx-60--lg"><a href="#"
+      class="nav-link px-0 cls-btn" data-no="16">공학 </a></li>
+      <li class="nav-item g-mx-60--lg"><a href="#"
+      class="nav-link px-0 cls-btn" data-no="17">외국어 </a></li>
     </ul>
    </div>
    <!-- End Navigation -->
