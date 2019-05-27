@@ -44,3 +44,44 @@ $(document.body).bind('loaded-header', () => {
 function getCurrentScrollPercentage(){
     return (window.scrollY + window.innerHeight) / document.body.clientHeight * 100
 }
+
+//JSON 형식의 데이터 목록 가져오기
+function loadList(no) {
+  $.getJSON('../../app/json/study/getStudy?no=' + no,
+      function(obj) {
+
+    console.log(no);
+
+
+
+    $(cardGenerator(obj)).appendTo(tbody);
+
+    // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+    $(document.body).trigger('loaded-list');
+      });
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

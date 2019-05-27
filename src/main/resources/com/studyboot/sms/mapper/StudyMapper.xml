@@ -322,6 +322,15 @@
 
   </select>
 
+  <!-- 스터디 사진 조회 -->
+  <select id="fineByStudy" resultMap="studyMap" parameterType="int">
+	select 
+	  photo
+	from
+	  sms_std 
+	where
+	  std_id = #{value}
+  </select>
 
 </mapper>
 
