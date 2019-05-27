@@ -27,6 +27,7 @@
     <id column="space_id" property="no"/>
     <result column="name" property="name"/>
     <result column="intro" property="intro"/>
+    <result column="tel" property="tel"/>
     
     <collection property="tags" ofType="spaceTag">
       <id column="tag_id" property="no"/>
@@ -78,6 +79,7 @@
       s.space_id,
       s.name,
       s.intro,
+      s.tel,
       p.space_photo_id,
       p.photo as filePath,
       t.tag_id,
