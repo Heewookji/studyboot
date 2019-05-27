@@ -1,21 +1,21 @@
 
 $( document ).ready(function() {
     $("#js-header").load("./indexheader.html", function(){
-	
+
 	$('.cls-btn').click((e) => {
-	  window.location.href =
-	    '/studyboot/html/study/index.html?clsNo='
-	    + $(e.target).attr('data-no')
-	    + '&clsTitle=' + $(e.target).text()
-	    + '&keyword=';
+	    window.location.href =
+		'/studyboot/html/study/index.html?clsNo='
+		+ $(e.target).attr('data-no')
+		+ '&clsTitle=' + $(e.target).text()
+		+ '&keyword=';
 	});
-	
+
 	$('#search-btn').click((e) => {
 	    pageNo = 1;
 	    keyword = $("#study-search").val();
 	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
-	  });
-	
+	});
+
 	$(document.body).trigger('loaded-header');
     });
 });
@@ -26,7 +26,7 @@ $( document ).ready(function() {
 $(document.body).bind('loaded-header', () => {
     // initialization of go to
     $.HSCore.components.HSGoTo.init('.js-go-to');
-  
+
     // initialization of HSDropdown component
     $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
 	afterOpen: function(){
@@ -49,9 +49,9 @@ $(document.body).bind('loaded-header', () => {
     // initialization of header
     $.HSCore.components.HSHeader.init($('#js-header'));
     $.HSCore.helpers.HSHamburgers.init('.hamburger');
-    
 
- // initialization of carousel
+
+    // initialization of carousel
     $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
 
 
@@ -100,15 +100,21 @@ function loadLoginUser() {
 
 	if (obj.status == 'success') {
 	    notLoginState.addClass('std-invisible');
-	    
+
 	    $("#nickname").html(user.nickName);
-	    
+
 	    if(obj.myStudyList != undefined){
 		var myStudyListTemplateSrc = $('#myStudy-template').html();
 		var myStudyListGenerator = Handlebars.compile(myStudyListTemplateSrc);
 		$(myStudyListGenerator(obj)).appendTo($('#std-dropdown'));
 	    }
-	    
+
+	    //관리자라면 관리자 페이지버튼 드롭다운에 추가
+	    if(obj.user.admin){
+		$("#std-dropdown").append("<div class=\"dropdown-divider\"></div>" +
+		"<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
+	    }
+
 	} else {
 	    loginState.addClass('std-invisible');
 	}

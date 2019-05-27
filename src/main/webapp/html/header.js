@@ -92,6 +92,12 @@ function loadLoginUser() {
 		$(myStudyListGenerator(obj)).appendTo($('#std-dropdown'));
 	    }
 	    
+	    //관리자라면 관리자 페이지버튼 드롭다운에 추가
+	    if(obj.user.admin){
+		$("#std-dropdown").append("<div class=\"dropdown-divider\"></div>" +
+				"<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
+	    }
+	    
 	} else {
 	    loginState.addClass('std-invisible');
 	}
