@@ -422,20 +422,20 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
   
 
   
-  -- 공간 데이터 입력
+-- 공간 데이터 입력
 insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '555555', '819-4 YBM빌딩 2층', '111-222', '지환 카페 입니다.');
 insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '666655', '9 YMCA빌딩 7층', '111-222', '현우 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '111111', '825-35', '111-222', '상민 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '111111', '820-11', '111-222', '상현 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '111111', '825-18', '111-222', '희욱 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '555555', '825-35', '상민 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '555555', '820-11', '111-222', '상현 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '555555', '825-18', '111-222', '희욱 카페 입니다.');
 
 -- 공간 스터디룸 데이터 입력
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '1번방.jgp', '4', '20000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('202', '101', '지환룸 2번방', '2번방.jgp', '6', '40000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('203', '101', '지환룸 3번방', '3번방.jgp', '8', '60000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '1번방.jpg', '4', '20000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('202', '101', '지환룸 2번방', '2번방.jpg', '6', '40000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('203', '101', '지환룸 3번방', '3번방.jpg', '8', '60000');
 
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('204', '102', '현우룸 1번방', '1번방.jgp', '3', '30000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('205', '102', '현우룸 2번방', '2번방.jgp', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('204', '102', '현우룸 1번방', '1번방.jpg', '3', '30000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('205', '102', '현우룸 2번방', '2번방.jpg', '6', '50000');
 
 -- 공간 태그 데이터 입력
 insert into sms_tag(tag_id, space_id, name) values('301', '101', '#강남');
