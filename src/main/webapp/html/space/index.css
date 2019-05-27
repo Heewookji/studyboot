@@ -14,7 +14,7 @@
 	width: 16%;
 }
 
-#list > div[name = spaceList]  {
+#list > div[name=spaceList]  {
 	height: 280px;
 	width: 300px;
 }
@@ -27,8 +27,11 @@ h3, div > p {
 	text-align: center;
 }
 
+#spaceMapList {
+	height:1543px;
+}
+
 #js-footer {
-	
 }
 
 
