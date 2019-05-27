@@ -41,22 +41,6 @@ $(document.body).bind('loaded-header', () => {
 });
 
 
-
-$(document.body).bind('loaded-header', () => {
-    $(window).scroll(function(obj) {
-	const currentScrollPercentage = getCurrentScrollPercentage()
-
-	if(currentScrollPercentage > 50){
-	    $('#header-child').prop('hidden', false);
-	    $('#header-search').prop('hidden', false);
-	}else{
-	    $('#header-child').prop('hidden', true);
-	    $('#header-search').prop('hidden', true);
-	}
-    });
-});
-
-
 function getCurrentScrollPercentage(){
     return (window.scrollY + window.innerHeight) / document.body.clientHeight * 100
 }
