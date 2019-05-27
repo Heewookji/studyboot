@@ -31,9 +31,12 @@
   <link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
   <link rel="stylesheet" href="../../Unify/assets/css/unify-components.css">
   <link rel="stylesheet" href="../../Unify/assets/css/unify-globals.css">
-    <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
+  <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
-  <!-- CSS Customization -->
+  <link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
+  <link rel='stylesheet' href='../../fullcalendar/daygrid/main.css'/>
+  <link rel='stylesheet' href='./calendar/calendar.css'  />
+
 </head>
 
 <body>
@@ -326,7 +329,7 @@
 
             <!-- Activities Panel -->
             <div class="card border-0">
-            <p> 캘린더
+            <div id='calendar'></div>
             </div>
               
           <!-- End Profle Content -->
@@ -422,6 +425,10 @@
       });
   </script>
 
+<script src='../../fullcalendar/core/main.js'></script>
+<script src='../../fullcalendar/interaction/main.js'></script>
+<script src='../../fullcalendar/daygrid/main.js'></script>
+<script src='./calendar/calendar.js'></script>
 
 
 

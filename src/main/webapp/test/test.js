@@ -8,7 +8,7 @@ var trGeneratorBtn = Handlebars.compile(templateSrcBtn);
 var trGeneratorRoom = Handlebars.compile(templateSrcRoom);
 
 //캘린더 초기설정
-$(document).on('DOMContentLoaded', function (e) {
+$(document).on('DOMContentLoaded', function (e) { 
     var calendarEl = document.getElementById('calendar');
     window.calendar = new FullCalendar.Calendar(calendarEl, {
 	plugins : [ 'dayGrid', 'interaction'],
