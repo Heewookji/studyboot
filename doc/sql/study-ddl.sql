@@ -94,6 +94,9 @@ DROP TABLE IF EXISTS sms_rest_day RESTRICT;
 -- 공간후기
 DROP TABLE IF EXISTS sms_space_review RESTRICT;
 
+-- 관심분야
+DROP TABLE IF EXISTS sms_member_cls RESTRICT;
+
 -- 스터디 종료 지표
 CREATE TABLE sms_member_endrate (
   member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
@@ -123,8 +126,7 @@ CREATE TABLE sms_member (
   tel       VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo     VARCHAR(255) NOT NULL COMMENT '사진', -- 사진
   admin     BOOLEAN      NOT NULL DEFAULT false COMMENT '관리자여부', -- 관리자여부
-  adr_lms   CHAR(6)      NOT NULL COMMENT '활동지역', -- 활동지역
-  cls_lms   CHAR(6)      NOT NULL COMMENT '관심분야' -- 관심분야
+  adr_lms   CHAR(6)      NOT NULL COMMENT '활동지역' -- 활동지역
 )
 COMMENT '회원';
 
@@ -732,6 +734,13 @@ ALTER TABLE sms_space_review
 ALTER TABLE sms_space_review
   MODIFY COLUMN space_review_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '공간후기번호';
 
+-- 관심분야
+CREATE TABLE sms_member_cls (
+  member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  cls_lms   CHAR(6) NOT NULL COMMENT '관심분야' -- 관심분야
+)
+COMMENT '관심분야';
+
 -- 스터디 종료 지표
 ALTER TABLE sms_member_endrate
   ADD CONSTRAINT FK_sms_member_TO_sms_member_endrate -- 회원 -> 스터디 종료 지표
@@ -1123,6 +1132,16 @@ ALTER TABLE sms_space_review
 -- 공간후기
 ALTER TABLE sms_space_review
   ADD CONSTRAINT FK_sms_member_TO_sms_space_review -- 회원 -> 공간후기
+    FOREIGN KEY (
+      member_id -- 회원번호
+    )
+    REFERENCES sms_member ( -- 회원
+      member_id -- 회원번호
+    );
+
+-- 관심분야
+ALTER TABLE sms_member_cls
+  ADD CONSTRAINT FK_sms_member_TO_sms_member_cls -- 회원 -> 관심분야
     FOREIGN KEY (
       member_id -- 회원번호
     )
