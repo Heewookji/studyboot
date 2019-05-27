@@ -2,7 +2,10 @@ var param = location.href.split('?')[1],
 //no = param.split('=')[1];
 // 위에 코드가 맞는 거!! 임시로 no 값 1 넣어놨습니다.
 // 원래 클릭하면 스터디 번호 받아와서 값에 넣어줘야함!
-no = 1;
+no = 1,
+memberTemplateSrc = $('#study-member').html();
+
+var memberGenerator = Handlebars.compile(memberTemplateSrc);
 
 //JSON 형식의 데이터 목록 가져오기
 function loadList(no) {
@@ -10,8 +13,9 @@ function loadList(no) {
       function(obj) {
 
     console.log(no);
-    $('#study_img').attr("src", "/studyboot/upload/images/" + obj.photo);
+    $('#study_img').attr("src", "/studyboot/upload/images/" + obj.study.photo);
 
+    $(memberGenerator(obj)).appendTo('#study-list');
     
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
