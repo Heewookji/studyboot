@@ -65,7 +65,7 @@
       c.cls_lms
     from 
       sms_member m
-      inner join sms_member_cls c on c.member_id = m.member_id
+      left outer join sms_member_cls c on m.member_id = c.member_id
     where 
       email = #{email}
       and pwd = password(#{password})
@@ -88,17 +88,29 @@
       nick_name = #{nickName},
       birth = #{birth},
       email = #{email},
-      tel = #{tel},
-      photo = #{photo},
-      pwd = password(#{password}),
-      rate = #{rate}
+      tel = #{tel}
     where member_id = #{no}
   </update>
   
   <select id="findByNo" resultMap="memberMap" parameterType="int">
-    select *
-    from sms_member
-    where member_id = #{value}
+    select
+      m.member_id, 
+      m.nick_name, 
+      m.name,
+      m.email, 
+      m.tel,
+      m.admin,
+      m.adr_lms,
+      m.join_date,
+      m.rate,
+      m.photo,
+      m.birth,
+      c.cls_lms
+    from 
+      sms_member m
+      left outer join sms_member_cls c on m.member_id = c.member_id
+    where 
+      m.member_id = #{value}
   </select>
   
   

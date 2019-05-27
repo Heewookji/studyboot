@@ -166,34 +166,34 @@
         <!-- Sidebar Navigation -->
         <div class="list-group list-group-border-0 g-mb-40">
         
-         <!-- Comments -->
+         <!-- 내 스터디 -->
           <a href="#" class="list-group-item list-group-item-action justify-content-between">
             <span><i class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
             <span class="u-label g-font-size-11 g-bg-pink g-rounded-20 g-px-8">24</span>
           </a>
-          <!-- End Comments -->
+          <!-- End 내 스터디 -->
           
-             <!-- My Projects -->
+             <!-- 내 정보 -->
           <a href="view.html" class="list-group-item justify-content-between active">
             <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내 정보</span>
             <span class="u-label g-font-size-11 g-bg-white g-color-main g-rounded-20 g-px-10">9</span>
           </a>
-          <!-- End My Projects -->
+          <!-- End 내 정보 -->
           
         
-          <!-- Overall -->
+          <!-- 쪽지함 -->
           <a href="../message/index.html" class="list-group-item list-group-item-action justify-content-between">
             <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
             <span class="u-label g-font-size-11 g-bg-gray-dark-v2 g-rounded-20 g-px-10">2</span>
           </a>
-          <!-- End Overall -->
+          <!-- End 쪽지함 -->
 
-          <!-- History -->
+          <!-- 문의하기 -->
           <a href="#" class="list-group-item list-group-item-action justify-content-between"
            data-toggle="modal" data-target="#inqryModal" id="inqryForm-btn">
             <span><i class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
           </a>
-          <!-- End History -->
+          <!-- End 문의하기 -->
         </div>
       <!-- End Sidebar Navigation -->
       </div>
@@ -225,6 +225,7 @@
             <h2 class="h4 g-font-weight-300">Manage your Name, ID and Email Addresses</h2>
             <p>Below are name, email addresse, contacts and more on file for your account.</p>
 
+            <form>
             <ul class="list-unstyled g-mb-30">
               <!-- Name -->
               <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
@@ -262,7 +263,7 @@
               <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15">
                 <div class="g-pr-10">
                   <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Birth</strong>
-                  <input type="Date" class="align-top form-control-plaintext d-md-inline-block g-width-200" id="birth" readonly>
+                  <input type="date" class="align-top form-control-plaintext d-md-inline-block g-width-200" id="birth" readonly>
                 </div>
                 <span id="sb-birth-edit">
                   <i class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
@@ -306,6 +307,7 @@
               </li>
               <!-- End Phone number -->
             </ul>
+            </form>
 
             <div class="text-sm-right">
               <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#" id="sb-info-cancel">Cancel</a>

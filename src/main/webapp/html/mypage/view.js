@@ -3,10 +3,9 @@ no,
 member;
 
 
-var passRule = /^[A-Za-z0-9]{6,12}$/; //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+//var passRule = /^[A-Za-z0-9]{6,12}$/; //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 
 
-loadData(1);
 
 // JSON 형식의 데이터 가져오기
 function loadData(no) {
@@ -29,11 +28,10 @@ function loadData(no) {
 //    $('#attendance').val(data.attendance);
 //    $('#endrate').val(data.endrate);
     
-    $(document.body).trigger('loaded-member');
-
   });
-
 };
+
+loadData(2);
 
 // inquiry
 $('#inqryForm-btn').click((e) => {
@@ -129,8 +127,7 @@ $('#sb-email-save > .icon-media-065').click(() => {
   
   if(!emailRule.test($("input[id='email']").val())) {
     //경고
-    alert("xxx");
-    //return false;
+    return false;
   } else {
     $('#email').prop('readonly', true);
     $('#email').addClass('form-control-plaintext');
@@ -199,12 +196,11 @@ $('#sb-birth-save > .icon-media-066').click(() => {
 
   
   
-  if(!passRule.test($("input[id='PASS']").val())) {
-    //경고
-   
-    //return false;
-  }
-
+//  if(!passRule.test($("input[id='PASS']").val())) {
+//    //경고
+//   
+//    //return false;
+//  }
 
 
 $('#sb-info-change').click((e) => {
@@ -221,11 +217,8 @@ $('#sb-info-change').click((e) => {
       birth: $(birth).val(),
       email: $(email).val(),
       tel: $(tel).val()
-//      contents:$(inqryContents).val(),
-//      inquiryPersonNo: $(inqryNo).val(),
-//      suspectPersonNo: $(sspctNo).val()
     },
-    success: function(data){
+    success: function(data) {
       var obj = JSON.parse(data);
       location.reload();
     }

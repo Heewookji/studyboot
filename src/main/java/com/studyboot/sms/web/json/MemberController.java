@@ -44,7 +44,6 @@ public class MemberController {
   @PostMapping("update")
   public Object update(Member member) {
     
-    System.out.println(member);
     HashMap<String,Object> content = new HashMap<>();
     try {
       if (memberService.update(member) == 0) 
