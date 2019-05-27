@@ -2,6 +2,7 @@ package com.studyboot.sms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Member implements Cloneable, Serializable {
@@ -17,6 +18,8 @@ public class Member implements Cloneable, Serializable {
   private String email;
   private String photo;
   private String tel;
+  private List<String> cls;
+  
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date birth;
@@ -29,13 +32,12 @@ public class Member implements Cloneable, Serializable {
   
   
   
-  
   @Override
   public String toString() {
     return "Member [no=" + no + ", rate=" + rate + ", password=" + password + ", name=" + name
         + ", nickName=" + nickName + ", email=" + email + ", photo=" + photo + ", tel=" + tel
-        + ", birth=" + birth + ", registeredDate=" + registeredDate + ", admin=" + admin
-        + ", address=" + address + "]";
+        + ", cls=" + cls + ", birth=" + birth + ", registeredDate=" + registeredDate + ", admin="
+        + admin + ", address=" + address + "]";
   }
   public int getNo() {
     return no;
@@ -85,6 +87,12 @@ public class Member implements Cloneable, Serializable {
   public void setTel(String tel) {
     this.tel = tel;
   }
+  public List<String> getCls() {
+    return cls;
+  }
+  public void setCls(List<String> cls) {
+    this.cls = cls;
+  }
   public Date getBirth() {
     return birth;
   }
@@ -109,7 +117,7 @@ public class Member implements Cloneable, Serializable {
   public void setAddress(String address) {
     this.address = address;
   }
-
+  
   
   
   

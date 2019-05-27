@@ -19,6 +19,12 @@
     <result column="photo" property="photo"/>
     <result column="admin" property="admin"/>
     <result column="adr_lms" property="address"/>
+    
+     <collection property="cls" ofType="string">
+    <result column="cls_lms"/>
+    </collection>
+    
+    
   </resultMap>
   
   <sql id="default-columns">
@@ -28,7 +34,6 @@
       email, 
       tel,
       admin,
-      cls_lms,
       adr_lms,
       join_date,
       rate,
@@ -49,9 +54,21 @@
   
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
     select 
-      <include refid="default-columns"/> 
+      m.member_id, 
+      m.nick_name, 
+      m.name,
+      m.email, 
+      m.tel,
+      m.admin,
+      m.adr_lms,
+      m.join_date,
+      m.rate,
+      m.photo,
+      m.birth,
+      c.cls_lms
     from 
-      sms_member
+      sms_member m
+      inner join sms_member_cls c on c.member_id = m.member_id
     where 
       email = #{email}
       and pwd = password(#{password})
