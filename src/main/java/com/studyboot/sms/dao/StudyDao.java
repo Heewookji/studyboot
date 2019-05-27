@@ -16,5 +16,5 @@ public interface StudyDao {
   int countAllByKeyword(HashMap<String, Object> params);
   List<Study> findAll(Map<String, Object> params);
   List<Study> findAllByKeyword(HashMap<String, Object> params);
-  Study fineByStudy(int no);
+  Study findByStudy(int no);
 }

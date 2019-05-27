@@ -34,6 +34,8 @@
     select
       m.rate,
       m.birth,
+      m.name,
+      m.photo
       sm.atn_pct
     from
       sms_std_member sm
