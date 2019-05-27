@@ -15,6 +15,12 @@ $( document ).ready(function() {
 	    keyword = $("#study-search").val();
 	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
 	});
+	
+	$('#main-search-btn').click((e) => {
+	    pageNo = 1;
+	    keyword = $("#main-search").val();
+	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
+	});
 
 	$(document.body).trigger('loaded-header');
     });

@@ -17,6 +17,17 @@ $(document).on('DOMContentLoaded', function (e) {
 	dateClick: function(info) {
 	    window.calInfo = info;
 	    $(document.body).trigger('cal-dateClick');
+	},
+	eventClick: function(info) {
+	    window.eventInfo = info.event;
+	    $(document.body).trigger('cal-eventClick');
+	},
+	events: {
+	    url: '/studyboot/app/json/schedule/list',   
+	    success : function(doc) { 
+		var data = JSON.parse(doc);
+		callback(data); 
+	    }
 	}
     });
 });
@@ -68,6 +79,13 @@ $(document.body).bind('loaded-calbtn', () => {
 });
 
 
+
+$(document.body).bind('cal-eventClick', () => {
+    alert(window.eventInfo.title + window.eventInfo.id);
+});
+
+
+
 //$("#calendar").fullCalendar({
 
 //dayClick: function() {
@@ -79,11 +97,6 @@ $(document.body).bind('loaded-calbtn', () => {
 //});
 
 //$(".ui .full-calendar").addClass('modal');
-
-
-
-
-
 
 
 

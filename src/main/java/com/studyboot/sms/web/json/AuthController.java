@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
@@ -29,19 +28,7 @@ public class AuthController {
   @Autowired StudyMemberService studyMemberService;
   @Autowired ServletContext servletContext;
 
-  @GetMapping("form")
-  public void form(
-      @RequestHeader(value="Referer",required=false) String refererUrl,
-      HttpSession session) {
-
-    logger.debug("refererUrl: " + refererUrl);
-
-    if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
-      session.setAttribute(REFERER_URL, refererUrl);
-    } else {
-      session.removeAttribute(REFERER_URL);
-    }
-  }
+ 
 
   @PostMapping("login")
   public Object login(
