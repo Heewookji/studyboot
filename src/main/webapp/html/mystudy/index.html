@@ -26,11 +26,11 @@
   <link rel="stylesheet" href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
   <link rel="stylesheet" href="../../Unify/assets/vendor/hs-megamenu/src/hs.megamenu.css">
   <link rel="stylesheet" href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+  <link rel="stylesheet" href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
 
   <!-- CSS Unify -->
   <link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
   <link rel="stylesheet" href="../../Unify/assets/css/unify-components.css">
-  <link rel="stylesheet" href="../../Unify/assets/css/unify-globals.css">
   <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
   <link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
@@ -80,8 +80,7 @@
             <!-- User Image -->
             <div class="u-block-hover g-pos-rel">
               <figure>
-                <img class="img-fluid w-100 u-block-hover__main--zoom-v1" src="/studyboot/upload/images/test.png" 
-                alt="Image Description" id="study_img">
+                <img class="img-fluid w-100 u-block-hover__main--zoom-v1" alt="Image Description" id="study_img">
               </figure>
 
               <!-- Figure Caption -->
@@ -363,6 +362,10 @@
   <script src="../../Unify/assets/vendor/appear.js"></script>
   <script src="../../Unify/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
   <script src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+   
+  
 
   <!-- JS Unify -->
   <script src="../../Unify/assets/js/hs.core.js"></script>
@@ -373,59 +376,16 @@
   <script src="../../Unify/assets/js/components/hs.rating.js"></script>
   <script src="../../Unify/assets/js/components/hs.scrollbar.js"></script>
   <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+  <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+  <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
 
   <!-- JS Customization -->
   <script src="../../Unify/assets/js/custom.js"></script>
-    <script src="/studyboot/html/header.js"></script>
+  <script src="/studyboot/html/header.js"></script>
   <script src="index.js"></script>
   <script src="../footer.js"></script>
 
   <!-- JS Plugins Init. -->
-  <script>
-    $(document).on('ready', function () {
-        // initialization of go to
-        $.HSCore.components.HSGoTo.init('.js-go-to');
-
-        // initialization of tabs
-        $.HSCore.components.HSTabs.init('[role="tablist"]');
-
-        // initialization of rating
-        $.HSCore.components.HSRating.init($('.js-rating'), {
-          spacing: 2
-        });
-
-        // initialization of HSScrollBar component
-        $.HSCore.components.HSScrollBar.init( $('.js-scrollbar') );
-      });
-
-      $(window).on('load', function () {
-        // initialization of header
-        $.HSCore.components.HSHeader.init($('#js-header'));
-        $.HSCore.helpers.HSHamburgers.init('.hamburger');
-
-        // initialization of HSMegaMenu component
-        $('.js-mega-menu').HSMegaMenu({
-          event: 'hover',
-          pageContainer: $('.container'),
-          breakpoint: 991
-        });
-
-        // initialization of horizontal progress bars
-        setTimeout(function() { // important in this case
-          var horizontalProgressBars = $.HSCore.components.HSProgressBar.init('.js-hr-progress-bar', {
-            direction: 'horizontal',
-            indicatorSelector: '.js-hr-progress-bar-indicator'
-          });
-        }, 1);
-      });
-
-      $(window).on('resize', function () {
-        setTimeout(function () {
-          $.HSCore.components.HSTabs.init('[role="tablist"]');
-        }, 200);
-      });
-  </script>
-
 <script src='../../fullcalendar/core/main.js'></script>
 <script src='../../fullcalendar/interaction/main.js'></script>
 <script src='../../fullcalendar/daygrid/main.js'></script>
