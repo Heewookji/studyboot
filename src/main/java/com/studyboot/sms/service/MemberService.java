@@ -7,7 +7,8 @@ public interface MemberService {
 
   List<Integer> findMemberNoByKeyword(String keyword);
   List<Integer> findMemberNoMsg(String keyword);
-  int findById(String nickName);
   Member get(String email, String password);
-
+  Member get(int no);
+  int findByNickName(String nickName);
+  int update(Member member);
 }

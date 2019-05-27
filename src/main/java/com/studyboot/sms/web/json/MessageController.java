@@ -28,7 +28,7 @@ public class MessageController {
     HashMap<String,Object> content = new HashMap<>();
 
     String nickName = member.getNickName();
-    int memberNo = memberService.findById(nickName);
+    int memberNo = memberService.findByNickName(nickName);
     message.setRecvNo(memberNo);
 
     try {

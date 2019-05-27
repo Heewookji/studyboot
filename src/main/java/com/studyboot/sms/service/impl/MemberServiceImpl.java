@@ -37,13 +37,7 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.findByKeywordMsg(keywordMap);
 
   }
-
-  @Override
-  public int findById(String nickName) {
-
-    return memberDao.findById(nickName);
-  }
-
+  
   @Override
   public Member get(String email, String password) {
     HashMap<String,Object> paramMap = new HashMap<>();
@@ -51,6 +45,22 @@ public class MemberServiceImpl implements MemberService {
     paramMap.put("password", password);
     return memberDao.findByEmailPassword(paramMap);
   }
+
+  @Override
+  public Member get(int no) {
+    return memberDao.findByNo(no);
+  }
+  
+  @Override
+  public int findByNickName(String nickName) {
+    return memberDao.findByNickName(nickName);
+  }
+  
+  @Override
+  public int update(Member member) {
+    return memberDao.update(member);
+  }
+
 }
 
 
