@@ -68,7 +68,7 @@
       c.cls_lms
     from 
       sms_member m
-      inner join sms_member_cls c on c.member_id = m.member_id
+      left outer join sms_member_cls c on c.member_id = m.member_id
     where 
       email = #{email}
       and pwd = password(#{password})

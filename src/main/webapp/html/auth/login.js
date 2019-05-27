@@ -19,7 +19,7 @@ document.querySelector('#login-btn').onclick = () => {
 	    if (obj.status == 'success') {
 		location.href = "/studyboot"
 	    } else {
-		alert('로그인 실패입니다!\n' + data.message);
+		alert('로그인 실패입니다!');
 	    }
 	}
     });

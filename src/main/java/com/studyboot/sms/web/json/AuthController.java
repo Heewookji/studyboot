@@ -53,7 +53,7 @@ public class AuthController {
     Member member = memberService.get(email, password);
 
     HashMap<String,Object> content = new HashMap<>();
-
+    System.out.println(member);
     if (member == null) {
       content.put("status", "fail");
       content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
