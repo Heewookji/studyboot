@@ -1,7 +1,7 @@
 
 <div
  class="u-header__section u-shadow-v18 u-header__section--light g-bg-white g-transition-0_3 g-py-10"
- data-header-fix-moment-exclude="g-py-10" 
+ data-header-fix-moment-exclude="g-py-10"
  data-header-fix-moment-classes="g-py-0">
  <nav class="navbar navbar-expand-lg">
 
@@ -19,8 +19,7 @@
    <!-- End Responsive Toggle Button -->
 
    <!-- Logo -->
-   <a href="./Unify/index.html" class="navbar-brand">
-   </a>
+   <a href="./Unify/index.html" class="navbar-brand"> </a>
    <!-- End Logo -->
 
    <div class="input-group u-shadow-v33  g-rounded-50 g-max-width-250"
@@ -31,9 +30,10 @@
     <div class="input-group-append">
      <span
       class="input-group-text g-bg-white border-0 g-rounded-right-50">
-      <button
-       class="btn btn-sm u-btn-primary rounded-circle"
-       type="submit" id="search-btn"><i class="fa fa-search"></i></button>
+      <button class="btn btn-sm u-btn-primary rounded-circle"
+       type="submit" id="search-btn">
+       <i class="fa fa-search"></i>
+      </button>
      </span>
     </div>
    </div>
@@ -42,19 +42,38 @@
     class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg"
     id="navBar">
     <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-     <li class="nav-item g-mx-20--lg std-invisible"><a href="#"
-      class="nav-link px-0">MyPage </a></li>
-     <li class="nav-item g-mx-20--lg std-invisible"><a href="#"
-      class="nav-link px-0">Study <span class="sr-only"></span>
-     </a></li>
      <li class="nav-item g-mx-20--lg"><a href="#"
       class="nav-link px-0">Space </a></li>
-     <li class="nav-item g-mx-20--lg"><a href="#"
-      class="nav-link px-0">Login </a></li>
-     <li class="nav-item g-ml-20--lg g-mr-0--lg"><a href="/studyboot/html/auth/register.html"
-      class="nav-link px-0">Register </a></li>
+     <li class="nav-item g-mx-20--lg std-not-login"><a
+      href="/studyboot/html/auth/login.html" class="nav-link px-0">Login
+     </a></li>
+     <li class="nav-item g-ml-20--lg g-mr-0--lg std-not-login"><a
+      href="/studyboot/html/auth/register.html" class="nav-link px-0">Register
+     </a></li>
+
+     <div class="btn-group std-login">
+      <li
+       class="nav-item g-mx-20--lg std-login g-cursor-pointer g-color-primary--hover 
+     dropdown-toggle"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       <span class="d-inline-block g-pos-rel g-mr-20 g-mb-20"> <img
+        class="media-object g-rounded-50x u-image-icon-size-sm"
+        src="/studyboot/Unify/assets/img-temp/100x100/img4.jpg"
+        alt="Image Description">
+      </span> <span id="nickname"></span>
+       <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">마이페이지</a> 
+        <a class="dropdown-item" href="#">쪽지함</a>
+        <div id="std-dropdown"></div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" id="logout">로그아웃</a>
+       </div>
+      </li>
+     </div>
+
     </ul>
    </div>
+
    <!-- End Navigation -->
   </div>
  </nav>
@@ -91,7 +110,7 @@
       class="nav-link px-0 cls-btn" data-no="15">인문 </a></li>
      <li class="nav-item g-mx-60--lg"><a href="#"
       class="nav-link px-0 cls-btn" data-no="16">공학 </a></li>
-      <li class="nav-item g-mx-60--lg"><a href="#"
+     <li class="nav-item g-mx-60--lg"><a href="#"
       class="nav-link px-0 cls-btn" data-no="17">외국어 </a></li>
     </ul>
    </div>
@@ -99,3 +118,14 @@
   </div>
  </nav>
 </div>
+
+
+<!-- 카테고리 소분류 -->
+<script id="myStudy-template" type="text/x-handlebars-template">
+ <div class="dropdown-divider"></div>
+{{#each myStudyList}}
+<a class="dropdown-item myStudy-btn" href="#" data-no="{{no}}">{{name}}</a>
+{{/each}}
+</script>
+
+<script src="/studyboot/node_modules/handlebars/dist/handlebars.min.js"></script>

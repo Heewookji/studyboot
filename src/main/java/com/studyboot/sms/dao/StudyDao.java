@@ -16,4 +16,5 @@ public interface StudyDao {
   int countAllByKeyword(HashMap<String, Object> params);
   List<Study> findAll(Map<String, Object> params);
   List<Study> findAllByKeyword(HashMap<String, Object> params);
+  List<Study> findByNos(List<Integer> list);
 }

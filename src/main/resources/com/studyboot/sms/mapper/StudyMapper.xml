@@ -68,7 +68,8 @@
 				and (
 				name like #{pattern1}
 				or goal like #{pattern1}
-				or cont like #{pattern1}
+				or cont like
+				#{pattern1}
 				<if test="findedClsNosByKeyword != null">
 					or
 					<foreach collection="findedClsNosByKeyword" item="k"
@@ -85,65 +86,67 @@
 			limit #{rowNo}, #{size}
 		</if>
 	</select>
-	
-	<select id="findAllByKeyword" resultMap="studyMap" parameterType="map">
-    select
-    std_id,
-    name,
-    adr_lms,
-    cls_lms,
-    rate,
-    photo,
-    goal
-    from
-    sms_std
-    <where>
-      rate >= #{rateValue}
-         <if test="clsNo != null">
-        and (
-         <foreach collection="clsNo" item="c" separator="or">
-         IF ( LENGTH(#{c}) = 2,  LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) = #{c})
-          </foreach>
-          )
-      </if>
-      
-      <if test="addressNoSize != 0">
-        and
-        <if test="addressNoSize == 2">
-          LEFT(adr_lms,2) = #{addressNo}
-        </if>
-        <if test="addressNoSize == 4">
-          LEFT(adr_lms,4) = #{addressNo}
-        </if>
-        <if test="addressNoSize == 6">
-          adr_lms = #{addressNo}
-        </if>
-      </if>
 
-      <if test="keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'" />
-        and (
-        name like #{pattern1}
-        or goal like #{pattern1}
-        or cont like #{pattern1}
-        <if test="findedClsNosByKeyword != null">
-          or
-          <foreach collection="findedClsNosByKeyword" item="k"
-            separator="or">
-            cls_lms = #{k}
-          </foreach>
-        </if>
-        )
-      </if>
-      
-    </where>
-    order by
-    std_id desc
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-	
+	<select id="findAllByKeyword" resultMap="studyMap"
+		parameterType="map">
+		select
+		std_id,
+		name,
+		adr_lms,
+		cls_lms,
+		rate,
+		photo,
+		goal
+		from
+		sms_std
+		<where>
+			rate >= #{rateValue}
+			<if test="clsNo != null">
+				and (
+				<foreach collection="clsNo" item="c" separator="or">
+					IF ( LENGTH(#{c}) = 2, LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) =
+					#{c})
+				</foreach>
+				)
+			</if>
+
+			<if test="addressNoSize != 0">
+				and
+				<if test="addressNoSize == 2">
+					LEFT(adr_lms,2) = #{addressNo}
+				</if>
+				<if test="addressNoSize == 4">
+					LEFT(adr_lms,4) = #{addressNo}
+				</if>
+				<if test="addressNoSize == 6">
+					adr_lms = #{addressNo}
+				</if>
+			</if>
+
+			<if test="keyword != null">
+				<bind name="pattern1" value="'%' + keyword + '%'" />
+				and (
+				name like #{pattern1}
+				or goal like #{pattern1}
+				or cont like #{pattern1}
+				<if test="findedClsNosByKeyword != null">
+					or
+					<foreach collection="findedClsNosByKeyword" item="k"
+						separator="or">
+						cls_lms = #{k}
+					</foreach>
+				</if>
+				)
+			</if>
+
+		</where>
+		order by
+		std_id desc
+		<if test="size != null and rowNo != null">
+			limit #{rowNo}, #{size}
+		</if>
+	</select>
+
 
 
 
@@ -166,6 +169,30 @@
 		sms_std
 		where
 		std_id = #{value}
+	</select>
+
+	<select id="findByNos" resultMap="studyMap" parameterType="list">
+		select
+		std_id,
+		adr_lms,
+		cls_lms,
+		name,
+		photo,
+		day,
+		sdt,
+		edt,
+		rcrtm_state,
+		goal,
+		cont,
+		prsn,
+		rate
+		from
+		sms_std
+		where
+		<foreach collection="list" item="k"
+			separator="or">
+			std_id = #{k}
+		</foreach>
 	</select>
 
 	<!-- <update id="increaseCount" parameterType="int"> update sms_std set 
@@ -262,6 +289,55 @@
 				and (
 				name like #{pattern1}
 				or goal like #{pattern1}
+				or cont like
+				#{pattern1}
+				<if test="findedClsNosByKeyword != null">
+					or
+					<foreach collection="findedClsNosByKeyword" item="k"
+						separator="or">
+						cls_lms = #{k}
+					</foreach>
+				</if>
+				)
+			</if>
+		</where>
+
+	</select>
+
+
+
+	<select id="countAllByKeyword" resultType="int"
+		parameterType="map">
+		select count(*) from sms_std
+		<where>
+			rate >= #{rateValue}
+			<if test="clsNo != null">
+				and (
+				<foreach collection="clsNo" item="c" separator="or">
+					IF ( LENGTH(#{c}) = 2, LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) =
+					#{c})
+				</foreach>
+				)
+			</if>
+
+			<if test="addressSize != 0">
+				and
+				<if test="addressSize == 2">
+					LEFT(adr_lms,2) = #{addressNo}
+				</if>
+				<if test="addressSize == 4">
+					LEFT(adr_lms,4) = #{addressNo}
+				</if>
+				<if test="addressSize == 6">
+					adr_lms = #{addressNo}
+				</if>
+			</if>
+
+			<if test="keyword != null">
+				<bind name="pattern1" value="'%' + keyword + '%'" />
+				and (
+				name like #{pattern1}
+				or goal like #{pattern1}
 				or cont like #{pattern1}
 				<if test="findedClsNosByKeyword != null">
 					or
@@ -275,52 +351,6 @@
 		</where>
 
 	</select>
-	
-	
-	
-	<select id="countAllByKeyword" resultType="int" parameterType="map">
-    select count(*) from sms_std
-    <where>
-      rate >= #{rateValue}
-      <if test="clsNo != null">
-        and (
-         <foreach collection="clsNo" item="c" separator="or">
-         IF ( LENGTH(#{c}) = 2,  LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) = #{c})
-          </foreach>
-          )
-      </if>
-
-      <if test="addressSize != 0">
-        and
-        <if test="addressSize == 2">
-          LEFT(adr_lms,2) = #{addressNo}
-        </if>
-        <if test="addressSize == 4">
-          LEFT(adr_lms,4) = #{addressNo}
-        </if>
-        <if test="addressSize == 6">
-          adr_lms = #{addressNo}
-        </if>
-      </if>
-
-      <if test="keyword != null">
-        <bind name="pattern1" value="'%' + keyword + '%'" />
-        and (
-        name like #{pattern1}
-        or goal like #{pattern1}
-        or cont like #{pattern1}
-        <if test="findedClsNosByKeyword != null">
-          or
-          <foreach collection="findedClsNosByKeyword" item="k"
-            separator="or">
-            cls_lms = #{k}
-          </foreach>
-        </if>
-        )
-      </if>
-    </where>
-
-  </select>
 
 
 </mapper>

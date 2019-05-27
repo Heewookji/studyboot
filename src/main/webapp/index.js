@@ -74,6 +74,49 @@ $(document.body).bind('loaded-header', () => {
 });
 
 
+
+$(document.body).bind('loaded-header', () => {
+//  로그인 사용자 불러온다.
+    loadLoginUser();
+
+    $('#logout').click((e) => {
+	e.preventDefault();
+	$.getJSON('/studyboot/app/json/auth/logout',
+		function(obj) {
+	    location.href = "/studyboot"
+	});
+    });
+
+});
+
+
+function loadLoginUser() {
+
+    $.getJSON('/studyboot/app/json/auth/user',
+	    function(obj) {
+	var user = obj.user;
+	var loginState = $(".std-login");
+	var notLoginState = $(".std-not-login");
+
+	if (obj.status == 'success') {
+	    notLoginState.addClass('std-invisible');
+	    
+	    $("#nickname").html(user.nickName);
+	    
+	    if(obj.myStudyList != undefined){
+		var myStudyListTemplateSrc = $('#myStudy-template').html();
+		var myStudyListGenerator = Handlebars.compile(myStudyListTemplateSrc);
+		$(myStudyListGenerator(obj)).appendTo($('#std-dropdown'));
+	    }
+	    
+	} else {
+	    loginState.addClass('std-invisible');
+	}
+    });
+}
+
+
+
 function getCurrentScrollPercentage(){
     return (window.scrollY + window.innerHeight) / document.body.clientHeight * 100
 }

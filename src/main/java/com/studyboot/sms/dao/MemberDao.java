@@ -11,6 +11,7 @@ public interface MemberDao {
 	Member findByNo(int no);
 	int update(Member member);
 	int findById(String nickName);
+  Member findByEmailPassword(HashMap<String, Object> paramMap);
 	
 }
 

@@ -21,6 +21,20 @@
     <result column="adr_lms" property="address"/>
   </resultMap>
   
+  <sql id="default-columns">
+      member_id, 
+      nick_name, 
+      name,
+      email, 
+      tel,
+      admin,
+      cls_lms,
+      adr_lms,
+      join_date,
+      rate,
+      photo,
+      birth
+  </sql>
   
 
   <select id="findByKeyword" resultType="int" parameterType="map">
@@ -31,6 +45,16 @@
         name like #{pattern1}
     </if>
     </where>   
+  </select>
+  
+  <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
+    select 
+      <include refid="default-columns"/> 
+    from 
+      sms_member
+    where 
+      email = #{email}
+      and pwd = password(#{password})
   </select>
   
   <select id="findByKeywordMsg" resultType="int" parameterType="map">

@@ -1,39 +1,34 @@
 if (window.localStorage.getItem('email')) {
-  //document.querySelector('#email').value = localStorage.getItem('email')
-  document.querySelector('#email').value = localStorage.email
+    $('#email').val(localStorage.email);
 }
 
 document.querySelector('#login-btn').onclick = () => {
-  var xhr = new XMLHttpRequest()
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState != 4 || xhr.status != 200)
-      return;
-    
-    var data = JSON.parse(xhr.responseText);
-    
-    if (data.status == 'success') {
-      location.href = "../index.html"
-        
+
+    $.ajax({
+	url:'/studyboot/app/json/auth/login',
+	type: 'post',
+	dataType: 'text',
+	contentType: 'application/x-www-form-urlencoded',
+	data: {
+	    email: $(email).val(),
+	    password:$(password).val()
+	},
+	success: function(data){
+	    var obj = JSON.parse(data);
+	    
+	    if (obj.status == 'success') {
+		location.href = "/studyboot"
+	    } else {
+		alert('로그인 실패입니다!\n' + data.message);
+	    }
+	}
+    });
+
+    if ($('#saveEmail:checked') != null) {
+	window.localStorage.email = $('#email').val();
     } else {
-      alert('로그인 실패입니다!\n' + data.message);
+	window.localStorage.removeItem("email");
     }
-  };
-  xhr.open('POST', '../../app/json/auth/login', true)
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  
-  var email = document.querySelector('#email').value;
-  var password = document.querySelector('#password').value;
-  
-  if (document.querySelector('#saveEmail:checked') != null) {
-    // 웹브라우저의 로컬 스토리지에 이메일을 저장한다.
-    //window.localStorage.setItem("email", email);
-    window.localStorage.email = email;
-  } else {
-    window.localStorage.removeItem("email");
-  }
-  
-  var qs = 'email=' + email + '&password=' + password;
-  xhr.send(qs);
 };
 
 

@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
+import com.studyboot.sms.service.StudyMemberService;
 
 @RestController("json/AuthController")
 @RequestMapping("/json/auth")
@@ -23,6 +26,7 @@ public class AuthController {
   static final String REFERER_URL = "refererUrl";
 
   @Autowired MemberService memberService;
+  @Autowired StudyMemberService studyMemberService;
   @Autowired ServletContext servletContext;
   
   @GetMapping("form")
@@ -82,6 +86,13 @@ public class AuthController {
     HashMap<String,Object> content = new HashMap<>();
 
     if (loginUser != null) {
+      
+      List<Study> myStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
+      
+      if(myStudyList != null) {
+        content.put("myStudyList", myStudyList);
+      }
+      
       content.put("status", "success");
       content.put("user", loginUser);
     } else {
