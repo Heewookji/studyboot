@@ -24,9 +24,9 @@
   <link rel="stylesheet" href="../../Unify/assets/vendor/icon-hs/style.css">
   <link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
   <link rel="stylesheet" href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+  <link rel="stylesheet" href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
   <link rel="stylesheet" href="../../Unify/assets/vendor/hs-megamenu/src/hs.megamenu.css">
   <link rel="stylesheet" href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
-  <link rel="stylesheet" href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
 
   <!-- CSS Unify -->
   <link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
@@ -164,63 +164,8 @@
 <div class="col-lg" style="padding: 0px;">
               <div id="shortcode1">
                 <div class="shortcode-html">
-                  <ul class="list-unstyled">
-                    <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
-                      <div class="media">
-                        <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/test.png" alt="Image Description">
-                        </div>
-                        <div class="media-body">
-                          <p class="m-0"><strong>박상민</strong> saved your pin</p>
-                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
-                      <div class="media">
-                        <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/index.png" alt="Image Description">
-                        </div>
-                        <div class="media-body">
-                          <p class="m-0"><strong>최지환</strong> sent you a message</p>
-                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
-                      <div class="media">
-                        <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../Unify/assets/img-temp/100x100/img6.jpg" alt="Image Description">
-                        </div>
-                        <div class="media-body">
-                          <p class="m-0"><strong>박상현</strong> is offering free coffee</p>
-                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
-                      <div class="media">
-                        <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../Unify/assets/img-temp/100x100/img17.jpg" alt="Image Description">
-                        </div>
-                        <div class="media-body">
-                          <p class="m-0"><strong>지희욱</strong> released a new update</p>
-                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
-                      <div class="media">
-                        <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../Unify/assets/img-temp/100x100/img17.jpg" alt="Image Description">
-                        </div>
-                        <div class="media-body">
-                          <p class="m-0"><strong>임현우</strong> released a new update</p>
-                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                <!-- 스터디원 정보 -->
+                  <ul class="list-unstyled" id="study-list"> </ul>
                 </div>
               </div>
 
@@ -345,10 +290,10 @@
  <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
                       <div class="media">
                         <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/test.png" alt="Image Description">
+                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}" alt="Image Description">
                         </div>
                         <div class="media-body">
-                          <p class="m-0"><strong>박상민</strong> saved your pin</p>
+                          <p class="m-0"><strong>{{name}}</strong> saved your pin</p>
                           <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
                         </div>
                       </div>
@@ -371,6 +316,7 @@
   <!-- JS Global Compulsory -->
   <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
   <script src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
   <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
 
@@ -378,6 +324,7 @@
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/appear.js"></script>
   <script src="../../Unify/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+  <script src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
   <script src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
   <script src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
@@ -391,6 +338,7 @@
   <script src="../../Unify/assets/js/components/hs.tabs.js"></script>
   <script src="../../Unify/assets/js/components/hs.progress-bar.js"></script>
   <script src="../../Unify/assets/js/components/hs.rating.js"></script>
+   <script src="../../Unify/assets/js/components/hs.popup.js"></script>
   <script src="../../Unify/assets/js/components/hs.scrollbar.js"></script>
   <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
   <script src="../../Unify/assets/js/components/hs.carousel.js"></script>

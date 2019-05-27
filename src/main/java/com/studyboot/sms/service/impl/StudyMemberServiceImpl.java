@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
 import com.studyboot.sms.domain.Study;
+import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.StudyMemberService;
 
 @Service
@@ -29,6 +30,14 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     } else {
       return null;
     }
+  }
+
+  @Override
+  public List<StudyMember> findStudyMember(int no) {
+    
+    List<StudyMember> memberList = studyMemberDao.findStudyMembersByNo(no);
+    
+    return memberList;
   }
 
   
