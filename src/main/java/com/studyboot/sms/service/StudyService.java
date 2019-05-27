@@ -14,4 +14,5 @@ public interface StudyService {
   int size(List<String> clsNo, String addressNo, double rateValue, String keyword);
   List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo, double rateValue, String keyword);
   List<Study> list(int pageNo, int pageSize, List<String> clsNo, String addressNo, double rateValue, String keyword);
+  Study getStudy(int no);
 }

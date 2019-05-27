@@ -255,6 +255,13 @@ public class StudyController {
     return content;
   }
 
+  @GetMapping("studyphoto")
+  public Object getStudy(int no) {
+    //studyService.updateRate(no);
+    Study study = studyService.getStudy(no);
+    return study;
+  }
+  
 }
 
 

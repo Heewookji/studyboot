@@ -213,7 +213,13 @@ public class StudyServiceImpl implements StudyService {
     return  studyDao.countAllByKeyword(params);
   }
 
-  
+
+  @Override
+  public Study getStudy(int no) {
+    
+    Study study = studyDao.fineByStudy(no);
+    return study;
+  }
   
   
   

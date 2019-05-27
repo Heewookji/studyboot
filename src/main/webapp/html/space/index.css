@@ -1,24 +1,34 @@
 #spaceMap {
-	float: left;
-	height: 920px;
-	width: 70%;
+	position: relative;
+	top:130px;
+	left: 320px;
+	width: 50%;
+	height: 1412px;
+	display: inline-block;
 }
 
-.spaceList {
-	background-color: cornflowerblue;
-	height: 180px;
-	width: 28%;
-	float: right;
-	margin: 5px;
+#list {
+	position:absolute;
+	top: 130px;
+	right: 320px;
+	width: 16%;
 }
 
-#img {
-	float: left;
-	background-color: khaki;
-	width: 40%;
-	height: 100%;
+#list > div[name = spaceList]  {
+	height: 280px;
+	width: 300px;
 }
 
-h2, div > p {
+article > img {
+	height: 130px;
+}
+
+h3, div > p {
 	text-align: center;
 }
+
+#js-footer {
+	
+}
+
+
