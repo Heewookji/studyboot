@@ -17,5 +17,5 @@ public interface StudyDao {
   List<Study> findAll(Map<String, Object> params);
   List<Study> findAllByKeyword(HashMap<String, Object> params);
   List<Study> findByNos(List<Integer> list);
-  Study fineByStudy(int no);
+  Study findByStudy(int no);
 }

@@ -217,10 +217,9 @@ public class StudyServiceImpl implements StudyService {
   @Override
   public Study getStudy(int no) {
     
-    Study study = studyDao.fineByStudy(no);
+    Study study = studyDao.findByStudy(no);
     return study;
   }
-  
-  
+
   
 }

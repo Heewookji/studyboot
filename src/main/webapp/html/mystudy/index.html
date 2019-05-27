@@ -168,7 +168,7 @@
                     <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
                       <div class="media">
                         <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../Unify/assets/img-temp/100x100/img7.jpg" alt="Image Description">
+                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/test.png" alt="Image Description">
                         </div>
                         <div class="media-body">
                           <p class="m-0"><strong>박상민</strong> saved your pin</p>
@@ -179,7 +179,7 @@
                     <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
                       <div class="media">
                         <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../Unify/assets/img-temp/100x100/img5.jpg" alt="Image Description">
+                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/index.png" alt="Image Description">
                         </div>
                         <div class="media-body">
                           <p class="m-0"><strong>최지환</strong> sent you a message</p>
@@ -338,6 +338,23 @@
     </section>
 
 <footer id="js-footer"> </footer>
+
+<!-- 스터디원 리스트 -->
+<script id="study-member" type="text/x-handlebars-template">
+{{#each list}}
+ <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+                      <div class="media">
+                        <div class="d-flex g-mt-2 g-mr-15">
+                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/test.png" alt="Image Description">
+                        </div>
+                        <div class="media-body">
+                          <p class="m-0"><strong>박상민</strong> saved your pin</p>
+                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
+                        </div>
+                      </div>
+                    </li>
+{{/each}}
+</script>
 
     <!-- End Copyright Footer -->
     <a class="js-go-to u-go-to-v1" href="#" data-type="fixed" data-position='{
