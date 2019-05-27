@@ -353,7 +353,7 @@
 	</select>
 
   <!-- 스터디 사진 조회 -->
-  <select id="fineByStudy" resultMap="studyMap" parameterType="int">
+  <select id="findByStudy" resultMap="studyMap" parameterType="int">
 	select 
 	  photo
 	from
