@@ -19,6 +19,7 @@
     <result column="photo" property="photo"/>
     <result column="admin" property="admin"/>
     <result column="adr_lms" property="address"/>
+    <result column="cls_lms" property="clsNo"/>
   </resultMap>
   
   
@@ -45,17 +46,26 @@
 
   <update id="update" parameterType="member">
     update sms_member
-    set 
+    set
+      name = #{name},
+      nick_name = #{nickName},
+      <!-- birth = #{birth}, -->
+      email = #{email},
+      tel = #{tel},
+      photo = #{photo},
+      pwd = password(#{password}),
       rate = #{rate}
     where member_id = #{no}
   </update>
   
   <select id="findByNo" resultMap="memberMap" parameterType="int">
-    select * from sms_member where member_id = #{value}
+    select *
+    from sms_member
+    where member_id = #{value}
   </select>
   
   
-   <select id="findById" resultType="int" parameterType="string">
+   <select id="findByNickName" resultType="int" parameterType="string">
     select 
       member_id 
     from 

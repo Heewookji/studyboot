@@ -26,8 +26,7 @@ public class Member implements Cloneable, Serializable {
 
   private boolean admin;
   private String address;
-  
-  
+  private String clsNo;
   
   
   @Override
@@ -35,8 +34,9 @@ public class Member implements Cloneable, Serializable {
     return "Member [no=" + no + ", rate=" + rate + ", password=" + password + ", name=" + name
         + ", nickName=" + nickName + ", email=" + email + ", photo=" + photo + ", tel=" + tel
         + ", birth=" + birth + ", registeredDate=" + registeredDate + ", admin=" + admin
-        + ", address=" + address + "]";
+        + ", address=" + address + ", clsNo=" + clsNo + "]";
   }
+  
   public int getNo() {
     return no;
   }
@@ -109,8 +109,12 @@ public class Member implements Cloneable, Serializable {
   public void setAddress(String address) {
     this.address = address;
   }
-
-  
+  public String getClsNo() {
+    return clsNo;
+  }
+  public void setClsNo(String clsNo) {
+    this.clsNo = clsNo;
+  }
   
   
 }
