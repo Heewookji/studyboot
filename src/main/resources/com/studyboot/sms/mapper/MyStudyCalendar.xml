@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.MyStudyCalendar">
+
+    <insert id="insert" parameterType="myStudyCalendar">
+    insert into sms_std_schdl(
+      name,
+      std_id,
+      member_id,
+      schdl_sdt,
+      schdl_edt,
+      memo)
+    values(
+      #{name},
+      #{studyNo},
+      #{memberNo},
+      #{scheduleStartDate},
+      #{scheduleStartEnd},
+      #{memo})
+  </insert>
+</mapper>

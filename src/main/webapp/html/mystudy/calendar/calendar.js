@@ -1,68 +1,62 @@
- document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid' ],
-      defaultDate: '2019-04-12',
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2019-04-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2019-04-07',
-          end: '2019-04-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2019-04-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2019-04-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2019-04-11',
-          end: '2019-04-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-04-12T10:30:00',
-          end: '2019-04-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2019-04-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-04-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2019-04-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2019-04-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2019-04-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2019-04-28'
-        }
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ 'interaction', 'dayGrid' ],
+    defaultDate: new Date(),
+    editable: true,
+    eventLimit: true, // allow "more" link when too many events
+    selectable: true,
+    dateClick: function(info) {
+      window.calInfo = info;
+      //alert(info.dateStr);
+      $(document.body).trigger('cal-dateClick');
+    },
+    events: [
+      {
+        title: 'ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ',
+        start: '2019-05-03'
+      },
+      {
+        title: 'Long Event',
+        start: '2019-05-07',
+        end: '2019-05-10'
+      },
+      {
+        title: 'Long Event',
+        start: '2019-06-07',
+        end: '2019-06-10'
+      }
       ]
-    });
-
-    calendar.render();
   });
+
+  calendar.render();
+});
+
+/* ------------------- */
+
+$(document.body).bind('cal-dateClick', () => {
+  $('#calendar-modal-btn').click();
+  
+});
+
+$('#schedule-submit-btn').click(() => {
+  alert("등록하시겠습니까?");
+  $.ajax({
+    url : "../../app/json/mystudycalendar/add",
+    type : "post",
+    data : {
+      name: $('#schedule-name').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
+      scheduleStartDate: $('#schedule-sdt').val(),
+      scheduleStartEnd: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
+      memo: $('#scheduled-message').val(),
+    },
+    success : function(data) {
+      alert("성공");
+      location.reload();
+    },
+    error : function(request, status, error) {
+      alert("등록에 실패 했습니다.");
+    }
+  });
+});

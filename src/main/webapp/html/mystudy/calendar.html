@@ -1,19 +1,208 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8' />
-  <link href='../../fullcalendar/core/main.css' rel='stylesheet' />
-  <link href='../../fullcalendar/daygrid/main.css' rel='stylesheet' />
-  <link rel='stylesheet' href='./calendar/calendar.css' />
+
+<meta charset='utf-8' />
+<!-- Required Meta Tags Always Come First -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../Unify/favicon.ico">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet" href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<!-- CSS Global Icons -->
+<link rel="stylesheet" href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify-components.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify-globals.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify.css">
+
+<link rel='stylesheet' href='../../fullcalendar/core/main.css' />
+<link rel='stylesheet' href='../../fullcalendar/daygrid/main.css' />
+<link rel='stylesheet' href='./calendar/calendar.css' />
+
+<link href='../../fullcalendar/core/main.css' rel='stylesheet' />
+<link href='../../fullcalendar/daygrid/main.css' rel='stylesheet' />
+<link rel='stylesheet' href='./calendar/calendar.css' />
+
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/custombox/custombox.min.css">
 </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <body>
 
   <div id='calendar'></div>
 
-  <script src='../../fullcalendar/core/main.js'></script>
-  <script src='../../fullcalendar/interaction/main.js'></script>
-  <script src='../../fullcalendar/daygrid/main.js'></script>
+
+
+
+
+
+<button id="calendar-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" 
+            data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">일정 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="schedule-name" class="col-form-label">일정 제목:</label>
+            <input type="text" class="form-control" id="schedule-name">
+          </div>
+          <div class="form-group">
+            <label for="schedule-sdt" class="col-form-label">시작 날짜:</label>
+            <input type="date" class="form-control" id="schedule-sdt">
+          </div>
+          <div class="form-group">
+            <label for="schedule-edt" class="col-form-label">종료 날짜:</label>
+            <input type="date" class="form-control" id="schedule-edt">
+          </div>
+          <div class="form-group">
+            <label for="schedule-message" class="col-form-label">일정 내용:</label>
+            <textarea class="form-control" id="schedule-message"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="schedule-submit-btn">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 
+  <a class="btn u-btn-primary" href="#modal17" data-modal-target="#modal17" id="modal-btn"
+    data-modal-effect="scale" hidden="true">Launch Modal </a>
+
+  Demo modal window
+  <div id="modal17" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20"
+    style="display: none;">
+
+    닫기버튼
+    <button type="button" class="close" onclick="Custombox.modal.close();">
+      <i class="hs-icon hs-icon-close"></i>
+    </button>
+
+    <h4 class="g-mb-20">일정 등록</h4>
+     <hr>
+    <div class="form-group">
+      <h6>일정 제목:</h6>
+      <input id="calendar-name" type="text" maxlength="15">
+    </div>
+    
+    <div class="form-group">
+      <h6>일정 내용:</h6>
+      <textarea id="calendar-content" maxlength="100"></textarea>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" onclick="Custombox.modal.close();">닫기</button>
+      <button id="calendar-add-btn" type="button" class="btn btn-primary">등록</button>
+    </div>
+  </div>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- JS Global Compulsory -->
+  <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+  <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+
+
+  <!-- JS Implementing Plugins -->
+  <script src="../../Unify/assets/vendor/appear.js"></script>
+  <script src="../../Unify/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+  <script src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/hs.core.js"></script>
+  <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+  <script src="../../Unify/assets/js/components/hs.header.js"></script>
+  <script src="../../Unify/assets/js/components/hs.tabs.js"></script>
+  <script src="../../Unify/assets/js/components/hs.progress-bar.js"></script>
+  <script src="../../Unify/assets/js/components/hs.rating.js"></script>
+  <script src="../../Unify/assets/js/components/hs.scrollbar.js"></script>
+  <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+
+  <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
+  <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
+  <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
   <script src='./calendar/calendar.js'></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="../../Unify/assets/vendor/custombox/custombox.min.js"></script>
+
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/components/hs.modal-window.js"></script>
+
+  <!-- JS Plugins Init. -->
+  <script>
+                      $(document).on('ready', function () {
+                        // initialization of popups
+                        $.HSCore.components.HSModalWindow.init('[data-modal-target]');
+                      });
+  </script>
+
 </body>
 </html>
