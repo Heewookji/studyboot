@@ -31,14 +31,13 @@ $('#schedule-submit-btn').click(() => {
     url : "../../app/json/mystudycalendar/add",
     type : "post",
     data : {
-      name: $('#schedule-name').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
+      title: $('#schedule-name').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
       studyNo: 1,
       memberNo: 2,
-      scheduleStartDate: $('#schedule-sdt').val(),
-      scheduleStartEnd: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
+      start: $('#schedule-sdt').val(),
+      end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
       memo: $('#schedule-message').val(),
     },
-    contentType: "application/x-www-form-urlencoded",
     success : function(data) {
       alert("성공");
       location.reload();

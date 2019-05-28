@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MyStudyCalendar {
 
-  private int no;
-  private String name;
+  private int id;
+  private String title;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-  private Date scheduleStartDate;
+  private Date start;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-  private Date scheduleStartEnd;
+  private Date end;
   
   private String memo;
   
@@ -22,35 +22,34 @@ public class MyStudyCalendar {
   
   @Override
   public String toString() {
-    return "MyStudyCalendar [no=" + no + ", name=" + name + ", scheduleStartDate="
-        + scheduleStartDate + ", scheduleStartEnd=" + scheduleStartEnd + ", memo=" + memo
-        + ", studyNo=" + studyNo + ", memberNo=" + memberNo + ", spaceBookingNo=" + spaceBookingNo
-        + "]";
+    return "MyStudyCalendar [id=" + id + ", title=" + title + ", start=" + start + ", end=" + end
+        + ", memo=" + memo + ", studyNo=" + studyNo + ", memberNo=" + memberNo + ", spaceBookingNo="
+        + spaceBookingNo + "]";
   }
   
-  public int getNo() {
-    return no;
+  public int getId() {
+    return id;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setId(int id) {
+    this.id = id;
   }
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
-  public void setName(String name) {
-    this.name = name;
+  public void setTitle(String title) {
+    this.title = title;
   }
-  public Date getScheduleStartDate() {
-    return scheduleStartDate;
+  public Date getStart() {
+    return start;
   }
-  public void setScheduleStartDate(Date scheduleStartDate) {
-    this.scheduleStartDate = scheduleStartDate;
+  public void setStart(Date start) {
+    this.start = start;
   }
-  public Date getScheduleStartEnd() {
-    return scheduleStartEnd;
+  public Date getEnd() {
+    return end;
   }
-  public void setScheduleStartEnd(Date scheduleStartEnd) {
-    this.scheduleStartEnd = scheduleStartEnd;
+  public void setEnd(Date end) {
+    this.end = end;
   }
   public String getMemo() {
     return memo;

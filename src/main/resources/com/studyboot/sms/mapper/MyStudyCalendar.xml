@@ -7,13 +7,13 @@
 <mapper namespace="com.studyboot.sms.dao.MyStudyCalendarDao">
 
   <resultMap type="myStudyCalendar" id="myStudyCalendarMap">
-    <id column="std_schdl_id" property="no" />
+    <id column="std_schdl_id" property="id" />
     <result column="std_id" property="studyNo" />
     <result column="member_id" property="memberNo" />
     <result column="space_bkng_id" property="spaceBookingNo" />
-    <result column="name" property="name" />
-    <result column="schdl_sdt" property="scheduleStartDate" />
-    <result column="schdl_edt" property="scheduleStartEnd" />
+    <result column="name" property="title" />
+    <result column="schdl_sdt" property="start" />
+    <result column="schdl_edt" property="end" />
     <result column="memo" property="memo" />
   </resultMap>
 
@@ -26,11 +26,11 @@
       schdl_edt,
       memo)
     values(
-      #{name},
+      #{title},
       #{studyNo},
       #{memberNo},
-      #{scheduleStartDate},
-      #{scheduleStartEnd},
+      #{start},
+      #{end},
       #{memo})
   </insert>
 
