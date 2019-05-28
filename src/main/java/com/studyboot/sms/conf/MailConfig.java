@@ -17,7 +17,7 @@ public class MailConfig {
     mailSender.setHost("smtp.naver.com"); 
     mailSender.setPort(587);
     mailSender.setUsername("wlgmldnr@naver.com"); 
-    mailSender.setPassword("wlgmldnr465132"); 
+    mailSender.setPassword("FWUCSUS1L5Y9"); 
     Properties prop = new Properties();
     prop.put("mail.smtp.auth", true);
     prop.put("mail.smtp.starttls.enable", true);

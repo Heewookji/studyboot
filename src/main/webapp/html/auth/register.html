@@ -53,6 +53,7 @@
 <link rel="stylesheet"
  href="/studyboot/Unify/assets/vendor/hs-megamenu/src/hs.megamenu.css">
 
+
 <!-- CSS Unify -->
 <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify.css">
 
@@ -81,12 +82,11 @@
     <div class="col-md-6 col-lg-7 g-mb-100">
      <!-- Content Info -->
      <div class="mb-5 g-pt-100">
-      <h1 class="g-color-white g-font-weight-600 g-font-size-50 mb-3">지금 스터디를 시작해보세요!</h1>
+      <h1 class="g-color-white g-font-weight-600 g-font-size-50 mb-3">지금
+       스터디를 시작해보세요!</h1>
       <p class="g-color-white g-font-size-18">
-      세상에는 혼자서 이루기 힘든 일도 있습니다.<br>
-      사람들과 힘내서 나아가는 것은 어떨까요?<br>
-      스터디 부트에는 같이 성장해나갈 사람들이 있습니다.<br>
-      마음 맞는 사람들과 함께 목표를 이뤄보세요!
+       세상에는 혼자서 이루기 힘든 일도 있습니다.<br> 사람들과 힘내서 나아가는 것은 어떨까요?<br>
+       스터디 부트에는 같이 성장해나갈 사람들이 있습니다.<br> 마음 맞는 사람들과 함께 목표를 이뤄보세요!
       </p>
      </div>
      <a
@@ -134,38 +134,12 @@
       <!-- Form -->
       <form class="g-py-15">
 
-
        <div class="g-mb-20">
-        <div class="input-group">
-         <input
-          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left g-py-15 g-px-15"
-          type="email" placeholder="이메일">
-         <div class="input-group-append">
-          <button class="btn btn-md u-btn-primary g-rounded-right"
-           type="button">인증</button>
-         </div>
-        </div>
-       </div>
-       
-       
-        <div class="g-mb-20">
         <input
          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
          type="text" placeholder="닉네임">
        </div>
-       
-       <div class="g-mb-20">
-        <div class="input-group">
-         <input
-          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
-          type="tel" placeholder="휴대폰 번호">
-         <div class="input-group-append">
-          <button class="btn btn-md u-btn-primary g-rounded-right"
-           type="button">인증</button>
-         </div>
-        </div>
-       </div>
-       
+
        <div class="g-mb-20">
         <input
          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
@@ -179,9 +153,41 @@
        </div>
 
 
-      
 
 
+       <div class="row">
+
+        <div class="col-8 g-mb-20">
+         <input type="email"
+          class="form-control g-brd-gray-light-v3 is-valid g-py-15 g-px-15"
+          id="validationServer01" placeholder="이메일" required>
+        </div>
+         <div class="col-4 g-mb-20">
+         <button class="btn btn-md u-btn-primary g-rounded-right g-py-15 g-width-105"
+            type="button" id="email-btn">인증</button>
+        </div>
+        </div>
+
+
+
+       <div class="row">
+        <div class="col-8 g-mb-20">
+         <div class="input-group">
+          <input
+           class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left g-py-15 g-px-15"
+           type="email" placeholder="핸드폰 번호" id="phone">
+          <div class="input-group-append">
+           <button class="btn btn-md u-btn-primary g-rounded-right"
+            type="button" id="phone-btn">인증</button>
+          </div>
+         </div>
+        </div>
+        <div class="col-4 g-mb-20">
+         <input
+          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
+          type="text" placeholder="인증번호" id="phoneIdNo">
+        </div>
+       </div>
 
        <div class="mb-1 g-pb-30">
         <label
@@ -191,7 +197,7 @@
          <div
           class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
           <i class="fa" data-check-icon="&#xf00c"></i>
-         </div><a href="#">이용 약관</a>에 대해 동의합니다.
+         </div> <a href="#">이용 약관</a>에 대해 동의합니다.
         </label>
        </div>
 
@@ -226,6 +232,7 @@
  <script src="/studyboot/Unify/assets/vendor/popper.js/popper.min.js"></script>
  <script src="/studyboot/Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
  <script src="/studyboot/Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+
 
  <!-- JS Implementing Plugins -->
 
@@ -271,6 +278,9 @@
  <script src="/studyboot/html/header.js"></script>
  <script src="/studyboot/html/footer.js"></script>
  <script src="register.js"></script>
+
+
+
 </body>
 </html>
 

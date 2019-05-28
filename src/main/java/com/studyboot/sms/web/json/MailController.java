@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 import javax.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
               MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
               messageHelper.setTo(email);
               
-              String id = UUID.randomUUID().toString();
+              int id = (int)(Math.random() * 1000);
               
               messageHelper.setText("인증번호: " + id);
               
