@@ -2,6 +2,7 @@ package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,12 +45,20 @@ public class MemberController {
 
 
   @PostMapping("update")
-  public Object update(Member member) {
+  public Object update(HttpSession session, Member member) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    member.setNo(loginUser.getNo());
     
     HashMap<String,Object> content = new HashMap<>();
+    
     try {
       if (memberService.update(member) == 0) 
         throw new RuntimeException("해당 번호의 공간이 없습니다.");
+      
+      loginUser = memberService.get(loginUser.getNo());
+      
+      session.setAttribute("loginUser", loginUser);
       content.put("status", "success");
 
     } catch (Exception e) {
