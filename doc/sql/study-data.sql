@@ -423,11 +423,11 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
 
   
 -- 공간 데이터 입력
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환카페', '555555', '819-4 YBM빌딩 2층', '111-222', '지환 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우카페', '666655', '9 YMCA빌딩 7층', '111-222', '현우 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민카페', '555555', '825-35', '상민 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현카페', '555555', '820-11', '111-222', '상현 카페 입니다.');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱카페', '555555', '825-18', '111-222', '희욱 카페 입니다.');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환스터디', '555555', '819-4 YBM빌딩 2층', '02-1234-5678', '지환스터디에 오신걸 환영합니다. 좋은 시간 되세요 :)');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우스터디', '666655', '9 YMCA빌딩 7층', '02-1234-5678', '현우스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민스터디', '555555', '825-35', '02-1234-5678', '상민스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현스터디', '555555', '820-11', '02-1234-5678', '상현스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱스터디', '555555', '825-18', '02-1234-5678', '희욱스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
 
 -- 공간 스터디룸 데이터 입력
 insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '1번방.jpg', '4', '20000');
@@ -436,26 +436,61 @@ insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) va
 
 insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('204', '102', '현우룸 1번방', '1번방.jpg', '3', '30000');
 insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('205', '102', '현우룸 2번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('206', '102', '현우룸 3번방', '2번방.jpg', '6', '50000');
+
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('207', '103', '상민룸 1번방', '1번방.jpg', '3', '30000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('208', '103', '상민룸 2번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('209', '103', '상민룸 3번방', '2번방.jpg', '6', '50000');
+
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('210', '104', '상현룸 1번방', '1번방.jpg', '3', '30000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('211', '104', '상현룸 2번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('212', '104', '상현룸 3번방', '2번방.jpg', '6', '50000');
+
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('213', '105', '희욱룸 1번방', '1번방.jpg', '3', '30000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('214', '105', '희욱룸 2번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('215', '105', '희욱룸 3번방', '2번방.jpg', '6', '50000');
 
 -- 공간 태그 데이터 입력
 insert into sms_tag(tag_id, space_id, name) values('301', '101', '#강남');
 insert into sms_tag(tag_id, space_id, name) values('302', '101', '#지환');
 insert into sms_tag(tag_id, space_id, name) values('303', '101', '#카페');
 
-insert into sms_tag(tag_id, space_id, name) values('304', '102', '#성남');
+insert into sms_tag(tag_id, space_id, name) values('304', '102', '#강남');
 insert into sms_tag(tag_id, space_id, name) values('305', '102', '#현우');
 insert into sms_tag(tag_id, space_id, name) values('306', '102', '#스터디');
 
--- 공간 사진
-insert into sms_space_photo(space_photo_id, space_id, photo) values('401', '101', '지환카페1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('402', '101', '지환카페2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('403', '101', '지환카페3.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('404', '101', '지환카페4.jpg');
+insert into sms_tag(tag_id, space_id, name) values('307', '103', '#분위기');
+insert into sms_tag(tag_id, space_id, name) values('308', '103', '#상민');
+insert into sms_tag(tag_id, space_id, name) values('309', '103', '#커피');
 
-insert into sms_space_photo(space_photo_id, space_id, photo) values('405', '102', '현우카페1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('406', '102', '현우카페2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('407', '102', '현우카페3.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('408', '102', '현우카페4.jpg');
+insert into sms_tag(tag_id, space_id, name) values('310', '104', '#강남');
+insert into sms_tag(tag_id, space_id, name) values('311', '104', '#상현');
+insert into sms_tag(tag_id, space_id, name) values('312', '104', '#앤티크');
+
+insert into sms_tag(tag_id, space_id, name) values('313', '105', '#강남');
+insert into sms_tag(tag_id, space_id, name) values('314', '105', '#희욱');
+insert into sms_tag(tag_id, space_id, name) values('315 ', '105', '#트렌디');
+
+-- 공간 사진
+insert into sms_space_photo(space_photo_id, space_id, photo) values('401', '101', '스터디룸1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('402', '101', '스터디룸2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('403', '101', '스터디룸3.jpg');
+
+insert into sms_space_photo(space_photo_id, space_id, photo) values('404', '102', '스터디룸1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('405', '102', '스터디룸2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('406', '102', '스터디룸3.jpg');
+
+insert into sms_space_photo(space_photo_id, space_id, photo) values('407', '103', '스터디룸1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('408', '103', '스터디룸2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('409', '103', '스터디룸3.jpg');
+
+insert into sms_space_photo(space_photo_id, space_id, photo) values('410', '104', '스터디룸1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('411', '104', '스터디룸2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('412', '104', '스터디룸3.jpg');
+
+insert into sms_space_photo(space_photo_id, space_id, photo) values('413', '105', '스터디룸1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('414', '105', '스터디룸2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('415', '105', '스터디룸3.jpg');
 
 -- 편의시설
 insert into sms_conv(conv_id, name) values('1', '와이파이');
@@ -472,17 +507,39 @@ insert into sms_conv(conv_id, name) values('11', '음향/마이크');
 insert into sms_conv(conv_id, name) values('12', '에어컨');
 
 -- 공간 편의시설
-insert into sms_space_conv_info(conv_id, space_id, note) values('6', '101', '주차요금은 만원입니다');
-insert into sms_space_conv_info(conv_id, space_id, note) values('1', '101', '와이파이는 기가 와이파이입니다');
+insert into sms_space_conv_info(conv_id, space_id, note) values('1', '101', '와이파이는 기가 와이파이입니다 !!');
+insert into sms_space_conv_info(conv_id, space_id, note) values('2', '101', '의자 및 테이블 여유있게 비치되어 있습니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('4', '101', '음료나 간단한 샌드위치는 반입 가능합니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('6', '101', '주차요금은 시간당 2천원입니다 ㅎㅎ');
+insert into sms_space_conv_info(conv_id, space_id, note) values('12', '101', '에어컨 설치되어 있습니다~');
 
-insert into sms_space_conv_info(conv_id, space_id, note) values('12', '102', '에어컨 설치되어있습니다');
-insert into sms_space_conv_info(conv_id, space_id, note) values('4', '102', '음료만 반입 가능합니다');
+insert into sms_space_conv_info(conv_id, space_id, note) values('1', '102', '와이파이 이용 가능합니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('2', '102', '의자 및 테이블 있습니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('4', '102', '음료만 반입 가능합니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('9', '102', 'A4 크기만 인쇄 및 복사 가능합니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('12', '102', '에어컨 설치되어있습니다 :)');
+
+insert into sms_space_conv_info(conv_id, space_id, note) values('1', '103', '와이파이 사용 가능합니다');
+insert into sms_space_conv_info(conv_id, space_id, note) values('2', '103', '의자 및 테이블 비치되어 있습니다');
+insert into sms_space_conv_info(conv_id, space_id, note) values('5', '103', '흡연실 비치되어 있습니다');
+insert into sms_space_conv_info(conv_id, space_id, note) values('12', '103', '에어컨 설치되어있습니다');
+
+insert into sms_space_conv_info(conv_id, space_id, note) values('1', '104', '와이파이 사용 가능합니다 ~');
+insert into sms_space_conv_info(conv_id, space_id, note) values('2', '104', '앤티크한 분위기의 나무 의자 및 테이블 비치되어 있습니다 !!');
+insert into sms_space_conv_info(conv_id, space_id, note) values('7', '104', '고사양의 PC 2대 설치되어 있습니다 ^^');
+insert into sms_space_conv_info(conv_id, space_id, note) values('12', '104', '에어컨 설치되어있습니다');
+
+insert into sms_space_conv_info(conv_id, space_id, note) values('1', '105', '와이파이 이용 가능합니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('2', '105', '트렌디한 디자인의 이케아 테이블 및 의자 비치되어 있습니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('8', '105', '세미나용 대형 화이트보드 비치되어 있습니다 :)');
+insert into sms_space_conv_info(conv_id, space_id, note) values('12', '105', '에어컨 설치되어있습니다 :)');
 
 
 
 -- 공간휴일
-insert into sms_rest_day(space_id, rest_day) values('101', '2019-5-20');
-insert into sms_rest_day(space_id, rest_day) values('102', '2019-6-1');
+insert into sms_rest_day(space_id, rest_day) values('101', '2019-6-10');
+insert into sms_rest_day(space_id, rest_day) values('102', '2019-6-17');
+insert into sms_rest_day(space_id, rest_day) values('103', '2019-6-23');
 
 
 -- 스터디룸 예약
@@ -532,11 +589,41 @@ values ('601', '2', '101', '3.0', '그저그래요');
 insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
 values ('602', '3', '101', '5.0', '완벽합니다 너무 좋네요');
 insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
-values ('603', '4', '101', '1.5', '에어컨이 잘 안나오네요');
+values ('603', '4', '101', '2.5', '에어컨이 잘 안나오네요');
 insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
 values ('604', '5', '101', '4.0', '사장님이 친절해요');
 insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
 values ('605', '3', '101', '3.5', '좋아요');
+
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('606', '2', '102', '4.0', '잘 사용했습니다 :)');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('607', '3', '102', '4.5', '시설이나 분위기 정말 좋습니다 !!');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('608', '4', '102', '5.0', '사장님이 너무 친절합니다 !!');
+
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('609', '2', '103', '4.0', '분위기 정말 좋네요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('610', '3', '103', '4.0', '잘 썼습니다 ~~');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('611', '4', '103', '4.5', '다음에 또 오고 싶어요 !!');
+
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('612', '2', '104', '3.0', '와이파이가 잘 안잡히네요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('613', '3', '104', '5.0', '앤틱한 분위기 너무 좋네요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('614', '4', '104', '3.5', '나쁘지 않네요~');
+
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('615', '2', '105', '4.0', '에릭남이 운영하는 곳인가요?');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('616', '3', '105', '4.5', '스터디하기 좋은 분위기네요');
+insert into sms_space_review(space_review_id, member_id, space_id, rating, review)
+values ('617', '4', '105', '4.5', '사장님이 친절해서 다음에 또 오고 싶네요');
+
+
 
 -- 쪽지 샘플 데이텅
 insert into sms_msg(send_id, recv_id, titl, cont)
