@@ -61,6 +61,17 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.update(member);
   }
 
+  @Override
+  public int nickNameCheck(String nickName) {
+    try {
+      return memberDao.findByNickName(nickName);
+      
+    } catch(Exception e) {
+      return 0;
+    }
+    
+  }
+
 }
 
 

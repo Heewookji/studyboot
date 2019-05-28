@@ -11,4 +11,5 @@ public interface MemberService {
   Member get(int no);
   int findByNickName(String nickName);
   int update(Member member);
+  int nickNameCheck(String nickName);
 }

@@ -1,11 +1,58 @@
 var param = location.href.split('?')[1],
 no,
-member;
+member,
+nickCheck = 0; // false
+telCheck = 0; // true
 
 
-//var passRule = /^[A-Za-z0-9]{6,12}$/; //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+// var passRule = /^[A-Za-z0-9]{6,12}$/; //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 
-
+$(document.body).bind('loaded-data', () => {
+  // 닉네임 중복체크
+  $(function() {
+    // nickCheck 버튼을 클릭했을 때
+    $("#nickCheck").click(function() {
+        
+        // nickName 을 param으로 보내기 위한 변수
+        var nickName =  $("#nickName").val();
+        console.log(nickName);
+        
+        $.ajax({
+            async: true,
+            type : 'POST',
+            data : nickName,
+            url : "../../app/json/member/nickcheck",
+            dataType : "json",
+            contentType: "application/json; charset=UTF-8",
+            success : function(data) {
+                if (data.cnt > 0) {
+                    
+                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                    // 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+                    $('#nickName').closest('div').addClass('u-has-error-v1');
+                    $('#nickName').siblings('small').removeClass('std-invisible');
+                    $('#nickName').focus();
+                    
+                } else {
+                    alert("사용가능한 아이디입니다.");
+                    // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $('#nickName').closest('div').removeClass('u-has-error-v1');
+                    $('#nickName').closest('div').addClass('u-has-success-v1-1');
+                    $('#nickName').siblings('small').addClass('std-invisible');
+                    $('#nickCheck').addClass('std-invisible')
+                    $('#nickName').prop('readonly', true);
+                    // 아이디가 중복하지 않으면 idck = 1
+                    nickCheck = 1;
+                    
+                }
+            },
+            error : function(error) {
+                alert("error : " + error);
+            }
+        });
+    });
+  });
+});
 
 // JSON 형식의 데이터 가져오기
 function loadData(no) {
@@ -19,15 +66,16 @@ function loadData(no) {
     $('#email').val(data.email);
     $('#tel').val(data.tel);
     $('#birth').val(data.birth);
-//    $('#cls').val(data.cls);
-//    $('#sdt').val(data.startDate);
-//    $('#edt').val(data.endDate);
-//    $('#prsn').val(data.personnel);
-//    $('#rate').val(data.rate);
-//    $('#age').val(data.memberAge);
-//    $('#attendance').val(data.attendance);
-//    $('#endrate').val(data.endrate);
+// $('#cls').val(data.cls);
+// $('#sdt').val(data.startDate);
+// $('#edt').val(data.endDate);
+// $('#prsn').val(data.personnel);
+// $('#rate').val(data.rate);
+// $('#age').val(data.memberAge);
+// $('#attendance').val(data.attendance);
+// $('#endrate').val(data.endrate);
     
+    $(document.body).trigger('loaded-data');
   });
 };
 
@@ -64,158 +112,90 @@ $('#inqryAdd-btn').click((e) => {
   });
 });
 
-// userName
-$('#sb-name-edit').click(() => {
-  $('#userName').prop('readonly', false);
-  $('#userName').removeClass('form-control-plaintext');
-  $('#sb-name-edit').addClass('std-invisible');
-  $('#sb-name-save').removeClass('std-invisible');
-});
-
-$('#sb-name-save > .icon-media-065').click(() => {
-  $('#userName').prop('readonly', true);
-  $('#userName').addClass('form-control-plaintext');
-  $('#sb-name-save').addClass('std-invisible');
-  $('#sb-name-edit').removeClass('std-invisible');
-});
-
-$('#sb-name-save > .icon-media-066').click(() => {
-  $('#userName').val(member.name);
-
-  $('#userName').prop('readonly', true);
-  $('#userName').addClass('form-control-plaintext');
-  $('#sb-name-save').addClass('std-invisible');
-  $('#sb-name-edit').removeClass('std-invisible');
-});
-
-// nickName
-$('#sb-nickname-edit').click(() => {
-  $('#nickName').prop('readonly', false);
-  $('#nickName').removeClass('form-control-plaintext');
-  $('#sb-nickname-edit').addClass('std-invisible');
-  $('#sb-nickname-save').removeClass('std-invisible');
-});
-
-$('#sb-nickname-save > .icon-media-065').click(() => {
-  $('#nickName').prop('readonly', true);
-  $('#nickName').addClass('form-control-plaintext');
-  $('#sb-nickname-save').addClass('std-invisible');
-  $('#sb-nickname-edit').removeClass('std-invisible');
-});
-
-$('#sb-nickname-save > .icon-media-066').click(() => {
-  $('#nickName').val(member.nickName);
-
-  $('#nickName').prop('readonly', true);
-  $('#nickName').addClass('form-control-plaintext');
-  $('#sb-nickname-save').addClass('std-invisible');
-  $('#sb-nickname-edit').removeClass('std-invisible');
-});
-
-// email
-$('#sb-email-edit').click(() => {
-  $('#email').prop('readonly', false);
-  $('#email').removeClass('form-control-plaintext');
-  $('#sb-email-edit').addClass('std-invisible');
-  $('#sb-email-save').removeClass('std-invisible');
-});
-
-$('#sb-email-save > .icon-media-065').click(() => {
+$(document).ready(() => {
   
-  // 이메일 형식 검사..
-  var emailRule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//이메일 정규식
+  // nickName
+  $('#sb-nickname-edit').click(() => {
+    $('#nickName').prop('readonly', false);
+    $('#nickCheck').removeClass('std-invisible');
+    $('#sb-nickname-edit').addClass('std-invisible');
+    $('#sb-nickname-cancel').removeClass('std-invisible');
+  });
   
-  if(!emailRule.test($("input[id='email']").val())) {
-    //경고
-    return false;
-  } else {
-    $('#email').prop('readonly', true);
-    $('#email').addClass('form-control-plaintext');
-    $('#sb-email-save').addClass('std-invisible');
-    $('#sb-email-edit').removeClass('std-invisible');
-  }
+  $('#sb-nickname-cancel').click(() => {
+    $('#nickName').val(member.nickName);
+  
+    $('#nickName').closest('div').removeClass('u-has-error-v1');
+    $('#nickName').closest('div').removeClass('u-has-success-v1-1');
+    $('#nickName').siblings('small').addClass('std-invisible');
+    $('#nickName').prop('readonly', true);
+    $('#nickCheck').addClass('std-invisible');
+    $('#sb-nickname-cancel').addClass('std-invisible');
+    $('#sb-nickname-edit').removeClass('std-invisible');
+  });
+  
+  // tel
+  $('#sb-tel-edit').click(() => {
+    $('#tel').prop('readonly', false);
+    $('#sb-tel-edit').addClass('std-invisible');
+    $('#sb-tel-cancel').removeClass('std-invisible');
+  });
+  
+  $('#sb-tel-cancel').click(() => {
+    $('#tel').val(member.tel);
+  
+    $('#tel').closest('div').removeClass('u-has-success-v1-1');
+    $('#tel').prop('readonly', true);
+    $('#sb-tel-cancel').addClass('std-invisible');
+    $('#sb-tel-edit').removeClass('std-invisible');
+  });
+  
+  // focusout
+  $('#tel').change(function() {
+    
+    var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    
+    if(!telRule.test($("input[id='tel']").val())) {
+      // 경고
+      telCheck = 0;
+      $('#tel').closest('div').addClass('u-has-error-v1');
+      return false;
+      
+    } else {
+      telCheck = 1;
+      $('#tel').closest('div').removeClass('u-has-error-v1');
+      $('#tel').closest('div').addClass('u-has-success-v1-1');
+      $('#tel').prop('readonly', true);
+    }
+  });
   
 });
-
-$('#sb-email-save > .icon-media-066').click(() => {
-  $('#email').val(member.email);
   
-  $('#email').prop('readonly', true);
-  $('#email').addClass('form-control-plaintext');
-  $('#sb-email-save').addClass('std-invisible');
-  $('#sb-email-edit').removeClass('std-invisible');
-});
-  
-// tel
-$('#sb-tel-edit').click(() => {
-  $('#tel').prop('readonly', false);
-  $('#tel').removeClass('form-control-plaintext');
-  $('#sb-tel-edit').addClass('std-invisible');
-  $('#sb-tel-save').removeClass('std-invisible');
-});
-
-$('#sb-tel-save > .icon-media-065').click(() => {
-  $('#tel').prop('readonly', true);
-  $('#tel').addClass('form-control-plaintext');
-  $('#sb-tel-save').addClass('std-invisible');
-  $('#sb-tel-edit').removeClass('std-invisible');
-});
-
-$('#sb-tel-save > .icon-media-066').click(() => {
-  $('#tel').val(member.tel);
-
-  $('#tel').prop('readonly', true);
-  $('#tel').addClass('form-control-plaintext');
-  $('#sb-tel-save').addClass('std-invisible');
-  $('#sb-tel-edit').removeClass('std-invisible');
-});
-
-// birth
-$('#sb-birth-edit').click(() => {
-  $('#birth').prop('readonly', false);
-  $('#birth').removeClass('form-control-plaintext');
-  $('#sb-birth-edit').addClass('std-invisible');
-  $('#sb-birth-save').removeClass('std-invisible');
-});
-
-$('#sb-birth-save > .icon-media-065').click(() => {
-  $('#birth').prop('readonly', true);
-  $('#birth').addClass('form-control-plaintext');
-  $('#sb-birth-save').addClass('std-invisible');
-  $('#sb-birth-edit').removeClass('std-invisible');
-});
-
-$('#sb-birth-save > .icon-media-066').click(() => {
-  $('#birth').val(member.birth);
-
-  $('#birth').prop('readonly', true);
-  $('#birth').addClass('form-control-plaintext');
-  $('#sb-birth-save').addClass('std-invisible');
-  $('#sb-birth-edit').removeClass('std-invisible');
-});
 
   
-  
-//  if(!passRule.test($("input[id='PASS']").val())) {
-//    //경고
+// if(!passRule.test($("input[id='PASS']").val())) {
+// //경고
 //   
-//    //return false;
-//  }
+// //return false;
+// }
 
 
 $('#sb-info-change').click((e) => {
   e.preventDefault();
+  
+  if (nickCheck == 0 && telCheck == 0) {
+    alert('변경 사항이 없습니다!');
+    return false;
+  } else if (nickCheck == 0 || telCheck == 0){
+    alert('변경할 수 없습니다..\n 수정 사항을 확인하세요!');
+  }
   
   $.ajax({
     url:'../../app/json/member/update',
     type: 'post',
     dataType: 'text',
     data: {
-      no: member.no,
-      name: $(userName).val(),
       nickName: $(nickName).val(),
-      birth: $(birth).val(),
-      email: $(email).val(),
       tel: $(tel).val()
     },
     success: function(data) {
