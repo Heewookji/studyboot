@@ -423,32 +423,37 @@ insert into sms_rprt_inqry (rprt_inqry_id, cls_id, inqry_id, sspct_id, cont)
 
   
 -- 공간 데이터 입력
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환스터디', '555555', '819-4 YBM빌딩 2층', '02-1234-5678', '지환스터디에 오신걸 환영합니다. 좋은 시간 되세요 :)');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우스터디', '666655', '9 YMCA빌딩 7층', '02-1234-5678', '현우스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민스터디', '555555', '825-35', '02-1234-5678', '상민스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현스터디', '555555', '820-11', '02-1234-5678', '상현스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
-insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱스터디', '555555', '825-18', '02-1234-5678', '희욱스터디에 오신걸 환영합니다.  좋은 시간 되세요 :)');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('101', '지환스터디', '555555', '819-4 YBM빌딩 2층', '010-1234-5678', '강남역에 위치한 지환스터디입니다. 반가워요 ~');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('102', '현우스터디', '555555', '818-11', '010-1234-5678', '분위기 있는 강남역 스터디룸 현우스터디입니다 :)');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('103', '상민스터디', '555555', '825-35', '010-1234-5678', '역삼동 스터디룸 상민스터디입니다 !!');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('104', '상현스터디', '555555', '820-11', '010-1234-5678', '앤티크한 소품으로 인테리어한 상현스터디 입니다 ~');
+insert into sms_space(space_id, name, adr_lms, adr_dtl, tel, intro) values('105', '희욱스터디', '555555', '825-18', '010-1234-5678', '트렌디한 공간 희욱 스터디입니다.');
 
 -- 공간 스터디룸 데이터 입력
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '1번방.jpg', '4', '20000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('202', '101', '지환룸 2번방', '2번방.jpg', '6', '40000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('203', '101', '지환룸 3번방', '3번방.jpg', '8', '60000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('201', '101', '지환룸 1번방', '/studyboot/images/room1-1.jpg', '4', '1000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('202', '101', '지환룸 2번방', '/studyboot/images/room1-2.jpg', '6', '1000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('203', '101', '지환룸 3번방', '/studyboot/images/room1-3jpg', '8', '1000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('204', '101', '지환룸 4번방', '/studyboot/images/room1-4jpg', '8', '1000');
 
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('204', '102', '현우룸 1번방', '1번방.jpg', '3', '30000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('205', '102', '현우룸 2번방', '2번방.jpg', '6', '50000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('206', '102', '현우룸 3번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('205', '102', '현우룸 1번방', '/studyboot/images/room2-1.jpg', '6', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('206', '102', '현우룸 2번방', '/studyboot/images/room2-2.jpg', '6', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('207', '102', '현우룸 3번방', '/studyboot/images/room2-3.jpg', '8', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('208', '102', '현우룸 4번방', '/studyboot/images/room2-4.jpg', '12', '1500');
 
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('207', '103', '상민룸 1번방', '1번방.jpg', '3', '30000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('208', '103', '상민룸 2번방', '2번방.jpg', '6', '50000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('209', '103', '상민룸 3번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('209', '103', '상민룸 1번방', '/studyboot/images/room3-1.jpg', '4', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('210', '103', '상민룸 2번방', '/studyboot/images/room3-2.jpg', '6', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('211', '103', '상민룸 3번방', '/studyboot/images/room3-3.jpg', '6', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('212', '103', '상민룸 3번방', '/studyboot/images/room3-4.jpg', '8', '1500');
 
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('210', '104', '상현룸 1번방', '1번방.jpg', '3', '30000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('211', '104', '상현룸 2번방', '2번방.jpg', '6', '50000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('212', '104', '상현룸 3번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('213', '104', '상현룸 1번방', '/studyboot/images/room4-1.jpg', '6', '1000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('214', '104', '상현룸 2번방', '/studyboot/images/room4-2.jpg', '8', '1000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('215', '104', '상현룸 3번방', '/studyboot/images/room4-3.jpg', '12', '1000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('216', '104', '상현룸 3번방', '/studyboot/images/room4-4.jpg', '12', '1000');
 
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('213', '105', '희욱룸 1번방', '1번방.jpg', '3', '30000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('214', '105', '희욱룸 2번방', '2번방.jpg', '6', '50000');
-insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('215', '105', '희욱룸 3번방', '2번방.jpg', '6', '50000');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('217', '105', '희욱룸 1번방', '/studyboot/images/room5-1.jpg', '4', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('218', '105', '희욱룸 2번방', '/studyboot/images/room5-2.jpg', '4', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('219', '105', '희욱룸 3번방', '/studyboot/images/room5-3.jpg', '8', '1500');
+insert into sms_space_room(space_room_id, space_id, name, photo, prsn, price) values('220', '105', '희욱룸 3번방', '/studyboot/images/room5-4.jpg', '8', '1500');
 
 -- 공간 태그 데이터 입력
 insert into sms_tag(tag_id, space_id, name) values('301', '101', '#강남');
@@ -472,25 +477,25 @@ insert into sms_tag(tag_id, space_id, name) values('314', '105', '#희욱');
 insert into sms_tag(tag_id, space_id, name) values('315 ', '105', '#트렌디');
 
 -- 공간 사진
-insert into sms_space_photo(space_photo_id, space_id, photo) values('401', '101', '스터디룸1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('402', '101', '스터디룸2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('403', '101', '스터디룸3.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('401', '101', '/studyboot/images/studyroom1-1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('402', '101', '/studyboot/images/studyroom1-2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('403', '101', '/studyboot/images/studyroom1-3.jpg');
 
-insert into sms_space_photo(space_photo_id, space_id, photo) values('404', '102', '스터디룸1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('405', '102', '스터디룸2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('406', '102', '스터디룸3.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('404', '102', '/studyboot/images/studyroom2-1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('405', '102', '/studyboot/images/studyroom2-2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('406', '102', '/studyboot/images/studyroom2-3.jpg');
 
-insert into sms_space_photo(space_photo_id, space_id, photo) values('407', '103', '스터디룸1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('408', '103', '스터디룸2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('409', '103', '스터디룸3.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('407', '103', '/studyboot/images/studyroom3-1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('408', '103', '/studyboot/images/studyroom3-2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('409', '103', '/studyboot/images/studyroom3-3.jpg');
 
-insert into sms_space_photo(space_photo_id, space_id, photo) values('410', '104', '스터디룸1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('411', '104', '스터디룸2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('412', '104', '스터디룸3.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('410', '104', '/studyboot/images/studyroom4-1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('411', '104', '/studyboot/images/studyroom4-2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('412', '104', '/studyboot/images/studyroom4-3.jpg');
 
-insert into sms_space_photo(space_photo_id, space_id, photo) values('413', '105', '스터디룸1.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('414', '105', '스터디룸2.jpg');
-insert into sms_space_photo(space_photo_id, space_id, photo) values('415', '105', '스터디룸3.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('413', '105', '/studyboot/images/studyroom5-1.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('414', '105', '/studyboot/images/studyroom5-2.jpg');
+insert into sms_space_photo(space_photo_id, space_id, photo) values('415', '105', '/studyboot/images/studyroom5-3.jpg');
 
 -- 편의시설
 insert into sms_conv(conv_id, name) values('1', '와이파이');
