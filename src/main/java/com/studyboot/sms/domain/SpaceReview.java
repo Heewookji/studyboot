@@ -5,13 +5,16 @@ public class SpaceReview {
   private int no;
   private int memberNo;
   private int spaceNo;
+  private String nickName;
+  private String photo;
   private double rating;
   private String review;
   
   @Override
   public String toString() {
-    return "SpaceReview [no=" + no + ", memberNo=" + memberNo + ", spaceNo=" + spaceNo + ", rating="
-        + rating + ", review=" + review + "]";
+    return "SpaceReview [no=" + no + ", memberNo=" + memberNo + ", spaceNo=" + spaceNo
+        + ", nickName=" + nickName + ", photo=" + photo + ", rating=" + rating + ", review="
+        + review + "]";
   }
   
   public int getNo() {
@@ -31,6 +34,18 @@ public class SpaceReview {
   }
   public void setSpaceNo(int spaceNo) {
     this.spaceNo = spaceNo;
+  }
+  public String getNickName() {
+    return nickName;
+  }
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
+  }
+  public String getPhoto() {
+    return photo;
+  }
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
   public double getRating() {
     return rating;
