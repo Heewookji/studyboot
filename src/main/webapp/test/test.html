@@ -16,51 +16,11 @@
 </head>
 <body>
 
- <button type="button" class="btn btn-outline-primary"
-  data-toggle="modal" data-target="#calModal" id="booking-btn">calendar</button>
-
-
- <a type="hidden" data-target="#calModal" id="cal-btn"></a>
 
 
 
- <div class="modal" id="calModal" tabindex="-1" role="dialog"
-  data-focus="false" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg"
-   role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h5 class="modal-title" id="formTitle">스터디룸 예약</h5>
-     <button type="button" class="close" data-dismiss="modal"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
-    <div class="modal-body">
-     <div class="container-fluid">
       <div id="calendar"></div>
       
-      
-      <div id="time-btn">
-      
-      </div>
-      
-      
-      <div id="roomList">
-      
-      </div>
-      
-     </div>
-    </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">닫기</button>
-     <button type="button" class="btn btn-primary" id="inqryAdd-btn">예약하기</button>
-    </div>
-   </div>
-  </div>
- </div>
 
 
 
@@ -116,13 +76,6 @@
   src="/studyboot/node_modules/handlebars/dist/handlebars.min.js"></script>
  <script src='/studyboot/test/test.js'></script>
  
- 
- <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
- 
-<!--   <script src='../../fullcalendar/core/main.js'></script>
-  <script src='../../fullcalendar/interaction/main.js'></script>
-  <script src='../../fullcalendar/daygrid/main.js'></script>
-  <script src='./calendar/calendar.js'></script> -->
   
 </body>
 </html>

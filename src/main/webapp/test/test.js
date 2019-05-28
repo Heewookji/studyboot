@@ -23,11 +23,12 @@ $(document).on('DOMContentLoaded', function (e) {
 	    $(document.body).trigger('cal-eventClick');
 	},
 	events: '/studyboot/app/json/schedule/list'
-	
     });
-    
+
+
+    window.calendar.render();
 });
-    
+
 
 //모달이 출력되기전에 캘린더를 렌더하면 안되기때문에(짤림) 모달이 shown된 뒤 캘린더를 렌더(출력)한다.
 $('#calModal').on('shown.bs.modal', function (e) {

@@ -81,7 +81,6 @@ function loadLoginUser() {
 	    function(obj) {
 	
 	var user = obj.user;
-	window.localStorage.user = obj.user;
 	var loginState = $(".std-login");
 	var notLoginState = $(".std-not-login");
 
