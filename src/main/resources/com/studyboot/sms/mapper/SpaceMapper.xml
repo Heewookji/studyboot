@@ -17,8 +17,10 @@
   
   <resultMap type="spaceReview" id="spaceReviewMap">
       <id column="space_review_id" property="no"/>
-    <id column="space_id" property="spaceNo"/>
-     <id column="member_id" property="memberNo"/>
+      <id column="space_id" property="spaceNo"/>
+      <id column="member_id" property="memberNo"/>
+      <result column="nick_name" property="nickName"/>
+      <result column="photo" property="photo"/>     
       <result column="rating" property="rating"/>
       <result column="review" property="review"/>
   </resultMap>
@@ -115,6 +117,8 @@
       r.space_review_id,
       s.space_id,
       m.member_id,
+      m.nick_name,
+      m.photo,
       r.space_id,
       r.member_id,
       r.rating,
