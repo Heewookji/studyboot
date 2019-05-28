@@ -4,9 +4,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.studyboot.sms.dao.MyStudyCalendarDao">
+<mapper namespace="com.studyboot.sms.dao.MyStudyScheduleDao">
 
-  <resultMap type="myStudyCalendar" id="myStudyCalendarMap">
+  <resultMap type="schedule" id="scheduleMap">
     <id column="std_schdl_id" property="id" />
     <result column="std_id" property="studyNo" />
     <result column="member_id" property="memberNo" />
@@ -17,7 +17,7 @@
     <result column="memo" property="memo" />
   </resultMap>
 
-  <insert id="insert" parameterType="myStudyCalendar">
+  <insert id="insert" parameterType="schedule">
     insert into sms_std_schdl(
       name,
       std_id,
@@ -34,7 +34,7 @@
       #{memo})
   </insert>
 
-  <select id="findAll" resultMap="myStudyCalendarMap">
+  <select id="findAll" resultMap="scheduleMap">
     select
       std_schdl_id,
       std_id,
@@ -48,4 +48,19 @@
       sms_std_schdl
   </select>
 
+  <select id="findByNo" resultMap="scheduleMap" parameterType="int">
+    select
+      std_schdl_id,
+      std_id,
+      member_id,
+      space_bkng_id,
+      name,
+      schdl_sdt,
+      schdl_edt,
+      memo
+    from
+      sms_std_schdl
+    where
+      std_schdl_id = #{value}
+  </select>
 </mapper>

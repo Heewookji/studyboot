@@ -63,7 +63,7 @@
 
 <body>
 
-<button id="calendar-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" 
+<button id="calendar-add-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" 
             data-target="#exampleModal" data-whatever="@getbootstrap">일정 추가</button>
   <div id='calendar'></div>
 
@@ -72,7 +72,7 @@
 
 
 
-
+<!-- 일정 등록 모달 -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -109,6 +109,60 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 디테일 모달 -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="event-detail">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">삭제</button>
+        <button type="button" class="btn btn-primary">수정</button>
+        <button type="button" class="btn btn-primary">출석</button>
+        <button type="button" class="btn btn-primary">후기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button id="calendar-detail-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  detail-modal
+</button>
+
+
+
+
+
+
+
 
 
 
