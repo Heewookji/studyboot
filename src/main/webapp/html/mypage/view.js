@@ -1,8 +1,8 @@
 var param = location.href.split('?')[1],
 no,
-member,
-nickCheck = 0; // false
-telCheck = 0; // true
+user,
+nickCheck,
+telCheck;
 
 
 // var passRule = /^[A-Za-z0-9]{6,12}$/; //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
@@ -32,6 +32,7 @@ $(document.body).bind('loaded-data', () => {
                     $('#nickName').closest('div').addClass('u-has-error-v1');
                     $('#nickName').siblings('small').removeClass('std-invisible');
                     $('#nickName').focus();
+                    nickCheck = 0;
                     
                 } else {
                     alert("사용가능한 아이디입니다.");
@@ -55,17 +56,16 @@ $(document.body).bind('loaded-data', () => {
 });
 
 // JSON 형식의 데이터 가져오기
-function loadData(no) {
-  $.getJSON('../../app/json/member/detail?no=' + no,
+function loadData() {
+  $.getJSON('../../app/json/auth/user',
       function(data) {
     
-    member = data;
+    user = data.user;
     console.log(data);
-    $('#userName').val(data.name);
-    $('#nickName').val(data.nickName);
-    $('#email').val(data.email);
-    $('#tel').val(data.tel);
-    $('#birth').val(data.birth);
+    $('#userName').val(user.name);
+    $('#nickName').val(user.nickName);
+    $('#email').val(user.email);
+    $('#tel').val(user.tel);
 // $('#cls').val(data.cls);
 // $('#sdt').val(data.startDate);
 // $('#edt').val(data.endDate);
@@ -79,16 +79,16 @@ function loadData(no) {
   });
 };
 
-loadData(2);
+loadData();
 
 // inquiry
 $('#inqryForm-btn').click((e) => {
   e.preventDefault();
   $('.sspctForm-Format').addClass('std-invisible');
-  $('#inqryName').html("홍길동");
+  $('#inqryName').html(user.name);
   $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
   $('#sspctName').val("");
-  $('#inqryNo').val(1);
+  $('#inqryNo').val(user.no);
   $('#sspctNo').val(0);
   $('#inqryClsNo').val(1);
 });
@@ -123,7 +123,7 @@ $(document).ready(() => {
   });
   
   $('#sb-nickname-cancel').click(() => {
-    $('#nickName').val(member.nickName);
+    $('#nickName').val(user.nickName);
   
     $('#nickName').closest('div').removeClass('u-has-error-v1');
     $('#nickName').closest('div').removeClass('u-has-success-v1-1');
@@ -132,6 +132,7 @@ $(document).ready(() => {
     $('#nickCheck').addClass('std-invisible');
     $('#sb-nickname-cancel').addClass('std-invisible');
     $('#sb-nickname-edit').removeClass('std-invisible');
+    nickCheck = undefined;
   });
   
   // tel
@@ -142,15 +143,16 @@ $(document).ready(() => {
   });
   
   $('#sb-tel-cancel').click(() => {
-    $('#tel').val(member.tel);
+    $('#tel').val(user.tel);
   
     $('#tel').closest('div').removeClass('u-has-success-v1-1');
     $('#tel').prop('readonly', true);
     $('#sb-tel-cancel').addClass('std-invisible');
     $('#sb-tel-edit').removeClass('std-invisible');
+    telCheck = undefined;
   });
   
-  // focusout
+  // change
   $('#tel').change(function() {
     
     var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -183,26 +185,31 @@ $(document).ready(() => {
 $('#sb-info-change').click((e) => {
   e.preventDefault();
   
-  if (nickCheck == 0 && telCheck == 0) {
+  if (nickCheck == undefined && telCheck == undefined) {
     alert('변경 사항이 없습니다!');
     return false;
   } else if (nickCheck == 0 || telCheck == 0){
     alert('변경할 수 없습니다..\n 수정 사항을 확인하세요!');
+    return false;
+  } else {
+    
+    $.ajax({
+      url:'../../app/json/member/update',
+      type: 'post',
+      dataType: 'text',
+      data: {
+        nickName: $(nickName).val(),
+        tel: $(tel).val()
+      },
+      success: function(data) {
+        var obj = JSON.parse(data);
+        location.reload();
+      }
+    });
+    
+    loadData();
   }
   
-  $.ajax({
-    url:'../../app/json/member/update',
-    type: 'post',
-    dataType: 'text',
-    data: {
-      nickName: $(nickName).val(),
-      tel: $(tel).val()
-    },
-    success: function(data) {
-      var obj = JSON.parse(data);
-      location.reload();
-    }
-  });
 });
 
 $('#sb-info-cancel').click((e) => {
