@@ -2,22 +2,20 @@ package com.studyboot.sms.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class MyStudyCalendar {
+public class Schedule {
 
   private int id;
   private String title;
-  
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
   private String start;
-  
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
   private String end;
-  
   private String memo;
   
   private int studyNo;
   private int memberNo;
   private int spaceBookingNo;
+  
   private boolean allDay = false;
   
   @Override
