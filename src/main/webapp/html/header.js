@@ -1,4 +1,5 @@
 
+
 $( document ).ready(function() {
     $("#js-header").load("/studyboot/html/header.html", function(){
 
@@ -68,6 +69,7 @@ $(document.body).bind('loaded-header', () => {
 		function(obj) {
 	    location.href = "/studyboot"
 	});
+	window.localStorage.removeItem("user");
     });
 
 });
@@ -77,7 +79,9 @@ function loadLoginUser() {
 
     $.getJSON('/studyboot/app/json/auth/user',
 	    function(obj) {
+	
 	var user = obj.user;
+	window.localStorage.user = obj.user;
 	var loginState = $(".std-login");
 	var notLoginState = $(".std-not-login");
 

@@ -7,7 +7,7 @@ templateSrcRoom = $('#room-template').html()
 var trGeneratorBtn = Handlebars.compile(templateSrcBtn);
 var trGeneratorRoom = Handlebars.compile(templateSrcRoom);
 
-//캘린더 초기설정
+
 $(document).on('DOMContentLoaded', function (e) { 
     var calendarEl = document.getElementById('calendar');
     window.calendar = new FullCalendar.Calendar(calendarEl, {
@@ -22,15 +22,12 @@ $(document).on('DOMContentLoaded', function (e) {
 	    window.eventInfo = info.event;
 	    $(document.body).trigger('cal-eventClick');
 	},
-	events: {
-	    url: '/studyboot/app/json/schedule/list',   
-	    success : function(doc) { 
-		var data = JSON.parse(doc);
-		callback(data); 
-	    }
-	}
+	events: '/studyboot/app/json/schedule/list'
+	
     });
+    
 });
+    
 
 //모달이 출력되기전에 캘린더를 렌더하면 안되기때문에(짤림) 모달이 shown된 뒤 캘린더를 렌더(출력)한다.
 $('#calModal').on('shown.bs.modal', function (e) {
