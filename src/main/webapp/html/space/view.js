@@ -58,17 +58,17 @@ function loadDetail(no) {
 		var trTagGenerator = Handlebars.compile(templateTag);
 		$(trTagGenerator(obj)).appendTo($(tag));
 
-		var templateSpacePhoto = $('#div-spacePhoto').html();
-		var trSpacePhotoGenerator = Handlebars.compile(templateSpacePhoto);
-		$(trSpacePhotoGenerator(obj)).appendTo($(filePath));
+//		var templateSpacePhoto = $('#div-spacePhoto').html();
+//		var trSpacePhotoGenerator = Handlebars.compile(templateSpacePhoto);
+//		$(trSpacePhotoGenerator(obj)).appendTo($(filePath));
 
-		var templateRoomInfo = $('#div-roomInfo').html();
-		var trRoomInfoGenerator = Handlebars.compile(templateRoomInfo);
-		$(trRoomInfoGenerator(obj)).appendTo($(roomInfo));
+//		var templateRoomInfo = $('#div-roomInfo').html();
+//		var trRoomInfoGenerator = Handlebars.compile(templateRoomInfo);
+//		$(trRoomInfoGenerator(obj)).appendTo($(roomInfo));
 
-		var templateSpaceReview = $('#div-spaceReview').html();
-		var trSpaceReviewGenerator = Handlebars.compile(templateSpaceReview);
-		$(trSpaceReviewGenerator(obj)).appendTo($(spaceReview));
+//		var templateSpaceReview = $('#div-spaceReview').html();
+//		var trSpaceReviewGenerator = Handlebars.compile(templateSpaceReview);
+//		$(trSpaceReviewGenerator(obj)).appendTo($(spaceReview));
 
 		$(document.body).trigger('loaded-detail'); // trigger가 'loaded-detail'을 실행 시킨다.
 		// tirgger와 bind는 세트!!
@@ -101,8 +101,12 @@ $('#add-btn').click( () => {
 $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라는 이름을 갖는 bind를 실행시킨다.
 
 	$('#convDiv i').mouseenter(() => {
-		alert(1111);
-	});
+		
+		$('.convNote').stop().animate({border: '1px solid red'}, 1000);
+		
+	}).mouseleave(() => {
+		
+  });
 	
 	$('.delete-review').click((e) => {
 		if ( confirm('정말 삭제하시겠습니까?') ) {
