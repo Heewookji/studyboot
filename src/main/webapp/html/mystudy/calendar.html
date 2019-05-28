@@ -63,6 +63,8 @@
 
 <body>
 
+<button id="calendar-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" 
+            data-target="#exampleModal" data-whatever="@getbootstrap">일정 추가</button>
   <div id='calendar'></div>
 
 
@@ -70,8 +72,6 @@
 
 
 
-<button id="calendar-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" 
-            data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -85,16 +85,16 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="schedule-name" class="col-form-label">일정 제목:</label>
+            <label for="schedule-name" class="col-form-label" >일정 제목:</label>
             <input type="text" class="form-control" id="schedule-name">
           </div>
           <div class="form-group">
             <label for="schedule-sdt" class="col-form-label">시작 날짜:</label>
-            <input type="date" class="form-control" id="schedule-sdt">
+            <input type="datetime-local" class="form-control" id="schedule-sdt">
           </div>
           <div class="form-group">
             <label for="schedule-edt" class="col-form-label">종료 날짜:</label>
-            <input type="date" class="form-control" id="schedule-edt">
+            <input type="datetime-local" class="form-control" id="schedule-edt">
           </div>
           <div class="form-group">
             <label for="schedule-message" class="col-form-label">일정 내용:</label>
@@ -109,52 +109,6 @@
     </div>
   </div>
 </div>
-
-
-
-<!-- 
-  <a class="btn u-btn-primary" href="#modal17" data-modal-target="#modal17" id="modal-btn"
-    data-modal-effect="scale" hidden="true">Launch Modal </a>
-
-  Demo modal window
-  <div id="modal17" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20"
-    style="display: none;">
-
-    닫기버튼
-    <button type="button" class="close" onclick="Custombox.modal.close();">
-      <i class="hs-icon hs-icon-close"></i>
-    </button>
-
-    <h4 class="g-mb-20">일정 등록</h4>
-     <hr>
-    <div class="form-group">
-      <h6>일정 제목:</h6>
-      <input id="calendar-name" type="text" maxlength="15">
-    </div>
-    
-    <div class="form-group">
-      <h6>일정 내용:</h6>
-      <textarea id="calendar-content" maxlength="100"></textarea>
-    </div>
-    
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" onclick="Custombox.modal.close();">닫기</button>
-      <button id="calendar-add-btn" type="button" class="btn btn-primary">등록</button>
-    </div>
-  </div>
-
-
- -->
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -187,6 +141,7 @@
   <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
+  <script src='/studyboot/node_modules/@fullcalendar/core/locales/ko.js'></script>
   <script src='./calendar/calendar.js'></script>
 
   <!-- JS Implementing Plugins -->

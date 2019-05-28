@@ -37,7 +37,7 @@ public class MyStudyCalendarController {
     List<MyStudyCalendar> myStudyCalendar = myStudyCalendarService.list();
 
     
-    System.out.println(myStudyCalendar);
+    System.out.println("컨트롤러 list: " + myStudyCalendar);
     
     return myStudyCalendar;
   }

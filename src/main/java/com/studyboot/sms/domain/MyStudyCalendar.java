@@ -1,6 +1,5 @@
 package com.studyboot.sms.domain;
 
-import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MyStudyCalendar {
@@ -8,23 +7,24 @@ public class MyStudyCalendar {
   private int id;
   private String title;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-  private Date start;
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
+  private String start;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-  private Date end;
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
+  private String end;
   
   private String memo;
   
   private int studyNo;
   private int memberNo;
   private int spaceBookingNo;
+  private boolean allDay = false;
   
   @Override
   public String toString() {
     return "MyStudyCalendar [id=" + id + ", title=" + title + ", start=" + start + ", end=" + end
         + ", memo=" + memo + ", studyNo=" + studyNo + ", memberNo=" + memberNo + ", spaceBookingNo="
-        + spaceBookingNo + "]";
+        + spaceBookingNo + ", allDay=" + allDay + "]";
   }
   
   public int getId() {
@@ -39,16 +39,16 @@ public class MyStudyCalendar {
   public void setTitle(String title) {
     this.title = title;
   }
-  public Date getStart() {
+  public String getStart() {
     return start;
   }
-  public void setStart(Date start) {
+  public void setStart(String start) {
     this.start = start;
   }
-  public Date getEnd() {
+  public String getEnd() {
     return end;
   }
-  public void setEnd(Date end) {
+  public void setEnd(String end) {
     this.end = end;
   }
   public String getMemo() {
@@ -74,6 +74,12 @@ public class MyStudyCalendar {
   }
   public void setSpaceBookingNo(int spaceBookingNo) {
     this.spaceBookingNo = spaceBookingNo;
+  }
+  public boolean isAllDay() {
+    return allDay;
+  }
+  public void setAllDay(boolean allDay) {
+    this.allDay = allDay;
   }
   
 }
