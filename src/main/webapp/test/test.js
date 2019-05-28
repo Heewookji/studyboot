@@ -2,7 +2,8 @@ var pageNo = 1,
 pageSize = 6,
 fulledtimes,
 templateSrcBtn = $('#time-button-template').html(),
-templateSrcRoom = $('#room-template').html()
+templateSrcRoom = $('#room-template').html(),
+id
 ;
 var trGeneratorBtn = Handlebars.compile(templateSrcBtn);
 var trGeneratorRoom = Handlebars.compile(templateSrcRoom);
@@ -28,6 +29,22 @@ $(document).on('DOMContentLoaded', function (e) {
 
     window.calendar.render();
 });
+
+
+$("#email-btn").click((e) => {
+    $.getJSON('/studyboot/app/json/mail/send?email='+ $("#email").val(), function(obj) {
+	id = obj.id;
+    }
+    );
+});
+
+$("#id-btn").click((e) => {
+    if($("#id").val() == id){
+	alert("일치합니다!");
+    }
+});
+
+
 
 
 //모달이 출력되기전에 캘린더를 렌더하면 안되기때문에(짤림) 모달이 shown된 뒤 캘린더를 렌더(출력)한다.
