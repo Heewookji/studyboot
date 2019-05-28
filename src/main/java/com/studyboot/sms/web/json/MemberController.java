@@ -1,9 +1,11 @@
 package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
@@ -57,11 +59,21 @@ public class MemberController {
     return content;
   }
 
+
+  @PostMapping("nickcheck")
+  public Object nickcheck(@RequestBody String nickName) {
+    
+    int count = 0;
+    Map<Object, Object> map = new HashMap<Object, Object>();
+
+    count = memberService.nickNameCheck(nickName);
+    System.out.println(count);
+    map.put("cnt", count);
+
+    return map;
+  }
+
 }
-
-
-
-
 
 
 

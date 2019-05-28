@@ -119,7 +119,7 @@
     from 
       sms_member
     where
-      nick_name = #{nickName}
+      nick_name = #{value}
   </select>
   
 </mapper>
