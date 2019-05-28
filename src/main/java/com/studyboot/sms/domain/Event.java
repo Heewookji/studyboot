@@ -8,6 +8,7 @@ public class Event {
   private String title;
   private Date start;
   private Date end;
+  
   public String getId() {
     return id;
   }

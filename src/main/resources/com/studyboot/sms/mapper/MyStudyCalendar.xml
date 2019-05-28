@@ -3,10 +3,21 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.studyboot.sms.dao.MyStudyCalendar">
 
-    <insert id="insert" parameterType="myStudyCalendar">
+<mapper namespace="com.studyboot.sms.dao.MyStudyCalendarDao">
+
+  <resultMap type="myStudyCalendar" id="myStudyCalendarMap">
+    <id column="std_schdl_id" property="no" />
+    <result column="std_id" property="studyNo" />
+    <result column="member_id" property="memberNo" />
+    <result column="space_bkng_id" property="spaceBookingNo" />
+    <result column="name" property="name" />
+    <result column="schdl_sdt" property="scheduleStartDate" />
+    <result column="schdl_edt" property="scheduleStartEnd" />
+    <result column="memo" property="memo" />
+  </resultMap>
+
+  <insert id="insert" parameterType="myStudyCalendar">
     insert into sms_std_schdl(
       name,
       std_id,
@@ -22,4 +33,19 @@
       #{scheduleStartEnd},
       #{memo})
   </insert>
+
+  <select id="findAll" resultMap="myStudyCalendarMap">
+    select
+      std_schdl_id,
+      std_id,
+      member_id,
+      space_bkng_id,
+      name,
+      schdl_sdt,
+      schdl_edt,
+      memo
+    from
+      sms_std_schdl
+  </select>
+
 </mapper>

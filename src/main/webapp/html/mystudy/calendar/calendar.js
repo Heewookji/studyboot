@@ -9,27 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     selectable: true,
     dateClick: function(info) {
       window.calInfo = info;
-      //alert(info.dateStr);
       $(document.body).trigger('cal-dateClick');
-    },
-    events: [
-      {
-        title: 'ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ',
-        start: '2019-05-03'
-      },
-      {
-        title: 'Long Event',
-        start: '2019-05-07',
-        end: '2019-05-10'
-      },
-      {
-        title: 'Long Event',
-        start: '2019-06-07',
-        end: '2019-06-10'
-      }
-      ]
+    }, //url: '../../app/json/mystudycalendar/list',
+    events: {
+      url: '/studyboot/app/json/mystudycalendar/list'
+    }
   });
-
   calendar.render();
 });
 
@@ -37,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document.body).bind('cal-dateClick', () => {
   $('#calendar-modal-btn').click();
-  
+
 });
 
 $('#schedule-submit-btn').click(() => {
@@ -47,10 +32,13 @@ $('#schedule-submit-btn').click(() => {
     type : "post",
     data : {
       name: $('#schedule-name').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
+      studyNo: 1,
+      memberNo: 2,
       scheduleStartDate: $('#schedule-sdt').val(),
       scheduleStartEnd: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
-      memo: $('#scheduled-message').val(),
+      memo: $('#schedule-message').val(),
     },
+    contentType: "application/x-www-form-urlencoded",
     success : function(data) {
       alert("성공");
       location.reload();

@@ -1,6 +1,6 @@
 package com.studyboot.sms.domain;
 
-import java.util.Date;
+import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class MyStudyCalendar {
@@ -18,13 +18,14 @@ public class MyStudyCalendar {
   
   private int studyNo;
   private int memberNo;
-  private String spaceBookingNo;
+  private int spaceBookingNo;
   
   @Override
   public String toString() {
-    return "StudySchedule [no=" + no + ", name=" + name + ", scheduleStartDate=" + scheduleStartDate
-        + ", scheduleStartEnd=" + scheduleStartEnd + ", memo=" + memo + ", studyNo=" + studyNo
-        + ", memberNo=" + memberNo + ", spaceBookingNo=" + spaceBookingNo + "]";
+    return "MyStudyCalendar [no=" + no + ", name=" + name + ", scheduleStartDate="
+        + scheduleStartDate + ", scheduleStartEnd=" + scheduleStartEnd + ", memo=" + memo
+        + ", studyNo=" + studyNo + ", memberNo=" + memberNo + ", spaceBookingNo=" + spaceBookingNo
+        + "]";
   }
   
   public int getNo() {
@@ -69,10 +70,10 @@ public class MyStudyCalendar {
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
   }
-  public String getSpaceBookingNo() {
+  public int getSpaceBookingNo() {
     return spaceBookingNo;
   }
-  public void setSpaceBookingNo(String spaceBookingNo) {
+  public void setSpaceBookingNo(int spaceBookingNo) {
     this.spaceBookingNo = spaceBookingNo;
   }
   
