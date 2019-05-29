@@ -38,8 +38,11 @@ public class MemberController {
    */
 
   @GetMapping("detail")
-  public Object detail(int no) {
-    Member member = memberService.get(no);
+  public Object detail(HttpSession session) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    Member member = memberService.get(loginUser.getNo());
     return member;
   }
 

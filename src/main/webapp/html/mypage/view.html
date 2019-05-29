@@ -302,7 +302,7 @@
                 <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">New password</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
-                    <input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="New password">
+                    <input id="newPassword" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="New password">
                     <div class="input-group-append">
                       <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
                     </div>
@@ -316,7 +316,7 @@
                 <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Verify password</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
-                    <input class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="Verify password">
+                    <input id="verifyPassword" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="Verify password">
                     <div class="input-group-append">
                       <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
                     </div>
@@ -375,8 +375,8 @@
               <hr class="g-brd-gray-light-v4 g-my-25">
 
               <div class="text-sm-right">
-                <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#">Cancel</a>
-                <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25" href="#">Save Changes</a>
+                <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#" id="sb-password-cancel">Cancel</a>
+                <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25" href="#" id="sb-password-change">Save Changes</a>
               </div>
             </form>
           </div>
