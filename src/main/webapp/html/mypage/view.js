@@ -10,7 +10,8 @@ $(document.body).bind('loaded-data', () => {
   // 닉네임 중복체크
   $(function() {
     // nickCheck 버튼을 클릭했을 때
-    $("#nickCheck").click(function() {
+    $("#nickCheck-btn").click(function() {
+      
         
         // nickName 을 param으로 보내기 위한 변수
         var nickName =  $("#nickName").val();
@@ -29,7 +30,6 @@ $(document.body).bind('loaded-data', () => {
                     alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
                     // 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').addClass('u-has-error-v1');
-                    $('#nickName').siblings('small').removeClass('std-invisible');
                     $('#nickName').focus();
                     nickCheck = 0;
                     
@@ -38,8 +38,8 @@ $(document.body).bind('loaded-data', () => {
                     // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').removeClass('u-has-error-v1');
                     $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                    $('#nickName').siblings('small').addClass('std-invisible');
-                    $('#nickCheck').addClass('std-invisible')
+                    $('#nickCheck-btn').prop('disabled',false);
+                    $('#nickCheck-btn').addClass('std-invisible')
                     $('#nickName').prop('readonly', true);
                     // 아이디가 중복하지 않으면 idck = 1
                     nickCheck = 1;
@@ -52,6 +52,7 @@ $(document.body).bind('loaded-data', () => {
         });
     });
   });
+  
 });
 
 // JSON 형식의 데이터 가져오기
@@ -111,12 +112,14 @@ $('#inqryAdd-btn').click((e) => {
   });
 });
 
+
+
 $(document).ready(() => {
   
   // nickName
   $('#sb-nickname-edit').click(() => {
     $('#nickName').prop('readonly', false);
-    $('#nickCheck').removeClass('std-invisible');
+    $('#nickCheck-btn').removeClass('std-invisible');
     $('#sb-nickname-edit').addClass('std-invisible');
     $('#sb-nickname-cancel').removeClass('std-invisible');
   });
@@ -126,13 +129,51 @@ $(document).ready(() => {
   
     $('#nickName').closest('div').removeClass('u-has-error-v1');
     $('#nickName').closest('div').removeClass('u-has-success-v1-1');
-    $('#nickName').siblings('small').addClass('std-invisible');
     $('#nickName').prop('readonly', true);
-    $('#nickCheck').addClass('std-invisible');
+    $('#nickCheck-btn').addClass('std-invisible');
     $('#sb-nickname-cancel').addClass('std-invisible');
     $('#sb-nickname-edit').removeClass('std-invisible');
     nickCheck = undefined;
   });
+  
+  //닉네임 체크
+  $( '#nickName' ).keyup(function(){
+    var init;
+
+    if(nickCheck() == true){
+      $('#nickCheck-btn').prop('disabled',false);
+      $('#nickName').tooltip('disable');
+      $('#nickName').tooltip('hide');
+    } else{
+      if(init != 1){
+        $('#nickName').attr('data-toggle','tooltip');
+        $('#nickName').attr('data-trigger','hover focus');
+        $('#nickName').attr('data-placement','bottom');
+        $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
+      }
+      $('#nickName').tooltip('enable');
+      $('#nickName').tooltip('show');
+      $('#nickCheck-btn').prop('disabled',true);
+    }
+  });
+
+
+  //닉네임 체크
+  function nickCheck() {
+    var str = $("#nickName").val();
+    if(str.length < 4 || str.length > 10) {
+      return false;
+    }
+    var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+
+    for(var i = 0; i <= str.length -1 ; i++ ) {
+      if(chk.test(str.charAt(i))) {
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
   
   // tel
   $('#sb-tel-edit').click(() => {
