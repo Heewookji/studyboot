@@ -1,160 +1,224 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<!-- Title -->
 <title>Message</title>
+
+<!-- Required Meta Tags Always Come First -->
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../Unify/favicon.ico">
+<!-- Google Fonts -->
 <link rel="stylesheet"
-	href="/Study-Web-Project/node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/Study-Web-Project/css/common.css">
-<link rel="stylesheet" href="/Study-Web-Project/css/header.css">
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
+<!-- CSS Global Icons -->
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="../../Unify/assets/css/unify-core.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/css/unify-components.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify-globals.css">
+
+<!-- CSS Customization -->
+<link rel="stylesheet" href="../../Unify/assets/css/custom.css">
+<link rel="stylesheet" href="/studyboot/css/common.css">
+<link rel="stylesheet" href="/studyboot/css/header.css">
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-	<header class=""></header>
+  <!-- Header -->
+  <header id="js-header"
+    class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+    data-header-fix-moment="300"> </header>
+  <!-- End Header -->
 
-	<div class="container">
-		<h1>쪽지기능</h1>
+  <div class="container" style="margin-top: 200px; margin-bottom: 200px;">
+    <h1>쪽지기능</h1>
 
-		<nav class="navbar navbar-light">
-			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
-					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">
-					<span id="currCls" >받은 쪽지함</span>
-				</button>
-				<div class="dropdown-menu dropdown-menu-right"
-					aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#" id="recvPage">받은 쪽지함</a> <a
-						class="dropdown-item" href="#" id="sendPage">보낸 쪽지함</a> 
-				</div>
-			</div>
+    <nav class="navbar navbar-light">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button"
+          id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span id="currCls">받은 쪽지함</span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" id="recvPage">받은 쪽지함</a> <a
+            class="dropdown-item" href="#" id="sendPage">보낸 쪽지함</a>
+        </div>
+      </div>
 
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" id="message-search"
-					type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-primary my-2 my-sm-0"
-					id="message-search-btn" type="button">회원으로 검색</button>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" id="message-search"
+          type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0"
+          id="message-search-btn" type="button">회원으로 검색</button>
 
-				<div class="col">
-					<button type="button" class="btn btn-outline-primary"
-						data-toggle="modal" data-target="#addModal" id="messageForm-btn">쪽지
-						보내기</button>
-				</div>
-
-			</form>
-		</nav>
-
-		<div class="msg-list">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-					    <th id=check><input type="checkbox" name="allCheck" id="checkAll"/></th>
-						<th scope="col" id="message">보낸 회원</th>
-						<th scope="col" class="check">제목</th>
-						<th scope="col" class="check">날짜</th>
-					</tr>
-				</thead>
-
-				<tbody></tbody>
-			</table>
-		</div>
-
-		<!-- .stdinqry-list -->
-		<div class="container">
-			<div class="row">
-				<div class="col"></div>
-				<div class="col-9">
-					<nav aria-label="목록 페이지 이동">
-						<ul class="pagination justify-content-center">
-							<li id="prevPage" class="page-item"><a class="page-link"
-								href="?pageNo=0&pageSize=3">이전</a></li>
-							<li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-							<li id="nextPage" class="page-item ">
-							  <a class="page-link"
-								href="?pageNo=2&pageSize=3">다음</a></li>
-						</ul>
-					</nav>
-				</div>
         <div class="col">
-      <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-        id="msg-Delete-btn">삭제</button>
-       </div>
-			</div>
-		</div>
-	</div>
-	<!-- .container -->
+          <button type="button" class="btn btn-outline-primary"
+            data-toggle="modal" data-target="#addModal"
+            id="messageForm-btn">쪽지 보내기</button>
+        </div>
 
- <div class="modal fade" id="viewModal" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg"
-   role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h5 class="modal-title" id="nickName"></h5>
-     <span id="viewNo"></span>
-     <button type="button" class="close" data-dismiss="modal"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
+      </form>
+    </nav>
+
+    <div class="msg-list">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th id=check><input type="checkbox" name="allCheck"
+              id="checkAll" /></th>
+            <th scope="col" id="message">보낸 회원</th>
+            <th scope="col" class="check">제목</th>
+            <th scope="col" class="check">날짜</th>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+      </table>
     </div>
-    <div class="modal-body">
-     <p><span id="viewInquiryText"></span>
-      <input id="viewNo" type="hidden"></input>
-     </p>
+
+    <!-- .stdinqry-list -->
+    <div class="container">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-9">
+          <nav aria-label="목록 페이지 이동">
+            <ul class="pagination justify-content-center">
+              <li id="prevPage" class="page-item"><a
+                class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+              <li id="currPage" class="page-item active"><span
+                class="page-link">1</span></li>
+              <li id="nextPage" class="page-item "><a
+                class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-outline-primary"
+            data-toggle="modal" id="msg-Delete-btn">삭제</button>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary"
-      data-dismiss="modal" id="detailClose-btn">닫기</button>
-      <button type="button" class="btn btn-primary" id="messageRemove-btn">삭제하기</button>
-     <button type="button" class="btn btn-primary"
-						data-toggle="modal" data-target="#addModal" id="msg-response">답장하기</button>
-    </div>
-   </div>
   </div>
- </div>
+  <!-- .container -->
+
+  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"
+      role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="nickName"></h5>
+          <span id="viewNo"></span>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <span id="viewInquiryText"></span> <input id="viewNo"
+              type="hidden"></input>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" id="detailClose-btn">닫기</button>
+          <button type="button" class="btn btn-primary"
+            id="messageRemove-btn">삭제하기</button>
+          <button type="button" class="btn btn-primary"
+            data-toggle="modal" data-target="#addModal"
+            id="msg-response">답장하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-lg"
-			role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="formTitle" align="center" style="width: 768px;">쪽지 보내기</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group sspctForm-Format std-invisible">
-							<label for="recipient-name" class="col-form-label">받는 회원</label>
-							<input class="form-control" id="recv_id" style="width: 300px;"></input>
-							<input type="hidden" id="sendNo"></input>
-							<label for="recipient-name" class="col-form-label">제목</label>
-							<input class="form-control" id="title"></input>
-						</div>
-						<div class="form-group">
-							<label for="recipient-name" class="col-form-label">내용</label> 
-							<textarea style="width: 768px; height: 500px;"
-							class="form-control" id="message_contents"></textarea>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="messageAdd-btn">보내기</button>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"
+      role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formTitle" align="center"
+            style="width: 768px;">쪽지 보내기</h5>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group sspctForm-Format std-invisible">
+              <label for="recipient-name" class="col-form-label">받는
+                회원</label> <input class="form-control" id="recv_id"
+                style="width: 300px;"></input> <input type="hidden"
+                id="sendNo"></input> <label for="recipient-name"
+                class="col-form-label">제목</label> <input
+                class="form-control" id="title"></input>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">내용</label>
+              <textarea style="width: 768px; height: 500px;"
+                class="form-control" id="message_contents"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-primary"
+            id="messageAdd-btn">보내기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- footer -->
+  <footer id="js-footer"></footer>
 
 
-<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="ms-template" type="text/x-handlebars-template">
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+  <script id="ms-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
 <th><input type="checkbox" name="listCheck" id="chk" value={{no}}></th>
@@ -175,8 +239,8 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
 {{/each}}
 </script>
 
-<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template" type="text/x-handlebars-template">
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+  <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
 <th><input type="checkbox" name="listCheck" id="chk" value={{no}}></th>
@@ -197,15 +261,50 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
 {{/each}}
 </script>
 
-	<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
-	<script
-		src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-	<script
-		src="/Study-Web-Project/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-	<script src="index.js"></script>
-	<script src="view.js"></script>
+  <!-- JS Global Compulsory -->
+  <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+  <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+  <script
+    src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script
+    src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/hs.core.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.header.js"></script>
+  <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
+  <script src="../../Unify/assets/js/components/hs.popup.js"></script>
+  <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+
+  <!-- JS Custom -->
+  <script src="../../Unify/assets/js/custom.js"></script>
+  <script src="../header.js"></script>
+  <script src="../footer.js"></script>
+  <script src="index.js"></script>
+  <script src="view.js"></script>
+  <!-- JS Plugins Init. -->
 </body>
 </html>
 
