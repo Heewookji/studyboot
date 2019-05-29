@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.StudyBoardDao">
+  
+  <resultMap type="studyBoard" id="studyBoardMap">
+    <id column="std_board_id" property="no"/>
+    <result column="std_id" property="studyNo"/>
+    <result column="member_id" property="memberNo"/>
+    <result column="ntc" property="ntc"/>
+    <result column="title" property="title"/>
+    <result column="cont" property="contents"/>
+    <result column="rgstr_dt" property="date"/>
+    <result column="vw_cnt" property="viewCount"/>
+  </resultMap>
+  
+  
+  
+  
+  <!-- 
+  <resultMap type="inquiry" id="inquiryMap">
+    <id column="rprt_inqry_id" property="no"/>
+    <result column="cls_id" property="clsNo"/>
+    <result column="inqry_id" property="inquiryPersonNo"/>
+    <result column="sspct_id" property="suspectPersonNo"/>
+    <result column="cont" property="contents"/>
+    <result column="send_dt" property="createdDate"/>
+  </resultMap>
+  
+   <resultMap type="inquiry" id="inquiryListMap">
+    <id column="rprt_inqry_id" property="no"/>
+    <result column="cls_id" property="clsNo"/>
+    <result column="inqry_id" property="inquiryPersonNo"/>
+    <result column="sspct_id" property="suspectPersonNo"/>
+    <result column="cont" property="contents"/>
+    <result column="send_dt" property="createdDate"/>
+    
+    
+    <association property="inquiryPerson" javaType="member">
+     <id column="inqry_id"        property="no"/>
+      <result column="inqry_name"  property="name"/>
+    </association>
+    
+    <association property="suspectPerson" javaType="member">
+     <id column="sspct_id"        property="no"/>
+      <result column="sspct_name"  property="name"/>
+    </association>
+    
+    <association property="cls" javaType="BoardCls">
+    <result column="cls_id" property="no"/>
+      <result column="cls_name"  property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  
+  <resultMap type="inquiry" id="inquiryDetailMap">
+    <id column="rprt_inqry_id" property="no"/>
+    <result column="cls_id" property="clsNo"/>
+    <result column="inqry_id" property="inquiryPersonNo"/>
+    <result column="sspct_id" property="suspectPersonNo"/>
+    <result column="cont" property="contents"/>
+    <result column="send_dt" property="createdDate"/>
+    
+    <association property="inquiryPerson" javaType="member">
+     <id column="inqry_id"        property="no"/>
+      <result column="inqry_name"  property="name"/>
+       <result column="inqry_email"  property="email"/>
+        <result column="inqry_date"  property="registeredDate"/>
+    </association>
+    
+    <association property="suspectPerson" javaType="member">
+     <id column="sspct_id"        property="no"/>
+      <result column="sspct_name"  property="name"/>
+          <result column="sspct_email"  property="email"/>
+        <result column="sspct_date"  property="registeredDate"/>
+    </association>
+    
+    <association property="cls" javaType="boardCls">
+    <result column="cls_id" property="no"/>
+      <result column="cls_name"  property="name"/>
+    </association>
+    
+  </resultMap>
+  
+  
+  <sql id="select2">
+  select 
+      c.rprt_inqry_id,
+      c.cont, 
+      c.send_dt,
+      c.inqry_id,
+      c.sspct_id,
+      i.name as inqry_name,
+      s.name as sspct_name,
+      p.cls_name
+    from 
+      sms_rprt_inqry c
+      left outer join sms_board_cls p on c.cls_id = p.cls_id
+      left outer join sms_member i on c.inqry_id = i.member_id
+      left outer join sms_member s on c.sspct_id = s.member_id
+      </sql>
+      
+      <sql id="detail">
+      select 
+      c.rprt_inqry_id,
+      c.cont, 
+      c.send_dt,
+      c.inqry_id,
+      c.sspct_id,
+      i.name as inqry_name,
+      i.email as inqry_email,
+      i.join_date as inqry_date,
+      s.name as sspct_name,
+      s.email as sspct_email,
+      s.join_date as sspct_date,
+      p.cls_name
+      from 
+      sms_rprt_inqry c
+      left outer join sms_board_cls p on c.cls_id = p.cls_id
+      left outer join sms_member i on c.inqry_id = i.member_id
+      left outer join sms_member s on c.sspct_id = s.member_id
+      </sql>
+
+  
+  <select id="findAll" resultMap="inquiryListMap" parameterType="map">
+    <include refid="select2"/>
+    <if test="cls != 0 or member_ids != null">
+      where 
+      <if test="cls != 0">
+      p.cls_id = #{cls}
+      </if>
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      and (
+      </if>
+      <foreach collection="member_ids" item="member_id" separator="or">
+      inqry_id = 
+      #{member_id}
+    </foreach>
+    <if test="cls != 0">
+      )
+    </if>
+    </if>
+    </if>
+    order by 
+      rprt_inqry_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="findByNo" resultMap="inquiryDetailMap" parameterType="int">
+   <include refid="detail"/>
+    where 
+      rprt_inqry_id = #{value}
+  </select>
+  
+  <insert id="insert" parameterType="inquiry">
+    insert into 
+    sms_rprt_inqry
+    (cls_id,
+    inqry_id,
+    <if test="suspectPersonNo != 0">
+    sspct_id,
+    </if>
+    cont) 
+    values
+    (#{clsNo},
+    #{inquiryPersonNo},
+    <if test="suspectPersonNo != 0">
+    #{suspectPersonNo},
+    </if>
+    #{contents})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from sms_rprt_inqry 
+    where rprt_inqry_id = #{no}
+  </delete>
+  
+  
+  <select id="countByClsAndMember" resultType="int" parameterType="map">
+    select count(*) from sms_rprt_inqry
+      <if test="cls != 0 or member_ids != null">
+      where 
+      <if test="cls != 0">
+      cls_id = #{cls}
+      </if>
+      <if test="member_ids != null">
+      <if test="cls != 0">
+      and (
+      </if>
+      <foreach collection="member_ids" item="member_id" separator="or">
+      inqry_id = 
+      #{member_id}
+    </foreach>
+    <if test="cls != 0">
+      )
+    </if>
+    </if>
+      </if>
+  </select>
+   -->
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
