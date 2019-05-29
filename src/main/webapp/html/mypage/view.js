@@ -237,6 +237,7 @@ $('#sb-info-change').click((e) => {
         tel: $(tel).val()
       },
       success: function() {
+        alert("정보 변경 성공!")
         location.href = 'index.html';
       }
     });
@@ -412,7 +413,7 @@ function checkPassword(password){
   return true;
 }
 
-// 암호 업데이트 이벤트
+// 비밀번호 업데이트 이벤트
 $('#sb-password-change').click((e) => {
   e.preventDefault();
   
@@ -432,6 +433,7 @@ $('#sb-password-change').click((e) => {
         password: newPwd
       },
       success: function() {
+        alert("비밀번호 변경 성공!")
         location.href = 'index.html';
       }
     });
