@@ -65,8 +65,8 @@ $('#schedule-add-btn').click(() => {
   } else if($('#schedule-memo').val().length === 0) {
     alert("일정 내용을 입력해 주세요.");
     return;
-  } else if
-
+  } 
+  
   $.ajax({
     url : "../../app/json/mystudyschedule/add",
     type : "post",
