@@ -77,38 +77,24 @@ function loadDetail(no) {
   $.getJSON('../../app/json/mystudyschedule/detail?no=' + no, function(obj) {
     //alert('1'); // 현재 값 먼저 가져오고 디테일 모달 띄우는 상태
     
+
+    var startM = obj.start.substring(5, 7); // 월
+    var startD = obj.start.substring(8, 10); // 일
+    var endM = obj.end.substring(5, 7); // 월
+    var endD = obj.end.substring(8, 10); // 일
+    var startT = obj.start.substring(11, 16); // 시간
+    var endT = obj.end.substring(11, 16); // 시간
+    
     console.log(obj); // 콘솔에 해당 키값의 디테일 값 잘 출력됨//exampleModalCenterTitle
-    $('#exampleModalCenterTitle').html(obj.title);
+    $('#exampleModalCenterTitle').html(obj.title + " ");
+    if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
+      $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
+    } else {
+      $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endM + "월" + endD + "일 " + endT);
+    }
     $('#event-detail').html(obj.memo);
   });
-/*
-  $.getJSON('../../app/json/inquiry/detail?no=' + no, function(obj) {
 
-$(viewCls).html(obj.cls.name);
-$(viewDate).html(obj.createdDate);
-
-$(viewNo).val(obj.no);
-
-$(viewInquiryText).html('문의   ' + obj.no + '번 '
-+ '문의 회원   ' +obj.inquiryPerson.name +'님 '
-+ '이메일 '+ obj.inquiryPerson.email
-+ '가입일 ' +obj.inquiryPerson.registeredDate);
-
-$(viewContents).html(obj.contents);
-
-if(obj.suspectPerson){
-    
- $(viewSuspectText).html('피신고 회원  ' +obj.suspectPerson.name+'님 '
-+ '이메일 '+obj.suspectPerson.email
-+ '가입일 ' +obj.suspectPerson.registeredDate);
- 
-} else{
-  $(viewSuspectText).html('');
-}
-
-$(document.body).trigger('loaded-detail');
-  });
-*/
 }
   
   
