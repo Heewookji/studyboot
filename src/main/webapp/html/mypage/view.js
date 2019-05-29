@@ -3,7 +3,7 @@ no,
 user,
 nickCheck,
 telCheck,
-pwdCheck;
+pwdCheck = 0;
 
 
 $(document.body).bind('loaded-data', () => {
@@ -192,13 +192,10 @@ $('#sb-info-change').click((e) => {
         nickName: $(nickName).val(),
         tel: $(tel).val()
       },
-      success: function(data) {
-        var obj = JSON.parse(data);
+      success: function() {
         location.reload();
       }
     });
-    
-    loadData();
   }
   
 });
@@ -207,6 +204,42 @@ $('#sb-info-change').click((e) => {
 $('#sb-info-cancel').click((e) => {
   e.preventDefault();
   location.href = 'index.html';
+});
+
+
+// 비밀번호 확인
+$("#password").keyup(function() {
+  
+  password = $("#password").val();
+  
+  $.ajax({
+      async: true,
+      type : 'POST',
+      data : password,
+      url : "../../app/json/member/passwordcheck",
+      dataType : "json",
+      contentType: "application/json; charset=UTF-8",
+      success : function(data) {
+          if (!data.result) {
+              
+              alert("비밀번호가 틀렸씁니다..");
+              $('#password').closest('div').addClass('u-has-error-v1');
+              $('#password').siblings('small').removeClass('std-invisible');
+              $('#password').focus();
+              pwdCheck = 0;
+              
+          } else {
+              alert("비밀번호 일치 !");
+              $('#password').closest('div').removeClass('u-has-error-v1');
+              $('#password').closest('div').addClass('u-has-success-v1-1');
+              pwdCheck = 1;
+              
+          }
+      },
+      error : function(error) {
+          alert("error : " + error);
+      }
+  });
 });
 
 // 비밀번호 유효성 검사
@@ -263,13 +296,29 @@ function checkPassword(password){
   return true;
 }
 
-//정보 업데이트 이벤트
+// 정보 업데이트 이벤트
 $('#sb-password-change').click((e) => {
   e.preventDefault();
   
-  if ($('#newPassword').val() != $('#verifyPassword').val()) {
-    alert('변경할 수 없습니다..\n 수정 사항을 확인하세요!');
+  newPwd = $('#newPassword').val();
+  verifyPwd = $('#verifyPassword').val();
+  
+  if (newPwd != verifyPwd || pwdCheck == 0) {
+    alert('변경할 수 없습니다..\n 비밀번호를 확인하세요!');
     return false;
+  } else {
+    
+    $.ajax({
+      url:'../../app/json/member/update',
+      type: 'post',
+      dataType: 'text',
+      data: {
+        password: newPwd
+      },
+      success: function() {
+        location.reload();
+      }
+    });
   }
   
 });
