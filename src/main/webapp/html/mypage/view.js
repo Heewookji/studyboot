@@ -36,7 +36,8 @@ $(document.body).bind('loaded-data', () => {
                     // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').removeClass('u-has-error-v1');
                     $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                    $('#nickCheck-btn').addClass('std-invisible')
+                    $('#nickCheck-btn').prop('disabled', true);
+                    $('#nickCheck-btn').addClass('std-invisible');
                     $('#nickName').prop('readonly', true);
                     // 아이디가 중복하지 않으면 idck = 1
                     nickCheck = 1;
@@ -80,7 +81,7 @@ loadData();
 $('#inqryForm-btn').click((e) => {
   e.preventDefault();
   $('.sspctForm-Format').addClass('std-invisible');
-  $('#inqryName').html(user.name);
+  $('#inqryName').html(user.nickName);
   $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
   $('#sspctName').val("");
   $('#inqryNo').val(user.no);
@@ -148,22 +149,25 @@ $(document).ready(() => {
   
   // 닉네임 체크
   $( '#nickName' ).keyup(function(){
-    var init;
 
     if(nickNameCheck() == true){
       $('#nickCheck-btn').prop('disabled',false);
       $('#nickName').tooltip('disable');
       $('#nickName').tooltip('hide');
+      $('#nickName').closest('div').removeClass('u-has-error-v1');
+      $('#nickName').closest('div').addClass('u-has-success-v1-1');
     } else{
-      if(init != 1){
-        $('#nickName').attr('data-toggle','tooltip');
-        $('#nickName').attr('data-trigger','hover focus');
-        $('#nickName').attr('data-placement','bottom');
-        $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
-      }
+      
+      $('#nickName').attr('data-toggle','tooltip');
+      $('#nickName').attr('data-trigger','hover focus');
+      $('#nickName').attr('data-placement','bottom');
+      $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
+      
       $('#nickName').tooltip('enable');
       $('#nickName').tooltip('show');
       $('#nickCheck-btn').prop('disabled',true);
+      $('#nickName').closest('div').removeClass('u-has-success-v1-1');
+      $('#nickName').closest('div').addClass('u-has-error-v1');
     }
   });
 
@@ -178,6 +182,7 @@ $(document).ready(() => {
     $('#tel').val(user.tel);
   
     $('#tel').closest('div').removeClass('u-has-success-v1-1');
+    $('#tel').closest('div').removeClass('u-has-error-v1');
     $('#tel').prop('readonly', true);
     $('#sb-tel-cancel').addClass('std-invisible');
     $('#sb-tel-edit').removeClass('std-invisible');
@@ -185,21 +190,27 @@ $(document).ready(() => {
   });
   
   // change
-  $('#tel').change(function() {
+  $('#tel').keyup(function() {
     
     var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
     
-    if(!telRule.test($("input[id='tel']").val())) {
-      // 경고
-      telCheck = 0;
-      $('#tel').closest('div').addClass('u-has-error-v1');
-      return false;
+    if(telRule.test($("input[id='tel']").val())) {
       
-    } else {
-      telCheck = 1;
       $('#tel').closest('div').removeClass('u-has-error-v1');
       $('#tel').closest('div').addClass('u-has-success-v1-1');
-      $('#tel').prop('readonly', true);
+      telCheck = 1;
+      
+    } else {
+      $('#tel').attr('data-toggle','tooltip');
+      $('#tel').attr('data-trigger','hover focus');
+      $('#tel').attr('data-placement','bottom');
+      $('#tel').attr('title','010-xxxx-xxxx');
+      
+      $('#tel').tooltip('enable');
+      $('#tel').tooltip('show');
+      $('#tel').closest('div').removeClass('u-has-success-v1-1');
+      $('#tel').closest('div').addClass('u-has-error-v1');
+      telCheck = 0;
     }
   });
   
@@ -226,7 +237,7 @@ $('#sb-info-change').click((e) => {
         tel: $(tel).val()
       },
       success: function() {
-        location.reload();
+        location.href = 'index.html';
       }
     });
   }
@@ -319,12 +330,35 @@ $("#newPassword").keyup(function(){
     $('#newPassword').attr('data-toggle','tooltip');
     $('#newPassword').attr('data-trigger','hover focus');
     $('#newPassword').attr('data-placement','bottom');
-    $('#newPassword').attr('title','숫자+영문자+특수문자 조합으로 6자리 이상 사용해야 합니다.');
+    $('#newPassword').attr('title','숫자,영문자,특수문자 조합으로\n중복문자 4개 이하\n6자리 이상 사용해야 합니다');
     
     $('#newPassword').tooltip('enable');
     $('#newPassword').tooltip('show');
     $('#newPassword').closest('div').removeClass('u-has-success-v1-1');
     $('#newPassword').closest('div').addClass('u-has-error-v1');
+  }
+  
+  if ($('#verifyPassword').val().length != 0) {
+    
+    if (password == $('#verifyPassword').val()) {
+      $('#verifyPassword').tooltip('disable');
+      $('#verifyPassword').tooltip('hide');
+      $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
+      $('#verifyPassword').closest('div').addClass('u-has-success-v1-1');
+      $('#verifyPassword').removeAttr('title');
+      
+    } else{
+      
+      $('#verifyPassword').attr('data-toggle','tooltip');
+      $('#verifyPassword').attr('data-trigger','hover focus');
+      $('#verifyPassword').attr('data-placement','bottom');
+      $('#verifyPassword').attr('title','비밀번호를 다시 확인하세요!!');
+      
+      $('#verifyPassword').tooltip('enable');
+      $('#verifyPassword').tooltip('show');
+      $('#verifyPassword').closest('div').removeClass('u-has-success-v1-1');
+      $('#verifyPassword').closest('div').addClass('u-has-error-v1');
+    }
   }
   
 });
@@ -398,7 +432,7 @@ $('#sb-password-change').click((e) => {
         password: newPwd
       },
       success: function() {
-        location.reload();
+        location.href = 'index.html';
       }
     });
   }
