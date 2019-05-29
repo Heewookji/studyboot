@@ -1,46 +1,52 @@
 var emailNo,
+phoneNo,
 emailInit = true,
-count = 180
+phoneInit = true,
+nickChecked,
+emailCountDownFunction
 ;
 
+//js와 css 의 초기화 작업이다.
 $(document).on('ready', function () {
+
+    //핸드폰 인증 api
+    IMP.init("imp46277948"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+
     // initialization of tabs
     $.HSCore.components.HSTabs.init('[role="tablist"]');
-
     // initialization of counters
     var counters = $.HSCore.components.HSCounter.init('[class*="js-counter"]');
-
 });
-
 $(window).on('load', function () {
-
     // initialization of HSMegaMenu component
     $('.js-mega-menu').HSMegaMenu({
 	event: 'hover',
 	pageContainer: $('.container'),
 	breakpoint: 991
     });
-
     // initialization of custom select
     setTimeout(function() { // important in this case
 	$.HSCore.components.HSSelect.init('.js-custom-select');
     }, 1);
-});
 
+
+});
 $(window).on('resize', function () {
     setTimeout(function () {
 	$.HSCore.components.HSTabs.init('[role="tablist"]');
     }, 200);
 });
 
-
+//이메일 버튼을 눌렀을때, 카운트다운 실행, 인증번호 확인 한다.
 $("#email-btn").click((e) => {
 
+    clearInterval(emailCountDownFunction);
+    emailCountDown();
+
     $.getJSON('/studyboot/app/json/mail/send?email='+ $("#email").val(), function(obj) {
-	
+
 	emailNo = obj.id;
-	setInterval("countDown()", 1000);
-	
+
     });
     //처음에만 한번 등록
     if(emailInit){
@@ -55,6 +61,37 @@ $("#email-btn").click((e) => {
 	});
     }
     emailInit = false;
+});
+
+//핸드폰인증 버튼을 눌렀을때 api 인증 한다.
+$("#phone-btn").click((e) => {
+
+    IMP.request_pay({
+	    pg : 'danal', // version 1.1.0부터 지원.
+	    pay_method : 'phone',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : 1400,
+	    buyer_email : 'iamport@siot.do',
+	    buyer_name : '구매자이름',
+	    buyer_tel : '010-1234-5678',
+	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_postcode : '123-456',
+	    m_redirect_url : 'http://localhost:8080/studyboot/html/auth/register.html'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	    }
+	    alert(msg);
+	});
+
 });
 
 
@@ -144,6 +181,23 @@ $( "#email" ).keyup(function(){
     }
 });
 
+//입력시 핸드폰번호 체크
+$( "#phone" ).keyup(function(){
+    if(checkPhone($( "#phone" ).val()) == true){
+	$('#phone').tooltip('disable');
+	$('#phone').tooltip('hide');
+	$("#phone-btn").prop("disabled", false);
+    } else{
+	$("#phone").attr("data-toggle","tooltip");
+	$("#phone").attr("data-trigger","hover focus");
+	$("#phone").attr("data-placement","bottom");
+	$("#phone").attr("title","휴대폰 번호 양식에 맞게 적어주세요");
+	$('#phone').tooltip('enable');
+	$('#phone').tooltip('show');
+	$("#phone-btn").prop("disabled", true);
+    }
+});
+
 
 
 
@@ -151,11 +205,11 @@ $( "#email" ).keyup(function(){
 //닉네임 중복체크
 $("#nickCheck-btn").click(function() {
 
-  // nickName 을 param으로 보내기 위한 변수
-  var nickName =  $("#nickName").val();
-  console.log(nickName);
+    // nickName 을 param으로 보내기 위한 변수
+    var nickName =  $("#nickName").val();
+    console.log(nickName);
 
-  $.ajax({
+    $.ajax({
 	async: true,
 	type : 'POST',
 	data : nickName,
@@ -164,28 +218,17 @@ $("#nickCheck-btn").click(function() {
 	contentType: "application/json; charset=UTF-8",
 	success : function(data) {
 	    if (data.cnt > 0) {
-		alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-		// 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
-		$('#nickName').closest('div').addClass('u-has-error-v1');
-		$('#nickName').siblings('small').removeClass('std-invisible');
-		$('#nickName').focus();
-		nickCheck = 0;
+		alert("닉네임이 존재합니다. 다른 닉네임을 입력해주세요.");
+		nickChecked = 0;
 	    } else {
 		alert("사용가능한 아이디입니다.");
-		// 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		$('#nickName').closest('div').removeClass('u-has-error-v1');
-		$('#nickName').closest('div').addClass('u-has-success-v1-1');
-		$('#nickName').siblings('small').addClass('std-invisible');
-		$('#nickCheck').addClass('std-invisible')
-		$('#nickName').prop('readonly', true);
-		// 아이디가 중복하지 않으면 idck = 1
-		nickCheck = 1;
+		nickChecked = 1;
 	    }
 	},
 	error : function(error) {
 	    alert("error : " + error);
 	}
-  });
+    });
 });
 
 
@@ -230,17 +273,51 @@ function checkPassword(password){
     return true;
 }
 
-function checkEmail(){
+function checkEmail(email){
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (email == '' || !re.test($('#email').val())) {
+    if (email == '' || !re.test(email)) {
 	return false;
     }
     return true;
 }
 
-function countDown(){
-    
-    $("emailNo").prop("placeholder", count++);
-    
-    return;
+
+function checkPhone(phone){
+    var re = /^\d{3}-\d{3,4}-\d{4}$/;
+
+    if (phone == '' || !re.test(phone)) {
+	return false;
+    }
+    return true;
 }
+
+function emailCountDown(){
+    var future = new Date();
+    future.setMinutes(future.getMinutes()+3);
+    var countDownDate = future.getTime();
+    // Update the count down every 1 second
+    emailCountDownFunction = setInterval(function() {
+	// Get today's date and time
+	var now = new Date().getTime();
+	// Find the distance between now and the count down date
+	var distance = countDownDate - now;
+	// Time calculations for days, hours, minutes and seconds
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	if(seconds < 10){
+	    $("#emailNo").attr("placeholder", "0" +minutes + " : " + "0" + seconds);
+	} else{
+	    $("#emailNo").attr("placeholder", "0" +minutes + " : " + seconds);
+	}
+
+	if (distance < 0) {
+	    $("#emailNo").attr("placeholder", "시간초과!");
+	    emailNo = null;
+	    clearInterval(emailCountDownFunction);
+	}
+    }, 1000);
+
+}
+
+
+
