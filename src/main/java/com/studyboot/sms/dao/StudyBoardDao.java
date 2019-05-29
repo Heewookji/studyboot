@@ -1,11 +1,14 @@
 package com.studyboot.sms.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import com.studyboot.sms.domain.StudyBoard;
 
-public interface StudyBoard {
+public interface StudyBoardDao {
   
-  List<StudyBoard> findAll();
-  
+  List<StudyBoard> findAll(Map<String,Object> params);
+  int countByClsAndMember(HashMap<String, Object> params);
   
 //  int insert(StudyMember studyMember);
   

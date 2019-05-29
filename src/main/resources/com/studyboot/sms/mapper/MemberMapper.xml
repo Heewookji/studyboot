@@ -119,6 +119,7 @@
       nick_name = #{value}
   </select>
   
+  
 </mapper>
 
 

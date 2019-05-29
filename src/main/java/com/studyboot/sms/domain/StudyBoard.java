@@ -81,10 +81,10 @@ public class StudyBoard implements Cloneable, Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  public Member getSuspectPerson() {
+  public Member getMember() {
     return member;
   }
-  public void setSuspectPerson(Member member) {
+  public void setMember(Member member) {
     this.member = member;
   }
   public static long getSerialversionuid() {
