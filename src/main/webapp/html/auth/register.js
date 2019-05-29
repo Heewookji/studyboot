@@ -55,14 +55,23 @@ $("#email-btn").click((e) => {
 
 
 //닉네임 체크
-$( "#nickName" ).change(function(){
+$( "#nickName" ).keyup(function(){
+    var init;
     
     if(nickCheck() == true){
-	$( "#nickNameDiv small" ).remove();
+	$( "#nickCheck-btn").prop("disabled",false);
+	$('#nickName').tooltip('disable');
+	$('#nickName').tooltip('hide');
     } else{
-	$( "#nickNameDiv small" ).remove();
-	 $( "#nickNameDiv" ).append( "<small class='text-muted g-font-size-12'>4~10자의" +
-	    " 한글, 영문, 숫자만 사용할 수 있습니다</small>" );
+	if(init != 1){
+	    $("#nickName").attr("data-toggle","tooltip");
+	    $("#nickName").attr("data-trigger","hover focus");
+	    $("#nickName").attr("data-placement","bottom");
+	    $("#nickName").attr("title","4~10자의 한글, 영문, 숫자만 사용할 수 있습니다");
+	}
+	$('#nickName').tooltip('enable');
+	$('#nickName').tooltip('show');
+	$( "#nickCheck-btn").prop("disabled",true);
     }
 });
 
@@ -90,40 +99,40 @@ function nickCheck() {
 
 //닉네임 중복체크
 $("#nickCheck-btn").click(function() {
-    
+
     // nickName 을 param으로 보내기 위한 변수
     var nickName =  $("#nickName").val();
     console.log(nickName);
-    
+
     $.ajax({
-        async: true,
-        type : 'POST',
-        data : nickName,
-        url : "/studyboot/app/json/member/nickcheck",
-        dataType : "json",
-        contentType: "application/json; charset=UTF-8",
-        success : function(data) {
-            if (data.cnt > 0) {
-                alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-                // 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
-                $('#nickName').closest('div').addClass('u-has-error-v1');
-                $('#nickName').siblings('small').removeClass('std-invisible');
-                $('#nickName').focus();
-                nickCheck = 0;
-            } else {
-                alert("사용가능한 아이디입니다.");
-                // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                $('#nickName').closest('div').removeClass('u-has-error-v1');
-                $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                $('#nickName').siblings('small').addClass('std-invisible');
-                $('#nickCheck').addClass('std-invisible')
-                $('#nickName').prop('readonly', true);
-                // 아이디가 중복하지 않으면 idck = 1
-                nickCheck = 1;
-            }
-        },
-        error : function(error) {
-            alert("error : " + error);
-        }
+	async: true,
+	type : 'POST',
+	data : nickName,
+	url : "/studyboot/app/json/member/nickcheck",
+	dataType : "json",
+	contentType: "application/json; charset=UTF-8",
+	success : function(data) {
+	    if (data.cnt > 0) {
+		alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		// 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+		$('#nickName').closest('div').addClass('u-has-error-v1');
+		$('#nickName').siblings('small').removeClass('std-invisible');
+		$('#nickName').focus();
+		nickCheck = 0;
+	    } else {
+		alert("사용가능한 아이디입니다.");
+		// 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+		$('#nickName').closest('div').removeClass('u-has-error-v1');
+		$('#nickName').closest('div').addClass('u-has-success-v1-1');
+		$('#nickName').siblings('small').addClass('std-invisible');
+		$('#nickCheck').addClass('std-invisible')
+		$('#nickName').prop('readonly', true);
+		// 아이디가 중복하지 않으면 idck = 1
+		nickCheck = 1;
+	    }
+	},
+	error : function(error) {
+	    alert("error : " + error);
+	}
     });
 });
