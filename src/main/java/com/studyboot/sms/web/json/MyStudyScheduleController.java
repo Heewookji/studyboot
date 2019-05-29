@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Schedule;
 import com.studyboot.sms.service.MyStudyScheduleService;
 
-//@RestController("json/MyStudyCalendarController")
-//@RequestMapping("/json/mystudycalendar")
 @RestController("json/MyStudyScheduleController")
 @RequestMapping("/json/mystudyschedule")
 public class MyStudyScheduleController {
@@ -47,16 +45,43 @@ public class MyStudyScheduleController {
 
   @GetMapping("detail")
   public Object detail(@RequestParam int no) {
-    
+
     Schedule schedule = myStudyScheduleService.get(no);
-    
+
     return schedule;
   }
 
+  @GetMapping("delete")
+  public Object delete(@RequestParam int no) {
+
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (myStudyScheduleService.delete(no) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+
+  @PostMapping("update")
+  public Object update(Schedule schedule) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (myStudyScheduleService.update(schedule) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 }
-
-
-
 
 
 
