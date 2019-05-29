@@ -666,4 +666,18 @@ insert into sms_msg(send_id, recv_id, titl, cont) values(6, 7, "제목4","6번�
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 4, "제목입니다.","6번이 4번에게 쪽지 보냄");
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 4, "제목입니다.","6번이 4번에게 쪽지 보냄");
 
+-- 마이스터디 캘린더 
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('캘린더..', 1, 2, '2019-05-29T00:00', '2019-05-31T18:00', '캘린더 뼈대 완성');
 
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('DB모델링', 1, 2, '2019-05-01T00:00', '2019-05-01T18:00', '모델링 1차 끝내기');
+
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('DB모델링 리뷰', 1, 2, '2019-05-03T00:00', '2019-05-03T18:00', '강사님의 피드백을 잘 듣고 수정하기');
+
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('프로젝트 완성하기', 1, 2, '2019-06-17T00:00', '2019-06-28T18:00', '버그잡기, 디자인 수정, PPT만들기');
+
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('지환 예비군', 1, 2, '2019-06-12T13:00', '2019-06-14T18:00', '최지환 예비군으로 인해 일정 빠짐');

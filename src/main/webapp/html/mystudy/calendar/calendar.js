@@ -75,9 +75,10 @@ $(document.body).bind('eventClick', () => {
 //일정 디테일을 처리할 함수
 function loadDetail(no) {
   $.getJSON('../../app/json/mystudyschedule/detail?no=' + no, function(obj) {
-    alert('1'); // 현재 값 먼저 가져오고 디테일 모달 띄우는 상태
+    //alert('1'); // 현재 값 먼저 가져오고 디테일 모달 띄우는 상태
     
-    console.log(obj); // 콘솔에 해당 키값의 디테일 값 잘 출력됨
+    console.log(obj); // 콘솔에 해당 키값의 디테일 값 잘 출력됨//exampleModalCenterTitle
+    $('#exampleModalCenterTitle').html(obj.title);
     $('#event-detail').html(obj.memo);
   });
 /*
