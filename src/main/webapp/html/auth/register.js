@@ -1,4 +1,4 @@
-var idNo,
+var emailNo,
 emailInit;
 ;
 
@@ -34,22 +34,56 @@ $(window).on('resize', function () {
 
 
 $("#email-btn").click((e) => {
+
+    $("#email-btn").prop("hidden", true);
+    $("#emailNo").prop("type", "text");
+
     $.getJSON('/studyboot/app/json/mail/send?email='+ $("#email").val(), function(obj) {
-	idNo = obj.id;
+	emailNo = obj.id;
     }
     );
-    
     //처음에만 한번 등록
     if(emailInit){
-    $( "#idNo" ).change(function() {
-	if($("#idNo").val() == idNo){
-	    alert("일치합니다!");
-	}
-    });
+	$( "#emailNo" ).change(function() {
+	    if($("#emailNo").val() == emailNo){
+		alert("일치합니다!");
+	    }
+	});
     }
-    
     emailInit = false;
-    
 });
 
+
+//닉네임 체크
+$( "#nickName" ).change(function(){
+    
+    if(nickCheck() == true){
+	$( "#nickNameDiv small" ).remove();
+    } else{
+	$( "#nickNameDiv small" ).remove();
+	 $( "#nickNameDiv" ).append( "<small class='text-muted g-font-size-12'>6~10자의" +
+	    " 한글, 영문, 숫자만 사용할 수 있습니다</small>" );
+    }
+   
+});
+//닉네임 체크
+function nickCheck() {
+    var str = $("#nickName").val();
+    if(str.length < 6 || str.length > 10) {
+	return false;
+    }
+    var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+
+    for( var i = 0; i <= str.length -1 ; i++ )
+    {
+	if(chk.test(str.charAt(i)))
+	{
+	}
+	else
+	{
+	    return false;
+	}
+    }
+    return true;
+}
 
