@@ -11,11 +11,9 @@ $(document.body).bind('loaded-data', () => {
   $(function() {
     // nickCheck 버튼을 클릭했을 때
     $("#nickCheck-btn").click(function() {
-      
         
         // nickName 을 param으로 보내기 위한 변수
         var nickName =  $("#nickName").val();
-        console.log(nickName);
         
         $.ajax({
             async: true,
@@ -38,12 +36,10 @@ $(document.body).bind('loaded-data', () => {
                     // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').removeClass('u-has-error-v1');
                     $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                    $('#nickCheck-btn').prop('disabled',false);
                     $('#nickCheck-btn').addClass('std-invisible')
                     $('#nickName').prop('readonly', true);
                     // 아이디가 중복하지 않으면 idck = 1
                     nickCheck = 1;
-                    
                 }
             },
             error : function(error) {
@@ -52,7 +48,6 @@ $(document.body).bind('loaded-data', () => {
         });
     });
   });
-  
 });
 
 // JSON 형식의 데이터 가져오기
@@ -112,7 +107,22 @@ $('#inqryAdd-btn').click((e) => {
   });
 });
 
+// 닉네임 체크
+function nickNameCheck() {
+  var str = $("#nickName").val();
+  if(str.length < 4 || str.length > 10) {
+    return false;
+  }
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
 
+  for(var i = 0; i <= str.length -1 ; i++ ) {
+    if(chk.test(str.charAt(i))) {
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
 
 $(document).ready(() => {
   
@@ -136,11 +146,11 @@ $(document).ready(() => {
     nickCheck = undefined;
   });
   
-  //닉네임 체크
+  // 닉네임 체크
   $( '#nickName' ).keyup(function(){
     var init;
 
-    if(nickCheck() == true){
+    if(nickNameCheck() == true){
       $('#nickCheck-btn').prop('disabled',false);
       $('#nickName').tooltip('disable');
       $('#nickName').tooltip('hide');
@@ -157,24 +167,6 @@ $(document).ready(() => {
     }
   });
 
-
-  //닉네임 체크
-  function nickCheck() {
-    var str = $("#nickName").val();
-    if(str.length < 4 || str.length > 10) {
-      return false;
-    }
-    var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
-
-    for(var i = 0; i <= str.length -1 ; i++ ) {
-      if(chk.test(str.charAt(i))) {
-      } else {
-        return false;
-      }
-    }
-    return true;
-  }
-  
   // tel
   $('#sb-tel-edit').click(() => {
     $('#tel').prop('readonly', false);
@@ -251,7 +243,17 @@ $('#sb-info-cancel').click((e) => {
 // 비밀번호 확인
 $("#password").keyup(function() {
   
-  password = $("#password").val();
+  var init;
+  var password = $("#password").val();
+  
+  if (password.length == 0 || password == undefined) {
+    $('#password').tooltip('disable');
+    $('#password').tooltip('hide');
+    $('#password').closest('div').removeClass('u-has-error-v1');
+    $('#password').closest('div').removeClass('u-has-success-v1-1');
+    $('#password').removeAttr('title');
+    return false;
+  }
   
   $.ajax({
       async: true,
@@ -261,21 +263,29 @@ $("#password").keyup(function() {
       dataType : "json",
       contentType: "application/json; charset=UTF-8",
       success : function(data) {
-          if (!data.result) {
-              
-              alert("비밀번호가 틀렸씁니다..");
-              $('#password').closest('div').addClass('u-has-error-v1');
-              $('#password').siblings('small').removeClass('std-invisible');
-              $('#password').focus();
-              pwdCheck = 0;
-              
-          } else {
-              alert("비밀번호 일치 !");
-              $('#password').closest('div').removeClass('u-has-error-v1');
-              $('#password').closest('div').addClass('u-has-success-v1-1');
-              pwdCheck = 1;
-              
+        
+        if(data.result == true){
+          $('#password').tooltip('disable');
+          $('#password').tooltip('hide');
+          $('#password').closest('div').removeClass('u-has-error-v1');
+          $('#password').closest('div').addClass('u-has-success-v1-1');
+          $('#password').removeAttr('title');
+          pwdCheck = 1;
+          
+        } else{
+          
+          if(init != 1){
+            $('#password').attr('data-toggle','tooltip');
+            $('#password').attr('data-trigger','hover focus');
+            $('#password').attr('data-placement','bottom');
+            $('#password').attr('title','비밀번호가 틀렸습니다!');
           }
+          $('#password').tooltip('enable');
+          $('#password').tooltip('show');
+          $('#password').closest('div').removeClass('u-has-success-v1-1');
+          $('#password').closest('div').addClass('u-has-error-v1');
+          pwdCheck = 0;
+        }
       },
       error : function(error) {
           alert("error : " + error);
@@ -284,60 +294,91 @@ $("#password").keyup(function() {
 });
 
 // 비밀번호 유효성 검사
-$("#newPassword").change(function(){
-  if (checkPassword($('#newPassword').val())) {
+$("#newPassword").keyup(function(){
+  
+  var password = $("#newPassword").val();
+  
+  if (password.length == 0 || password == undefined) {
+    $('#newPassword').tooltip('disable');
+    $('#newPassword').tooltip('hide');
+    $('#newPassword').closest('div').removeClass('u-has-error-v1');
+    $('#newPassword').closest('div').removeClass('u-has-success-v1-1');
+    $('#newPassword').removeAttr('title');
+    return false;
+  }
+  
+  if(checkPassword(password)){
+    $('#newPassword').tooltip('disable');
+    $('#newPassword').tooltip('hide');
     $('#newPassword').closest('div').removeClass('u-has-error-v1');
     $('#newPassword').closest('div').addClass('u-has-success-v1-1');
-  } else {
+    $('#newPassword').removeAttr('title');
+    
+  } else{
+    
+    $('#newPassword').attr('data-toggle','tooltip');
+    $('#newPassword').attr('data-trigger','hover focus');
+    $('#newPassword').attr('data-placement','bottom');
+    $('#newPassword').attr('title','숫자+영문자+특수문자 조합으로 6자리 이상 사용해야 합니다.');
+    
+    $('#newPassword').tooltip('enable');
+    $('#newPassword').tooltip('show');
     $('#newPassword').closest('div').removeClass('u-has-success-v1-1');
     $('#newPassword').closest('div').addClass('u-has-error-v1');
   }
+  
 });
 
 // 비밀번호 재확인
-$("#verifyPassword").change(function(){
-  if ($("#newPassword").val() == undefined || $("#newPassword").val() == '') {
+$("#verifyPassword").keyup(function(){
+  
+  var password = $("#newPassword").val();
+  
+  if (password.length == 0 || password == undefined) {
     alert('먼저 새로운 비밀번호를 입력하세요!!')
     $('#verifyPassword').val('')
     $('#newPassword').focus();
     return false;
   }
   
-  if ($('#newPassword').val() == $('#verifyPassword').val()) {
+  if (password == $('#verifyPassword').val()) {
+    $('#verifyPassword').tooltip('disable');
+    $('#verifyPassword').tooltip('hide');
     $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
     $('#verifyPassword').closest('div').addClass('u-has-success-v1-1');
-  } else {
-    alert('비밀번호를 다시 확인하세요!!')
-    $('#verifyPassword').focus();
+    $('#verifyPassword').removeAttr('title');
+    
+  } else{
+    
+    $('#verifyPassword').attr('data-toggle','tooltip');
+    $('#verifyPassword').attr('data-trigger','hover focus');
+    $('#verifyPassword').attr('data-placement','bottom');
+    $('#verifyPassword').attr('title','비밀번호를 다시 확인하세요!!');
+    
+    $('#verifyPassword').tooltip('enable');
+    $('#verifyPassword').tooltip('show');
     $('#verifyPassword').closest('div').removeClass('u-has-success-v1-1');
     $('#verifyPassword').closest('div').addClass('u-has-error-v1');
   }
-  
 });
 
 function checkPassword(password){
   
   if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,25}$/.test(password)){
-      alert('숫자+영문자+특수문자 조합으로 6자리 이상 사용해야 합니다.');
-      $('#newPassword').val('').focus();
-      return false;
+    return false;
   }    
   var checkNumber = password.search(/[0-9]/g);
   var checkEnglish = password.search(/[a-z]/ig);
   if(checkNumber <0 || checkEnglish <0){
-      alert("숫자와 영문자를 혼용하여야 합니다.");
-      $('#newPassword').val('').focus();
-      return false;
+    return false;
   }
   if(/(\w)\1\1\1/.test(password)){
-      alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
-      $('#newPassword').val('').focus();
-      return false;
+    return false;
   }
   return true;
 }
 
-// 정보 업데이트 이벤트
+// 암호 업데이트 이벤트
 $('#sb-password-change').click((e) => {
   e.preventDefault();
   
