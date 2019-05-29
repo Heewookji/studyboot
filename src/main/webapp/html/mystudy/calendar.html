@@ -67,10 +67,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="schedul-submit-form">
           <div class="form-group">
             <label for="schedule-name" class="col-form-label" >일정 제목:</label>
-            <input type="text" class="form-control" id="schedule-name">
+            <input type="text" class="form-control" id="schedule-title">
           </div>
           <div class="form-group">
             <label for="schedule-sdt" class="col-form-label">시작 날짜:</label>
@@ -87,9 +87,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule-close-btn">닫기</button>
         <button type="button" class="btn btn-primary" id="schedule-update-btn">수정</button>
-        <button type="button" class="btn btn-primary" id="schedule-add-btn">등록</button>
+        <button type="submit" class="btn btn-primary" id="schedule-add-btn">등록</button>
       </div>
     </div>
   </div>
