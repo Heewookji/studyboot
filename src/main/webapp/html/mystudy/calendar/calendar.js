@@ -1,4 +1,8 @@
-var eventDate;
+var eventDate,
+updateStartDate,
+updateEndDate,
+updateMemoDate,
+updateTitleDate;
 
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
@@ -15,13 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
       $('#calendar-detail-modal-btn').click();
       //$(document.body).trigger('eventClick'); // 디테일 모달을 띄우기 위한 트리거
       loadDetail(info.event.id);
-      
     },
     dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
       window.dateStr = info.dateStr;
-      //alert(info.dateStr);
-      //alert(info.date);
-      window.calInfo = info;
+      //alert(window.dateStr);
       $(document.body).trigger('dateClick');
     },
     events:  '../../app/json/mystudyschedule/list'
@@ -31,16 +32,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ------------------- */
 
-// 날짜를 눌렀을때 일정을 추가할 수 있고, 선택한 날짜 자동으로 입력됨.
+//날짜를 눌렀을때 일정 버튼이 눌려서, 일정을 추가할 수 있고, 선택한 날짜 자동으로 입력됨.
 $(document.body).bind('dateClick', () => {
+  $('#schedule-name').attr("value", "");
+  $('#schedule-edt').attr("value", "");
+  $('#schedule-memo').html("");
+
+  $('#schedule-add-btn').show(); // 모달의 수정 버튼 보이게
+  $('#schedule-update-btn').hide(); // 모달의 수정 버튼 숨김
+  
+  //$('schedule-update-btn').attr("hidden", hidden);
   $('#calendar-add-modal-btn').click();
-  alert(window.dateStr);
   $('#schedule-sdt').attr("value", window.dateStr + 'T00:00'); // 클릭한 날짜 + 00시 00분 으로 초기 세팅
 });
 
 
-// 모달에서 등록을 눌렀을 때 실행되는 함수.
-$('#schedule-submit-btn').click(() => {
+// 일정을 등록하는 버튼
+$('#schedule-add-btn').click(() => {
+
   $.ajax({
     url : "../../app/json/mystudyschedule/add",
     type : "post",
@@ -50,7 +59,7 @@ $('#schedule-submit-btn').click(() => {
       memberNo: 2,
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
-      memo: $('#schedule-message').val(),
+      memo: $('#schedule-memo').val(),
     },
     success : function(data) {
       //data.title 이 null이면 실패하도록 하고싶음..
@@ -64,19 +73,20 @@ $('#schedule-submit-btn').click(() => {
   });
 });
 
-// 일정 디테일을 처리할 함수
+// 달력의 일정을 클릭하면 모달 버튼을 눌리게 함
 $(document.body).bind('eventClick', () => {
-    console.log(window.eventDate.id);
-    console.log(window.eventDate.title);
-    //loadDetail(info.event.id);
-    $('#calendar-detail-modal-btn').click();
+  //console.log(window.eventDate.id);
+  //console.log(window.eventDate.title);
+  $('#calendar-detail-modal-btn').click();
 });
 
-//일정 디테일을 처리할 함수
+//일정 디테일 출력을 처리할 함수
 function loadDetail(no) {
   $.getJSON('../../app/json/mystudyschedule/detail?no=' + no, function(obj) {
-    //alert('1'); // 현재 값 먼저 가져오고 디테일 모달 띄우는 상태
-    
+    console.log(obj); // 콘솔에 해당 키값의 디테일 값 잘 출력됨
+
+    updateStartDate = obj.start.substring(0, 10); // 업데이트때 사용할 년, 월, 일
+    updateEndDate = obj.start.substring(0, 10); // 업데이트때 사용할 년, 월, 일
 
     var startM = obj.start.substring(5, 7); // 월
     var startD = obj.start.substring(8, 10); // 일
@@ -84,8 +94,10 @@ function loadDetail(no) {
     var endD = obj.end.substring(8, 10); // 일
     var startT = obj.start.substring(11, 16); // 시간
     var endT = obj.end.substring(11, 16); // 시간
-    
-    console.log(obj); // 콘솔에 해당 키값의 디테일 값 잘 출력됨//exampleModalCenterTitle
+
+    updateMemoDate = obj.memo; 
+    updateTitleDate = obj.title;
+
     $('#exampleModalCenterTitle').html(obj.title + " ");
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
@@ -94,17 +106,59 @@ function loadDetail(no) {
     }
     $('#event-detail').html(obj.memo);
   });
-
 }
-  
-  
+
+//일정 삭제하는 버튼updateMemoDate
+$('#event-delete-btn').click(() => {
+
+  if(confirm('정말 삭제 하시겠습니까?')) {
+    $.getJSON('../../app/json/mystudyschedule/delete?no=' + window.eventDate.id,
+        function(obj) {
+      location.reload();
+    })
+  }
+});
+
+// 디테일에서 수정누르면 실행되는 곳. 
+$('#event-update-btn').click(() => {
+  $('#schedule-memo').html(""); // memo 누적안되게 맨처음 초기화
+
+  $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
+  $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
+
+  $('#calendar-detail-close-modal-btn').click(); // 디테일 모달 닫고,
+  $('#calendar-add-modal-btn').click(); // 수정하는 모달 띄움
+
+  $('#schedule-name').attr("value", updateTitleDate); // 디테일에 있던 이름 모달창으로 가져옴
+  $('#schedule-sdt').attr("value", updateStartDate + 'T00:00');
+  $('#schedule-edt').attr("value", updateEndDate + 'T00:00');
+
+  $('#schedule-memo').attr("value", '내용'); // 클릭한 날짜 + 00시 00분 으로 초기 세팅
+  $('#schedule-memo').append(updateMemoDate);
+});
 
 
-
-
-
-
-
-
-
-
+$('#schedule-update-btn').click(() => {
+  $.ajax({
+    url : "../../app/json/mystudyschedule/update",
+    type : "post",
+    data : {
+      id: window.eventDate.id,
+      title: $('#schedule-name').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
+      studyNo: 1,
+      memberNo: 2,
+      start: $('#schedule-sdt').val(),
+      end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
+      memo: $('#schedule-memo').val(),
+    },
+    success : function(data) {
+      //data.title 이 null이면 실패하도록 하고싶음..
+      alert("일정이 수정 되었습니다.");
+      location.reload();
+      //$(calendarEl).fullCalendar("refetchEvents");
+    },
+    error : function(request, status, error) {
+      alert("일정 변경에 실패 했습니다.");
+    }
+  });
+});
