@@ -57,8 +57,8 @@ $("#email-btn").click((e) => {
 //닉네임 체크
 $( "#nickName" ).keyup(function(){
     var init;
-    
-    if(nickCheck() == true){
+
+    if(nickCheck($("#nickName").val()) == true){
 	$( "#nickCheck-btn").prop("disabled",false);
 	$('#nickName').tooltip('disable');
 	$('#nickName').tooltip('hide');
@@ -73,26 +73,103 @@ $( "#nickName" ).keyup(function(){
 	$('#nickName').tooltip('show');
 	$( "#nickCheck-btn").prop("disabled",true);
     }
+
+});
+
+//비번체크
+$( "#password" ).keyup(function(){
+    var init;
+
+    if(checkPassword($( "#password" ).val()) == true){
+	$('#password').tooltip('disable');
+	$('#password').tooltip('hide');
+    } else{
+	if(init != 1){
+	    $("#password").attr("data-toggle","tooltip");
+	    $("#password").attr("data-trigger","hover focus");
+	    $("#password").attr("data-placement","bottom");
+	    $("#password").attr("title","숫자,영문자,특수문자 조합 중복문자 없이 6자리 이상 사용해야 합니다");
+	}
+	$('#password').tooltip('enable');
+	$('#password').tooltip('show');
+    }
+
+    if($('#passwordConfirm').val().length != 0){
+
+	if(equalPassword($( "#passwordConfirm" ).val(), $( "#password" ).val()) == true){
+	    $('#passwordConfirm').tooltip('disable');
+	    $('#passwordConfirm').tooltip('hide');
+	} else {
+	    $("#passwordConfirm").attr("data-toggle","tooltip");
+	    $("#passwordConfirm").attr("data-trigger","hover focus");
+	    $("#passwordConfirm").attr("data-placement","bottom");
+	    $("#passwordConfirm").attr("title","비밀번호가 일치하지 않습니다");
+	    $('#passwordConfirm').tooltip('enable');
+	}
+
+    }
+
+});
+
+//입력시 비번일치 체크
+$( "#passwordConfirm" ).keyup(function(){
+    var init;
+    if(equalPassword($( "#passwordConfirm" ).val(), $( "#password" ).val()) == true){
+	$('#passwordConfirm').tooltip('disable');
+	$('#passwordConfirm').tooltip('hide');
+    } else{
+	if(init != 1){
+	    $("#passwordConfirm").attr("data-toggle","tooltip");
+	    $("#passwordConfirm").attr("data-trigger","hover focus");
+	    $("#passwordConfirm").attr("data-placement","bottom");
+	    $("#passwordConfirm").attr("title","비밀번호가 일치하지 않습니다");
+	}
+	$('#passwordConfirm').tooltip('enable');
+	$('#passwordConfirm').tooltip('show');
+    }
 });
 
 
+
 //닉네임 체크
-function nickCheck() {
-    var str = $("#nickName").val();
+function nickCheck(str) {
+
     if(str.length < 4 || str.length > 10) {
 	return false;
     }
     var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
 
-    for( var i = 0; i <= str.length -1 ; i++ )
-    {
-	if(chk.test(str.charAt(i)))
-	{
+    for( var i = 0; i <= str.length -1 ; i++ )    {
+
+	if(chk.test(str.charAt(i)))	{
 	}
-	else
-	{
+	else	{
 	    return false;
 	}
+    }
+    return true;
+}
+
+//비번 일치체크
+function equalPassword(confirmPassword, password){
+    return confirmPassword == password;
+}
+
+
+//패스워드 체크
+function checkPassword(password){
+    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,25}$/.test(password)){
+	return false;
+    }    
+    var checkNumber = password.search(/[0-9]/g);
+    var checkEnglish = password.search(/[a-z]/ig);
+    if(checkNumber <0 || checkEnglish <0){
+	$('#newPassword').val('').focus();
+	return false;
+    }
+    if(/(\w)\1\1\1/.test(password)){
+	$('#newPassword').val('').focus();
+	return false;
     }
     return true;
 }
