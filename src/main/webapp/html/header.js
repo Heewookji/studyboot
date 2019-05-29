@@ -17,6 +17,10 @@ $( document ).ready(function() {
 	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
 	});
 
+	$('#mypage-btn').click((e) => {
+	    window.location.href = '/studyboot/html/mypage/index.html';
+	});
+
 
 	$(document.body).trigger('loaded-header');
     });
@@ -79,28 +83,28 @@ function loadLoginUser() {
 
     $.getJSON('/studyboot/app/json/auth/user',
 	    function(obj) {
-	
+
 	var user = obj.user;
 	var loginState = $(".std-login");
 	var notLoginState = $(".std-not-login");
 
 	if (obj.status == 'success') {
 	    notLoginState.addClass('std-invisible');
-	    
+
 	    $("#nickname").html(user.nickName);
-	    
+
 	    if(obj.myStudyList != undefined){
 		var myStudyListTemplateSrc = $('#myStudy-template').html();
 		var myStudyListGenerator = Handlebars.compile(myStudyListTemplateSrc);
 		$(myStudyListGenerator(obj)).appendTo($('#std-dropdown'));
 	    }
-	    
+
 	    //관리자라면 관리자 페이지버튼 드롭다운에 추가
 	    if(obj.user.admin){
 		$("#std-dropdown").append("<div class=\"dropdown-divider\"></div>" +
-				"<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
+		"<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
 	    }
-	    
+
 	} else {
 	    loginState.addClass('std-invisible');
 	}

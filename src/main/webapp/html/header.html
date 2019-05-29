@@ -62,7 +62,7 @@
         alt="Image Description">
       </span> <span id="nickname"></span>
        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">마이페이지</a> 
+        <a class="dropdown-item" href="#" id="mypage-btn">마이페이지</a> 
         <a class="dropdown-item" href="#">쪽지함</a>
         <div id="std-dropdown"></div>
         <div class="dropdown-divider"></div>
@@ -124,7 +124,7 @@
 <script id="myStudy-template" type="text/x-handlebars-template">
  <div class="dropdown-divider"></div>
 {{#each myStudyList}}
-<a class="dropdown-item myStudy-btn" href="#" data-no="{{no}}">{{name}}</a>
+<a class="dropdown-item myStudy-btn" href="#">{{name}}</a>
 {{/each}}
 </script>
 

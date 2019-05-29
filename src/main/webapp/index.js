@@ -21,6 +21,10 @@ $( document ).ready(function() {
 	    keyword = $("#main-search").val();
 	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
 	});
+	
+	$('#mypage-btn').click((e) => {
+	    window.location.href = '/studyboot/html/mypage/index.html';
+	});
 
 	$(document.body).trigger('loaded-header');
     });
