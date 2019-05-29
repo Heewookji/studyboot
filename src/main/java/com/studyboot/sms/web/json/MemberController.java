@@ -53,7 +53,7 @@ public class MemberController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     member.setNo(loginUser.getNo());
     
-    HashMap<String,Object> content = new HashMap<>();
+    Map<String,Object> content = new HashMap<>();
     
     try {
       if (memberService.update(member) == 0) 
@@ -71,20 +71,34 @@ public class MemberController {
     return content;
   }
 
-
   @PostMapping("nickcheck")
   public Object nickcheck(@RequestBody String nickName) {
     
     int count = 0;
-    Map<Object, Object> map = new HashMap<Object, Object>();
+    Map<String, Object> map = new HashMap<>();
 
     count = memberService.nickNameCheck(nickName);
-    System.out.println(count);
     map.put("cnt", count);
 
     return map;
   }
 
+  @PostMapping("passwordcheck")
+  public Object passwordcheck(
+      HttpSession session,
+      @RequestBody String password) {
+    
+    boolean result = false;
+    Map<Object, Object> map = new HashMap<Object, Object>();
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    result = memberService.passwordCheck(loginUser.getEmail(), password);
+    System.out.println(result);
+    map.put("result", result);
+
+    return map;
+  }
 }
 
 
