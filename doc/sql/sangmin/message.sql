@@ -44,3 +44,38 @@ insert into sms_msg(send_id, recv_id, titl, cont) values(6, 7, "제목3","6번�
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 7, "제목4","6번이 7번에게 쪽지 보냄4");
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 4, "제목입니다.","6번이 4번에게 쪽지 보냄");
 insert into sms_msg(send_id, recv_id, titl, cont) values(6, 4, "제목입니다.","6번이 4번에게 쪽지 보냄");
+
+
+-- 스터디 게시판 샘플 데이터 (공지사항)
+insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항1", "내용1");
+insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항2", "내용2");
+ 
+-- 스터디 게시판 샘펄 데이터
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성1', '내용작성1');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성2', '내용작성2');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 4, '게시판작성3', '내용작성3');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 4, '게시판작성4', '내용작성4');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 5, '게시판작성5', '내용작성5');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 5, '게시판작성6', '내용작성6');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 6, '게시판작성7', '내용작성7');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 6, '게시판작성8', '내용작성8');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 7, '게시판작성9', '내용작성9');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 7, '게시판작성10', '내용작성10');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성11', '내용작성11');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성12', '내용작성12');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 4, '게시판작성13', '내용작성13');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 5, '게시판작성14', '내용작성14');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 6, '게시판작성15', '내용작성15');
+insert into sms_std_board(std_id, member_id, title, cont) values(1, 7, '게시판작성16', '내용작성16');
+
+insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항3", "내용3");
+
+
+
+
+
+
+
+
+
+

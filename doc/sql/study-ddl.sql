@@ -716,11 +716,12 @@ ALTER TABLE sms_rest_day
 
 -- 공간후기
 CREATE TABLE sms_space_review (
-  space_review_id INTEGER NOT NULL COMMENT '공간후기번호', -- 공간후기번호
-  member_id       INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  space_id        INTEGER NOT NULL COMMENT '공간 번호', -- 공간 번호
-  rating          DOUBLE  NOT NULL COMMENT '별점', -- 별점
-  review          TEXT    NOT NULL COMMENT '후기' -- 후기
+  space_review_id INTEGER  NOT NULL COMMENT '공간후기번호', -- 공간후기번호
+  member_id       INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+  space_id        INTEGER  NOT NULL COMMENT '공간 번호', -- 공간 번호
+  rating          DOUBLE   NOT NULL COMMENT '별점', -- 별점
+  review          TEXT     NOT NULL COMMENT '후기', -- 후기
+  rgstr_dt        DATETIME NOT NULL DEFAULT current_timestamp() COMMENT '등록일시' -- 등록일시
 )
 COMMENT '공간후기';
 

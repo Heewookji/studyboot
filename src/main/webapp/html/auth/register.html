@@ -134,12 +134,20 @@
       <!-- Form -->
       <form class="g-py-15">
 
-       <div class="g-mb-20">
-        <input
+       <div class="g-mb-20" id="nickNameDiv">
+         <div class="input-group">
+           <input
          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
-         type="text" placeholder="닉네임">
+         type="text" placeholder="닉네임" id="nickName">
+          <div class="input-group-append">
+           <button
+            class="btn g-bg-primary g-color-white g-rounded-right--10" id="nickCheck-btn"
+            disabled>중복체크</button>
+          </div>
+         </div>
        </div>
-
+       
+       
        <div class="g-mb-20">
         <input
          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
@@ -156,36 +164,48 @@
 
 
        <div class="row">
-
-        <div class="col-8 g-mb-20">
-         <input type="email"
-          class="form-control g-brd-gray-light-v3 is-valid g-py-15 g-px-15"
-          id="validationServer01" placeholder="이메일" required>
-        </div>
-         <div class="col-4 g-mb-20">
-         <button class="btn btn-md u-btn-primary g-rounded-right g-py-15 g-width-105"
-            type="button" id="email-btn">인증</button>
-        </div>
-        </div>
-
-
-
-       <div class="row">
         <div class="col-8 g-mb-20">
          <div class="input-group">
-          <input
-           class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-rounded-left g-py-15 g-px-15"
-           type="email" placeholder="핸드폰 번호" id="phone">
+          <input type="email"
+           class="form-control g-brd-gray-light-v3 g-py-15 g-px-15"
+           id="validationServer01" placeholder="이메일">
           <div class="input-group-append">
-           <button class="btn btn-md u-btn-primary g-rounded-right"
-            type="button" id="phone-btn">인증</button>
+           <button
+            class="btn g-bg-primary g-color-white g-rounded-right--10"
+            disabled>인증</button>
           </div>
          </div>
+         <small class="text-muted g-font-size-12">올바른 이메일을
+          입력해주세요</small>
         </div>
         <div class="col-4 g-mb-20">
          <input
           class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
-          type="text" placeholder="인증번호" id="phoneIdNo">
+          type="text" placeholder="인증번호" id="emailNo">
+        </div>
+       </div>
+
+
+
+       <div class="row">
+
+        <div class="col-8 g-mb-20">
+         <div class="input-group">
+          <input type="tel"
+           class="form-control g-brd-gray-light-v3 g-py-15 g-px-15"
+           id="validationServer01" placeholder="핸드폰 번호">
+          <div class="input-group-append">
+           <button
+            class="btn g-bg-primary g-color-white g-rounded-right--10 "
+            disabled>인증</button>
+          </div>
+         </div>
+         <small class="text-muted g-font-size-12">올바른 핸드폰번호를 입력해주세요</small>
+        </div>
+        <div class="col-4 g-mb-20">
+         <input
+          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
+          type="text" placeholder="인증번호" id="emailNo">
         </div>
        </div>
 
