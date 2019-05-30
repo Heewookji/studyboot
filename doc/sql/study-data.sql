@@ -3,7 +3,7 @@
 
 -- 스터디 생성 입력
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121111', '111111', '스터디1', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
+values('121111', '111111', '스터디1', 'test.png', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
 values('111112', '111112', '스터디2', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
@@ -110,19 +110,19 @@ insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, phot
   values(1, password('1111'), 'user1@test.com', 'user1', 'nick1', '1993-05-16', '010-1111-1111', 'photo1.jpg', true, '111111');
   -- 일반
   insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(2, password('1111'), 'user2@test.com', 'user2', 'nick2', 3.5, '1993-05-16', '010-2222-2222', 'photo2.jpg', '222222');
+  values(2, password('1111'), 'user2@test.com', 'user2', 'nick2', 3.5, '1993-05-16', '010-2222-2222', 'test.png', '222222');
  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(3, password('1111'), 'user3@test.com', 'user3', 'nick3', 4.0, '1997-05-16', '010-3333-3333', 'photo3.jpg', '333333');
+  values(3, password('1111'), 'user3@test.com', 'user3', 'nick3', 4.0, '1997-05-16', '010-3333-3333', 'test.png', '333333');
   insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(4, password('1111'), 'user4@test.com', 'user4', 'nick4', 4.5, '1990-05-16', '010-4444-4444', 'photo4.jpg', '444444');
+  values(4, password('1111'), 'user4@test.com', 'user4', 'nick4', 4.5, '1990-05-16', '010-4444-4444', 'test.png', '444444');
   insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(5, password('1111'), 'user5@test.com', 'user5', 'nick5', 5.0, '1983-05-16', '010-5555-5555', 'photo5.jpg','555555');
+  values(5, password('1111'), 'user5@test.com', 'user5', 'nick5', 5.0, '1983-05-16', '010-5555-5555', 'test.png','555555');
 insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(6, password('1111'), 'user6@test.com', 'user6', 'nick6', 4.5, '1999-05-16', '010-4444-4444', 'photo4.jpg', '444444');
+  values(6, password('1111'), 'user6@test.com', 'user6', 'nick6', 4.5, '1999-05-16', '010-4444-4444', 'test.png', '444444');
   insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(7, password('1111'), 'user7@test.com', 'user7', 'nick7', 5.0, '1988-05-16', '010-5555-5555', 'photo5.jpg','555555');
+  values(7, password('1111'), 'user7@test.com', 'user7', 'nick7', 5.0, '1988-05-16', '010-5555-5555', 'test.png','555555');
 insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, photo, admin, adr_lms)   
-values(8, password('1111'), 'user8@test.com', 'user8', 'nick8', '1993-05-16', '010-1111-1111', 'photo1.jpg', true, '111111');
+values(8, password('1111'), 'user8@test.com', 'user8', 'nick8', '1993-05-16', '010-1111-1111', 'test.png', true, '111111');
  
 
 -- 스터디 회원 관심분야(3개씩)
