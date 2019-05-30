@@ -1,7 +1,5 @@
 package com.studyboot.sms.web.json;
 import java.util.HashMap;
-import java.util.Random;
-import java.util.UUID;
 import javax.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
