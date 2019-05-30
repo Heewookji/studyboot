@@ -20,26 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
       //$(document.body).trigger('eventClick'); // 디테일 모달을 띄우기 위한 트리거
       loadDetail(info.event.id);
     },
-    color: 'red',
-    dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
-      window.dateStr = info.dateStr;
-      //alert(window.dateStr);
-      $(document.body).trigger('dateClick');
-    },
     events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1],
     eventSourceSuccess: function(content, xhr) {
-      window.calendarContent = content;
-      content.getJSON(content.size()-1);
-      console.log(content);
+      console.log(content); // event 배열 목록이 출력됨
+      console.log(content[content.length-1]);
+      window.calendarContent = content[content.length-1]; // window.calendarContent에는 스터디장 유무가 들어있다.
       return content.eventArray;
+    },
+    dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
+      window.dateStr = info.dateStr;
+      if(window.calendarContent === false){
+        alert("스터디 장만 일정을 등록 할 수 있습니다.");
+        return;
+      }
+      //alert(window.dateStr);
+      $(document.body).trigger('dateClick');
     }
-    
-//    events: function(info, successCallback, failureCallback) {
-//      '../../app/json/mystudyschedule/list'
-//    },
-//    color: 'yellow',   // an option!
-//    textColor: 'black' // an option!
-    
   });
   calendar.render();
 });
@@ -64,6 +60,7 @@ $(document.body).bind('dateClick', () => {
 
 //일정을 등록하는 버튼
 $('#schedule-add-btn').click(() => {
+  
   if($('#schedule-title').val().length === 0) {
     alert("일정 제목을 입력해 주세요.");
     return;
@@ -77,7 +74,7 @@ $('#schedule-add-btn').click(() => {
     alert("일정 내용을 입력해 주세요.");
     return;
   } 
-  
+
   $.ajax({
     url : "../../app/json/mystudyschedule/add",
     type : "post",
@@ -134,7 +131,12 @@ function loadDetail(no) {
 
 //일정 삭제하는 버튼updateMemoDate
 $('#event-delete-btn').click(() => {
-
+  
+  if(window.calendarContent === false){
+    alert("삭제 권한이 없습니다.");
+    return;
+  }
+  
   if(confirm('정말 삭제 하시겠습니까?')) {
     $.getJSON('../../app/json/mystudyschedule/delete?no=' + window.eventDate.id,
         function(obj) {
@@ -144,12 +146,17 @@ $('#event-delete-btn').click(() => {
 });
 
 /* ------------------------------------------------------------------------------------------------ */
-// 디테일에서 수정버튼 누르면 실행되는 곳. 
+//디테일에서 수정버튼 누르면 실행되는 곳. 
 $('#event-update-btn').click(() => {
+
+  if(window.calendarContent === false){
+    alert("수정 권한이 없습니다.");
+    return;
+  }
   
   $('#schedule-memo').empty(); // textarea(memo)에 누적이 안되게 일단 비워준다.
   //$('#schedule-title').attr("value", "");
-//  $('#schedule-title').val("asf");
+//$('#schedule-title').val("asf");
   resetForm();
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
@@ -166,21 +173,26 @@ $('#event-update-btn').click(() => {
 
 
 $('#schedule-update-btn').click(() => {
+  
+  if(window.calendarContent === false){
+    alert("수정 권한이 없습니다.");
+    return;
+  }
+  
   $.ajax({
     url : "../../app/json/mystudyschedule/update",
     type : "post",
     data : {
       id: window.eventDate.id,
       title: $('#schedule-title').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
-      studyNo: 1,
-      memberNo: 2,
+      studyNo: location.href.split('=')[1],
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
       memo: $('#schedule-memo').val()
     },
     success : function(data) {
       //data.title 이 null이면 실패하도록 하고싶음..
-      alert("일정이 수정 되었습니다.");
+      alert(data.status);
       location.reload();
       //$(calendarEl).fullCalendar("refetchEvents");
     },
@@ -196,17 +208,17 @@ $('#schedule-close-btn').click(() => {
 });
 
 function resetForm() {
-    $('#schedul-submit-form')[0].reset();
-  };
+  $('#schedul-submit-form')[0].reset();
+};
 
-  
-  
-  // 리더값을 받아오기 위한 리스트.
-  function loadList() {
 
-    $.getJSON('../../app/json/mystudyschedule/update',
+
+// 리더값을 받아오기 위한 리스트.
+function loadList() {
+
+  $.getJSON('../../app/json/mystudyschedule/update',
       function(obj) {
 
-    });
+  });
 
 }

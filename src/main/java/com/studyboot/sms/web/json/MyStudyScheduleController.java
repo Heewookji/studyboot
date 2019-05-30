@@ -39,7 +39,7 @@ public class MyStudyScheduleController {
     // 리더 유무 판단. 
     if (leaderYesOrNo == false) {
 
-      content.put("status", "스터디 장만 일정을 등록할 수 있습니다.");
+      content.put("status", "스터디 장만 일정을 등록 할 수 있습니다.");
       return content;
     }
 
@@ -76,7 +76,7 @@ public class MyStudyScheduleController {
   }
 
   @GetMapping("detail")
-  public Object detail(@RequestParam int no) {
+  public Object detail(int no) {
 
     Schedule schedule = myStudyScheduleService.get(no);
 
@@ -84,7 +84,7 @@ public class MyStudyScheduleController {
   }
 
   @GetMapping("delete")
-  public Object delete(@RequestParam int no) {
+  public Object delete(int no) {
 
     HashMap<String,Object> content = new HashMap<>();
     try {
@@ -100,12 +100,31 @@ public class MyStudyScheduleController {
   }
 
   @PostMapping("update")
-  public Object update(Schedule schedule) {
+  public Object update(Schedule schedule, HttpSession session) {
     HashMap<String,Object> content = new HashMap<>();
+    
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    // loginUser.getNo() 로그인한 유저의 유저넘버를 schedule 객체에 담는다.
+    schedule.setMemberNo(loginUser.getNo());
+
+    // 리더 판만을 위한 코드
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", schedule.getStudyNo());
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+    
+    // 리더 유무 판단. 
+    if (leaderYesOrNo == false) {
+
+      content.put("status", "스터디 장만 일정을 수정 할 수 있습니다.");
+      return content;
+    }
+    
     try {
       if (myStudyScheduleService.update(schedule) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-      content.put("status", "success");
+      content.put("status", "수정이 완료 되었습니다.");
 
     } catch (Exception e) {
       content.put("status", "fail");
@@ -113,23 +132,7 @@ public class MyStudyScheduleController {
     }
     return content;
   }
-
-
-
-  @GetMapping("leader")
-  public Object leader(HttpSession session, @RequestParam int no) {
-
-    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
-
-    HashMap<String,Object> studyAndUserNo = new HashMap<>();
-    studyAndUserNo.put("loginUser", loginUser.getNo());
-    studyAndUserNo.put("studyNo", no);
-    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
-
-    return null;
-
-  }
-
+    
 }
 
 
