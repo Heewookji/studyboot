@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.studyboot.sms.dao.AppliedStudyDao">
+  
+  <resultMap type="appliedStudy" id="appliedStudyMap">
+    <id column="member_id" property="studyNo"/>
+    <id column="std_id" property="memberNo"/>
+    <result column="dtrm" property="determination"/>
+    <result column="state" property="state"/>
+    <result column="apl_date" property="appliedDate"/>
+    <result column="name" property="studyName"/>
+    <result column="photo" property="photo"/>
+    <result column="sdt" property="startDate"/>
+  </resultMap>
+  
+
+  <select id="findAllByUser" resultMap="appliedStudyMap" parameterType="int">
+    select
+      a.member_id,
+      a.std_id,
+      a.dtrm,
+      a.state,
+      a.apl_date,
+      s.name,
+      s.photo,
+      s.sdt
+    from
+      sms_apl_std a
+      inner join sms_std s on a.std_id = s.std_id
+    where
+      member_id = #{value}
+  </select>
+  
+  <select id="findAllByStudy" resultMap="appliedStudyMap" parameterType="int">
+    select
+      member_id,
+      std_id,
+      dtrm,
+      state,
+      apl_date
+    from
+      sms_apl_std
+    where
+      std_id = #{value}
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

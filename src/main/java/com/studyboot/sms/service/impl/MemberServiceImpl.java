@@ -3,7 +3,9 @@ package com.studyboot.sms.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.studyboot.sms.dao.AppliedStudyDao;
 import com.studyboot.sms.dao.MemberDao;
+import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.service.MemberService;
 
@@ -11,9 +13,11 @@ import com.studyboot.sms.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
+  AppliedStudyDao appliedStudyDao;
 
-  public MemberServiceImpl(MemberDao memberDao) {
+  public MemberServiceImpl(MemberDao memberDao, AppliedStudyDao appliedStudyDao) {
     this.memberDao = memberDao;
+    this.appliedStudyDao = appliedStudyDao;
   }
 
   @Override
@@ -82,6 +86,11 @@ public class MemberServiceImpl implements MemberService {
     Member member = memberDao.findByEmailPassword(paramMap);
     
     return member != null ? true : false;
+  }
+  
+  @Override
+  public List<AppliedStudy> appliedStudyList(int no) {
+    return appliedStudyDao.findAllByUser(no);
   }
   
 }

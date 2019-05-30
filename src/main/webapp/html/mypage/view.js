@@ -36,9 +36,6 @@ $(document.body).bind('loaded-data', () => {
                     // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').removeClass('u-has-error-v1');
                     $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                    $('#nickCheck-btn').prop('disabled', true);
-                    $('#nickCheck-btn').addClass('std-invisible');
-                    $('#nickName').prop('readonly', true);
                     // 아이디가 중복하지 않으면 idck = 1
                     nickCheck = 1;
                 }
@@ -251,60 +248,6 @@ $('#sb-info-cancel').click((e) => {
   location.href = 'index.html';
 });
 
-
-// 비밀번호 확인
-$("#password").keyup(function() {
-  
-  var init;
-  var password = $("#password").val();
-  
-  if (password.length == 0 || password == undefined) {
-    $('#password').tooltip('disable');
-    $('#password').tooltip('hide');
-    $('#password').closest('div').removeClass('u-has-error-v1');
-    $('#password').closest('div').removeClass('u-has-success-v1-1');
-    $('#password').removeAttr('title');
-    return false;
-  }
-  
-  $.ajax({
-      async: true,
-      type : 'POST',
-      data : password,
-      url : "../../app/json/member/passwordcheck",
-      dataType : "json",
-      contentType: "application/json; charset=UTF-8",
-      success : function(data) {
-        
-        if(data.result == true){
-          $('#password').tooltip('disable');
-          $('#password').tooltip('hide');
-          $('#password').closest('div').removeClass('u-has-error-v1');
-          $('#password').closest('div').addClass('u-has-success-v1-1');
-          $('#password').removeAttr('title');
-          pwdCheck = 1;
-          
-        } else{
-          
-          if(init != 1){
-            $('#password').attr('data-toggle','tooltip');
-            $('#password').attr('data-trigger','hover focus');
-            $('#password').attr('data-placement','bottom');
-            $('#password').attr('title','비밀번호가 틀렸습니다!');
-          }
-          $('#password').tooltip('enable');
-          $('#password').tooltip('show');
-          $('#password').closest('div').removeClass('u-has-success-v1-1');
-          $('#password').closest('div').addClass('u-has-error-v1');
-          pwdCheck = 0;
-        }
-      },
-      error : function(error) {
-          alert("error : " + error);
-      }
-  });
-});
-
 // 비밀번호 유효성 검사
 $("#newPassword").keyup(function(){
   
@@ -341,7 +284,7 @@ $("#newPassword").keyup(function(){
   
   if ($('#verifyPassword').val().length != 0) {
     
-    if (password == $('#verifyPassword').val()) {
+    if (checkPassword(password) && password == $('#verifyPassword').val()) {
       $('#verifyPassword').tooltip('disable');
       $('#verifyPassword').tooltip('hide');
       $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
@@ -372,11 +315,13 @@ $("#verifyPassword").keyup(function(){
   if (password.length == 0 || password == undefined) {
     alert('먼저 새로운 비밀번호를 입력하세요!!')
     $('#verifyPassword').val('')
+    $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
+    $('#verifyPassword').closest('div').removeClass('u-has-success-v1-1');
     $('#newPassword').focus();
     return false;
   }
   
-  if (password == $('#verifyPassword').val()) {
+  if (checkPassword(password) && password == $('#verifyPassword').val()) {
     $('#verifyPassword').tooltip('disable');
     $('#verifyPassword').tooltip('hide');
     $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
@@ -417,14 +362,57 @@ function checkPassword(password){
 $('#sb-password-change').click((e) => {
   e.preventDefault();
   
-  newPwd = $('#newPassword').val();
-  verifyPwd = $('#verifyPassword').val();
+  var password = $("#password").val();
+  
+  // 비밀번호 확인
+  if (password.length == 0 || password == undefined) {
+    alert('비밀번호를 입력하세요!!!');
+    $("#password").focus();
+    return false;
+  }
+  
+  $.ajax({
+      async: true,
+      type : 'POST',
+      data : password,
+      url : "../../app/json/member/passwordcheck",
+      dataType : "json",
+      contentType: "application/json; charset=UTF-8",
+      success : function(data) {
+        
+        if(data.result == true){
+          
+          pwdCheck = 1;
+          $(document.body).trigger('checked-password');
+          
+        } else{
+          alert('비밀번호가 틀렸습니다!!');
+          $('#password').focus();
+          
+          pwdCheck = 0;
+        }
+      },
+      error : function(error) {
+          alert("error : " + error);
+      }
+  });
+});
+
+$(document.body).bind('checked-password', () => {
+  
+  var newPwd = $('#newPassword').val();
+  var verifyPwd = $('#verifyPassword').val();
+  
+  if (newPwd.length == 0 || verifyPwd.length == 0) {
+    alert('변경할 비밀번호를 입력하세요!!');
+    return false;
+  }
   
   if (newPwd != verifyPwd || pwdCheck == 0) {
     alert('변경할 수 없습니다..\n 비밀번호를 확인하세요!');
     return false;
-  } else {
     
+  } else {
     $.ajax({
       url:'../../app/json/member/update',
       type: 'post',
@@ -438,7 +426,6 @@ $('#sb-password-change').click((e) => {
       }
     });
   }
-  
 });
 
 // 정보 업데이트 취소 이벤트

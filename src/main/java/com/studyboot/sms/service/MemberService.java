@@ -1,6 +1,7 @@
 package com.studyboot.sms.service;
 
 import java.util.List;
+import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 
 public interface MemberService {
@@ -13,4 +14,5 @@ public interface MemberService {
   int update(Member member);
   int nickNameCheck(String nickName);
   boolean passwordCheck(String email, String password);
+  List<AppliedStudy> appliedStudyList(int no);
 }

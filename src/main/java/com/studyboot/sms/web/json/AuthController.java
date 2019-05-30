@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
@@ -27,8 +28,6 @@ public class AuthController {
   @Autowired MemberService memberService;
   @Autowired StudyMemberService studyMemberService;
   @Autowired ServletContext servletContext;
-
- 
 
   @PostMapping("login")
   public Object login(
@@ -76,16 +75,21 @@ public class AuthController {
 
     Member loginUser = (Member)session.getAttribute("loginUser");
 
-
     HashMap<String,Object> content = new HashMap<>();
 
     if (loginUser != null) {
 
       List<Study> myStudyList = (List<Study>)session.getAttribute("myStudyList");
+      List<AppliedStudy> appliedStudyList = memberService.appliedStudyList(loginUser.getNo());
 
       if(myStudyList != null) {
         content.put("myStudyList", myStudyList);
       }
+      
+      if(myStudyList != null) {
+        content.put("appliedStudyList", appliedStudyList);
+      }
+      
       content.put("status", "success");
       content.put("user", loginUser);
     } else {
@@ -93,6 +97,7 @@ public class AuthController {
     }
     return content;
   }
+  
 }
 
 

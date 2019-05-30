@@ -380,8 +380,24 @@ insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rat
 insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(1, 5, 6, 1.0, 20190513);
 insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(1, 5, 7, 2.0, 20191013);
 
+-- 회원 스터디 신청 정보
+-- 회원번호, 스터디번호, 스터디 각오, 열람여부, 신청일
 
-  
+insert into sms_apl_std(member_id, std_id, dtrm) values(2, 2, '잘부탁드려요~');
+insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(2, 3, '열심히 하겠습니다!', 20190401);
+insert into sms_apl_std(member_id, std_id, dtrm, state, apl_date) values(2, 4, '꼭 참여하고 싶습니다.', true, 20190411);
+insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(2, 5, '노력 하겠습니다!', 20190501);
+
+insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(3, 5, '제발 받아주세요...', 20190422);
+insert into sms_apl_std(member_id, std_id, dtrm) values(3, 6, '같이 공부하면서 실력을 키우고 싶어요');
+insert into sms_apl_std(member_id, std_id, dtrm, state, apl_date) values(3, 7, '열심히 하겠습니다!', true, 20190415);
+insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(3, 8, '이 스터디 정말 하고 싶습니다', 20190522);
+
+insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(4, 2, '제발 받아주세요...', 20190422);
+insert into sms_apl_std(member_id, std_id, dtrm) values(4, 4, '같이 공부하면서 실력을 키우고 싶어요');
+insert into sms_apl_std(member_id, std_id, dtrm, state, apl_date) values(4, 9, '열심히 하겠습니다!', true, 20190420);
+insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(4, 10, '이 스터디 정말 하고 싶습니다', 20190522);
+
 -- 게시판 분류 (문의,신고)생성
 insert into sms_board_cls (cls_id, cls_name)
   values(1, '문의');
