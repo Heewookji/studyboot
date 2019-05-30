@@ -16,12 +16,13 @@ public class StudyMember extends Member {
   private boolean leader;
   private double attendance;
   private int upload;
+  private Member member;
   
   @Override
   public String toString() {
     return "StudyMember [studyNo=" + studyNo + ", memberNo=" + memberNo + ", endNo=" + endNo
         + ", joinDate=" + joinDate + ", endDate=" + endDate + ", leader=" + leader + ", attendance="
-        + attendance + ", upload=" + upload + "]";
+        + attendance + ", upload=" + upload + ", member=" + member + "]";
   }
   
   public int getStudyNo() {
@@ -72,5 +73,10 @@ public class StudyMember extends Member {
   public void setUpload(int upload) {
     this.upload = upload;
   }
-  
+  public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
 }

@@ -27,6 +27,11 @@
 		<result column="leader" property="leader" />
 		<result column="atn_pct" property="attendance" />
 		<result column="arch_cnt" property="upload" />
+		
+		<association property="member" javaType="member">
+			<id column="members_id" property="no" />
+			<result column="members_nick" property="nickName" />
+		</association>
 	</resultMap>
 
 	<!-- 스터디 구성원들 가져오기 -->
@@ -37,6 +42,7 @@
 		m.birth,
 		m.name,
 		m.photo,
+		m.nick_name as members_nick,
 		sm.atn_pct
 		from
 		sms_std_member sm

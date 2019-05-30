@@ -703,6 +703,7 @@ insert into sms_std_board(std_id, member_id, title, cont) values(1, 6, '게시�
 insert into sms_std_board(std_id, member_id, title, cont) values(1, 7, '게시판작성16', '내용작성16');
 insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항3", "내용3");
 insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성1', '내용작성1');
+insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항 최상단 테스트", "공지사항입니다.");
 
 
 
