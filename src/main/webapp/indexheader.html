@@ -121,13 +121,20 @@
  </nav>
 </div>
 
-
 <!-- 카테고리 소분류 -->
 <script id="myStudy-template" type="text/x-handlebars-template">
  <div class="dropdown-divider"></div>
 {{#each myStudyList}}
-<a class="dropdown-item myStudy-btn" href="/studyboot/html/mystudy/index.html?no={{no}}">{{name}}</a>
+<a href="/studyboot/html/mystudy/index.html?no={{no}}" class="dropdown-item myStudy-btn">
+{{name}}</a>
 {{/each}}
 </script>
 
 <script src="/studyboot/node_modules/handlebars/dist/handlebars.min.js"></script>
+
+<script>
+
+$('.dropdown-item').click((e) => {
+  alert("ok");
+});
+</script>
