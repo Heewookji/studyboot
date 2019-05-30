@@ -108,6 +108,10 @@ function loadLoginUser() {
         $("#std-dropdown").append("<div class=\"dropdown-divider\"></div>" +
         "<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
       }
+      
+      $('.my-study').click((e) => {
+        window.location.href = 'html/mystudy/index.html?no=' + $(e.target).attr('my-study-no');
+      });
 
     } else {
       loginState.addClass('std-invisible');
