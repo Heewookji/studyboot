@@ -110,7 +110,7 @@ function loadLoginUser() {
       }
       
       $('.my-study').click((e) => {
-        window.location.href = 'html/mystudy/index.html?no=' + $(e.target).attr('my-study-no');
+        window.location.href = '../mystudy/index.html?no=' + $(e.target).attr('my-study-no');
       });
 
     } else {
