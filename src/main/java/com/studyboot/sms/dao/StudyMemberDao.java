@@ -1,6 +1,7 @@
 package com.studyboot.sms.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.studyboot.sms.domain.StudyMember;
 
 public interface StudyMemberDao {
@@ -17,4 +18,5 @@ public interface StudyMemberDao {
   int delete(int no);
   int countAll();
   List<Integer> findStudyNoByMemberNo(int no);
+  boolean findStudyMemberLeaderByMap(Map<String, Object> map);
 }

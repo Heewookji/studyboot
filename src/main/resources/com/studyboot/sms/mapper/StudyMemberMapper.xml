@@ -63,6 +63,17 @@
 		member_id = #{no}
 	</select>
 
+   <!-- 스터디 장인지 판단 -->
+  <select id="findStudyMemberLeaderByMap" resultType="boolean" 
+  parameterType="map">
+    select
+      leader
+    from
+      sms_std_member
+    where
+      member_id = #{loginUser} and std_id= #{studyNo}
+  </select>
+
 </mapper>
 
 

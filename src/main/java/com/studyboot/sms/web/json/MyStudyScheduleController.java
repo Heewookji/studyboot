@@ -12,43 +12,66 @@ import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Schedule;
 import com.studyboot.sms.service.MyStudyScheduleService;
+import com.studyboot.sms.service.StudyMemberService;
 
 @RestController("json/MyStudyScheduleController")
 @RequestMapping("/json/mystudyschedule")
 public class MyStudyScheduleController {
 
   @Autowired MyStudyScheduleService myStudyScheduleService;
+  @Autowired StudyMemberService studyMemberService;
 
   @PostMapping("add")
-  public Object add(Schedule schedule, HttpSession session, @RequestParam int no) {
-    System.out.println("컨트롤러: " + schedule);
-    
-    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
-    schedule.setMemberNo(loginUser.getNo());
-    // 스터디 번호도 변
-    schedule.setStudyNo(1);
-    
-    
+  public Object add(Schedule schedule, HttpSession session) {
     HashMap<String,Object> content = new HashMap<>();
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    // loginUser.getNo() 로그인한 유저의 유저넘버를 schedule 객체에 담는다.
+    schedule.setMemberNo(loginUser.getNo());
+
+    // 리더 판만을 위한 코드 (34줄 ~ 48줄)
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", schedule.getStudyNo());
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+
+    // 리더 유무 판단. 
+    if (leaderYesOrNo == false) {
+
+      content.put("status", "스터디 장만 일정을 등록할 수 있습니다.");
+      return content;
+    }
+
     try {
       myStudyScheduleService.add(schedule);
-      content.put("status", "success");
+      content.put("status", "등록이 완료 되었습니다.");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
+
     return content;
   }
 
   @GetMapping("list")
-  public Object list() {
+  public Object list(HttpSession session, @RequestParam int no) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
 
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", no);
+    
     // 데이터 베이스에서 공간에 대한 정보 리스트를 받아온다.
-    List<Schedule> schedule = myStudyScheduleService.list();
-
+    List<Object> schedule = myStudyScheduleService.list(no);
+   
+    // 배열 마지막방에 리더 유무 판단을 위해 boolean값을 넣는다.
+    schedule.add(studyMemberService.findStudyMemberLeader(studyAndUserNo));
 
     System.out.println("컨트롤러 list: " + schedule);
-
+    System.out.println("리더입니까?: " + schedule.get(schedule.size()-1));
+    
     return schedule;
   }
 
@@ -90,11 +113,23 @@ public class MyStudyScheduleController {
     }
     return content;
   }
+
+
+
+  @GetMapping("leader")
+  public Object leader(HttpSession session, @RequestParam int no) {
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", no);
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+
+    return null;
+
+  }
+
 }
-
-
-
-
-
 
 

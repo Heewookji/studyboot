@@ -6,7 +6,7 @@ import com.studyboot.sms.domain.Schedule;
 public interface MyStudyScheduleService {
   
   int add(Schedule schedule);
-  List<Schedule> list();
+  List<Object> list(int no);
   Schedule get(int no);
   int delete(int no);
   int update(Schedule schedule);

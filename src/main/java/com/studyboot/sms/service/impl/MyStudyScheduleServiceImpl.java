@@ -22,9 +22,9 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
   }
   
   @Override
-  public List<Schedule> list() {
+  public List<Object> list(int no) {
 
-    return scheduleDao.findAll();
+    return scheduleDao.findAll(no);
   }
   
   @Override

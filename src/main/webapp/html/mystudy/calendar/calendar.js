@@ -20,17 +20,29 @@ document.addEventListener('DOMContentLoaded', function() {
       //$(document.body).trigger('eventClick'); // 디테일 모달을 띄우기 위한 트리거
       loadDetail(info.event.id);
     },
+    color: 'red',
     dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
       window.dateStr = info.dateStr;
       //alert(window.dateStr);
       $(document.body).trigger('dateClick');
     },
-    events:  '../../app/json/mystudyschedule/list'
+    events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1],
+    eventSourceSuccess: function(content, xhr) {
+      window.calendarContent = content;
+      content.getJSON(content.size()-1);
+      console.log(content);
+      return content.eventArray;
+    }
+    
+//    events: function(info, successCallback, failureCallback) {
+//      '../../app/json/mystudyschedule/list'
+//    },
+//    color: 'yellow',   // an option!
+//    textColor: 'black' // an option!
+    
   });
   calendar.render();
 });
-
-/* ------------------- */
 
 //날짜를 눌렀을때 일정추가 모달 버튼이 눌려서, 일정을 추가할 수 있고, 선택한 날짜 자동으로 입력됨.
 $(document.body).bind('dateClick', () => {
@@ -52,7 +64,6 @@ $(document.body).bind('dateClick', () => {
 
 //일정을 등록하는 버튼
 $('#schedule-add-btn').click(() => {
-
   if($('#schedule-title').val().length === 0) {
     alert("일정 제목을 입력해 주세요.");
     return;
@@ -72,14 +83,13 @@ $('#schedule-add-btn').click(() => {
     type : "post",
     data : {
       title: $('#schedule-title').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
-      studyNo: 1,
+      studyNo: location.href.split('=')[1],
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
       memo: $('#schedule-memo').val()
     },
     success : function(data) {
-      //data.title 이 null이면 실패하도록 하고싶음..
-      alert("일정이 등록 되었습니다.");
+      alert(data.status);
       location.reload();
       //$(calendarEl).fullCalendar("refetchEvents");
     },
@@ -189,3 +199,14 @@ function resetForm() {
     $('#schedul-submit-form')[0].reset();
   };
 
+  
+  
+  // 리더값을 받아오기 위한 리스트.
+  function loadList() {
+
+    $.getJSON('../../app/json/mystudyschedule/update',
+      function(obj) {
+
+    });
+
+}

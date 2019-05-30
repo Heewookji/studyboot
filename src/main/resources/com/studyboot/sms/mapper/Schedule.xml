@@ -34,7 +34,7 @@
       #{memo})
   </insert>
 
-  <select id="findAll" resultMap="scheduleMap">
+  <select id="findAll" resultMap="scheduleMap" parameterType="int">
     select
       std_schdl_id,
       std_id,
@@ -46,6 +46,8 @@
       memo
     from
       sms_std_schdl
+    where std_id = #{value}
+      
   </select>
 
   <select id="findByNo" resultMap="scheduleMap" parameterType="int">

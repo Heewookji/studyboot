@@ -1,6 +1,7 @@
 package com.studyboot.sms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
@@ -40,7 +41,11 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return memberList;
   }
 
-  
+  @Override
+  public boolean findStudyMemberLeader(Map<String, Object> map) {
+
+    return studyMemberDao.findStudyMemberLeaderByMap(map);
+  }
   
   
 }
