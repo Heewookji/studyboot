@@ -52,10 +52,9 @@
 
   <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance" data-header-fix-moment="300"></header>
 
-    <!-- Portfolio Single Item -->
-    <section class="container g-pt-100 g-pb-70" id="spaceDetail">
-      <div class="row g-mb-70">
-        <div class="col-lg-8 g-mb-30">
+  <section class="container g-pb-70" id="spaceDetail">
+    <div class="row g-mb-70">
+        <div class="col-lg-8 g-mb-30 img">
           <!-- Carousel Images -->
           <div class="js-carousel g-mb-30" data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-40 g-height-40 g-font-size-default g-color-gray-dark-v5 g-bg-white g-color-white--hover g-bg-primary--hover rounded" data-arrow-left-classes="fa fa-angle-left g-left-20"
           data-arrow-right-classes="fa fa-angle-right g-right-20">
@@ -66,8 +65,8 @@
           <!-- End Carousel Images -->
         </div>
 
-    <div id="spaceInfo">
-      <div class="col-lg-4 g-mb-30">
+      <div id="spaceInfo">
+        <div class="col-lg-4 g-mb-30">
           <div class="mb-5">
             <h2 class="g-color-black mb-1" id="spaceName"></h2>
             <span class="d-block lead mb-4" id="tel"></span>
@@ -76,7 +75,7 @@
           
           <!-- Conv -->
           <div class="mb-5">
-            <h3 class="h5 g-color-black mb-3">편의시설 :</h3>
+            <h3 class="h5 g-color-black mb-3">편의시설</h3>
             <div id="convDiv"></div>
           </div>
           <!-- End Conv -->
@@ -94,76 +93,47 @@
           </div>
         </div>
       </div>
-      
-      </div>
-
-    <a class="btn u-btn-primary" href="#review-add-modal" data-modal-target="#review-add-modal" data-modal-effect="fadein">리뷰 등록</a>
-      
-    <div id="spaceReview"></div>
-
+    </div>
+    
+  <div id="spaceReview">
+   <div class="d-flex justify-content-end">
+   <a id="review-add-btn" class="btn u-btn-primary" href="#" data-modal-target="#review-add-modal" data-modal-effect="fadein">리뷰 등록</a>
+   </div>
+  </div>
+  
   </section>
-    <!-- End Portfolio Single Item -->
-
+  
   <!-- 후기 등록 폼 -->
   <div id="review-add-modal" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20" style="display: none;">
-    <button type="button" class="close" onclick="Custombox.modal.close();">
-      <i class="hs-icon hs-icon-close"></i>
-    </button>
-    <h4 class="g-mb-20">리뷰 등록</h4>
-    <div class="modal-body">
+  <button type="button" class="close" onclick="Custombox.modal.close();">
+    <i class="hs-icon hs-icon-close"></i>
+  </button>
+    <h4 class="g-mb-15">리뷰 등록</h4>
       <form action="add/review">
-        <div class="form-group d-flex align-items-center justify-content-between mb-0">
-          <label for="rating-form" class="mb-0">별점</label>
-          <ul id="rating-form" class="js-rating u-rating-v1 g-font-size-17 g-color-gray-light-v3 m  b-0" data-hover-classes="g-color-primary">
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-          </ul>
+        <div class="form-group d-flex align-items-center">
+          <label>별점</label>
+            <fieldset class="rate" id="rating-form">
+              <input type="radio" id="rating10" name="rating"/><label id="star5" for="rating10"></label>
+              <input type="radio" id="rating9" name="rating"/><label id="star4.5" class="half" for="rating9"></label>
+              <input type="radio" id="rating8" name="rating"/><label id="star4" for="rating8"></label>
+              <input type="radio" id="rating7" name="rating"/><label id="star3.5" class="half" for="rating7"></label>
+              <input type="radio" id="rating6" name="rating"/><label id="star3" for="rating6"></label>
+              <input type="radio" id="rating5" name="rating"/><label id="star2.5" class="half" for="rating5"></label>
+              <input type="radio" id="rating4" name="rating"/><label id="star2" for="rating4"></label>
+              <input type="radio" id="rating3" name="rating"/><label id="star1.5" class="half" for="rating3"></label>
+              <input type="radio" id="rating2" name="rating"/><label id="star1" for="rating2"></label>
+              <input type="radio" id="rating1" name="rating"/><label id="star0.5" class="half" for="rating1"></label>
+            </fieldset>
         </div>
         <div class="form-group">
           <label for="review-form" class="col-form-label">후기</label>
           <textarea class="form-control" id="review-form"></textarea>
         </div>
       </form>
-    </div>
-    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" id="update-btn">수정</button>
       <button type="button" class="btn btn-primary" id="add-btn">등록</button>
-    </div>
   </div>
   <!-- 후기 등록 폼 -->
-  
-  <!-- 후기 수정 폼 -->
-  <div id="review-update-modal" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20" style="display: none;">
-    <button type="button" class="close" onclick="Custombox.modal.close();">
-      <i class="hs-icon hs-icon-close"></i>
-    </button>
-    <h4 class="g-mb-20">리뷰 수정</h4>
-    <div class="modal-body">
-      <form action="add/review">
-        <div
-          class="form-group d-flex align-items-center justify-content-between mb-0">
-          <label for="rating-update-form" class="mb-0">별점</label>
-          <ul id="rating-update-form" class="js-rating u-rating-v1 g-font-size-17 g-color-gray-light-v3 mb-0" data-hover-classes="g-color-primary">
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-          </ul>
-        </div>
-        <div class="form-group">
-          <label for="review-update-form" class="col-form-label">후기</label>
-          <textarea class="form-control" id="review-update-form"></textarea>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" id="update-btn">등록</button>
-    </div>
-  </div>
-  <!-- 후기 수정 폼 -->
   
   <script id="div-tag" type="text/x-handlebars-template">
 {{#each detail.tags}}
@@ -202,20 +172,22 @@
 
 <script id="div-spaceReview" type="text/x-handlebars-template">
 {{#each detail.spaceReview}}
-      <div class="media g-mb-30">
+      <div class="reviewDetail media g-mb-30">
         <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-20" src="../../Unify/assets/img-temp/100x100/img7.jpg" alt="Image Description">
         <div class="media-body g-brd-around g-brd-gray-light-v4 g-pa-30">
           <div class="g-mb-15">
             <h5 class="d-flex justify-content-between align-items-center h5 g-color-gray-dark-v1 mb-0">
               <span class="d-block g-mr-10">{{nickName}}</span>
             </h5>
-            <span class="g-color-gray-dark-v4 g-font-size-12">2019.05.07 17:30</span>
+            <span class="g-color-gray-dark-v4 g-font-size-12">{{registeredDate}}</span>
           </div>
           <p>{{review}}</p>
         </div>
       </div>
-      <a class="u-tags-v1 g-font-size-12 g-brd-around g-brd-gray-light-v4 g-bg-primary--hover g-brd-primary--hover g-color-black-opacity-0_8 g-color-white--hover rounded g-py-6 g-px-15" href="#">수정</a>
-      <a class="u-tags-v1 g-font-size-12 g-brd-around g-brd-gray-light-v4 g-bg-primary--hover g-brd-primary--hover g-color-black-opacity-0_8 g-color-white--hover rounded g-py-6 g-px-15" href="#">삭제</a>
+      <div class="d-flex justify-content-end">
+        <a class="review-update-btn btn u-btn-primary" href="#" data-modal-target="#review-add-modal" data-modal-effect="fadein" review-no="{{no}}">수정</a>
+        <a class="delete-review u-tags-v1 g-font-size-12 g-brd-around g-brd-gray-light-v4 g-bg-primary--hover g-brd-primary--hover g-color-black-opacity-0_8 g-color-white--hover rounded g-py-6 g-px-15" review-no="{{no}}">삭제</a>
+      </div>
 {{/each}}
 </script>
 
