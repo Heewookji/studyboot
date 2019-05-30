@@ -84,8 +84,8 @@
 					#{member_id}
 				</foreach>
 		</if>
-		order by
-	    c.std_id desc
+		order by 
+        ntc desc, std_board_id desc
 	    <if test="size != null and rowNo != null">
 		limit #{rowNo}, #{size}
 	</if>

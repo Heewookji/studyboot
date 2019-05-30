@@ -4,10 +4,7 @@ tbody,
 prevPageLi,
 nextPageLi,
 param = location.href.split('?')[1],
-//no = param.split('=')[1];
-// 위에 코드가 맞는 거!! 임시로 no 값 1 넣어놨습니다.
-// 원래 클릭하면 스터디 번호 받아와서 값에 넣어줘야함!
-no = 1,
+no = param.split('=')[1],
 currSpan, 
 currCls,
 keyword,
@@ -154,7 +151,13 @@ $('#std-board').click(function() {
   
 });
 
+$('#board-ntc').click((e) => {
+  e.preventDefault();
+  boardList(pageNo + 1, $("#currCls").html(), $("#board-search").val());
+});
 
+
+// 스터디 게시판
 $(document.body).bind('loaded-board', () => {
   
   $('#prevPage > a').click((e) => {
@@ -167,7 +170,6 @@ $(document.body).bind('loaded-board', () => {
       boardList(pageNo + 1, $("#currCls").html(), $("#board-search").val());
   });
   
-  // 스터디 게시판
   $('#bothClsPage').click((e) => {
     e.preventDefault();
     $("#currCls").html("전체");

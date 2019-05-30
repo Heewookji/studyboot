@@ -189,26 +189,6 @@
                   <span class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="icon-options-vertical g-pos-rel g-top-1"></i>
                     </span>
-                  <div class="dropdown-menu dropdown-menu-right rounded-0 g-mt-10">
-                    <a class="dropdown-item g-px-10" href="#">
-                      <i class="icon-layers g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Projects
-                    </a>
-                    <a class="dropdown-item g-px-10" href="#">
-                      <i class="icon-wallet g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Wallets
-                    </a>
-                    <a class="dropdown-item g-px-10" href="#">
-                      <i class="icon-fire g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Reports
-                    </a>
-                    <a class="dropdown-item g-px-10" href="#">
-                      <i class="icon-settings g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> Users Setting
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a class="dropdown-item g-px-10" href="#">
-                      <i class="icon-plus g-font-size-12 g-color-gray-dark-v5 g-mr-5"></i> View More
-                    </a>
-                  </div>
                 </div>
               </div>
               <!-- End Panel Header -->
@@ -222,13 +202,10 @@
                     </div>
                     <div class="media-body">
                       <div class="d-flex justify-content-between">
-                        <h5 class="h6 g-font-weight-600 g-color-black">Unify Template</h5>
+                        <h5 class="h6 g-font-weight-600 g-color-black">스터디장</h5>
                         <span class="small text-nowrap g-color-blue">2 min ago</span>
                       </div>
-                      <p>Curabitur hendrerit dolor sit amet consectetur. Adipiscing elitut leosit amet, consectetur eleifend.</p>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">HTML</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">AnhularJS</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">PHP</span>
+                      <p>스터디 관련 공지사항 (필독하세요!!)</p>
                     </div>
                   </li>
 
@@ -262,6 +239,22 @@
                       <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">ReactJS</span>
                       <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">CSS</span>
                       <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">HTML</span>
+                    </div>
+                  </li>
+                  
+                  <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
+                    <div class="d-flex g-mt-2 g-mr-15">
+                      <img class="g-width-40 g-height-40 rounded-circle" src="/studyboot/Unify/assets/img-temp/100x100/img1.jpg" alt="Image Description">
+                    </div>
+                    <div class="media-body">
+                      <div class="d-flex justify-content-between">
+                        <h5 class="h6 g-font-weight-600 g-color-black">Unify Template</h5>
+                        <span class="small text-nowrap g-color-blue">2 min ago</span>
+                      </div>
+                      <p>Curabitur hendrerit dolor sit amet consectetur. Adipiscing elitut leosit amet, consectetur eleifend.</p>
+                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">HTML</span>
+                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">AnhularJS</span>
+                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">PHP</span>
                     </div>
                   </li>
                 </ul>
@@ -355,28 +348,59 @@
     </div>
   </div>
 </div>
-
 <footer id="js-footer"> </footer>
+
+<!-- 
+ <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+ <div class="media">
+ <div class="d-flex g-mt-2 g-mr-15">
+ <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}" alt="Image Description">
+ </div>
+ <div class="media-body">
+ <p class="m-0"><strong>{{name}}</strong> saved your pin</p>
+ <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
+ </div>
+ </div>
+ </li>
+ -->
+
+<!-- 
+ <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
+ -->
 
 <!-- 스터디원 리스트 -->
 <script id="study-member" type="text/x-handlebars-template">
 {{#each list}}
  <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
-                      <div class="media">
-                        <div class="d-flex g-mt-2 g-mr-15">
-                          <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}" alt="Image Description">
-                        </div>
-                        <div class="media-body">
-                          <p class="m-0"><strong>{{name}}</strong> saved your pin</p>
-                          <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
-                        </div>
-                      </div>
-                    </li>
+ <div class="media">
+ <div class="d-flex g-mt-2 g-mr-15">
+ <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}" alt="Image Description">
+ </div>
+ <div class="media-body">
+ <p style="margin-top: 10px;"><strong>{{name}}</strong>({{member.nickName}})</p>
+ </div>
+ </div>
+ </li>
 {{/each}}
 </script>
 
 <script id="study-board" type="text/x-handlebars-template">
 {{#each list}}
+{{#if ntc}}
+<tr>
+  <th><span style="color: red;">
+  <i class="et-icon-megaphone"></i></span></th>
+  <td align="center">{{title}}</td>
+  <td>
+<a href='#' class='sspctForm-btn'
+ data-toggle="modal" 
+data-target="#addModal"
+data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a>
+</td>
+<td align="center">{{date}}</td>
+<td align="center">{{viewCount}}</td>
+</tr>
+{{else}}
 <tr>
   <th scope='row'>{{no}}</th>
   <td align="center">{{title}}</td>
@@ -389,6 +413,8 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
 <td align="center">{{date}}</td>
 <td align="center">{{viewCount}}</td>
 </tr>
+{{/if}}
+
 {{/each}}
 </script>
 
