@@ -175,7 +175,9 @@
         <div class="col-4 g-mb-20">
          <input
           class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
-          type="text" placeholder="인증번호" id="emailNo" data-title="email">
+          type="text" placeholder="인증번호" id="emailNo"
+          data-placement="bottom" title="다시 요청하세요!"
+          data-trigger="hover focus">
         </div>
        </div>
 
@@ -191,13 +193,21 @@
           <div class="input-group-append">
            <button type="button"
             class="btn g-bg-primary g-color-white g-rounded-right--10 "
-            id="phone-btn" disabled>휴대폰 인증</button>
+            id="phone-btn" disabled>인증</button>
           </div>
          </div>
         </div>
+        <div class="col-4 g-mb-20">
+         <input
+          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 rounded g-py-15 g-px-15"
+          type="text" placeholder="인증번호" id="phoneNo"
+          data-placement="bottom" title="다시 요청하세요!"
+          data-trigger="hover focus">
+        </div>
        </div>
 
-       <div class="row">
+       <!-- 생년월일 만들은건데 그냥 인풋 텍스트로 받기로 했지만 다른곳에서 쓸까봐 안지움  -->
+       <!--      <div class="row">
        
          <div class="col-6 g-mb-20">
          <input
@@ -266,24 +276,37 @@
           <option value="d31">31</option>
          </select>
         </div>
-       </div>
+       </div> -->
+
+       <div class="row">
+        <div class="col-5 g-mb-20">
+         <input
+          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-py-15 g-px-15"
+          type="text" placeholder="이름" id="name">
+        </div>
+        <div class="col g-mb-20">
+         <input
+          class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-py-15 g-px-15"
+          type="date" placeholder="생년월일 (ex)1991-01-01" id="birth">
+        </div>
+        
+        </div>
 
 
-       <div class="mb-1 g-pb-30">
-        <label
-         class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-13 g-pl-25 mb-2">
-         <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-         type="checkbox">
-         <div
-          class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
-          <i class="fa" data-check-icon="&#xf00c"></i>
-         </div> <a href="#">이용 약관</a>에 대해 동의합니다.
-        </label>
-       </div>
+        <div class="mb-1 g-pb-30">
+         <label
+          class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-13 g-pl-25 mb-2">
+          <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox">
+          <div
+           class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+           <i class="fa" data-check-icon="&#xf00c"></i>
+          </div> <a href="#">이용 약관</a>에 대해 동의합니다.
+         </label>
+        </div>
 
-       <button class="btn btn-block u-btn-primary rounded g-py-13"
-        type="button">시작하기</button>
-
+        <button class="btn btn-block u-btn-primary rounded g-py-13"
+         type="button">시작하기</button>
       </form>
       <!-- End Form -->
      </div>
@@ -352,8 +375,9 @@
  <script src="/studyboot/Unify/assets/js/components/hs.go-to.js"></script>
 
 
-<!--  핸드폰 인증 api -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+ <!--  핸드폰 인증 api -->
+ <script type="text/javascript"
+  src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
  <!-- JS Custom -->
  <script src="/studyboot/Unify/assets/js/custom.js"></script>

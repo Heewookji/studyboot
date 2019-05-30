@@ -3,7 +3,8 @@ phoneNo,
 emailInit = true,
 phoneInit = true,
 nickChecked,
-emailCountDownFunction
+emailCountDownFunction,
+phoneCountDownFunction
 ;
 
 //js와 css 의 초기화 작업이다.
@@ -40,6 +41,10 @@ $(window).on('resize', function () {
 //이메일 버튼을 눌렀을때, 카운트다운 실행, 인증번호 확인 한다.
 $("#email-btn").click((e) => {
 
+    //다시 요청하세요 지우기
+    $('#emailNo').tooltip('disable');
+    $('#emailNo').tooltip('hide');
+
     clearInterval(emailCountDownFunction);
     emailCountDown();
 
@@ -48,12 +53,26 @@ $("#email-btn").click((e) => {
 	emailNo = obj.id;
 
     });
+
+    //발송됐다는 것을 알려주자!
+    $("#email-btn").attr("data-toggle","tooltip");
+    $("#email-btn").attr("data-trigger","hover focus");
+    $("#email-btn").attr("data-placement","bottom");
+    $("#email-btn").attr("title","발송되었습니다!");
+    $('#email-btn').tooltip('enable');
+    $('#email-btn').tooltip('show');
+
+
     //처음에만 한번 등록
     if(emailInit){
+
+	//이메일 인증번호 확인!
 	$( "#emailNo" ).change(function() {
 	    if($("#emailNo").val() == emailNo){
 		$("#emailNo").removeClass("is-invalid");
 		$("#emailNo").addClass("is-valid");
+		$('#email-btn').tooltip('disable');
+		$('#email-btn').tooltip('hide');
 	    } else{
 		$("#emailNo").removeClass("is-valid");
 		$("#emailNo").addClass("is-invalid");
@@ -66,50 +85,60 @@ $("#email-btn").click((e) => {
 //핸드폰인증 버튼을 눌렀을때 api 인증 한다.
 $("#phone-btn").click((e) => {
 
-    IMP.request_pay({
-	    pg : 'danal', // version 1.1.0부터 지원.
-	    pay_method : 'phone',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:결제테스트',
-	    amount : 1400,
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '구매자이름',
-	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
-	    buyer_postcode : '123-456',
-	    m_redirect_url : 'http://localhost:8080/studyboot/html/auth/register.html'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	        var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
-	        msg += '카드 승인번호 : ' + rsp.apply_num;
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	    }
-	    alert(msg);
-	});
+    //다시 요청하세요 지우기
+    $('#phoneNo').tooltip('disable');
+    $('#phoneNo').tooltip('hide');
 
+
+    clearInterval(phoneCountDownFunction);
+    phoneCountDown();
+
+    $.getJSON('/studyboot/app/json/sms/send?no=' + $("#phone").val(), function(obj) {
+
+	phoneNo = obj.id;
+    });
+
+    //발송됐다는 것을 알려주자!
+    $("#phone-btn").attr("data-toggle","tooltip");
+    $("#phone-btn").attr("data-trigger","hover focus");
+    $("#phone-btn").attr("data-placement","bottom");
+    $("#phone-btn").attr("title","발송되었습니다!");
+    $('#phone-btn').tooltip('enable');
+    $('#phone-btn').tooltip('show');
+
+
+
+    //처음에만 한번 등록
+    if(phoneInit){
+	$( "#phoneNo" ).change(function() {
+	    if($("#phoneNo").val() == phoneNo){
+		$("#phoneNo").removeClass("is-invalid");
+		$("#phoneNo").addClass("is-valid");
+		$('#phone-btn').tooltip('disable');
+		$('#phone-btn').tooltip('hide');
+	    } else{
+		$("#phoneNo").removeClass("is-valid");
+		$("#phoneNo").addClass("is-invalid");
+	    }
+	});
+    }
+    phoneInit = false;
 });
 
 
 //닉네임 체크
 $( "#nickName" ).keyup(function(){
-    var init;
 
     if(nickCheck($("#nickName").val()) == true){
 	$( "#nickCheck-btn").prop("disabled",false);
 	$('#nickName').tooltip('disable');
 	$('#nickName').tooltip('hide');
     } else{
-	if(init != 1){
-	    $("#nickName").attr("data-toggle","tooltip");
-	    $("#nickName").attr("data-trigger","hover focus");
-	    $("#nickName").attr("data-placement","bottom");
-	    $("#nickName").attr("title","4~10자의 한글, 영문, 숫자만 사용할 수 있습니다");
-	}
+	$("#nickName").attr("data-toggle","tooltip");
+	$("#nickName").attr("data-trigger","hover focus");
+	$("#nickName").attr("data-placement","bottom");
+	$("#nickName").attr("title","4~10자의 한글, 영문, 숫자만 사용할 수 있습니다");
+
 	$('#nickName').tooltip('enable');
 	$('#nickName').tooltip('show');
 	$( "#nickCheck-btn").prop("disabled",true);
@@ -148,17 +177,14 @@ $( "#password" ).keyup(function(){
 
 //입력시 비번일치 체크
 $( "#passwordConfirm" ).keyup(function(){
-    var init;
     if(equalPassword($( "#passwordConfirm" ).val(), $( "#password" ).val()) == true){
 	$('#passwordConfirm').tooltip('disable');
 	$('#passwordConfirm').tooltip('hide');
     } else{
-	if(init != 1){
-	    $("#passwordConfirm").attr("data-toggle","tooltip");
-	    $("#passwordConfirm").attr("data-trigger","hover focus");
-	    $("#passwordConfirm").attr("data-placement","bottom");
-	    $("#passwordConfirm").attr("title","비밀번호가 일치하지 않습니다");
-	}
+	$("#passwordConfirm").attr("data-toggle","tooltip");
+	$("#passwordConfirm").attr("data-trigger","hover focus");
+	$("#passwordConfirm").attr("data-placement","bottom");
+	$("#passwordConfirm").attr("title","비밀번호가 일치하지 않습니다");
 	$('#passwordConfirm').tooltip('enable');
 	$('#passwordConfirm').tooltip('show');
     }
@@ -197,6 +223,38 @@ $( "#phone" ).keyup(function(){
 	$("#phone-btn").prop("disabled", true);
     }
 });
+
+
+//입력시 생년월일 체크
+$( "#birth" ).keyup(function(){
+    if(checkBirth($( "#birth" ).val()) == true){
+	$('#birth').tooltip('disable');
+	$('#birth').tooltip('hide');
+    } else{
+	$("#birth").attr("data-toggle","tooltip");
+	$("#birth").attr("data-trigger","hover focus");
+	$("#birth").attr("data-placement","bottom");
+	$("#birth").attr("title","생년월일 양식에 맞게 적어주세요");
+	$('#birth').tooltip('enable');
+	$('#birth').tooltip('show');
+    }
+});
+
+//입력시 이름 체크
+$( "#name" ).keyup(function(){
+    if(checkName($( "#name" ).val()) == true){
+	$('#name').tooltip('disable');
+	$('#name').tooltip('hide');
+    } else{
+	$("#name").attr("data-toggle","tooltip");
+	$("#name").attr("data-trigger","hover focus");
+	$("#name").attr("data-placement","bottom");
+	$("#name").attr("title","이름 양식에 맞게 적어주세요");
+	$('#name').tooltip('enable');
+	$('#name').tooltip('show');
+    }
+});
+
 
 
 
@@ -284,8 +342,24 @@ function checkEmail(email){
 
 function checkPhone(phone){
     var re = /^\d{3}-\d{3,4}-\d{4}$/;
-
     if (phone == '' || !re.test(phone)) {
+	return false;
+    }
+    return true;
+}
+
+function checkBirth(birth){
+    var re = /^(\d+)[/|\-|\s]+[0|1](\d)[/|\-|\s]+([0|1|2|3]\d)$/;
+    if (birth == '' || !re.test(birth)) {
+	return false;
+    }
+    return true;
+}
+
+
+function checkName(name){
+    var re = /^[가-힣]{2,4}$/;
+    if (name == '' || !re.test(name)) {
 	return false;
     }
     return true;
@@ -312,8 +386,51 @@ function emailCountDown(){
 
 	if (distance < 0) {
 	    $("#emailNo").attr("placeholder", "시간초과!");
+
+	    $('#email-btn').tooltip('disable');
+	    $('#email-btn').tooltip('hide');
+
+	    $('#emailNo').tooltip('enable');
+	    $('#emailNo').tooltip('show');
 	    emailNo = null;
 	    clearInterval(emailCountDownFunction);
+	}
+    }, 1000);
+
+}
+
+
+function phoneCountDown(){
+    var future = new Date();
+    future.setMinutes(future.getMinutes()+3);
+    var countDownDate = future.getTime();
+    // Update the count down every 1 second
+
+    phoneCountDownFunction = setInterval(function() {
+	// Get today's date and time
+	var now = new Date().getTime();
+	// Find the distance between now and the count down date
+	var distance = countDownDate - now;
+	// Time calculations for days, hours, minutes and seconds
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	if(seconds < 10){
+	    $("#phoneNo").attr("placeholder", "0" +minutes + " : " + "0" + seconds);
+	} else{
+	    $("#phoneNo").attr("placeholder", "0" +minutes + " : " + seconds);
+	}
+
+	if (distance < 0) {
+	    $("#phoneNo").attr("placeholder", "시간초과!");
+
+	    $('#phone-btn').tooltip('disable');
+	    $('#phone-btn').tooltip('hide');
+
+	    $('#phoneNo').tooltip('enable');
+	    $('#phoneNo').tooltip('show');
+
+	    phoneNo = null;
+	    clearInterval(phoneCountDownFunction);
 	}
     }, 1000);
 
