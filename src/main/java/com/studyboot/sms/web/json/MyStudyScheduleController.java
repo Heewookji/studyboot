@@ -2,12 +2,14 @@ package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Schedule;
 import com.studyboot.sms.service.MyStudyScheduleService;
 
@@ -18,8 +20,15 @@ public class MyStudyScheduleController {
   @Autowired MyStudyScheduleService myStudyScheduleService;
 
   @PostMapping("add")
-  public Object add(Schedule schedule) {
+  public Object add(Schedule schedule, HttpSession session, @RequestParam int no) {
     System.out.println("컨트롤러: " + schedule);
+    
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+    schedule.setMemberNo(loginUser.getNo());
+    // 스터디 번호도 변
+    schedule.setStudyNo(1);
+    
+    
     HashMap<String,Object> content = new HashMap<>();
     try {
       myStudyScheduleService.add(schedule);

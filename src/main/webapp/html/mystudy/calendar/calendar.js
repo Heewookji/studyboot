@@ -73,10 +73,9 @@ $('#schedule-add-btn').click(() => {
     data : {
       title: $('#schedule-title').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
       studyNo: 1,
-      memberNo: 2,
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
-      memo: $('#schedule-memo').val(),
+      memo: $('#schedule-memo').val()
     },
     success : function(data) {
       //data.title 이 null이면 실패하도록 하고싶음..
@@ -167,7 +166,7 @@ $('#schedule-update-btn').click(() => {
       memberNo: 2,
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
-      memo: $('#schedule-memo').val(),
+      memo: $('#schedule-memo').val()
     },
     success : function(data) {
       //data.title 이 null이면 실패하도록 하고싶음..
