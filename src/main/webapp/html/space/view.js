@@ -70,9 +70,42 @@ function loadDetail(no) {
 		$(trSpaceReviewGenerator(obj)).appendTo($(spaceReview));
 
 		$(document.body).trigger('loaded-detail'); // trigger가 'loaded-detail'을 실행 시킨다.
-		// tirgger와 bind는 세트!!
+		// trigger와 bind는 세트!!
 	});
 }
+
+$('#review-add-btn').click(() => {
+	$('#star0.5').click( () => {
+		ratingForm.attr("data-value", "0.5");
+	});
+	$('#star1').click( () => {
+		ratingForm.attr("data-value", "1");
+	});
+	$('#star1.5').click( () => {
+		ratingForm.attr("data-value", "1.5");
+	});
+	$('#star2').click( () => {
+		ratingForm.attr("data-value", "2");
+	});
+	$('#star2.5').click( () => {
+		ratingForm.attr("data-value", "2.5");
+	});
+	$('#star3').click( () => {
+		ratingForm.attr("data-value", "3");
+	});
+	$('#star3.5').click( () => {
+		ratingForm.attr("data-value", "3.5");
+	});
+	$('#star4').click( () => {
+		ratingForm.attr("data-value", "4");
+	});
+	$('#star4.5').click( () => {
+		ratingForm.attr("data-value", "4.5");
+	});
+	$('#star5').click( () => {
+		ratingForm.attr("data-value", "5");
+	});
+});
 
 //$('#add-btn').click( function() {
 $('#add-btn').click( () => {
@@ -81,9 +114,8 @@ $('#add-btn').click( () => {
 		url : "../../app/json/space/add/review",
 		type : "POST",
 		data : {
-			memberNo: 3, // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
 			spaceNo: spaceNo,
-			rating: $(ratingForm).val(), // rating-form 태그의 값을 가져와서 담는다.
+			rating: $(ratingForm).attr("data-value"), // rating-form 태그의 값을 가져와서 담는다.
 			review: $(reviewForm).val()
 		},
 		success : function(data) {
@@ -95,6 +127,13 @@ $('#add-btn').click( () => {
 	});
 });
 
+$('#review-add-btn').click((e) => {
+	$('#update-btn').hide();
+});
+
+$('#review-update-btn').click((e) => {
+	$('#add-btn').hide();
+});
 
 //handlebars가 비동기 방식이라 trigger, bind 사용
 $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라는 이름을 갖는 bind를 실행시킨다.
@@ -105,12 +144,10 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 		
 //		$('#').css('visibility', 'visible');
 //		$('.convNote').css('visibility', 'visible');
-		
 	}).mouseleave(() => {
-
 		$('.convNote').css('visibility', 'hidden');
-		
   });
+	
 	
 	$('.delete-review').click((e) => {
 		if ( confirm('정말 삭제하시겠습니까?') ) {
@@ -130,18 +167,48 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 			})
 		}
 	});
-});
 
 
-$(document.body).bind('loaded-detail', () => {
-
-	$('.updateBtn').click((e) => {
+	
+	$('.review-update-btn').click((e) => {
+		
+		e.preventDefault();
+		
 		updateNo = $(e.target).attr('review-no');
+		
+		$('#review-update-modal').attr('display','block');
+		
+		$('#upd-star0.5').click( () => {
+			ratingUpdateForm.attr("data-value", "0.5");
+		});
+		$('#upd-star1').click( () => {
+			ratingUpdateForm.attr("data-value", "1");
+		});
+		$('#upd-star1.5').click( () => {
+			ratingUpdateForm.attr("data-value", "1.5");
+		});
+		$('#upd-star2').click( () => {
+			ratingUpdateForm.attr("data-value", "2");
+		});
+		$('#upd-star2.5').click( () => {
+			ratingUpdateForm.attr("data-value", "2.5");
+		});
+		$('#upd-star3').click( () => {
+			ratingUpdateForm.attr("data-value", "3");
+		});
+		$('#upd-star3.5').click( () => {
+			ratingUpdateForm.attr("data-value", "3.5");
+		});
+		$('#upd-star4').click( () => {
+			ratingUpdateForm.attr("data-value", "4");
+		});
+		$('#upd-star4.5').click( () => {
+			ratingUpdateForm.attr("data-value", "4.5");
+		});
+		$('#upd-star5').click( () => {
+			ratingUpdateForm.attr("data-value", "5");
+		});
 	});
-});
-
-
-$(document.body).bind('loaded-detail', () => {
 
 	$('#update-btn').click((e) => {
 		//alert($(e.target).attr('data-no'));
@@ -150,7 +217,7 @@ $(document.body).bind('loaded-detail', () => {
 			type : "POST",
 			data : {
 				no : updateNo,
-				rating: $(ratingUpdateForm).val(),
+				rating: $(ratingUpdateForm).attr("data-value"),
 				review: $(reviewUpdateForm).val()
 			},
 			success : function() {

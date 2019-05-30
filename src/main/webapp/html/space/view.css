@@ -1,21 +1,33 @@
+/*
 * {
+	border: 0.5px dotted lightgrey;
 }
+*/
 
 #spaceDetail {
-	position: relative;
-	top: 140px;
+	position: absolute;
+	top: 230px;
+	left: 280px;
 }
 
 #spaceInfo {
+	text-align: center;
 	position: fixed;
 	width: 900px;
-	top: 240px;
+	top: 230px;
 	left: 1150px;
 }
 
-.reviewList{
+#spaceReview{
+	position: absolute;
+	left: 30px;
   width: 700px;
 }
+
+.reviewDetail {
+	padding-top: 30px;
+}
+
 
 #spaceName {
 	font-size: 2.5em;
@@ -33,6 +45,14 @@
 	float: left;
 }
 
+#review-form {
+	height: 130px;
+}
+
+#review-update-form {
+	heiht: 130px;
+}
+
 .convNote {
 	visibility: hidden;
 	opacity: 0.5;
@@ -45,51 +65,46 @@
 	position: absolute;
 }
 
-span[name=convSpan]:hover {
-	
+
+/* Base setup */
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+/* Ratings widget */
+.rate {
+    margin-left: 10px;
+    display: inline-block;
+    border: 0;
+}
+/* Hide radio */
+.rate > input {
+    display: none;
+}
+/* Order correctly by floating highest to the right */
+.rate > label {
+    float: right;
+}
+/* The star of the show */
+.rate > label:before {
+    display: inline-block;
+    font-size: 1.1rem;
+    padding: .3rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 "; /* full star */
 }
 
-/*
-#tag > div{
-  background-color: #d3d7cf;
-  border: ridge 3px;
-  height: 30px;
-  width: 70px;
-  position: relative;
-  left: 30%;
-  top: 10px;
-  margin: 5px;
-  display: inline;
+/* Half star trick */
+.rate .half:before {
+    content: "\f089 "; /* half star no outline */
+    position: absolute;
+    padding-right: 0;
 }
+/* Click + hover color */
+input:checked ~ label, /* color current and previous stars on checked */
+label:hover, label:hover ~ label { color: #73B100;  } /* color previous stars on hover */
 
-
-#intro {
-	margin: 20px;
-}
-
-#name {
-	font-size: 3em;
-  margin: 20px;
-  display: inline;
-}
-
-#filePath {
-	background-color: #aee8f1;
-}
-
-#convName {
-	background-color: #fbb2b2;
-}
-
-#convNote {
-	background-color: #d3d7cf;
-}
-
-#roomInfo {
-	background-color: #00ffff;
-}
-
-#spaceReview {
-	background-color: #8ae234;
-}
-*/
+/* Hover highlights */
+input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
+input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  } 

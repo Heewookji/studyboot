@@ -23,6 +23,7 @@
       <result column="photo" property="photo"/>     
       <result column="rating" property="rating"/>
       <result column="review" property="review"/>
+      <result column="rgstr_dt" property="registeredDate"/>      
   </resultMap>
   
   <resultMap type="space" id="spaceDetailMap">
@@ -122,7 +123,8 @@
       r.space_id,
       r.member_id,
       r.rating,
-      r.review
+      r.review,
+      r.rgstr_dt
     from
       sms_space_review r
         inner join sms_space s on s.space_id = r.space_id
