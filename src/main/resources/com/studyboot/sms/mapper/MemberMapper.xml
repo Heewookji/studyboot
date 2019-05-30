@@ -89,6 +89,13 @@
     where member_id = #{no}
   </update>
   
+  <update id="updatePassword" parameterType="member">
+    update sms_member
+    set
+      pwd = password(#{password})
+    where member_id = #{no}
+  </update>
+  
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select
       m.member_id, 
@@ -118,6 +125,7 @@
     where
       nick_name = #{value}
   </select>
+  
   
 </mapper>
 

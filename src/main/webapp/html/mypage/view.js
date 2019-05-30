@@ -2,20 +2,18 @@ var param = location.href.split('?')[1],
 no,
 user,
 nickCheck,
-telCheck;
+telCheck,
+pwdCheck = 0;
 
-
-// var passRule = /^[A-Za-z0-9]{6,12}$/; //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 
 $(document.body).bind('loaded-data', () => {
   // 닉네임 중복체크
   $(function() {
     // nickCheck 버튼을 클릭했을 때
-    $("#nickCheck").click(function() {
+    $("#nickCheck-btn").click(function() {
         
         // nickName 을 param으로 보내기 위한 변수
         var nickName =  $("#nickName").val();
-        console.log(nickName);
         
         $.ajax({
             async: true,
@@ -30,7 +28,6 @@ $(document.body).bind('loaded-data', () => {
                     alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
                     // 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').addClass('u-has-error-v1');
-                    $('#nickName').siblings('small').removeClass('std-invisible');
                     $('#nickName').focus();
                     nickCheck = 0;
                     
@@ -39,12 +36,11 @@ $(document.body).bind('loaded-data', () => {
                     // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
                     $('#nickName').closest('div').removeClass('u-has-error-v1');
                     $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                    $('#nickName').siblings('small').addClass('std-invisible');
-                    $('#nickCheck').addClass('std-invisible')
+                    $('#nickCheck-btn').prop('disabled', true);
+                    $('#nickCheck-btn').addClass('std-invisible');
                     $('#nickName').prop('readonly', true);
                     // 아이디가 중복하지 않으면 idck = 1
                     nickCheck = 1;
-                    
                 }
             },
             error : function(error) {
@@ -57,10 +53,10 @@ $(document.body).bind('loaded-data', () => {
 
 // JSON 형식의 데이터 가져오기
 function loadData() {
-  $.getJSON('../../app/json/auth/user',
+  $.getJSON('../../app/json/member/detail',
       function(data) {
     
-    user = data.user;
+    user = data;
     console.log(data);
     $('#userName').val(user.name);
     $('#nickName').val(user.nickName);
@@ -85,7 +81,7 @@ loadData();
 $('#inqryForm-btn').click((e) => {
   e.preventDefault();
   $('.sspctForm-Format').addClass('std-invisible');
-  $('#inqryName').html(user.name);
+  $('#inqryName').html(user.nickName);
   $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
   $('#sspctName').val("");
   $('#inqryNo').val(user.no);
@@ -112,12 +108,29 @@ $('#inqryAdd-btn').click((e) => {
   });
 });
 
+// 닉네임 체크
+function nickNameCheck() {
+  var str = $("#nickName").val();
+  if(str.length < 4 || str.length > 10) {
+    return false;
+  }
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+
+  for(var i = 0; i <= str.length -1 ; i++ ) {
+    if(chk.test(str.charAt(i))) {
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
 $(document).ready(() => {
   
   // nickName
   $('#sb-nickname-edit').click(() => {
     $('#nickName').prop('readonly', false);
-    $('#nickCheck').removeClass('std-invisible');
+    $('#nickCheck-btn').removeClass('std-invisible');
     $('#sb-nickname-edit').addClass('std-invisible');
     $('#sb-nickname-cancel').removeClass('std-invisible');
   });
@@ -127,14 +140,37 @@ $(document).ready(() => {
   
     $('#nickName').closest('div').removeClass('u-has-error-v1');
     $('#nickName').closest('div').removeClass('u-has-success-v1-1');
-    $('#nickName').siblings('small').addClass('std-invisible');
     $('#nickName').prop('readonly', true);
-    $('#nickCheck').addClass('std-invisible');
+    $('#nickCheck-btn').addClass('std-invisible');
     $('#sb-nickname-cancel').addClass('std-invisible');
     $('#sb-nickname-edit').removeClass('std-invisible');
     nickCheck = undefined;
   });
   
+  // 닉네임 체크
+  $( '#nickName' ).keyup(function(){
+
+    if(nickNameCheck() == true){
+      $('#nickCheck-btn').prop('disabled',false);
+      $('#nickName').tooltip('disable');
+      $('#nickName').tooltip('hide');
+      $('#nickName').closest('div').removeClass('u-has-error-v1');
+      $('#nickName').closest('div').addClass('u-has-success-v1-1');
+    } else{
+      
+      $('#nickName').attr('data-toggle','tooltip');
+      $('#nickName').attr('data-trigger','hover focus');
+      $('#nickName').attr('data-placement','bottom');
+      $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
+      
+      $('#nickName').tooltip('enable');
+      $('#nickName').tooltip('show');
+      $('#nickCheck-btn').prop('disabled',true);
+      $('#nickName').closest('div').removeClass('u-has-success-v1-1');
+      $('#nickName').closest('div').addClass('u-has-error-v1');
+    }
+  });
+
   // tel
   $('#sb-tel-edit').click(() => {
     $('#tel').prop('readonly', false);
@@ -146,6 +182,7 @@ $(document).ready(() => {
     $('#tel').val(user.tel);
   
     $('#tel').closest('div').removeClass('u-has-success-v1-1');
+    $('#tel').closest('div').removeClass('u-has-error-v1');
     $('#tel').prop('readonly', true);
     $('#sb-tel-cancel').addClass('std-invisible');
     $('#sb-tel-edit').removeClass('std-invisible');
@@ -153,35 +190,33 @@ $(document).ready(() => {
   });
   
   // change
-  $('#tel').change(function() {
+  $('#tel').keyup(function() {
     
     var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
     
-    if(!telRule.test($("input[id='tel']").val())) {
-      // 경고
-      telCheck = 0;
-      $('#tel').closest('div').addClass('u-has-error-v1');
-      return false;
+    if(telRule.test($("input[id='tel']").val())) {
       
-    } else {
-      telCheck = 1;
       $('#tel').closest('div').removeClass('u-has-error-v1');
       $('#tel').closest('div').addClass('u-has-success-v1-1');
-      $('#tel').prop('readonly', true);
+      telCheck = 1;
+      
+    } else {
+      $('#tel').attr('data-toggle','tooltip');
+      $('#tel').attr('data-trigger','hover focus');
+      $('#tel').attr('data-placement','bottom');
+      $('#tel').attr('title','010-xxxx-xxxx');
+      
+      $('#tel').tooltip('enable');
+      $('#tel').tooltip('show');
+      $('#tel').closest('div').removeClass('u-has-success-v1-1');
+      $('#tel').closest('div').addClass('u-has-error-v1');
+      telCheck = 0;
     }
   });
   
 });
-  
 
-  
-// if(!passRule.test($("input[id='PASS']").val())) {
-// //경고
-//   
-// //return false;
-// }
-
-
+// 정보 업데이트 이벤트
 $('#sb-info-change').click((e) => {
   e.preventDefault();
   
@@ -201,24 +236,216 @@ $('#sb-info-change').click((e) => {
         nickName: $(nickName).val(),
         tel: $(tel).val()
       },
-      success: function(data) {
-        var obj = JSON.parse(data);
-        location.reload();
+      success: function() {
+        alert("정보 변경 성공!")
+        location.href = 'index.html';
       }
     });
-    
-    loadData();
   }
   
 });
 
+// 정보 업데이트 취소 이벤트
 $('#sb-info-cancel').click((e) => {
   e.preventDefault();
-  location.reload();
+  location.href = 'index.html';
 });
 
 
+// 비밀번호 확인
+$("#password").keyup(function() {
+  
+  var init;
+  var password = $("#password").val();
+  
+  if (password.length == 0 || password == undefined) {
+    $('#password').tooltip('disable');
+    $('#password').tooltip('hide');
+    $('#password').closest('div').removeClass('u-has-error-v1');
+    $('#password').closest('div').removeClass('u-has-success-v1-1');
+    $('#password').removeAttr('title');
+    return false;
+  }
+  
+  $.ajax({
+      async: true,
+      type : 'POST',
+      data : password,
+      url : "../../app/json/member/passwordcheck",
+      dataType : "json",
+      contentType: "application/json; charset=UTF-8",
+      success : function(data) {
+        
+        if(data.result == true){
+          $('#password').tooltip('disable');
+          $('#password').tooltip('hide');
+          $('#password').closest('div').removeClass('u-has-error-v1');
+          $('#password').closest('div').addClass('u-has-success-v1-1');
+          $('#password').removeAttr('title');
+          pwdCheck = 1;
+          
+        } else{
+          
+          if(init != 1){
+            $('#password').attr('data-toggle','tooltip');
+            $('#password').attr('data-trigger','hover focus');
+            $('#password').attr('data-placement','bottom');
+            $('#password').attr('title','비밀번호가 틀렸습니다!');
+          }
+          $('#password').tooltip('enable');
+          $('#password').tooltip('show');
+          $('#password').closest('div').removeClass('u-has-success-v1-1');
+          $('#password').closest('div').addClass('u-has-error-v1');
+          pwdCheck = 0;
+        }
+      },
+      error : function(error) {
+          alert("error : " + error);
+      }
+  });
+});
 
+// 비밀번호 유효성 검사
+$("#newPassword").keyup(function(){
+  
+  var password = $("#newPassword").val();
+  
+  if (password.length == 0 || password == undefined) {
+    $('#newPassword').tooltip('disable');
+    $('#newPassword').tooltip('hide');
+    $('#newPassword').closest('div').removeClass('u-has-error-v1');
+    $('#newPassword').closest('div').removeClass('u-has-success-v1-1');
+    $('#newPassword').removeAttr('title');
+    return false;
+  }
+  
+  if(checkPassword(password)){
+    $('#newPassword').tooltip('disable');
+    $('#newPassword').tooltip('hide');
+    $('#newPassword').closest('div').removeClass('u-has-error-v1');
+    $('#newPassword').closest('div').addClass('u-has-success-v1-1');
+    $('#newPassword').removeAttr('title');
+    
+  } else{
+    
+    $('#newPassword').attr('data-toggle','tooltip');
+    $('#newPassword').attr('data-trigger','hover focus');
+    $('#newPassword').attr('data-placement','bottom');
+    $('#newPassword').attr('title','숫자,영문자,특수문자 조합으로\n중복문자 4개 이하\n6자리 이상 사용해야 합니다');
+    
+    $('#newPassword').tooltip('enable');
+    $('#newPassword').tooltip('show');
+    $('#newPassword').closest('div').removeClass('u-has-success-v1-1');
+    $('#newPassword').closest('div').addClass('u-has-error-v1');
+  }
+  
+  if ($('#verifyPassword').val().length != 0) {
+    
+    if (password == $('#verifyPassword').val()) {
+      $('#verifyPassword').tooltip('disable');
+      $('#verifyPassword').tooltip('hide');
+      $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
+      $('#verifyPassword').closest('div').addClass('u-has-success-v1-1');
+      $('#verifyPassword').removeAttr('title');
+      
+    } else{
+      
+      $('#verifyPassword').attr('data-toggle','tooltip');
+      $('#verifyPassword').attr('data-trigger','hover focus');
+      $('#verifyPassword').attr('data-placement','bottom');
+      $('#verifyPassword').attr('title','비밀번호를 다시 확인하세요!!');
+      
+      $('#verifyPassword').tooltip('enable');
+      $('#verifyPassword').tooltip('show');
+      $('#verifyPassword').closest('div').removeClass('u-has-success-v1-1');
+      $('#verifyPassword').closest('div').addClass('u-has-error-v1');
+    }
+  }
+  
+});
+
+// 비밀번호 재확인
+$("#verifyPassword").keyup(function(){
+  
+  var password = $("#newPassword").val();
+  
+  if (password.length == 0 || password == undefined) {
+    alert('먼저 새로운 비밀번호를 입력하세요!!')
+    $('#verifyPassword').val('')
+    $('#newPassword').focus();
+    return false;
+  }
+  
+  if (password == $('#verifyPassword').val()) {
+    $('#verifyPassword').tooltip('disable');
+    $('#verifyPassword').tooltip('hide');
+    $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
+    $('#verifyPassword').closest('div').addClass('u-has-success-v1-1');
+    $('#verifyPassword').removeAttr('title');
+    
+  } else{
+    
+    $('#verifyPassword').attr('data-toggle','tooltip');
+    $('#verifyPassword').attr('data-trigger','hover focus');
+    $('#verifyPassword').attr('data-placement','bottom');
+    $('#verifyPassword').attr('title','비밀번호를 다시 확인하세요!!');
+    
+    $('#verifyPassword').tooltip('enable');
+    $('#verifyPassword').tooltip('show');
+    $('#verifyPassword').closest('div').removeClass('u-has-success-v1-1');
+    $('#verifyPassword').closest('div').addClass('u-has-error-v1');
+  }
+});
+
+function checkPassword(password){
+  
+  if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,25}$/.test(password)){
+    return false;
+  }    
+  var checkNumber = password.search(/[0-9]/g);
+  var checkEnglish = password.search(/[a-z]/ig);
+  if(checkNumber <0 || checkEnglish <0){
+    return false;
+  }
+  if(/(\w)\1\1\1/.test(password)){
+    return false;
+  }
+  return true;
+}
+
+// 비밀번호 업데이트 이벤트
+$('#sb-password-change').click((e) => {
+  e.preventDefault();
+  
+  newPwd = $('#newPassword').val();
+  verifyPwd = $('#verifyPassword').val();
+  
+  if (newPwd != verifyPwd || pwdCheck == 0) {
+    alert('변경할 수 없습니다..\n 비밀번호를 확인하세요!');
+    return false;
+  } else {
+    
+    $.ajax({
+      url:'../../app/json/member/update',
+      type: 'post',
+      dataType: 'text',
+      data: {
+        password: newPwd
+      },
+      success: function() {
+        alert("비밀번호 변경 성공!")
+        location.href = 'index.html';
+      }
+    });
+  }
+  
+});
+
+// 정보 업데이트 취소 이벤트
+$('#sb-password-cancel').click((e) => {
+  e.preventDefault();
+  location.href = 'index.html';
+});
 
 
 

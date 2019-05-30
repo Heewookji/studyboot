@@ -12,4 +12,5 @@ public interface MemberService {
   int findByNickName(String nickName);
   int update(Member member);
   int nickNameCheck(String nickName);
+  boolean passwordCheck(String email, String password);
 }

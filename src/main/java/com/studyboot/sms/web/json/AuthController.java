@@ -40,12 +40,17 @@ public class AuthController {
     Member member = memberService.get(email, password);
 
     HashMap<String,Object> content = new HashMap<>();
-    System.out.println(member);
     if (member == null) {
       content.put("status", "fail");
       content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
     } else {
       session.setAttribute("loginUser", member);
+      
+      List<Study> myStudyList = studyMemberService.findMyStudyList(member.getNo());
+      
+      if(myStudyList != null) {
+        session.setAttribute("myStudyList", myStudyList);
+      }
       content.put("status", "success");
     }
 
@@ -65,6 +70,7 @@ public class AuthController {
     return content;
   }
 
+  @SuppressWarnings("unchecked")
   @GetMapping("user")
   public Object user(HttpSession session) throws Exception {
 
@@ -75,7 +81,7 @@ public class AuthController {
 
     if (loginUser != null) {
 
-      List<Study> myStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
+      List<Study> myStudyList = (List<Study>)session.getAttribute("myStudyList");
 
       if(myStudyList != null) {
         content.put("myStudyList", myStudyList);

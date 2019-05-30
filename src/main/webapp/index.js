@@ -1,29 +1,37 @@
 
 $( document ).ready(function() {
-    $("#js-header").load("./indexheader.html", function(){
+  $("#js-header").load("./indexheader.html", function(){
 
-	$('.cls-btn').click((e) => {
-	    window.location.href =
-		'/studyboot/html/study/index.html?clsNo='
-		+ $(e.target).attr('data-no')
-		+ '&clsTitle=' + $(e.target).text()
-		+ '&keyword=';
-	});
-
-	$('#search-btn').click((e) => {
-	    pageNo = 1;
-	    keyword = $("#study-search").val();
-	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
-	});
-	
-	$('#main-search-btn').click((e) => {
-	    pageNo = 1;
-	    keyword = $("#main-search").val();
-	    window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
-	});
-
-	$(document.body).trigger('loaded-header');
+    $('.cls-btn').click((e) => {
+      window.location.href =
+        '/studyboot/html/study/index.html?clsNo='
+        + $(e.target).attr('data-no')
+        + '&clsTitle=' + $(e.target).text()
+        + '&keyword=';
     });
+
+    $('#search-btn').click((e) => {
+      pageNo = 1;
+      keyword = $("#study-search").val();
+      window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
+    });
+
+    $('#main-search-btn').click((e) => {
+      pageNo = 1;
+      keyword = $("#main-search").val();
+      window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
+    });
+
+    $('#mypage-btn').click((e) => {
+      window.location.href = '/studyboot/html/mypage/index.html';
+    });
+
+    $('#message-btn').click((e) => {
+      window.location.href = '/studyboot/html/message/index.html';
+    });
+
+    $(document.body).trigger('loaded-header');
+  });
 });
 
 

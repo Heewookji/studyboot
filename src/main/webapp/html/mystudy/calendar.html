@@ -44,33 +44,17 @@
 <link rel="stylesheet" href="../../Unify/assets/vendor/custombox/custombox.min.css">
 </head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
 
+<!-- 일정 등록 버튼 -->
 <button id="calendar-add-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" 
-            data-target="#exampleModal" data-whatever="@getbootstrap">일정 추가</button>
+            data-target="#exampleModal" data-whatever="@getbootstrap" hidden="hidden">일정 추가</button>
   <div id='calendar'></div>
 
-
-
-
-
+<!-- 일정 디테일 버튼 -->
+<button id="calendar-detail-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" hidden="hidden">
+  detail-modal
+</button>
 
 <!-- 일정 등록 모달 -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,10 +67,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="schedul-submit-form">
           <div class="form-group">
             <label for="schedule-name" class="col-form-label" >일정 제목:</label>
-            <input type="text" class="form-control" id="schedule-name">
+            <input type="text" class="form-control" id="schedule-title">
           </div>
           <div class="form-group">
             <label for="schedule-sdt" class="col-form-label">시작 날짜:</label>
@@ -97,79 +81,43 @@
             <input type="datetime-local" class="form-control" id="schedule-edt">
           </div>
           <div class="form-group">
-            <label for="schedule-message" class="col-form-label">일정 내용:</label>
-            <textarea class="form-control" id="schedule-message"></textarea>
+            <label for="schedule-memo" class="col-form-label">일정 내용:</label>
+            <textarea class="form-control" id="schedule-memo"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="schedule-submit-btn">등록</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule-close-btn">닫기</button>
+        <button type="button" class="btn btn-primary" id="schedule-update-btn">수정</button>
+        <button type="submit" class="btn btn-primary" id="schedule-add-btn">등록</button>
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 디테일 모달 -->
+<!-- 일정 디테일 모달 -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h4 class="modal-title" id="exampleModalCenterTitle"></h4> <!-- 일정 제목 -->
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="calendar-detail-close-modal-btn">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="event-detail">
-        
-      </div>
+      <div class="modal-body" id="study-start-date"></div> <!-- 일정 시작 시간 -->
+      <!-- <div class="modal-body" id="study-end-date"></div> --> <!-- 일정 종료 시간 -->
+      <div class="modal-body" id="event-detail"></div> <!-- 일정 내용 --> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">삭제</button>
-        <button type="button" class="btn btn-primary">수정</button>
-        <button type="button" class="btn btn-primary">출석</button>
         <button type="button" class="btn btn-primary">후기</button>
+        <button type="button" class="btn btn-primary">출석</button>
+        <button type="button" class="btn btn-primary" id="event-update-btn">수정</button>
+        <button type="button" class="btn btn-primary" id="event-delete-btn">삭제</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Button trigger modal -->
-<button id="calendar-detail-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  detail-modal
-</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <!-- JS Global Compulsory -->
   <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
@@ -199,18 +147,18 @@
   <script src='./calendar/calendar.js'></script>
 
   <!-- JS Implementing Plugins -->
-  <script src="../../Unify/assets/vendor/custombox/custombox.min.js"></script>
+  <!-- <script src="../../Unify/assets/vendor/custombox/custombox.min.js"></script> -->
 
   <!-- JS Unify -->
   <script src="../../Unify/assets/js/components/hs.modal-window.js"></script>
-
-  <!-- JS Plugins Init. -->
+<!-- 
+   JS Plugins Init.
   <script>
                       $(document).on('ready', function () {
                         // initialization of popups
                         $.HSCore.components.HSModalWindow.init('[data-modal-target]');
                       });
   </script>
-
+ -->
 </body>
 </html>

@@ -12,6 +12,7 @@ public interface MemberDao {
   Member findByNo(int no);
   int findByNickName(String nickName);
   int update(Member member);
+  int updatePassword(Member member);
 }
 
 
