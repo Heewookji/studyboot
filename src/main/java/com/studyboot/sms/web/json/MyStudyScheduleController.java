@@ -84,13 +84,13 @@ public class MyStudyScheduleController {
   }
 
   @GetMapping("delete")
-  public Object delete(HttpSession session, int eventNo, @RequestParam int no) {
-    
+  public Object delete(int eventNo, int studyNo, HttpSession session) {
+    System.out.println(studyNo);
     HashMap<String,Object> content = new HashMap<>();
 
     HashMap<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", ((Member) session.getAttribute("loginUser")).getNo());
-    studyAndUserNo.put("studyNo", no);
+    studyAndUserNo.put("studyNo", studyNo);
 
     boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
     
@@ -101,7 +101,7 @@ public class MyStudyScheduleController {
     }
     
     try {
-      if (myStudyScheduleService.delete(no) == 0) 
+      if (myStudyScheduleService.delete(eventNo) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
 

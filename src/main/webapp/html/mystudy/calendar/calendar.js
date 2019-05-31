@@ -2,7 +2,8 @@ var eventDate,
 updateStartDate,
 updateEndDate,
 updateMemoDate,
-updateTitleDate;
+updateTitleDate,
+studyNo = location.href.split('=')[1].substring(0,1);
 
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
@@ -16,14 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
     selectable: true,
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       window.eventDate = info.event; // 클릭한 일정의 객체를 뽑아 넣음
-
       if(window.calendarContent === false) { // 스터디 장이 아니면 이벤트 버튼을 눌렀을 때 닫기 버튼만 보이기
         $('#calendar-detail-modal-btn').click();
         $('#event-review-btn').hide();
         $('#event-attend-btn').hide();
         $('#event-update-btn').hide();
         $('#event-delete-btn').hide();
-        
+
         $('#event-close-btn').show();
       } else { // 그 외의 회원일 경우 닫기 버튼만 안보이고 모든 버튼 보이기
         $('#calendar-detail-modal-btn').click();
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       loadDetail(info.event.id);
     },
-    
+
     events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1].substring(0,1),
     eventSourceSuccess: function(content, xhr) {
       console.log(content); // event 배열 목록이 출력됨
@@ -45,7 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
       window.calendarContent = content[content.length-1]; // window.calendarContent에는 스터디장 유무가 들어있다.
       return content.eventArray;
     },
-    
+    eventDragStop: function(event, jsEvent, ui, view) { // 드래그 & 드롭 못하게 막음
+      //console.log(event.id); 
+      if (isElemOverDiv(ui, $('div#delete-events'))) {
+        calendar.fullCalendar('removeEvents', event.id); 
+      } 
+    },
+
     dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
       window.dateStr = info.dateStr;
       if(window.calendarContent === false){
@@ -54,7 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       //alert(window.dateStr);
       $(document.body).trigger('dateClick');
-    }
+    },
+    eventColor: '#72c02c',
+    eventTextColor: 'white'
   });
   calendar.render();
 });
@@ -152,8 +160,12 @@ $('#event-delete-btn').click(() => {
   }
 
   if(confirm('정말 삭제 하시겠습니까?')) {
-    $.getJSON('../../app/json/mystudyschedule/delete?no=' + window.eventDate.id,
+    $.getJSON('../../app/json/mystudyschedule/delete?eventNo=' + window.eventDate.id
+        + '&studyNo=' + studyNo, 
         function(obj) {
+      if (obj.status != 'success') {
+        alert(obj.status)
+      }
       location.reload();
     })
   }
