@@ -1,39 +1,45 @@
 var param = location.href.split('?')[1],
 // 스터디 리스트 출력 - 스터디 목록
-myStudyTemplateSrc = $('#myStudy-template').html(),
-myStudyGenerator = Handlebars.compile(myStudyTemplateSrc),
+doingStudyTemplateSrc = $('#doing-study-template').html(),
+doingStudyGenerator = Handlebars.compile(doingStudyTemplateSrc),
 appliedStudyTemplateSrc = $('#applied-study-template').html(),
-appliedStudyGenerator = Handlebars.compile(appliedStudyTemplateSrc);
+appliedStudyGenerator = Handlebars.compile(appliedStudyTemplateSrc),
+pickedStudyTemplateSrc = $('#picked-study-template').html(),
+pickedStudyGenerator = Handlebars.compile(pickedStudyTemplateSrc);
 
-// 로그인 유저의 마이스터디 리스트 데이터 가져오기
+// 로그인 유저의 스터디 데이터 가져오기
 function loadList() {
 
-  $.getJSON('../../app/json/member/studylist', function(obj) {
+  $.getJSON('../../app/json/member/mystudy', function(obj) {
     
     console.log(obj);
-    
-    if (obj.myStudyList == null) {
-      $('#myStudyCarousel').append('<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">'
+    var $empty = $('<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">'
           + '<article><img class="img-fluid w-100" src="/studyboot/upload/images/test2.jpeg" alt="Image Description">'
           + '<div class="g-bg-white g-pa-20"><h2 class="h5 g-color-black g-font-weight-600 mb-3">'
           + '진행중인 스터디가 없습니다...'
-          + '</h2></div></article></div>');
+          + '</h2></div></article></div>')
+    
+    if (obj.doingStudyList == null) {
+      $('#doingStudyCarousel').append($empty);
       
     } else {
-      $(myStudyGenerator(obj)).appendTo($('#myStudyCarousel'));
+      $(doingStudyGenerator(obj)).appendTo($('#doingStudyCarousel'));
     }
     
     if (obj.appliedStudyList == null) {
-      $('#appliedStudyCarousel').append('<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">'
-          + '<article><img class="img-fluid w-100" src="/studyboot/upload/images/test3.jpg" alt="Image Description">'
-          + '<div class="g-bg-white g-pa-20"><h2 class="h5 g-color-black g-font-weight-600 mb-3">'
-          + '신청한 스터디가 없습니다...'
-          + '</h2></div></article></div>');
-    
+      $('#appliedStudyCarousel').append($empty);
+      
     } else {
       $(appliedStudyGenerator(obj)).appendTo($('#appliedStudyCarousel'));
     }
-
+    
+    if (obj.pickedStudyList == null) {
+      $('#pickedStudyCarousel').append($empty);
+      
+    } else {
+      $(pickedStudyGenerator(obj)).appendTo($('#pickedStudyCarousel'));
+    }
+    
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-loadList');
   });
@@ -43,10 +49,12 @@ loadList();
 
 // 스터디 리스트 가져온 후
 $(document.body).bind('loaded-loadList', () => {
-  $('').click()
+  //initialization of carousel
+  $.HSCore.components.HSCarousel.init('.js-carousel');
+  
+  $()
+  
 });
-
-
 
 //inquiry
 $('#inqryForm-btn').click((e) => {

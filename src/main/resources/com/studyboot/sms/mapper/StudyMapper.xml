@@ -362,6 +362,28 @@
 	  std_id = #{value}
   </select>
 
+  <select id="findPickedStudyByUser" resultMap="studyMap" parameterType="int">
+    select 
+      s.std_id,
+      s.adr_lms,
+      s.cls_lms,
+      s.name,
+      s.photo,
+      s.day,
+      s.sdt,
+      s.edt,
+      s.rcrtm_state,
+      s.goal,
+      s.cont,
+      s.prsn,
+      s.rate
+    from 
+      sms_pick_std p
+      inner join sms_std s on p.std_id = s.std_id
+    where
+      member_id = #{value}
+  </select>
+
 </mapper>
 
 

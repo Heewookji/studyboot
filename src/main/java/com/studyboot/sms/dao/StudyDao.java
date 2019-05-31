@@ -18,4 +18,5 @@ public interface StudyDao {
   List<Study> findAllByKeyword(HashMap<String, Object> params);
   List<Study> findByNos(List<Integer> list);
   Study findByStudy(int no);
+  List<Study> findPickedStudyByUser(int no);
 }

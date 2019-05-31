@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.AppliedStudyDao;
 import com.studyboot.sms.dao.MemberDao;
+import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
 
 @Service
@@ -14,10 +16,15 @@ public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
   AppliedStudyDao appliedStudyDao;
+  StudyDao studyDao;
 
-  public MemberServiceImpl(MemberDao memberDao, AppliedStudyDao appliedStudyDao) {
+  public MemberServiceImpl(
+      MemberDao memberDao,
+      AppliedStudyDao appliedStudyDao,
+      StudyDao studyDao) {
     this.memberDao = memberDao;
     this.appliedStudyDao = appliedStudyDao;
+    this.studyDao = studyDao;
   }
 
   @Override
@@ -91,6 +98,11 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public List<AppliedStudy> appliedStudyList(int no) {
     return appliedStudyDao.findAllByUser(no);
+  }
+  
+  @Override
+  public List<Study> pickedStudyList(int no) {
+    return studyDao.findPickedStudyByUser(no);
   }
   
 }
