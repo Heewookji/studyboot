@@ -97,22 +97,26 @@
     
   <div id="spaceReview">
    <div class="d-flex justify-content-end">
-   <a id="review-add-btn" class="btn u-btn-primary" href="#" data-modal-target="#review-add-modal" data-modal-effect="fadein">리뷰 등록</a>
+   <button id="review-add-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#review-add-modal">리뷰 등록</button>
    </div>
   </div>
-  
   </section>
   
-  <!-- 후기 등록 폼 -->
-  <div id="review-add-modal" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20" style="display: none;">
-  <button type="button" class="close" onclick="Custombox.modal.close();">
-    <i class="hs-icon hs-icon-close"></i>
-  </button>
-    <h4 class="g-mb-15">리뷰 등록</h4>
-      <form action="add/review">
-        <div class="form-group d-flex align-items-center">
-          <label>별점</label>
-            <fieldset class="rate" id="rating-form">
+
+<div id="review-add-modal" class="modal-sm modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">리뷰 등록</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="add-form" action="add/review">
+          <label class="col-form-label">별점</label>
+          <div class="form-group">
+            <fieldset class="review-rating-form rate" id="rating-form">
               <input type="radio" id="rating10" name="rating"/><label id="star5" for="rating10"></label>
               <input type="radio" id="rating9" name="rating"/><label id="star4.5" class="half" for="rating9"></label>
               <input type="radio" id="rating8" name="rating"/><label id="star4" for="rating8"></label>
@@ -124,16 +128,60 @@
               <input type="radio" id="rating2" name="rating"/><label id="star1" for="rating2"></label>
               <input type="radio" id="rating1" name="rating"/><label id="star0.5" class="half" for="rating1"></label>
             </fieldset>
-        </div>
-        <div class="form-group">
-          <label for="review-form" class="col-form-label">후기</label>
-          <textarea class="form-control" id="review-form"></textarea>
-        </div>
-      </form>
-      <button type="button" class="btn btn-primary" id="update-btn">수정</button>
-      <button type="button" class="btn btn-primary" id="add-btn">등록</button>
+          </div>
+          <div class="form-group">
+            <label for="review-form" class="col-form-label">후기</label>
+            <textarea class="review-text-form form-control"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="add-btn">등록</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
   </div>
-  <!-- 후기 등록 폼 -->
+</div>
+
+<div id="review-update-modal" class="modal-sm modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">리뷰 수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="update-form" action="update/review">
+          <label class="col-form-label">별점</label>
+          <div class="form-group">
+            <fieldset class="review-rating-form rate" id="rating-update-form">
+              <input type="radio" id="rating20" name="rating"/><label id="upd-star5" for="rating20"></label>
+              <input type="radio" id="rating19" name="rating"/><label id="upd-star4.5" class="half" for="rating19"></label>
+              <input type="radio" id="rating18" name="rating"/><label id="upd-star4" for="rating18"></label>
+              <input type="radio" id="rating17" name="rating"/><label id="upd-star3.5" class="half" for="rating17"></label>
+              <input type="radio" id="rating16" name="rating"/><label id="upd-star3" for="rating16"></label>
+              <input type="radio" id="rating15" name="rating"/><label id="upd-star2.5" class="half" for="rating15"></label>
+              <input type="radio" id="rating14" name="rating"/><label id="upd-star2" for="rating14"></label>
+              <input type="radio" id="rating13" name="rating"/><label id="upd-star1.5" class="half" for="rating13"></label>
+              <input type="radio" id="rating12" name="rating"/><label id="upd-star1" for="rating12"></label>
+              <input type="radio" id="rating11" name="rating"/><label id="upd-star0.5" class="half" for="rating11"></label>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label for="review-update-form" class="col-form-label">후기</label>
+            <textarea class="review-text-form form-control"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="update-btn">수정</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
   
   <script id="div-tag" type="text/x-handlebars-template">
 {{#each detail.tags}}
@@ -168,8 +216,6 @@
   {{/each}}
 </script>
 
-
-
 <script id="div-spaceReview" type="text/x-handlebars-template">
 {{#each detail.spaceReview}}
       <div class="reviewDetail media g-mb-30">
@@ -178,6 +224,8 @@
           <div class="g-mb-15">
             <h5 class="d-flex justify-content-between align-items-center h5 g-color-gray-dark-v1 mb-0">
               <span class="d-block g-mr-10">{{nickName}}</span>
+
+
             </h5>
             <span class="g-color-gray-dark-v4 g-font-size-12">{{registeredDate}}</span>
           </div>
@@ -185,11 +233,30 @@
         </div>
       </div>
       <div class="d-flex justify-content-end">
-        <a class="review-update-btn btn u-btn-primary" href="#" data-modal-target="#review-add-modal" data-modal-effect="fadein" review-no="{{no}}">수정</a>
-        <a class="delete-review u-tags-v1 g-font-size-12 g-brd-around g-brd-gray-light-v4 g-bg-primary--hover g-brd-primary--hover g-color-black-opacity-0_8 g-color-white--hover rounded g-py-6 g-px-15" review-no="{{no}}">삭제</a>
+        <a class="btns review-update-btn u-tags-v1 g-font-size-12 g-brd-around g-brd-gray-light-v4 g-bg-primary--hover g-brd-primary--hover g-color-black-opacity-0_8 g-color-white--hover rounded g-py-6 g-px-15" data-toggle="modal" data-target="#review-update-modal" review-no="{{no}}" member-no="{{memberNo}}">수정</a>
+        <a class="btns delete-review u-tags-v1 g-font-size-12 g-brd-around g-brd-gray-light-v4 g-bg-primary--hover g-brd-primary--hover g-color-black-opacity-0_8 g-color-white--hover rounded g-py-6 g-px-15" review-no="{{no}}" member-no="{{memberNo}}">삭제</a>
       </div>
 {{/each}}
 </script>
+
+
+<!--  
+  <ul class="u-rating-v1 g-font-size-17 g-color-gray-light-v3 mb-0">
+    <li class="rating-to-stars g-color-primary"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars g-color-primary"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars g-color-primary"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars g-color-primary"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars g-color-primary"><i class="fa fa-star"></i></li>
+  </ul>
+  
+  <ul class="u-rating-v1 g-font-size-17 g-color-gray-light-v3 mb-0">
+    <li class="rating-to-stars"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars"><i class="fa fa-star"></i></li>
+    <li class="rating-to-stars"><i class="fa fa-star"></i></li>
+  </ul>
+-->
 
   <!-- JS Global Compulsory -->
   <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>

@@ -23,10 +23,12 @@ function loadDetail(no) {
 		url : "../../app/json/space/detail?no=" + no,
 		data : {name:'name', intro:'intro', tel:'tel'},
 		success : function(data) {
-			console.log(data.detail); // detail은 controller에서 키값으로 보낸 것.
+			console.log(data);
+			window.loginNo = data.loginNo;
 			$('#spaceName').append(data.detail.name),
 			$('#intro').append(data.detail.intro),
 			$('#tel').append(data.detail.tel)
+			
 		},
 		error : function(request, status, error) {
 			alert("에러가 발생했습니다.");
@@ -38,18 +40,19 @@ function loadDetail(no) {
 
 		$.each(obj.detail.spaceConvenienceInfos, function (index, value) {
 			switch (value.convenienceNo) {
-			case 1 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-047 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 2 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-education-122 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 3 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-053 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 4 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-171 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 5 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-018 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 6 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-085 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 7 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-communication-053 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 8 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-education-024 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 9 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-communication-030 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 10 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-communication-077 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 11 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-communication-066 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
-			case 12 : $('<span class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><p class="convNote" id="'+value.convenienceNo+'">'+ value.note +'</p><i data-no="'+value.convenienceNo+'" class="icon-electronics-011 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+
+			case 1 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-047 u-line-icon-pro"></i></span></span>').appendTo('#convDiv'); break;
+			case 2 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-education-122 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 3 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-053 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 4 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-171 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 5 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-018 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 6 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-hotel-restaurant-085 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 7 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-communication-053 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 8 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-education-024 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 9 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-communication-030 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 10 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-communication-077 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 11 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-communication-066 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
+			case 12 : $('<span id="'+value.convenienceNo+'" tooltip="'+value.note+'" class="u-icon-v1 u-icon-shadow--hover g-rounded-3 g-font-size-30 g-mr-15 g-mb-15"><i data-no="'+value.convenienceNo+'" class="icon-electronics-011 u-line-icon-pro"></i></span>').appendTo('#convDiv'); break;
 			}
 		});
 
@@ -68,13 +71,15 @@ function loadDetail(no) {
 		var templateSpaceReview = $('#div-spaceReview').html();
 		var trSpaceReviewGenerator = Handlebars.compile(templateSpaceReview);
 		$(trSpaceReviewGenerator(obj)).appendTo($(spaceReview));
-
+		
 		$(document.body).trigger('loaded-detail'); // trigger가 'loaded-detail'을 실행 시킨다.
 		// trigger와 bind는 세트!!
 	});
 }
 
 $('#review-add-btn').click(() => {
+	$('#add-form')[0].reset();
+	
 	$('#star0.5').click( () => {
 		ratingForm.attr("data-value", "0.5");
 	});
@@ -127,19 +132,11 @@ $('#add-btn').click( () => {
 	});
 });
 
-$('#review-add-btn').click((e) => {
-	$('#update-btn').hide();
-});
-
-$('#review-update-btn').click((e) => {
-	$('#add-btn').hide();
-});
-
 //handlebars가 비동기 방식이라 trigger, bind 사용
 $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라는 이름을 갖는 bind를 실행시킨다.
 
 	$('#convDiv i').mouseenter((e) => {
-		  var noteId = $(e.target).attr('data-no');
+		var noteId = $(e.target).attr('data-no');
 		  $('#'+noteId+'').css('visibility', 'visible');
 		
 //		$('#').css('visibility', 'visible');
@@ -148,6 +145,7 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 		$('.convNote').css('visibility', 'hidden');
   });
 	
+	$('.btns[member-no='+window.loginNo+']').css('visibility', 'visible');
 	
 	$('.delete-review').click((e) => {
 		if ( confirm('정말 삭제하시겠습니까?') ) {
@@ -172,11 +170,9 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 	
 	$('.review-update-btn').click((e) => {
 		
-		e.preventDefault();
+		$('#update-form')[0].reset();
 		
 		updateNo = $(e.target).attr('review-no');
-		
-		$('#review-update-modal').attr('display','block');
 		
 		$('#upd-star0.5').click( () => {
 			ratingUpdateForm.attr("data-value", "0.5");
@@ -220,7 +216,8 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 				rating: $(ratingUpdateForm).attr("data-value"),
 				review: $(reviewUpdateForm).val()
 			},
-			success : function() {
+			success : function(data) {
+				console.log(data);
 				alert('수정 되었습니다.');
 				location.reload();
 			},
@@ -229,4 +226,5 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 			}
 		})
 	});
+	
 });

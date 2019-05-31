@@ -20,10 +20,10 @@ public class SpaceReviewController {
   @PostMapping("add/review")
   public Object add(SpaceReview spaceReview,
       HttpSession session) {
-    
+
     Member loginUser = (Member)session.getAttribute("loginUser");
     spaceReview.setMemberNo(loginUser.getNo());
-    
+
     HashMap<String,Object> content = new HashMap<>();
 
     try {
@@ -40,7 +40,7 @@ public class SpaceReviewController {
   public Object delete(int no,HttpSession session) {
 
     HashMap<String,Object> content = new HashMap<>();
-    
+
     try {
       if (spaceReviewService.deleteReview(no) == 0)
         throw new RuntimeException("해당 리뷰가 없습니다.");
@@ -56,26 +56,18 @@ public class SpaceReviewController {
   @PostMapping("update/review")
   public Object update(SpaceReview spaceReview, HttpSession session) {
     HashMap<String,Object> content = new HashMap<>();
-    
-    Member loginUser = (Member)session.getAttribute("loginUser");
-    if (loginUser.getNo() == spaceReview.getMemberNo()) {
-      
-      try {
-        if (spaceReviewService.updateReview(spaceReview) == 0) 
-          throw new RuntimeException("해당 리뷰가 없습니다.");
-        content.put("status", "success");
-        
-      } catch (Exception e) {
-        content.put("status", "fail");
-        content.put("message", e.getMessage());
-      }
-      return content;
-    } else {
-      content.put("updateFail", "회원 정보가 일치하지 않습니다.");
-      return content;
+
+    try {
+      if (spaceReviewService.updateReview(spaceReview) == 0) 
+        throw new RuntimeException("해당 리뷰가 없습니다.");
+      content.put("status", "success");
+
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
     }
+    return content;
   }
-  
 }
 
 
