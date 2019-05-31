@@ -297,7 +297,30 @@
             data-parent="#nav-1-1-default-hor-left-underline">
             <!-- myStudyList -->
             <div class="container g-pb-100">
-              <div id="myStudyCarousel" class="g-px-30--lg">
+              <div class="g-px-30--lg">
+                <div id="myStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+                  data-slides-show="3" data-slides-scroll="1"
+                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+                  data-responsive='[{
+                     "breakpoint": 992,
+                     "settings": {
+                       "slidesToShow": 2
+                     }
+                   }, {
+                     "breakpoint": 768,
+                     "settings": {
+                       "slidesToShow": 1
+                     }
+                   }, {
+                     "breakpoint": 554,
+                     "settings": {
+                       "slidesToShow": 1
+                     }
+                   }]'>
+                </div>
               </div>
             </div>
             <!-- End myStudyList -->
@@ -310,7 +333,30 @@
             data-parent="#nav-1-1-default-hor-left-underline">
             <!-- applied studyList -->
             <div class="container g-pb-100">
-              <div id="appliedStudyCarousel" class="g-px-30--lg">
+              <div class="g-px-30--lg">
+                <div id="appliedStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+                  data-slides-show="3" data-slides-scroll="1"
+                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+                  data-responsive='[{
+                     "breakpoint": 992,
+                     "settings": {
+                       "slidesToShow": 2
+                     }
+                   }, {
+                     "breakpoint": 768,
+                     "settings": {
+                       "slidesToShow": 1
+                     }
+                   }, {
+                     "breakpoint": 554,
+                     "settings": {
+                       "slidesToShow": 1
+                     }
+                   }]'>
+                </div>
               </div>
             </div>
             <!-- End applied studyList -->
@@ -323,7 +369,30 @@
             data-parent="#nav-1-1-default-hor-left-underline">
             <!-- myStudyList -->
             <div class="container g-pb-100">
-              <div id="pickedStudyCarousel" class="g-px-30--lg">
+              <div class="g-px-30--lg">
+                <div id="pickedStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+                  data-slides-show="3" data-slides-scroll="1"
+                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+                  data-responsive='[{
+                     "breakpoint": 992,
+                     "settings": {
+                       "slidesToShow": 2
+                     }
+                   }, {
+                     "breakpoint": 768,
+                     "settings": {
+                       "slidesToShow": 1
+                     }
+                   }, {
+                     "breakpoint": 554,
+                     "settings": {
+                       "slidesToShow": 1
+                     }
+                   }]'>
+                </div>
               </div>
             </div>
             <!-- End myStudyList -->
@@ -346,30 +415,6 @@
 
   <!-- 마이스터디 리스트 -->
   <script id="myStudy-template" type="text/x-handlebars-template">
-
-<div class="js-carousel u-carousel-v5 g-mx-minus-15"
-                  data-slides-show="3" data-slides-scroll="1"
-                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-                  data-responsive='[{
-                     "breakpoint": 992,
-                     "settings": {
-                       "slidesToShow": 2
-                     }
-                   }, {
-                     "breakpoint": 768,
-                     "settings": {
-                       "slidesToShow": 1
-                     }
-                   }, {
-                     "breakpoint": 554,
-                     "settings": {
-                       "slidesToShow": 1
-                     }
-                   }]'>
-
 {{#each myStudyList}}
 <div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
   <article>
@@ -388,36 +433,10 @@
   </article>
 </div>
 {{/each}}
-
-                </div>
   </script>
   
   <!-- 신청한 스터디 리스트 -->
   <script id="applied-study-template" type="text/x-handlebars-template">
-
-<div class="js-carousel u-carousel-v5 g-mx-minus-15"
-                  data-slides-show="3" data-slides-scroll="1"
-                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-                  data-responsive='[{
-                     "breakpoint": 992,
-                     "settings": {
-                       "slidesToShow": 2
-                     }
-                   }, {
-                     "breakpoint": 768,
-                     "settings": {
-                       "slidesToShow": 1
-                     }
-                   }, {
-                     "breakpoint": 554,
-                     "settings": {
-                       "slidesToShow": 1
-                     }
-                   }]'>
-
 {{#each appliedStudyList}}
 <div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
   <article>
@@ -436,36 +455,10 @@
   </article>
 </div>
 {{/each}}
-
-                </div>
   </script>
 
 <!-- 작업중.. -->
   <script id="picked-Study-template" type="text/x-handlebars-template">
-
-<div class="js-carousel u-carousel-v5 g-mx-minus-15"
-                  data-slides-show="3" data-slides-scroll="1"
-                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-                  data-responsive='[{
-                     "breakpoint": 992,
-                     "settings": {
-                       "slidesToShow": 2
-                     }
-                   }, {
-                     "breakpoint": 768,
-                     "settings": {
-                       "slidesToShow": 1
-                     }
-                   }, {
-                     "breakpoint": 554,
-                     "settings": {
-                       "slidesToShow": 1
-                     }
-                   }]'>
-
 {{#each         }}
 <div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
   <article>
@@ -484,8 +477,6 @@
   </article>
 </div>
 {{/each}}
-
-                </div>
   </script>
 
   <!-- JS Global Compulsory -->
