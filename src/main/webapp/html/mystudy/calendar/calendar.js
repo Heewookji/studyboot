@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1].substring(0,1),
     eventSourceSuccess: function(content, xhr) {
-      console.log(content); // event 배열 목록이 출력됨
-      console.log(content[content.length-1]); // 배열의 마지막 방에는 boolean 값이 들어있다. 
+      //console.log(content); // event 배열 목록이 출력됨
+      console.log("스터디장? " + content[content.length-1]); // 배열의 마지막 방에는 boolean 값이 들어있다. 
       window.calendarContent = content[content.length-1]; // window.calendarContent에는 스터디장 유무가 들어있다.
       return content.eventArray;
     },
@@ -67,11 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 });
 
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+
 //날짜를 눌렀을때 일정추가 모달 버튼이 눌려서, 일정을 추가할 수 있고, 선택한 날짜 자동으로 입력됨.
 $(document.body).bind('dateClick', () => {
-  //$('#schedule-title').empty();
-  //$('#schedule-title').value=null;
-  //$('#schedule-title').val("");
   $('#schedule-title').attr("value", "");
   $('#schedule-edt').attr("value", "");
   $('#schedule-memo').empty();
@@ -79,11 +78,9 @@ $(document.body).bind('dateClick', () => {
   $('#schedule-add-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-update-btn').hide(); // 모달의 수정 버튼 숨김
 
-  //$('schedule-update-btn').attr("hidden", hidden);
   $('#calendar-add-modal-btn').click();
   $('#schedule-sdt').attr("value", window.dateStr + 'T00:00'); // 클릭한 날짜 + 00시 00분 으로 초기 세팅
 });
-/* --------------------------------------------------------------------------------------------- */
 
 //일정을 등록하는 버튼
 $('#schedule-add-btn').click(() => {
@@ -101,6 +98,22 @@ $('#schedule-add-btn').click(() => {
     alert("일정 내용을 입력해 주세요.");
     return;
   } 
+
+
+  // 2019-05-12T00:00
+  // 시작일과 종료일을 비교하기위해 input에 입력한 날짜 들을 잘라서 Int로 변환시킨다.
+  var startDateTime = parseInt($('#schedule-sdt').val().substring(0, 4) +
+      $('#schedule-sdt').val().substring(5, 7) + $('#schedule-sdt').val().substring(8, 10) +
+      $('#schedule-sdt').val().substring(11, 13) +  $('#schedule-sdt').val().substring(14, 16));
+
+  var endDateTime = parseInt($('#schedule-edt').val().substring(0, 4) +
+      $('#schedule-edt').val().substring(5, 7) + $('#schedule-edt').val().substring(8, 10) +
+      $('#schedule-edt').val().substring(11, 13) +  $('#schedule-edt').val().substring(14, 16));
+
+  if(startDateTime >= endDateTime) {
+    alert("시작일과 종료일을 확인 해 주세요");
+    return;
+  }
 
   $.ajax({
     url : "../../app/json/mystudyschedule/add",
@@ -132,8 +145,8 @@ function loadDetail(no) {
     updateEndDate = obj.end.substring(0, 10); // 업데이트때 사용할 년, 월, 일
 
     var startM = obj.start.substring(5, 7); // 월
-    var startD = obj.start.substring(8, 10); // 일
     var endM = obj.end.substring(5, 7); // 월
+    var startD = obj.start.substring(8, 10); // 일
     var endD = obj.end.substring(8, 10); // 일
     var startT = obj.start.substring(11, 16); // 시간
     var endT = obj.end.substring(11, 16); // 시간
@@ -171,7 +184,6 @@ $('#event-delete-btn').click(() => {
   }
 });
 
-/* ------------------------------------------------------------------------------------------------ */
 //디테일에서 수정버튼 누르면 실행되는 곳. 
 $('#event-update-btn').click(() => {
 
@@ -198,6 +210,35 @@ $('#event-update-btn').click(() => {
 
 
 $('#schedule-update-btn').click(() => {
+
+  if($('#schedule-title').val().length === 0) {
+    alert("일정 제목을 입력해 주세요.");
+    return;
+  } else if($('#schedule-sdt').val().length === 0) {
+    alert("일정 시작일을 입력해 주세요.");
+    return;
+  } else if($('#schedule-edt').val().length === 0) {
+    alert("일정 종료일을 입력해 주세요.");
+    return;
+  } else if($('#schedule-memo').val().length === 0) {
+    alert("일정 내용을 입력해 주세요.");
+    return;
+  } 
+
+  // 2019-05-12T00:00
+  // 시작일과 종료일을 비교하기위해 input에 입력한 날짜 들을 잘라서 Int로 변환시킨다.
+  var startDateTime = parseInt($('#schedule-sdt').val().substring(0, 4) +
+      $('#schedule-sdt').val().substring(5, 7) + $('#schedule-sdt').val().substring(8, 10) +
+      $('#schedule-sdt').val().substring(11, 13) +  $('#schedule-sdt').val().substring(14, 16));
+
+  var endDateTime = parseInt($('#schedule-edt').val().substring(0, 4) +
+      $('#schedule-edt').val().substring(5, 7) + $('#schedule-edt').val().substring(8, 10) +
+      $('#schedule-edt').val().substring(11, 13) +  $('#schedule-edt').val().substring(14, 16));
+
+  if(startDateTime >= endDateTime) {
+    alert("시작일과 종료일을 확인 해 주세요");
+    return;
+  }
 
   if(window.calendarContent === false){
     alert("수정 권한이 없습니다.");
