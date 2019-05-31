@@ -9,12 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: [ 'interaction', 'dayGrid' ],
+    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     locale: 'ko',
     defaultDate: new Date(),
     editable: true,
     eventLimit: true, // allow "more" link when too many events
     selectable: true,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+    },
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       window.eventDate = info.event; // 클릭한 일정의 객체를 뽑아 넣음
       if(window.calendarContent === false) { // 스터디 장이 아니면 이벤트 버튼을 눌렀을 때 닫기 버튼만 보이기
