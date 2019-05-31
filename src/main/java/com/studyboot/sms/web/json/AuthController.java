@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
@@ -80,14 +79,9 @@ public class AuthController {
     if (loginUser != null) {
 
       List<Study> myStudyList = (List<Study>)session.getAttribute("myStudyList");
-      List<AppliedStudy> appliedStudyList = memberService.appliedStudyList(loginUser.getNo());
 
       if(myStudyList != null) {
         content.put("myStudyList", myStudyList);
-      }
-      
-      if(myStudyList != null) {
-        content.put("appliedStudyList", appliedStudyList);
       }
       
       content.put("status", "success");

@@ -1,6 +1,7 @@
 package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
+import com.studyboot.sms.service.StudyMemberService;
 
 
 @RestController("json/MemberController")
@@ -18,7 +22,7 @@ import com.studyboot.sms.service.MemberService;
 public class MemberController {
 
   @Autowired MemberService memberService;
-
+  @Autowired StudyMemberService studyMemberService;
   /*
   @GetMapping("delete")
   public Object delete(int no) {
@@ -37,6 +41,34 @@ public class MemberController {
   }
    */
 
+  @GetMapping("studylist")
+  public Object studylist(HttpSession session) {
+    
+    Member loginUser = (Member)session.getAttribute("loginUser");
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    if (loginUser != null) {
+
+      List<Study> myStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
+      List<AppliedStudy> appliedStudyList = memberService.appliedStudyList(loginUser.getNo());
+
+      if(myStudyList != null) {
+        content.put("myStudyList", myStudyList);
+      }
+      
+      if(appliedStudyList != null) {
+        content.put("appliedStudyList", appliedStudyList);
+      }
+      
+      content.put("status", "success");
+      content.put("user", loginUser);
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
+  }
+  
   @GetMapping("detail")
   public Object detail(HttpSession session) {
     
