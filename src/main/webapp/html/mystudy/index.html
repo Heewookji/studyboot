@@ -36,6 +36,8 @@
   <link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
   <link rel='stylesheet' href='../../fullcalendar/daygrid/main.css'/>
   <link rel='stylesheet' href='./calendar/calendar.css'  />
+  <link rel='stylesheet'  href='../../fullcalendar/timegrid/main.css'/>
+  <link rel='stylesheet'  href='../../fullcalendar/list/main.css'/>
 
 </head>
 
@@ -340,10 +342,11 @@
       <!-- <div class="modal-body" id="study-end-date"></div> --> <!-- 일정 종료 시간 -->
       <div class="modal-body" id="event-detail"></div> <!-- 일정 내용 --> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">후기</button>
-        <button type="button" class="btn btn-primary">출석</button>
+        <button type="button" class="btn btn-primary" id="event-review-btn">후기</button>
+        <button type="button" class="btn btn-primary" id="event-attend-btn">출석</button>
         <button type="button" class="btn btn-primary" id="event-update-btn">수정</button>
         <button type="button" class="btn btn-primary" id="event-delete-btn">삭제</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="event-close-btn">닫기</button>
       </div>
     </div>
   </div>
@@ -475,6 +478,11 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
   <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/core/locales/ko.js'></script>
+  
+<script src='../../fullcalendar/timegrid/main.js'></script>
+<script src='../../fullcalendar/list/main.js'></script>
+  
+  
   <script src='./calendar/calendar.js'></script>
 
 

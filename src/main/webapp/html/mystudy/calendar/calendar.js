@@ -2,31 +2,61 @@ var eventDate,
 updateStartDate,
 updateEndDate,
 updateMemoDate,
-updateTitleDate;
+updateTitleDate,
+studyNo = location.href.split('=')[1].substring(0,1);
 
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: [ 'interaction', 'dayGrid' ],
+    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     locale: 'ko',
     defaultDate: new Date(),
     editable: true,
     eventLimit: true, // allow "more" link when too many events
     selectable: true,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+    },
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       window.eventDate = info.event; // 클릭한 일정의 객체를 뽑아 넣음
-      $('#calendar-detail-modal-btn').click();
-      //$(document.body).trigger('eventClick'); // 디테일 모달을 띄우기 위한 트리거
+      if(window.calendarContent === false) { // 스터디 장이 아니면 이벤트 버튼을 눌렀을 때 닫기 버튼만 보이기
+        $('#calendar-detail-modal-btn').click();
+        $('#event-review-btn').hide();
+        $('#event-attend-btn').hide();
+        $('#event-update-btn').hide();
+        $('#event-delete-btn').hide();
+
+        $('#event-close-btn').show();
+      } else { // 그 외의 회원일 경우 닫기 버튼만 안보이고 모든 버튼 보이기
+        $('#calendar-detail-modal-btn').click();
+        $('#event-review-btn').show();
+        $('#event-attend-btn').show();
+        $('#event-update-btn').show();
+        $('#event-delete-btn').show();
+
+        $('#event-close-btn').hide();
+      }
+
       loadDetail(info.event.id);
     },
-    events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1],
+
+    events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1].substring(0,1),
     eventSourceSuccess: function(content, xhr) {
-      console.log(content); // event 배열 목록이 출력됨
-      console.log(content[content.length-1]);
+      //console.log(content); // event 배열 목록이 출력됨
+      console.log("스터디장? " + content[content.length-1]); // 배열의 마지막 방에는 boolean 값이 들어있다. 
       window.calendarContent = content[content.length-1]; // window.calendarContent에는 스터디장 유무가 들어있다.
       return content.eventArray;
     },
+    eventDragStop: function(event, jsEvent, ui, view) { // 드래그 & 드롭 못하게 막음
+      //console.log(event.id); 
+      if (isElemOverDiv(ui, $('div#delete-events'))) {
+        calendar.fullCalendar('removeEvents', event.id); 
+      } 
+    },
+
     dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
       window.dateStr = info.dateStr;
       if(window.calendarContent === false){
@@ -35,16 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       //alert(window.dateStr);
       $(document.body).trigger('dateClick');
-    }
+    },
+    eventColor: '#72c02c',
+    eventTextColor: 'white'
   });
   calendar.render();
 });
 
+/* -------------------------------------------------------------------------------------------------------------------------------- */
+
 //날짜를 눌렀을때 일정추가 모달 버튼이 눌려서, 일정을 추가할 수 있고, 선택한 날짜 자동으로 입력됨.
 $(document.body).bind('dateClick', () => {
-  //$('#schedule-title').empty();
-  //$('#schedule-title').value=null;
-  //$('#schedule-title').val("");
   $('#schedule-title').attr("value", "");
   $('#schedule-edt').attr("value", "");
   $('#schedule-memo').empty();
@@ -52,15 +83,13 @@ $(document.body).bind('dateClick', () => {
   $('#schedule-add-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-update-btn').hide(); // 모달의 수정 버튼 숨김
 
-  //$('schedule-update-btn').attr("hidden", hidden);
   $('#calendar-add-modal-btn').click();
   $('#schedule-sdt').attr("value", window.dateStr + 'T00:00'); // 클릭한 날짜 + 00시 00분 으로 초기 세팅
 });
-/* --------------------------------------------------------------------------------------------- */
 
 //일정을 등록하는 버튼
 $('#schedule-add-btn').click(() => {
-  
+
   if($('#schedule-title').val().length === 0) {
     alert("일정 제목을 입력해 주세요.");
     return;
@@ -75,12 +104,28 @@ $('#schedule-add-btn').click(() => {
     return;
   } 
 
+
+  // 2019-05-12T00:00
+  // 시작일과 종료일을 비교하기위해 input에 입력한 날짜 들을 잘라서 Int로 변환시킨다.
+  var startDateTime = parseInt($('#schedule-sdt').val().substring(0, 4) +
+      $('#schedule-sdt').val().substring(5, 7) + $('#schedule-sdt').val().substring(8, 10) +
+      $('#schedule-sdt').val().substring(11, 13) +  $('#schedule-sdt').val().substring(14, 16));
+
+  var endDateTime = parseInt($('#schedule-edt').val().substring(0, 4) +
+      $('#schedule-edt').val().substring(5, 7) + $('#schedule-edt').val().substring(8, 10) +
+      $('#schedule-edt').val().substring(11, 13) +  $('#schedule-edt').val().substring(14, 16));
+
+  if(startDateTime >= endDateTime) {
+    alert("시작일과 종료일을 확인 해 주세요");
+    return;
+  }
+
   $.ajax({
     url : "../../app/json/mystudyschedule/add",
     type : "post",
     data : {
       title: $('#schedule-title').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
-      studyNo: location.href.split('=')[1],
+      studyNo: location.href.split('=')[1].substring(0,1),
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
       memo: $('#schedule-memo').val()
@@ -96,11 +141,6 @@ $('#schedule-add-btn').click(() => {
   });
 });
 
-//달력의 일정을 클릭하면 모달 버튼을 눌리게 함
-$(document.body).bind('eventClick', () => {
-  $('#calendar-detail-modal-btn').click();
-});
-
 //일정 디테일 출력을 처리할 함수
 function loadDetail(no) {
   $.getJSON('../../app/json/mystudyschedule/detail?no=' + no, function(obj) {
@@ -110,8 +150,8 @@ function loadDetail(no) {
     updateEndDate = obj.end.substring(0, 10); // 업데이트때 사용할 년, 월, 일
 
     var startM = obj.start.substring(5, 7); // 월
-    var startD = obj.start.substring(8, 10); // 일
     var endM = obj.end.substring(5, 7); // 월
+    var startD = obj.start.substring(8, 10); // 일
     var endD = obj.end.substring(8, 10); // 일
     var startT = obj.start.substring(11, 16); // 시간
     var endT = obj.end.substring(11, 16); // 시간
@@ -131,21 +171,24 @@ function loadDetail(no) {
 
 //일정 삭제하는 버튼updateMemoDate
 $('#event-delete-btn').click(() => {
-  
+
   if(window.calendarContent === false){
     alert("삭제 권한이 없습니다.");
     return;
   }
-  
+
   if(confirm('정말 삭제 하시겠습니까?')) {
-    $.getJSON('../../app/json/mystudyschedule/delete?no=' + window.eventDate.id,
+    $.getJSON('../../app/json/mystudyschedule/delete?eventNo=' + window.eventDate.id
+        + '&studyNo=' + studyNo, 
         function(obj) {
+      if (obj.status != 'success') {
+        alert(obj.status)
+      }
       location.reload();
     })
   }
 });
 
-/* ------------------------------------------------------------------------------------------------ */
 //디테일에서 수정버튼 누르면 실행되는 곳. 
 $('#event-update-btn').click(() => {
 
@@ -153,10 +196,9 @@ $('#event-update-btn').click(() => {
     alert("수정 권한이 없습니다.");
     return;
   }
-  
+
   $('#schedule-memo').empty(); // textarea(memo)에 누적이 안되게 일단 비워준다.
-  //$('#schedule-title').attr("value", "");
-//$('#schedule-title').val("asf");
+
   resetForm();
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
@@ -173,12 +215,41 @@ $('#event-update-btn').click(() => {
 
 
 $('#schedule-update-btn').click(() => {
-  
+
+  if($('#schedule-title').val().length === 0) {
+    alert("일정 제목을 입력해 주세요.");
+    return;
+  } else if($('#schedule-sdt').val().length === 0) {
+    alert("일정 시작일을 입력해 주세요.");
+    return;
+  } else if($('#schedule-edt').val().length === 0) {
+    alert("일정 종료일을 입력해 주세요.");
+    return;
+  } else if($('#schedule-memo').val().length === 0) {
+    alert("일정 내용을 입력해 주세요.");
+    return;
+  } 
+
+  // 2019-05-12T00:00
+  // 시작일과 종료일을 비교하기위해 input에 입력한 날짜 들을 잘라서 Int로 변환시킨다.
+  var startDateTime = parseInt($('#schedule-sdt').val().substring(0, 4) +
+      $('#schedule-sdt').val().substring(5, 7) + $('#schedule-sdt').val().substring(8, 10) +
+      $('#schedule-sdt').val().substring(11, 13) +  $('#schedule-sdt').val().substring(14, 16));
+
+  var endDateTime = parseInt($('#schedule-edt').val().substring(0, 4) +
+      $('#schedule-edt').val().substring(5, 7) + $('#schedule-edt').val().substring(8, 10) +
+      $('#schedule-edt').val().substring(11, 13) +  $('#schedule-edt').val().substring(14, 16));
+
+  if(startDateTime >= endDateTime) {
+    alert("시작일과 종료일을 확인 해 주세요");
+    return;
+  }
+
   if(window.calendarContent === false){
     alert("수정 권한이 없습니다.");
     return;
   }
-  
+
   $.ajax({
     url : "../../app/json/mystudyschedule/update",
     type : "post",
@@ -213,7 +284,7 @@ function resetForm() {
 
 
 
-// 리더값을 받아오기 위한 리스트.
+//리더값을 받아오기 위한 리스트.
 function loadList() {
 
   $.getJSON('../../app/json/mystudyschedule/update',

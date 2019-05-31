@@ -84,11 +84,24 @@ public class MyStudyScheduleController {
   }
 
   @GetMapping("delete")
-  public Object delete(int no) {
-
+  public Object delete(int eventNo, int studyNo, HttpSession session) {
+    System.out.println(studyNo);
     HashMap<String,Object> content = new HashMap<>();
+
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", ((Member) session.getAttribute("loginUser")).getNo());
+    studyAndUserNo.put("studyNo", studyNo);
+
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+    
+    if (leaderYesOrNo == false) {
+      
+      content.put("status", "스터디 장만 일정을 삭제 할 수 있습니다.");
+      return content;
+    }
+    
     try {
-      if (myStudyScheduleService.delete(no) == 0) 
+      if (myStudyScheduleService.delete(eventNo) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
 

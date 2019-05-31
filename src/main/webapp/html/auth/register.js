@@ -44,6 +44,8 @@ $("#email-btn").click((e) => {
     //다시 요청하세요 지우기
     $('#emailNo').tooltip('disable');
     $('#emailNo').tooltip('hide');
+    
+    $("#emailNo").prop("readonly", false);
 
     clearInterval(emailCountDownFunction);
     emailCountDown();
@@ -73,6 +75,9 @@ $("#email-btn").click((e) => {
 		$("#emailNo").addClass("is-valid");
 		$('#email-btn').tooltip('disable');
 		$('#email-btn').tooltip('hide');
+		$("#emailNo").prop("readonly", true);
+		$("#email-btn").prop("disabled", true);
+		clearInterval(emailCountDownFunction);
 	    } else{
 		$("#emailNo").removeClass("is-valid");
 		$("#emailNo").addClass("is-invalid");
@@ -88,6 +93,8 @@ $("#phone-btn").click((e) => {
     //다시 요청하세요 지우기
     $('#phoneNo').tooltip('disable');
     $('#phoneNo').tooltip('hide');
+    
+    $("#phoneNo").prop("readonly", false);
 
 
     clearInterval(phoneCountDownFunction);
@@ -116,6 +123,9 @@ $("#phone-btn").click((e) => {
 		$("#phoneNo").addClass("is-valid");
 		$('#phone-btn').tooltip('disable');
 		$('#phone-btn').tooltip('hide');
+		$("#phoneNo").prop("readonly", true);
+		$("#phone-btn").prop("disabled", true);
+		clearInterval(phoneCountDownFunction);
 	    } else{
 		$("#phoneNo").removeClass("is-valid");
 		$("#phoneNo").addClass("is-invalid");
@@ -367,7 +377,8 @@ function checkName(name){
 
 function emailCountDown(){
     var future = new Date();
-    future.setMinutes(future.getMinutes()+3);
+//    future.setMinutes(future.getMinutes()+3);
+    future.setSeconds(future.getSeconds()+15);
     var countDownDate = future.getTime();
     // Update the count down every 1 second
     emailCountDownFunction = setInterval(function() {
@@ -402,7 +413,8 @@ function emailCountDown(){
 
 function phoneCountDown(){
     var future = new Date();
-    future.setMinutes(future.getMinutes()+3);
+//    future.setMinutes(future.getMinutes()+3);
+    future.setSeconds(future.getSeconds()+15);
     var countDownDate = future.getTime();
     // Update the count down every 1 second
 
