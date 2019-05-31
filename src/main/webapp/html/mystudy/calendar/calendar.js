@@ -16,17 +16,36 @@ document.addEventListener('DOMContentLoaded', function() {
     selectable: true,
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       window.eventDate = info.event; // 클릭한 일정의 객체를 뽑아 넣음
-      $('#calendar-detail-modal-btn').click();
-      //$(document.body).trigger('eventClick'); // 디테일 모달을 띄우기 위한 트리거
+
+      if(window.calendarContent === false) { // 스터디 장이 아니면 이벤트 버튼을 눌렀을 때 닫기 버튼만 보이기
+        $('#calendar-detail-modal-btn').click();
+        $('#event-review-btn').hide();
+        $('#event-attend-btn').hide();
+        $('#event-update-btn').hide();
+        $('#event-delete-btn').hide();
+        
+        $('#event-close-btn').show();
+      } else { // 그 외의 회원일 경우 닫기 버튼만 안보이고 모든 버튼 보이기
+        $('#calendar-detail-modal-btn').click();
+        $('#event-review-btn').show();
+        $('#event-attend-btn').show();
+        $('#event-update-btn').show();
+        $('#event-delete-btn').show();
+
+        $('#event-close-btn').hide();
+      }
+
       loadDetail(info.event.id);
     },
-    events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1],
+    
+    events:  '../../app/json/mystudyschedule/list?no=' + location.href.split('=')[1].substring(0,1),
     eventSourceSuccess: function(content, xhr) {
       console.log(content); // event 배열 목록이 출력됨
-      console.log(content[content.length-1]);
+      console.log(content[content.length-1]); // 배열의 마지막 방에는 boolean 값이 들어있다. 
       window.calendarContent = content[content.length-1]; // window.calendarContent에는 스터디장 유무가 들어있다.
       return content.eventArray;
     },
+    
     dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
       window.dateStr = info.dateStr;
       if(window.calendarContent === false){
@@ -60,7 +79,7 @@ $(document.body).bind('dateClick', () => {
 
 //일정을 등록하는 버튼
 $('#schedule-add-btn').click(() => {
-  
+
   if($('#schedule-title').val().length === 0) {
     alert("일정 제목을 입력해 주세요.");
     return;
@@ -80,7 +99,7 @@ $('#schedule-add-btn').click(() => {
     type : "post",
     data : {
       title: $('#schedule-title').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
-      studyNo: location.href.split('=')[1],
+      studyNo: location.href.split('=')[1].substring(0,1),
       start: $('#schedule-sdt').val(),
       end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
       memo: $('#schedule-memo').val()
@@ -94,11 +113,6 @@ $('#schedule-add-btn').click(() => {
       alert("등록에 실패 했습니다.");
     }
   });
-});
-
-//달력의 일정을 클릭하면 모달 버튼을 눌리게 함
-$(document.body).bind('eventClick', () => {
-  $('#calendar-detail-modal-btn').click();
 });
 
 //일정 디테일 출력을 처리할 함수
@@ -131,12 +145,12 @@ function loadDetail(no) {
 
 //일정 삭제하는 버튼updateMemoDate
 $('#event-delete-btn').click(() => {
-  
+
   if(window.calendarContent === false){
     alert("삭제 권한이 없습니다.");
     return;
   }
-  
+
   if(confirm('정말 삭제 하시겠습니까?')) {
     $.getJSON('../../app/json/mystudyschedule/delete?no=' + window.eventDate.id,
         function(obj) {
@@ -153,10 +167,9 @@ $('#event-update-btn').click(() => {
     alert("수정 권한이 없습니다.");
     return;
   }
-  
+
   $('#schedule-memo').empty(); // textarea(memo)에 누적이 안되게 일단 비워준다.
-  //$('#schedule-title').attr("value", "");
-//$('#schedule-title').val("asf");
+
   resetForm();
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
@@ -173,12 +186,12 @@ $('#event-update-btn').click(() => {
 
 
 $('#schedule-update-btn').click(() => {
-  
+
   if(window.calendarContent === false){
     alert("수정 권한이 없습니다.");
     return;
   }
-  
+
   $.ajax({
     url : "../../app/json/mystudyschedule/update",
     type : "post",
@@ -213,7 +226,7 @@ function resetForm() {
 
 
 
-// 리더값을 받아오기 위한 리스트.
+//리더값을 받아오기 위한 리스트.
 function loadList() {
 
   $.getJSON('../../app/json/mystudyschedule/update',
