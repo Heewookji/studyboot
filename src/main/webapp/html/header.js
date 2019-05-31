@@ -35,9 +35,6 @@ $(document.body).bind('loaded-header', () => {
   // initialization of go to
   $.HSCore.components.HSGoTo.init('.js-go-to');
 
-  // initialization of carousel
-  $.HSCore.components.HSCarousel.init('.js-carousel');
-
   // initialization of HSDropdown component
   $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
     afterOpen: function(){

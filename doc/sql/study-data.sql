@@ -398,6 +398,24 @@ insert into sms_apl_std(member_id, std_id, dtrm) values(4, 4, '같이 공부하�
 insert into sms_apl_std(member_id, std_id, dtrm, state, apl_date) values(4, 9, '열심히 하겠습니다!', true, 20190420);
 insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(4, 10, '이 스터디 정말 하고 싶습니다', 20190522);
 
+-- 회원 스터디 신청 정보
+-- 회원번호, 스터디번호, 스터디 각오, 열람여부, 신청일
+
+insert into sms_pick_std(member_id, std_id) values(2, 9);
+insert into sms_pick_std(member_id, std_id) values(2, 10);
+insert into sms_pick_std(member_id, std_id) values(2, 11);
+insert into sms_pick_std(member_id, std_id) values(2, 12);
+
+insert into sms_pick_std(member_id, std_id) values(3, 9);
+insert into sms_pick_std(member_id, std_id) values(3, 10);
+insert into sms_pick_std(member_id, std_id) values(3, 11);
+insert into sms_pick_std(member_id, std_id) values(3, 12);
+
+insert into sms_pick_std(member_id, std_id) values(4, 13);
+insert into sms_pick_std(member_id, std_id) values(4, 14);
+insert into sms_pick_std(member_id, std_id) values(4, 15);
+insert into sms_pick_std(member_id, std_id) values(4, 16);
+
 -- 게시판 분류 (문의,신고)생성
 insert into sms_board_cls (cls_id, cls_name)
   values(1, '문의');

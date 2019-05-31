@@ -3,6 +3,7 @@ package com.studyboot.sms.service;
 import java.util.List;
 import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.Study;
 
 public interface MemberService {
 
@@ -15,4 +16,5 @@ public interface MemberService {
   int nickNameCheck(String nickName);
   boolean passwordCheck(String email, String password);
   List<AppliedStudy> appliedStudyList(int no);
+  List<Study> pickedStudyList(int no);
 }

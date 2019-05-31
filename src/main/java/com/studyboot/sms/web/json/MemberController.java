@@ -41,8 +41,9 @@ public class MemberController {
   }
    */
 
-  @GetMapping("studylist")
-  public Object studylist(HttpSession session) {
+  // 회원의 스터디 목록
+  @GetMapping("mystudy")
+  public Object mystudy(HttpSession session) {
     
     Member loginUser = (Member)session.getAttribute("loginUser");
 
@@ -50,15 +51,19 @@ public class MemberController {
 
     if (loginUser != null) {
 
-      List<Study> myStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
+      List<Study> doingStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
       List<AppliedStudy> appliedStudyList = memberService.appliedStudyList(loginUser.getNo());
-
-      if(myStudyList != null) {
-        content.put("myStudyList", myStudyList);
+      List<Study> pickedStudyList = memberService.pickedStudyList(loginUser.getNo());
+      
+      if(doingStudyList != null) {
+        content.put("doingStudyList", doingStudyList);
       }
       
       if(appliedStudyList != null) {
         content.put("appliedStudyList", appliedStudyList);
+      }
+      if(pickedStudyList != null) {
+        content.put("pickedStudyList", pickedStudyList);
       }
       
       content.put("status", "success");

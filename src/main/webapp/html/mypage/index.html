@@ -170,6 +170,27 @@
     </div>
   </div>
   <!-- inquiry modal -->
+  
+  <!-- imageSetting modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"
+      role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-primary"
+            id="imageUpdate-btn">변경</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End imageSetting modal -->
 
   <!-- content -->
   <div class="container g-pt-70 g-pb-30"
@@ -181,7 +202,7 @@
         <div class="u-block-hover g-pos-rel">
           <figure>
             <img class="img-fluid w-100 u-block-hover__main--zoom-v1"
-              src="../../Unify/assets/img-temp/400x450/img5.jpg"
+              src="../../upload/images/test2.jpeg"
               alt="Image Description">
           </figure>
 
@@ -195,15 +216,8 @@
                 class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
                 <li class="list-inline-item align-middle g-mx-7"><a
                   class="u-icon-v1 u-icon-size--md g-color-white"
-                  href="#"> <i class="icon-note u-line-icon-pro"></i>
-                </a></li>
-                <li class="list-inline-item align-middle g-mx-7"><a
-                  class="u-icon-v1 u-icon-size--md g-color-white"
-                  href="#"> <i class="icon-notebook u-line-icon-pro"></i>
-                </a></li>
-                <li class="list-inline-item align-middle g-mx-7"><a
-                  class="u-icon-v1 u-icon-size--md g-color-white"
-                  href="#"> <i class="icon-settings u-line-icon-pro"></i>
+                  href="#" data-toggle="modal" data-target="#imageModal" id="imageSetting">
+                  <i class="icon-settings u-line-icon-pro"></i>
                 </a></li>
               </ul>
               <!-- End Figure Social Icons -->
@@ -275,15 +289,18 @@
           data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
           <li class="nav-item"><a class="nav-link g-py-10 active"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--1" role="tab">진행중인
+            href="#nav-1-1-default-hor-left-underline--1" 
+            role="tab" id="doingStudyTab">진행중인
               스터디</a></li>
           <li class="nav-item"><a class="nav-link g-py-10"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--2" role="tab">신청한
+            href="#nav-1-1-default-hor-left-underline--2" 
+            role="tab" id="appliedStudyTab">신청한
               스터디</a></li>
           <li class="nav-item"><a class="nav-link g-py-10"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--3" role="tab">찜한
+            href="#nav-1-1-default-hor-left-underline--3" 
+            role="tab" id="pickedStudyTab">찜한
               스터디</a></li>
         </ul>
         <!-- End Nav tabs -->
@@ -295,10 +312,10 @@
           <div class="tab-pane fade show active"
             id="nav-1-1-default-hor-left-underline--1" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
-            <!-- myStudyList -->
+            <!-- doingStudyList -->
             <div class="container g-pb-100">
               <div class="g-px-30--lg">
-                <div id="myStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+                <div id="doingStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
                   data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
@@ -323,7 +340,7 @@
                 </div>
               </div>
             </div>
-            <!-- End myStudyList -->
+            <!-- End doingStudyList -->
           </div>
           <!-- End 진행중인 스터디 -->
           
@@ -363,11 +380,11 @@
           </div>
           <!-- End 신청한 스터디 -->
           
-          <!-- 진행중인 스터디 -->
-          <div class="tab-pane fade show active"
+          <!-- 찜한 스터디 -->
+          <div class="tab-pane fade"
             id="nav-1-1-default-hor-left-underline--3" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
-            <!-- myStudyList -->
+            <!-- pickedStudyList -->
             <div class="container g-pb-100">
               <div class="g-px-30--lg">
                 <div id="pickedStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
@@ -395,9 +412,9 @@
                 </div>
               </div>
             </div>
-            <!-- End myStudyList -->
+            <!-- End pickedStudyList -->
           </div>
-          <!-- End 진행중인 스터디 -->
+          <!-- End 찜한 스터디 -->
           
         </div>
         <!-- End Tab panels -->
@@ -413,9 +430,9 @@
 
   <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 
-  <!-- 마이스터디 리스트 -->
-  <script id="myStudy-template" type="text/x-handlebars-template">
-{{#each myStudyList}}
+  <!-- 진행중인 스터디 리스트 -->
+  <script id="doing-study-template" type="text/x-handlebars-template">
+{{#each doingStudyList}}
 <div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
   <article>
     <img class="img-fluid w-100"
@@ -457,9 +474,9 @@
 {{/each}}
   </script>
 
-<!-- 작업중.. -->
-  <script id="picked-Study-template" type="text/x-handlebars-template">
-{{#each         }}
+<!-- 찜한 스터디 -->
+  <script id="picked-study-template" type="text/x-handlebars-template">
+{{#each pickedStudyList}}
 <div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
   <article>
     <img class="img-fluid w-100"
