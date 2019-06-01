@@ -10,8 +10,18 @@ phoneCountDownFunction
 //js와 css 의 초기화 작업이다.
 $(document).on('ready', function () {
 
-    //핸드폰 인증 api
-    IMP.init("imp46277948"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+    //네이버 로그인 초기화
+    var naverLogin = new naver.LoginWithNaverId(
+	    {
+		clientId: "SfQg5WbbEwfRelyDmqBo",
+		callbackUrl: "http://localhost:8080/studyboot/html/auth/naverregistercallback.html",
+		isPopup: true, /* 팝업을 통한 연동처리 여부 */
+		loginButton: {color: "green", type: 1, height: 30} /* 로그인 버튼의 타입을 지정 */
+	    }
+    );
+
+    /* 설정정보를 초기화하고 연동을 준비 */
+    naverLogin.init();
 
     // initialization of tabs
     $.HSCore.components.HSTabs.init('[role="tablist"]');
@@ -44,7 +54,7 @@ $("#email-btn").click((e) => {
     //다시 요청하세요 지우기
     $('#emailNo').tooltip('disable');
     $('#emailNo').tooltip('hide');
-    
+
     $("#emailNo").prop("readonly", false);
 
     clearInterval(emailCountDownFunction);
@@ -93,7 +103,7 @@ $("#phone-btn").click((e) => {
     //다시 요청하세요 지우기
     $('#phoneNo').tooltip('disable');
     $('#phoneNo').tooltip('hide');
-    
+
     $("#phoneNo").prop("readonly", false);
 
 
@@ -377,7 +387,7 @@ function checkName(name){
 
 function emailCountDown(){
     var future = new Date();
-//    future.setMinutes(future.getMinutes()+3);
+//  future.setMinutes(future.getMinutes()+3);
     future.setSeconds(future.getSeconds()+15);
     var countDownDate = future.getTime();
     // Update the count down every 1 second
@@ -413,7 +423,7 @@ function emailCountDown(){
 
 function phoneCountDown(){
     var future = new Date();
-//    future.setMinutes(future.getMinutes()+3);
+//  future.setMinutes(future.getMinutes()+3);
     future.setSeconds(future.getSeconds()+15);
     var countDownDate = future.getTime();
     // Update the count down every 1 second
@@ -447,6 +457,5 @@ function phoneCountDown(){
     }, 1000);
 
 }
-
 
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NaverLoginSDK</title>
+</head>
+
+<body>
+
+ <!-- JS Global Compulsory -->
+ <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>
+ <!-- (1) LoginWithNaverId Javscript SDK -->
+ <script type="text/javascript"
+  src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+  charset="utf-8"></script>
+
+ <!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
+ <script>
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+		    clientId : "SfQg5WbbEwfRelyDmqBo",
+		    callbackUrl : "http://localhost:8080/studyboot/html/auth/naverregistercallback.html",
+		    isPopup : true,
+		    callbackHandle : true
+		/* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */
+		});
+
+	/* (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */
+	naverLogin.init();
+
+	/* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */
+	window.addEventListener('load', function() {
+
+	    naverLogin.getLoginStatus(function(status) {
+
+		if (status) {
+		    //필수 정보 누락시
+		    var email = naverLogin.user.getEmail();
+		    var name = naverLogin.user.getName();
+		    var nickName = naverLogin.user.getNickName();
+
+		    if (email == undefined || email == null
+			    || name == undefined || name == null
+			    || nickName == undefined || nickName == null) {
+			alert("필수정보 제공 항목에 동의해주세요.");
+			/* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */
+			naverLogin.reprompt();
+			return;
+
+		    } else {
+
+			$.ajax({
+			    url : '/studyboot/app/json/auth/registernaver',
+			    type : 'post',
+			    dataType : 'text',
+			    data : {
+				email : email,
+				name : name,
+				nickName : nickName
+			    },
+
+			    //잘끝났다면, 팝업창 닫고 부모창은 메인페이지로 넘긴다.
+			    success : function(data) {
+				var obj = JSON.parse(data);
+				close();
+				$(opener.location).attr("href", "/studyboot;");
+			    }
+			});
+
+		    }
+
+		} else {
+		    console.log("callback 처리에 실패하였습니다.");
+		}
+
+	    });
+
+	});
+    </script>
+
+
+</body>
+
+</html>

@@ -43,9 +43,9 @@ public class AuthController {
       content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
     } else {
       session.setAttribute("loginUser", member);
-      
+
       List<Study> myStudyList = studyMemberService.findMyStudyList(member.getNo());
-      
+
       if(myStudyList != null) {
         session.setAttribute("myStudyList", myStudyList);
       }
@@ -83,7 +83,7 @@ public class AuthController {
       if(myStudyList != null) {
         content.put("myStudyList", myStudyList);
       }
-      
+
       content.put("status", "success");
       content.put("user", loginUser);
     } else {
@@ -91,6 +91,40 @@ public class AuthController {
     }
     return content;
   }
+
+
+  
+  @PostMapping("registernaver")
+  public Object registerNaver(HttpSession session,
+      String email,
+      String nickName,
+      String name
+      ) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    
+    System.out.println(email);
+    System.out.println(nickName);
+    System.out.println(name);
+    
+    content.put("status", "success");
+    
+    return content;
+  }
+  
+  @PostMapping("loginnaver")
+  public Object loginNaver(HttpSession session,
+      String email
+      ) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    
+    System.out.println("러그인"+email);
+    
+    content.put("status", "fail");
+    
+    return content;
+  }
+  
+  
   
 }
 
