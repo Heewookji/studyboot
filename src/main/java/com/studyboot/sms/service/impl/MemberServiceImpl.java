@@ -26,6 +26,14 @@ public class MemberServiceImpl implements MemberService {
     this.appliedStudyDao = appliedStudyDao;
     this.studyDao = studyDao;
   }
+  
+  
+  @Override
+  public int add(Member member) {
+    
+    return memberDao.insert(member);
+  }
+  
 
   @Override
   public List<Integer> findMemberNoByKeyword(String keyword) {
@@ -45,6 +53,11 @@ public class MemberServiceImpl implements MemberService {
 
     return memberDao.findByKeywordMsg(keywordMap);
 
+  }
+  
+  @Override
+  public Member get(String email) {
+    return  memberDao.findByEmail(email);
   }
   
   @Override
@@ -73,6 +86,8 @@ public class MemberServiceImpl implements MemberService {
     }
     return memberDao.update(member);
   }
+  
+  
 
   @Override
   public int nickNameCheck(String nickName) {
@@ -104,6 +119,7 @@ public class MemberServiceImpl implements MemberService {
   public List<Study> pickedStudyList(int no) {
     return studyDao.findPickedStudyByUser(no);
   }
+
   
 }
 

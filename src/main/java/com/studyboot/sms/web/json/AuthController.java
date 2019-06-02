@@ -92,40 +92,61 @@ public class AuthController {
     return content;
   }
 
-
-  
-  @PostMapping("registernaver")
-  public Object registerNaver(HttpSession session,
+  @PostMapping("register")
+  public Object register(HttpSession session,
       String email,
       String nickName,
-      String name
+      String name,
+      String password
       ) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
-    
-    System.out.println(email);
-    System.out.println(nickName);
-    System.out.println(name);
-    
-    content.put("status", "success");
+
+    Member member = new Member();
+
+    try {
+    //등록시 에러가 나면 알려준다
+      member.setEmail(email);
+      member.setNickName(nickName);
+      member.setName(name);
+      if(password != null) {
+        if(!password.equals("undefined"))
+        member.setPassword(password);
+      }
+      memberService.add(member);
+      content.put("status", "success");
+    }catch(Exception e) {
+      content.put("status", "fail");
+    }
+
     
     return content;
   }
   
-  @PostMapping("loginnaver")
-  public Object loginNaver(HttpSession session,
+  
+  @PostMapping("sociallogin")
+  public Object socialLogin(HttpSession session,
       String email
       ) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
+
+    Member member = memberService.get(email);
     
-    System.out.println("러그인"+email);
-    
-    content.put("status", "fail");
-    
+    if (member == null) {
+      content.put("status", "fail");
+    } else {
+      session.setAttribute("loginUser", member);
+      List<Study> myStudyList = studyMemberService.findMyStudyList(member.getNo());
+      if(myStudyList != null) {
+        session.setAttribute("myStudyList", myStudyList);
+      }
+      content.put("status", "success");
+    }
+
     return content;
   }
-  
-  
-  
+
+
+
 }
 
 

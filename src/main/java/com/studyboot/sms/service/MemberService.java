@@ -9,6 +9,7 @@ public interface MemberService {
 
   List<Integer> findMemberNoByKeyword(String keyword);
   List<Integer> findMemberNoMsg(String keyword);
+  Member get(String email);
   Member get(String email, String password);
   Member get(int no);
   int findByNickName(String nickName);
@@ -17,4 +18,5 @@ public interface MemberService {
   boolean passwordCheck(String email, String password);
   List<AppliedStudy> appliedStudyList(int no);
   List<Study> pickedStudyList(int no);
+  int add(Member member);
 }

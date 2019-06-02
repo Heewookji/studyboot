@@ -10,9 +10,11 @@ public interface MemberDao {
   List<Integer> findByKeywordMsg(HashMap<String, Object> keywordMap);
   Member findByEmailPassword(HashMap<String, Object> paramMap);
   Member findByNo(int no);
+  Member findByEmail(String email);
   int findByNickName(String nickName);
   int update(Member member);
   int updatePassword(Member member);
+  int insert(Member member);
 }
 
 

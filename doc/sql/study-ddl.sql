@@ -116,17 +116,17 @@ ALTER TABLE sms_member_endrate
 -- 회원
 CREATE TABLE sms_member (
   member_id INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  pwd       VARCHAR(100) NOT NULL COMMENT '암호', -- 암호
+  pwd       VARCHAR(100) NULL     COMMENT '암호', -- 암호
   email     VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
   nick_name VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
   join_date DATE         NULL     DEFAULT current_date() COMMENT '가입일', -- 가입일
   name      VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
   rate      DOUBLE       NOT NULL DEFAULT 3.0 COMMENT '현재평점', -- 현재평점
-  birth     DATE         NOT NULL COMMENT '생년월일', -- 생년월일
-  tel       VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
-  photo     VARCHAR(255) NOT NULL COMMENT '사진', -- 사진
+  birth     DATE         NULL     COMMENT '생년월일', -- 생년월일
+  tel       VARCHAR(30)  NULL     COMMENT '전화', -- 전화
+  photo     VARCHAR(255) NULL     COMMENT '사진', -- 사진
   admin     BOOLEAN      NOT NULL DEFAULT false COMMENT '관리자여부', -- 관리자여부
-  adr_lms   CHAR(6)      NOT NULL COMMENT '활동지역' -- 활동지역
+  adr_lms   CHAR(6)      NULL     COMMENT '활동지역' -- 활동지역
 )
 COMMENT '회원';
 

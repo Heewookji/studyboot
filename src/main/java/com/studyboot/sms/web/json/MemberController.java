@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
@@ -118,6 +119,19 @@ public class MemberController {
     map.put("cnt", count);
 
     return map;
+  }
+  
+  @GetMapping("emailcheck")
+  public Object emailCheck(@RequestParam String email) {
+    System.out.println(email);
+    Map<String, Object> content = new HashMap<>();
+    Member member = memberService.get(email);
+    if(member != null) {
+      content.put("status", "success");
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
   }
 
   @PostMapping("passwordcheck")
