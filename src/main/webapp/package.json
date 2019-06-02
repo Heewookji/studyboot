@@ -1,7 +1,6 @@
 {
   "name": "webapp",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -20,5 +19,6 @@
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "popper.js": "^1.15.0"
-  }
+  },
+  "description": ""
 }
