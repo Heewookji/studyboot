@@ -10,6 +10,7 @@ public interface ScheduleDao {
   Schedule findByNo(int no);
   int delete(int no);
   int update(Schedule schedule);
+  int attend(String nickNames, int studyNo , int scheduleNo);
 }
 
 

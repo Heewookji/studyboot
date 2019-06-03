@@ -38,6 +38,7 @@
 	<select id="findStudyMembersByNo" resultMap="studyMemberMap"
 		parameterType="int">
 		select
+    m.member_id,
 		m.rate,
 		m.birth,
 		m.name,

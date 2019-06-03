@@ -44,6 +44,12 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
    
     return scheduleDao.update(schedule);
   }
+  
+  @Override
+  public int attend(String nickName, int studyNo , int scheduleNo) {
+    
+    return scheduleDao.attend(nickName, studyNo, scheduleNo);
+  }
 }
 
 

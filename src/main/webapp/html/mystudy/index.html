@@ -265,7 +265,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="schedule-close-btn">닫기</button>
         <button type="button" class="btn btn-primary" id="schedule-update-btn">수정</button>
-        <button type="submit" class="btn btn-primary" id="schedule-add-btn">등록</button>
+        <button type="button" class="btn btn-primary" id="schedule-add-btn">등록</button>
       </div>
     </div>
   </div>
@@ -301,7 +301,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-center" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <h3 class="modal-title" id="exampleModalScrollableTitle">출석 체크</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -312,8 +312,8 @@
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="atted-close">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="atted-close">닫기</button>
+        <button type="button" class="btn btn-primary" id="attend-btn">출석</button>
       </div>
     </div>
   </div>
@@ -340,6 +340,47 @@
 <!-- 
  <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
  -->
+ 
+ 
+<!--  <div class="form-group g-mb-15 align-items-center justify-content-between">
+<strong>{{name}}</strong>({{member.nickName}})
+
+            
+                </div>
+  -->
+ <!-- 스터디원 리스트 모달 -->
+<script id="attend-member" type="text/x-handlebars-template">
+{{#each list}}
+  <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+    <div class="media">
+      <div class="d-flex g-mt-2 g-mr-15">
+        <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}"
+          alt="Image Description">
+      </div>
+
+      <div class="media-body">
+        <div
+          class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0">
+          <h3 class="h6 mb-0">
+            <strong>{{name}}</strong>({{member.nickName}})
+          </h3>
+          <div class="g-mb-10 g-mb-0--md">
+            <div class="g-mt-10">
+              <label class="u-check g-pl-30"> <input
+                class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 g-mb-10 g-mb-0--md" type="checkbox"
+                value={{member.nickName}} checked>
+                <div class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+                  <i class="fa" data-check-icon="&#xf00c"></i>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+{{/each}}
+</script>
 
 <!-- 스터디원 리스트 -->
 <script id="study-member" type="text/x-handlebars-template">
