@@ -38,6 +38,23 @@
 			<result column="cls_name" property="name" />
 		</association>
 	</resultMap>
+	
+	<resultMap type="studyBoard" id="ntcListMap">
+		<id column="std_board_id" property="no" />
+		<result column="std_id" property="studyNo" />
+		<result column="member_id" property="memberNo" />
+		<result column="ntc" property="ntc" />
+		<result column="title" property="title" />
+		<result column="cont" property="contents" />
+		<result column="rgstr_dt" property="date" />
+		<result column="vw_cnt" property="viewCount" />
+
+		<association property="member" javaType="member">
+			<id column="board_id" property="no" />
+			<result column="board_nick" property="nickName" />
+			<result column="photo" property="photo" />
+		</association>
+	</resultMap>
 
 
 	<select id="findAll" resultMap="boardListMap" parameterType="map">
@@ -50,12 +67,13 @@
 		c.cont,
 		c.rgstr_dt,
 		c.vw_cnt,
-		s.nick_Name as board_nick
+		s.nick_Name as board_nick,
+		s.photo as photo
 		from
 		sms_std_board c
 		left outer join sms_member s on c.member_id = s.member_id
 		where
-		c.std_id = 1
+		c.std_id = #{no}
 		<if test="cls == 0 and keyword != null">
 			and
 			<bind name="pattern1" value="'%' + keyword + '%'" />
@@ -93,7 +111,7 @@
 
 <select id="countByClsAndMember" resultType="int" parameterType="map">
     select count(*) from sms_std_board
-    where std_id=1
+    where std_id = #{no}
     <if test="cls == 0 and keyword != null">
     and
       <bind name="pattern1" value="'%' + keyword + '%'" />
@@ -123,11 +141,26 @@
 	</if>
 </select>
   
-
-
-
-
-
+	<select id="findNtc" resultMap="ntcListMap" parameterType="int">
+		select
+		c.std_board_id,
+		c.std_id,
+		c.member_id,
+		c.ntc,
+		c.title,
+		c.cont,
+		c.rgstr_dt,
+		c.vw_cnt,
+		s.nick_Name as board_nick,
+		s.photo as photo
+		from
+		sms_std_board c
+		left outer join sms_member s on c.member_id = s.member_id
+		where
+		c.std_id = #{no} and ntc=1
+		order by 
+        ntc desc, std_board_id desc
+	</select>
 
 
 	<!-- <resultMap type="inquiry" id="inquiryMap"> <id column="rprt_inqry_id" 

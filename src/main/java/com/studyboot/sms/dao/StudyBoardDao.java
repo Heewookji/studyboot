@@ -9,6 +9,7 @@ public interface StudyBoardDao {
   
   List<StudyBoard> findAll(Map<String,Object> params);
   int countByClsAndMember(HashMap<String, Object> params);
+  List<StudyBoard> findNtc(int no);
   
 //  int insert(StudyMember studyMember);
   

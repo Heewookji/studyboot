@@ -7,22 +7,24 @@ param = location.href.split('?')[1],
 no = param.split('=')[1],
 currSpan, 
 currCls,
-keyword,
 boardTemplateSrc = $('#study-board').html(),
-memberTemplateSrc = $('#study-member').html();
+memberTemplateSrc = $('#study-member').html(),
+ntcTemplateSrc = $('#ntc-list').html();
 
 var memberGenerator = Handlebars.compile(memberTemplateSrc),
-boardGenerator = Handlebars.compile(boardTemplateSrc);
+boardGenerator = Handlebars.compile(boardTemplateSrc),
+ntcGenerator = Handlebars.compile(ntcTemplateSrc);
 
-//JSON 형식의 데이터 목록 가져오기 (이미지 사진 + 맴버 리스트)
+//JSON 형식의 데이터 목록 가져오기 (이미지 사진 + 맴버 리스트 + 최상단 공지 가져오기)
 function loadList(no) {
-  $.getJSON('../../app/json/study/studyphoto?no=' + no,
+  $.getJSON('../../app/json/MyStudy/studyphoto?no=' + no,
       function(obj) {
 
     console.log(no);
     $('#study_img').attr("src", "/studyboot/upload/images/" + obj.study.photo);
 
     $(memberGenerator(obj)).appendTo('#study-list');
+    $(ntcGenerator(obj)).appendTo('#ntc-board-list');
     
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
@@ -36,9 +38,9 @@ loadList(no);
 
 
 // JSON 형식으로 데이터 목록 가져오기 (게시판 리스트 )
-function boardList(pn, cls, keyword) {
+function boardList(pn, cls, keyword, no) {
   $.getJSON('../../app/json/MyStudy/list?pageNo=' + pn + '&pageSize=' + pageSize
-      + '&pageCls=' + cls + "&keyword=" + keyword,
+      + '&pageCls=' + cls + "&keyword=" + keyword + "&no=" + no,
       function(obj) {
 
     tbody.html('');
@@ -108,13 +110,10 @@ $(document).on('ready', function () {
   }, 1);
 });
 
-$(window).on('resize', function () {
-  setTimeout(function () {
-    $.HSCore.components.HSTabs.init('[role="tablist"]');
-  }, 200);
-});
 
-$('#std-board').click(function() {
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+$('#std-board, #ntc-board').click(function() {
   
   // 클릭 했을때 해당 게시물 초록배경 씌우기
   $('#std-board').removeClass('list-group-item list-group-item-action justify-content-between');
@@ -129,9 +128,10 @@ $('#std-board').click(function() {
     tbody = $('tbody');
     prevPageLi = $('#prevPage');
     nextPageLi = $('#nextPage');
+    keyword = $("#board-search").val();
     
   // 클릭이벤트를 전부 완료한 후 게시판 리스트를 호출한다.
-    boardList(1, );
+    boardList(1, "undefined", "undefined", no);
     
   });
   
@@ -146,14 +146,6 @@ $('#std-board').click(function() {
             + "<span>Study Board</span></li>");
     $('#conts-list').append($stdBoard);
   }
-  
-  
-  
-});
-
-$('#board-ntc').click((e) => {
-  e.preventDefault();
-  boardList(pageNo + 1, $("#currCls").html(), $("#board-search").val());
 });
 
 
@@ -162,18 +154,19 @@ $(document.body).bind('loaded-board', () => {
   
   $('#prevPage > a').click((e) => {
       e.preventDefault();
-      boardList(pageNo - 1, $("#currCls").html(), $("#board-search").val());
+      boardList(pageNo - 1, $("#currCls").html(), keyword, no);
   });
 
   $('#nextPage > a').click((e) => {
       e.preventDefault();
-      boardList(pageNo + 1, $("#currCls").html(), $("#board-search").val());
+      boardList(pageNo + 1, $("#currCls").html(), keyword, no);
   });
   
   $('#bothClsPage').click((e) => {
+    keyword = "";
     e.preventDefault();
     $("#currCls").html("전체");
-    boardList(1);
+    boardList(1, "undefined", "undefined", no);
   });
     
   $('#titlePage').click((e) => {
@@ -188,8 +181,20 @@ $(document.body).bind('loaded-board', () => {
   
   $('#board-search-btn').click((e) => {
     keyword = $("#board-search").val();
-    boardList(1, $("#currCls").html(), $("#board-search").val());
+    boardList(1, $("#currCls").html(), keyword, no);
+    $("#board-search").val("");
   });
+
+  // 글쓰기
+  $('#add-board').click((e) => {
+    $( document ).ready(function() {
+      $("#study-board").load("/studyboot/html/mystudy/forms.html", function(){
+        
+      });
+
+    });
+  });
+  
 
 });
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.domain.Study;
-import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.AddressService;
 import com.studyboot.sms.service.ClsService;
 import com.studyboot.sms.service.RateService;
@@ -258,19 +257,6 @@ public class StudyController {
     return content;
   }
 
-  @GetMapping("studyphoto")
-  public Object getStudy(int no) {
-    
-    HashMap<String,Object> content = new HashMap<>();
-    
-    Study study = studyService.getStudy(no);
-    List<StudyMember> list = studyMemberService.findStudyMember(no);
-    content.put("list", list);
-    content.put("study", study);
-    
-    return content;
-  }
-  
 }
 
 
