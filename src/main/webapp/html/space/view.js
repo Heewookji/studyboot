@@ -114,7 +114,6 @@ $('#review-add-btn').click(() => {
 
 //$('#add-btn').click( function() {
 $('#add-btn').click( () => {
-
 	$.ajax({
 		url : "../../app/json/space/add/review",
 		type : "POST",
@@ -131,6 +130,7 @@ $('#add-btn').click( () => {
 		}
 	});
 });
+
 
 //handlebars가 비동기 방식이라 trigger, bind 사용
 $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라는 이름을 갖는 bind를 실행시킨다.
@@ -227,4 +227,10 @@ $(document.body).bind('loaded-detail', () => { // trigger가 loaded-detail이라
 		})
 	});
 	
+});
+
+$(document).on('ready', function () {
+	$.HSCore.helpers.HSRating.init();
+	$.HSCore.components.HSModalWindow.init('[data-modal-target]');
+	$.HSCore.components.HSCarousel.init('.js-carousel');
 });

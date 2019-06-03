@@ -236,3 +236,13 @@ function createMarkerImage(markerSize, offset, spriteOrigin) {
 
   return markerImage;
 }
+
+$(document).ready(function () {
+	// initialization of rating
+	$.HSCore.components.HSRating.init($('.js-rating'), {
+		spacing: 4
+	});
+
+	// initialization of carousel
+	$.HSCore.components.HSCarousel.init('.js-carousel');
+});
