@@ -150,14 +150,19 @@ public class MyStudyScheduleController {
 
   @GetMapping("attend")
   public Object attend(String[] nickNames, int studyNo , int scheduleNo, HttpSession session) {
-
+    for(String nickName : nickNames) {
+      System.out.println(nickName);
+    }
+    System.out.println(studyNo);
+    System.out.println(scheduleNo);
+    
     HashMap<String,Object> content = new HashMap<>();
 
     Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
 
     HashMap<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
-    studyAndUserNo.put("studyNo", scheduleNo);
+    studyAndUserNo.put("studyNo", studyNo);
     boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
 
     if (leaderYesOrNo == false) {
@@ -167,17 +172,26 @@ public class MyStudyScheduleController {
     }
 
     // 닉네임을 멤버넘버로 바꾸는 코드
-    List<String> memberNo =  memberService.findMemberNoByNickNameList(nickNames);
+    List memberNo =  memberService.findMemberNoByNickNameList(nickNames);
+
+      System.out.println(memberNo.size());
+//      System.out.println(memberNo.get);
+    for (int i = 0; i < memberNo.size(); i ++) {
+      System.out.println(memberNo.get(i)); // int 값임
+    }
     
     
-    
-    
+    HashMap<String,Object> attendMap = new HashMap<>();
     try {
-      for(int i = 0; i < nickNames.length; i++) {
+      for(int i = 0; i < memberNo.size(); i++) {
+        attendMap.put("scheduleNo", scheduleNo);
+        attendMap.put("studyNo", studyNo);
+        attendMap.put("memberNo", memberNo.get(i));
         // schedule.setMemberNo(memberNoList.get(i));
-        myStudyScheduleService.attend(nickNames[i], studyNo, scheduleNo);
-        content.put("status", "출석 체크가 완료 되었습니다.");
+        myStudyScheduleService.attend(attendMap);
+        System.out.println("==========");
       }
+      content.put("status", "출석 체크가 완료 되었습니다.");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());

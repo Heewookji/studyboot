@@ -1,6 +1,7 @@
 package com.studyboot.sms.service;
 
 import java.util.List;
+import java.util.Map;
 import com.studyboot.sms.domain.Schedule;
 
 public interface MyStudyScheduleService {
@@ -10,5 +11,5 @@ public interface MyStudyScheduleService {
   Schedule get(int no);
   int delete(int no);
   int update(Schedule schedule);
-  int attend(String nickNames, int studyNo , int scheduleNo);
+  int attend(Map<String, Object> attendMap);
 }

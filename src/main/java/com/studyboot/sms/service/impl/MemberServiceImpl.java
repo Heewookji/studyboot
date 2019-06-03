@@ -1,5 +1,6 @@
 package com.studyboot.sms.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -122,10 +123,15 @@ public class MemberServiceImpl implements MemberService {
   
   @Override
   public List<String> findMemberNoByNickNameList(String[] nickNames) {
-
-    return findMemberNoByNickNameList(nickNames);
+    
+    List<String> nickNameList = new ArrayList<String>();
+    
+    for(String nickName : nickNames) {
+      nickNameList.add(nickName);
+    }
+    return memberDao.findMemberNoByNickNameList(nickNameList);
   }
-  
+
 }
 
 

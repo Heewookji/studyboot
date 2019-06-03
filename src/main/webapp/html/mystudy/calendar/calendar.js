@@ -316,12 +316,10 @@ function loadList(studyNo) {
 $('#attend-btn').click(() => {
 
   var nickNames = [];
-  
-  $.each(memberList,  function(index, val) {
-    nickNames.push(val.member.nickName);
-  });
-  
-  console.log(window.eventDate.id);
+  $("input[name=attend-check]:checked").each(function() {
+	  nickNames.push($(this).val());
+	  });
+
   console.log(nickNames);
   alert("클릭!");
   
