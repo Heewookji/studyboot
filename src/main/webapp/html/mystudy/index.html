@@ -188,8 +188,8 @@
                     <i class="icon-layers g-pos-rel g-top-1 g-mr-5"></i> Study announcement
                   </h3>
                 <div class="dropdown g-mb-10 g-mb-0--md">
-                  <span class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="icon-options-vertical g-pos-rel g-top-1"></i>
+                  <span class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5">
+                      <i class="icon-options-vertical g-pos-rel g-top-1" id="ntc-board"></i>
                     </span>
                 </div>
               </div>
@@ -197,68 +197,7 @@
 
               <!-- Panel Body -->
               <div class="js-scrollbar card-block u-info-v1-1 g-bg-white-gradient-v1--after g-height-400 g-pa-0">
-                <ul class="list-unstyled">
-                  <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
-                    <div class="d-flex g-mt-2 g-mr-15">
-                      <img class="g-width-40 g-height-40 rounded-circle" src="/studyboot/Unify/assets/img-temp/100x100/img1.jpg" alt="Image Description">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="h6 g-font-weight-600 g-color-black">스터디장</h5>
-                        <span class="small text-nowrap g-color-blue">2 min ago</span>
-                      </div>
-                      <p>스터디 관련 공지사항 (필독하세요!!)</p>
-                    </div>
-                  </li>
-
-                  <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-pink-left rounded g-pa-20 g-mb-10">
-                    <div class="d-flex g-mt-2 g-mr-15">
-                      <img class="g-width-40 g-height-40 rounded-circle" src="/studyboot/Unify/assets/img-temp/100x100/img5.jpg" alt="Image Description">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="h6 g-font-weight-600 g-color-black">UX/UI Design and Backend</h5>
-                        <span class="small text-nowrap g-color-pink">16 min ago</span>
-                      </div>
-                      <p>Hac consectetur habitasse platea dictumst, adipiscing elitut leosit amet, consectetur eleifend.</p>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">CSS</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-color-black g-rounded-20 g-px-10">JavaScript</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">Ruby</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">ASP.NET</span>
-                    </div>
-                  </li>
-
-                  <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-black-left rounded g-pa-20 g-mb-10">
-                    <div class="d-flex g-mt-2 g-mr-15">
-                      <img class="g-width-40 g-height-40 rounded-circle" src="/studyboot/Unify/assets/img-temp/100x100/img4.jpg" alt="Image Description">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="h6 g-font-weight-600 g-color-black">React Native App</h5>
-                        <span class="small text-nowrap g-color-blue">2 min ago</span>
-                      </div>
-                      <p>Curabitur hendrerit dolor sit amet consectetur. Adipiscing elitut leosit amet, consectetur eleifend.</p>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">ReactJS</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">CSS</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">HTML</span>
-                    </div>
-                  </li>
-                  
-                  <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
-                    <div class="d-flex g-mt-2 g-mr-15">
-                      <img class="g-width-40 g-height-40 rounded-circle" src="/studyboot/Unify/assets/img-temp/100x100/img1.jpg" alt="Image Description">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="h6 g-font-weight-600 g-color-black">Unify Template</h5>
-                        <span class="small text-nowrap g-color-blue">2 min ago</span>
-                      </div>
-                      <p>Curabitur hendrerit dolor sit amet consectetur. Adipiscing elitut leosit amet, consectetur eleifend.</p>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">HTML</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">AnhularJS</span>
-                      <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-main g-rounded-20 g-px-10">PHP</span>
-                    </div>
-                  </li>
+                <ul class="list-unstyled" id="ntc-board-list">
                 </ul>
               </div>
               <!-- End Panel Body -->
@@ -418,6 +357,7 @@
 {{/each}}
 </script>
 
+<!-- 게시판 리스트 -->
 <script id="study-board" type="text/x-handlebars-template">
 {{#each list}}
 {{#if ntc}}
@@ -449,6 +389,25 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
 </tr>
 {{/if}}
 
+{{/each}}
+</script>
+
+<!-- 메인 공지사항 리스트 -->
+<script id="ntc-list" type="text/x-handlebars-template">
+{{#each ntcList}}
+<li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
+<div class="d-flex g-mt-2 g-mr-15">
+<img class="g-width-40 g-height-40 rounded-circle" 
+src="/studyboot/upload/images/{{member.photo}}" alt="Image Description">
+</div>
+<div class="media-body">
+<div class="d-flex justify-content-between">
+<h5 class="h6 g-font-weight-600 g-color-black">{{member.nickName}}</h5>
+<span class="small text-nowrap g-color-blue">{{date}}</span>
+</div>
+<p>{{title}}</p>
+</div>
+</li>
 {{/each}}
 </script>
 

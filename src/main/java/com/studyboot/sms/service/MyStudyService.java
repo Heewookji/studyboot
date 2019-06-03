@@ -7,10 +7,13 @@ public interface MyStudyService {
   
   // 스터디 게시판 관련 service
   List<StudyBoard> list(int pageNo, int pageSize, 
-      int clsNo, List<Integer> memberNos, String keyword);
+      int clsNo, List<Integer> memberNos, String keyword, int no);
   
-  int size(int clsNo, List<Integer> memberNos, String keyword);
+  int size(int clsNo, List<Integer> memberNos, String keyword, int no);
+  
+  List<StudyBoard> ntcList(int no);
   // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+  
 //  Inquiry get(int no);
 //  int delete(int no);
 //  Study getStudy(int no);
