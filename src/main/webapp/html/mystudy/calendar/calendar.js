@@ -302,7 +302,7 @@ $('#event-attend-btn').click(() => {
 
 //JSON 형식의 데이터 목록 가져오기 (이미지 사진 + 맴버 리스트)
 function loadList(studyNo) {
-	$.getJSON('../../app/json/study/studyphoto?no=' + studyNo,
+	$.getJSON('../../app/json/MyStudy/studyphoto?no=' + studyNo,
 			function(obj) {
 		$(memberGenerator(obj)).appendTo('#study-list-modal');
 	});
