@@ -119,7 +119,12 @@ public class MemberServiceImpl implements MemberService {
   public List<Study> pickedStudyList(int no) {
     return studyDao.findPickedStudyByUser(no);
   }
+  
+  @Override
+  public List<String> findMemberNoByNickNameList(String[] nickNames) {
 
+    return findMemberNoByNickNameList(nickNames);
+  }
   
 }
 

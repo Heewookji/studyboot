@@ -714,7 +714,23 @@ insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
 values('프로젝트 완성하기', 1, 2, '2019-06-17T00:00', '2019-06-28T18:00', '버그잡기, 디자인 수정, PPT만들기');
 
 insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
-values('지환 예비군', 1, 2, '2019-06-12T13:00', '2019-06-14T18:00', '최지환 예비군으로 인해 일정 빠짐');
+values('지환 예비군', 1, 2, '2019-06-12T13:00', '2019-06-14T18:00', '예비군 훈련으로 인해 학원 빠짐');
+
+insert into sms_std_schdl(space_bkng_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(14 ,'공간!!', 1, 2, '2019-06-06T13:00', '2019-06-06T18:00', '공간예약 test');
+
+insert into sms_std_schdl(space_bkng_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(15 ,'공간 2!!', 1, 2, '2019-06-06T13:00', '2019-06-06T18:00', '공간예약 test');
+
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('일정 1', 2, 2, '2019-06-12T13:00', '2019-06-14T18:00', '일정 2');
+
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('일정 2', 2, 2, '2019-06-20T13:00', '2019-06-21T18:00', '일정 3');
+
+insert into sms_std_schdl(name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values('일정 3', 2, 2, '2019-06-5T13:00', '2019-06-6T18:00', '일정 4');
+
 
 -- 스터디 게시판
 insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항1", "내용1");

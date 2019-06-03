@@ -169,6 +169,18 @@
       nick_name = #{value}
   </select>
   
+  <select id="findMemberNoByNickNameList" resultType="int" parameterType="list">
+    select 
+      member_id 
+    from 
+      sms_member
+    where
+      <foreach collection="list" item="k" separator="or">
+    nick_name = #{k}
+      </foreach>
+  </select>
+  
+  
 </mapper>
 
 

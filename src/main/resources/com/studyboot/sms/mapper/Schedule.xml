@@ -84,4 +84,15 @@
     where std_schdl_id = #{id}
   </update>
   
+  <insert id="attend" parameterType="schedule">
+    insert into sms_std_atnd(
+      std_schdl_id,
+      std_id,
+      member_id)
+    values(
+      #{id},
+      #{studyNo},
+      #{memberNo})
+  </insert>
+
 </mapper>

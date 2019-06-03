@@ -3,10 +3,11 @@ updateStartDate,
 updateEndDate,
 updateMemoDate,
 updateTitleDate,
-studyNo = location.href.split('=')[1].substring(0,1);
+studyNo = location.href.split('=')[1].substring(0,1),
+memberList;
 
-var memberTemplateSrc = $('#study-member').html(),
-memberGenerator = Handlebars.compile(memberTemplateSrc);
+var attendTemplateSrc = $('#attend-member').html(),
+attendGenerator = Handlebars.compile(attendTemplateSrc);
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -142,6 +143,7 @@ $('#schedule-add-btn').click(() => {
 			memo: $('#schedule-memo').val()
 		},
 		success : function(data) {
+		  console.log(data);
 			alert(data.status);
 			location.reload();
 			//$(calendarEl).fullCalendar("refetchEvents");
@@ -267,14 +269,14 @@ $('#schedule-update-btn').click(() => {
 		data : {
 			id: window.eventDate.id,
 			title: $('#schedule-title').val(), // 좌항은 프러퍼티명 , 우항은 프러퍼티에 담을 값
-			studyNo: location.href.split('=')[1],
+			studyNo: location.href.split('=')[1].substring(0,1),
 			start: $('#schedule-sdt').val(),
 			end: $('#schedule-edt').val(), // rating-form 태그의 값을 가져와서 담는다.
 			memo: $('#schedule-memo').val()
 		},
 		success : function(data) {
-			//data.title 이 null이면 실패하도록 하고싶음..
-			alert(data.status);
+
+		  alert(data.status);
 			location.reload();
 			//$(calendarEl).fullCalendar("refetchEvents");
 		},
@@ -295,7 +297,7 @@ function resetForm() {
 
 
 $('#event-attend-btn').click(() => {
-	$('#calendar-detail-close-modal-btn').click();
+	//$('#calendar-detail-close-modal-btn').click();
 	$('#calendar-attendance-modal-btn').click();
 });
 
@@ -304,7 +306,49 @@ $('#event-attend-btn').click(() => {
 function loadList(studyNo) {
 	$.getJSON('../../app/json/MyStudy/studyphoto?no=' + studyNo,
 			function(obj) {
-		$(memberGenerator(obj)).appendTo('#study-list-modal');
+
+	  memberList = obj.list;
+	  
+		$(attendGenerator(obj)).appendTo('#study-list-modal');
 	});
 };
 
+$('#attend-btn').click(() => {
+
+  var nickNames = [];
+  
+  $.each(memberList,  function(index, val) {
+    nickNames.push(val.member.nickName);
+  });
+  
+  console.log(window.eventDate.id);
+  console.log(nickNames);
+  alert("클릭!");
+  
+/*  $.ajax({
+    contentType: 'application/json',
+    //dataType: "json",
+   // contentType: "application/x-www-form-urlencoded",
+    url : "../../app/json/mystudyschedule/attend",
+    type : "post",
+    data : {
+//      nickNames: JSON.stringify(["nick2", "nick3", "nick4", "nick5"]),
+      nickNames: memberNickNames,
+      studyNo: location.href.split('=')[1].substring(0,1)
+    },
+    success : function(data) {
+      alert(data.status);
+      location.reload();
+    },
+    error : function(request, status, error) {
+      alert("출석 인원 등록에 실패 했습니다.");
+    }
+  });*/
+  
+  $.getJSON('../../app/json/mystudyschedule/attend?nickNames=' + nickNames
+      + '&studyNo=' + location.href.split('=')[1].substring(0,1) + '&scheduleNo=' + window.eventDate.id,
+      function(obj) {
+  location.reload();
+})
+  
+});

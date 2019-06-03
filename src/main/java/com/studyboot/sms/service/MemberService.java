@@ -19,4 +19,5 @@ public interface MemberService {
   List<AppliedStudy> appliedStudyList(int no);
   List<Study> pickedStudyList(int no);
   int add(Member member);
+  List<String> findMemberNoByNickNameList(String[] nickNames);
 }

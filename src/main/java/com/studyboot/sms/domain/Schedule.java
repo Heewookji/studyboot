@@ -1,5 +1,7 @@
 package com.studyboot.sms.domain;
 
+import java.util.List;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Schedule {
@@ -19,13 +21,6 @@ public class Schedule {
   private boolean allDay = false;
   
   private boolean studyLeader; // 스터디 장 판단을 위해 넣은 필드
-  
-  @Override
-  public String toString() {
-    return "Schedule [id=" + id + ", title=" + title + ", start=" + start + ", end=" + end
-        + ", memo=" + memo + ", studyNo=" + studyNo + ", memberNo=" + memberNo + ", spaceBookingNo="
-        + spaceBookingNo + ", allDay=" + allDay + ", studyLeader=" + studyLeader + "]";
-  }
 
   public int getId() {
     return id;
@@ -106,5 +101,6 @@ public class Schedule {
   public void setStudyLeader(boolean studyLeader) {
     this.studyLeader = studyLeader;
   }
-  
+
+
 }
