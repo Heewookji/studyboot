@@ -1,7 +1,7 @@
-
+var userInit = true;
 
 $( document ).ready(function() {
-  $("#js-header").load("/studyboot/html/header.html", function(){
+  $("#js-header").load("./indexheader.html", function(){
 
     $('.cls-btn').click((e) => {
       window.location.href =
@@ -17,6 +17,12 @@ $( document ).ready(function() {
       window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
     });
 
+    $('#main-search-btn').click((e) => {
+      pageNo = 1;
+      keyword = $("#main-search").val();
+      window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
+    });
+
     $('#mypage-btn').click((e) => {
       window.location.href = '/studyboot/html/mypage/index.html';
     });
@@ -25,11 +31,12 @@ $( document ).ready(function() {
       window.location.href = '/studyboot/html/message/index.html';
     });
 
-
     $(document.body).trigger('loaded-header');
   });
-
 });
+
+
+
 
 $(document.body).bind('loaded-header', () => {
   // initialization of go to
@@ -41,9 +48,6 @@ $(document.body).bind('loaded-header', () => {
       $(this).find('input[type="search"]').focus();
     }
   });
-
-  // initialization of HSScrollBar component
-  $.HSCore.components.HSScrollBar.init($('.js-scrollbar'));
 
   // initialization of masonry
   $('.masonry-grid').imagesLoaded().then(function () {
@@ -61,7 +65,29 @@ $(document.body).bind('loaded-header', () => {
   $.HSCore.components.HSHeader.init($('#js-header'));
   $.HSCore.helpers.HSHamburgers.init('.hamburger');
 
+
+
+  // initialization of carousel
+  $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+  
 });
+
+
+
+$(document.body).bind('loaded-header', () => {
+  $(window).scroll(function(obj) {
+    const currentScrollPercentage = getCurrentScrollPercentage()
+
+    if(currentScrollPercentage > 50){
+      $('#header-child').prop('hidden', false);
+      $('#header-search').prop('hidden', false);
+    }else{
+      $('#header-child').prop('hidden', true);
+      $('#header-search').prop('hidden', true);
+    }
+  });
+});
+
 
 
 $(document.body).bind('loaded-header', () => {
@@ -71,10 +97,9 @@ $(document.body).bind('loaded-header', () => {
   $('#logout').click((e) => {
     e.preventDefault();
     $.getJSON('/studyboot/app/json/auth/logout',
-        function(obj) {
+            function(obj) {
       location.href = "/studyboot"
     });
-    window.localStorage.removeItem("user");
   });
 
 });
@@ -83,15 +108,16 @@ $(document.body).bind('loaded-header', () => {
 function loadLoginUser() {
 
   $.getJSON('/studyboot/app/json/auth/user',
-      function(obj) {
+          function(obj) {
 
-    var user = obj.user;
     var loginState = $(".std-login");
     var notLoginState = $(".std-not-login");
 
     if (obj.status == 'success') {
+      var user = obj.user;
+
+      console.log(user);
       notLoginState.addClass('std-invisible');
-    
       $("#nickname").html(user.nickName);
 
       if(obj.myStudyList != undefined){
@@ -101,19 +127,54 @@ function loadLoginUser() {
       }
 
       //관리자라면 관리자 페이지버튼 드롭다운에 추가
-      if(obj.user.admin){
+      if(user.admin){
         $("#std-dropdown").append("<div class=\"dropdown-divider\"></div>" +
         "<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
       }
-      
+
       $('.my-study').click((e) => {
-        window.location.href = '../mystudy/index.html?no=' + $(e.target).attr('my-study-no');
+        window.location.href = 'html/mystudy/index.html?no=' + $(e.target).attr('my-study-no');
       });
 
+      if(user.birth == null ||
+              user.cls.length == null ||
+              user.cls.length == 0){
+        userInit = false;
+      }
     } else {
       loginState.addClass('std-invisible');
     }
+    
+    $(document.body).trigger('loaded-user');
+    
   });
+  
+}
+
+$(document.body).bind('loaded-user', () => {
+  
+  if(!userInit){
+    $('#initModal-btn').click();
+    }
+  
+  $('#init-btn').click((e) => {
+    //서버에 송신
+    
+    
+  });
+ 
+  });
+
+$('#exampleModalCenter').on('shown.bs.modal', function (e) {
+  alert("modal shown!");
+});
+
+
+
+
+
+function getCurrentScrollPercentage(){
+  return (window.scrollY + window.innerHeight) / document.body.clientHeight * 100
 }
 
 
