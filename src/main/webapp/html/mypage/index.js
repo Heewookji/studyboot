@@ -50,10 +50,13 @@ loadList();
 // 스터디 리스트 가져온 후
 $(document.body).bind('loaded-loadList', () => {
   //initialization of carousel
-  $.HSCore.components.HSCarousel.init('.js-carousel');
+  $.HSCore.components.HSCarousel.init('#doingStudyCarousel');
   
-  $()
-  
+});
+
+$('#nav-1-1-default-hor-left-underline--2').on('shown.bs.tab', function () {
+  alert('aaa');
+  //$.HSCore.components.HSCarousel.init('#appliedStudyCarousel');
 });
 
 //inquiry
