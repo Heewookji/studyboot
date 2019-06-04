@@ -53,17 +53,6 @@ $(document).on('ready', function () {
   }, 1);
 });
 
-
-
-  // 글쓰기
-  $('#add-board').click((e) => {
-    $( document ).ready(function() {
-      $("#study-board").load("/studyboot/html/mystudy/forms.html", function(){
-        
-      });
-
-    });
-  });
   
 
 
