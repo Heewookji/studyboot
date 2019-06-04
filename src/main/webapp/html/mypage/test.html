@@ -1,0 +1,24 @@
+  <!-- Advanced File Input -->
+  <div class="form-group mb-0">
+    <h4 class="h6 g-font-weight-600 g-color-black g-mb-20">Advanced File input</h4>
+    <input class="js-file-attachment" name="fileAttachment2[]" type="file">
+  </div>
+  <!-- End Advanced File Input -->
+
+
+  <script src="../../Unify/assets/vendor/jquery.filer/js/jquery.filer.min.js"></script>
+
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/components/hs.file-attachement.js"></script>
+
+
+  <script>
+    $(document).on('ready', function () {
+      // initialization of custom select
+      $('.js-select').selectpicker();
+      $.HSCore.components.HSFileAttachment.init('.js-file-attachment');
+    });
+  </script>
+</body>
+
+</html>

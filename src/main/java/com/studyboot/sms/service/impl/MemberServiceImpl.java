@@ -112,12 +112,24 @@ public class MemberServiceImpl implements MemberService {
   
   @Override
   public List<AppliedStudy> appliedStudyList(int no) {
-    return appliedStudyDao.findAllByUser(no);
+    
+    List<AppliedStudy> list = appliedStudyDao.findAllByUser(no);
+    if (list.size() > 0) {
+      return list;
+    } else {
+      return null;
+    }
   }
   
   @Override
   public List<Study> pickedStudyList(int no) {
-    return studyDao.findPickedStudyByUser(no);
+    
+    List<Study> list = studyDao.findPickedStudyByUser(no);
+    if (list.size() > 0) {
+      return list;
+    } else {
+      return null;
+    }
   }
 
   
