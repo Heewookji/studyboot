@@ -59,7 +59,6 @@ public class MemberController {
       if(doingStudyList != null) {
         content.put("doingStudyList", doingStudyList);
       }
-      
       if(appliedStudyList != null) {
         content.put("appliedStudyList", appliedStudyList);
       }
