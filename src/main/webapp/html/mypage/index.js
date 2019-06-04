@@ -9,7 +9,7 @@ pickedStudyGenerator = Handlebars.compile(pickedStudyTemplateSrc),
 appliedinit = false,
 pickedinit = false;
 
-
+// 프로필 사진 모달
 function readURL(input) {
   if (input.files && input.files[0]) {
     
@@ -24,8 +24,8 @@ function readURL(input) {
 $('#imageInput').change(function() {
   readURL(this);
 });
-  
 
+// 프로필 사진 변경
 $('#imageInput').fileupload({
   url: '../../app/json/member/photo',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
@@ -41,15 +41,36 @@ $('#imageInput').fileupload({
     console.log('done()...');
     console.log(data.result);
   }
-}); 
+});
+
+
+loadData();
+loadList();
 
 // 로그인 유저의 정보 가져오기
 function loadData() {
-  $.getJSON('../../app/json/member/detail', function(obj) {
+  $.getJSON('../../app/json/member/detail',
+      function(data) {
     
+    console.log(data);
+    $('#nickName').val(data.nickName);
+    $('#rate').val(data.rate);
+// $('#cls').val(data.cls);
+// $('#sdt').val(data.startDate);
+// $('#edt').val(data.endDate);
+// $('#prsn').val(data.personnel);
+// $('#rate').val(data.rate);
+// $('#age').val(data.memberAge);
+// $('#attendance').val(data.attendance);
+// $('#endrate').val(data.endrate);
+    
+    $(document.body).trigger('loaded-data');
   });
-}
+};
 
+$(document.body).bind('loaded-data', () => {
+  
+});
 // 로그인 유저의 스터디 데이터 가져오기
 function loadList() {
 
@@ -83,7 +104,6 @@ function loadList() {
   });
 };
 
-loadList();
 
 // 스터디가 없을 때 사용할 함수
 function studyIsEmpty(study) {

@@ -19,6 +19,8 @@ import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.StudyMemberService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 
 @RestController("json/MemberController")
@@ -154,7 +156,7 @@ public class MemberController {
     return map;
   }
   
-  @PostMapping(value="photo", consumes = "multipart/form-data")
+  @PostMapping("photo")
   public Object photo(
       HttpSession session,
       Part files) throws Exception {
@@ -168,10 +170,17 @@ public class MemberController {
       return content;
     }
     
+    // 이미지 저장
     String uploadDir = servletContext.getRealPath("/upload/images/member");
     String filename = UUID.randomUUID().toString();
     System.out.println(uploadDir + "/" + filename);
     files.write(uploadDir + "/" + filename);
+    
+    // 썸네일 이미지 저장
+    Thumbnails.of(uploadDir + "/" + filename)
+    .size(20, 20)
+    .outputFormat("jpg")
+    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
     
     loginUser.setPhoto(filename);
     
