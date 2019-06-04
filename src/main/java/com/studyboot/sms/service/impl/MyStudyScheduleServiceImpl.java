@@ -51,6 +51,13 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
 
     return scheduleDao.attend(attendMap);
   }
+  
+  @Override
+  public List<Schedule> attendTrueFalse(int scheduleNo) {
+   
+    return scheduleDao.attendTrueFalse(scheduleNo);
+  }
+  
 }
 
 

@@ -12,4 +12,5 @@ public interface MyStudyScheduleService {
   int delete(int no);
   int update(Schedule schedule);
   int attend(Map<String, Object> attendMap);
+  List<Schedule> attendTrueFalse(int scheduleNo); // 출석을 했었는지를 확인하기 위함
 }

@@ -12,6 +12,7 @@ public interface ScheduleDao {
   int delete(int no);
   int update(Schedule schedule);
   int attend(Map<String, Object> attendMap);
+  List<Schedule> attendTrueFalse(int scheduleNo);
 }
 
 
