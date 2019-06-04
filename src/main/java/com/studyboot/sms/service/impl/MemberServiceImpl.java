@@ -88,8 +88,6 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.update(member);
   }
   
-  
-
   @Override
   public int nickNameCheck(String nickName) {
     try {

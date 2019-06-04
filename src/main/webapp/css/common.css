@@ -5,6 +5,9 @@
 .std-invisible {
   display: none;
 }
+.std-hidden {
+  visibility: hidden;
+}
 
 .clsTag {
  
