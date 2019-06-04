@@ -3,7 +3,10 @@ package com.studyboot.sms.web.json;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +27,7 @@ public class MemberController {
 
   @Autowired MemberService memberService;
   @Autowired StudyMemberService studyMemberService;
+  @Autowired ServletContext servletContext;
   /*
   @GetMapping("delete")
   public Object delete(int no) {
@@ -148,6 +152,36 @@ public class MemberController {
     map.put("result", result);
 
     return map;
+  }
+  
+  @PostMapping(value="photo", consumes = "multipart/form-data")
+  public Object photo(
+      HttpSession session,
+      Part files) throws Exception {
+    
+    System.out.println(files);
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    Map<String, Object> content = new HashMap<>();
+    
+    if (files.getSize() <= 0) {
+      content.put("status", "fail");
+      return content;
+    }
+    
+    String uploadDir = servletContext.getRealPath("/upload/images/member");
+    String filename = UUID.randomUUID().toString();
+    System.out.println(uploadDir + "/" + filename);
+    files.write(uploadDir + "/" + filename);
+    
+    loginUser.setPhoto(filename);
+    
+    if(memberService.update(loginUser) != 0) {
+      content.put("status", "success");
+      
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
   }
 }
 

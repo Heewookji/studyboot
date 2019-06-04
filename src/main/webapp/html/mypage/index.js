@@ -24,7 +24,31 @@ function readURL(input) {
 $('#imageInput').change(function() {
   readURL(this);
 });
+  
 
+$('#imageInput').fileupload({
+  url: '../../app/json/member/photo',        // 서버에 요청할 URL
+  dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+  add: function (e, data) {
+    console.log('add()...');
+    console.log(data);
+    
+    $('#imageUpdate-btn').click(function() {
+        data.submit();
+    });
+  }, 
+  done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
+    console.log('done()...');
+    console.log(data.result);
+  }
+}); 
+
+// 로그인 유저의 정보 가져오기
+function loadData() {
+  $.getJSON('../../app/json/member/detail', function(obj) {
+    
+  });
+}
 
 // 로그인 유저의 스터디 데이터 가져오기
 function loadList() {

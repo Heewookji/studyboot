@@ -188,10 +188,8 @@
             <img id="prevImage" src="../../upload/images/test2.jpeg" class="img-fluid w-100" alt="Responsive image"/>
           </div>
           <div>
-            <form action="" method="">
-              <label for="imageInput" class="btn btn-xl u-btn-primary g-width-170"><i class="fa fa-camera-retro"></i></label>
-              <input type="file" id="imageInput" style="visibility: hidden">
-            </form>
+            <label for="imageInput" class="btn btn-xl u-btn-primary g-width-170"><i class="fa fa-camera-retro"></i></label>
+            <input type="file" id="imageInput" name="files" class="std-hidden">
           </div>
         </div>
         <div class="modal-footer">
@@ -199,7 +197,6 @@
             data-dismiss="modal">닫기</button>
           <button type="button" class="btn btn-primary"
             id="imageUpdate-btn">변경</button>
-        </div>
         </div>
       </div>
     </div>
@@ -518,6 +515,10 @@
   <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
   <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+  
+  <script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
