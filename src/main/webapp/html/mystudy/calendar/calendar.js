@@ -321,12 +321,19 @@ $('#event-attend-btn').click(() => {
       $('#attend-btn').hide();
     } 
   })
-
+  
   if(window.calendarContent === false){
     alert("출석 권한이 없습니다.");
     return;
   }
 });
+
+
+
+
+
+
+
 
 // 닉네임을 서버로 보내서 멤버 id로 바꾸고 그것으로 출석을 하는 클릭 이벤트
 $('#attend-btn').click(() => {
@@ -351,4 +358,16 @@ $('#attend-btn').click(() => {
   })
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
