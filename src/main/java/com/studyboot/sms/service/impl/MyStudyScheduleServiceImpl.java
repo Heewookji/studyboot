@@ -48,7 +48,7 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
   
   @Override
   public int attend(Map<String, Object> attendMap) {
-    
+
     return scheduleDao.attend(attendMap);
   }
 }

@@ -150,16 +150,11 @@ public class MyStudyScheduleController {
 
   @GetMapping("attend")
   public Object attend(String[] nickNames, int studyNo , int scheduleNo, HttpSession session) {
-    for(String nickName : nickNames) {
-      System.out.println(nickName);
-    }
-    System.out.println(studyNo);
-    System.out.println(scheduleNo);
-    
+
     HashMap<String,Object> content = new HashMap<>();
 
-    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
 
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
     HashMap<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
     studyAndUserNo.put("studyNo", studyNo);
@@ -174,13 +169,6 @@ public class MyStudyScheduleController {
     // 닉네임을 멤버넘버로 바꾸는 코드
     List memberNo =  memberService.findMemberNoByNickNameList(nickNames);
 
-      System.out.println(memberNo.size());
-//      System.out.println(memberNo.get);
-    for (int i = 0; i < memberNo.size(); i ++) {
-      System.out.println(memberNo.get(i)); // int 값임
-    }
-    
-    
     HashMap<String,Object> attendMap = new HashMap<>();
     try {
       for(int i = 0; i < memberNo.size(); i++) {
@@ -189,7 +177,6 @@ public class MyStudyScheduleController {
         attendMap.put("memberNo", memberNo.get(i));
         // schedule.setMemberNo(memberNoList.get(i));
         myStudyScheduleService.attend(attendMap);
-        System.out.println("==========");
       }
       content.put("status", "출석 체크가 완료 되었습니다.");
     } catch (Exception e) {

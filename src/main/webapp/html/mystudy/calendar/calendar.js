@@ -346,6 +346,7 @@ $('#attend-btn').click(() => {
   $.getJSON('../../app/json/mystudyschedule/attend?nickNames=' + nickNames
       + '&studyNo=' + location.href.split('=')[1].substring(0,1) + '&scheduleNo=' + window.eventDate.id,
       function(obj) {
+    alert(obj.status);
   location.reload();
 })
   
