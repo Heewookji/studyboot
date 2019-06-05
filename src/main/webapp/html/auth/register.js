@@ -13,8 +13,7 @@ $(document).on('ready', function () {
           {
             clientId: "SfQg5WbbEwfRelyDmqBo",
             callbackUrl: "http://localhost:8080/studyboot/html/auth/naverlogincallback.html",
-            isPopup: true, /* 팝업을 통한 연동처리 여부 */
-            loginButton: {color: "green", type: 1, height: 30} /* 로그인 버튼의 타입을 지정 */
+            isPopup: true /* 팝업을 통한 연동처리 여부 */
           }
   );
 
