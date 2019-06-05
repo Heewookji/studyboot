@@ -1,7 +1,7 @@
   <!-- Advanced File Input -->
   <div class="form-group mb-0">
     <h4 class="h6 g-font-weight-600 g-color-black g-mb-20">Advanced File input</h4>
-    <input class="js-file-attachment" name="fileAttachment2[]" type="file">
+    <input id="imageInput" class="js-file-attachment" name="fileAttachment2[]" type="file">
   </div>
   <!-- End Advanced File Input -->
 
@@ -17,6 +17,40 @@
       // initialization of custom select
       $('.js-select').selectpicker();
       $.HSCore.components.HSFileAttachment.init('.js-file-attachment');
+    });
+    
+    $('#imageInput').fileupload({
+      url: '../../app/json/member/photo',        // 서버에 요청할 URL
+      dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+      sequentialUploads: true,
+      singleFileUploads: false,
+      autoUpload: false,
+      replaceFileInput : true,
+      processalways: function (e, data) {
+        
+        console.log('add()...');
+        console.log(data);
+      
+        if (data.files && data.files[0]) {
+          
+          var reader = new FileReader();
+          reader.onload = (e) => {
+            $('#prevImage').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(data.files[0]);
+          
+          $('#imageUpdate-btn').prop('disabled', false);
+          $('#imageUpdate-btn').unbind("click");
+          $('#imageUpdate-btn').click(function() {
+            data.submit();
+          });
+        }
+      }, 
+      done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
+        $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + data.result.loginUser.photo);
+        $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.result.loginUser.photo + '.jpg');
+        $('#imageModal').modal('hide');
+      }
     });
   </script>
 </body>

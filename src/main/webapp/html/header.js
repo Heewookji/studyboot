@@ -93,6 +93,7 @@ function loadLoginUser() {
       notLoginState.addClass('std-invisible');
     
       $("#nickname").html(user.nickName);
+      $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/' + 'thumbnail.' + user.photo + '.jpg');
 
       if(obj.myStudyList != undefined){
         var myStudyListTemplateSrc = $('#myStudy-template').html();
