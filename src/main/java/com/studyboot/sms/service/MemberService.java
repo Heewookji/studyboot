@@ -6,7 +6,9 @@ import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 
 public interface MemberService {
-
+  
+  Member getNaverMember(String token);
+  Member getFacebookMember(String token);
   List<Integer> findMemberNoByKeyword(String keyword);
   List<Integer> findMemberNoMsg(String keyword);
   Member get(String email);
@@ -20,4 +22,5 @@ public interface MemberService {
   List<Study> pickedStudyList(int no);
   int add(Member member);
   List<String> findMemberNoByNickNameList(String[] nickNames);
+
 }

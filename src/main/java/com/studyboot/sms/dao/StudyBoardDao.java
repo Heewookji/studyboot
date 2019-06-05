@@ -11,12 +11,12 @@ public interface StudyBoardDao {
   int countByClsAndMember(HashMap<String, Object> params);
   List<StudyBoard> findNtc(int no);
   
-//  int insert(StudyMember studyMember);
+  int insert(StudyBoard studyBoard);
+  StudyBoard findByNo(int no);
   
   // 스터디 넘버로 스터디 구성원 가져오기
 //  List<StudyMember> findStudyMembersByNo(int no);
   
-//  StudyMember findByNo(int no);
   //int increaseCount(int no);
 //  int update(StudyMember studyMember);
 //  int delete(int no);

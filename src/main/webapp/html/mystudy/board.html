@@ -160,43 +160,6 @@
     
 <footer id="js-footer"> </footer>
 
-<!-- 게시판 리스트 -->
-<script id="std-BoardList" type="text/x-handlebars-template">
-{{#each list}}
-{{#if ntc}}
-<tr>
-  <th><span style="color: red;">
-  <i class="et-icon-megaphone"></i></span></th>
-  <td align="center">{{title}}</td>
-  <td>
-<a href='#' class='sspctForm-btn'
- data-toggle="modal" 
-data-target="#addModal"
-data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a>
-</td>
-<td align="center">{{date}}</td>
-<td align="center">{{viewCount}}</td>
-</tr>
-{{else}}
-<tr>
-  <th scope='row'>{{no}}</th>
-  <td align="center">{{title}}</td>
-  <td>
-<a href='#' class='sspctForm-btn'
- data-toggle="modal" 
-data-target="#addModal"
-data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a>
-</td>
-<td align="center">{{date}}</td>
-<td align="center">{{viewCount}}</td>
-</tr>
-{{/if}}
-
-{{/each}}
-</script>
-
-
-
 
     <!-- End Copyright Footer -->
     <a class="js-go-to u-go-to-v1" href="#" data-type="fixed" data-position='{
@@ -209,6 +172,39 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
 
   <div class="u-outer-spaces-helper"></div>
 
+
+<!-- 
+data-toggle="modal" 
+data-target="#addModal"
+ -->
+<!-- 게시판 리스트 -->
+<script id="std-BoardList" type="text/x-handlebars-template">
+{{#each list}}
+{{#if ntc}}
+<tr>
+  <th><span style="color: red;">
+  <i class="et-icon-megaphone"></i></span></th>
+  <td align="center">
+<a href='#' class='detail-btn' id="detail-data"
+data-no='{{no}}'>{{title}}</a></td>
+  <td>{{member.nickName}}</td>
+<td align="center">{{date}}</td>
+<td align="center">{{viewCount}}</td>
+</tr>
+{{else}}
+<tr>
+  <th scope='row'>{{no}}</th>
+  <td align="center">
+<a href='#' class='detail-btn' id="detail-data"
+data-no='{{no}}'>{{title}}</a></td>
+  <td>{{member.nickName}}</td>
+<td align="center">{{date}}</td>
+<td align="center">{{viewCount}}</td>
+</tr>
+{{/if}}
+
+{{/each}}
+</script>
 
   <!-- JS Global Compulsory -->
   <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>
@@ -247,21 +243,8 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
   <script src="navbar.js"></script>
   <script src="board.js"></script>
   <script src="forms.js"></script>
+  <script src="view.js"></script>
   <script src="../footer.js"></script>
-
-  <!-- JS Plugins Init. -->
-  <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
-  <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
-  <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
-  <script src='/studyboot/node_modules/@fullcalendar/core/locales/ko.js'></script>
-  
-<script src='../../fullcalendar/timegrid/main.js'></script>
-<script src='../../fullcalendar/list/main.js'></script>
-  
-  
-  <script src='./calendar/calendar.js?v=<%=System.currentTimeMillis() %>'></script>
-
-
 
 
 </body>
