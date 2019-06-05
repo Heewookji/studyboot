@@ -30,6 +30,7 @@ public class MemberController {
   @Autowired MemberService memberService;
   @Autowired StudyMemberService studyMemberService;
   @Autowired ServletContext servletContext;
+  
   /*
   @GetMapping("delete")
   public Object delete(int no) {
@@ -84,8 +85,11 @@ public class MemberController {
   public Object detail(HttpSession session) {
     
     Member loginUser = (Member) session.getAttribute("loginUser");
-    
     Member member = memberService.get(loginUser.getNo());
+    
+    if (member.getPhoto() == null) {
+      member.setPhoto("vven.jpg");
+    }
     return member;
   }
 
@@ -161,7 +165,6 @@ public class MemberController {
       HttpSession session,
       Part files) throws Exception {
     
-    System.out.println(files);
     Member loginUser = (Member) session.getAttribute("loginUser");
     Map<String, Object> content = new HashMap<>();
     
@@ -173,18 +176,18 @@ public class MemberController {
     // 이미지 저장
     String uploadDir = servletContext.getRealPath("/upload/images/member");
     String filename = UUID.randomUUID().toString();
-    System.out.println(uploadDir + "/" + filename);
     files.write(uploadDir + "/" + filename);
     
     // 썸네일 이미지 저장
     Thumbnails.of(uploadDir + "/" + filename)
-    .size(20, 20)
+    .size(100, 100)
     .outputFormat("jpg")
     .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
     
     loginUser.setPhoto(filename);
     
     if(memberService.update(loginUser) != 0) {
+      content.put("loginUser", loginUser);
       content.put("status", "success");
       
     } else {

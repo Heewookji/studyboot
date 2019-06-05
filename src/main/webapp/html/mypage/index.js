@@ -7,39 +7,57 @@ appliedStudyGenerator = Handlebars.compile(appliedStudyTemplateSrc),
 pickedStudyTemplateSrc = $('#picked-study-template').html(),
 pickedStudyGenerator = Handlebars.compile(pickedStudyTemplateSrc),
 appliedinit = false,
-pickedinit = false;
+pickedinit = false,
+imgUdt = false,
+user;
 
-// 프로필 사진 모달
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      $('#prevImage').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(input.files[0]);
+
+// 프사 모달 닫힐 때
+$('#imageModal').on('hidden.bs.modal', function (e) {
+  console.log('modal close');
+  if (!imgUdt) {
+    $('#prevImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
+    $('#imageUpdate-btn').prop('disabled', true);
   }
-}
-
-$('#imageInput').change(function() {
-  readURL(this);
 });
 
-// 프로필 사진 변경
+
+// 프사 변경
 $('#imageInput').fileupload({
   url: '../../app/json/member/photo',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
-  add: function (e, data) {
+  sequentialUploads: true,
+  singleFileUploads: false,
+  autoUpload: false,
+  replaceFileInput : true,
+  processalways: function (e, data) {
+    
     console.log('add()...');
     console.log(data);
-    
-    $('#imageUpdate-btn').click(function() {
+  
+    if (data.files && data.files[0]) {
+      
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        $('#prevImage').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(data.files[0]);
+      
+      imgUdt = false;
+      $('#imageUpdate-btn').prop('disabled', false);
+      $('#imageUpdate-btn').unbind("click");
+      $('#imageUpdate-btn').click(function() {
         data.submit();
-    });
+      });
+    }
   }, 
-  done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
-    console.log('done()...');
-    console.log(data.result);
+  done: function (e, data) {
+    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + data.result.loginUser.photo);
+    $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.result.loginUser.photo + '.jpg');
+    user.photo = data.result.loginUser.photo;
+    imgUdt = true;
+    $('#imageModal').modal('hide');
+    $('#imageUpdate-btn').prop('disabled', true);
   }
 });
 
@@ -53,8 +71,12 @@ function loadData() {
       function(data) {
     
     console.log(data);
-    $('#nickName').val(data.nickName);
-    $('#rate').val(data.rate);
+    user = data;
+// $('#nickName').val(data.nickName);
+// $('#rate').val(data.rate);
+    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
+    $('#prevImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
+    
 // $('#cls').val(data.cls);
 // $('#sdt').val(data.startDate);
 // $('#edt').val(data.endDate);

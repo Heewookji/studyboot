@@ -104,6 +104,10 @@ values('161411', '161411', '스터디47', '사진', 127, '2019-05-16', '2019-06-
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
 values('161412', '161412', '스터디48', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
+insert into sms_std(std_id, adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
+values(100, '161412', '161412', '지환탈퇴테스트', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+
+
 -- 회원 생성
   -- 관리자
 insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, photo, admin, adr_lms)
@@ -170,7 +174,12 @@ insert into sms_std_member(std_id, member_id) values(2,3);
 insert into sms_std_member(std_id, member_id) values(2,4);
 insert into sms_std_member(std_id, member_id) values(2,5);
   
-  
+insert into sms_std_member(std_id, member_id,leader) values(100,2,true);
+insert into sms_std_member(std_id, member_id) values(100,3);
+insert into sms_std_member(std_id, member_id) values(100,4);
+insert into sms_std_member(std_id, member_id) values(100,5);
+insert into sms_std_member(std_id, member_id) values(100,6);
+insert into sms_std_member(std_id, member_id) values(100,7);
 
   
 -- 스터디 활동일
