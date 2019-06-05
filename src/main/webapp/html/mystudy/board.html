@@ -160,6 +160,18 @@
     
 <footer id="js-footer"> </footer>
 
+
+    <!-- End Copyright Footer -->
+    <a class="js-go-to u-go-to-v1" href="#" data-type="fixed" data-position='{
+     "bottom": 15,
+     "right": 15
+   }' data-offset-top="400" data-compensation="#js-header" data-show-effect="zoomIn">
+      <i class="hs-icon hs-icon-arrow-top"></i>
+    </a>
+  </main>
+
+  <div class="u-outer-spaces-helper"></div>
+
 <!-- 게시판 리스트 -->
 <script id="std-BoardList" type="text/x-handlebars-template">
 {{#each list}}
@@ -194,21 +206,6 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
 
 {{/each}}
 </script>
-
-
-
-
-    <!-- End Copyright Footer -->
-    <a class="js-go-to u-go-to-v1" href="#" data-type="fixed" data-position='{
-     "bottom": 15,
-     "right": 15
-   }' data-offset-top="400" data-compensation="#js-header" data-show-effect="zoomIn">
-      <i class="hs-icon hs-icon-arrow-top"></i>
-    </a>
-  </main>
-
-  <div class="u-outer-spaces-helper"></div>
-
 
   <!-- JS Global Compulsory -->
   <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>
@@ -248,20 +245,6 @@ data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a
   <script src="board.js"></script>
   <script src="forms.js"></script>
   <script src="../footer.js"></script>
-
-  <!-- JS Plugins Init. -->
-  <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
-  <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
-  <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
-  <script src='/studyboot/node_modules/@fullcalendar/core/locales/ko.js'></script>
-  
-<script src='../../fullcalendar/timegrid/main.js'></script>
-<script src='../../fullcalendar/list/main.js'></script>
-  
-  
-  <script src='./calendar/calendar.js?v=<%=System.currentTimeMillis() %>'></script>
-
-
 
 
 </body>

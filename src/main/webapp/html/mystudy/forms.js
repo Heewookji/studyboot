@@ -1,6 +1,26 @@
+var param = location.href.split('?')[1],
+noss = param.split('=')[1],
+leader;
+
+//리더 유무 받아오기
+$.getJSON('../../app/json/MyStudy/leader?no=' + noss,
+    function(obj) {
+  leader = obj.leader;
+});
+
+
 $('#add-board').click((e) => {
 
   $("#contents").load("/studyboot/html/mystudy/forms.html", function(){
+    
+    $('#checkboxSuccess').click((e) => {
+      if (leader != true){
+        alert("스터디장만 공지사항입력이 가능합니다.");
+        $("input:checkbox[id='checkboxSuccess']").prop("checked", false);
+      }
+    });
+    
+    
     $('#add-min-btn').click((e) => {
 
       if($('#inputHorizontalSuccess').val().length === 0) {
@@ -23,18 +43,15 @@ $('#add-board').click((e) => {
         },
         success: function(data){
           var obj = JSON.parse(data);
-          console.log(obj);
           alert(obj.status);
-
+          window.location.href = "/studyboot/html/mystudy/board.html?no=" + noss;
         },
         error: function(request, status, error){
           alert("등록에 실패 했습니다.");
         }
       });
-      window.location.href = "/studyboot/html/mystudy/index.html?" + nos;
 
     });
-    $(document.body).trigger('loaded-paging');
 
 
   });
