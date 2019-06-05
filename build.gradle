@@ -44,7 +44,7 @@ dependencies {
     
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     
-      compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
     
     compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
     
@@ -52,6 +52,7 @@ dependencies {
     
     compile group: 'org.springframework', name: 'spring-context-support', version: '5.1.6.RELEASE'
     
+    compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
     
     compile group: 'javax.activation', name: 'activation', version: '1.1.1'
     

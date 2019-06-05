@@ -65,8 +65,18 @@ public class MyStudyServiceImpl implements MyStudyService {
   public List<StudyBoard> ntcList(int no) {
 
     List<StudyBoard> boardNtc = studyBoardDao.findNtc(no);
-    
+
     return boardNtc;
+  }
+
+  @Override
+  public StudyBoard get(int no) {
+    return studyBoardDao.findByNo(no);
+  }
+
+  @Override
+  public int add(StudyBoard studyBoard) {
+    return studyBoardDao.insert(studyBoard);
   }
 
 

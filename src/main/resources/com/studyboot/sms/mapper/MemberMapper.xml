@@ -107,7 +107,8 @@
     update sms_member
     set
       nick_name = #{nickName},
-      tel = #{tel}
+      tel = #{tel},
+      photo = #{photo}
     where member_id = #{no}
   </update>
   

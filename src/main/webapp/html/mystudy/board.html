@@ -3,7 +3,7 @@
 
 <head>
   <!-- Title -->
-  <title>Unify Profile Projects | | Unify - Responsive Website Template</title>
+  <title>My Study</title>
 
   <!-- Required Meta Tags Always Come First -->
   <meta charset="utf-8">
@@ -36,13 +36,54 @@
   <link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
   <link rel='stylesheet' href='../../fullcalendar/daygrid/main.css'/>
   <link rel='stylesheet' href='./calendar/calendar.css'  />
+  <link rel='stylesheet'  href='../../fullcalendar/timegrid/main.css'/>
+  <link rel='stylesheet'  href='../../fullcalendar/list/main.css'/>
 
 </head>
 
 <body>
   <main>
-  
-<div class="card border-0 g-mb-40" id="study-board">
+
+<!-- Header -->
+ <header id="js-header"
+  class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+  data-header-fix-moment="300"> </header>
+ <!-- End Header -->
+
+    <div style="width: 800px; height: 150px;">
+ 
+ </div>
+
+    <!-- Breadcrumb -->
+    <section class="g-my-30">
+      <div class="container">
+        <ul class="u-list-inline" id= "conts-list">
+          <li class="list-inline-item g-mr-7">
+            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">Home</a>
+            <i class="fa fa-angle-right g-ml-7"></i>
+          </li>
+          <li class="list-inline-item g-mr-7">
+            <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/html/mypage/">My page</a>
+            <i class="fa fa-angle-right g-ml-7"></i>
+          </li>
+          <li class="list-inline-item g-color-primary" id="std-main">
+            <span>My Study</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- End Breadcrumb -->
+
+    <section class="g-mb-100">
+      <div class="container">
+        <div class="row">
+          <!-- Profile Sidebar -->
+          <div class="col-lg-3 g-mb-50 g-mb-0--lg" id="min_nav_bar"></div>
+          <!-- End Profile Sidebar -->
+
+          <!-- 게시판 -->
+          <div class="col-lg-9" id="contents">
+          <div class="card border-0 g-mb-40" id="study-board">
               <!-- Panel Header -->
               <div class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0 g-mb-15">
                 <h3 class="h6 mb-0" style="text-align: center;">
@@ -68,9 +109,7 @@
     </thead>
 
     <tbody id="board-list-hb"></tbody>
-    
-   </table>
-   <hr>
+   </table><hr>
 
       <nav class="navbar navbar-light">
    <div class="dropdown" style="margin: 0px;">
@@ -113,11 +152,61 @@
   </div> <!-- END 페이징 -->
   
  </div>
-  
+ </div>
+          
+      </div>
+      </div>
+    </section>
+    
+<footer id="js-footer"> </footer>
+
+
+    <!-- End Copyright Footer -->
+    <a class="js-go-to u-go-to-v1" href="#" data-type="fixed" data-position='{
+     "bottom": 15,
+     "right": 15
+   }' data-offset-top="400" data-compensation="#js-header" data-show-effect="zoomIn">
+      <i class="hs-icon hs-icon-arrow-top"></i>
+    </a>
   </main>
 
-
   <div class="u-outer-spaces-helper"></div>
+
+<!-- 게시판 리스트 -->
+<script id="std-BoardList" type="text/x-handlebars-template">
+{{#each list}}
+{{#if ntc}}
+<tr>
+  <th><span style="color: red;">
+  <i class="et-icon-megaphone"></i></span></th>
+  <td align="center">{{title}}</td>
+  <td>
+<a href='#' class='sspctForm-btn'
+ data-toggle="modal" 
+data-target="#addModal"
+data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a>
+</td>
+<td align="center">{{date}}</td>
+<td align="center">{{viewCount}}</td>
+</tr>
+{{else}}
+<tr>
+  <th scope='row'>{{no}}</th>
+  <td align="center">{{title}}</td>
+  <td>
+<a href='#' class='sspctForm-btn'
+ data-toggle="modal" 
+data-target="#addModal"
+data-content='{{member.nickName}}' data-no='{{memberNo}}'>{{member.nickName}}</a>
+</td>
+<td align="center">{{date}}</td>
+<td align="center">{{viewCount}}</td>
+</tr>
+{{/if}}
+
+{{/each}}
+</script>
+
   <!-- JS Global Compulsory -->
   <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
@@ -152,74 +241,13 @@
   <!-- JS Customization -->
   <script src="/studyboot/Unify/assets/js/custom.js"></script>
   <script src="/studyboot/html/header.js"></script>
-  <script src="index.js"></script>
+  <script src="navbar.js"></script>
+  <script src="board.js"></script>
+  <script src="forms.js"></script>
   <script src="../footer.js"></script>
-
-  <!-- JS Plugins Init. -->
-<script src='../../fullcalendar/core/main.js'></script>
-<script src='../../fullcalendar/interaction/main.js'></script>
-<script src='../../fullcalendar/daygrid/main.js'></script>
-<script src='./calendar/calendar.js'></script>
-
-
-
-
 
 
 </body>
 
 </html>
 
-     <!-- 
-   <div style="width: 810px;">
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
-  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-  style="color: #72c02c; background: white; border: solid 1px #72c02c">
-    분류
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-
-<div class="input-group u-shadow-v33  g-rounded-50 g-max-width-250"
-    id="header-search">
-    <input
-     class="form-control g-font-size-default g-color-gray-dark-v4 g-placeholder-gray-dark-v3 border-0 g-rounded-left-50 g-px-20"
-     placeholder="Enter keyword" id="study-search">
-    <div class="input-group-append">
-     <span
-      class="input-group-text g-bg-white border-0 g-rounded-right-50">
-      <button class="btn btn-sm u-btn-primary rounded-circle"
-       type="submit" id="search-btn">
-       <i class="fa fa-search"></i>
-      </button>
-     </span>
-    </div>
-   </div>
-</div>
--->
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  

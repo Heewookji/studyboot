@@ -17,6 +17,12 @@
     <result column="memo" property="memo" />
   </resultMap>
 
+  <resultMap type="attend" id="attendMap">
+    <id column="std_atnd_id" property="scheduleNo" />
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="memberNo" />
+  </resultMap>
+  
   <insert id="insert" parameterType="schedule">
     insert into sms_std_schdl(
       name,
@@ -84,15 +90,27 @@
     where std_schdl_id = #{id}
   </update>
   
-  <insert id="attend" parameterType="schedule">
+  <insert id="attend" parameterType="map">
     insert into sms_std_atnd(
-      std_schdl_id,
+      std_atnd_id,
       std_id,
       member_id)
     values(
-      #{id},
+      #{scheduleNo},
       #{studyNo},
       #{memberNo})
   </insert>
+  
+  <select id="attendTrueFalse" resultMap="attendMap" parameterType="int">
+    select
+      std_atnd_id,
+      std_id,
+      member_id
+    from
+      sms_std_atnd
+    where
+      std_atnd_id = #{value}
+  </select>
+  
 
 </mapper>

@@ -3,7 +3,10 @@ package com.studyboot.sms.web.json;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,8 @@ import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.StudyMemberService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 
 @RestController("json/MemberController")
@@ -24,6 +29,7 @@ public class MemberController {
 
   @Autowired MemberService memberService;
   @Autowired StudyMemberService studyMemberService;
+  @Autowired ServletContext servletContext;
   /*
   @GetMapping("delete")
   public Object delete(int no) {
@@ -59,7 +65,6 @@ public class MemberController {
       if(doingStudyList != null) {
         content.put("doingStudyList", doingStudyList);
       }
-      
       if(appliedStudyList != null) {
         content.put("appliedStudyList", appliedStudyList);
       }
@@ -149,6 +154,43 @@ public class MemberController {
     map.put("result", result);
 
     return map;
+  }
+  
+  @PostMapping("photo")
+  public Object photo(
+      HttpSession session,
+      Part files) throws Exception {
+    
+    System.out.println(files);
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    Map<String, Object> content = new HashMap<>();
+    
+    if (files.getSize() <= 0) {
+      content.put("status", "fail");
+      return content;
+    }
+    
+    // 이미지 저장
+    String uploadDir = servletContext.getRealPath("/upload/images/member");
+    String filename = UUID.randomUUID().toString();
+    System.out.println(uploadDir + "/" + filename);
+    files.write(uploadDir + "/" + filename);
+    
+    // 썸네일 이미지 저장
+    Thumbnails.of(uploadDir + "/" + filename)
+    .size(20, 20)
+    .outputFormat("jpg")
+    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+    
+    loginUser.setPhoto(filename);
+    
+    if(memberService.update(loginUser) != 0) {
+      content.put("status", "success");
+      
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
   }
 }
 

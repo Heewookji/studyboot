@@ -9,7 +9,7 @@ public class StudyBoard implements Cloneable, Serializable {
   private int no;
   private int studyNo;
   private int memberNo;
-  private int ntc;
+  private boolean ntc;
   private String title;
   private String contents;
   private int cls;
@@ -24,7 +24,7 @@ public class StudyBoard implements Cloneable, Serializable {
   public String toString() {
     return "StudyBoard [no=" + no + ", studyNo=" + studyNo + ", memberNo=" + memberNo + ", ntc="
         + ntc + ", title=" + title + ", contents=" + contents + ", cls=" + cls + ", date=" + date
-        + ", viewCount=" + viewCount + ", suspectPerson=" + member + "]";
+        + ", viewCount=" + viewCount + ", member=" + member + "]";
   }
   
   public int getNo() {
@@ -45,10 +45,10 @@ public class StudyBoard implements Cloneable, Serializable {
   public void setMemberNo(int memberNo) {
     this.memberNo = memberNo;
   }
-  public int getNtc() {
+  public boolean isNtc() {
     return ntc;
   }
-  public void setNtc(int ntc) {
+  public void setNtc(boolean ntc) {
     this.ntc = ntc;
   }
   public String getTitle() {

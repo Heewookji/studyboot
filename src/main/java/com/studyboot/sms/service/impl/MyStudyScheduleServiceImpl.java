@@ -1,6 +1,7 @@
 package com.studyboot.sms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.ScheduleDao;
 import com.studyboot.sms.domain.Schedule;
@@ -46,10 +47,17 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
   }
   
   @Override
-  public int attend(String nickName, int studyNo , int scheduleNo) {
-    
-    return scheduleDao.attend(nickName, studyNo, scheduleNo);
+  public int attend(Map<String, Object> attendMap) {
+
+    return scheduleDao.attend(attendMap);
   }
+  
+  @Override
+  public List<Schedule> attendTrueFalse(int scheduleNo) {
+   
+    return scheduleDao.attendTrueFalse(scheduleNo);
+  }
+  
 }
 
 

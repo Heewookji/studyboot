@@ -48,7 +48,7 @@
   href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
 
 <!-- CSS Unify -->
-<link rel="stylesheet" href="/studyboot/Unify/assets/css/unify.css">
+<link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
@@ -185,7 +185,11 @@
         </div>
         <div class="modal-body">
           <div >
-            <img src="../../upload/images/test2.jpeg" class="img-fluid" alt="Responsive image">
+            <img id="prevImage" src="../../upload/images/test2.jpeg" class="img-fluid w-100" alt="Responsive image"/>
+          </div>
+          <div>
+            <label for="imageInput" class="btn btn-xl u-btn-primary g-width-170"><i class="fa fa-camera-retro"></i></label>
+            <input type="file" id="imageInput" name="files" class="std-hidden">
           </div>
         </div>
         <div class="modal-footer">
@@ -193,7 +197,6 @@
             data-dismiss="modal">닫기</button>
           <button type="button" class="btn btn-primary"
             id="imageUpdate-btn">변경</button>
-        </div>
         </div>
       </div>
     </div>
@@ -210,7 +213,7 @@
         <div class="u-block-hover g-pos-rel">
           <figure>
             <img class="img-fluid w-100 u-block-hover__main--zoom-v1"
-              src="../../upload/images/test2.jpeg"
+              src="../../upload/images/member/vven.jpg"
               alt="Image Description">
           </figure>
 
@@ -234,10 +237,8 @@
           <!-- End Figure Caption -->
 
           <!-- User Info -->
-          <span class="g-pos-abs g-top-20 g-left-0"> <a
-            class="btn btn-sm u-btn-primary rounded-0" href="#">Johne
-              Doe</a> <small class="d-block g-bg-black g-color-white g-pa-5">Project
-              Manager</small>
+          <span class="g-pos-abs g-top-0 g-left-0">
+            <a class="btn btn-sm u-btn-primary rounded-0" href="#">Johne Doe</a>
           </span>
           <!-- End User Info -->
         </div>
@@ -322,8 +323,8 @@
             data-parent="#nav-1-1-default-hor-left-underline">
             <!-- doingStudyList -->
             <div class="container g-pb-100">
-              <div class="g-px-30--lg">
-                <div id="doingStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+              <div id="doingStudy" class="g-px-30--lg">
+                <div class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
                   data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
@@ -358,8 +359,8 @@
             data-parent="#nav-1-1-default-hor-left-underline">
             <!-- applied studyList -->
             <div class="container g-pb-100">
-              <div class="g-px-30--lg">
-                <div id="appliedStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+              <div id="appliedStudy" class="g-px-30--lg">
+                <div class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
                   data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
@@ -394,8 +395,8 @@
             data-parent="#nav-1-1-default-hor-left-underline">
             <!-- pickedStudyList -->
             <div class="container g-pb-100">
-              <div class="g-px-30--lg">
-                <div id="pickedStudyCarousel" class="js-carousel u-carousel-v5 g-mx-minus-15"
+              <div id="pickedStudy" class="g-px-30--lg">
+                <div class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
                   data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
@@ -512,6 +513,10 @@
   <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
   <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+  
+  <script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>

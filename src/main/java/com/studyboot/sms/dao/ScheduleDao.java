@@ -1,6 +1,7 @@
 package com.studyboot.sms.dao;
 
 import java.util.List;
+import java.util.Map;
 import com.studyboot.sms.domain.Schedule;
 
 public interface ScheduleDao {
@@ -10,7 +11,8 @@ public interface ScheduleDao {
   Schedule findByNo(int no);
   int delete(int no);
   int update(Schedule schedule);
-  int attend(String nickNames, int studyNo , int scheduleNo);
+  int attend(Map<String, Object> attendMap);
+  List<Schedule> attendTrueFalse(int scheduleNo);
 }
 
 

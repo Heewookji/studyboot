@@ -1,5 +1,6 @@
 package com.studyboot.sms.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import com.studyboot.sms.dao.AppliedStudyDao;
 import com.studyboot.sms.dao.MemberDao;
 import com.studyboot.sms.dao.StudyDao;
@@ -118,18 +118,34 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public List<AppliedStudy> appliedStudyList(int no) {
-    return appliedStudyDao.findAllByUser(no);
+    
+    List<AppliedStudy> list = appliedStudyDao.findAllByUser(no);
+    if (list.size() > 0) {
+      return list;
+    } else {
+      return null;
+    }
   }
 
   @Override
   public List<Study> pickedStudyList(int no) {
-    return studyDao.findPickedStudyByUser(no);
+    List<Study> list = studyDao.findPickedStudyByUser(no);
+    if (list.size() > 0) {
+      return list;
+    } else {
+      return null;
+    }
   }
 
   @Override
   public List<String> findMemberNoByNickNameList(String[] nickNames) {
 
-    return findMemberNoByNickNameList(nickNames);
+  List<String> nickNameList = new ArrayList<String>();
+    
+    for(String nickName : nickNames) {
+      nickNameList.add(nickName);
+    }
+    return memberDao.findMemberNoByNickNameList(nickNameList);
   }
 
 

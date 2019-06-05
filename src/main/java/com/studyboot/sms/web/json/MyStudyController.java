@@ -2,11 +2,14 @@ package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyBoard;
 import com.studyboot.sms.domain.StudyMember;
@@ -54,7 +57,7 @@ public class MyStudyController {
     if(keyword.equals("undefined")) {
       keyword = null;
     } 
-    
+
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
@@ -87,135 +90,102 @@ public class MyStudyController {
 
     return content;
   }
-  
+
 
   @GetMapping("studyphoto")
   public Object getStudy(int no) {
-    
+    System.out.println(no);
+
     HashMap<String,Object> content = new HashMap<>();
-    
+
     Study study = studyService.getStudy(no);
     List<StudyMember> list = studyMemberService.findStudyMember(no);
-    List<StudyBoard> ntcList = myStudyService.ntcList(no);
-    
+
     content.put("list", list);
     content.put("study", study);
-    content.put("ntcList", ntcList);
-    
+
     return content;
   }
-  
+
+  @GetMapping("studyNtc")
+  public Object getNtc(int no) {
+
+    HashMap<String,Object> content = new HashMap<>();
+    List<StudyBoard> ntcList = myStudyService.ntcList(no);
+    content.put("ntcList", ntcList);
+    return content;
+  }
 
 
-  //  @Autowired InquiryService inquiryService;
-  //  @Autowired MemberService memberService;
-  //
-  //  @PostMapping("add")
-  //  public Object add(Inquiry inquiry) {
-  //    HashMap<String,Object> content = new HashMap<>();
-  //    
-  //    try {
-  //      inquiryService.add(inquiry);
-  //      content.put("status", "success");
-  //    } catch (Exception e) {
-  //      content.put("status", "fail");
-  //      content.put("message", e.getMessage());
-  //    }
-  //    
-  //    return content;
-  //  }
-  //
-  //  @GetMapping("delete")
-  //  public Object delete(int no) {
-  //
-  //    HashMap<String,Object> content = new HashMap<>();
-  //    try {
-  //      if (inquiryService.delete(no) == 0) 
-  //        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-  //      content.put("status", "success");
-  //
-  //    } catch (Exception e) {
-  //      content.put("status", "fail");
-  //      content.put("message", e.getMessage());
-  //    }
-  //    return content;
-  //  }
-  //
-  //  @GetMapping("detail")
-  //  public Object detail(@RequestParam int no) {
-  //    
-  //    Inquiry inquiry = inquiryService.get(no);
-  //    
-  //    return inquiry;
-  //  }
-  //
-  //
-  //  @GetMapping("list")
-  //  public Object list(
-  //      @RequestParam(defaultValue="1") int pageNo,
-  //      @RequestParam(defaultValue="3") int pageSize,
-  //      @RequestParam String pageCls,
-  //      @RequestParam String keyword) {
-  //
-  //    HashMap<String,Object> content = new HashMap<>();
-  //
-  //    int clsNo = 0;
-  //    switch(pageCls){
-  //      case "문의": clsNo = 1; break;
-  //      case "신고": clsNo = 2; break;
-  //      case "undefined": clsNo = 0;
-  //    }
-  //
-  //    List<Inquiry> inquirys;
-  //    List<Integer> memberNos = null;
-  //
-  //    if(!keyword.equals("undefined")) {
-  //      memberNos = memberService.findMemberNoByKeyword(keyword);
-  //      
-  //      if (memberNos.size() == 0) {
-  //        content.put("pageNo", 0);
-  //        return content;
-  //      }
-  //    } 
-  //    
-  //    if (pageSize < 3 || pageSize > 8) 
-  //      pageSize = 3;
-  //    
-  //
-  //    int rowCount = inquiryService.size(clsNo, memberNos);
-  //    
-  //    if (rowCount == 0) {
-  //      content.put("pageNo", 0);
-  //      return content;
-  //    }
-  //    
-  //    int totalPage = rowCount / pageSize;
-  //
-  //    if (rowCount % pageSize > 0)
-  //      totalPage++;
-  //
-  //    if (pageNo < 1) 
-  //      pageNo = 1;
-  //    else if (pageNo > totalPage)
-  //      pageNo = totalPage;
-  //
-  //
-  //    inquirys = inquiryService.list(pageNo, pageSize, clsNo, memberNos);
-  //    
-  //
-  //    content.put("list", inquirys);
-  //    content.put("pageNo", pageNo);
-  //    content.put("pageSize", pageSize);
-  //    content.put("totalPage", totalPage);
-  //
-  //    return content;
-  //  }
+  @PostMapping("add")
+  public Object add(StudyBoard studyBoard, HttpSession session) {
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    // loginUser.getNo() 로그인한 유저의 유저넘버를 schedule 객체에 담는다.
+    studyBoard.setMemberNo(loginUser.getNo());
+
+    // 리더 판단을 위한 코드 (34줄 ~ 48줄)
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", studyBoard.getStudyNo());
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+
+    if (studyBoard.isNtc() == true && leaderYesOrNo == true) {
+
+      try {
+        myStudyService.add(studyBoard);
+        content.put("status", "등록이 완료 되었습니다.");
+      } catch (Exception e) {
+        content.put("status", "fail");
+        content.put("message", e.getMessage());
+      }
+
+    } else if (studyBoard.isNtc() == true && leaderYesOrNo == false) {
+      content.put("status", "스터디장만 공지사항을 등록 할 수 있습니다.");
+      return content;
+
+    } else if (studyBoard.isNtc() == false) {
+
+      try {
+        myStudyService.add(studyBoard);
+        content.put("status", "등록이 완료 되었습니다.");
+      } catch (Exception e) {
+        content.put("status", "fail");
+        content.put("message", e.getMessage());
+      }
+    }
+
+    return content;
+  }
+
+  @GetMapping("leader")
+  public Object leader(HttpSession session, int no) {
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", no);
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    content.put("leader", studyMemberService.findStudyMemberLeader(studyAndUserNo));
+
+    return content;
+  }
+
+  @GetMapping("detail")
+  public Object detail(@RequestParam int no) {
+
+    StudyBoard studyBoard = myStudyService.get(no);
+
+    return studyBoard;
+  }
 
 }
-
-
-
-
 
 
 
