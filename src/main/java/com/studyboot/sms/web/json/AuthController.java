@@ -125,11 +125,23 @@ public class AuthController {
   
   @PostMapping("sociallogin")
   public Object socialLogin(HttpSession session,
-      String email
+      String token,  String social
       ) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
 
-    Member member = memberService.get(email);
+    Member member = null;
+    
+    //토큰으로 서버에 요청한다.
+    if(social.equalsIgnoreCase("facebook")) {
+      
+      member = memberService.getFacebookMember(token);
+      
+    }else if(social.equalsIgnoreCase("naver")){
+      
+      member = memberService.getNaverMember(token);
+      
+    }
+    
     
     if (member == null) {
       content.put("status", "fail");

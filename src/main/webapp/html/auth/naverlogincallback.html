@@ -38,7 +38,7 @@
               .getLoginStatus(function(status) {
 
                 if (status) {
-
+                  
                   //필수 정보 누락시
                   var email = naverLogin.user.getEmail();
                   var name = naverLogin.user.getName();
@@ -59,56 +59,21 @@
                       type: 'post',
                       dataType: 'text',
                       data: {
-                        email: email
+                        token: naverLogin.accessToken.accessToken,
+                        social: "naver"
                       },
                       success: function(data) {
-                        var data = JSON.parse(data);
-
+                        var obj = JSON.parse(data);
                         //등록된 이메일이 있다면, 로그인 후 팝업창 닫고 메인으로 이동한다.
-                        if (data.status == "success") {
+                        if (obj.status == "success") {
                           close();
                           $(opener.location).attr("href", "/studyboot;");
-
-                          //등록된 이메일이 없다면, 해당 정보로 등록하고 로그인도 바로 한다.
-                        } else {
-
-                          $.ajax({
-                            url: '/studyboot/app/json/auth/register',
-                            type: 'post',
-                            dataType: 'text',
-                            data: {
-                              email: email,
-                              name: name,
-                              nickName: nickName
-                            },
-                            success: function(data) {
-                              var data = JSON.parse(data);
-                              if (data.status == "success") {
-                                $.ajax({
-                                  url: '/studyboot/app/json/auth/sociallogin',
-                                  type: 'post',
-                                  dataType: 'text',
-                                  data: {
-                                    email: email
-                                  },
-                                  success: function(data) {
-                                    close();
-                                    $(opener.location).attr("href",
-                                            "/studyboot;");
-                                  }
-                                });
-                              } else {
-                                alert("등록에 실패했습니다");
-                              }
-                            }
-                          });
-
                         }
-
                       }
-
                     });
+
                   }
+
                 } else {
                   console.log("callback 처리에 실패하였습니다.");
                 }

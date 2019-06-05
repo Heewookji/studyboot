@@ -8,18 +8,46 @@ $(document).on('ready', function () {
           {
             clientId: "SfQg5WbbEwfRelyDmqBo",
             callbackUrl: "http://localhost:8080/studyboot/html/auth/naverlogincallback.html",
-            isPopup: true, /* 팝업을 통한 연동처리 여부 */
-            loginButton: {color: "green", type: 1, height: 30} /* 로그인 버튼의 타입을 지정 */
+            isPopup: true /* 팝업을 통한 연동처리 여부 */
           }
   );
   /* 설정정보를 초기화하고 연동을 준비 */
   naverLogin.init();
+  
+  
+//페이스북  로그인 초기화
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '608458479642615',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v3.3'
+    });
+    FB.AppEvents.logPageView();   
+  };
+
+  //동적 스크립트 생성
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
 });
 
+$("#fb-btn").click((e) => {
+  e.preventDefault();
 
-
-
+  FB.login(function(response) {
+    //로그인 과정이 완료되면 실행
+    checkLoginState();
+  }, {
+    scope: 'public_profile',
+    auth_type: 'rerequest'
+      });
+});
 
 
 if (window.localStorage.getItem('email')) {
