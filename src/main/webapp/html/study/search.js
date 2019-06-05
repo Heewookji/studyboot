@@ -7,6 +7,8 @@ rateValue = 3,
 largeClsNo,
 mediumClsNo,
 clsTitle,
+dayNo,
+dayCheckList = $('.day-checkbox input'),
 keyword,
 tbody = $('#card-div'),
 //card 리스트 출력 - 스터디 목록
@@ -30,20 +32,21 @@ trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress);
 
 
 //JSON 형식의 데이터 목록 가져오기
-function searchList(pageNo, clsNo, addressNo, rateValue, keyword) {
+function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
   $.getJSON('../../app/json/study/search?pageNo=' + pageNo
           + '&pageSize=' + pageSize
           + '&clsNo=' + clsNo
           + '&addressNo=' + addressNo 
           + '&rateValue=' + rateValue
-          + '&keyword=' + keyword,
+          + '&keyword=' + keyword
+          + '&dayNo=' + dayNo,
 
           function(obj) {
 
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
-            'rateValue=' + rateValue, 'keyword=' + keyword);
+            'rateValue=' + rateValue, 'keyword=' + keyword, 'dayNo=' + dayNo);
 
     // keyword 검색된 스터디 개수 알려준다.(기존 분류제목에)
 
@@ -114,7 +117,7 @@ function loadAddress(addressNo) {
 if (param) {
   keyword = decodeURIComponent(param.split('=')[1]);
   pageNo = 1;
-  searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   loadCheckList(clsNo);
   loadAddress();
 }
@@ -122,7 +125,7 @@ if (param) {
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
   if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    searchList(++pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   }
 });
 
@@ -167,7 +170,7 @@ $(document.body).bind('loaded-checklist', () => {
       clsNo.splice(index,1);
     }
     console.log(clsNo);
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   });
 });
 
@@ -178,7 +181,7 @@ $(document.body).bind('loaded-smalltitle', () => {
     pageNo = 1;
     tbody.html('');
     clsNo = $(e.target).attr('data-no');
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 
     // 빵부스러기
     $('#small-tag').remove();
@@ -202,7 +205,7 @@ $(document.body).bind('loaded-largeAddress', () => {
     $('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
     $('#largeAddressButton').text($(e.target).text()); // 지역 대분류 버튼 이름 변경
     addressNo = $(e.target).attr('data-no');
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     loadAddress(addressNo);
   });
 });
@@ -216,7 +219,7 @@ $(document.body).bind('loaded-mediumAddress', () => {
     $('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
     $('#mediumAddressButton').text($(e.target).text()); // 지역 중분류 버튼 이름 변경
     addressNo = $(e.target).attr('data-no');
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     loadAddress(addressNo);
   });
 });
@@ -228,7 +231,7 @@ $(document.body).bind('loaded-smallAddress', () => {
     tbody.html('');
     $('#smallAddressButton').text($(e.target).text()); // 지역 소분류 버튼 이름 변경
     addressNo = $(e.target).attr('data-no');
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   });
 });
 
@@ -238,7 +241,7 @@ $('#large-tag > button').click(function(e) {
   pageNo = 1;
   tbody.html('');
   clsNo = largeClsNo;
-  searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   $('#small-tag').remove();
   $('#medium-tag').remove();
   $('#large-tag > button').prop('disabled', true);
@@ -250,7 +253,7 @@ $(document.body).bind('loaded-medium-tag', () => {
     pageNo = 1;
     tbody.html('');
     clsNo = $(e.target).attr('data-no');
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $('#small-tag').remove();
     $('#medium-tag > button').prop('disabled', true);
   });
@@ -262,7 +265,7 @@ $('#rateRange').change(function() {
   pageNo = 1;
   tbody.html('');
   rateValue = $('#rateRange').val();
-  searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
 //검색 필터
@@ -270,7 +273,26 @@ $('#search-btn').click((e) => {
   pageNo = 1;
   tbody.html('');
   keyword = $("#study-search").val();
-  searchList(pageNo, clsNo, addressNo, rateValue, keyword);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+});
+
+
+//요일 필터
+$('.day-checkbox input').change(function(e) {
+
+  var sum = 0;
+  
+  for(var a of dayCheckList){
+    if($(a).prop("checked")){
+      sum += parseInt($(a).val());
+    }
+  }
+  dayNo = sum;
+  
+  pageNo = 1; // 페이지 초기화
+  tbody.html(''); // 스터디 목록 초기화
+
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
 

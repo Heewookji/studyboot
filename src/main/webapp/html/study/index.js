@@ -45,7 +45,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
 	console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
 		'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
-		'rateValue=' + rateValue, 'keyword=' + keyword + 'dayNo=' + dayNo);
+		'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
 
 
 	// 현재 끝페이지까지 왔고, 처음 출력이 아니라면

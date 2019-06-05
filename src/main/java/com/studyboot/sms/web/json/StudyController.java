@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,8 @@ public class StudyController {
       @RequestParam List<String> clsNo,
       @RequestParam String addressNo,
       @RequestParam double rateValue,
-      @RequestParam String keyword) {
+      @RequestParam String keyword,
+      @RequestParam String dayNo) {
     
     // 페이지 사이즈
     if (pageSize < 3 || pageSize > 8) {
@@ -86,13 +88,24 @@ public class StudyController {
     if (clsNo.size() == 0) {
       clsNo = null;
     }
-
+    
+    //비트연산을 통해 월요일을 체크할 경우, 월화수, 월수, 월화수목금 등의 월요일 포함 정수 리스트 생성
+    List<Integer> dayNoList = new ArrayList<>();
+    if (!dayNo.equals("undefined")) {
+      int dayNumber = Integer.valueOf(dayNo);
+     
+      for(int i = 0; i < 128; i++) {
+        if( dayNumber == (dayNumber&i)){
+          dayNoList.add(i);
+        }
+      }
+    }
+    
     HashMap<String,Object> content = new HashMap<>();
 
     // clsNo와 일치하는 스터디 개수를 불러온다.
-    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword);
+    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword, dayNoList);
     
-    System.out.println(rowCount);
     
     if (rowCount == 0) {
       content.put("pageNo", 0);
@@ -114,7 +127,7 @@ public class StudyController {
 
 
     List<Study> studys = studyService.list(
-        pageNo, pageSize, clsNo, addressNo, rateValue, keyword);
+        pageNo, pageSize, clsNo, addressNo, rateValue, keyword, dayNoList);
 
     //리스트에 출력할 주소는 따로 꽂아준다. 
     for(Study study : studys) {
@@ -159,14 +172,23 @@ public class StudyController {
       keyword = null;
     }
  
-    if (dayNo.equals("undefined")) {
-      dayNo = "0";
+    //비트연산을 통해 월요일을 체크할 경우, 월화수, 월수, 월화수목금 등의 월요일 포함 정수 리스트 생성
+    List<Integer> dayNoList = new ArrayList<>();
+    if (!dayNo.equals("undefined")) {
+      int dayNumber = Integer.valueOf(dayNo);
+     
+      for(int i = 0; i < 128; i++) {
+        if( dayNumber == (dayNumber&i)){
+          dayNoList.add(i);
+        }
+      }
     }
-
+    
+    
     HashMap<String,Object> content = new HashMap<>();
 
     // clsNo와 일치하는 스터디 개수를 불러온다.
-    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword, dayNo);
+    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword, dayNoList);
     if (rowCount == 0) {
       content.put("pageNo", 0);
       content.put("rowCount", rowCount);
@@ -184,10 +206,10 @@ public class StudyController {
     } else if (pageNo > totalPage) {
       pageNo = totalPage;
     }
-
+    
 
     List<Study> studys = studyService.list(
-        pageNo, pageSize, clsNo, addressNo, rateValue, keyword);
+        pageNo, pageSize, clsNo, addressNo, rateValue, keyword, dayNoList);
 
     //리스트에 출력할 주소는 따로 꽂아준다. 
     for(Study study : studys) {

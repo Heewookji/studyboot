@@ -36,7 +36,7 @@ public class StudyServiceImpl implements StudyService {
   
   @Override
   public List<Study> list(int pageNo, int pageSize, List<String> clsNo, String addressNo,
-      double rateValue, String keyword) {
+      double rateValue, String keyword, List<Integer> dayNoList) {
 
     HashMap<String,Object> params = new HashMap<>();
 
@@ -52,6 +52,8 @@ public class StudyServiceImpl implements StudyService {
     
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("dayNoList", dayNoList);
+    params.put("dayNoListSize", dayNoList.size());
     params.put("clsNo", clsNo);
     params.put("addressNo", addressNo);
     params.put("addressNoSize", addressNo.length());
@@ -68,7 +70,8 @@ public class StudyServiceImpl implements StudyService {
   public List<Study> list(
       int pageNo, int pageSize,
       String clsNo, String addressNo,
-      double rateValue, String keyword) {
+      double rateValue, String keyword,
+      List<Integer> dayNoList) {
     
     HashMap<String,Object> params = new HashMap<>();
 
@@ -87,6 +90,8 @@ public class StudyServiceImpl implements StudyService {
     
     
     params.put("size", pageSize);
+    params.put("dayNoList", dayNoList);
+    params.put("dayNoListSize", dayNoList.size());
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("clsNo", clsNo);
     params.put("clsNoSize", clsNo.length());
@@ -172,7 +177,7 @@ public class StudyServiceImpl implements StudyService {
 
   @Override
   public int size(
-      String clsNo, String addressNo , double rateValue, String keyword, String dayNo) {
+      String clsNo, String addressNo , double rateValue, String keyword, List<Integer> dayNoList) {
     
     HashMap<String,Object> params = new HashMap<>();
     if(keyword != null) {
@@ -183,9 +188,9 @@ public class StudyServiceImpl implements StudyService {
         params.put("findedClsNosByKeyword", findedClsNosByKeyword);
       }
       }
-    System.out.println(dayNo);
     params.put("clsNo", clsNo);
-    params.put("dayNo", Integer.valueOf(dayNo));
+    params.put("dayNoList", dayNoList);
+    params.put("dayNoListSize", dayNoList.size());
     params.put("size", clsNo.length());
     params.put("addressNo", addressNo);
     params.put("addressSize", addressNo.length());
@@ -197,7 +202,7 @@ public class StudyServiceImpl implements StudyService {
   
   @Override
   public int size(
-      List<String> clsNo, String addressNo , double rateValue, String keyword) {
+      List<String> clsNo, String addressNo , double rateValue, String keyword, List<Integer> dayNoList) {
     
     HashMap<String,Object> params = new HashMap<>();
       HashMap<String,Object> clsParam = new HashMap<>();
@@ -207,6 +212,8 @@ public class StudyServiceImpl implements StudyService {
         params.put("findedClsNosByKeyword", findedClsNosByKeyword);
       }
     params.put("clsNo", clsNo);
+    params.put("dayNoList", dayNoList);
+    params.put("dayNoListSize", dayNoList.size());
     params.put("addressNo", addressNo);
     params.put("addressSize", addressNo.length());
     params.put("keyword", keyword);
