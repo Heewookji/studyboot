@@ -201,12 +201,15 @@ public class MyStudyScheduleController {
     HashMap<String,Object> content = new HashMap<>();
     
     List<Schedule> attendTrueFalse = myStudyScheduleService.attendTrueFalse(scheduleNo);
+
+    content.put("attendNickName", attendTrueFalse);
     
     System.out.println(attendTrueFalse);
     
     if (attendTrueFalse.size() > 0) {
     
       content.put("attend", true);
+
       return content;
     } else {
       
