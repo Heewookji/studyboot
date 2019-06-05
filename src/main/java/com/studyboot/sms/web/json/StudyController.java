@@ -140,7 +140,8 @@ public class StudyController {
       @RequestParam String clsNo,
       @RequestParam String addressNo,
       @RequestParam double rateValue,
-      @RequestParam String keyword) {
+      @RequestParam String keyword,
+      @RequestParam String dayNo) {
 
     // 페이지 사이즈
     if (pageSize < 3 || pageSize > 8) {
@@ -157,11 +158,15 @@ public class StudyController {
     if (keyword.equals("undefined")) {
       keyword = null;
     }
+ 
+    if (dayNo.equals("undefined")) {
+      dayNo = "0";
+    }
 
     HashMap<String,Object> content = new HashMap<>();
 
     // clsNo와 일치하는 스터디 개수를 불러온다.
-    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword);
+    int rowCount = studyService.size(clsNo, addressNo, rateValue, keyword, dayNo);
     if (rowCount == 0) {
       content.put("pageNo", 0);
       content.put("rowCount", rowCount);

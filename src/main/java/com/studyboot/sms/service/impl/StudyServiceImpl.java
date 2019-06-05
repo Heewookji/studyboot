@@ -172,7 +172,7 @@ public class StudyServiceImpl implements StudyService {
 
   @Override
   public int size(
-      String clsNo, String addressNo , double rateValue, String keyword) {
+      String clsNo, String addressNo , double rateValue, String keyword, String dayNo) {
     
     HashMap<String,Object> params = new HashMap<>();
     if(keyword != null) {
@@ -183,7 +183,9 @@ public class StudyServiceImpl implements StudyService {
         params.put("findedClsNosByKeyword", findedClsNosByKeyword);
       }
       }
+    System.out.println(dayNo);
     params.put("clsNo", clsNo);
+    params.put("dayNo", Integer.valueOf(dayNo));
     params.put("size", clsNo.length());
     params.put("addressNo", addressNo);
     params.put("addressSize", addressNo.length());

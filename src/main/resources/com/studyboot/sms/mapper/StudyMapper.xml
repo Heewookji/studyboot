@@ -270,6 +270,10 @@
 					cls_lms = #{clsNo}
 				</if>
 			</if>
+			
+			<if test="dayNo != 0">
+        and day = #{dayNo} 
+      </if>
 
 			<if test="addressSize != 0">
 				and

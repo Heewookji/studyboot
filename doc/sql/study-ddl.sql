@@ -97,6 +97,9 @@ DROP TABLE IF EXISTS sms_space_review RESTRICT;
 -- 관심분야
 DROP TABLE IF EXISTS sms_member_cls RESTRICT;
 
+-- 탈퇴 회원 정보
+DROP TABLE IF EXISTS sms_member_retire RESTRICT;
+
 -- 스터디 종료 지표
 CREATE TABLE sms_member_endrate (
   member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
@@ -742,6 +745,22 @@ CREATE TABLE sms_member_cls (
 )
 COMMENT '관심분야';
 
+-- 탈퇴 회원 정보
+CREATE TABLE sms_member_retire (
+  std_id       INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  member_id    INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  rate_require BOOLEAN NOT NULL DEFAULT true COMMENT '평가필요여부' -- 평가필요여부
+)
+COMMENT '탈퇴 회원 정보';
+
+-- 탈퇴 회원 정보
+ALTER TABLE sms_member_retire
+  ADD CONSTRAINT PK_sms_member_retire -- 탈퇴 회원 정보 기본키
+    PRIMARY KEY (
+      std_id,    -- 스터디번호
+      member_id  -- 회원번호
+    );
+
 -- 스터디 종료 지표
 ALTER TABLE sms_member_endrate
   ADD CONSTRAINT FK_sms_member_TO_sms_member_endrate -- 회원 -> 스터디 종료 지표
@@ -1148,4 +1167,26 @@ ALTER TABLE sms_member_cls
     )
     REFERENCES sms_member ( -- 회원
       member_id -- 회원번호
+    );
+
+-- 탈퇴 회원 정보
+ALTER TABLE sms_member_retire
+  ADD CONSTRAINT FK_sms_std_TO_sms_member_retire -- 스터디 -> 탈퇴 회원 정보
+    FOREIGN KEY (
+      std_id -- 스터디번호
+    )
+    REFERENCES sms_std ( -- 스터디
+      std_id -- 스터디번호
+    );
+
+-- 탈퇴 회원 정보
+ALTER TABLE sms_member_retire
+  ADD CONSTRAINT FK_sms_std_member_TO_sms_member_retire -- 스터디회원 -> 탈퇴 회원 정보
+    FOREIGN KEY (
+      std_id,    -- 스터디번호
+      member_id  -- 회원번호
+    )
+    REFERENCES sms_std_member ( -- 스터디회원
+      std_id,    -- 스터디번호
+      member_id  -- 회원번호
     );
