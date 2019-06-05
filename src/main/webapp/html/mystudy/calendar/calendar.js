@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
     },
 
     dateClick: function(info) { // 달력의 날짜를 date라 한다. 날짜를 눌렀을때 일어나는 함수
+
+      $('#schedule-add-head').html('일정 등록');
+
       window.dateStr = info.dateStr;
       if(window.calendarContent === false){
         alert("스터디 장만 일정을 등록 할 수 있습니다.");
@@ -172,7 +175,7 @@ function loadDetail(no) {
     updateMemoDate = obj.memo; 
     updateTitleDate = obj.title;
 
-    $('#exampleModalCenterTitle').html(obj.title + " ");
+    $('#schedleDetailHead').html(obj.title + " ");
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
     } else {
@@ -210,9 +213,12 @@ $('#event-update-btn').click(() => {
     return;
   }
 
+  $('#schedule-add-head').html('일정 수정');
+
   $('#schedule-memo').empty(); // textarea(memo)에 누적이 안되게 일단 비워준다.
 
   resetForm();
+  
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
 
@@ -287,7 +293,7 @@ $('#schedule-update-btn').click(() => {
 });
 
 
-$('#schedule-close-btn').click(() => {
+$('.schedule-close-btn').click(() => {
   $('#schedul-submit-form')[0].reset();
 });
 
@@ -310,7 +316,7 @@ function resetForm() {
 
 //디테일에서 출석 버튼 누를때.
 $('#event-attend-btn').click(() => {
-  //$('#calendar-detail-close-modal-btn').click();
+
   $('#calendar-attendance-modal-btn').click(); // 출석 모달 띄우기
 
   $.getJSON('../../app/json/mystudyschedule/attendTrueFalse?scheduleNo=' + window.eventDate.id,
@@ -318,45 +324,32 @@ $('#event-attend-btn').click(() => {
 
     if (obj.attend) { // 해당 일정에 대해 출석을 한 적이 있으면 출석체크 모달에서 출석 버튼 숨기기
       $('#attend-btn').hide();
+      $('#attend-head').html('출석 확인');
     } else {
       $('#attend-btn').show();
+      $('#attend-head').html('출석 체크');
     }
 
-//    for (var j = 0; j < calendarMemberList.length; j ++) {
-//      $("#calmember"+calendarMemberList[j].memberNo).prop("checked", false);
-//    }
-    
-    //console.log(calendarMemberList[0].member.nickName);
+    // 체크박스 모두 false로 초기화
+    for (var j = 0; j < calendarMemberList.length; j ++) {
+      $("#calmember"+calendarMemberList[j].memberNo).attr("checked", false);
+    }
+
+    // 출석체크를 했던 일정일 경우 출석 한 인원만 체크되게.
     for (var i = 0; i < obj.attendNickName.length; i++) {
 
       for (var j = 0; j < calendarMemberList.length; j ++) {
-        if (obj.attendNickName[i].nickName == calendarMemberList[j].member.nickName) {
+
+        if (obj.attendNickName[i].nickName === calendarMemberList[j].member.nickName) {
           console.log("출석한사람"+calendarMemberList[j].memberNo);
-          $("#calmember"+calendarMemberList[j].memberNo).prop("checked", true);
+          $("#calmember"+calendarMemberList[j].memberNo).attr("checked", true);
+        }
       }
-      console.log("-------------------------");
     }
-    }
-//    for (var i = 0; i < obj.attendNickName.length; i++) {
-//
-//      for (var j = 0; j < calendarMemberList.length; j ++) {
-//        if (obj.attendNickName[i].nickName === calendarMemberList[j].member.nickName) {
-//          console.log(calendarMemberList[j].memberNo);
-//          $("#calmember"+calendarMemberList[j].memberNo).prop("checked", true);
-//        } 
-//      }
-//    }
-    
+
   })
 
 });
-
-
-
-
-
-
-
 
 //닉네임을 서버로 보내서 멤버 id로 바꾸고 그것으로 출석을 하는 클릭 이벤트
 $('#attend-btn').click(() => {
@@ -383,7 +376,9 @@ $('#attend-btn').click(() => {
 });
 
 
-
+$('.attend-close').click(() => {
+  $('#event-close-btn').click();
+});
 
 
 
