@@ -52,18 +52,22 @@
                         <div class="media">
                           <a class="d-flex align-self-center g-mr-10 g-mr-15--md" href="#">
                             <img class="g-width-40 g-width-50--md g-height-40 g-height-50--md rounded-circle" 
-                            src="/studyboot/Unify/assets/img-temp/100x100/img7.jpg" alt="Image Description">
+                            alt="Image Description" id="detail-photo">
                           </a>
 
                           <div class="media-body align-self-center">
-                            <h3 class="g-font-weight-300 g-font-size-default g-font-size-16--md g-color-black mb-0" id="detail-name"></h3>
+                            <h3 class="g-font-weight-300 g-font-size-default g-font-size-16--md g-color-black mb-0" id="detail-nick"></h3>
                           </div>
                         </div>
                       </div>
 
                       <div class="media-body d-flex align-self-center justify-content-end">
                         <div id="datepickerWrapper2" class="u-datepicker-right u-datepicker--v3">
-                          <input id="datepicker2" class="g-font-size-12 g-font-size-default--md" type="text" data-rp-wrapper="#datepickerWrapper2" data-rp-date-format="d M Y" data-rp-default-date='["02 Oct 2017"]'>
+                        <!-- 
+                          <input id="datepicker2" class="g-font-size-12 g-font-size-default--md" type="text" data-rp-wrapper="#datepickerWrapper2" 
+                          data-rp-date-format="Y-M-d" value="2015-6-5"> 
+                          -->
+                          <p class="g-font-weight-300 g-color-gray-dark-v6 mb-0" id="detail-date">
                         </div>
 
                         <div class="g-pos-rel g-z-index-2">
@@ -98,13 +102,13 @@
 
                   <header class="card-header g-bg-transparent g-brd-bottom-none g-px-15 g-px-30--sm g-pt-15 g-pt-25--sm pb-0">
                     <div class="media">
-                      <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mr-10 mb-0">Panel title</h3>
+                      <h3 class="d-flex align-self-center text-uppercase g-font-size-12 g-font-size-default--md g-color-black g-mr-10 mb-0" id="detail-title"></h3>
                       <div class="media-body d-flex justify-content-end">
                       </div>
                     </div>
                   </header>
-                   <div class="card-block g-pa-15 g-pa-30--sm g-pt-10 g-pt-15--sm" style="height: 800px;">
-                    <p class="g-font-weight-300 g-color-gray-dark-v6 mb-0">Businesses often become known today through effective marketing. The marketing may be in the form of a regular news item or half column society news in the Sunday newspaper. The marketing may be in the form of a heart to heart talk
+                   <div class="card-block g-pa-15 g-pa-30--sm g-pt-10 g-pt-15--sm" style="height: 800px; width: 850px;">
+                   <p class="g-font-weight-300 g-color-gray-dark-v6 mb-0" id="detail-cont">Businesses often become known today through effective marketing. The marketing may be in the form of a regular news item or half column society news in the Sunday newspaper. The marketing may be in the form of a heart to heart talk
                       with Mr. Brown on his prominent local television show. These are all advertising. Businesses cannot get away from the force of advertising. If they want to make their products known in the marketplace they have to use some form of
                       advertisement. Advertising is being more and more known as a reasonable and desirable business force. Let’s say you own a department store.</p>
                   </div>
@@ -191,18 +195,7 @@
       });
     });
     
-    
-    function loadDetail(no) {
-      $.getJSON('../../app/json/MyStudy/detail?no=' + no, function(obj) {
-
-        $('#detail-name').html(obj.member.name);
-
-        $(document.body).trigger('loaded-detail');
-        
-        
-      });
-
-    }
+   
     
     
     
