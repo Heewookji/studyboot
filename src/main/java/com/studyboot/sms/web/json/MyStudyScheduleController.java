@@ -183,7 +183,6 @@ public class MyStudyScheduleController {
         attendMap.put("scheduleNo", scheduleNo);
         attendMap.put("studyNo", studyNo);
         attendMap.put("memberNo", memberNo.get(i));
-        // schedule.setMemberNo(memberNoList.get(i));
         myStudyScheduleService.attend(attendMap);
       }
       content.put("status", "출석 체크가 완료 되었습니다.");
