@@ -21,8 +21,13 @@ $('#imageModal').on('hidden.bs.modal', function (e) {
   }
 });
 
+// image 파일인지 검사
+function checkImageType(fileName) {
+  var pattern = /jpg|gif|png|jpeg/i;
+  return fileName.match(pattern);
+}
 
-// 프사 변경
+// 사진 파일 업로드
 $('#imageInput').fileupload({
   url: '../../app/json/member/photo',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
@@ -34,7 +39,12 @@ $('#imageInput').fileupload({
     
     console.log('add()...');
     console.log(data);
-  
+    
+    if (!checkImageType(data.files[0].name)) {
+      alert('사진 파일만 선택 할 수 있습니다!')
+      return false;
+    }
+    
     if (data.files && data.files[0]) {
       
       var reader = new FileReader();
@@ -60,6 +70,7 @@ $('#imageInput').fileupload({
     $('#imageUpdate-btn').prop('disabled', true);
   }
 });
+    
 
 
 loadData();
@@ -90,9 +101,7 @@ function loadData() {
   });
 };
 
-$(document.body).bind('loaded-data', () => {
-  
-});
+
 // 로그인 유저의 스터디 데이터 가져오기
 function loadList() {
 
