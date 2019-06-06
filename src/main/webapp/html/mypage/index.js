@@ -9,7 +9,8 @@ pickedStudyGenerator = Handlebars.compile(pickedStudyTemplateSrc),
 appliedinit = false,
 pickedinit = false,
 imgUdt = false,
-user;
+user,
+ratingForm = $("#rating-form");
 
 
 // 프사 모달 닫힐 때
@@ -63,6 +64,7 @@ $('#imageInput').fileupload({
   }, 
   done: function (e, data) {
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + data.result.loginUser.photo);
+    $('#rate-profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
     $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.result.loginUser.photo + '.jpg');
     user.photo = data.result.loginUser.photo;
     imgUdt = true;
@@ -70,7 +72,6 @@ $('#imageInput').fileupload({
     $('#imageUpdate-btn').prop('disabled', true);
   }
 });
-    
 
 
 loadData();
@@ -84,8 +85,9 @@ function loadData() {
     console.log(data);
     user = data;
 // $('#nickName').val(data.nickName);
-// $('#rate').val(data.rate);
+    rateData(user.rate);
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
+    $('#rate-profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
     $('#prevImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
     
 // $('#cls').val(data.cls);
@@ -100,6 +102,14 @@ function loadData() {
     $(document.body).trigger('loaded-data');
   });
 };
+
+// 별점
+function rateData(rate) {
+  var rateLabel = '#star' + rate;
+  var rateInput = '#' + $(rateLabel).attr('for');
+  console.log(rateInput);
+  $(rateInput).prop("checked", true);
+}
 
 
 // 로그인 유저의 스터디 데이터 가져오기
@@ -178,6 +188,18 @@ $('#pickedStudyTab').on('shown.bs.tab', () => {
   }
   pickedinit = true;
 });
+
+
+// 내 평가(별점) 버튼 눌렀을 때 평가 관련 데이터 불러옴
+$('#myRate-btn').click(() => {
+  
+  $.getJSON('../../app/json/member/mystudy', function(obj) {
+    
+    
+  });
+});
+
+
 
 
 // inquiry

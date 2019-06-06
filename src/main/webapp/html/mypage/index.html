@@ -53,6 +53,51 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
+<style type="text/css">
+/* rating star css */
+
+/* Ratings widget */
+.rate {
+    display: inline-block;
+    pointer-events: none;
+    border: 0;
+}
+/* Hide radio */
+.rate > input {
+    display: none;
+}
+/* Order correctly by floating highest to the right */
+.rate > label {
+    float: right;
+    margin: 0;
+}
+/* The star of the show */
+.rate > label:before {
+    display: inline-block;
+    font-size: 1.5rem;
+    padding: 0rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 "; /* full star */
+}
+
+/* Half star trick */
+.rate .half:before {
+    content: "\f089 "; /* half star no outline */
+    position: absolute;
+    padding-right: 0;
+}
+/* Click + hover color */
+input:checked ~ label, /* color current and previous stars on checked */
+label:hover, label:hover ~ label { color: #73B100;  } /* color previous stars on hover */
+
+/* Hover highlights */
+input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
+input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
+/* rating star css */
+</style>
 
 </head>
 
@@ -65,66 +110,39 @@
   <!-- End Header -->
 
   <!-- 나의 평점 -->
-  <div class="modal fade" id="stdAddModal" tabindex="-1" role="dialog"
+  <div class="modal fade" id="rateModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">스터디 생성</h5>
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pie-chart"></i>나의 평가</h5>
           <button type="button" class="close" data-dismiss="modal"
             aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-
-          <form action="add" class="study-add-form">
-
-            <div class="form-group">
-              <label for="name" class="col-form-label">스터디 이름</label> <input
-                type="text" class="form-control" id="name" name="name">
-
-              <label for="cls" class="">스터디 분류</label> <input
-                type="text" class="form-control" id="cls" name='cls'>
-
-              <label for="address" class="">스터디 지역</label> <input
-                type="text" class="form-control" id="address"
-                name='address'> <label for="goal" class="">스터디
-                목표</label> <input type="text" class="form-control" id="goal"
-                name='goal'>
-
+          <div class="container-fluid">
+          
+            <div class="row">
+              <div class="col-md-6">
+                <figure class="text-center">
+                  <img id="rate-profilePhoto" class="img-thumbnail"
+                    alt="Image Description" style="height: 200px;">
+                </figure>
+              </div>
+              <div class="col-md-6">.col-md-4 .ml-auto</div>
             </div>
-
-            <div class="study-add study-add">
-              <label for="photo" class="">스터디 사진</label> <input
-                type="text" class="form-control" id="photo" name='photo'>
-
-              <label for="day" class="">스터디 요일</label> <input
-                type="text" class="form-control" id="day" name='day'>
-
-              <label for="personnel" class="">스터디 인원</label> <input
-                type="text" class="form-control" id="personnel"
-                name='personnel'>
+            
+            <div class="row">
+              <div style="border: 1px solid red; height: 200px; width: 100%;"></div>
             </div>
-
-            <div class="study-add study-add">
-              <label for="startDate" class="">스터디 기간</label> <input
-                type="text" class="form-control" id="startDate"
-                name='startDate'> ~ <input type="text"
-                class="form-control" id="endDate" name='endDate'>
-
-              <label for="contents" class="">스터디 설명</label>
-              <textarea class="form-control" id="contents"
-                name='contents' cols="150" rows="7"></textarea>
-            </div>
-
-          </form>
-
+            
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary"
-            data-dismiss="modal">취소</button>
-          <button type="button" class="btn btn-primary" id="add-btn">생성</button>
+            data-dismiss="modal">닫기</button>
         </div>
       </div>
     </div>
@@ -134,8 +152,7 @@
   <!-- inquiry modal -->
   <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"
-      role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="formTitle"></h5>
@@ -174,8 +191,7 @@
   <!-- imageSetting modal -->
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"
-      role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">프로필 사진</h5>
@@ -204,8 +220,17 @@
   <!-- End imageSetting modal -->
 
   <!-- content -->
-  <div class="container g-pt-70 g-pb-30"
-    style="margin-top: 200px; margin-bottom: 200px;">
+  <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
+    <!-- title, breadcrumb -->
+    <div class="row">
+      <div class="col-lg-3 g-mb-20">
+        <h1>MyPage</h1>
+      </div>
+      <div class="col-lg-9 g-mb-20">
+        
+      </div>
+    </div>
+    
     <div class="row">
       <!-- Profile Sidebar -->
       <div class="col-lg-3 g-mb-50 g-mb-0--lg">
@@ -214,30 +239,44 @@
           <figure>
             <img id="profilePhoto" class="img-fluid w-100 u-block-hover__main--zoom-v1"
               alt="Image Description">
+          
+            <!-- Figure Caption -->
+            <figcaption
+              class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
+              <div
+                class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
+                <!-- Figure Social Icons -->
+                <ul
+                  class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
+                  <li class="list-inline-item align-middle g-mx-7"><a
+                    class="u-icon-v1 u-icon-size--md g-color-white"
+                    href="#" data-toggle="modal" data-target="#imageModal">
+                    <i class="icon-settings u-line-icon-pro"></i>
+                  </a></li>
+                </ul>
+                <!-- End Figure Social Icons -->
+              </div>
+            </figcaption>
           </figure>
-
-          <!-- Figure Caption -->
-          <figcaption
-            class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
-            <div
-              class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
-              <!-- Figure Social Icons -->
-              <ul
-                class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
-                <li class="list-inline-item align-middle g-mx-7"><a
-                  class="u-icon-v1 u-icon-size--md g-color-white"
-                  href="#" data-toggle="modal" data-target="#imageModal" id="imageSetting">
-                  <i class="icon-settings u-line-icon-pro"></i>
-                </a></li>
-              </ul>
-              <!-- End Figure Social Icons -->
-            </div>
-          </figcaption>
           <!-- End Figure Caption -->
 
           <!-- User Info -->
-          <span class="g-pos-abs g-top-0 g-left-0">
-            <a class="btn btn-sm u-btn-primary rounded-0" href="#">Johne Doe</a>
+          <span class="g-pos-abs g-top-0 g-left-0" id="myRate-btn">
+            
+            <a class="btn btn-sm u-btn-blue rounded-0" href="#" data-toggle="modal" data-target="#rateModal">
+              <fieldset class="rate" id="rating-form" disabled>
+                <input type="radio" id="rating10" name="rating"/><label id="star5" for="rating10"></label>
+                <input type="radio" id="rating9" name="rating"/><label id="star4.5" class="half" for="rating9"></label>
+                <input type="radio" id="rating8" name="rating"/><label id="star4" for="rating8"></label>
+                <input type="radio" id="rating7" name="rating"/><label id="star3.5" class="half" for="rating7"></label>
+                <input type="radio" id="rating6" name="rating"/><label id="star3" for="rating6"></label>
+                <input type="radio" id="rating5" name="rating"/><label id="star2.5" class="half" for="rating5"></label>
+                <input type="radio" id="rating4" name="rating"/><label id="star2" for="rating4"></label>
+                <input type="radio" id="rating3" name="rating"/><label id="star1.5" class="half" for="rating3"></label>
+                <input type="radio" id="rating2" name="rating"/><label id="star1" for="rating2"></label>
+                <input type="radio" id="rating1" name="rating"/><label id="star0.5" class="half" for="rating1"></label>
+              </fieldset>
+            </a>
           </span>
           <!-- End User Info -->
         </div>
