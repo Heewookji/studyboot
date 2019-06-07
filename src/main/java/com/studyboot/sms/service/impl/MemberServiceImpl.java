@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.studyboot.sms.dao.AppliedStudyDao;
+import com.studyboot.sms.dao.EndRateDao;
 import com.studyboot.sms.dao.MemberDao;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.domain.AppliedStudy;
+import com.studyboot.sms.domain.EndRate;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
@@ -24,14 +26,17 @@ public class MemberServiceImpl implements MemberService {
   MemberDao memberDao;
   AppliedStudyDao appliedStudyDao;
   StudyDao studyDao;
+  EndRateDao endRateDao;
 
   public MemberServiceImpl(
       MemberDao memberDao,
       AppliedStudyDao appliedStudyDao,
-      StudyDao studyDao) {
+      StudyDao studyDao,
+      EndRateDao endRateDao) {
     this.memberDao = memberDao;
     this.appliedStudyDao = appliedStudyDao;
     this.studyDao = studyDao;
+    this.endRateDao = endRateDao;
   }
 
 
@@ -208,6 +213,12 @@ public class MemberServiceImpl implements MemberService {
     memberDao.insert(newbie);
 
     return newbie;
+  }
+
+  // 스터디 종료 지표 데이터를 가져온다.
+  @Override
+  public EndRate getEndRate(int no) {
+    return endRateDao.findById(no);
   }
 
 

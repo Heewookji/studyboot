@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.AppliedStudy;
+import com.studyboot.sms.domain.EndRate;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
@@ -74,7 +75,7 @@ public class MemberController {
       }
       
       content.put("status", "success");
-      content.put("user", loginUser);
+      content.put("loginUser", loginUser);
     } else {
       content.put("status", "fail");
     }
@@ -195,6 +196,32 @@ public class MemberController {
     }
     return content;
   }
+  
+  // 회원의 스터디 목록
+  @GetMapping("rateinfo")
+  public Object rateinfo(HttpSession session) {
+
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    
+    HashMap<String,Object> content = new HashMap<>();
+
+    if (loginUser != null) {
+      
+      EndRate endRate = memberService.getEndRate(loginUser.getNo());
+      
+      if(endRate != null) {
+        content.put("endRate", endRate);
+      }
+      
+      content.put("status", "success");
+      content.put("loginUser", loginUser);
+      
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
+  }
+
 }
 
 
