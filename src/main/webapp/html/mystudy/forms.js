@@ -46,7 +46,7 @@ $('#add-board').click((e) => {
         success: function(data){
           var obj = JSON.parse(data);
           alert(obj.status);
-          history.back();
+          location.reload();
         },
         error: function(request, status, error){
           alert("등록에 실패 했습니다.");
