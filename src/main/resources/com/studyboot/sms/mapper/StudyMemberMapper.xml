@@ -35,8 +35,7 @@
 	</resultMap>
 
 	<!-- 스터디 구성원들 가져오기 -->
-	<select id="findStudyMembersByNo" resultMap="studyMemberMap"
-		parameterType="int">
+	<select id="findStudyMembersByNo" resultMap="studyMemberMap" parameterType="int">
 		select
     m.member_id,
 		m.rate,
@@ -54,8 +53,7 @@
 
 
 	<!-- 마이스터디 목록 가져오기 -->
-	<select id="findStudyNoByMemberNo" resultType="int"
-		parameterType="int">
+	<select id="findStudyNoByMemberNo" resultType="int" parameterType="int">
 		select
 		std_id
 		from
@@ -63,12 +61,10 @@
 		where
 		member_id = #{no}
 		and end_date is null
-		
 	</select>
 
    <!-- 스터디 장인지 판단 -->
-  <select id="findStudyMemberLeaderByMap" resultType="boolean" 
-  parameterType="map">
+  <select id="findStudyMemberLeaderByMap" resultType="boolean" parameterType="map">
     select
       leader
     from
@@ -76,7 +72,17 @@
     where
       member_id = #{loginUser} and std_id= #{studyNo}
   </select>
-
+  
+  <update id="attendUpdate" parameterType="map">
+    update 
+      sms_std_member
+    set
+      end_state_cls_id = #{endNo},
+      end_date = #{endDate}
+    where std_id = #{studyNo} and member_id = #{memberNo}
+  </update>
+  
+  
 </mapper>
 
 

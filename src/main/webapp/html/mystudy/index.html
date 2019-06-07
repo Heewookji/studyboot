@@ -180,7 +180,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="schedleDetailHead"></h4> <!-- 일정 제목 -->
+        <h4 class="modal-title" id="schedleDetailTitle"></h4> <!-- 일정 제목 -->
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="calendar-detail-close-modal-btn">
           <span aria-hidden="true">&times;</span>
@@ -270,7 +270,7 @@
           </h3>
           <div class="g-mb-10 g-mb-0--md">
             <div class="g-mt-10">
-              <label class="u-check g-pl-30"> 
+              <label for="calmember{{memberNo}}" class="u-check g-pl-30"> 
               <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 g-mb-10 g-mb-0--md attend-checkbox" 
                 name="attend-check"
                 type="checkbox" id="calmember{{memberNo}}"

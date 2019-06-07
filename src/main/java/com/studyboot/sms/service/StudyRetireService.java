@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface StudyRetireService {
 
-  int evaluationAdd(Map<String,Object> evaluationMap);
+  int evaluationAdd(Map<String, Object> evaluationMap);
 }

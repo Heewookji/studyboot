@@ -15,6 +15,7 @@ public interface StudyMemberDao {
   StudyMember findByNo(int no);
   //int increaseCount(int no);
   int update(StudyMember studyMember);
+  int attendUpdate(Map<String, Object> map);
   int delete(int no);
   int countAll();
   List<Integer> findStudyNoByMemberNo(int no);

@@ -175,7 +175,7 @@ function loadDetail(no) {
     updateMemoDate = obj.memo; 
     updateTitleDate = obj.title;
 
-    $('#schedleDetailHead').html(obj.title + " ");
+    $('#schedleDetailTitle').html(updateTitleDate);
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
     } else {
@@ -222,10 +222,10 @@ $('#event-update-btn').click(() => {
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
 
-  $('#calendar-detail-close-modal-btn').click(); // 디테일 모달 닫고,
   $('#calendar-add-modal-btn').click(); // 수정하는 모달 띄움
+  $('#event-close-btn').click(); // 디테일 모달 닫고,
 
-  //$('#schedule-title').val(updateTitleDate); // 디테일에 있던 일정 이름 모달창으로 가져옴
+//  $('#schedule-title').val(updateTitleDate); // 디테일에 있던 일정 이름 모달창으로 가져옴
   $('#schedule-title').attr("value", updateTitleDate); // 디테일에 있던 일정 이름 모달창으로 가져옴
   $('#schedule-sdt').attr("value", updateStartDate + 'T00:00');
   $('#schedule-edt').attr("value", updateEndDate + 'T00:00');
