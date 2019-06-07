@@ -23,7 +23,7 @@ $.getJSON('../../app/json/MyStudy/leader?no=' + myStudyNo,
 
 $('#retire-request').click(() => {
   
-  if (window.leader) {
+  if (window.leader === true) {
     alert("스터디 장은 스터디에 탈퇴 할 수 없습니다.");
     return;
   }

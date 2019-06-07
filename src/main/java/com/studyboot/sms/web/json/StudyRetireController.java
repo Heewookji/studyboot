@@ -34,7 +34,8 @@ public class StudyRetireController {
     studyAndUserNo.put("loginUser", loginUser.getNo());
     studyAndUserNo.put("studyNo", studyNo);
     boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
-    if (leaderYesOrNo == false) {
+    System.out.println("리더 ?? " + leaderYesOrNo);
+    if (leaderYesOrNo == true) {
 
       content.put("status", "스터디 장은 스터디에 탈퇴 할 수 없습니다.");
       return content;
