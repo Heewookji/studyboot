@@ -1,6 +1,3 @@
--- 스터디 종료 지표
-DROP TABLE IF EXISTS sms_member_endrate RESTRICT;
-
 -- 회원
 DROP TABLE IF EXISTS sms_member RESTRICT;
 
@@ -100,22 +97,6 @@ DROP TABLE IF EXISTS sms_member_cls RESTRICT;
 -- 탈퇴 회원 정보
 DROP TABLE IF EXISTS sms_member_retire RESTRICT;
 
--- 스터디 종료 지표
-CREATE TABLE sms_member_endrate (
-  member_id INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  cmplt_pct DOUBLE  NULL     COMMENT '완료율', -- 완료율
-  drop_pct  DOUBLE  NULL     COMMENT '탈퇴율', -- 탈퇴율
-  exile_pct DOUBLE  NULL     COMMENT '추방률' -- 추방률
-)
-COMMENT '스터디 종료 지표';
-
--- 스터디 종료 지표
-ALTER TABLE sms_member_endrate
-  ADD CONSTRAINT PK_sms_member_endrate -- 스터디 종료 지표 기본키
-    PRIMARY KEY (
-      member_id -- 회원번호
-    );
-
 -- 회원
 CREATE TABLE sms_member (
   member_id INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -127,7 +108,7 @@ CREATE TABLE sms_member (
   rate      DOUBLE       NOT NULL DEFAULT 3.0 COMMENT '현재평점', -- 현재평점
   birth     DATE         NULL     COMMENT '생년월일', -- 생년월일
   tel       VARCHAR(30)  NULL     COMMENT '전화', -- 전화
-  photo     VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  photo     VARCHAR(255) NULL     DEFAULT "defaultphoto" COMMENT '사진', -- 사진
   admin     BOOLEAN      NOT NULL DEFAULT false COMMENT '관리자여부', -- 관리자여부
   adr_lms   CHAR(6)      NULL     COMMENT '활동지역' -- 활동지역
 )
@@ -759,16 +740,6 @@ ALTER TABLE sms_member_retire
     PRIMARY KEY (
       std_id,    -- 스터디번호
       member_id  -- 회원번호
-    );
-
--- 스터디 종료 지표
-ALTER TABLE sms_member_endrate
-  ADD CONSTRAINT FK_sms_member_TO_sms_member_endrate -- 회원 -> 스터디 종료 지표
-    FOREIGN KEY (
-      member_id -- 회원번호
-    )
-    REFERENCES sms_member ( -- 회원
-      member_id -- 회원번호
     );
 
 -- 스터디일정

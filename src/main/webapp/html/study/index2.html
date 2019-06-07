@@ -164,7 +164,7 @@
 
 
     <!-- Sidebar -->
-    <div class="col-xs-12 g-pr-40--lg g-mb-50 g-mb-0--lg">
+    <div class="col-xs-12 g-pr-10--lg g-mb-50 g-mb-0--lg">
 
      <!-- Categories -->
      <h2 class="h5 text-uppercase g-color-gray-dark-v1">카테고리</h2>
@@ -365,15 +365,42 @@
     </div>
     <!-- End Sidebar -->
 
+
     <!-- Search Results -->
     <div class="col">
 
-     <div class="row" id="card-div">
-     
+     <!-- Search Info -->
+     <div class="d-md-flex justify-content-between g-mb-30">
+      <ul class="u-list-inline">
+       <li class="list-inline-item g-mr-7"><a
+        class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover"
+        href="#">Home</a> <i class="fa fa-angle-right g-ml-7"></i></li>
+       <li class="list-inline-item g-mr-7"><a
+        class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover"
+        href="#">Pages</a> <i class="fa fa-angle-right g-ml-7"></i></li>
+       <li class="list-inline-item g-color-primary"><span>About
+         Us</span></li>
+      </ul>
+     </div>
+     <!-- End Search Info -->
+
+     <!--  스터디 목록
+<div class="content">
+
+  <div style="height:60px; width:780px;" >
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" id="cls-tag">
+        <li class="breadcrumb-item" id="large-tag"><button class="btn btn-link" disabled></button></li>
+      </ol>
+    </nav>
+  </div>
+  
+</div>  .content -->
+
+
+     <div class="row" id="card-div"></div>
+
     </div>
-
-
-
    </div>
   </div>
  </section>
@@ -411,25 +438,6 @@
     </div>
   </div>
   
- 
- <!--  스터디 목록
-<div class="content">
-
-  <div style="height:60px; width:780px;" >
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb" id="cls-tag">
-        <li class="breadcrumb-item" id="large-tag"><button class="btn btn-link" disabled></button></li>
-      </ol>
-    </nav>
-  </div>
-  <div style="width:780px; height:900px;" id="card-div">
-  </div>
-</div>  .content -->
-
-
-
-
-
 
  <!--  footer -->
  <footer id="js-footer"> </footer>
@@ -439,44 +447,27 @@
 
  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 
- <!-- 스터디 리스트 -->
- <script id="card-template1" type="text/x-handlebars-template">
-{{#each list}}
-<div class="card" style="width: 250px; float: left; padding:10px;">
-  <img src="/studyboot/images/studyimage.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <a class="study-view-link" href="#" data-no="{{no}}">{{name}}</a>
-    <p class="card-text">{{rate}}</p>
-    <p class="card-text">{{goal}}</p>
-    <p class="card-text">{{addressName}}</p>
-  </div>
-</div>
-{{/each}}
-</script>
 
 
  <script id="card-template" type="text/x-handlebars-template">
 {{#each list}}
-<div class="col g-mb-30" style="width: 250px; float: left;">
+<div class="g-pr-20 g-mb-20 study-view-link" style="width: 230px; height: 300px; float: left;">
        <!-- Blog Classic Blocks -->
-       <article>
+       <article class="u-shadow-v11 u-shadow-v41--hover g-cursor-pointer">
         <div class="g-bg-cover g-bg-bluegray-gradient-opacity-v1--after">
          <img class="img-fluid w-100"
           src="/studyboot/images/studyimage.jpg" alt="Image Description">
         </div>
         <div class="g-bg-white g-pa-20">
          <span
-          class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">1
-          June 2017</span>
-         <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-          <a
-           class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-           href="#">Exclusive interview with InVision's CEO</a>
+          class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">
+          {{addressName}}</span>
+         <h2 class="h5 g-font-weight-600 mb-3">
+          <a data-no="{{no}}"
+           class="u-link-v5 g-color-black"
+           href="#">{{name}}</a>
          </h2>
-         <p class="g-color-gray-dark-v4 g-line-height-1_8">Clark
-          Valberg is the founder and CEO of InVision. If you are a
-          designer...</p>
-         <a class="g-font-size-13" href="#">Read more...</a>
+         <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
         </div>
        </article>
        <!-- End Blog Classic Blocks -->
