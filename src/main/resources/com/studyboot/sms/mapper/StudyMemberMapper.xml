@@ -62,6 +62,8 @@
 		sms_std_member
 		where
 		member_id = #{no}
+		and end_date is null
+		
 	</select>
 
    <!-- 스터디 장인지 판단 -->

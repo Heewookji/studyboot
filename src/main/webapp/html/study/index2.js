@@ -143,7 +143,7 @@ if (param) {
 
   pageNo = 1;
   $('#clsTitle').html(clsTitle);
-  $('#large-tag > button').text(clsTitle);
+  $('#large-tag').val(clsTitle);
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   loadCategoryTitle(clsNo);
   loadAddress();
@@ -167,11 +167,7 @@ $(document.body).bind('loaded-list', () => {
   
   $( ".study-view-link" ).hover(
           function(e) {
-            $($( e.target).find( "a" )).removeClass("g-color-black");
-            $($( e.target).find( "a" )).addClass("g-color-primary");
           }, function(e) {
-            $($( e.target).find( "a" )).removeClass("g-color-primary");
-            $($( e.target).find( "a" )).addClass("g-color-black");
           }
         );
 });
@@ -182,11 +178,20 @@ $(document.body).bind('loaded-categorytitle', () => {
   loadSmallTitle(clsNo);
 
   $('.mcls-btn').click(function(e) {
+    
+    $('.mcls-btn').removeClass("g-color-primary");
+    $('.mcls-btn').addClass("g-color-main");
+    $('.scls-btn').removeClass("g-color-primary");
+    $('.scls-btn').addClass("g-color-main");
+    
     pageNo = 1; // 페이지 초기화
     tbody.html(''); // 스터디 목록 초기화
     clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-
+    
+    $(e.target).removeClass("g-color-main");
+    $(e.target).addClass("g-color-primary");
+    
     // 빵부스러기
 
     $('#small-tag').remove();
@@ -204,6 +209,12 @@ $(document.body).bind('loaded-categorytitle', () => {
 //카테고리 하위 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-smalltitle', () => {
   $('.scls-btn').click(function(e) {
+    
+    $('.scls-btn').removeClass("g-color-primary");
+    $('.scls-btn').addClass("g-color-main");
+    $(e.target).removeClass("g-color-main");
+    $(e.target).addClass("g-color-primary");
+    
     e.preventDefault();
     pageNo = 1;
     tbody.html('');
