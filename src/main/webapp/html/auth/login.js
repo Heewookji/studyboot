@@ -13,8 +13,8 @@ $(document).on('ready', function () {
   );
   /* 설정정보를 초기화하고 연동을 준비 */
   naverLogin.init();
-  
-  
+
+
 //페이스북  로그인 초기화
   window.fbAsyncInit = function() {
     FB.init({
@@ -46,7 +46,7 @@ $("#fb-btn").click((e) => {
   }, {
     scope: 'public_profile',
     auth_type: 'rerequest'
-      });
+  });
 });
 
 
@@ -88,6 +88,53 @@ document.querySelector('#login-btn').onclick = () => {
 
 
 
+//비번 수정하려고 입력시 이메일 체크
+$( "#modalEmail" ).keyup(function(){
+  if(checkEmail($( "#modalEmail" ).val()) == true){
+    $('#modalEmail').tooltip('disable');
+    $('#modalEmail').tooltip('hide');
+    $("#modalEmail-btn").prop("disabled", false);
+  } else{
+    $("#modalEmail").attr("data-toggle","tooltip");
+    $("#modalEmail").attr("data-trigger","hover focus");
+    $("#modalEmail").attr("data-placement","bottom");
+    $("#modalEmail").attr("title","이메일 양식에 맞게 적어주세요");
+    $('#modalEmail').tooltip('enable');
+    $('#modalEmail').tooltip('show');
+    $("#modalEmail-btn").prop("disabled", true);
+  }
+});
 
 
+$("#modalEmail-btn").click((e) => {
+//이메일 중복체크
+  $.getJSON('/studyboot/app/json/member/emailcheck?email='+ $("#modalEmail").val(), function(obj) {
+    if(obj.status == "fail"){
+      alert("해당 이메일이 없습니다.");
+    } else{
+
+      //발송됐다는 것을 알려주자!
+      $("#modalEmail-btn").attr("data-toggle","tooltip");
+      $("#modalEmail-btn").attr("data-trigger","hover focus");
+      $("#modalEmail-btn").attr("data-placement","bottom");
+      $("#modalEmail-btn").attr("title","발송되었습니다!");
+      $('#modalEmail-btn').tooltip('enable');
+      $('#modalEmail-btn').tooltip('show');
+
+      $.getJSON('/studyboot/app/json/mail/sendpasswordmail?email='+ $("#modalEmail").val(), function(obj) {
+      });
+    }
+  });
+});
+
+
+
+//이메일 체크
+function checkEmail(email){
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email == '' || !re.test(email)) {
+    return false;
+  }
+  return true;
+}
 

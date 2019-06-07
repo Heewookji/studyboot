@@ -82,6 +82,7 @@
           class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-google-plus"></i>
           <i
           class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-google-plus"></i>
+
         </a></li>
        </ul>
 
@@ -112,7 +113,8 @@
            class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">비밀번호</label>
          </div>
          <div class="col align-self-center text-right">
-          <a class="d-inline-block g-font-size-12 mb-2" href="#">비밀번호를
+          <a class="d-inline-block g-font-size-12 mb-2" href="#"
+           data-toggle="modal" data-target="#exampleModal">비밀번호를
            잊으셨습니까?</a>
          </div>
         </div>
@@ -154,6 +156,45 @@
    </div>
   </div>
  </section>
+
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h5 class="modal-title" id="exampleModalLabel">이메일을 입력해주세요</h5>
+     <button type="button" class="close" data-dismiss="modal"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    <div class="modal-body">
+     <div class="row g-pt-20 g-pr-10 g-pl-10">
+      <div class="col g-mb-20">
+       <div class="input-group">
+        <input type="text"
+         class="form-control g-color-black g-brd-gray-light-v3 g-py-15 g-px-15"
+         id="modalEmail" placeholder="이메일">
+        <div class="input-group-append">
+         <button type="button"
+          class="btn g-bg-primary g-color-white g-rounded-right--10"
+          id="modalEmail-btn" disabled>임시 비밀번호 요청</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-secondary"
+      data-dismiss="modal">Close</button>
+    </div>
+   </div>
+  </div>
+ </div>
+
  <!-- End Login --> </main>
 
  <div class="u-outer-spaces-helper"></div>
