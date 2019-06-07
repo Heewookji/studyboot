@@ -67,25 +67,28 @@
                           <input id="datepicker2" class="g-font-size-12 g-font-size-default--md" type="text" data-rp-wrapper="#datepickerWrapper2" 
                           data-rp-date-format="Y-M-d" value="2015-6-5"> 
                           -->
+                          <input type="hidden" id=detail-no>
+                          <input type="hidden" id=detail-member>
                           <p class="g-font-weight-300 g-color-gray-dark-v6 mb-0" id="detail-date">
                         </div>
 
                         <div class="g-pos-rel g-z-index-2">
                           <a id="dropDown6Invoker" class="u-link-v5 g-line-height-0 g-font-size-24 g-color-gray-light-v6 g-color-secondary--hover g-ml-10 g-ml-20--md" href="#" aria-controls="dropDown6" aria-haspopup="true" aria-expanded="false" data-dropdown-event="click" data-dropdown-target="#dropDown6"
                           data-dropdown-type="jquery-slide">
-                            <i class="hs-admin-more-alt"></i>
+                            <i class="hs-admin-more-alt" id="drop-menu"></i>
                           </a>
 
                           <div id="dropDown6" class="u-shadow-v31 g-pos-abs g-right-0 g-z-index-2 g-bg-white u-dropdown--css-animation u-dropdown--hidden u-dropdown--reverse-y" aria-labelledby="dropDown6Invoker">
                             <ul class="list-unstyled g-nowrap mb-0">
-                              <li>
+                              <li id="detail-edit">
                                 <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" href="#">
                                   <i class="hs-admin-pencil g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
                                   Edit
                                 </a>
                               </li>
-                              <li>
-                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" href="#">
+                              <li id="detail-del">
+                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" 
+                                href="#" id="detail-delete">
                                   <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
                                   Delete
                                 </a>
@@ -107,11 +110,8 @@
                       </div>
                     </div>
                   </header>
-                   <div class="card-block g-pa-15 g-pa-30--sm g-pt-10 g-pt-15--sm" style="height: 800px; width: 850px;">
-                   <p class="g-font-weight-300 g-color-gray-dark-v6 mb-0" id="detail-cont">Businesses often become known today through effective marketing. The marketing may be in the form of a regular news item or half column society news in the Sunday newspaper. The marketing may be in the form of a heart to heart talk
-                      with Mr. Brown on his prominent local television show. These are all advertising. Businesses cannot get away from the force of advertising. If they want to make their products known in the marketplace they have to use some form of
-                      advertisement. Advertising is being more and more known as a reasonable and desirable business force. Let’s say you own a department store.</p>
-                  </div>
+                  <!-- 게시글이 들어갈 자리 -->
+                   <div class="card-block g-pa-15 g-pa-30--sm g-pt-10 g-pt-15--sm" style="height: 800px; width: 850px;" id="detail-cont"></div>
 
                   <footer class="card-footer d-flex g-bg-transparent g-brd-top-none g-pa-15 g-pa-30--sm pt-0">
                     <a class="d-flex align-items-center u-link-v5 g-parent g-color-gray-dark-v6 g-color-secondary--hover" href="#">

@@ -205,6 +205,11 @@
 	</select>
 
 
+    <delete id="delete" parameterType="int">
+    delete from sms_std_board
+    where std_board_id = #{no}
+  </delete>
+
 </mapper>
 
 

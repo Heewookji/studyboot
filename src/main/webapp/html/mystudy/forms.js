@@ -22,6 +22,8 @@ $('#add-board').click((e) => {
     
     
     $('#add-min-btn').click((e) => {
+      
+      var markup = $('.note-editable').summernote('code');
 
       if($('#inputHorizontalSuccess').val().length === 0) {
         alert("제목을 입력해 주세요.");
@@ -39,12 +41,12 @@ $('#add-board').click((e) => {
           studyNo : location.href.split('=')[1].substring(0,1),
           ntc: $('input[id="checkboxSuccess"]:checked').val(),
           title: $(inputHorizontalSuccess).val(),
-          contents: $('.note-editable').text()
+          contents: markup
         },
         success: function(data){
           var obj = JSON.parse(data);
           alert(obj.status);
-          window.location.href = "/studyboot/html/mystudy/board.html?no=" + noss;
+          history.back();
         },
         error: function(request, status, error){
           alert("등록에 실패 했습니다.");
