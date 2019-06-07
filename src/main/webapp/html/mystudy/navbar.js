@@ -1,13 +1,12 @@
 var param = location.href.split('?')[1],
-nos = param.split('=')[1];
-
-
+nos = param.split('=')[1],
+evaluationMemberList;
 
 
 $(document).ready(function() {
   $("#min_nav_bar").load("/studyboot/html/mystudy/navbar.html", function() {
-
     $('#std-board').attr("href", "/studyboot/html/mystudy/board.html?no=" + nos);
+
     $(document.body).trigger('loaded-nav');
 
 
@@ -16,7 +15,6 @@ $(document).ready(function() {
 
 
 $(document.body).bind('loaded-nav', () => {
-
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + nos,
       function(obj) {
 
@@ -24,13 +22,25 @@ $(document.body).bind('loaded-nav', () => {
 
     var stdMemberListTemplateSrc = $('#study-memberList').html();
     var stdMemberListGenerator = Handlebars.compile(stdMemberListTemplateSrc);
-    $(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+    $(stdMemberListGenerator(obj)).appendTo('#std-MemberList')
 
+
+    var evaluationTemplateSrc = $('#retire-evaluation-list').html(),
+    evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
+    
+    evaluationMemberList = obj.list;
+    $(evaluationGenerator(obj)).appendTo('#retire-evaluation');
   });
 
 });
 
+/*---------------------------------------------------------------------------------*/
 
-
-
-
+  $('#retire-request').click(() => {
+      if (confirm("스터디에 탈퇴 하시겠습니까?")) {
+        $('#retire-modal').click();
+      }
+    });
+  
+  
+ 
