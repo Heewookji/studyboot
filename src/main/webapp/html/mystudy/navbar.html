@@ -1,3 +1,10 @@
+<link rel="stylesheet" href="./retire.css">
+
+
+
+
+
+
 <!-- 스터디 그룹 사진 -->
   <div class="u-block-hover g-pos-rel">
     <figure>
@@ -30,6 +37,8 @@
     </figcaption>
     <!-- End Figure Caption -->
 
+
+
     <!-- User Info 스터디 이름과 해당 스터디 회원의 등급(원, 장)-->
     <span class="g-pos-abs g-top-20 g-left-0"> <a
       class="btn btn-sm u-btn-primary rounded-0" href="#">Johne Doe</a> <small
@@ -39,7 +48,6 @@
     <!-- End User Info -->
   </div>
   <!-- User Image -->
-
   <!-- Sidebar Navigation -->
   <div class="list-group list-group-border-0 g-mb-40">
 
@@ -98,19 +106,9 @@
         <ul class="list-unstyled" id="std-MemberList"></ul>
       </div>
     </div>
-
-
   </div>
 
-  <!-- End Project Progress -->
-<!-- End Profile Sidebar -->
-
-
-
-
-
 <!-- --------------------------------------------- 모달 --------------------------------------------- -->
-<!-- Large modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal"
   data-target=".bd-example-modal-lg" hidden="hidden" id="retire-modal">modal</button>
 
@@ -133,25 +131,14 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary attend-close"
           data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="attend-btn">제출</button>
+        <button type="button" class="btn btn-primary" id="retire-evaluation-btn">제출</button>
       </div>
     </div>
 
   </div>
 </div>
+
 <!-- --------------------------------------------- 모달 --------------------------------------------- -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- 스터디원 리스트 -->
 <script id="study-memberList" type="text/x-handlebars-template">
@@ -173,38 +160,41 @@
 <script id="retire-evaluation-list" type="text/x-handlebars-template">
 {{#each list}}
 <div class="col-md-4 g-mb-30 g-mt-30">
-            <figure
-              class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-cyan--hover g-transition-0_2 text-center">
-              <div class="g-py-40 g-px-20">
-                <!-- Figure Image -->
-                <img class="g-width-100 g-height-100 rounded-circle g-mb-20"
-                  src="../../upload/images/{{photo}}" alt="Image Description">
+  <figure
+    class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-cyan--hover g-transition-0_2 text-center">
+    <div class="g-py-40 g-px-20">
+      <!-- Figure Image -->
+      <img class="g-width-100 g-height-100 rounded-circle g-mb-20"
+        src="../../upload/images/{{photo}}" alt="Image Description">
 
-                <h4 class="h5 g-mb-5">{{name}}</h4>
-                <div class="d-block">
-                  <span class="g-color-cyan g-font-size-default g-mr-3"> <i class="icon-user"></i>
-                  </span> <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{member.nickName}}</em>
-                </div>
-              </div>
+      <h4 class="h5 g-mb-5">{{name}}</h4>
+      <div class="d-block">
+        <span class="g-color-cyan g-font-size-default g-mr-3"> <i class="icon-user"></i>
+        </span> <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{member.nickName}}</em>
+      </div>
+    </div>
 
-              <hr class="g-brd-gray-light-v4 g-my-0">
+    <hr class="g-brd-gray-light-v4 g-my-0">
 
-         <div class="form-group">
-            <fieldset class="review-rating-form rate" id="rating-form">
-              <input type="radio" id="rating10" name="rating"/><label id="star5" for="rating10"></label>
-              <input type="radio" id="rating9" name="rating"/><label id="star4.5" class="half" for="rating9"></label>
-              <input type="radio" id="rating8" name="rating"/><label id="star4" for="rating8"></label>
-              <input type="radio" id="rating7" name="rating"/><label id="star3.5" class="half" for="rating7"></label>
-              <input type="radio" id="rating6" name="rating"/><label id="star3" for="rating6"></label>
-              <input type="radio" id="rating5" name="rating"/><label id="star2.5" class="half" for="rating5"></label>
-              <input type="radio" id="rating4" name="rating"/><label id="star2" for="rating4"></label>
-              <input type="radio" id="rating3" name="rating"/><label id="star1.5" class="half" for="rating3"></label>
-              <input type="radio" id="rating2" name="rating"/><label id="star1" for="rating2"></label>
-              <input type="radio" id="rating1" name="rating"/><label id="star0.5" class="half" for="rating1"></label>
-            </fieldset>
-          </div>
-            </figure>
-          </div>
+    <form id="ratingEvalationForm{{member.nickName}}" action="add/review">
+      <div class="form-group">
+        <fieldset class="review-rating-form rate" id="ratingForm{{member.nickName}}" data-value=3>
+        <input type="radio" id="rating10{{member.nickName}}" name="rating"/><label id="star5{{member.nickName}}" for="rating10{{member.nickName}}"></label>
+              <input type="radio" id="rating9{{member.nickName}}" name="rating"/><label id="star45{{member.nickName}}" class="half" for="rating9{{member.nickName}}"></label>
+              <input type="radio" id="rating8{{member.nickName}}" name="rating"/><label id="star4{{member.nickName}}" for="rating8{{member.nickName}}"></label>
+              <input type="radio" id="rating7{{member.nickName}}" name="rating"/><label id="star35{{member.nickName}}" class="half" for="rating7{{member.nickName}}"></label>
+              <input type="radio" id="rating6{{member.nickName}}" name="rating"/><label id="star3{{member.nickName}}" for="rating6{{member.nickName}}"></label>
+              <input type="radio" id="rating5{{member.nickName}}" name="rating"/><label id="star25{{member.nickName}}" class="half" for="rating5{{member.nickName}}"></label>
+              <input type="radio" id="rating4{{member.nickName}}" name="rating"/><label id="star2{{member.nickName}}" for="rating4{{member.nickName}}"></label>
+              <input type="radio" id="rating3{{member.nickName}}" name="rating"/><label id="star15{{member.nickName}}" class="half" for="rating3{{member.nickName}}"></label>
+              <input type="radio" id="rating2{{member.nickName}}" name="rating"/><label id="star1{{member.nickName}}" for="rating2{{member.nickName}}"></label>
+              <input type="radio" id="rating1{{member.nickName}}" name="rating"/><label id="star05{{member.nickName}}" class="half" for="rating1{{member.nickName}}"></label>
+        </fieldset>
+      </div>
+    </form>
+  </figure>
+</div>
 {{/each}}
 </script>
 
+<script src="./retire.js"></script>

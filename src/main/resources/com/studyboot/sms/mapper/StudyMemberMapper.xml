@@ -6,67 +6,64 @@
 
 <mapper namespace="com.studyboot.sms.dao.StudyMemberDao">
 
-	<resultMap type="studyMember" id="studyMemberMap">
-		<id column="std_id" property="studyNo" />
-		<id column="member_id" property="memberNo" />
-		<result column="std_name" property="studyName"/>
-		<result column="pwd" property="password" />
-		<result column="email" property="email" />
-		<result column="nick_name" property="nickName" />
-		<result column="join_date" property="registeredDate" />
-		<result column="name" property="name" />
-		<result column="rate" property="rate" />
-		<result column="birth" property="birth" />
-		<result column="tel" property="tel" />
-		<result column="photo" property="photo" />
-		<result column="admin" property="admin" />
-		<result column="adr_lms" property="address" />
-		<result column="end_state_cls_id" property="endNo" />
-		<result column="join_date" property="joinDate" />
-		<result column="end_date" property="endDate" />
-		<result column="leader" property="leader" />
-		<result column="atn_pct" property="attendance" />
-		<result column="arch_cnt" property="upload" />
-		
-		<association property="member" javaType="member">
-			<id column="members_id" property="no" />
-			<result column="members_nick" property="nickName" />
-		</association>
-	</resultMap>
+  <resultMap type="studyMember" id="studyMemberMap">
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="memberNo" />
+    <result column="std_name" property="studyName" />
+    <result column="pwd" property="password" />
+    <result column="email" property="email" />
+    <result column="nick_name" property="nickName" />
+    <result column="join_date" property="registeredDate" />
+    <result column="name" property="name" />
+    <result column="rate" property="rate" />
+    <result column="birth" property="birth" />
+    <result column="tel" property="tel" />
+    <result column="photo" property="photo" />
+    <result column="admin" property="admin" />
+    <result column="adr_lms" property="address" />
+    <result column="end_state_cls_id" property="endNo" />
+    <result column="join_date" property="joinDate" />
+    <result column="end_date" property="endDate" />
+    <result column="leader" property="leader" />
+    <result column="atn_pct" property="attendance" />
+    <result column="arch_cnt" property="upload" />
 
-	<!-- 스터디 구성원들 가져오기 -->
-	<select id="findStudyMembersByNo" resultMap="studyMemberMap"
-		parameterType="int">
-		select
-    m.member_id,
-		m.rate,
-		m.birth,
-		m.name,
-		m.photo,
-		m.nick_name as members_nick,
-		sm.atn_pct
-		from
-		sms_std_member sm
-		inner join sms_member m on sm.member_id = m.member_id
-		where
-		sm.std_id = #{no}
-	</select>
+    <association property="member" javaType="member">
+      <id column="members_id" property="no" />
+      <result column="members_nick" property="nickName" />
+    </association>
+  </resultMap>
+
+  <!-- 스터디 구성원들 가져오기 -->
+  <select id="findStudyMembersByNo" resultMap="studyMemberMap" parameterType="int">
+    select
+      m.member_id,
+      m.rate,
+      m.birth,
+      m.name,
+      m.photo,
+      m.nick_name as members_nick,
+      sm.atn_pct
+    from
+      sms_std_member sm
+      inner join sms_member m on sm.member_id = m.member_id
+    where
+      sm.std_id = #{no} and end_state_cls_id is null
+  </select>
 
 
-	<!-- 마이스터디 목록 가져오기 -->
-	<select id="findStudyNoByMemberNo" resultType="int"
-		parameterType="int">
-		select
-		std_id
-		from
-		sms_std_member
-		where
-		member_id = #{no}
-	</select>
+  <!-- 마이스터디 목록 가져오기 -->
+  <select id="findStudyNoByMemberNo" resultType="int" parameterType="int">
+    select
+      std_id
+      from
+      sms_std_member
+    where
+     member_id = #{no}
+  </select>
 
-   <!-- 스터디 장인지 판단 -->
-  <select id="findStudyMemberLeaderByMap" resultType="boolean" 
-  parameterType="map">
+  <!-- 스터디 장인지 판단 -->
+  <select id="findStudyMemberLeaderByMap" resultType="boolean" parameterType="map">
     select
       leader
     from
@@ -74,7 +71,14 @@
     where
       member_id = #{loginUser} and std_id= #{studyNo}
   </select>
-
+  <update id="attendUpdate" parameterType="map">
+    update 
+      sms_std_member
+    set
+      end_state_cls_id = #{endNo},
+      end_date = #{endDate}
+    where std_id = #{studyNo} and member_id = #{memberNo}
+  </update>
 </mapper>
 
 

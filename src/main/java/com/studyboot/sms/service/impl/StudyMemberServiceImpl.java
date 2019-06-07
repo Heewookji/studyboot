@@ -47,6 +47,11 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return studyMemberDao.findStudyMemberLeaderByMap(map);
   }
   
+  @Override
+  public int attendUpdate(Map<String, Object> map) {
+
+    return studyMemberDao.attendUpdate(map);
+  }
   
 }
 
