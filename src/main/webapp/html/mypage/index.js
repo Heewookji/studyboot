@@ -87,7 +87,6 @@ function loadData() {
 // $('#nickName').val(data.nickName);
     rateData(user.rate);
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
-    $('#rate-profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
     $('#prevImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
     
 // $('#cls').val(data.cls);
@@ -105,7 +104,21 @@ function loadData() {
 
 // 별점
 function rateData(rate) {
-  var rateLabel = '#star' + rate;
+  
+  var rateLabel;
+  
+  switch(rate) {
+    case 1: rateLabel = '#star1'; break;
+    case 1.5: rateLabel = '#star15'; break;
+    case 2: rateLabel = '#star2'; break;
+    case 2.5: rateLabel = '#star25'; break;
+    case 3: rateLabel = '#star3'; break;
+    case 3.5: rateLabel = '#star35'; break;
+    case 4: rateLabel = '#star4'; break;
+    case 4.5: rateLabel = '#star45'; break;
+    case 5: rateLabel = '#star5'; break;
+  }
+  
   var rateInput = '#' + $(rateLabel).attr('for');
   console.log(rateInput);
   $(rateInput).prop("checked", true);
@@ -188,18 +201,6 @@ $('#pickedStudyTab').on('shown.bs.tab', () => {
   }
   pickedinit = true;
 });
-
-
-// 내 평가(별점) 버튼 눌렀을 때 평가 관련 데이터 불러옴
-$('#myRate-btn').click(() => {
-  
-  $.getJSON('../../app/json/member/mystudy', function(obj) {
-    
-    
-  });
-});
-
-
 
 
 // inquiry
