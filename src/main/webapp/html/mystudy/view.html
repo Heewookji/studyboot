@@ -10,35 +10,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="/studyboot/Unify/favicon.ico">
-  <!-- Google Fonts -->
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A400%2C300%2C500%2C600%2C700%7CPlayfair+Display%7CRoboto%7CRaleway%7CSpectral%7CRubik">
-  <!-- CSS Global Compulsory -->
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/bootstrap/bootstrap.min.css">
-  <!-- CSS Global Icons -->
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/icon-line/css/simple-line-icons.css">
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/icon-etlinefont/style.css">
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/icon-line-pro/style.css">
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/icon-hs/style.css">
 
   <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/vendor/hs-admin-icons/hs-admin-icons.css">
-
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/animate.css">
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
-
   <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/css/flatpickr.min.css">
-
   <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/vendor/chartist-js/chartist.min.css">
-
-  <link rel="stylesheet" href="/studyboot/Unify/assets/vendor/hamburgers/hamburgers.min.css">
-
   <!-- CSS Unify -->
   <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/css/unify-admin.css">
 
-  <!-- CSS Customization -->
-  <link rel="stylesheet" href="/studyboot/Unify/assets/css/custom.css">
 </head>
 
 <body>
@@ -80,7 +58,7 @@
 
                           <div id="dropDown6" class="u-shadow-v31 g-pos-abs g-right-0 g-z-index-2 g-bg-white u-dropdown--css-animation u-dropdown--hidden u-dropdown--reverse-y" aria-labelledby="dropDown6Invoker">
                             <ul class="list-unstyled g-nowrap mb-0">
-                              <li id="detail-edit">
+                              <li id="detail-edit1">
                                 <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" href="#">
                                   <i class="hs-admin-pencil g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
                                   Edit
@@ -100,6 +78,7 @@
                     </div>
                   </header>
 
+<button id="detail-edit">ddd</button>
                   <hr class="d-flex g-brd-gray-light-v7 g-mx-15 g-mx-30--sm my-0">
 
 
@@ -130,78 +109,8 @@
   </main>
 
 
-  <!-- JS Global Compulsory -->
-  <script src="/studyboot/Unify/admin-template/assets/vendor/jquery/jquery.min.js"></script>
   <script src="/studyboot/Unify/admin-template/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
 
-  <script src="/studyboot/Unify/assets/vendor/popper.js/popper.min.js"></script>
-  <script src="/studyboot/Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
-
-  <script src="/studyboot/Unify/assets/vendor/cookiejs/jquery.cookie.js"></script>
-
-  <script src="/studyboot/Unify/assets/vendor/appear.js"></script>
-  <script src="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-
-  <script src="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/js/flatpickr.min.js"></script>
-
-  <script src="/studyboot/Unify/admin-template/assets/vendor/chartist-js/chartist.min.js"></script>
-
-  <!-- JS Unify -->
-  <script src="/studyboot/Unify/assets/js/hs.core.js"></script>
-
-  <script src="/studyboot/Unify/assets/js/components/hs.scrollbar.js"></script>
-
-  <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
-  <script src="/studyboot/Unify/assets/js/helpers/hs.hamburgers.js"></script>
-  <script src="/studyboot/Unify/admin-template/assets/js/components/hs.side-nav.js"></script>
-
-  <script src="/studyboot/Unify/admin-template/assets/js/components/hs.range-datepicker.js"></script>
-
-  <script src="/studyboot/Unify/admin-template/assets/js/components/hs.bar-chart.js"></script>
-
-  <!-- JS Custom -->
-  <script src="/studyboot/Unify/assets/js/custom.js"></script>
-
-  <!-- JS Plugins Init. -->
-  <script>
-    $(document).on('ready', function () {
-      // initialization of custom scrollbar
-      $.HSCore.components.HSScrollBar.init($('.js-custom-scroll'));
-
-      // initialization of HSDropdown component
-      $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
-
-      // initialization of hamburger
-      $.HSCore.helpers.HSHamburgers.init('.hamburger');
-
-      // initialization of range datepicker
-      $.HSCore.components.HSRangeDatepicker.init('#datepicker, #datepicker2');
-
-      // initialization of charts
-      $.HSCore.components.HSBarChart.init('.js-bar-chart');
-
-      // initialization of sidebar navigation component
-      $.HSCore.components.HSSideNav.init('.js-side-nav', {
-        afterOpen: function() {
-          setTimeout(function() {
-            $.HSCore.components.HSBarChart.init('.js-bar-chart');
-          }, 400);
-        },
-        afterClose: function() {
-          setTimeout(function() {
-            $.HSCore.components.HSBarChart.init('.js-bar-chart');
-          }, 400);
-        }
-      });
-    });
-    
-   
-    
-    
-    
-    
-  </script>
-  
 </body>
 
 </html>

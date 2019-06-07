@@ -22,9 +22,9 @@ $('#add-board').click((e) => {
     
     
     $('#add-min-btn').click((e) => {
-      
-      var markup = $('.note-editable').summernote('code');
-
+      var markup = $('.js-text-editor').summernote('code');
+      console.log(markup);
+      /*
       if($('#inputHorizontalSuccess').val().length === 0) {
         alert("제목을 입력해 주세요.");
         return;
@@ -52,7 +52,7 @@ $('#add-board').click((e) => {
           alert("등록에 실패 했습니다.");
         }
       });
-
+      */
     });
 
 

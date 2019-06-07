@@ -28,6 +28,7 @@ $(document.body).bind('loaded-list', () => {
 });
 
 function loadDetail(no) {
+  
   $.getJSON('../../app/json/MyStudy/detail?no=' + no, function(obj) {
 
     $('#detail-photo').attr("src", "/studyboot/upload/images/" + obj.member.photo);
@@ -37,21 +38,32 @@ function loadDetail(no) {
     $('#detail-cont').html(obj.contents);
     $('#detail-no').html(obj.no);
     $('#detail-member').html(obj.memberNo);
+    
+    $('#detail-edit').click((e) => {
+      $("#contents").load("/studyboot/html/mystudy/forms.html", function(){
+        $('.js-text-editor').summernote('code', obj.contents);
+        $('#inputHorizontalSuccess').val(obj.title);
+      });
+    }); // end update
 
     // 삭제 버튼
     $('#detail-delete').click((e) => {
 
       $.getJSON('../../app/json/MyStudy/delete?no=' + obj.no + 
           '&memberNo=' + obj.memberNo, function(obj) {
-
         alert(obj.status);
         location.reload();
+//        $(document.body).trigger('loaded-test'); // 트리거 실행이 안됨
       })
-    });
-
-
+    }); // end delete
+    
   });
 }
+
+$(document.body).bind('loaded-test', () => {
+  alert("트리거실행");
+});
+
 
 
 
