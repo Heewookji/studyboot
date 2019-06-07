@@ -79,6 +79,11 @@ public class MyStudyServiceImpl implements MyStudyService {
     return studyBoardDao.insert(studyBoard);
   }
 
+  @Override
+  public int delete(int no) {
+    return studyBoardDao.delete(no);
+  }
+
 
 
 
