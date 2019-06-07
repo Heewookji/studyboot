@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 6,
+pageSize = 8,
 addressNo,
 clsNo,
 rateValue = 3,
@@ -158,11 +158,22 @@ $(window).scroll(function(obj) {
 
 //스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
 $(document.body).bind('loaded-list', () => {
+  
   $('.study-view-link').click((e) => {
     e.preventDefault();
     window.location.href = 'view.html?no=' +
     $(e.target).attr('data-no');
   });
+  
+  $( ".study-view-link" ).hover(
+          function(e) {
+            $($( e.target).find( "a" )).removeClass("g-color-black");
+            $($( e.target).find( "a" )).addClass("g-color-primary");
+          }, function(e) {
+            $($( e.target).find( "a" )).removeClass("g-color-primary");
+            $($( e.target).find( "a" )).addClass("g-color-black");
+          }
+        );
 });
 
 //카테고리 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
