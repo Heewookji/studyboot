@@ -208,24 +208,33 @@ data-no='{{no}}' data-member='{{memberNo}}'>{{title}}</a></td>
 
   <!-- JS Global Compulsory -->
   <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="/studyboot/Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
   <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/popper.js/popper.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="/studyboot/Unify/assets/vendor/cookiejs/jquery.cookie.js"></script>
 
 
   <!-- JS Implementing Plugins -->
+  
   <script src="/studyboot/Unify/assets/vendor/appear.js"></script>
   <script src="/studyboot/Unify/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
   <script src="/studyboot/Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
   <script src="/studyboot/Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
-   
-  
+    <script src="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/js/flatpickr.min.js"></script>
+  <script src="/studyboot/Unify/admin-template/assets/vendor/chartist-js/chartist.min.js"></script>
+   <script src="../../Unify/admin-template/assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+  <script src="../../Unify/admin-template/assets/vendor/bloodhound-js/js/bloodhound.min.js"></script>
+  <script src="../../Unify/admin-template/assets/vendor/bloodhound-js/js/typeahead.jquery.min.js"></script>
+  <script src="../../Unify/admin-template/assets/vendor/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+  <script src="../../Unify/admin-template/assets/vendor/summernote/dist/summernote-bs4.min.js"></script>
+
+ 
 
   <!-- JS Unify -->
   <script src="/studyboot/Unify/assets/js/hs.core.js"></script>
+   <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
   <script src="/studyboot/Unify/assets/js/helpers/hs.hamburgers.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.header.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.tabs.js"></script>
@@ -235,8 +244,13 @@ data-no='{{no}}' data-member='{{memberNo}}'>{{title}}</a></td>
   <script src="/studyboot/Unify/assets/js/components/hs.scrollbar.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.go-to.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.carousel.js"></script>
-  <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
-
+   <script src="/studyboot/Unify/admin-template/assets/js/components/hs.range-datepicker.js"></script>
+  <script src="/studyboot/Unify/admin-template/assets/js/components/hs.bar-chart.js"></script>
+  
+ <script src="../../Unify/admin-template/assets/js/components/hs.side-nav.js"></script>
+  <script src="../../Unify/assets/js/components/hs.count-qty.js"></script>
+  <script src="../../Unify/admin-template/assets/js/components/hs.text-editor.js"></script>
+  <script src="../../Unify/assets/js/helpers/hs.focus-state.js"></script>
   <!-- JS Customization -->
   <script src="/studyboot/Unify/assets/js/custom.js"></script>
   <script src="/studyboot/html/header.js"></script>
@@ -246,6 +260,38 @@ data-no='{{no}}' data-member='{{memberNo}}'>{{title}}</a></td>
   <script src="view.js"></script>
   <script src="../footer.js"></script>
 
+
+
+  <script>
+    $(document).on('ready', function () {
+      // initialization of custom scrollbar
+       $.HSCore.components.HSScrollBar.init($('.js-custom-scroll')); 
+
+      // initialization of range datepicker
+      $.HSCore.components.HSRangeDatepicker.init('#datepicker, #datepicker2');
+
+      // initialization of charts
+      $.HSCore.components.HSBarChart.init('.js-bar-chart');
+
+      $('.js-select').selectpicker();
+
+      // initialization of sidebar navigation component
+      $.HSCore.components.HSSideNav.init('.js-side-nav');
+
+      // initialization of forms
+      $.HSCore.components.HSCountQty.init('.js-quantity');
+
+      // initialization of text editors
+      $.HSCore.components.HSTextEditor.init('.js-text-editor');
+      
+   // initialization of HSDropdown component
+     // $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
+      
+   
+    });
+    
+    
+  </script>
 
 </body>
 
