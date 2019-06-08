@@ -47,6 +47,12 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return studyMemberDao.findStudyMemberLeaderByMap(map);
   }
   
+  @Override
+  public List<StudyMember> rateInfo(int no) {
+    List<StudyMember> list = studyMemberDao.findRateInfoByMemberId(no);
+    System.out.println(list);
+    return list;
+  }
   
 }
 

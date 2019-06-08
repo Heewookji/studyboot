@@ -10,8 +10,6 @@
 		<id column="std_id" property="studyNo" />
 		<id column="member_id" property="memberNo" />
 		<result column="std_name" property="studyName"/>
-		<result column="pwd" property="password" />
-		<result column="email" property="email" />
 		<result column="nick_name" property="nickName" />
 		<result column="join_date" property="registeredDate" />
 		<result column="name" property="name" />
@@ -33,6 +31,24 @@
 			<result column="members_nick" property="nickName" />
 		</association>
 	</resultMap>
+  
+  <!-- 회원의 평가 정보 -->
+  <resultMap type="studyMember" id="memberRateInfoMap">
+    <id column="std_id" property="studyNo" />
+    <result column="end_state_cls_id" property="endNo" />
+    <result column="join_date" property="joinDate" />
+    <result column="end_date" property="endDate" />
+    <result column="leader" property="leader" />
+    <result column="atn_pct" property="attendance" />
+    
+    <result column="std_name" property="studyName"/>
+    
+    <association property="member" javaType="member">
+      <result column="nick_name" property="nickName" />
+      <result column="rate" property="rate" />
+      <result column="photo" property="photo" />
+    </association>
+  </resultMap>
 
 	<!-- 스터디 구성원들 가져오기 -->
 	<select id="findStudyMembersByNo" resultMap="studyMemberMap"
@@ -73,6 +89,26 @@
       sms_std_member
     where
       member_id = #{loginUser} and std_id= #{studyNo}
+  </select>
+
+  <!-- 회원의 평가 정보 가져오기 -->
+  <select id="findRateInfoByMemberId" resultMap="memberRateInfoMap" parameterType="int">
+    select
+      sm.std_id,
+      sm.end_state_cls_id,
+      sm.join_date,
+      sm.end_date,
+      sm.leader,
+      sm.atn_pct,
+      m.nick_name,
+      m.rate,
+      m.photo
+    from
+      sms_std_member sm
+      inner join sms_member m on sm.member_id = m.member_id
+      inner join sms_std s on sm.std_id = s.std_id
+    where
+      sm.member_id = #{value}
   </select>
 
 </mapper>

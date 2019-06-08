@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.AppliedStudy;
-import com.studyboot.sms.domain.EndRate;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.RateLog;
 import com.studyboot.sms.domain.Study;
+import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
+import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
@@ -30,6 +32,7 @@ public class MemberController {
 
   @Autowired MemberService memberService;
   @Autowired StudyMemberService studyMemberService;
+  @Autowired RateService rateService;
   @Autowired ServletContext servletContext;
   
   /*
@@ -207,14 +210,18 @@ public class MemberController {
 
     if (loginUser != null) {
       
-      EndRate endRate = memberService.getEndRate(loginUser.getNo());
+      List<StudyMember> rateInfo = studyMemberService.rateInfo(loginUser.getNo());
+      List<RateLog> rateLog = rateService.list(loginUser.getNo());
       
-      if(endRate != null) {
-        content.put("endRate", endRate);
+      if(rateInfo != null) {
+        content.put("rateInfo", rateInfo);
+      }
+      
+      if(rateLog != null) {
+        content.put("rateLog", rateLog);
       }
       
       content.put("status", "success");
-      content.put("loginUser", loginUser);
       
     } else {
       content.put("status", "fail");

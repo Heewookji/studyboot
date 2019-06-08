@@ -6,6 +6,7 @@
   
 <mapper namespace="com.studyboot.sms.dao.RateDao">
   
+  <!-- sms_member_rate_info 테이블 -->
   <resultMap type="rate" id="rateMap">
     <id column="member_rate_info_id" property="memberRateNo"/>
     <id column="std_id" property="studyNo"/>
@@ -15,11 +16,28 @@
     <result column="rate_dt" property="rateDate"/>
   </resultMap>
   
+  <!-- sms_member_rate_log 테이블 -->
+  <resultMap type="rateLog" id="rateLogMap">
+    <id column="rate_log_id" property="rateLogNo"/>
+    <id column="member_id" property="memberNo"/>
+    <result column="rate" property="rate"/>
+    <result column="update_dt" property="updateDate"/>
+  </resultMap>
+  
   <select id="findAll" resultMap="rateMap" parameterType="map">
   	select * from sms_member_rate_info
   	where std_id = #{studyNo} and member_id = #{no}
   </select>
   
+  <!-- 평점 업데이트 기록을 가져온다. -->
+  <select id="findRateLog" resultMap="rateLogMap" parameterType="int">
+    select
+      *
+    from
+      sms_member_rate_log
+    where
+      member_id = #{value}
+  </select>
   
 </mapper>
 

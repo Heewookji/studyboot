@@ -110,23 +110,23 @@ values(100, '161412', '161412', '지환탈퇴테스트', '사진', 127, '2019-05
 
 -- 회원 생성
   -- 관리자
-insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, photo, admin, adr_lms)
-  values(1, password('1111'), 'user1@test.com', 'user1', 'nick1', '1993-05-16', '010-1111-1111', 'photo1.jpg', true, '111111');
+insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, admin, adr_lms)
+  values(1, password('1111'), 'user1@test.com', 'user1', 'nick1', '1993-05-16', '010-1111-1111', true, '111111');
   -- 일반
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(2, password('1111'), 'user2@test.com', 'user2', 'nick2', 3.5, '1993-05-16', '010-2222-2222', 'test.png', '222222');
- insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(3, password('1111'), 'user3@test.com', 'user3', 'nick3', 4.0, '1997-05-16', '010-3333-3333', 'test.png', '333333');
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(4, password('1111'), 'user4@test.com', 'user4', 'nick4', 4.5, '1990-05-16', '010-4444-4444', 'test.png', '444444');
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(5, password('1111'), 'user5@test.com', 'user5', 'nick5', 5.0, '1983-05-16', '010-5555-5555', 'test.png','555555');
-insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(6, password('1111'), 'user6@test.com', 'user6', 'nick6', 4.5, '1999-05-16', '010-4444-4444', 'test.png', '444444');
-  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, photo, adr_lms)
-  values(7, password('1111'), 'user7@test.com', 'user7', 'nick7', 5.0, '1988-05-16', '010-5555-5555', 'test.png','555555');
-insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, photo, admin, adr_lms)   
-values(8, password('1111'), 'user8@test.com', 'user8', 'nick8', '1993-05-16', '010-1111-1111', 'test.png', true, '111111');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, adr_lms)
+  values(2, password('1111'), 'user2@test.com', 'user2', 'nick2', 3.5, '1993-05-16', '010-2222-2222', '222222');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, adr_lms)
+  values(3, password('1111'), 'user3@test.com', 'user3', 'nick3', 4.0, '1997-05-16', '010-3333-3333', '333333');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, adr_lms)
+  values(4, password('1111'), 'user4@test.com', 'user4', 'nick4', 4.5, '1990-05-16', '010-4444-4444', '444444');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, adr_lms)
+  values(5, password('1111'), 'user5@test.com', 'user5', 'nick5', 5.0, '1983-05-16', '010-5555-5555', '555555');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, adr_lms)
+  values(6, password('1111'), 'user6@test.com', 'user6', 'nick6', 4.5, '1999-05-16', '010-4444-4444', '444444');
+  insert into sms_member (member_id, pwd, email, name, nick_name, rate, birth, tel, adr_lms)
+  values(7, password('1111'), 'user7@test.com', 'user7', 'nick7', 5.0, '1988-05-16', '010-5555-5555', '555555');
+  insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, admin, adr_lms)   
+  values(8, password('1111'), 'user8@test.com', 'user8', 'nick8', '1993-05-16', '010-1111-1111', true, '111111');
  
 
 -- 스터디 회원 관심분야(3개씩)
@@ -173,6 +173,12 @@ insert into sms_std_member(std_id, member_id) values(2,2);
 insert into sms_std_member(std_id, member_id) values(2,3);
 insert into sms_std_member(std_id, member_id) values(2,4);
 insert into sms_std_member(std_id, member_id) values(2,5);
+
+insert into sms_std_member(std_id, member_id, leader) values(3,3,true);
+insert into sms_std_member(std_id, member_id) values(3,4);
+insert into sms_std_member(std_id, member_id) values(3,5);
+insert into sms_std_member(std_id, member_id) values(3,6);
+insert into sms_std_member(std_id, member_id) values(3,7);
   
 insert into sms_std_member(std_id, member_id,leader) values(100,2,true);
 insert into sms_std_member(std_id, member_id) values(100,3);
@@ -389,6 +395,12 @@ insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rat
 insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(1, 5, 4, 4.0, 20191013);
 insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(1, 5, 6, 1.0, 20190513);
 insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(1, 5, 7, 2.0, 20191013);
+
+insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(3, 3, 4, 3.0, 20190513);
+insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(3, 3, 5, 2.5, 20190520);
+insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(3, 3, 6, 3.5, 20190515);
+insert into sms_member_rate_info(std_id, member_id, confirm_member_id, rate, rate_dt) values(3, 3, 7, 1.5, 20190602);
+
 
 -- 회원 스터디 신청 정보
 -- 회원번호, 스터디번호, 스터디 각오, 열람여부, 신청일
