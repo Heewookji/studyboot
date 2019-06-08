@@ -44,11 +44,7 @@ public class AuthController {
     } else {
       session.setAttribute("loginUser", member);
 
-      List<Study> myStudyList = studyMemberService.findMyStudyList(member.getNo());
 
-      if(myStudyList != null) {
-        session.setAttribute("myStudyList", myStudyList);
-      }
       content.put("status", "success");
     }
 
@@ -68,7 +64,6 @@ public class AuthController {
     return content;
   }
 
-  @SuppressWarnings("unchecked")
   @GetMapping("user")
   public Object user(HttpSession session) throws Exception {
 
@@ -78,12 +73,11 @@ public class AuthController {
 
     if (loginUser != null) {
 
-      List<Study> myStudyList = (List<Study>)session.getAttribute("myStudyList");
-
+      List<Study> myStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
+      
       if(myStudyList != null) {
         content.put("myStudyList", myStudyList);
       }
-
       content.put("status", "success");
       content.put("user", loginUser);
     } else {

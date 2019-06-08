@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 8,
+pageSize = 16,
 addressNo,
 clsNo,
 rateValue = 3,
@@ -143,7 +143,7 @@ if (param) {
 
   pageNo = 1;
   $('#clsTitle').html(clsTitle);
-  $('#large-tag').val(clsTitle);
+  $('#large-tag a').text(clsTitle);
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   loadCategoryTitle(clsNo);
   loadAddress();
@@ -194,12 +194,16 @@ $(document.body).bind('loaded-categorytitle', () => {
     
     // 빵부스러기
 
+    $('#large-tag i').remove()
     $('#small-tag').remove();
     $('#medium-tag').remove();
-    $('#large-tag > button').prop('disabled', false);
+    $('#large-tag a').attr('href', '#');
+    $('#large-tag a').addClass('g-color-primary--hover');
+    $('#large-tag').append("<i class='fa fa-angle-right g-ml-7'></i>");
     clsName = $(e.target).text();
     var $mediumTag = 
-      $('<li class="breadcrumb-item" id="medium-tag"><button class="btn btn-link" data-no="'+ clsNo +'" disabled>' + clsName+ '</button></li>');
+      $('<li class="list-inline-item g-mr-7" id="medium-tag"><a class="u-link-v5 g-color-gray-dark-v1" data-no="'+ clsNo +'">' 
+              +clsName+'</a></li>');
     $('#cls-tag').append($mediumTag);
     $(document.body).trigger('loaded-medium-tag');
   });
@@ -222,11 +226,14 @@ $(document.body).bind('loaded-smalltitle', () => {
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 
     // 빵부스러기
+    $('#medium-tag i').remove();
     $('#small-tag').remove();
-    $('#medium-tag > button').prop('disabled', false);
+    $('#medium-tag a').attr('href', '#');
+    $('#medium-tag a').addClass('g-color-primary--hover');
+    $('#medium-tag').append("<i class='fa fa-angle-right g-ml-7'></i>");
     clsName = $(e.target).text();
     var $smallTag = 
-      $('<li class="breadcrumb-item active" id="small-tag"><button class="btn btn-link" disabled>' + clsName+ '</button></li>');
+      $('<li class="list-inline-item g-color-gray-dark-v1" id="small-tag"><span >'+clsName +'</span></li>');
     $('#cls-tag').append($smallTag);
   });
 
@@ -276,7 +283,11 @@ $(document.body).bind('loaded-smallAddress', () => {
 });
 
 //카테고리 breadcrumb 
-$('#large-tag > button').click(function(e) {
+$('#large-tag').click(function(e) {
+  
+  $('.collapse').removeClass('show');
+  $('.u-accordion__header a').removeClass('g-color-primary');
+  $('.u-accordion__header a').addClass('g-color-main');
   e.preventDefault();
   pageNo = 1;
   tbody.html('');
@@ -284,18 +295,23 @@ $('#large-tag > button').click(function(e) {
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   $('#small-tag').remove();
   $('#medium-tag').remove();
-  $('#large-tag > button').prop('disabled', true);
+  $('#large-tag a').removeClass('g-color-primary--hover');
+  $('#large-tag a').removeAttr('href');
 });
 
 $(document.body).bind('loaded-medium-tag', () => {
-  $('#medium-tag > button').click(function(e) {
+  $('#medium-tag').click(function(e) {
+    
+    $('.scls-btn').removeClass('g-color-primary');
+    $('.scls-btn').addClass("g-color-main");
     e.preventDefault();
     pageNo = 1;
     tbody.html('');
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $('#small-tag').remove();
-    $('#medium-tag > button').prop('disabled', true);
+    $('#medium-tag a').removeClass('g-color-primary--hover');
+    $('#medium-tag a').removeAttr('href');
   });
 });
 

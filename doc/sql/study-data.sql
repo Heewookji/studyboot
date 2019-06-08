@@ -18,6 +18,22 @@ insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, pr
 values('121411', '111411', '스터디7', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  4 ,  3.25);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
 values('111412', '111412', '스터디8', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  6 ,  1.8 );
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('121111', '111111', '스터디49', 'test.png', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('111112', '111112', '스터디50', '사진', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('121211', '111211', '스터디51', '사진', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('111212', '111212', '스터디52', '사진', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('121311', '111311', '스터디53', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('111312', '111312', '스터디54', '사진', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('121411', '111411', '스터디55', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  4 ,  3.25);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
+values('111412', '111412', '스터디56', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  6 ,  1.8 );
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
 values('111111', '121111', '스터디9', '사진', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합합시다1.',  5,   3);                    
