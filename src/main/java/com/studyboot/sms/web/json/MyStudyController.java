@@ -1,7 +1,10 @@
 package com.studyboot.sms.web.json;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,7 +85,17 @@ public class MyStudyController {
 
     studyBoard = myStudyService.list(pageNo, pageSize, clsNo, memberNos, keyword, no);
 
-
+//    for (int i = 0; i < studyBoard.size(); i++) {
+//    Date time = studyBoard.get(0).getDate();
+//    SimpleDateFormat outputFmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+//    String dateF = outputFmt.format(time);
+//    Date ddd = Date.valueOf(dateF);
+//    studyBoard.get(0).setDate(ddd);
+//    System.out.println(studyBoard.get(0).getDate());
+//        
+//    studyBoard.get(i).setDate();  
+//    
+//    }
     content.put("list", studyBoard);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
