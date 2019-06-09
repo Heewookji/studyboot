@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.studyboot.sms.service;
 
 import java.util.List;
@@ -13,21 +12,6 @@ public interface StudyMemberService {
   boolean findStudyMemberLeader(Map<String, Object> map);
   int attendUpdate(Map<String, Object> map);
   StudyMember findMyStudyByNo(Map<String, Object> map);
-}
-=======
-package com.studyboot.sms.service;
-
-import java.util.List;
-import java.util.Map;
-import com.studyboot.sms.domain.Study;
-import com.studyboot.sms.domain.StudyMember;
-
-public interface StudyMemberService {
-  List<Study> findMyStudyList(int no);
-  List<StudyMember> findStudyMember(int no);
-  // 스터디 장인지 판단하는 Service , 코드 재활용을 위해 파라미터값 Map으로 해놓음
-  boolean findStudyMemberLeader(Map<String, Object> map);
-  int attendUpdate(Map<String, Object> map);
   List<StudyMember> rateInfo(int no);
 }
->>>>>>> e9ddbeaaac532c19a22d2a1fc6c5b498c8b64445
+
