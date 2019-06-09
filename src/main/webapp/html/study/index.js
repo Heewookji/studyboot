@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 6,
+pageSize = 16,
 addressNo,
 clsNo,
 rateValue = 3,
@@ -30,244 +30,366 @@ templateSrcSmallAddress = $('#tr-template-sadr').html(),
 trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
 
 
+
+
+
 //JSON 형식의 데이터 목록 가져오기
 function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
-    $.getJSON('../../app/json/study/list?pageNo=' + pageNo
-	    + '&pageSize=' + pageSize
-	    + '&clsNo=' + clsNo
-	    + '&addressNo=' + addressNo 
-	    + '&rateValue=' + rateValue
-	    + '&keyword=' + keyword
-	    + '&dayNo=' + dayNo,
+  $.getJSON('../../app/json/study/list?pageNo=' + pageNo
+          + '&pageSize=' + pageSize
+          + '&clsNo=' + clsNo
+          + '&addressNo=' + addressNo 
+          + '&rateValue=' + rateValue
+          + '&keyword=' + keyword
+          + '&dayNo=' + dayNo,
 
-	    function(obj) {
-
-	console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
-		'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
-		'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
+          function(obj) {
 
 
-	// 현재 끝페이지까지 왔고, 처음 출력이 아니라면
-	// (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
-	if (pageNo > obj.totalPage) {
-	    return;
-	}
-	// 서버에서 넘겨준 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
-	pageNo = obj.pageNo;
+    console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
+            'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
+            'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
 
-	if (pageNo == 0){
-	    return;
-	}
 
-	$(cardGenerator(obj)).appendTo(tbody);
+    // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
+    // (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
+    if (pageNo > obj.totalPage) {
+      return;
+    }
+    // 서버에서 넘겨준 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
+    pageNo = obj.pageNo;
 
-	// 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
-	$(document.body).trigger('loaded-list');
-    });
+    if (pageNo == 0){
+      return;
+    }
+
+    $(cardGenerator(obj)).appendTo(tbody);
+
+    // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+    $(document.body).trigger('loaded-list');
+  });
 };
 
 
 
 //카테고리 분류 로딩 함수
 function loadCategoryTitle(clsNo) {
-    $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
-	    function(obj) {
-	    $(trGeneratorMediumCls(obj)).appendTo('#categoryTitle');
+  $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
+          function(obj) {
+    $(trGeneratorMediumCls(obj)).appendTo('#accordion-mcls');
 
-	$(document.body).trigger('loaded-categorytitle');
-    });
+    $(document.body).trigger('loaded-categorytitle');
+  });
 };
 
 //카테고리 하위 분류 로딩 함수
 function loadSmallTitle(clsNo) {
-    $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
-	    function(obj) {
-	$(trGeneratorSmallCls(obj)).appendTo('#smallClsTitle' + clsNo);
-	$(document.body).trigger('loaded-smalltitle');
-    });
-};
+  $.ajax({
+    type: 'Get',
+    url: '../../app/json/study/category?clsNo=' + clsNo,
+    async: false,
+    success: function(obj) {
+      var mclsNo;
+      $(obj.list).each(function(index, element) {
+        loadSmallTitleGet(element.clsNo);
+      });
+      $(document.body).trigger('loaded-smalltitle');
+    }
+  });
+}
+
+function loadSmallTitleGet(mclsNo){
+  $.ajax({
+    type: 'Get',
+    url: '../../app/json/study/category?clsNo=' + mclsNo,
+    async: false,
+    success: function(obj) {
+      $(trGeneratorSmallCls(obj)).appendTo('#smallClsTitle' + mclsNo);
+    }
+  });
+}
 
 //필터 - 지역 로딩
 function loadAddress(addressNo) {
-    $.getJSON('../../app/json/study/addresscategory?addressNo=' + addressNo,
-	    function(obj) {
+  $.getJSON('../../app/json/study/addresscategory?addressNo=' + addressNo,
+          function(obj) {
 
-	// addressNo 값이 없을 때(대분류), 2자리(중분류), 4자리(소분류)
-	if (addressNo == undefined) {
-	    $(trGeneratorLargeAddress(obj)).appendTo('.largeAddress');
-	    $(document.body).trigger('loaded-largeAddress');
+    // addressNo 값이 없을 때(대분류), 2자리(중분류), 4자리(소분류)
+    if (addressNo == undefined) {
+      $(trGeneratorLargeAddress(obj)).appendTo('.largeAddress');
+      $(document.body).trigger('loaded-largeAddress');
 
-	} else if (addressNo.length == 2) {
-	    $(trGeneratorMediumAddress(obj)).appendTo('.mediumAddress');
-	    $(document.body).trigger('loaded-mediumAddress');
-	} else if (addressNo.length == 4) {
-	    $(trGeneratorSmallAddress(obj)).appendTo('.smallAddress');
-	    $(document.body).trigger('loaded-smallAddress');
-	}
+    } else if (addressNo.length == 2) {
+      $(trGeneratorMediumAddress(obj)).appendTo('.mediumAddress');
+      $(document.body).trigger('loaded-mediumAddress');
+    } else if (addressNo.length == 4) {
+      $(trGeneratorSmallAddress(obj)).appendTo('.smallAddress');
+      $(document.body).trigger('loaded-smallAddress');
+    }
 
-    });
+  });
 };
 
 //페이지를 출력한 후 pageNo 와 clsNo, keyword를 넘겨주고 로딩한다.
 if (param) {
-    // 빈 문자열이 들어가는 것을 방지하기 위해. undefined 로 넣어주기 위해 조건문 썻음
-    if(param.split('&')[0].split('=')[1].length != 0){
-	clsNo = param.split('&')[0].split('=')[1];
-    }
+  // 빈 문자열이 들어가는 것을 방지하기 위해. undefined 로 넣어주기 위해 조건문 썻음
+  if(param.split('&')[0].split('=')[1].length != 0){
+    clsNo = param.split('&')[0].split('=')[1];
+  }
 
-    largeClsNo = param.split('&')[0].split('=')[1];
-    clsTitle = param.split('&')[1].split('=')[1];
-    clsTitle = decodeURIComponent(clsTitle);
+  largeClsNo = param.split('&')[0].split('=')[1];
+  clsTitle = param.split('&')[1].split('=')[1];
+  clsTitle = decodeURIComponent(clsTitle);
 
-    pageNo = 1;
-
-    $('#clsTitle').html(clsTitle);
-    $('#large-tag > button').text(clsTitle);
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-    loadCategoryTitle(clsNo);
-    loadAddress();
+  pageNo = 1;
+  $('#clsTitle').html(clsTitle);
+  $('#large-tag a').text(clsTitle);
+  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  loadCategoryTitle(clsNo);
+  loadAddress();
 }
 
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
-    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	loadList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-    }
+  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    loadList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  }
 });
 
 //스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
 $(document.body).bind('loaded-list', () => {
-    $('.study-view-link').click((e) => {
-	e.preventDefault();
-	window.location.href = 'view.html?no=' +
-	$(e.target).attr('data-no');
-    });
+
+  $('.study-view-link').click((e) => {
+    e.preventDefault();
+    window.location.href = 'view.html?no=' +
+    $(e.target).attr('data-no');
+  });
+
+  $( ".study-view-link" ).hover(
+          function(e) {
+          }, function(e) {
+          }
+  );
 });
+
 
 //카테고리 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-categorytitle', () => {
-    $('.mcls-btn').click(function(e) {
-	pageNo = 1; // 페이지 초기화
-	tbody.html(''); // 스터디 목록 초기화
-	$('.smallTitle').html(''); // 카테고리 소분류 목록 초기화
-	clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-	loadSmallTitle(clsNo); // 카테고리 소분류 목록 불러오기
 
-	// 빵부스러기
+  loadSmallTitle(clsNo);
 
-	$('#small-tag').remove();
-	$('#medium-tag').remove();
-	$('#large-tag > button').prop('disabled', false);
-	clsName = $(e.target).text();
-	var $mediumTag = 
-	    $('<li class="breadcrumb-item" id="medium-tag"><button class="btn btn-link" data-no="'+ clsNo +'" disabled>' + clsName+ '</button></li>');
-	$('#cls-tag').append($mediumTag);
-	$(document.body).trigger('loaded-medium-tag');
-    });
-    
+  $('.mcls-btn').click(function(e) {
+
+    $('.mcls-btn').removeClass("g-color-primary");
+    $('.mcls-btn').addClass("g-color-main");
+    $('.scls-btn').removeClass("g-color-primary");
+    $('.scls-btn').addClass("g-color-main");
+
+    pageNo = 1; // 페이지 초기화
+    tbody.html(''); // 스터디 목록 초기화
+    clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
+    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+
+    $(e.target).removeClass("g-color-main");
+    $(e.target).addClass("g-color-primary");
+
+    // 빵부스러기
+
+    $('#large-tag i').remove()
+    $('#small-tag').remove();
+    $('#medium-tag').remove();
+    $('#large-tag a').attr('href', '#');
+    $('#large-tag a').addClass('g-color-primary--hover');
+    $('#large-tag').append("<i class='fa fa-angle-right g-ml-7'></i>");
+    clsName = $(e.target).text();
+    var $mediumTag = 
+      $('<li class="list-inline-item g-mr-7" id="medium-tag"><a class="u-link-v5 g-color-gray-dark-v1" data-no="'+ clsNo +'">' 
+              +clsName+'</a></li>');
+    $('#cls-tag').append($mediumTag);
+    $(document.body).trigger('loaded-medium-tag');
+  });
+
 });
 
 //카테고리 하위 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-smalltitle', () => {
-    $('.scls-btn').click(function(e) {
-	e.preventDefault();
-	pageNo = 1;
-	tbody.html('');
-	clsNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-	
-	// 빵부스러기
-	$('#small-tag').remove();
-	$('#medium-tag > button').prop('disabled', false);
-	clsName = $(e.target).text();
-	var $smallTag = 
-	    $('<li class="breadcrumb-item active" id="small-tag"><button class="btn btn-link" disabled>' + clsName+ '</button></li>');
-	$('#cls-tag').append($smallTag);
-    });
+  $('.scls-btn').click(function(e) {
+
+    $('.scls-btn').removeClass("g-color-primary");
+    $('.scls-btn').addClass("g-color-main");
+    $(e.target).removeClass("g-color-main");
+    $(e.target).addClass("g-color-primary");
+
+    e.preventDefault();
+    pageNo = 1;
+    tbody.html('');
+    clsNo = $(e.target).attr('data-no');
+    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+
+    // 빵부스러기
+    $('#medium-tag i').remove();
+    $('#small-tag').remove();
+    $('#medium-tag a').attr('href', '#');
+    $('#medium-tag a').addClass('g-color-primary--hover');
+    $('#medium-tag').append("<i class='fa fa-angle-right g-ml-7'></i>");
+    clsName = $(e.target).text();
+    var $smallTag = 
+      $('<li class="list-inline-item g-color-gray-dark-v1" id="small-tag"><span >'+clsName +'</span></li>');
+    $('#cls-tag').append($smallTag);
+  });
 });
 
 //필터 - 지역 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-largeAddress', () => {
-    $('.ladr-btn').click(function(e) {
-	e.preventDefault();
-	pageNo = 1;
-	tbody.html('');
-	$('.mediumAddress').html(''); // 지역 중분류 목록 초기화
-	$('.smallAddress').html(''); // 지역 소분류 목록 초기화
-	$('#mediumAddressButton').html('시군구'); // 지역 중분류 이름 초기화
-	$('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
-	$('#largeAddressButton').text($(e.target).text()); // 지역 대분류 버튼 이름 변경
-	addressNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-	loadAddress(addressNo);
-    });
-});
+  $('.ladr-btn').click(function(e) {
 
-$(document.body).bind('loaded-mediumAddress', () => {
-    $('.madr-btn').click(function(e) {
-	e.preventDefault();
-	pageNo = 1;
-	tbody.html('');
-	$('.smallAddress').html(''); // 지역 소분류 목록 초기화
-	$('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
-	$('#mediumAddressButton').text($(e.target).text()); // 지역 중분류 버튼 이름 변경
-	addressNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-	loadAddress(addressNo);
-    });
-});
-
-$(document.body).bind('loaded-smallAddress', () => {
-    $('.sadr-btn').click(function(e) {
-	e.preventDefault();
-	pageNo = 1;
-	tbody.html('');
-	$('#smallAddressButton').text($(e.target).text()); // 지역 소분류 버튼 이름 변경
-	addressNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-    });
-});
-
-//카테고리 breadcrumb 
-$('#large-tag > button').click(function(e) {
     e.preventDefault();
     pageNo = 1;
     tbody.html('');
-    clsNo = largeClsNo;
+    $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
+    $('.smallAddress').html(''); // 지역 소분류 목록 초기화
+    $('#mediumAddressButton').html('시군구<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 중분류 이름 초기화
+    $('#mediumAddressButton').removeClass('g-color-primary');
+    $('#mediumAddressButton').addClass('g-color-main');
+    $('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
+    $('#smallAddressButton').removeClass('g-color-primary');
+    $('#smallAddressButton').addClass('g-color-main');
+    $('#largeAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 대분류 버튼 이름 변경
+    $('#largeAddressButton').removeClass('g-color-main');
+    $('#largeAddressButton').addClass('g-color-primary');
+    addressNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-    $('#small-tag').remove();
-    $('#medium-tag').remove();
-    $('#large-tag > button').prop('disabled', true);
+    loadAddress(addressNo);
+  });
+});
+
+$(document.body).bind('loaded-mediumAddress', () => {
+  $('.madr-btn').click(function(e) {
+    e.preventDefault();
+    pageNo = 1;
+    tbody.html('');
+    $('.smallAddress').html(''); // 지역 소분류 목록 초기화
+    $('#smallAddressButton').html('동읍면<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 이름 초기화
+    $('#smallAddressButton').removeClass('g-color-primary');
+    $('#smallAddressButton').addClass('g-color-main');
+    $('#mediumAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 중분류 버튼 이름 변경
+    $('#mediumAddressButton').removeClass('g-color-main');
+    $('#mediumAddressButton').addClass('g-color-primary');
+    addressNo = $(e.target).attr('data-no');
+    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    loadAddress(addressNo);
+  });
+});
+
+$(document.body).bind('loaded-smallAddress', () => {
+  $('.sadr-btn').click(function(e) {
+    e.preventDefault();
+    pageNo = 1;
+    tbody.html('');
+    $('#smallAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 버튼 이름 변경
+    $('#smallAddressButton').removeClass('g-color-main');
+    $('#smallAddressButton').addClass('g-color-primary');
+    addressNo = $(e.target).attr('data-no');
+    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  });
+});
+
+//카테고리 breadcrumb 
+$('#large-tag').click(function(e) {
+
+  $('#accordion-mcls .collapse').removeClass('show');
+  $('#large-tag i').remove();
+  $('#accordion-mcls .u-accordion__header a').removeClass('g-color-primary');
+  $('#accordion-mcls .u-accordion__header a').addClass('g-color-main');
+  e.preventDefault();
+  pageNo = 1;
+  tbody.html('');
+  clsNo = largeClsNo;
+  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  $('#small-tag').remove();
+  $('#medium-tag').remove();
+  $('#large-tag a').removeClass('g-color-primary--hover');
+  $('#large-tag a').removeAttr('href');
 });
 
 $(document.body).bind('loaded-medium-tag', () => {
-    $('#medium-tag > button').click(function(e) {
-	e.preventDefault();
-	pageNo = 1;
-	tbody.html('');
-	clsNo = $(e.target).attr('data-no');
-	loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-	$('#small-tag').remove();
-	$('#medium-tag > button').prop('disabled', true);
-    });
+  $('#medium-tag').click(function(e) {
+    $('#medium-tag i').remove();
+    $('.scls-btn').removeClass('g-color-primary');
+    $('.scls-btn').addClass("g-color-main");
+    e.preventDefault();
+    pageNo = 1;
+    tbody.html('');
+    clsNo = $(e.target).attr('data-no');
+    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    $('#small-tag').remove();
+    $('#medium-tag a').removeClass('g-color-primary--hover');
+    $('#medium-tag a').removeAttr('href');
+  });
+});
+//새로고침 아이콘
+$('#clearAddr').hover(function(e){
+  $(e.target).addClass('fa-spin');
+}, function(e){
+  $(e.target).removeClass('fa-spin');
+}
+);
+$('#clearDay').hover(function(e){
+  $(e.target).addClass('fa-spin');
+}, function(e){
+  $(e.target).removeClass('fa-spin');
+}
+);
+//주소 새로고침
+$('#clearAddr').click(function(e){
+  $('#accordion-addr .collapse').removeClass('show');
+  
+  $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
+  $('.smallAddress').html(''); // 지역 소분류 목록 초기화
+  $('#largeAddressButton').html('시도<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>');
+  $('#largeAddressButton').removeClass('g-color-primary');
+  $('#largeAddressButton').addClass('g-color-main');
+  $('#mediumAddressButton').html('시군구'); // 지역 중분류 이름 초기화
+  $('#mediumAddressButton').removeClass('g-color-primary');
+  $('#mediumAddressButton').addClass('g-color-main');
+  $('#smallAddressButton').html('동읍면'); // 지역 소분류 이름 초기화
+  $('#smallAddressButton').removeClass('g-color-primary');
+  $('#smallAddressButton').addClass('g-color-main');
+  pageNo = 1;
+  tbody.html('');
+  addressNo = undefined;
+  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+});
+
+//요일 새로고침
+$('#clearDay').click(function(e){
+  
+  $('.day-checkbox input').prop('checked',false);
+  pageNo = 1;
+  tbody.html('');
+  dayNo = undefined;
+  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
 //평점 필터
-$('#rateRange').change(function() {
-    $('#rangeText').text($('#rateRange').val());
+$('#rateRange').on('DOMSubtreeModified', function() {
+  if($('#rateRange').html().length >= 1){
+    console.log($('#rateRange').html());
     pageNo = 1;
     tbody.html('');
-    rateValue = $('#rateRange').val();
+    rateValue = $('#rateRange').html();
+    $.ajaxSetup({ async:false });
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    $.ajaxSetup({ async:true });
+  }
 });
 
 //검색 필터
 $('#search-btn').click((e) => {
-    pageNo = 1;
-    keyword = $("#study-search").val();
-    window.location.href = './search.html?keyword=' + keyword;
+  pageNo = 1;
+  keyword = $("#study-search").val();
+  window.location.href = './search.html?keyword=' + keyword;
 });
 
 
@@ -275,14 +397,14 @@ $('#search-btn').click((e) => {
 $('.day-checkbox input').change(function(e) {
 
   var sum = 0;
-  
+
   for(var a of dayCheckList){
     if($(a).prop("checked")){
       sum += parseInt($(a).val());
     }
   }
   dayNo = sum;
-  
+
   pageNo = 1; // 페이지 초기화
   tbody.html(''); // 스터디 목록 초기화
 
@@ -292,29 +414,29 @@ $('.day-checkbox input').change(function(e) {
 
 //add-btn URI인코딩 방식으로 보냈음
 $('#add-btn').click(function() {
-    jQuery.ajax({
-	url:"../../app/json/study/add",
-	type:"POST",
-	data:  "name=" + encodeURIComponent($("#name").val()) +
-	"&cls=" + encodeURIComponent($("#cls").val()) +  
-	"&address=" + encodeURIComponent($("#address").val()) +
-	"&goal=" + encodeURIComponent($("#goal").val()) +
-	"&photo=" + encodeURIComponent($("#photo").val()) +
-	"&day=" + encodeURIComponent($("#day").val()) +
-	"&personnel=" + encodeURIComponent($("#personnel").val()) +
-	"&startDate=" + encodeURIComponent($("#startDate").val()) +
-	"&endDate=" + encodeURIComponent($("#endDate").val()) +
-	"&contents=" + encodeURIComponent($("#contents").val()),
-	contentType: "application/x-www-form-urlencoded",
-	success: function(data) {
-	    if (data.status == 'success') {
-		alert("저장되었습니다.");
-		location.href = 'index.html';
-	    } else {
-		alert("잠시 후에 시도해주세요.");
-	    }
-	}
-    });
+  jQuery.ajax({
+    url:"../../app/json/study/add",
+    type:"POST",
+    data:  "name=" + encodeURIComponent($("#name").val()) +
+    "&cls=" + encodeURIComponent($("#cls").val()) +  
+    "&address=" + encodeURIComponent($("#address").val()) +
+    "&goal=" + encodeURIComponent($("#goal").val()) +
+    "&photo=" + encodeURIComponent($("#photo").val()) +
+    "&day=" + encodeURIComponent($("#day").val()) +
+    "&personnel=" + encodeURIComponent($("#personnel").val()) +
+    "&startDate=" + encodeURIComponent($("#startDate").val()) +
+    "&endDate=" + encodeURIComponent($("#endDate").val()) +
+    "&contents=" + encodeURIComponent($("#contents").val()),
+    contentType: "application/x-www-form-urlencoded",
+    success: function(data) {
+      if (data.status == 'success') {
+        alert("저장되었습니다.");
+        location.href = 'index.html';
+      } else {
+        alert("잠시 후에 시도해주세요.");
+      }
+    }
+  });
 });
 
 

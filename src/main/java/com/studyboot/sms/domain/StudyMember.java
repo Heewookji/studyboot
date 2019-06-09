@@ -9,6 +9,8 @@ public class StudyMember extends Member {
   private int studyNo;
   private int memberNo;
   private int endNo;
+  
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date joinDate;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
@@ -16,13 +18,17 @@ public class StudyMember extends Member {
   private boolean leader;
   private double attendance;
   private int upload;
+  
+  private String studyName;
   private Member member;
+  
   
   @Override
   public String toString() {
     return "StudyMember [studyNo=" + studyNo + ", memberNo=" + memberNo + ", endNo=" + endNo
         + ", joinDate=" + joinDate + ", endDate=" + endDate + ", leader=" + leader + ", attendance="
-        + attendance + ", upload=" + upload + ", member=" + member + "]";
+        + attendance + ", upload=" + upload + ", studyName=" + studyName + ", member=" + member
+        + "]";
   }
   
   public int getStudyNo() {
@@ -72,6 +78,12 @@ public class StudyMember extends Member {
   }
   public void setUpload(int upload) {
     this.upload = upload;
+  }
+  public String getStudyName() {
+    return studyName;
+  }
+  public void setStudyName(String studyName) {
+    this.studyName = studyName;
   }
   public Member getMember() {
     return member;

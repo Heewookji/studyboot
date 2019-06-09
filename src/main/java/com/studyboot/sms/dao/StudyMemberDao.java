@@ -20,5 +20,10 @@ public interface StudyMemberDao {
   int countAll();
   List<Integer> findStudyNoByMemberNo(int no);
   boolean findStudyMemberLeaderByMap(Map<String, Object> map);
+<<<<<<< HEAD
   StudyMember findMyStudyByNo(Map<String, Object> map);
+=======
+  
+  List<StudyMember> findRateInfoByMemberId(int no);
+>>>>>>> e9ddbeaaac532c19a22d2a1fc6c5b498c8b64445
 }

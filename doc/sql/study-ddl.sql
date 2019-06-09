@@ -97,6 +97,12 @@ DROP TABLE IF EXISTS sms_member_cls RESTRICT;
 -- 탈퇴 회원 정보
 DROP TABLE IF EXISTS sms_member_retire RESTRICT;
 
+-- 새 테이블
+DROP TABLE IF EXISTS TABLE RESTRICT;
+
+-- 회원 평점 기록
+DROP TABLE IF EXISTS sms_member_rate_log RESTRICT;
+
 -- 회원
 CREATE TABLE sms_member (
   member_id INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -742,6 +748,32 @@ ALTER TABLE sms_member_retire
       member_id  -- 회원번호
     );
 
+-- 새 테이블
+CREATE TABLE TABLE (
+)
+COMMENT '새 테이블';
+
+-- 회원 평점 기록
+CREATE TABLE sms_member_rate_log (
+  rate_log_id INTEGER NOT NULL COMMENT '회원 평점 기록 번호', -- 회원 평점 기록 번호
+  member_id   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  rate        DOUBLE  NOT NULL COMMENT '평점', -- 평점
+  update_dt   DATE    NOT NULL DEFAULT current_timestamp() COMMENT '갱신일' -- 갱신일
+)
+COMMENT '회원 평점 기록';
+
+-- 회원 평점 기록
+ALTER TABLE sms_member_rate_log
+  ADD CONSTRAINT PK_sms_member_rate_log -- 회원 평점 기록 기본키
+    PRIMARY KEY (
+      rate_log_id -- 회원 평점 기록 번호
+    );
+
+-- 회원 평점 기록 유니크 인덱스
+CREATE UNIQUE INDEX UIX_sms_member_rate_log
+  ON sms_member_rate_log ( -- 회원 평점 기록
+  );
+
 -- 스터디일정
 ALTER TABLE sms_std_schdl
   ADD CONSTRAINT FK_sms_std_TO_sms_std_schdl -- 스터디 -> 스터디일정
@@ -1160,4 +1192,14 @@ ALTER TABLE sms_member_retire
     REFERENCES sms_std_member ( -- 스터디회원
       std_id,    -- 스터디번호
       member_id  -- 회원번호
+    );
+
+-- 회원 평점 기록
+ALTER TABLE sms_member_rate_log
+  ADD CONSTRAINT FK_sms_member_TO_sms_member_rate_log -- 회원 -> 회원 평점 기록
+    FOREIGN KEY (
+      member_id -- 회원번호
+    )
+    REFERENCES sms_member ( -- 회원
+      member_id -- 회원번호
     );

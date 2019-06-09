@@ -78,8 +78,8 @@ public class StudyController {
       @RequestParam String dayNo) {
     
     // 페이지 사이즈
-    if (pageSize < 3 || pageSize > 8) {
-      pageSize = 3;
+    if (pageSize < 4) {
+      pageSize = 4;
     }
 
     if (addressNo.equals("undefined")) {
@@ -157,8 +157,8 @@ public class StudyController {
       @RequestParam String dayNo) {
 
     // 페이지 사이즈
-    if (pageSize < 3 || pageSize > 8) {
-      pageSize = 3;
+    if (pageSize < 4) {
+      pageSize = 4;
     }
 
     if (addressNo.equals("undefined")) {

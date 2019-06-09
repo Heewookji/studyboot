@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
@@ -54,3 +55,74 @@
 
 
 
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studyboot.sms.dao.RateDao">
+  
+  <!-- sms_member_rate_info 테이블 -->
+  <resultMap type="rate" id="rateMap">
+    <id column="member_rate_info_id" property="memberRateNo" />
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="no" />
+    <id column="confirm_member_id" property="confirmNo" />
+    <result column="rate" property="rate" />
+    <result column="rate_dt" property="rateDate" />
+  </resultMap>
+
+  <!-- sms_member_rate_log 테이블 -->
+  <resultMap type="rateLog" id="rateLogMap">
+    <id column="rate_log_id" property="rateLogNo"/>
+    <id column="member_id" property="memberNo"/>
+    <result column="rate" property="rate"/>
+    <result column="update_dt" property="updateDate"/>
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="rateMap" parameterType="map">
+    select * from sms_member_rate_info
+    where std_id = #{studyNo} and member_id = #{no}
+  </select>
+
+  <insert id="evaluationAdd" parameterType="map">
+    insert into sms_member_rate_info(
+      std_id,
+      member_id,
+      confirm_member_id,
+      rate,
+      rate_dt)
+    values(
+      #{studyNo},
+      #{memberNo},
+      #{confirmMemberId},
+      #{rate},
+      #{rateDate})
+  </insert>
+
+  
+  <!-- 평점 업데이트 기록을 가져온다. -->
+  <select id="findRateLog" resultMap="rateLogMap" parameterType="int">
+    select
+      *
+    from
+      sms_member_rate_log
+    where
+      member_id = #{value}
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+>>>>>>> e9ddbeaaac532c19a22d2a1fc6c5b498c8b64445
