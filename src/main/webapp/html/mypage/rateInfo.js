@@ -4,7 +4,7 @@ rateDataset,
 atnDataset,
 now = new Date(),
 year = now.getFullYear(),
-month = now.getMonth();
+month = 3;
 
 
 $( document ).ready(function() {
@@ -21,24 +21,41 @@ $(document.body).bind('loaded-rateInfo', () => {
     
     console.log(data);
     
+    $('#rate-profilePhoto')
+      .attr('src', '/studyboot/upload/images/member/' + data.rateInfo[0].member.photo);
+    
     // 평점 데이터
     var rateDataList = [0, 0, 0, 0, 0];
     // 출석률 데이터
     var atnDataList = [0, 0, 0, 0, 0];
-    var i = month - 4;
     var dataIndex = 0; // 데이터가 들어갈 배열의 인덱스
+    var i = month - 4;
     
     // 현재 날짜의 월을 기준으로 반복문 돌림 ex) 현재 6월 -> 2월 ~ 6월 까지
     for (i; i <= month; i++) {
       
-      var month2 = i + 1;
+      // 날짜를 비교해줄 변수 선언
+      var year2;
+      var month2;
+      
+      // month가 음수라면 작년 ex) 2018-12
+      if (i < 0) {
+        year2 = year - 1;
+        month2 = 13 + i;
+      } else {
+        year2 = year;
+        month2 = i + 1;
+      }
+      
       if ((month2 + '').length < 2) { // 2자리가 아니면 0을 붙여준다.
         month2 = '0' + month2;  // ex) 02 ~ 06
       }
       
       // 평점 기록에서 데이터 뽑아내기
       data.rateLog.forEach(function(item) {
-        if (month2 == item.updateDate.split('-')[1]) { // 업데이트 날짜의 월을 비교
+        if (year2 == item.updateDate.split('-')[0] && // 업데이트 날짜의 년을 비교
+             month2 == item.updateDate.split('-')[1]) { // 업데이트 날짜의 월을 비교
+          
           rateDataList.splice(dataIndex, 1, item.rate); // 순서대로 채운다.
         }
       });
@@ -49,7 +66,10 @@ $(document.body).bind('loaded-rateInfo', () => {
       
       // 멤버 평가 정보(종료된 스터디)에서 출석률 뽑아내기
       data.rateInfo.forEach(function(item) {
-        if (item.endDate != null && month2 == item.endDate.split('-')[1]) {
+        if (item.endDate != null && // 종료 날짜가 null이 아닌 값만 사용
+             year2 == item.endDate.split('-')[0] && // 종료 날짜의 년을 비교
+             month2 == item.endDate.split('-')[1]) { // 종료 날짜의 월을 비교
+          
           atnPct += item.attendance;
           count++;
         }
@@ -157,6 +177,9 @@ $(document.body).bind('loaded-rateData', () => {
           }]
       },
       options: {
+        legend: {
+          display: false
+        }
       }
   });
   
