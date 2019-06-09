@@ -30,6 +30,13 @@ $('#retire-request').click(() => {
   
   if (confirm("스터디에 탈퇴 하시겠습니까?")) {
     $('#retire-modal').click();
+    
+    $(evaluationMemberList).each(function( i, element ) {
+    	//$("input:radio[id='rating']:radio[value='VALUE']").attr("checked",true);
+    	$('#star3' + evaluationMemberList[i].member.nickName).click();
+    	$('#ratingForm' + evaluationMemberList[i].member.nickName).attr("data-value", "3");
+    });
+  
   }
 });
 
@@ -37,7 +44,7 @@ $(document.body).bind('loaded-retireform', () => {
 
   $(evaluationMemberList).each(function( i, element ) {
 
-    $('#star05' + evaluationMemberList[i].member.nickName).click(() => {
+	$('#star05' + evaluationMemberList[i].member.nickName).click(() => {
       $('#ratingForm' + evaluationMemberList[i].member.nickName).attr("data-value", "0.5");
     });
 

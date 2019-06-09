@@ -19,4 +19,10 @@ public class StudyRetireServiceImpl implements StudyRetireService {
 
     return rateDao.evaluationAdd(evaluationMap);
   }
+  
+  @Override
+  public int rateRequire(Map<String, Object> rateRequireMap) {
+    
+    return rateDao.rateRequireUpdate(rateRequireMap);
+  }
 }

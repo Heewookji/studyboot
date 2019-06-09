@@ -73,6 +73,18 @@
       member_id = #{loginUser} and std_id= #{studyNo}
   </select>
   
+  <!-- 해당 스터디 맴버인지 판단 -->
+  <select id="findMyStudyByNo" resultMap="studyMemberMap" parameterType="int">
+    select 
+      *
+    from
+      sms_std_member
+    where 
+      std_id = #{studyNo} and member_id = #{memberNo} 
+  </select>
+  
+  
+  <!-- 스터디 탈퇴  -->
   <update id="attendUpdate" parameterType="map">
     update 
       sms_std_member

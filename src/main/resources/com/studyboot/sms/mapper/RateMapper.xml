@@ -34,6 +34,14 @@
       #{rate},
       #{rateDate})
   </insert>
+  
+  <update id="rateRequireUpdate" parameterType="map">
+    update 
+      sms_member_retire 
+    set 
+      rate_require = true 
+    where std_id = #{studyNo} and member_id= #{memberNo}
+  </update>
 
 </mapper>
 

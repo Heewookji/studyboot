@@ -11,4 +11,5 @@ public interface StudyMemberService {
   // 스터디 장인지 판단하는 Service , 코드 재활용을 위해 파라미터값 Map으로 해놓음
   boolean findStudyMemberLeader(Map<String, Object> map);
   int attendUpdate(Map<String, Object> map);
+  StudyMember findMyStudyByNo(Map<String, Object> map);
 }

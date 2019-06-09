@@ -53,6 +53,12 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return studyMemberDao.attendUpdate(map);
   }
   
+  @Override
+  public StudyMember findMyStudyByNo(Map<String, Object> map) {
+
+    return studyMemberDao.findMyStudyByNo(map);
+  }
+  
 }
 
 

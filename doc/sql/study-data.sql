@@ -770,6 +770,11 @@ insert into sms_end_state_cls(end_state_cls_id, name) values(1, "완료");
 insert into sms_end_state_cls(end_state_cls_id, name) values(2, "탈퇴");
 insert into sms_end_state_cls(end_state_cls_id, name) values(3, "추방");
 
-
-
+-- 탈퇴 회원 정보 테이블 샘플 데이터 (스터디 가입시 입력해야 됨)
+insert into sms_member_retire(std_id, member_id, rate_require) values(100, 2, false);
+insert into sms_member_retire(std_id, member_id, rate_require) values(100, 3, false);
+insert into sms_member_retire(std_id, member_id, rate_require) values(100, 4, false);
+insert into sms_member_retire(std_id, member_id, rate_require) values(100, 5, false);
+insert into sms_member_retire(std_id, member_id, rate_require) values(100, 6, false);
+insert into sms_member_retire(std_id, member_id, rate_require) values(100, 7, false);
 
