@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.AppliedStudy;
+import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.RateLog;
 import com.studyboot.sms.domain.Study;
@@ -201,7 +202,7 @@ public class MemberController {
     return content;
   }
   
-  // 회원의 스터디 목록
+  // 회원의 평가 정보
   @GetMapping("rateinfo")
   public Object rateinfo(HttpSession session) {
 
@@ -214,9 +215,6 @@ public class MemberController {
       List<StudyMember> rateInfo = studyMemberService.rateInfo(loginUser.getNo());
       List<RateLog> rateLog = rateService.list(loginUser.getNo());
       
-      for (RateLog r : rateLog) {
-        System.out.println(r.getUpdateDate());
-      }
       if(rateInfo != null) {
         content.put("rateInfo", rateInfo);
       }
@@ -233,12 +231,37 @@ public class MemberController {
     return content;
   }
   
+  @GetMapping("history")
+  public Object history(HttpSession session) {
+
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    
+    HashMap<String,Object> content = new HashMap<>();
+
+    if (loginUser != null) {
+      
+      List<History> history = studyMemberService.userHistory(loginUser.getNo());
+      
+      if(history != null) {
+        content.put("history", history);
+      }
+      
+      content.put("status", "success");
+      
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
+  }
+  
   // 매달 1일 마다 평가 기록을 자동으로 업데이트 한다.
   @Scheduled(cron = "0 0 0 1 * *")
   public void rateLogSchedule() {
     System.out.println("schedule start!!!");
+    int count = rateService.addRateLog();
     
-    if (rateService.addRateLog() == 1) {
+    if (count > 0) {
+      System.out.println(count);
       System.out.println("평가 기록 업데이트 완료!");
     } else {
       System.out.println("평가 기록 업데이트 실패!");

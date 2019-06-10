@@ -51,11 +51,12 @@ public class RateServiceImpl implements RateService {
   @Override
   public int addRateLog() {
     
+    // 각 회원들의 현재 평점을 가져온다.
     List<Member> rateList = memberDao.findAllRate();
     int count = 0;
     
     for (Member m : rateList) {
-      count = rateDao.insertRateLog(m);
+      count += rateDao.insertRateLog(m); // 각 회원들의 평점을 db에 저장한다.
     }
     
     return count;

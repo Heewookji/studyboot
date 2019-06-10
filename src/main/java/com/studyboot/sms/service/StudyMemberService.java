@@ -2,6 +2,7 @@ package com.studyboot.sms.service;
 
 import java.util.List;
 import java.util.Map;
+import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyMember;
 
@@ -13,5 +14,6 @@ public interface StudyMemberService {
   int attendUpdate(Map<String, Object> map);
   StudyMember findMyStudyByNo(Map<String, Object> map);
   List<StudyMember> rateInfo(int no);
+  List<History> userHistory(int no);
 }
 
