@@ -21,7 +21,6 @@
     <id column="std_atnd_id" property="scheduleNo" />
     <id column="std_id" property="studyNo" />
     <id column="member_id" property="memberNo" />
-    <result column="nick_name" property="nickName" />
   </resultMap>
   
   <insert id="insert" parameterType="schedule">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.RateRequire;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.StudyMemberService;
@@ -47,46 +48,44 @@ public class StudyRetireController {
     studyUserMap.put("studyNo", studyNo);
     studyUserMap.put("memberNo", loginUser.getNo());
     StudyMember studyMember = studyMemberService.findMyStudyByNo(studyUserMap);
-    
+
     if (studyMember == null) { // 중복 탈퇴 못하게 막음
       content.put("status", "스터디 멤버가 아닙니다.");
       return content;
-  
+
     } else if (studyMember.getEndNo() == 1 || 
         studyMember.getEndNo() == 2 || studyMember.getEndNo() == 3) { // 추방, 탈퇴 유저가 널이 아니면
-      
+
       content.put("status", "스터디 멤버가 아닙니다.");
       return content;
     }
-    
+
 
     // 닉네임을 멤버넘버로 바꾸는 코드
     List memberNo =  memberService.findMemberNoByNickNameList(nickNames);
 
     HashMap<String,Object> evaluationMap = new HashMap<>(); // 평가 맵
-    HashMap<String,Object> attendMap = new HashMap<>(); // 탈퇴 탭
     HashMap<String,Object> rateRequireMap = new HashMap<>(); // 탈퇴자 평가 여부 맵
-    
-    
+
+    HashMap<String,Object> attendMap = new HashMap<>(); // 탈퇴 탭
     attendMap.put("endNo", 2);
     attendMap.put("endDate", format.format(new Date()));
     attendMap.put("studyNo", studyNo);
     attendMap.put("memberNo", loginUser.getNo());
 
-    
+
     try {
       // 스터디 탈퇴
       studyMemberService.attendUpdate(attendMap);
 
       // 남은 스터디 원 조회
-      List<StudyMember> studyMemberList = studyMemberService.findStudyMember(studyNo);
-      // 스터디 원 들이 탈퇴자를 평가 할 수 있게 sms_member_retire 테이블 true로 바꿈
-      for(int i = 0; i < studyMemberList.size(); i++ ) {
+      //List<StudyMember> studyMemberList = studyMemberService.findStudyMember(studyNo);
 
+      // 스터디 원 들이 탈퇴자를 평가 할 수 있게 sms_member_retire 테이블 true로 입력
         rateRequireMap.put("studyNo", studyNo);
-        rateRequireMap.put("memberNo", studyMemberList.get(i).getMemberNo());
+        rateRequireMap.put("memberNo", loginUser.getNo());
+        rateRequireMap.put("rateRequire", true);
         studyRetireService.rateRequire(rateRequireMap);
-      }
 
     } catch (Exception e) {
       content.put("status", "스터디 탈퇴 중 에러가 발생 하였습니다.");
@@ -112,4 +111,27 @@ public class StudyRetireController {
 
     return content;
   }
+
+  
+  @GetMapping("retireTrueOrFalse")
+  public Object retireYesOrNo(int studyNo, HttpSession session) {
+
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> rateRequireMap = new HashMap<>();
+    try {
+      
+      rateRequireMap.put("studyNo", studyNo);
+      rateRequireMap.put("rateRequire", true);
+      RateRequire rateRequire = studyRetireService.retireTrueOrFalse(rateRequireMap);
+      System.out.println("탈퇴 유저가 있습니까? : " + rateRequire.getRateRequire());
+      
+      content.put("status", rateRequire.getRateRequire());
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
+
 }

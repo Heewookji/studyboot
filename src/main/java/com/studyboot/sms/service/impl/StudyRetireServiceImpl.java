@@ -3,15 +3,19 @@ package com.studyboot.sms.service.impl;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.RateDao;
+import com.studyboot.sms.dao.RateRequireDao;
+import com.studyboot.sms.domain.RateRequire;
 import com.studyboot.sms.service.StudyRetireService;
 
 @Service
 public class StudyRetireServiceImpl implements StudyRetireService {
 
   RateDao rateDao;
+  RateRequireDao rateRequireDao;
   
-  public StudyRetireServiceImpl(RateDao rateDao) {
+  public StudyRetireServiceImpl(RateDao rateDao, RateRequireDao rateRequireDao) {
     this.rateDao = rateDao;
+    this.rateRequireDao = rateRequireDao;
   }
   
   @Override
@@ -23,6 +27,13 @@ public class StudyRetireServiceImpl implements StudyRetireService {
   @Override
   public int rateRequire(Map<String, Object> rateRequireMap) {
     
-    return rateDao.rateRequireUpdate(rateRequireMap);
+    return rateRequireDao.rateRequire(rateRequireMap);
   }
+  
+  @Override
+  public RateRequire retireTrueOrFalse(Map<String, Object> map) {
+
+    return rateRequireDao.retireTrueOrFalse(map);
+  }
+  
 }

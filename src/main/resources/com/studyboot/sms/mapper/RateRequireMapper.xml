@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studyboot.sms.dao.RateRequireDao">
+
+ <!-- sms_member_rate_info 테이블 -->
+  <resultMap type="RateRequire" id="rateRequireMap">
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="memberNo" />
+    <result column="rate_require" property="rateRequire" />
+  </resultMap>
+
+  <insert id="rateRequire" parameterType="map">
+    insert into  sms_member_retire 
+      values(
+      #{studyNo},
+      #{memberNo},
+      #{rateRequire}
+      )
+  </insert>
+  
+  <select id="retireTrueOrFalse"  resultMap="rateRequireMap" parameterType="map">
+    select 
+      *
+    from
+     sms_member_retire
+    where std_id = #{studyNo} and rate_require = #{rateRequire}
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
