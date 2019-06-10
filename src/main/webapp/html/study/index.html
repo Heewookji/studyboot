@@ -55,9 +55,9 @@
 <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
 <!-- CSS Customization -->
+<link rel="stylesheet" href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="../../css/common.css">
-<link rel="stylesheet" href="../../css/star-rating-svg.css">
 </head>
 
 <body>
@@ -418,8 +418,9 @@
    </div>
   </div>
  </section>
-
-
+ 
+ <div class="rateit" data-rateit-mode="font" data-rateit-readonly="true"  style="font-size:30px" data-rateit-resetable="false">
+</div>
 
  <!--  footer -->
  <footer id="js-footer"> </footer>
@@ -460,7 +461,7 @@
            href="#">{{name}}</a>
          </h2>
          <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
-<div class="demo jq-stars"></div>{{rate}}
+{{rate}}
         </div>
        </article>
        <!-- End Blog Classic Blocks -->
@@ -528,6 +529,7 @@
  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
  <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+ <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
 
  <!-- JS Implementing Plugins -->
  <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
@@ -570,7 +572,6 @@
 
 
  <!-- JS Custom -->
- <script src="../../js/jquery.star-rating-svg.js"></script>
  <script src="../../Unify/assets/js/custom.js"></script>
  <script src="../header.js"></script>
  <script src="../footer.js"></script>

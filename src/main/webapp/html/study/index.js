@@ -30,80 +30,6 @@ templateSrcSmallAddress = $('#tr-template-sadr').html(),
 trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
 
 
-$(".demo").starRating({
-
-  // the number of stars
-  totalStars: 5,
-
-  // min rating
-  minRating: 0,
-
-  // rate using whole stars
-  useFullStars: false,
-
-  // 'straight' or 'rounded'
-  starShape: 'straight',
-
-  // the color of empty star
-  emptyColor: 'lightgray',
-
-  // star color on hover
-  hoverColor: 'orange',
-
-  // star color on active
-  activeColor: 'gold',
-
-  // star color on rated
-  ratedColor: 'orange',
-
-  // use gradient color
-  useGradient: false,
-
-  // readonly mode
-  readonly: false,
-
-  // auto disable after rate
-  disableAfterRate: false,
-  
-  // when enabled (true), enables compatibility with the base tag in your head section
-  baseUrl: false,
-
-  // gradient color
-  starGradient: {
-    start: '#FEF7CD',
-    end: '#FF9511'
-  },
-
-  // the thickness of the border
-  strokeWidth: 3,
-
-  // the color for the border
-  strokeColor: 'white',
-
-  // Initial rating
-  initialRating: 0,
-
-  // star size
-  starSize: 40,
-
-  // if true, forces rounding the initial rating to the nearest upper half even if the value is closer to the lower (1.1 -> 1.5 rather than 1.1 -> 1.0)
-  forceRoundUp: true,
-
-  // callback
-  callback: function(currentRating){
-    // do something after rating
-  },
-
-  onHover: function(currentRating){
-    // do something after rating
-  },
-  onLeave: function(currentRating){
-    // do something after rating
-  },
-  
-});
-
-
 //JSON 형식의 데이터 목록 가져오기
 function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
@@ -251,6 +177,10 @@ $(document.body).bind('loaded-categorytitle', () => {
   loadSmallTitle(clsNo);
 
   $('.mcls-btn').click(function(e) {
+    
+    
+    $('.rateit').rateit('value', 3.8);
+
     $('.mcls-btn').removeClass("g-color-primary");
     $('.mcls-btn').addClass("g-color-main");
     $('.scls-btn').removeClass("g-color-primary");
