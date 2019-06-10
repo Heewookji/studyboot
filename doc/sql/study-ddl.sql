@@ -82,9 +82,6 @@ DROP TABLE IF EXISTS sms_end_state_cls RESTRICT;
 -- 편의시설
 DROP TABLE IF EXISTS sms_conv RESTRICT;
 
--- 관심분야
-DROP TABLE IF EXISTS sms_intr RESTRICT;
-
 -- 공간휴일
 DROP TABLE IF EXISTS sms_rest_day RESTRICT;
 
@@ -96,9 +93,6 @@ DROP TABLE IF EXISTS sms_member_cls RESTRICT;
 
 -- 탈퇴 회원 정보
 DROP TABLE IF EXISTS sms_member_retire RESTRICT;
-
--- 새 테이블
-DROP TABLE IF EXISTS TABLE RESTRICT;
 
 -- 회원 평점 기록
 DROP TABLE IF EXISTS sms_member_rate_log RESTRICT;
@@ -671,24 +665,6 @@ ALTER TABLE sms_conv
 ALTER TABLE sms_conv
   MODIFY COLUMN conv_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '편의시설번호';
 
--- 관심분야
-CREATE TABLE sms_intr (
-  intr_id     INTEGER NOT NULL COMMENT '관심분야번호', -- 관심분야번호
-  member_id   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  std_cls_lms CHAR(6) NOT NULL COMMENT '관심분야' -- 관심분야
-)
-COMMENT '관심분야';
-
--- 관심분야
-ALTER TABLE sms_intr
-  ADD CONSTRAINT PK_sms_intr -- 관심분야 기본키
-    PRIMARY KEY (
-      intr_id -- 관심분야번호
-    );
-
-ALTER TABLE sms_intr
-  MODIFY COLUMN intr_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '관심분야번호';
-
 -- 공간휴일
 CREATE TABLE sms_rest_day (
   space_id INTEGER NOT NULL COMMENT '공간 번호', -- 공간 번호
@@ -748,11 +724,6 @@ ALTER TABLE sms_member_retire
       member_id  -- 회원번호
     );
 
--- 새 테이블
-CREATE TABLE TABLE (
-)
-COMMENT '새 테이블';
-
 -- 회원 평점 기록
 CREATE TABLE sms_member_rate_log (
   rate_log_id INTEGER NOT NULL COMMENT '회원 평점 기록 번호', -- 회원 평점 기록 번호
@@ -773,6 +744,9 @@ ALTER TABLE sms_member_rate_log
 CREATE UNIQUE INDEX UIX_sms_member_rate_log
   ON sms_member_rate_log ( -- 회원 평점 기록
   );
+
+ALTER TABLE sms_member_rate_log
+  MODIFY COLUMN rate_log_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원 평점 기록 번호';
 
 -- 스터디일정
 ALTER TABLE sms_std_schdl
@@ -1117,16 +1091,6 @@ ALTER TABLE sms_member_rate_info
   ADD CONSTRAINT FK_sms_member_TO_sms_member_rate_info -- 회원 -> 회원 평점 정보
     FOREIGN KEY (
       confirm_member_id -- 평가한 회원 번호
-    )
-    REFERENCES sms_member ( -- 회원
-      member_id -- 회원번호
-    );
-
--- 관심분야
-ALTER TABLE sms_intr
-  ADD CONSTRAINT FK_sms_member_TO_sms_intr -- 회원 -> 관심분야
-    FOREIGN KEY (
-      member_id -- 회원번호
     )
     REFERENCES sms_member ( -- 회원
       member_id -- 회원번호
