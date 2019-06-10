@@ -44,8 +44,16 @@
       #{rate},
       #{rateDate})
   </insert>
+  
+  <update id="rateRequireUpdate" parameterType="map">
+    update 
+      sms_member_retire 
+    set 
+      rate_require = true 
+    where std_id = #{studyNo} and member_id= #{memberNo}
+  </update>
 
-  <!-- 평점 업데이트 기록을 가져온다. -->
+  <!-- 평가 업데이트 기록을 가져온다. -->
   <select id="findRateLog" resultMap="rateLogMap" parameterType="int">
     select
       *
@@ -54,6 +62,19 @@
     where
       member_id = #{value}
   </select>
+  
+  <!-- 평가 기록을 추가 한다. -->
+  <insert id="insertRateLog" parameterType="member">
+    insert into
+    sms_member_rate_log(
+      member_id,
+      rate
+      )
+    values(
+      #{no},
+      #{rate}
+      )
+  </insert>
   
 </mapper>
 

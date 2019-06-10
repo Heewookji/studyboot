@@ -16,11 +16,13 @@
     <result column="schdl_edt" property="end" />
     <result column="memo" property="memo" />
   </resultMap>
+  
 
   <resultMap type="attend" id="attendMap">
     <id column="std_atnd_id" property="scheduleNo" />
     <id column="std_id" property="studyNo" />
     <id column="member_id" property="memberNo" />
+    <result column="nick_name" property="nickName" />
   </resultMap>
   
   <insert id="insert" parameterType="schedule">
@@ -100,18 +102,7 @@
       #{studyNo},
       #{memberNo})
   </insert>
- <!--  
-  <select id="attendTrueFalse" resultMap="attendMap" parameterType="int">
-    select
-      std_atnd_id,
-      std_id,
-      member_id
-    from
-      sms_std_atnd
-    where
-      std_atnd_id = #{value}
-  </select>
- -->
+  
   <select id="attendTrueFalse" resultMap="attendMap" parameterType="int">
     select
       ssa.std_atnd_id,
@@ -127,10 +118,3 @@
   </select>
 
 </mapper>
-<!-- 
-      sms_std_member ssm
-        inner join sms_std_atnd ssa on ssa.member_id = ssm.member_id and ssa.std_id = ssm.std_id
-        inner join sms_member sm on sm.member_id = ssm.member_id
-    where 
-      ssa.std_atnd_id = 4
-         -->

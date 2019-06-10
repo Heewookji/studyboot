@@ -38,7 +38,14 @@
       birth
   </sql>
   
-
+  <select id="findAllRate" resultMap="memberMap">
+    select
+      member_id,
+      rate
+    from
+      sms_member
+  </select>
+  
   <select id="findByKeyword" resultType="int" parameterType="map">
     select member_id from sms_member
    <where>
