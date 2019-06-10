@@ -2,13 +2,14 @@ var param = location.href.split('?')[1],
 pageNo = 1,
 pageSize = 16,
 addressNo,
-clsNo,
+clsNo = [],
 rateValue = 3,
 largeClsNo,
+mediumClsNo,
 clsTitle,
-keyword,
 dayNo,
 dayCheckList = $('.day-checkbox input'),
+keyword,
 tbody = $('#card-div'),
 //card 리스트 출력 - 스터디 목록
 cardTemplateSrc = $('#card-template').html(),
@@ -33,10 +34,11 @@ trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress);
 
 
 
-//JSON 형식의 데이터 목록 가져오기
-function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
-  $.getJSON('../../app/json/study/list?pageNo=' + pageNo
+//JSON 형식의 데이터 목록 가져오기
+function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
+
+  $.getJSON('../../app/json/study/search?pageNo=' + pageNo
           + '&pageSize=' + pageSize
           + '&clsNo=' + clsNo
           + '&addressNo=' + addressNo 
@@ -46,11 +48,11 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
           function(obj) {
 
-
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
-            'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
+            'rateValue=' + rateValue, 'keyword=' + keyword, 'dayNo=' + dayNo);
 
+    // keyword 검색된 스터디 개수 알려준다.(기존 분류제목에)
 
     // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
     // (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
@@ -63,6 +65,10 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     if (pageNo == 0){
       return;
     }
+
+    if(keyword != undefined){
+      $('#clsTitle').html(obj.rowCount + "개의 검색결과");
+    } 
 
     $(cardGenerator(obj)).appendTo(tbody);
 
@@ -131,21 +137,11 @@ function loadAddress(addressNo) {
   });
 };
 
-//페이지를 출력한 후 pageNo 와 clsNo, keyword를 넘겨주고 로딩한다.
+
 if (param) {
-  // 빈 문자열이 들어가는 것을 방지하기 위해. undefined 로 넣어주기 위해 조건문 썻음
-  if(param.split('&')[0].split('=')[1].length != 0){
-    clsNo = param.split('&')[0].split('=')[1];
-  }
-
-  largeClsNo = param.split('&')[0].split('=')[1];
-  clsTitle = param.split('&')[1].split('=')[1];
-  clsTitle = decodeURIComponent(clsTitle);
-
+  keyword = decodeURIComponent(param.split('=')[1]);
   pageNo = 1;
-  $('#clsTitle').html(clsTitle);
-  $('#large-tag a').text(clsTitle);
-  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   loadCategoryTitle(clsNo);
   loadAddress();
 }
@@ -153,7 +149,7 @@ if (param) {
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
 $(window).scroll(function(obj) {
   if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    loadList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    searchList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   }
 });
 
@@ -178,65 +174,42 @@ $(document.body).bind('loaded-list', () => {
 $(document.body).bind('loaded-categorytitle', () => {
 
   loadSmallTitle(clsNo);
-
-  $('.mcls-btn').click(function(e) {
-    $('.mcls-btn').removeClass("g-color-primary");
-    $('.mcls-btn').addClass("g-color-main");
-    $('.scls-btn').removeClass("g-color-primary");
-    $('.scls-btn').addClass("g-color-main");
+  
+  $('.lcls-checkbox input').change(function(e) {
 
     pageNo = 1; // 페이지 초기화
     tbody.html(''); // 스터디 목록 초기화
-    clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 
-    $(e.target).removeClass("g-color-main");
-    $(e.target).addClass("g-color-primary");
-
-    // 빵부스러기
-
-    $('#large-tag i').remove()
-    $('#small-tag').remove();
-    $('#medium-tag').remove();
-    $('#large-tag a').attr('href', '#');
-    $('#large-tag a').addClass('g-color-primary--hover');
-    $('#large-tag').append("<i class='fa fa-angle-right g-ml-7'></i>");
-    clsName = $(e.target).text();
-    var $mediumTag = 
-      $('<li class="list-inline-item g-mr-7" id="medium-tag"><a class="u-link-v5 g-color-gray-dark-v1" data-no="'+ clsNo +'">' 
-              +clsName+'</a></li>');
-    $('#cls-tag').append($mediumTag);
-    $(document.body).trigger('loaded-medium-tag');
+    if($('.lcheck' + $(this).val()).is(":checked")){
+      clsNo.push($(this).val());
+    } else {
+      var index = clsNo.indexOf($(this).val());
+      clsNo.splice(index,1);
+    }
+    console.log(clsNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   });
 
 });
 
 //카테고리 하위 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-smalltitle', () => {
-  $('.scls-btn').click(function(e) {
+  
+  $('.smallTitle input').change(function(e) {
 
-    $('.scls-btn').removeClass("g-color-primary");
-    $('.scls-btn').addClass("g-color-main");
-    $(e.target).removeClass("g-color-main");
-    $(e.target).addClass("g-color-primary");
+    pageNo = 1; // 페이지 초기화
+    tbody.html(''); // 스터디 목록 초기화
 
-    e.preventDefault();
-    pageNo = 1;
-    tbody.html('');
-    clsNo = $(e.target).attr('data-no');
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-
-    // 빵부스러기
-    $('#medium-tag i').remove();
-    $('#small-tag').remove();
-    $('#medium-tag a').attr('href', '#');
-    $('#medium-tag a').addClass('g-color-primary--hover');
-    $('#medium-tag').append("<i class='fa fa-angle-right g-ml-7'></i>");
-    clsName = $(e.target).text();
-    var $smallTag = 
-      $('<li class="list-inline-item g-color-gray-dark-v1" id="small-tag"><span >'+clsName +'</span></li>');
-    $('#cls-tag').append($smallTag);
+    if($('.mcheck' + $(this).val()).is(":checked")){
+      clsNo.push($(this).val());
+    } else {
+      var index = clsNo.indexOf($(this).val());
+      clsNo.splice(index,1);
+    }
+    console.log(clsNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   });
+  
 });
 
 //필터 - 지역 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
@@ -258,7 +231,7 @@ $(document.body).bind('loaded-largeAddress', () => {
     $('#largeAddressButton').removeClass('g-color-main');
     $('#largeAddressButton').addClass('g-color-primary');
     addressNo = $(e.target).attr('data-no');
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     loadAddress(addressNo);
   });
 });
@@ -276,7 +249,7 @@ $(document.body).bind('loaded-mediumAddress', () => {
     $('#mediumAddressButton').removeClass('g-color-main');
     $('#mediumAddressButton').addClass('g-color-primary');
     addressNo = $(e.target).attr('data-no');
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     loadAddress(addressNo);
   });
 });
@@ -290,26 +263,8 @@ $(document.body).bind('loaded-smallAddress', () => {
     $('#smallAddressButton').removeClass('g-color-main');
     $('#smallAddressButton').addClass('g-color-primary');
     addressNo = $(e.target).attr('data-no');
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   });
-});
-
-//카테고리 breadcrumb 
-$('#large-tag').click(function(e) {
-
-  $('#accordion-mcls .collapse').removeClass('show');
-  $('#large-tag i').remove();
-  $('#accordion-mcls .u-accordion__header a').removeClass('g-color-primary');
-  $('#accordion-mcls .u-accordion__header a').addClass('g-color-main');
-  e.preventDefault();
-  pageNo = 1;
-  tbody.html('');
-  clsNo = largeClsNo;
-  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-  $('#small-tag').remove();
-  $('#medium-tag').remove();
-  $('#large-tag a').removeClass('g-color-primary--hover');
-  $('#large-tag a').removeAttr('href');
 });
 
 $(document.body).bind('loaded-medium-tag', () => {
@@ -321,7 +276,7 @@ $(document.body).bind('loaded-medium-tag', () => {
     pageNo = 1;
     tbody.html('');
     clsNo = $(e.target).attr('data-no');
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $('#small-tag').remove();
     $('#medium-tag a').removeClass('g-color-primary--hover');
     $('#medium-tag a').removeAttr('href');
@@ -358,7 +313,7 @@ $('#clearAddr').click(function(e){
   pageNo = 1;
   tbody.html('');
   addressNo = undefined;
-  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
 //요일 새로고침
@@ -368,7 +323,7 @@ $('#clearDay').click(function(e){
   pageNo = 1;
   tbody.html('');
   dayNo = undefined;
-  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
 //평점 필터
@@ -379,7 +334,7 @@ $('#rateRange').on('DOMSubtreeModified', function() {
     tbody.html('');
     rateValue = $('#rateRange').html();
     $.ajaxSetup({ async:false });
-    loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $.ajaxSetup({ async:true });
   }
 });
@@ -407,7 +362,7 @@ $('.day-checkbox input').change(function(e) {
   pageNo = 1; // 페이지 초기화
   tbody.html(''); // 스터디 목록 초기화
 
-  loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
 
