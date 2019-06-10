@@ -8,4 +8,5 @@ public interface RateService {
   
   int updateRate(Map<String, Object> params);
   List<RateLog> list(int no);
+  int addRateLog();
 }

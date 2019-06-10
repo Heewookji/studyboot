@@ -16,6 +16,7 @@ public interface MemberDao {
   int updatePassword(Member member);
   int insert(Member member);
   List<String> findMemberNoByNickNameList(List<String> nickNames);
+  List<Member> findAllRate();
 }
 
 
