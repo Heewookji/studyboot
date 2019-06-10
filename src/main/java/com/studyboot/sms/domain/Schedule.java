@@ -1,7 +1,5 @@
 package com.studyboot.sms.domain;
 
-import java.util.List;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Schedule {

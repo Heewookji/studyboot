@@ -80,7 +80,7 @@
       std_schdl_id = #{value}
   </delete>
   
-  <update id="update" parameterType="study">
+  <update id="update" parameterType="schedule">
     update 
       sms_std_schdl
     set
