@@ -14,7 +14,7 @@ public class StudyBoard implements Cloneable, Serializable {
   private String contents;
   private int cls;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="Asia/Seoul")
   private Date date;
   
   private int viewCount;

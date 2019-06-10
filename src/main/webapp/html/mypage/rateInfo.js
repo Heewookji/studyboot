@@ -4,7 +4,7 @@ rateDataset,
 atnDataset,
 now = new Date(),
 year = now.getFullYear(),
-month = 3;
+month = now.getMonth();
 
 
 $( document ).ready(function() {

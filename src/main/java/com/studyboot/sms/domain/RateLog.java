@@ -9,7 +9,7 @@ public class RateLog {
   private int memberNo;
   private double rate;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
   private Date updateDate;
 
   

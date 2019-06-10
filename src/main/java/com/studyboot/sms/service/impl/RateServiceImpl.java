@@ -47,6 +47,19 @@ public class RateServiceImpl implements RateService {
   public List<RateLog> list(int no) {
     return rateDao.findRateLog(no);
   }
+  
+  @Override
+  public int addRateLog() {
+    
+    List<Member> rateList = memberDao.findAllRate();
+    int count = 0;
+    
+    for (Member m : rateList) {
+      count = rateDao.insertRateLog(m);
+    }
+    
+    return count;
+  }
 }
 
 

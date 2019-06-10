@@ -798,5 +798,8 @@ insert into sms_end_state_cls(end_state_cls_id, name) values(1, "완료");
 insert into sms_end_state_cls(end_state_cls_id, name) values(2, "탈퇴");
 insert into sms_end_state_cls(end_state_cls_id, name) values(3, "추방");
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 93075afe711ad14ee22c6f633e2d0c2db526064b
 

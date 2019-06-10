@@ -14,6 +14,7 @@ public interface MyStudyService {
   List<StudyBoard> ntcList(int no);
   StudyBoard get(int no);
   int add(StudyBoard studyBoard);
+  int update(StudyBoard studyBoard);
   int delete(int no);
   // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 

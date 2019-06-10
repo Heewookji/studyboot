@@ -12,15 +12,25 @@ $.getJSON('../../app/json/MyStudy/leader?no=' + noss,
 $('#add-board').click((e) => {
 
   $("#contents").load("/studyboot/html/mystudy/forms.html", function(){
-    
+
+    $('#update-min-btn').hide();
+
+    $(window).on("beforeunload", function() {
+      if($('#inputHorizontalSuccess').val().length != 0) {
+        return "게시글이 존재합니다. 뒤로가시겠습니까?";
+      } else if($('.note-editable').text().length != 0) {
+        return "게시글이 존재합니다. 뒤로가시겠습니까?";
+      }
+    });
+
     $('#checkboxSuccess').click((e) => {
       if (leader != true){
         alert("스터디장만 공지사항입력이 가능합니다.");
         $("input:checkbox[id='checkboxSuccess']").prop("checked", false);
       }
     });
-    
-    
+
+
     $('#add-min-btn').click((e) => {
       var markup = $('.js-text-editor').summernote('code');
       console.log(markup);

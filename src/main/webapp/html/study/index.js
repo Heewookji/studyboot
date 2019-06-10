@@ -180,7 +180,6 @@ $(document.body).bind('loaded-categorytitle', () => {
   loadSmallTitle(clsNo);
 
   $('.mcls-btn').click(function(e) {
-
     $('.mcls-btn').removeClass("g-color-primary");
     $('.mcls-btn').addClass("g-color-main");
     $('.scls-btn').removeClass("g-color-primary");
