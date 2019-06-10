@@ -120,9 +120,11 @@ public class StudyRetireController {
 
     HashMap<String,Object> content = new HashMap<>();
     HashMap<String,Object> map = new HashMap<>();
+
+    int confirmNo = 0;
+    RateRequire rateRequire = null;
     
     Member loginUser = (Member) session.getAttribute("loginUser");
-    loginUser.getNo();
 
     try {
 
@@ -130,39 +132,66 @@ public class StudyRetireController {
       map.put("rateRequire", true);
       map.put("no", loginUser.getNo()); // 얘랑 128줄 얘네 갖고 평가한 회원 번호 찾기
 
-      // 탈퇴자들의 리스트를 뽑아온다.
-      List<RateRequire> rateRequire = (List<RateRequire>) studyRetireService.retireTrueOrFalse(map);
+      // 모든 스터디원에게 평가받지 못한 탈퇴자들의 리스트를 뽑아온다.
+      List<RateRequire> rateRequireList = (List<RateRequire>) studyRetireService.retireTrueOrFalse(map); //RateRequireMapper
 
-      List<RateRequire> 평가아직안한유저 = new ArrayList<>();
+      List<RateRequire> rateRequirePerson = new ArrayList<>(); // 평가 받지 못한 탈퇴자들 모음
 
-      List<Rate> rate = (List<Rate>) studyRetireService.retireEvaluation(map); // 평가한 사람들 뽑아옴
+      // 로그인한 유저가 해당 스터디의 멤버(탈퇴자들)를 평가한 정보 목록 뽑아옴(회원 평점 정보 테이블)
+      List<Rate> rate = (List<Rate>) studyRetireService.retireEvaluation(map);//RateMapper
 
+      System.out.println(rateRequireList);
       System.out.println(rate);
-      System.out.println(rateRequire);
-      // 탈퇴자 리스트가 있다면 ..
-      if (rateRequire != null) {
+     
+      // 탈퇴자 리스트가 있다면 if문 실행
+      if (rateRequireList.size() > 0) {
+System.out.println("탈퇴자 리스트가 있다면 if문 실행");
 
-        for(int i = 0; i < rateRequire.size(); i++) {
+        if(rate.size() != 0) { // 탈퇴자 중 한명이라도 평가 했을경우 반복문 실행
+System.out.println("탈퇴자 중 한명이라도 평가 했을경우 반복문 실행");
 
-          //studyRetireServiceImpl
-          System.out.println("for문: " + i);
+          for(int i = 0; i < rate.size(); i++) {
+            
+            confirmNo = rate.get(i).getConfirmNo();
+            map.put("confirmNo", confirmNo);
+            System.out.println("confirmNo: " + confirmNo);
+            System.out.println("rate.get(i).getConfirmNo(): " + confirmNo);
+            System.out.println("rateRequire.get(i).getMemberNo(): " + rateRequireList.get(i).getMemberNo());
+    
+            rateRequire = studyRetireService.retireEvaluationWait(map);
+            
+            System.out.println("rateRequire: " + rateRequire.getMemberNo());
+            //studyRetireServiceImpl
+            System.out.println("for문: " + i);
+
+            // 유저가 평가한 회원 번호 == 탈퇴한 회원 번호  ===> 탈퇴한 회원번호를 평가 했을경우 다음 반복문.
+            if (rate.get(i).getConfirmNo() == rateRequire.getMemberNo() && studyNo == rate.get(i).getStudyNo()) {
+              System.out.println("평가한 유저");
+              continue; 
+
+            }
+              System.out.println("평가 못받은  유저 add");
+              rateRequirePerson.add(rateRequireList.get(i));
+
+          } //for
+
+        } else { // inner if // 탈퇴자는 있지만 아무도 평가를 안했을 경우
+
+          for(int i = 0; i < rateRequireList.size(); i++) {
+            
+            rateRequirePerson.add(rateRequireList.get(i));
+            System.out.println("탈퇴자는 잇지만 아무도 평가를 안했어요");
+            System.out.println("평가받지 못한 탈퇴자들 모음집 :" + rateRequirePerson);
+          }
           
-          //5는 평가한 회원 번호 
-          // 평가한 회원 번호 == 탈퇴한 회원 번호  ===> 탈퇴한 회원번호를 평가 했을경우 다음 반복문.
-          if (rate.get(i).getConfirmNo() == rateRequire.get(i).getMemberNo() && studyNo == rateRequire.get(i).getStudyNo()) {
-            System.out.println("평가한 유저");
-            continue; 
+          
+          
+          
+        }
 
-          } else if (rate.get(i).getConfirmNo() == rateRequire.get(i).getMemberNo()) { 
-           System.out.println("평가 안 한 유저");
-            평가아직안한유저.add(rateRequire.get(i));
-          } //else
-
-          System.out.println("for문 마지막 "+ i);
-        }//for
+        content.put("retire", rateRequirePerson);
         
-        content.put("retire", 평가아직안한유저);
-      } else {
+      } else { // 탈퇴자 리스트가 아예 없을 경우
         System.out.println("------------------------------");
         content.put("retire", "0");
       }
@@ -171,6 +200,7 @@ public class StudyRetireController {
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
+      System.out.println("오류 메시지: " + e.getMessage());
     }
 
     return content;

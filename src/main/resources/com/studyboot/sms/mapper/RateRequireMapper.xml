@@ -39,6 +39,23 @@
       inner join sms_member sm on sm.member_id = ssm.member_id
     where smr.std_id = #{studyNo} and smr.rate_require = #{rateRequire}
   </select>
+  
+  
+  
+  <select id="retireEvaluationWait" resultMap="rateRequireMap" parameterType="map">
+    select 
+      smr.std_id,
+      smr.member_id,
+      smr.rate_require,
+      sm.nick_name,
+      sm.photo,
+      sm.name
+    from
+     sms_member_retire smr
+      inner join sms_std_member ssm on ssm.member_id = smr.member_id and smr.std_id = ssm.std_id
+      inner join sms_member sm on sm.member_id = ssm.member_id
+    where smr.std_id = #{studyNo} and smr.rate_require = #{rateRequire} and smr.member_id = #{confirmNo}
+  </select>
 </mapper>
 
 
