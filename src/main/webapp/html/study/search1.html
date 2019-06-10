@@ -172,9 +172,11 @@
      <!-- End Categories -->
 
      <!-- addr filter -->
-     <h2 class="h5 text-uppercase g-color-gray-dark-v1" style="display: inline;">지역 필터
-     <span class="g-pr-110"></span>
-     <i class="g-color-gray-light-v3 fa fa-refresh g-cursor-pointer" id="clearAddr"></i>
+     <h2 class="h5 text-uppercase g-color-gray-dark-v1"
+      style="display: inline;">
+      지역 필터 <span class="g-pr-110"></span> <i
+       class="g-color-gray-light-v3 fa fa-refresh g-cursor-pointer"
+       id="clearAddr"></i>
      </h2>
      <hr class="g-brd-gray-light-v4 g-my-15">
 
@@ -197,16 +199,16 @@
           </a>
          </h5>
         </div>
-        <div id="accordion-laddr-body" class="collapse"
-         role="tabpanel" aria-labelledby="accordion-laddr-heading"
+        <div id="accordion-laddr-body" class="collapse" role="tabpanel"
+         aria-labelledby="accordion-laddr-heading"
          data-parent="#accordion-addr">
          <div
           class="u-accordion__body g-color-gray-dark-v5 g-px-0 g-py-5 largeAddress">
          </div>
         </div>
        </div>
-       
-       
+
+
        <div class="card rounded-0 g-brd-none">
         <div id="accordion-maddr-heading"
          class="u-accordion__header g-px-0 g-py-5" role="tab">
@@ -215,19 +217,18 @@
            class="dropdown-item u-link-v5 g-color-main g-color-primary--hover"
            href="#accordion-maddr-body" data-toggle="collapse"
            data-parent="#accordion-addr" aria-expanded="true"
-           aria-controls="accordion-maddr-body">시군구
-          </a>
+           aria-controls="accordion-maddr-body">시군구 </a>
          </h5>
         </div>
-        <div id="accordion-maddr-body" class="collapse"
-         role="tabpanel" aria-labelledby="accordion-maddr-heading"
+        <div id="accordion-maddr-body" class="collapse" role="tabpanel"
+         aria-labelledby="accordion-maddr-heading"
          data-parent="#accordion-addr">
          <div
           class="u-accordion__body g-color-gray-dark-v5 g-px-0 g-py-5 mediumAddress">
          </div>
         </div>
        </div>
-       
+
        <div class="card rounded-0 g-brd-none">
         <div id="accordion-saddr-heading"
          class="u-accordion__header g-px-0 g-py-5" role="tab">
@@ -236,20 +237,19 @@
            class="dropdown-item u-link-v5 g-color-main g-color-primary--hover"
            href="#accordion-saddr-body" data-toggle="collapse"
            data-parent="#accordion-addr" aria-expanded="true"
-           aria-controls="accordion-saddr-body">동읍면
-          </a>
+           aria-controls="accordion-saddr-body">동읍면 </a>
          </h5>
         </div>
-        <div id="accordion-saddr-body" class="collapse"
-         role="tabpanel" aria-labelledby="accordion-saddr-heading"
+        <div id="accordion-saddr-body" class="collapse" role="tabpanel"
+         aria-labelledby="accordion-saddr-heading"
          data-parent="#accordion-addr">
          <div
           class="u-accordion__body g-color-gray-dark-v5 g-px-0 g-py-5 smallAddress">
          </div>
         </div>
        </div>
-       
-       
+
+
       </div>
      </div>
 
@@ -272,9 +272,11 @@
 
 
      <!-- day filter -->
-    <h2 class="h5 text-uppercase g-color-gray-dark-v1" style="display: inline;">요일 필터
-     <span class="g-pr-110"></span>
-     <i class="g-color-gray-light-v3 fa fa-refresh g-cursor-pointer" id="clearDay"></i>
+     <h2 class="h5 text-uppercase g-color-gray-dark-v1"
+      style="display: inline;">
+      요일 필터 <span class="g-pr-110"></span> <i
+       class="g-color-gray-light-v3 fa fa-refresh g-cursor-pointer"
+       id="clearDay"></i>
      </h2>
      <hr class="g-brd-gray-light-v4 g-my-15">
      <form>
@@ -404,9 +406,8 @@
      <!-- Search Info -->
      <div class="d-md-flex justify-content-between">
       <ul class="u-list-inline" id="cls-tag">
-       <li class="list-inline-item g-mr-7" id="large-tag"><a
+       <li class="list-inline-item g-mr-7"><a
         class="u-link-v5 g-color-gray-dark-v1"></a></li>
-
       </ul>
      </div>
      <!-- End Search Info -->
@@ -468,7 +469,7 @@
 </script>
 
  <!-- 카테고리 중분류 -->
- <script id="tr-template-mcls" type="text/x-handlebars-template">
+ <script id="tr-template-mcls1" type="text/x-handlebars-template">
 {{#each list}}
        <div class="card rounded-0 g-brd-none">
         <div id="accordion-mcls-heading{{clsNo}}"
@@ -477,7 +478,7 @@
           <a class="dropdown-item u-link-v5 g-color-main g-color-primary--hover mcls-btn" data-no="{{clsNo}}"
            href="#accordion-mcls-body{{clsNo}}" data-toggle="collapse"
            data-parent="#accordion-mcls" aria-expanded="true"
-           aria-controls="accordion-mcls-body{{clsNo}}">{{name}}<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i></a>
+           aria-controls="accordion-mcls-body{{clsNo}}">{{name}} <i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>  </a>
          </h5>
         </div>
         <div id="accordion-mcls-body{{clsNo}}" class="collapse"
@@ -491,10 +492,55 @@
 {{/each}}
 </script>
 
+<!-- 카테고리 중분류 -->
+ <script id="tr-template-mcls" type="text/x-handlebars-template">
+{{#each list}}
+<div class="row">
+ <div class="col card rounded-0 g-brd-none">
+  <div id="accordion-mcls-heading{{clsNo}}"
+   class="u-accordion__header g-px-0 g-py-5 lcls-checkbox" role="tab">
+   <h5 class="g-font-weight-400 g-font-size-16 mb-0">
+    <label class="u-check g-pl-30 g-color-main g-color-primary--hover"> <input
+     class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 lcheck{{clsNo}}" type="checkbox"
+     value="{{clsNo}}">
+     <div
+      class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+      <i class="fa" data-check-icon="&#xf00c"></i>
+     </div> {{name}}
+    </label> 
+<a href="#accordion-mcls-body{{clsNo}}"
+     data-toggle="collapse" data-parent="#accordion-mcls"
+     aria-expanded="true" aria-controls="accordion-mcls-body{{clsNo}}">
+<i class="g-pos-abs fa fa-angle-down g-color-main g-right-0 g-pr-25" ></i>
+</a>
+   </h5>
+  </div>
+  <div id="accordion-mcls-body{{clsNo}}" class="collapse"
+   role="tabpanel" aria-labelledby="accordion-mcls-heading{{clsNo}}"
+   data-parent="#accordion-mcls">
+   <div
+    class="u-accordion__body g-color-gray-dark-v5 g-px-0 g-py-5 smallTitle"
+    id="smallClsTitle{{clsNo}}"></div>
+  </div>
+ </div>
+</div>
+{{/each}}
+</script>
+
+
+
+
  <!-- 카테고리 소분류 -->
  <script id="tr-template-scls" type="text/x-handlebars-template">
 {{#each list}}
-    <a class="dropdown-item scls-btn g-color-main" href="#" data-no="{{clsNo}}">{{name}}</a>
+<label class="u-check dropdown-item g-pl-30 g-color-main g-color-primary--hover"> <input
+     class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 mcheck{{clsNo}}" type="checkbox"
+     value="{{clsNo}}">
+     <div
+      class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+      <i class="fa" data-check-icon="&#xf00c"></i>
+     </div> {{name}}
+    </label> 
 {{/each}}
 </script>
 
@@ -572,7 +618,7 @@
  <script src="../../Unify/assets/js/custom.js"></script>
  <script src="../header.js"></script>
  <script src="../footer.js"></script>
- <script src="index.js"></script>
+ <script src="search1.js"></script>
  <script>
   <!-- JS Plugins Init. -->
     $(document)
