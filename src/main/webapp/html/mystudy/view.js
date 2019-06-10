@@ -108,7 +108,7 @@ function loadDetail(no) {
     }); // end update
 
     // 삭제 버튼
-    $('#detail-delete').click((e) => {
+    $('#detail-del').click((e) => {
 
       $.getJSON('../../app/json/MyStudy/delete?no=' + obj.no + 
           '&memberNo=' + obj.memberNo, function(obj) {
