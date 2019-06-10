@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -213,6 +214,9 @@ public class MemberController {
       List<StudyMember> rateInfo = studyMemberService.rateInfo(loginUser.getNo());
       List<RateLog> rateLog = rateService.list(loginUser.getNo());
       
+      for (RateLog r : rateLog) {
+        System.out.println(r.getUpdateDate());
+      }
       if(rateInfo != null) {
         content.put("rateInfo", rateInfo);
       }
@@ -227,6 +231,18 @@ public class MemberController {
       content.put("status", "fail");
     }
     return content;
+  }
+  
+  // 매달 1일 마다 평가 기록을 자동으로 업데이트 한다.
+  @Scheduled(cron = "0 0 0 1 * *")
+  public void rateLogSchedule() {
+    System.out.println("schedule start!!!");
+    
+    if (rateService.addRateLog() == 1) {
+      System.out.println("평가 기록 업데이트 완료!");
+    } else {
+      System.out.println("평가 기록 업데이트 실패!");
+    }
   }
 
 }
