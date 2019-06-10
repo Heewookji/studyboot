@@ -1,6 +1,7 @@
 package com.studyboot.sms.web.json;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.Rate;
 import com.studyboot.sms.domain.RateRequire;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
@@ -82,10 +84,10 @@ public class StudyRetireController {
       //List<StudyMember> studyMemberList = studyMemberService.findStudyMember(studyNo);
 
       // 스터디 원 들이 탈퇴자를 평가 할 수 있게 sms_member_retire 테이블 true로 입력
-        rateRequireMap.put("studyNo", studyNo);
-        rateRequireMap.put("memberNo", loginUser.getNo());
-        rateRequireMap.put("rateRequire", true);
-        studyRetireService.rateRequire(rateRequireMap);
+      rateRequireMap.put("studyNo", studyNo);
+      rateRequireMap.put("memberNo", loginUser.getNo());
+      rateRequireMap.put("rateRequire", true);
+      studyRetireService.rateRequire(rateRequireMap);
 
     } catch (Exception e) {
       content.put("status", "스터디 탈퇴 중 에러가 발생 하였습니다.");
@@ -112,24 +114,60 @@ public class StudyRetireController {
     return content;
   }
 
-  
+
   @GetMapping("retireTrueOrFalse")
-  public Object retireYesOrNo(int studyNo, HttpSession session) {
+  public Object retireTrueOrFalse(int studyNo, HttpSession session) {
 
     HashMap<String,Object> content = new HashMap<>();
-    HashMap<String,Object> rateRequireMap = new HashMap<>();
-    try {
-      
-      rateRequireMap.put("studyNo", studyNo);
-      rateRequireMap.put("rateRequire", true);
-      List<RateRequire> rateRequire = (List<RateRequire>) studyRetireService.retireTrueOrFalse(rateRequireMap);
+    HashMap<String,Object> map = new HashMap<>();
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    loginUser.getNo();
 
-      for(int i = 0; i < rateRequire.size(); i++) {
+    try {
+
+      map.put("studyNo", studyNo);
+      map.put("rateRequire", true);
+      map.put("no", loginUser.getNo()); // 얘랑 128줄 얘네 갖고 평가한 회원 번호 찾기
+
+      // 탈퇴자들의 리스트를 뽑아온다.
+      List<RateRequire> rateRequire = (List<RateRequire>) studyRetireService.retireTrueOrFalse(map);
+
+      List<RateRequire> 평가아직안한유저 = new ArrayList<>();
+
+      List<Rate> rate = (List<Rate>) studyRetireService.retireEvaluation(map); // 평가한 사람들 뽑아옴
+
+      System.out.println(rate);
+      System.out.println(rateRequire);
+      // 탈퇴자 리스트가 있다면 ..
+      if (rateRequire != null) {
+
+        for(int i = 0; i < rateRequire.size(); i++) {
+
+          //studyRetireServiceImpl
+          System.out.println("for문: " + i);
+          
+          //5는 평가한 회원 번호 
+          // 평가한 회원 번호 == 탈퇴한 회원 번호  ===> 탈퇴한 회원번호를 평가 했을경우 다음 반복문.
+          if (rate.get(i).getConfirmNo() == rateRequire.get(i).getMemberNo() && studyNo == rateRequire.get(i).getStudyNo()) {
+            System.out.println("평가한 유저");
+            continue; 
+
+          } else if (rate.get(i).getConfirmNo() == rateRequire.get(i).getMemberNo()) { 
+           System.out.println("평가 안 한 유저");
+            평가아직안한유저.add(rateRequire.get(i));
+          } //else
+
+          System.out.println("for문 마지막 "+ i);
+        }//for
         
-        System.out.println(rateRequire.get(i));
+        content.put("retire", 평가아직안한유저);
+      } else {
+        System.out.println("------------------------------");
+        content.put("retire", "0");
       }
-      
-     // content.put("status", rateRequire.getRateRequire());
+      //content.put("state", );
+      System.out.println("==============================");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
