@@ -13,6 +13,8 @@ $('#add-board').click((e) => {
 
   $("#contents").load("/studyboot/html/mystudy/forms.html", function(){
     
+    $('#update-min-btn').hide();
+    
     $('#checkboxSuccess').click((e) => {
       if (leader != true){
         alert("스터디장만 공지사항입력이 가능합니다.");

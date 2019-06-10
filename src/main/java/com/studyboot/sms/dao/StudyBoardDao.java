@@ -12,6 +12,7 @@ public interface StudyBoardDao {
   List<StudyBoard> findNtc(int no);
 
   int insert(StudyBoard studyBoard);
+  int update(StudyBoard studyBoard);
   StudyBoard findByNo(int no);
   int delete(int no);
 
@@ -19,7 +20,6 @@ public interface StudyBoardDao {
   //  List<StudyMember> findStudyMembersByNo(int no);
 
   //int increaseCount(int no);
-  //  int update(StudyMember studyMember);
 
   //  int countAll();
   //  List<Integer> findStudyNoByMemberNo(int no);

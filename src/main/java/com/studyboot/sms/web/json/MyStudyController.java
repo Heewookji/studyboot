@@ -1,10 +1,7 @@
 package com.studyboot.sms.web.json;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,17 +82,6 @@ public class MyStudyController {
 
     studyBoard = myStudyService.list(pageNo, pageSize, clsNo, memberNos, keyword, no);
 
-//    for (int i = 0; i < studyBoard.size(); i++) {
-//    Date time = studyBoard.get(0).getDate();
-//    SimpleDateFormat outputFmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
-//    String dateF = outputFmt.format(time);
-//    Date ddd = Date.valueOf(dateF);
-//    studyBoard.get(0).setDate(ddd);
-//    System.out.println(studyBoard.get(0).getDate());
-//        
-//    studyBoard.get(i).setDate();  
-//    
-//    }
     content.put("list", studyBoard);
     content.put("pageNo", pageNo);
     content.put("pageSize", pageSize);
@@ -232,6 +218,52 @@ public class MyStudyController {
     HashMap<String,Object> content = new HashMap<>();
     content.put("user", loginUser.getNo());
     
+    return content;
+  }
+  
+  @PostMapping("update")
+  public Object update(StudyBoard studyBoard, HttpSession session) {
+
+    System.out.println(studyBoard);
+    
+    HashMap<String,Object> content = new HashMap<>();
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    // loginUser.getNo() 로그인한 유저의 유저넘버를 schedule 객체에 담는다.
+    studyBoard.setMemberNo(loginUser.getNo());
+
+    // 리더 판단을 위한 코드 (34줄 ~ 48줄)
+    HashMap<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", studyBoard.getStudyNo());
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+
+    if (studyBoard.isNtc() == true && leaderYesOrNo == true) {
+
+      try {
+        myStudyService.update(studyBoard);
+        content.put("status", "등록이 완료 되었습니다.");
+      } catch (Exception e) {
+        content.put("status", "fail tt");
+        content.put("message", e.getMessage());
+      }
+
+    } else if (studyBoard.isNtc() == true && leaderYesOrNo == false) {
+      content.put("status", "스터디장만 공지사항을 등록 할 수 있습니다.");
+      return content;
+
+    } else if (studyBoard.isNtc() == false) {
+
+      try {
+        myStudyService.update(studyBoard);
+        content.put("status", "등록이 완료 되었습니다.");
+      } catch (Exception e) {
+        content.put("status", "fail ff");
+        content.put("message", e.getMessage());
+      }
+    }
+
     return content;
   }
   

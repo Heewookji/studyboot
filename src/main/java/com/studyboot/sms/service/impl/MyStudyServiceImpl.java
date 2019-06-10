@@ -84,6 +84,11 @@ public class MyStudyServiceImpl implements MyStudyService {
     return studyBoardDao.delete(no);
   }
 
+  @Override
+  public int update(StudyBoard studyBoard) {
+    return studyBoardDao.update(studyBoard);
+  }
+
 
 
 

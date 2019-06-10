@@ -208,7 +208,18 @@
     <delete id="delete" parameterType="int">
     delete from sms_std_board
     where std_board_id = #{no}
-  </delete>
+    </delete>
+    
+    <update id="update" parameterType="studyBoard">
+		update sms_std_board set
+		std_id = #{studyNo},
+		member_id = #{memberNo},
+		ntc = #{ntc},
+		title = #{title},
+		cont = #{contents}
+		where
+		std_id = #{studyNo} and std_board_id = #{no} 
+	</update>
 
 </mapper>
 
