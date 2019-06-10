@@ -15,14 +15,6 @@ $('#add-board').click((e) => {
 
     $('#update-min-btn').hide();
 
-    $(window).on("beforeunload", function() {
-      if($('#inputHorizontalSuccess').val().length != 0) {
-        return "게시글이 존재합니다. 뒤로가시겠습니까?";
-      } else if($('.note-editable').text().length != 0) {
-        return "게시글이 존재합니다. 뒤로가시겠습니까?";
-      }
-    });
-
     $('#checkboxSuccess').click((e) => {
       if (leader != true){
         alert("스터디장만 공지사항입력이 가능합니다.");
@@ -63,6 +55,15 @@ $('#add-board').click((e) => {
       });
     });
 
-
   });
 });
+
+
+//$(window).on("beforeunload", function() {
+//  if($('#inputHorizontalSuccess').val().length != 0) {
+//    return "게시글이 존재합니다. 뒤로가시겠습니까?";
+//  } else if($('.note-editable').text().length != 0) {
+//    return "게시글이 존재합니다. 뒤로가시겠습니까?";
+//  }
+//});
+
