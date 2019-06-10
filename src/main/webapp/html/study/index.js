@@ -177,9 +177,7 @@ $(document.body).bind('loaded-categorytitle', () => {
   loadSmallTitle(clsNo);
 
   $('.mcls-btn').click(function(e) {
-    
-    
-    $('.rateit').rateit('value', 3.8);
+
 
     $('.mcls-btn').removeClass("g-color-primary");
     $('.mcls-btn').addClass("g-color-main");
@@ -344,7 +342,7 @@ $('#clearDay').hover(function(e){
 //주소 새로고침
 $('#clearAddr').click(function(e){
   $('#accordion-addr .collapse').removeClass('show');
-  
+
   $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
   $('.smallAddress').html(''); // 지역 소분류 목록 초기화
   $('#largeAddressButton').html('시도<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>');
@@ -364,7 +362,7 @@ $('#clearAddr').click(function(e){
 
 //요일 새로고침
 $('#clearDay').click(function(e){
-  
+
   $('.day-checkbox input').prop('checked',false);
   pageNo = 1;
   tbody.html('');
@@ -439,6 +437,26 @@ $('#add-btn').click(function() {
   });
 });
 
+
+$('#stdAddModal').on('shown.bs.modal', function (e) {
+  $('.rateit').rateit({ 
+    // min value
+    min: 0, 
+    // max value
+    max: 5, 
+    // step size
+    step: 0.5, 
+    // 'bg', 'font'
+    mode: 'font', 
+    // size of star
+    starwidth: 16, 
+    starheight: 16, 
+    // is readonly?
+    readonly: false, 
+    // is resetable?
+    resetable: false, 
+  });
+})
 
 
 //뒤로가기 -진행중
