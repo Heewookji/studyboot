@@ -11,4 +11,5 @@ public interface StudyRetireService {
   int rateRequire(Map<String, Object> rateRequireMap);
   List<RateRequire> retireTrueOrFalse(Map<String, Object> map);
   List<Rate> retireEvaluation(Map<String, Object> map);
+  RateRequire retireEvaluationWait(Map<String, Object> map);
 }

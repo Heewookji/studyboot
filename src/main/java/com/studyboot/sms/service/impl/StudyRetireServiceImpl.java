@@ -43,4 +43,10 @@ public class StudyRetireServiceImpl implements StudyRetireService {
    
     return rateDao.findAll(map);
   }
+  
+  @Override
+  public RateRequire retireEvaluationWait(Map<String, Object> map) {
+
+    return rateRequireDao.retireEvaluationWait(map);
+  }
 }
