@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
+import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.StudyMemberService;
@@ -64,6 +65,10 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return studyMemberDao.findMyStudyByNo(map);
   }
   
+  @Override
+  public List<History> userHistory(int no) {
+    return studyMemberDao.findHistoryByMemberId(no);
+  }
 }
 
 

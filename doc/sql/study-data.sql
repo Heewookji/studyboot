@@ -204,7 +204,69 @@ insert into sms_std_member(std_id, member_id) values(100,6);
 insert into sms_std_member(std_id, member_id) values(100,7);
 
 insert into sms_std_member(std_id, end_date, member_id) values(100,'2019-06-19',7);
-  
+
+
+-- 스터디 회원 정보(종료 상태, 종료 날짜, 출석률 포함)
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(20, 2, 1, 20190101, 20190110, 80);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(21, 2, 2, 20190101, 20190210, 90);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(22, 2, 3, 20190101, 20190310, 70);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(23, 2, 1, 20190101, 20190410, 60);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(24, 2, 2, 20190101, 20190510, 70);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(25, 2, 3, 20190101, 20190610, 100);
+
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(30, 3, 1, 20190101, 20190110, 90);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(31, 3, 2, 20190101, 20190210, 70);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(32, 3, 3, 20190101, 20190310, 80);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(33, 3, 1, 20190101, 20190410, 60);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(34, 3, 2, 20190101, 20190510, 80);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(35, 3, 3, 20190101, 20190610, 100);
+
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(40, 4, 1, 20190101, 20190115, 90);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(41, 4, 2, 20190101, 20190220, 100);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(42, 4, 3, 20190101, 20190311, 60);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(43, 4, 1, 20190101, 20190405, 30);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(44, 4, 2, 20190101, 20190525, 80);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(45, 4, 3, 20190101, 20190612, 100);
+
+-- 회원의 평점을 매달 1일 마다 갱신 한다. sms_member_rate_log 테이블
+insert into sms_member_rate_log(member_id, rate, update_dt) values(2, 4, 20181201);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(2, 2, 20190101);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(2, 3.5, 20190201);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(2, 3, 20190301);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(2, 4, 20190401);
+
+insert into sms_member_rate_log(member_id, rate, update_dt) values(3, 2.5, 20190101);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(3, 4, 20190201);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(3, 3.5, 20190301);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(3, 3, 20190401);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(3, 5, 20190501);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(3, 4.5, 20190601);
+
+insert into sms_member_rate_log(member_id, rate, update_dt) values(4, 3.5, 20190201);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(4, 3, 20190301);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(4, 5, 20190401);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(4, 4, 20190501);
+insert into sms_member_rate_log(member_id, rate, update_dt) values(4, 4.5, 20190601);
+
+
 -- 스터디 활동일
 -- 
 

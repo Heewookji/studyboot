@@ -13,6 +13,11 @@ user,
 ratingForm = $("#rating-form");
 
 
+// 페이지가 준비되면 평점 정보 모달창을 꽂아준다.
+$( document ).ready(function() {
+  $("#sb-rateInfo").load("rateInfo.html")
+});
+
 // 프사 모달 닫힐 때
 $('#imageModal').on('hidden.bs.modal', function (e) {
   console.log('modal close');
@@ -64,7 +69,7 @@ $('#imageInput').fileupload({
   }, 
   done: function (e, data) {
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + data.result.loginUser.photo);
-    $('#rate-profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
+    $('#rate-profilePhoto').attr('src', '/studyboot/upload/images/member/' + data.result.loginUser.photo);
     $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.result.loginUser.photo + '.jpg');
     user.photo = data.result.loginUser.photo;
     imgUdt = true;

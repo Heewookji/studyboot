@@ -2,6 +2,7 @@ package com.studyboot.sms.dao;
 
 import java.util.List;
 import java.util.Map;
+import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.StudyMember;
 
 public interface StudyMemberDao {
@@ -22,4 +23,5 @@ public interface StudyMemberDao {
   boolean findStudyMemberLeaderByMap(Map<String, Object> map);
   StudyMember findMyStudyByNo(Map<String, Object> map);
   List<StudyMember> findRateInfoByMemberId(int no);
+  List<History> findHistoryByMemberId(int no);
 }

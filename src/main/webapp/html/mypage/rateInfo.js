@@ -4,26 +4,28 @@ rateDataset,
 atnDataset,
 now = new Date(),
 year = now.getFullYear(),
-month = now.getMonth();
+month = now.getMonth(),
+dropData = 0,
+exileData = 0,
+finishData = 0,
+//핸들바스로 데이터 준비
+templateSrc = $('#tr-template').html(),
+trGenerator = Handlebars.compile(templateSrc);
 
 
-$( document ).ready(function() {
-  $("#sb-rateInfo").load("rateInfo.html", function() {
-    
-    $(document.body).trigger('loaded-rateInfo');
-  });
-});
+loadRateData();
 
-$(document.body).bind('loaded-rateInfo', () => {
-
+function loadRateData() {
   $.getJSON('../../app/json/member/rateinfo',
       function(data) {
     
     console.log(data);
     
+    // 사진을 꼽아준다.
     $('#rate-profilePhoto')
       .attr('src', '/studyboot/upload/images/member/' + data.rateInfo[0].member.photo);
     
+    // bar 차트
     // 평점 데이터
     var rateDataList = [0, 0, 0, 0, 0];
     // 출석률 데이터
@@ -101,11 +103,23 @@ $(document.body).bind('loaded-rateInfo', () => {
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
     };
+    // End bar 차트
+    
+    // pie 차트
+    data.rateInfo.forEach(function(item) {
+      
+      switch (item.endNo) {
+        case 1: finishData++; break;
+        case 2: dropData++; break;
+        case 3: exileData++; break;
+      }
+    });
+    
+    console.log(finishData, dropData, exileData);
     
     $(document.body).trigger('loaded-rateData');
   });
-  
-});
+}
 
 
 $(document.body).bind('loaded-rateData', () => {
@@ -133,16 +147,21 @@ $(document.body).bind('loaded-rateData', () => {
   }
   
   // bar차트에 들어갈 데이터를 담는다.
-  var barChartData = {
+  var barChartData1 = {
       labels: monthLabel,
       datasets: [rateDataset],
   };
   
+  var barChartData2 = {
+      labels: monthLabel,
+      datasets: [atnDataset],
+  };
   
-  var ctx = $('#barChart');
+  
+  var ctx = $('#rate-barChart');
   myBarChart = new Chart(ctx, {
       type: 'bar',
-      data: barChartData,
+      data: barChartData1,
       options: {
           legend: {
               display: false
@@ -154,7 +173,31 @@ $(document.body).bind('loaded-rateData', () => {
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      max: 5
+                  }
+              }]
+          }
+      }
+  });
+  
+  var ctx = $('#atn-barChart');
+  myBarChart = new Chart(ctx, {
+      type: 'bar',
+      data: barChartData2,
+      options: {
+          legend: {
+              display: false
+          },
+          title: {
+            display: true,
+            text: '평점 및 출석률'
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      max: 100
                   }
               }]
           }
@@ -168,7 +211,7 @@ $(document.body).bind('loaded-rateData', () => {
       data: {
           labels: ['완료', '탈퇴', '추방'],
           datasets: [{
-              data: [1, 1, 1],
+              data: [finishData, dropData, exileData],
               backgroundColor: [
                   'rgb(255, 99, 132)',
                   'rgb(54, 162, 235)',
@@ -177,28 +220,33 @@ $(document.body).bind('loaded-rateData', () => {
           }]
       },
       options: {
-        legend: {
-          display: false
-        }
       }
   });
   
   
   $('#rateShow-btn').click(() => {
-    barChartData.datasets.pop();
-    barChartData.datasets.push(rateDataset);
-    window.myBarChart.update();
+    $('#atn-barChart').prop('hidden', true);
+    $('#rate-barChart').prop('hidden', false);
   });
 
   $('#atnShow-btn').click(() => {
-    barChartData.datasets.pop();
-    barChartData.datasets.push(atnDataset);
-    window.myBarChart.update();
+    $('#rate-barChart').prop('hidden', true);
+    $('#atn-barChart').prop('hidden', false);
   });
-  
   
 });
 
+
+loadHistory();
+
+function loadHistory() {
+  $.getJSON('../../app/json/member/history',
+      function(data) {
+    
+    console.log(data.history);
+    
+  });
+}
 
 
 
