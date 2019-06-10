@@ -1,9 +1,12 @@
 var param = location.href.split('?')[1],
 myStudyNo = param.split('=')[1],
 evaluationMemberList;
-
+//retire-person-evaluation-list
 var evaluationTemplateSrc = $('#retire-evaluation-list').html(),
 evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
+
+var retirePersonEvaluationTemplateSrc = $('#retire-person-evaluation-list').html(),
+retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
 
 // 리더인지 판단
 (function (myStudyNo) {
@@ -19,22 +22,39 @@ evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + myStudyNo,
       function(obj) {
     evaluationMemberList = obj.list;
+
     $(evaluationGenerator(obj)).appendTo('#retire-evaluation');
     $(document.body).trigger('loaded-retireform');
   });
 }(myStudyNo));
 
+
+
+
+
 // 탈퇴자가 발생하였는지 판단
 (function (myStudyNo) {
   $.getJSON('../../app/json/retireEvaluation/retireTrueOrFalse?studyNo=' + myStudyNo,
       function(obj) {
-    console.log(obj);
-    if (obj.status ===  true) {
+    console.log(obj.status);
+    if (obj.status[0].rateRequire === true && obj.status[1].rateRequire === true && obj.status[2].rateRequire === true) {
       //모달창 띄워서 평가하기
       $('#retire-person-modal').click();
+      $(retirePersonEvaluation(obj)).appendTo('#retire-person-evaluation');
     }
   });
 }(myStudyNo));
+
+
+
+
+
+
+
+
+
+
+
 
 $('#retire-request').click(() => {
 
