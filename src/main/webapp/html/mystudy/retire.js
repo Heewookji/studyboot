@@ -28,7 +28,7 @@ evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
 (function (myStudyNo) {
   $.getJSON('../../app/json/retireEvaluation/retireTrueOrFalse?studyNo=' + myStudyNo,
       function(obj) {
-    
+    console.log(obj);
     if (obj.status ===  true) {
       //모달창 띄워서 평가하기
       $('#retire-person-modal').click();

@@ -1,45 +1,45 @@
-var pageNo = 1,
-pageSize = 6,
-tbody = $('tbody'),
-prevPageLi = $('#prevPage'),
-nextPageLi = $('#nextPage'),
-param = location.href.split('?')[1],
-noss = param.split('=')[1],
-currSpan = $('#currPage > span'), 
-currCls,
-keyword = $("#board-search").val(),
-stdBoardListTemplateSrc = $('#std-BoardList').html();
-
-var stdBoardListGenerator = Handlebars.compile(stdBoardListTemplateSrc);
+//var pageNo = 1,
+//pageSize = 6,
+//tbody = $('tbody'),
+//prevPageLi = $('#prevPage'),
+//nextPageLi = $('#nextPage'),
+var param = location.href.split('?')[1],
+nosss = param.split('=')[1];
+//currSpan = $('#currPage > span'), 
+//currCls,
+//keyword = $("#board-search").val(),
+//stdBoardListTemplateSrc = $('#std-BoardList').html();
+//
+//var stdBoardListGenerator = Handlebars.compile(stdBoardListTemplateSrc);
 
 $(document).ready(function() {
 
   // 게시판으로 진입했을 때 탭 색깔 활성화
   $(document.body).bind('loaded-nav', () => {
-    $('#std-board').removeClass('list-group-item list-group-item-action justify-content-between');
-    $('#std-board').addClass('list-group-item justify-content-between active');
+    $('#std-management').removeClass('list-group-item list-group-item-action justify-content-between');
+    $('#std-management').addClass('list-group-item justify-content-between active');
 
   });
 
   // 위쪽 빵 부스러기 적용할 때 기존껄 span 태그에서 리스트 태그로 바꿔서 적용시키기
   var $mystudy = $("<a class='u-link-v5 g-color-main g-color-primary--hover' " +
-  		"href='/studyboot/html/mystudy/index.html?no=" + noss + "'>"
+      "href='/studyboot/html/mystudy/index.html?no=" + nosss + "'>"
       + "My study" + "</a><i class='fa fa-angle-right g-ml-7'></i>");
   $('#std-main').html($mystudy);
 
   // study board 빵부스러기 생성하기
   if($('#std-main2').val() == undefined){
     var $stdBoard = $("<li class='list-inline-item g-color-primary' id='std-main2'>"
-        + "<span>Study Board</span></li>");
+        + "<span>Study Management</span></li>");
     $('#conts-list').append($stdBoard);
   }
 
   $(document.body).trigger('loaded-board');
-  boardList(1, "undefined", "undefined", noss);
+//  boardList(1, "undefined", "undefined", noss);
 });
 
 
-//JSON 형식으로 데이터 목록 가져오기 (게시판 리스트 )
+/*//JSON 형식으로 데이터 목록 가져오기 (게시판 리스트 )
 function boardList(pn, cls, keyword, noss) {
   $.getJSON('../../app/json/MyStudy/list?pageNo=' + pn + '&pageSize=' + pageSize
       + '&pageCls=' + cls + "&keyword=" + keyword + "&no=" + noss,
@@ -84,46 +84,46 @@ function boardList(pn, cls, keyword, noss) {
 
   }); //getJSON()
 } // boardList()
-
+*/
 //스터디 게시판
-$(document.body).bind('loaded-board', () => {
-  
-  $('#prevPage > a').click((e) => {
-    e.preventDefault();
-    boardList(pageNo - 1, $("#currCls").html(), keyword, noss);
-  });
-
-  $('#nextPage > a').click((e) => {
-    e.preventDefault();
-    boardList(pageNo + 1, $("#currCls").html(), keyword, noss);
-  });
-
-  $('#bothClsPage').click((e) => {
-    keyword = "";
-    e.preventDefault();
-    $("#currCls").html("전체");
-    $("#board-search").val("");
-    boardList(1, "undefined", "undefined", noss);
-  });
-
-  $('#titlePage').click((e) => {
-    e.preventDefault();
-    $("#currCls").html("제목");
-  });
-
-  $('#nickPage').click((e) => {
-    e.preventDefault();
-    $("#currCls").html("닉네임");
-  });
-
-  $('#board-search-btn').click((e) => {
-    keyword = $("#board-search").val();
-    boardList(1, $("#currCls").html(), keyword, noss);
-    $("#board-search").val("");
-  });
-
-
-});
+//$(document.body).bind('loaded-board', () => {
+//  
+//  $('#prevPage > a').click((e) => {
+//    e.preventDefault();
+//    boardList(pageNo - 1, $("#currCls").html(), keyword, noss);
+//  });
+//
+//  $('#nextPage > a').click((e) => {
+//    e.preventDefault();
+//    boardList(pageNo + 1, $("#currCls").html(), keyword, noss);
+//  });
+//
+//  $('#bothClsPage').click((e) => {
+//    keyword = "";
+//    e.preventDefault();
+//    $("#currCls").html("전체");
+//    $("#board-search").val("");
+//    boardList(1, "undefined", "undefined", noss);
+//  });
+//
+//  $('#titlePage').click((e) => {
+//    e.preventDefault();
+//    $("#currCls").html("제목");
+//  });
+//
+//  $('#nickPage').click((e) => {
+//    e.preventDefault();
+//    $("#currCls").html("닉네임");
+//  });
+//
+//  $('#board-search-btn').click((e) => {
+//    keyword = $("#board-search").val();
+//    boardList(1, $("#currCls").html(), keyword, noss);
+//    $("#board-search").val("");
+//  });
+//
+//
+//});
 
 
 

@@ -122,10 +122,14 @@ public class StudyRetireController {
       
       rateRequireMap.put("studyNo", studyNo);
       rateRequireMap.put("rateRequire", true);
-      RateRequire rateRequire = studyRetireService.retireTrueOrFalse(rateRequireMap);
-      System.out.println("탈퇴 유저가 있습니까? : " + rateRequire.getRateRequire());
+      List<RateRequire> rateRequire = (List<RateRequire>) studyRetireService.retireTrueOrFalse(rateRequireMap);
+
+      for(int i = 0; i < rateRequire.size(); i++) {
+        
+        System.out.println(rateRequire.get(i));
+      }
       
-      content.put("status", rateRequire.getRateRequire());
+     // content.put("status", rateRequire.getRateRequire());
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
