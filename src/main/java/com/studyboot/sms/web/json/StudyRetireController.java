@@ -124,12 +124,12 @@ public class StudyRetireController {
       rateRequireMap.put("rateRequire", true);
       List<RateRequire> rateRequire = (List<RateRequire>) studyRetireService.retireTrueOrFalse(rateRequireMap);
 
-      for(int i = 0; i < rateRequire.size(); i++) {
-        
-        System.out.println(rateRequire.get(i));
-      }
+//      for(int i = 0; i < rateRequire.size(); i++) {
+//        
+//        System.out.println(rateRequire);
+//      }
       
-     // content.put("status", rateRequire.getRateRequire());
+      content.put("status", rateRequire);
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
