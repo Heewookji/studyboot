@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./retire.css">
-
+<link rel="stylesheet" href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 
 
 
@@ -129,7 +129,8 @@
 </div> -->
 
 
-
+<div class="rateit" id="rateit{{nickName}}" data-rateit-mode="font"  style="font-size:30px" data-rateit-resetable="false">
+</div>
 
 
 
@@ -297,8 +298,11 @@
 </script>
 
 <script id="retire-person-evaluation-list" type="text/x-handlebars-template">
-{{#each status}}
+{{#each retire}}
  <div class="col-md-4 g-mb-30 g-mt-30">
+<div id="rateit{{nickName}}" data-rateit-mode="font"  style="font-size:30px" data-rateit-resetable="false">
+</div>
+
   <figure
     class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-cyan--hover g-transition-0_2 text-center">
     <div class="g-py-40 g-px-20">
@@ -315,25 +319,12 @@
 
     <hr class="g-brd-gray-light-v4 g-my-0">
 
-    <form id="ratingEvalationForm{{nickName}}" action="add/review">
-      <div class="form-group">
-        <fieldset class="review-rating-form rate" id="ratingForm{{nickName}}">
-        <input type="radio" id="rating10{{nickName}}" name="rating"/><label id="star5{{nickName}}" for="rating10{{nickName}}"></label>
-              <input type="radio" id="rating9{{nickName}}" name="rating"/><label id="star45{{nickName}}" class="half" for="rating9{{nickName}}"></label>
-              <input type="radio" id="rating8{{nickName}}" name="rating"/><label id="star4{{nickName}}" for="rating8{{nickName}}"></label>
-              <input type="radio" id="rating7{{nickName}}" name="rating"/><label id="star35{{nickName}}" class="half" for="rating7{{nickName}}"></label>
-              <input type="radio" id="rating6{{nickName}}" name="rating"/ checked><label id="star3{{nickName}}" for="rating6{{nickName}}"></label>
-              <input type="radio" id="rating5{{nickName}}" name="rating"/><label id="star25{{nickName}}" class="half" for="rating5{{nickName}}"></label>
-              <input type="radio" id="rating4{{nickName}}" name="rating"/><label id="star2{{nickName}}" for="rating4{{nickName}}"></label>
-              <input type="radio" id="rating3{{nickName}}" name="rating"/><label id="star15{{nickName}}" class="half" for="rating3{{nickName}}"></label>
-              <input type="radio" id="rating2{{nickName}}" name="rating"/><label id="star1{{nickName}}" for="rating2{{nickName}}"></label>
-              <input type="radio" id="rating1{{nickName}}" name="rating"/><label id="star05{{nickName}}" class="half" for="rating1{{nickName}}"></label>
-        </fieldset>
-      </div>
-    </form>
+
   </figure>
+
+
 </div>
 {{/each}}
 </script>
-
 <script src="./retire.js"></script>
+ <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>

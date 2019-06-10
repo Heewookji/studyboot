@@ -1,6 +1,7 @@
 var param = location.href.split('?')[1],
 myStudyNo = param.split('=')[1],
-evaluationMemberList;
+evaluationMemberList,
+obj1;
 //retire-person-evaluation-list
 var evaluationTemplateSrc = $('#retire-evaluation-list').html(),
 evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
@@ -36,8 +37,10 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
 (function (myStudyNo) {
   $.getJSON('../../app/json/retireEvaluation/retireTrueOrFalse?studyNo=' + myStudyNo,
       function(obj) {
-    console.log(obj.status);
-    if (obj.status[0].rateRequire === true && obj.status[1].rateRequire === true && obj.status[2].rateRequire === true) {
+    console.log(obj.retire);
+    
+    obj1 = obj.retire;
+    if (obj.retire != "0") {
       //모달창 띄워서 평가하기
       $('#retire-person-modal').click();
       $(retirePersonEvaluation(obj)).appendTo('#retire-person-evaluation');
@@ -45,12 +48,12 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
   });
 }(myStudyNo));
 
+//<button onclick="alert($('#rateit10').rateit('value'))">Get value</button>
 
 
-
-
-
-
+//($('#rateit' + obj.status[0].nickName).rateit('value')).click(() => {
+//  alert(11);
+//});
 
 
 

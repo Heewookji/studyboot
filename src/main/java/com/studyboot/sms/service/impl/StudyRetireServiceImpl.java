@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.RateDao;
 import com.studyboot.sms.dao.RateRequireDao;
+import com.studyboot.sms.domain.Rate;
 import com.studyboot.sms.domain.RateRequire;
 import com.studyboot.sms.service.StudyRetireService;
 
@@ -37,4 +38,9 @@ public class StudyRetireServiceImpl implements StudyRetireService {
     return rateRequireDao.retireTrueOrFalse(map);
   }
   
+  @Override
+  public List<Rate> retireEvaluation(Map<String, Object> map) {
+   
+    return rateDao.findAll(map);
+  }
 }
