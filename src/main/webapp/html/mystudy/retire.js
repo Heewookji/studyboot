@@ -1,8 +1,7 @@
 var param = location.href.split('?')[1],
 myStudyNo = param.split('=')[1],
-evaluationMemberList,
-obj1;
-//retire-person-evaluation-list
+evaluationMemberList
+
 var evaluationTemplateSrc = $('#retire-evaluation-list').html(),
 evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
 
@@ -37,9 +36,8 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
 (function (myStudyNo) {
   $.getJSON('../../app/json/retireEvaluation/retireTrueOrFalse?studyNo=' + myStudyNo,
       function(obj) {
-    console.log(obj.retire);
+    console.log(obj.retire); // 서버에서 넘어온 로그인 유저가 평가하지 않은 탈퇴자 리스트
     
-    obj1 = obj.retire;
     if (obj.retire != "0") {
       //모달창 띄워서 평가하기
       $('#retire-person-modal').click();
@@ -125,6 +123,7 @@ $(document.body).bind('loaded-retireform', () => {
   });
 });
 
+// 평가 제출 버튼
 $('#retire-evaluation-btn').click(() => {
 
   var nickNames = []; // 스터디 멤버 닉네임 모음
@@ -146,3 +145,26 @@ $('#retire-evaluation-btn').click(() => {
 
 });
 
+$('#exampleModalCenter').on('shown.bs.modal', function (e) {
+  
+  $('.rateit').rateit({ 
+    // min value
+    min: 0, 
+    // max value
+    max: 5, 
+    // step size
+    step: 0.5, 
+    // 'bg', 'font'
+    mode: 'font', 
+    // size of star
+    starwidth: 16, 
+    starheight: 16, 
+    // is readonly?
+    readonly: false, 
+    // is resetable?
+    resetable: false, 
+  });
+  
+});
+
+//<button onclick="alert($('#rateit10').rateit('value'))">Get value</button>

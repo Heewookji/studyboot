@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class StudyRetireController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
+
     // 리더 판단을 위한 코드
     HashMap<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
@@ -44,6 +46,30 @@ public class StudyRetireController {
       content.put("status", "스터디 장은 스터디에 탈퇴 할 수 없습니다.");
       return content;
     }
+
+
+
+
+
+
+
+
+    /*    
+    // 탈퇴자가 있는지 판단하기 위한 코드
+    HashMap<String,Object> retireTrueOrFalseMap = new HashMap<>();
+    retireTrueOrFalseMap.put("studyNo", studyNo);
+    retireTrueOrFalseMap.put("rateRequire", true);
+
+    // 탈퇴자를 뽑아온다.
+    RateRequire retiree = studyRetireService.retireTrueOrFalse(retireTrueOrFalseMap);
+     */  
+
+
+
+
+
+
+
 
     // 탈퇴하려는 유저가 스터디 맴버인지 판단.
     HashMap<String,Object> studyUserMap = new HashMap<>();
@@ -121,9 +147,6 @@ public class StudyRetireController {
     HashMap<String,Object> content = new HashMap<>();
     HashMap<String,Object> map = new HashMap<>();
 
-    int confirmNo = 0;
-    RateRequire rateRequire = null;
-    
     Member loginUser = (Member) session.getAttribute("loginUser");
 
     try {
@@ -132,71 +155,76 @@ public class StudyRetireController {
       map.put("rateRequire", true);
       map.put("no", loginUser.getNo()); // 얘랑 128줄 얘네 갖고 평가한 회원 번호 찾기
 
-      // 모든 스터디원에게 평가받지 못한 탈퇴자들의 리스트를 뽑아온다.
-      List<RateRequire> rateRequireList = (List<RateRequire>) studyRetireService.retireTrueOrFalse(map); //RateRequireMapper
-
-      List<RateRequire> rateRequirePerson = new ArrayList<>(); // 평가 받지 못한 탈퇴자들 모음
+      // 모든 스터디원에게 평가받지 못한 탈퇴자들의 리스트를 뽑아온다.(평가가 끝나지 않은 탈퇴자들)
+      List<RateRequire> retireeList = (List<RateRequire>) studyRetireService.retireTrueOrFalse(map); //RateRequireMapper (retireTrueOrFalse)
 
       // 로그인한 유저가 해당 스터디의 멤버(탈퇴자들)를 평가한 정보 목록 뽑아옴(회원 평점 정보 테이블)
-      List<Rate> rate = (List<Rate>) studyRetireService.retireEvaluation(map);//RateMapper
+      List<Rate> retireeRateList = (List<Rate>) studyRetireService.retireEvaluation(map);//RateMapper (findAll)\
 
-      System.out.println(rateRequireList);
-      System.out.println(rate);
-     
-      // 탈퇴자 리스트가 있다면 if문 실행
-      if (rateRequireList.size() > 0) {
-System.out.println("탈퇴자 리스트가 있다면 if문 실행");
+      // 로그인한 유저에게 평가 받지 못한 탈퇴자들 모음
+      List<RateRequire> rateRequireRetiree = new ArrayList<>(); 
 
-        if(rate.size() != 0) { // 탈퇴자 중 한명이라도 평가 했을경우 반복문 실행
-System.out.println("탈퇴자 중 한명이라도 평가 했을경우 반복문 실행");
+      System.out.println(retireeList);
+      System.out.println(retireeRateList);
 
-          for(int i = 0; i < rate.size(); i++) {
-            
-            confirmNo = rate.get(i).getConfirmNo();
-            map.put("confirmNo", confirmNo);
-            System.out.println("confirmNo: " + confirmNo);
-            System.out.println("rate.get(i).getConfirmNo(): " + confirmNo);
-            System.out.println("rateRequire.get(i).getMemberNo(): " + rateRequireList.get(i).getMemberNo());
-    
-            rateRequire = studyRetireService.retireEvaluationWait(map);
-            
-            System.out.println("rateRequire: " + rateRequire.getMemberNo());
-            //studyRetireServiceImpl
-            System.out.println("for문: " + i);
+      Map<Integer, Integer> retireMap = new HashMap<>();
 
-            // 유저가 평가한 회원 번호 == 탈퇴한 회원 번호  ===> 탈퇴한 회원번호를 평가 했을경우 다음 반복문.
-            if (rate.get(i).getConfirmNo() == rateRequire.getMemberNo() && studyNo == rate.get(i).getStudyNo()) {
-              System.out.println("평가한 유저");
-              continue; 
 
+      int retireNo = 0;
+      int count = 0;
+      
+      // 스터디에 탈퇴자or 탈퇴자들이 있다면 if문 실행
+      if (retireeList.size() > 0) {
+
+        if(retireeRateList.size() != 0) { // 탈퇴자 중 한명이라도 평가 했을경우 반복문 실행
+
+          for (int i = 0; i < retireeRateList.size(); i++) { // 탈퇴자 평가리스트(3명탈퇴 중 2명 탈퇴하면 2바퀴 돌음)
+
+            for (int j = 0; j < retireeList.size(); j++) {
+
+              if (retireeRateList.get(i).getConfirmNo() != retireeList.get(j).getMemberNo()) {
+                // 평가 당한 사람 번호                            탈퇴자 번호 
+
+                retireNo = retireeList.get(j).getMemberNo();
+
+                if(retireMap.get(retireNo) == null) {
+                  retireMap.put(retireNo, 1);
+                  
+                }else {
+                  count = retireMap.get(retireNo);
+                  retireMap.put(retireNo, ++count);
+                }
+              }
+
+            } //in for
+          } //out for
+
+          retireMap.forEach((Integer no, Integer countValue) ->{
+
+            if(countValue == retireeRateList.size()) {
+              for(RateRequire i : retireeList) {
+                if(no == i.getMemberNo())
+                  rateRequireRetiree.add(i);
+              }
             }
-              System.out.println("평가 못받은  유저 add");
-              rateRequirePerson.add(rateRequireList.get(i));
+          });
 
-          } //for
+          System.out.println(rateRequireRetiree);
+
+
+          content.put("retire", rateRequireRetiree);
 
         } else { // inner if // 탈퇴자는 있지만 아무도 평가를 안했을 경우
 
-          for(int i = 0; i < rateRequireList.size(); i++) {
-            
-            rateRequirePerson.add(rateRequireList.get(i));
-            System.out.println("탈퇴자는 잇지만 아무도 평가를 안했어요");
-            System.out.println("평가받지 못한 탈퇴자들 모음집 :" + rateRequirePerson);
-          }
-          
-          
-          
-          
-        }
+          content.put("retire", retireeList);
+          return content; // 아랫줄에 도달하지 못하게 바로 리턴.
+        } 
 
-        content.put("retire", rateRequirePerson);
-        
       } else { // 탈퇴자 리스트가 아예 없을 경우
-        System.out.println("------------------------------");
+
         content.put("retire", "0");
       }
-      //content.put("state", );
-      System.out.println("==============================");
+
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());

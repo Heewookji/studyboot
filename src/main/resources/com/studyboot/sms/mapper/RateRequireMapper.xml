@@ -25,6 +25,7 @@
       )
   </insert>
   
+  <!-- 항상 멤버번호로 내림차순, 스터디 별로 탈퇴자들 -->
   <select id="retireTrueOrFalse"  resultMap="rateRequireMap" parameterType="map">
     select 
       smr.std_id,
@@ -38,8 +39,7 @@
       inner join sms_std_member ssm on ssm.member_id = smr.member_id and smr.std_id = ssm.std_id
       inner join sms_member sm on sm.member_id = ssm.member_id
     where smr.std_id = #{studyNo} and smr.rate_require = #{rateRequire}
-  </select>
-  
+  </select> 
   
   
   <select id="retireEvaluationWait" resultMap="rateRequireMap" parameterType="map">
