@@ -29,8 +29,28 @@ trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
 trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
 
-
-//JSON 형식의 데이터 목록 가져오기
+var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+$('#startDate').datepicker({
+  uiLibrary: 'bootstrap4',
+  iconsLibrary: 'fontawesome',
+  minDate: today,
+  maxDate: function () {
+      return $('#endDate').val();
+  }
+});
+$('#endDate').datepicker({
+  uiLibrary: 'bootstrap4',
+  iconsLibrary: 'fontawesome',
+  minDate: today,
+  minDate: function () {
+      return $('#startDate').val();
+  }
+});
+$('.ui.dropdown')
+.dropdown()
+;
+      
+      //JSON 형식의 데이터 목록 가져오기
 function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
   $.getJSON('../../app/json/study/list?pageNo=' + pageNo
