@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="./retire.css">
 <link rel="stylesheet" href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
-
+<link rel="stylesheet" href="../../css/common.css">
 
 
 
@@ -314,16 +314,14 @@
       <div class="d-block">
         <span class="g-color-cyan g-font-size-default g-mr-3"> <i class="icon-user"></i>
         </span> <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{nickName}}</em>
-      </div>
+      </div>  
     </div>
 
     <hr class="g-brd-gray-light-v4 g-my-0">
 
-<div class="rateit" data-rateit-mode="font" style="font-size: 30px"
+    <div id="rateit-{{nickName}}" class="rateit" data-rateit-mode="font" style="font-size: 30px"
       data-rateit-resetable="false"></div>
   </figure>
-
-
 </div>
 {{/each}}
 </script>

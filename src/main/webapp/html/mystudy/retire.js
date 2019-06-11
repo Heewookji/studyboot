@@ -1,6 +1,7 @@
 var param = location.href.split('?')[1],
 myStudyNo = param.split('=')[1],
-evaluationMemberList
+evaluationMemberList,
+retireeList;
 
 var evaluationTemplateSrc = $('#retire-evaluation-list').html(),
 evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
@@ -37,7 +38,7 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
   $.getJSON('../../app/json/retireEvaluation/retireTrueOrFalse?studyNo=' + myStudyNo,
       function(obj) {
     console.log(obj.retire); // 서버에서 넘어온 로그인 유저가 평가하지 않은 탈퇴자 리스트
-    
+    retireeList = obj.retire;
     if (obj.retire != "0") {
       //모달창 띄워서 평가하기
       $('#retire-person-modal').click();
@@ -49,7 +50,7 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
 //<button onclick="alert($('#rateit10').rateit('value'))">Get value</button>
 
 
-//($('#rateit' + obj.status[0].nickName).rateit('value')).click(() => {
+//($('#rateit-' +retireeList[0].nickName).rateit('value')).click(() => {
 //  alert(11);
 //});
 
@@ -167,4 +168,16 @@ $('#exampleModalCenter').on('shown.bs.modal', function (e) {
   
 });
 
-//<button onclick="alert($('#rateit10').rateit('value'))">Get value</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
