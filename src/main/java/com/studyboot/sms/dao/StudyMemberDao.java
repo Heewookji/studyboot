@@ -18,10 +18,10 @@ public interface StudyMemberDao {
   int update(StudyMember studyMember);
   int attendUpdate(Map<String, Object> map);
   int delete(int no);
-  int countAll();
+  int countAll(int no);
   List<Integer> findStudyNoByMemberNo(int no);
   boolean findStudyMemberLeaderByMap(Map<String, Object> map);
   StudyMember findMyStudyByNo(Map<String, Object> map);
   List<StudyMember> findRateInfoByMemberId(int no);
-  List<History> findHistoryByMemberId(int no);
+  List<History> findHistoryByMemberId(Map<String,Object> params);
 }

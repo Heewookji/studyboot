@@ -8,9 +8,13 @@ month = now.getMonth(),
 dropData = 0,
 exileData = 0,
 finishData = 0,
+pageNo = 1,
+prevPage = $('#history-prevPage'),
+nextPage = $('#history-nextPage'),
+currSpan = $('#history-currPage > span'),
 //핸들바스로 데이터 준비
-templateSrc = $('#tr-template').html(),
-trGenerator = Handlebars.compile(templateSrc);
+historytemplateSrc = $('#history-template').html(),
+historyGenerator = Handlebars.compile(historytemplateSrc);
 
 
 loadRateData();
@@ -22,8 +26,12 @@ function loadRateData() {
     console.log(data);
     
     // 사진을 꼽아준다.
-    $('#rate-profilePhoto')
+    $('#history-profilePhoto')
       .attr('src', '/studyboot/upload/images/member/' + data.rateInfo[0].member.photo);
+    
+    // 이름과 평점을 꼽아준다. - 작업중..
+    $('#history-nick').val(data.rateInfo[0].member.nickName);
+    
     
     // bar 차트
     // 평점 데이터
@@ -160,15 +168,15 @@ $(document.body).bind('loaded-rateData', () => {
   
   var ctx = $('#rate-barChart');
   myBarChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: barChartData1,
       options: {
           legend: {
               display: false
           },
           title: {
-            display: true,
-            text: '평점 및 출석률'
+              display: true,
+              text: '평점'
           },
           scales: {
               yAxes: [{
@@ -190,8 +198,8 @@ $(document.body).bind('loaded-rateData', () => {
               display: false
           },
           title: {
-            display: true,
-            text: '평점 및 출석률'
+              display: true,
+              text: '출석률'
           },
           scales: {
               yAxes: [{
@@ -220,33 +228,75 @@ $(document.body).bind('loaded-rateData', () => {
           }]
       },
       options: {
+          title: {
+              display: true,
+              text: '참여한 스터디'
+          },
+          legend: {
+              display: false
+          }
       }
-  });
-  
-  
-  $('#rateShow-btn').click(() => {
-    $('#atn-barChart').prop('hidden', true);
-    $('#rate-barChart').prop('hidden', false);
-  });
-
-  $('#atnShow-btn').click(() => {
-    $('#rate-barChart').prop('hidden', true);
-    $('#atn-barChart').prop('hidden', false);
   });
   
 });
 
+loadHistory(pageNo);
 
-loadHistory();
-
-function loadHistory() {
-  $.getJSON('../../app/json/member/history',
+function loadHistory(pn) {
+  $.getJSON('../../app/json/member/history?pageNo=' + pn + '&pageSize=' + 3,
       function(data) {
     
-    console.log(data.history);
+    console.log(data);
+    
+    $('#history-tbody').html('');
+    
+    if(data.pageNo != 0){
+
+      pageNo = data.pageNo;
+
+      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
+      $(historyGenerator(data)).appendTo('#history-tbody');
+
+      // 현재 페이지의 번호를 갱신한다.
+      currSpan.html(String(pageNo));
+
+      // 1페이지일 경우 버튼을 비활성화 한다.
+      if (pageNo == 1) {
+        prevPage.addClass('disabled');
+      } else {
+        prevPage.removeClass('disabled');
+      }
+
+      // 마지막 페이지일 경우 버튼을 비활성화 한다.
+      if (pageNo == data.totalPage) {
+        nextPage.addClass('disabled');
+      } else {
+        nextPage.removeClass('disabled');
+      }
+
+    } else{
+      currSpan.html(data.pageNo);
+      prevPage.addClass('disabled');
+      nextPage.addClass('disabled');
+    }
+    
+    // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+    $(document.body).trigger('loaded-list');
     
   });
 }
+
+// 페이지 버튼 이벤트 등록
+$('#history-prevPage > a').click((e) => {
+  e.preventDefault();
+  loadHistory(pageNo - 1);
+});
+
+$('#history-nextPage > a').click((e) => {
+  e.preventDefault();
+  loadHistory(pageNo + 1);
+});
+
 
 
 

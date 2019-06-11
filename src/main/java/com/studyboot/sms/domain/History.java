@@ -3,10 +3,9 @@ package com.studyboot.sms.domain;
 import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@SuppressWarnings("serial")
-public class History extends Member {
+public class History {
   
-  private int studyName;
+  private String studyName;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
   private Date joinDate;
@@ -22,11 +21,11 @@ public class History extends Member {
         + endDate + ", attendance=" + attendance + "]";
   }
 
-  public int getStudyName() {
+  public String getStudyName() {
     return studyName;
   }
 
-  public void setStudyName(int studyName) {
+  public void setStudyName(String studyName) {
     this.studyName = studyName;
   }
 
