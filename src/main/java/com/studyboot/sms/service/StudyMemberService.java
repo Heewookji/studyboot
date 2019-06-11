@@ -14,6 +14,7 @@ public interface StudyMemberService {
   int attendUpdate(Map<String, Object> map);
   StudyMember findMyStudyByNo(Map<String, Object> map);
   List<StudyMember> rateInfo(int no);
-  List<History> userHistory(int no);
+  List<History> userHistory(int no, int pageNo, int pageSize);
+  int size(int no);
 }
 

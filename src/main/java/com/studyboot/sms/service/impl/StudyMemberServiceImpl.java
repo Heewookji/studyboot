@@ -1,5 +1,6 @@
 package com.studyboot.sms.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
@@ -66,8 +67,18 @@ public class StudyMemberServiceImpl implements StudyMemberService {
   }
   
   @Override
-  public List<History> userHistory(int no) {
-    return studyMemberDao.findHistoryByMemberId(no);
+  public List<History> userHistory(int no, int pageNo, int pageSize) {
+    Map<String,Object> params = new HashMap<>();
+    params.put("memberNo", no);
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    
+    return studyMemberDao.findHistoryByMemberId(params);
+  }
+  
+  @Override
+  public int size(int no) {
+    return studyMemberDao.countAll(no);
   }
 }
 

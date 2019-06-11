@@ -1,10 +1,10 @@
   <!-- 나의 평점 -->
-  <div class="modal fade" id="rateModal" tabindex="-1" role="dialog"
+  <div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-pie-chart"></i>나의 평가</h5>
+          <h5 class="modal-title"><i class="fa fa-pie-chart"></i>History</h5>
           <button type="button" class="close" data-dismiss="modal"
             aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -16,26 +16,31 @@
             <div class="row g-mb-20">
               <div class="col-md-6">
                 <figure class="text-center">
-                  <img id="rate-profilePhoto" class="img-thumbnail"
+                  <span id="history-nick"></span>
+                  <div></div>
+                  <img id="history-profilePhoto" class="img-thumbnail"
                     alt="Image Description" style="height: 200px;">
                 </figure>
               </div>
               <div class="col-md-6">
-                <div class="g-mb-20">
-                  <canvas id="rate-barChart" width="200" height="200"></canvas>
-                  <canvas id="atn-barChart" width="200" height="200" hidden="true"></canvas>
-                  <button id="rateShow-btn" class="btn u-btn-purple u-btn-inset btn-sm" type="button">평점</button>
-                  <button id="atnShow-btn" class="btn u-btn-purple u-btn-inset btn-sm" type="button">출석률</button>
-                </div>
                 <div>
                   <canvas id="pieChart" width="200" height="200"></canvas>
                 </div>
               </div>
             </div>
             
+            <div class="row g-mb-20">
+              <div class="col-md-6">
+                <canvas id="rate-barChart" width="200" height="200"></canvas>
+              </div>
+              <div class="col-md-6">
+                <canvas id="atn-barChart" width="200" height="200"></canvas>
+              </div>
+            </div>
+            
             <div class="row">
               <div class="container">
-                <div class="endStudylist">
+                <div class="row g-min-height-200">
                   <table class="table table-hover">
                     <thead>
                       <tr>
@@ -45,24 +50,19 @@
                         <th scope="col">출석률</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="history-tbody"></tbody>
                   </table>
                 </div>
-            
-                <div class="row">
-                  <div class="col-12">
-                    <nav aria-label="목록 페이지 이동">
-                      <ul class="pagination justify-content-center">
-                        <li id="prevPage" class="page-item"><a
-                          class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
-                        <li id="currPage" class="page-item active"><span
-                          class="page-link">1</span></li>
-                        <li id="nextPage" class="page-item "><a
-                          class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
+                <nav aria-label="목록 페이지 이동">
+                  <ul class="pagination justify-content-center">
+                    <li id="history-prevPage" class="page-item"><a
+                      class="page-link" href="#">이전</a></li>
+                    <li id="history-currPage" class="page-item active"><span
+                      class="page-link">1</span></li>
+                    <li id="history-nextPage" class="page-item "><a
+                      class="page-link" href="#">다음</a></li>
+                  </ul>
+                </nav>
               </div>
               <!-- .container -->
             </div>
@@ -79,12 +79,13 @@
   <!-- 나의 평점 -->
   
   
-<script id="tr-template" type="text/x-handlebars-template">
-{{#each list}}
+<script id="history-template" type="text/x-handlebars-template">
+{{#each history}}
 <tr>
-<td>{{messagePerson.nickName}}</td>
-<td align="center">{{title}}</td>
-<td align="center">{{date}}</td>
+<td>{{studyName}}</td>
+<td>{{joinDate}}</td>
+<td>{{endDate}}</td>
+<td align="center">{{attendance}}%</td>
 </tr>
 {{/each}}
 </script>
