@@ -74,7 +74,7 @@
      </foreach>
     </if>
     <if test="member_ids == null">
-     recv_id=6
+     recv_id = #{userNo}
     </if>
     </where>
     order by 
@@ -102,7 +102,7 @@
      </foreach>
     </if>
     <if test="member_ids == null">
-     send_id=6
+     send_id = #{userNo}
     </if>
     </where>
     order by 
@@ -122,7 +122,7 @@
     </foreach>
     </if>
     <if test="member_ids == null">
-      recv_id=6
+      recv_id = #{userNo}
     </if>
   </select>
   
@@ -136,7 +136,7 @@
     </foreach>
     </if>
     <if test="member_ids == null">
-      send_id=6
+      send_id = #{userNo}
     </if>
   </select>
   

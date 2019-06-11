@@ -61,12 +61,11 @@ function loadList(pn, keyword) {
 
 
 function loadList2(pn, keyword) {
-  alert("loadList2 실행");
 
   $.getJSON('../../app/json/message/listsend?pageNo=' + pn + '&pageSize=' + pageSize
       + "&keyword=" + keyword,
       function(obj2) {
-    alert("loadList2 getJSON 후 콜백 함수");
+
     tbody.html('');
 
     if(obj2.pageNo != 0){
@@ -130,7 +129,7 @@ $('#nextPage > a').click((e) => {
 
 $('#recvPage').click((e) => {
   e.preventDefault();
-  $('#currCls').html("받은 쪽지함");
+  currCls.html("받은 쪽지함");
   $(message).html("보낸 회원");
   keyword = '';
   $('#checkAll').prop('checked', false);
@@ -139,10 +138,10 @@ $('#recvPage').click((e) => {
 
 $('#sendPage').click((e) => {
   e.preventDefault();
-  $('#currCls').html("보낸 쪽지함");
+  currCls.html("보낸 쪽지함");
   $(message).html("받은 회원");
   keyword = '';
-  $('#checkAll').prop('checked', false);  
+  $('#checkAll').prop('checked', false);
   loadList2(1);
 });
 
@@ -185,6 +184,7 @@ $('#messageForm-btn').click((e) => {
 $('#recv_id').val("");
 $('#message_contents').val("");
 $('#title').val("");
+$('#sendNo').val(6);
 $('.sspctForm-Format').removeClass('std-invisible');
 });
 
@@ -193,6 +193,7 @@ $('#message_contents').val("");
 $('#title').val("");
 $('.sspctForm-Format').removeClass('std-invisible');
 $('#recv_id').val($(e.target).attr('data-content'));
+$('#sendNo').val(6);
 });
 
 $('#msg-response').click((e) => {
@@ -200,6 +201,7 @@ $('#msg-response').click((e) => {
   $('#title').val("");
   $('.sspctForm-Format').removeClass('std-invisible');
   $('#recv_id').val($('#nickName').html());
+  $('#sendNo').val(6);
 });
 
 });
@@ -211,6 +213,7 @@ type: 'post',
 dataType: 'text',
 data: {
 nickName : $(recv_id).val(),
+sendNo: $(sendNo).val(),
 title: $(title).val(),
 contents: $(message_contents).val()
 },
