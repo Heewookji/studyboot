@@ -97,7 +97,18 @@
               </div>
               <!-- End Panel Header -->
               
-                <!-- Profle Content -->
+<!-- 메인 컨텐츠 (스터디 정보 변경과 스터디 가입 승인관리) -->
+      <!-- Profle Content -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20" role="tablist" data-target="nav-1-1-default-hor-left-underline" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
+          <li class="nav-item">
+            <a class="nav-link g-py-10 active" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1" role="tab">Study Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2" role="tab">register approval</a>
+          </li>
+        </ul>
+        <!-- End Nav tabs -->
 
         <!-- Tab panes -->
         <div id="nav-1-1-default-hor-left-underline" class="tab-content">
@@ -165,65 +176,119 @@
 
           <!-- Security Settings -->
           <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--2" role="tabpanel" data-parent="#nav-1-1-default-hor-left-underline">
-            <h2 class="h4 g-font-weight-300">Security Settings</h2>
-            <p class="g-mb-25">Reset your password, change verifications and so on.</p>
+            <!-- <h2 class="h4 g-font-weight-300">Security Settings</h2>
+            <p class="g-mb-25">Reset your password, change verifications and so on.</p> -->
 
-            <form>
-              <!-- Current Password -->
-              <div class="form-group row g-mb-25">
-                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Current password</label>
-                <div class="col-sm-9">
-                  <div class="input-group g-brd-primary--focus">
-                    <input id="password" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="Current password">
-                    <div class="input-group-append">
-                      <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Current Password -->
+<!-- 가입신청 넣은 회원들의 리스트 정보 -->
+<!-- Team Block -->
+<div class="row">
+<div style="width: 350px; margin: 30px 0px 30px; padding: 0px 15px;">
+    <figure class="g-brd-around g-brd-gray-light-v4 g-rounded-4 g-pa-15">
+      <div class="media g-mb-20">
+        <div class="d-flex g-mr-20">
+          <div class="g-brd-around g-brd-3 g-brd-gray-light-v3 rounded-circle">
+            <img class="rounded-circle g-width-50 g-height-50" src="/studyboot/upload/images/bboo.png" Image Description">
+          </div>
+        </div>
+        <div class="media-body">
+          <h4 class="h5 g-mb-2">박보영씨 입니다.</h4>
+          <div class="d-block">
+            <i class="g-color-primary g-font-size-default icon-location-pin"></i>
+            <span class="g-color-gray-dark-v4 g-font-size-13">이곳에 별점</span>
+          </div>
+        </div>
+      </div>
 
-              <!-- New Password -->
-              <div class="form-group row g-mb-25">
-                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">New password</label>
-                <div class="col-sm-9">
-                  <div class="input-group g-brd-primary--focus">
-                    <input id="newPassword" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="New password">
-                    <div class="input-group-append">
-                      <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End New Password -->
+       <div style="height: 100px;">
+      <p>ㅇㅇㅇㅇㅇㅇㅇ하이루gdfgdgdfgdfgdfgdfgdfgdgf아녕하시게나 이사람들아 ㅎㅎㅎㅎㅁㄴㅇㄻㄴ</p>
+	  </div>
 
-              <!-- Verify Password -->
-              <div class="form-group row g-mb-25">
-                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Verify password</label>
-                <div class="col-sm-9">
-                  <div class="input-group g-brd-primary--focus">
-                    <input id="verifyPassword" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="Verify password">
-                    <div class="input-group-append">
-                      <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Verify Password -->
+      <hr class="g-brd-gray-light-v4 g-my-20">
 
-              <hr class="g-brd-gray-light-v4 g-my-25">
+      <ul class="d-flex justify-content-between list-inline g-mb-0">
+        <li class="list-inline-item">
+          <a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+            <i class="icon-finance-206 u-line-icon-pro"></i>
+            <span class="g-ml-5">승인</span>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+            <i class="icon-finance-175 u-line-icon-pro"></i>
+            <span class="g-ml-5">거절</span>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+            <i class="icon-christmas-043 u-line-icon-pro"></i>
+            <span class="g-ml-5">회원정보</span>
+          </a>
+        </li>
+      </ul>
+    </figure>
+  </div>
 
-              <div class="text-sm-right">
-                <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#" id="sb-password-cancel">Cancel</a>
-                <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25" href="#" id="sb-password-change">Save Changes</a>
-              </div>
-            </form>
+<div style="width: 350px; margin: 30px 0px 30px; padding: 0px 15px;">
+    <figure class="g-brd-around g-brd-gray-light-v4 g-rounded-4 g-pa-15">
+      <div class="media g-mb-20">
+        <div class="d-flex g-mr-20">
+          <div class="g-brd-around g-brd-3 g-brd-gray-light-v3 rounded-circle">
+            <img class="rounded-circle g-width-50 g-height-50" src="/studyboot/upload/images/bboo.png" Image Description">
+          </div>
+        </div>
+        <div class="media-body">
+          <h4 class="h5 g-mb-2">Mikel Andrews</h4>
+          <div class="d-block">
+            <i class="g-color-primary g-font-size-default icon-location-pin"></i>
+            <span class="g-color-gray-dark-v4 g-font-size-13">California, US</span>
+          </div>
+        </div>
+      </div>
+       
+      <div style="height: 100px;">
+      <p>ㅇㅇㅇㅇㅇㅇㅇ하이루gdfgdgdfgdfgdfgdfgdfgdgf아녕하시게나 이사람들아 ㅎㅎㅎㅎㅁㄴㅇㄻㄴ</p>
+	  </div>
+
+      <hr class="g-brd-gray-light-v4 g-my-20">
+
+      <ul class="d-flex justify-content-between list-inline g-mb-0">
+        <li class="list-inline-item">
+          <a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+            <i class="icon-finance-206 u-line-icon-pro"></i>
+            <span class="g-ml-5">Comment</span>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+            <i class="icon-finance-175 u-line-icon-pro"></i>
+            <span class="g-ml-5">Pin</span>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+            <i class="icon-christmas-043 u-line-icon-pro"></i>
+            <span class="g-ml-5">Notification</span>
+          </a>
+        </li>
+      </ul>
+    </figure>
+  </div>
+  
+  
+  
+</div>
+<!-- End Team Block -->
+
+
+
+
           </div>
           <!-- End Security Settings -->
 
         </div>
         <!-- End Tab panes -->
       <!-- End Profle Content -->
+
 
   
  </div>
