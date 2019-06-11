@@ -17,42 +17,48 @@ public class MessageServiceImpl implements MessageService {
   }
 
   @Override
-  public List<Message> list(int pageNo, int pageSize, List<Integer> memberNos) {
+  public List<Message> list(int pageNo, int pageSize, 
+      List<Integer> memberNos, int loginNo) {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("member_ids", memberNos);
+    params.put("userNo", loginNo);
 
     return messageDao.findAll(params);
   }
 
   @Override
-  public List<Message> list2(int pageNo, int pageSize, List<Integer> memberNos) {
+  public List<Message> list2(int pageNo, int pageSize, 
+      List<Integer> memberNos, int loginNo) {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("member_ids", memberNos);
+    params.put("userNo", loginNo);
 
     return messageDao.findAll2(params);
   }
 
   @Override
-  public int size(List<Integer> memberNos) {
+  public int size(List<Integer> memberNos, int loginNo) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("member_ids", memberNos);
+    params.put("userNo", loginNo);
 
     int count = messageDao.countAll(params);
     return count;
   }
   
   @Override
-  public int size2(List<Integer> memberNos) {
+  public int size2(List<Integer> memberNos, int loginNo) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("member_ids", memberNos);
+    params.put("userNo", loginNo);
 
     int count = messageDao.countAll2(params);
     return count;

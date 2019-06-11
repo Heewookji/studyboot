@@ -2,6 +2,7 @@ package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,13 +24,19 @@ public class MessageController {
   @Autowired MemberService memberService;
 
   @PostMapping("add")
-  public Object add(Message message, Member member) {
+  public Object add(Message message, Member member,
+                    HttpSession session) {
 
+    // 로그인한 유저의 정보를 담는다.
+    Member loginUser = (Member) session.getAttribute("loginUser"); 
+    int loginNo = loginUser.getNo();
+    
     HashMap<String,Object> content = new HashMap<>();
 
     String nickName = member.getNickName();
     int memberNo = memberService.findByNickName(nickName);
     message.setRecvNo(memberNo);
+    message.setSendNo(loginNo);
 
     try {
       messageService.add(message);
@@ -91,8 +98,14 @@ public class MessageController {
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
-      @RequestParam String keyword) {
-
+      @RequestParam String keyword,
+      HttpSession session) {
+    
+    // 로그인한 유저의 정보를 담는다.
+    Member loginUser = (Member) session.getAttribute("loginUser"); 
+    int loginNo = loginUser.getNo();
+    System.out.println(loginNo);
+    
     HashMap<String,Object> content = new HashMap<>();
 
     List<Message> message;
@@ -110,7 +123,7 @@ public class MessageController {
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
-    int rowCount = messageService.size(memberNos); 
+    int rowCount = messageService.size(memberNos, loginNo); 
 
     if (rowCount == 0) {
       content.put("pageNo", 0);
@@ -127,7 +140,7 @@ public class MessageController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
 
-    message = messageService.list(pageNo, pageSize, memberNos);
+    message = messageService.list(pageNo, pageSize, memberNos, loginNo);
 
     content.put("list", message);
     content.put("pageNo", pageNo);
@@ -141,9 +154,15 @@ public class MessageController {
   public Object list2(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
-      @RequestParam String keyword
+      @RequestParam String keyword,
+      HttpSession session
       ) {
 
+    // 로그인한 유저의 정보를 담는다.
+    Member loginUser = (Member) session.getAttribute("loginUser"); 
+    int loginNo = loginUser.getNo();
+    System.out.println(loginNo);
+    
     HashMap<String,Object> content = new HashMap<>();
 
     List<Message> message;
@@ -161,7 +180,7 @@ public class MessageController {
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
 
-    int rowCount = messageService.size2(memberNos); 
+    int rowCount = messageService.size2(memberNos, loginNo); 
 
     if (rowCount == 0) {
       content.put("pageNo", 0);
@@ -178,7 +197,7 @@ public class MessageController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
 
-    message = messageService.list2(pageNo, pageSize, memberNos);
+    message = messageService.list2(pageNo, pageSize, memberNos, loginNo);
 
     content.put("list", message);
     content.put("pageNo", pageNo);
