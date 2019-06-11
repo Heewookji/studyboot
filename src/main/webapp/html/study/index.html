@@ -83,27 +83,100 @@
      </button>
     </div>
     <div class="modal-body">
-     <div class="rateit" data-rateit-mode="font" style="font-size: 30px"
-      data-rateit-resetable="false"></div>
-     <form action="add" class="study-add-form">
+     <!--      <div class="rateit" data-rateit-mode="font" style="font-size: 30px"
+      data-rateit-resetable="false"></div> -->
 
-      <div class="form-group">
-       <label for="name" class="col-form-label">스터디 이름</label> <input
-        type="text" class="form-control" id="name" name="name">
 
-       <label for="cls" class="">스터디 분류</label> <input type="text"
-        class="form-control" id="cls" name='cls'> <label
-        for="address" class="">스터디 지역</label> <input type="text"
-        class="form-control" id="address" name='address'> <label
-        for="goal" class="">스터디 목표</label> <input type="text"
-        class="form-control" id="goal" name='goal'>
 
+     <form action="add" class="study-add-form g-pa-10">
+
+      <!-- Text Input -->
+      <div class="row">
+       <div class="form-group g-mb-20 col-7">
+        <label class="g-mb-10" for="name">이름</label> <input
+         id="inputGroup1_1"
+         class="form-control form-control-md rounded-0" id="name"
+         type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!">
+       </div>
       </div>
+      <!-- End Text Input -->
+
+      <!-- Text Input -->
+      <div class="row">
+       <div class="form-group g-mb-20 col">
+        <label class="g-mb-10" for="goal">목표</label> <input
+         id="inputGroup1_1"
+         class="form-control form-control-md rounded-0" id="goal"
+         name='goal' type='text' placeholder="스터디 대표 이름을 입력해주세요!">
+       </div>
+      </div>
+      <!-- End Text Input -->
+
+      <!-- Checkbox -->
+      <div class="row g-mb-30 g-pl-10 g-pr-30 g-py-5 day-checkbox">
+      <label class="g-mb-10" for="dayCheck">목표</label>
+       <!-- Left Column -->
+       <div class="col" id="dayCheck">
+        <div class="form-group g-mb-10">
+         <label class="u-check g-pl-30"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox" value="1">
+          <div
+           class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+           <i class="fa" data-check-icon="&#xf00c"></i>
+          </div> 월요일
+         </label>
+        </div>
+        <!-- End Checkbox -->
+
+        <!-- Checkbox -->
+        <div class="form-group g-mb-10">
+         <label class="u-check g-pl-30"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox" value="2">
+          <div
+           class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+           <i class="fa" data-check-icon="&#xf00c"></i>
+          </div> 화요일
+         </label>
+        </div>
+        <!-- End Checkbox -->
+
+        <!-- Checkbox -->
+        <div class="form-group g-mb-10">
+         <label class="u-check g-pl-30"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox" value="4">
+          <div
+           class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+           <i class="fa" data-check-icon="&#xf00c"></i>
+          </div> 수요일
+         </label>
+        </div>
+        <!-- End Checkbox -->
+
+        <!-- Checkbox -->
+        <div class="form-group g-mb-10">
+         <label class="u-check g-pl-30"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox" value="8">
+          <div
+           class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+           <i class="fa" data-check-icon="&#xf00c"></i>
+          </div> 목요일
+         </label>
+        </div>
+        <!-- End Checkbox -->
+       </div>
+       </div>
+
+      <label for="cls" class="">스터디 분류</label> <input type="text"
+       class="form-control" id="cls" name='cls'> <label
+       for="address" class="">스터디 지역</label> <input type="text"
+       class="form-control" id="address" name='address'>
 
       <div class="study-add study-add">
-       <label for="photo" class="">스터디 사진</label> <input type="text"
-        class="form-control" id="photo" name='photo'> <label
-        for="day" class="">스터디 요일</label> <input type="text"
+       <label for="day" class="">스터디 요일</label> <input type="text"
         class="form-control" id="day" name='day'> <label
         for="personnel" class="">스터디 인원</label> <input type="text"
         class="form-control" id="personnel" name='personnel'>
@@ -119,7 +192,6 @@
         cols="150" rows="7"></textarea>
       </div>
      </form>
-
     </div>
     <div class="modal-footer">
      <button type="button" class="btn btn-secondary"
@@ -129,7 +201,9 @@
    </div>
   </div>
  </div>
+
  <!-- #stdAddModal -->
+
 
 
  <!-- Page Title -->

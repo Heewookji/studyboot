@@ -458,6 +458,8 @@ $('#stdAddModal').on('shown.bs.modal', function (e) {
   });
 })
 
+$('#stdAddModal').modal('show');
+
 
 //뒤로가기 -진행중
 //생성 폼에서 입력받는 도중에 페이지 이동이 감지되면 작성중인 글이 있다는 알터창을 띄우고 싶은데
