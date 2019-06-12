@@ -199,40 +199,75 @@
 
       <div class="row">
 
-       <div class="form-group g-mb-20 col">
+       <div class="form-group g-mb-20 col  w-100">
         <label class="g-mb-10" for="name">활동 시작일</label> <input
-         id="startDate" width="200" class="form-control form-control-md rounded-0" />
+         id="startDate" class="form-control form-control-md rounded-0" />
        </div>
-      <div class="form-group g-mb-20 col">
+      <div class="form-group g-mb-20 col w-100">
        <label class="g-mb-10" for="name">활동 종료일</label> <input
-        id="endDate" width="200" class="form-control form-control-md rounded-0" />
+        id="endDate"class="form-control form-control-md  rounded-0" />
       </div>
     </div>
-    
+   
     
     <div class="row">
- <select class="ui dropdown">
+    
+    
+    <div class="form-group col g-mb-20">
+    <label class="g-mb-10" for="name">활동 지역</label>
+ <select class="ui dropdown rounded-0 g-height-40 w-100 g-mb-10">
   <option value="">Gender</option>
   <option value="1">Male</option>
   <option value="0">Female</option>
 </select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+</div>
+
+ <div class="form-group g-mb-20 col">
+ <label class="g-mb-10" for="name">활동 분야</label>
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100 g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+</div>
+
    </div>
 
- <div class="study-add study-add">
-   <label for="cls" class="">스터디 분류</label> <input type="text"
-    class="form-control" id="cls" name='cls'> <label
-    for="address" class="">스터디 지역</label> <input type="text"
-    class="form-control" id="address" name='address'>
 
-    <label for="contents" class="">스터디 설명</label>
-    <textarea class="form-control" id="contents" name='contents'
-     cols="150" rows="7"></textarea>
-   </div>
-
-
-
+<!-- Textarea -->
+  <div class="form-group g-mb-20">
+    <label class="g-mb-10" for="contents">설명</label>
+    <textarea id="contents" name='contents' class="form-control form-control-md g-resize-none rounded-0" rows="5" placeholder="Text area"></textarea>
+  </div>
 
    </form>
+   
   </div>
   <div class="modal-footer">
    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
