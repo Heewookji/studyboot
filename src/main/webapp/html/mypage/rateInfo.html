@@ -1,3 +1,4 @@
+ 
   <!-- 나의 평점 -->
   <div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -16,8 +17,10 @@
             <div class="row g-mb-20">
               <div class="col-md-6">
                 <figure class="text-center">
-                  <span id="history-nick"></span>
-                  <div></div>
+                  <figcaption>
+                    <span id="history-nick"><strong></strong></span>
+                    <div id="history-rate" class="rateit" data-rateit-mode="font" style="font-size: 30px" data-rateit-resetable="false"></div>
+                  </figcaption>
                   <img id="history-profilePhoto" class="img-thumbnail"
                     alt="Image Description" style="height: 200px;">
                 </figure>
@@ -90,6 +93,7 @@
 {{/each}}
 </script>
 
+<script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
 <script src="rateInfo.js"></script>
 
 

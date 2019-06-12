@@ -51,53 +51,10 @@
 <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
 <!-- CSS Customization -->
+<link rel="stylesheet"
+ href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
-<style type="text/css">
-/* rating star css */
-
-/* Ratings widget */
-.rate {
-    display: inline-block;
-    pointer-events: none;
-    border: 0;
-}
-/* Hide radio */
-.rate > input {
-    display: none;
-}
-/* Order correctly by floating highest to the right */
-.rate > label {
-    float: right;
-    margin: 0;
-}
-/* The star of the show */
-.rate > label:before {
-    display: inline-block;
-    font-size: 2rem;
-    padding: 0rem .2rem;
-    margin: 0;
-    cursor: pointer;
-    font-family: FontAwesome;
-    content: "\f005 "; /* full star */
-}
-
-/* Half star trick */
-.rate .half:before {
-    content: "\f089 "; /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
-/* Click + hover color */
-input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: rgb(255, 230, 0);  } /* color previous stars on hover */
-
-/* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
-/* rating star css */
-</style>
 
 </head>
 
@@ -203,6 +160,8 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
           <figure>
             <img id="profilePhoto" class="img-fluid w-100 u-block-hover__main--zoom-v1"
               alt="Image Description">
+          
+           
           
             <!-- Figure Caption -->
             <figcaption
@@ -516,6 +475,8 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
   <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
   <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
   <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+  <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
   
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
