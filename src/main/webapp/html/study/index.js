@@ -478,7 +478,7 @@ $('#stdAddModal').on('shown.bs.modal', function (e) {
   });
 })
 
-$('#stdAddModal').modal('show');
+$('#exampleModalCenter').modal('show');
 
 
 //뒤로가기 -진행중
