@@ -232,7 +232,10 @@ public class MemberController {
   }
   
   @GetMapping("history")
-  public Object history(HttpSession session) {
+  public Object history(
+      HttpSession session,
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="3") int pageSize) {
 
     Member loginUser = (Member)session.getAttribute("loginUser");
     
@@ -240,12 +243,33 @@ public class MemberController {
 
     if (loginUser != null) {
       
-      List<History> history = studyMemberService.userHistory(loginUser.getNo());
-      
-      if(history != null) {
-        content.put("history", history);
+      if (pageSize < 3 || pageSize > 8) 
+        pageSize = 3;
+
+      int rowCount = studyMemberService.size(loginUser.getNo()); 
+
+      if (rowCount == 0) {
+        content.put("pageNo", 0);
+        content.put("status", "success");
+        return content;
       }
+
+      int totalPage = rowCount / pageSize;
+
+      if (rowCount % pageSize > 0)
+        totalPage++;
+
+      if (pageNo < 1) 
+        pageNo = 1;
+      else if (pageNo > totalPage)
+        pageNo = totalPage;
       
+      List<History> history = studyMemberService.userHistory(loginUser.getNo(), pageNo, pageSize);
+      
+      content.put("history", history);
+      content.put("pageNo", pageNo);
+      content.put("pageSize", pageSize);
+      content.put("totalPage", totalPage);
       content.put("status", "success");
       
     } else {

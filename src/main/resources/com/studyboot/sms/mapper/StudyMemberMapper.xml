@@ -52,7 +52,7 @@
   
   <!-- 회원의 평가 정보 -->
   <resultMap type="history" id="historyMap">
-    <result column="std_name" property="studyName"/>
+    <result column="name" property="studyName"/>
     <result column="join_date" property="joinDate" />
     <result column="end_date" property="endDate" />
     <result column="atn_pct" property="attendance" />
@@ -141,7 +141,7 @@
 
   
   <!-- 회원의 히스토리 가져오기 -->
-  <select id="findHistoryByMemberId" resultMap="historyMap" parameterType="int">
+  <select id="findHistoryByMemberId" resultMap="historyMap" parameterType="map">
     select
       s.name,
       sm.join_date,
@@ -151,7 +151,21 @@
       sms_std_member sm
       inner join sms_std s on sm.std_id = s.std_id
     where
-      sm.member_id = #{value} and sm.end_date is not null
+      sm.member_id = #{memberNo} and sm.end_date is not null
+    order by
+      sm.join_date desc
+    <if test="size != null and rowNo != null">
+    limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="countAll" resultType="int" parameterType="int">
+    select
+      count(*)
+    from
+      sms_std_member
+    where 
+      member_id = #{value} and end_date is not null
   </select>
   
 </mapper>
