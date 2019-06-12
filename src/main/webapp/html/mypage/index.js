@@ -16,6 +16,7 @@ ratingForm = $("#rating-form");
 // 페이지가 준비되면 평점 정보 모달창을 꽂아준다.
 $( document ).ready(function() {
   $("#sb-history").load("rateInfo.html")
+  $(document.body).trigger('loaded-history');
 });
 
 // 프사 모달 닫힐 때
@@ -219,6 +220,7 @@ $('#inqryForm-btn').click((e) => {
   $('#sspctNo').val(0);
   $('#inqryClsNo').val(1);
 });
+
 
 // inquiry add
 $('#inqryAdd-btn').click((e) => {
