@@ -57,20 +57,40 @@
  href="../../node_modules/cropperjs/dist/cropper.min.css">
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
+  <style>
+    .container {
+      margin: 20px auto;
+      max-width: 640px;
+    }
 
+    img {
+      max-width: 100%;
+    }
+  </style>
 </head>
-
 <body>
-<div>
-  <img id="image" src="../../upload/images/member/vven.jpg">
-</div>
-
+  <div class="container">
+    <h1>One to one crop box</h1>
+    <p>The image displays in its natural size, so the size of the crop box size equals real cropped size.</p>
+    <h3>Image</h3>
+    <div>
+      <img id="image" src="../../upload/images/member/vven.jpg" alt="Picture">
+    </div>
+    <p>Data: <span id="data"></span></p>
+    <p>Crop Box Data: <span id="cropBoxData"></span></p>
+    <h3>Result</h3>
+    <p>
+      <button type="button" id="button">Crop</button>
+    </p>
+    <div id="result"></div>
+  </div>
+  
 
 
 
 
   <!-- JS Global Compulsory -->
-  <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+  <c                                                                                              src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
   <script
     src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
   <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
@@ -124,25 +144,138 @@
   <script src="../header.js"></script>
   <script src="../footer.js"></script>
   <script src="index.js"></script>
+  <script src="test.js"></script>
   <!-- JS Plugins Init. -->
+  
   <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var image = document.querySelector('#image');
+      var data = document.querySelector('#data');
+      var cropBoxData = document.querySelector('#cropBoxData');
+      var button = document.getElementById('button');
+      var result = document.getElementById('result');
+      var cropper = new Cropper(image, {
+        ready: function (event) {
+          // Zoom the image to its natural size
+          cropper.zoomTo(1);
+        },
+
+        crop: function (event) {
+          data.textContent = JSON.stringify(cropper.getData());
+          cropBoxData.textContent = JSON.stringify(cropper.getCropBoxData());w 
+        },
+
+        zoom: function (event) {
+          // Keep the image in its natural size
+          if (event.detail.oldRatio === 1) {
+            event.preventDefault();
+          }
+        },
+      });
+
+      button.onclick = function () {
+        result.innerHTML = '';
+        result.appendChild(cropper.getCroppedCanvas());
+      };
+    });
+  </script>
+  
+  
+  
+  
+  
+<!--   <script>
+
+function cropperInit() {
+  
+  const $image = $('#image');
+  
+  $image.cropper({
+    viewMode: 2,
+    dragMode: 'none',
+    aspectRatio: 1 / 1,
+    responsive: true,
+    crop(event) {
+      console.log(event.detail.x);
+      console.log(event.detail.y);
+      console.log(event.detail.width);
+      console.log(event.detail.height);
+      console.log(event.detail.rotate);
+      console.log(event.detail.scaleX);
+      console.log(event.detail.scaleY);
+    },
+    modal: true,
+    guides: false,
+    highlight: false,
+    preview: '#prev-image'
+  });
+}
 
 
-const $image = $('#image');
-$image.cropper({
-  viewMode: 2,
-  aspectRatio: 1 / 1,
-  crop(event) {
-    console.log(event.detail.x);
-    console.log(event.detail.y);
-    console.log(event.detail.width);
-    console.log(event.detail.height);
-    console.log(event.detail.rotate);
-    console.log(event.detail.scaleX);
-    console.log(event.detail.scaleY);
-  },
+
+$("#inputImage").change(function () {
+  readURL(this);
+  cropperInit();
 });
-</script>
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          // blob stuff
+          var blob = new Blob([e.target.result]); // create blob...
+          window.URL = window.URL || window.webkitURL;
+          var blobURL = window.URL.createObjectURL(blob); // and get it's URL
+          
+          // helper Image object
+          var image = new Image();
+          image.src = blobURL;
+          image.onload = function () {
+
+              for (var x = 0; x < self.ThumbSizes.length; x++) {
+                  // have to wait till it's loaded
+                  var resized = resizeMe(image, self.ThumbSizes[x]); // send it to canvas
+                  var resized_blob = dataURItoBlob(resized);
+                  uploadFile(resized_blob, self.ThumbSizes[x].Name);
+              }
+          }
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+
+
+
+
+
+
+
+
+$('#upload-btn').click((e) => {
+  
+  $image.cropper('getCroppedCanvas').toBlob(function (blob) {
+    var formData = new FormData();
+    console.log(blob);
+    formData.append('croppedImage', blob);
+  
+    $.ajax('../../app/json/member/photo', {
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function () {
+        console.log('Upload success');
+      },
+      error: function () {
+        console.log('Upload error');
+      }
+    });
+  });
+  
+});
+
+</script> -->
   
 </body>
 </html>

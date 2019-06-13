@@ -169,36 +169,37 @@ public class MemberController {
   @PostMapping("photo")
   public Object photo(
       HttpSession session,
-      Part files) throws Exception {
+      Part croppedImage) throws Exception {
     
-    Member loginUser = (Member) session.getAttribute("loginUser");
+    System.out.println(croppedImage);
+//    Member loginUser = (Member) session.getAttribute("loginUser");
     Map<String, Object> content = new HashMap<>();
     
-    if (files.getSize() <= 0) {
-      content.put("status", "fail");
-      return content;
-    }
-    
-    // 이미지 저장
-    String uploadDir = servletContext.getRealPath("/upload/images/member");
-    String filename = UUID.randomUUID().toString();
-    files.write(uploadDir + "/" + filename);
-    
-    // 썸네일 이미지 저장
-    Thumbnails.of(uploadDir + "/" + filename)
-    .size(100, 100)
-    .outputFormat("jpg")
-    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-    
-    loginUser.setPhoto(filename);
-    
-    if(memberService.update(loginUser) != 0) {
-      content.put("loginUser", loginUser);
-      content.put("status", "success");
-      
-    } else {
-      content.put("status", "fail");
-    }
+//    if (croppedImage.getSize() <= 0) {
+//      content.put("status", "fail");
+//      return content;
+//    }
+//    
+//    // 이미지 저장
+//    String uploadDir = servletContext.getRealPath("/upload/images/member");
+//    String filename = UUID.randomUUID().toString();
+//    croppedImage.write(uploadDir + "/" + filename);
+//    
+//    // 썸네일 이미지 저장
+//    Thumbnails.of(uploadDir + "/" + filename)
+//    .size(100, 100)
+//    .outputFormat("jpg")
+//    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+//    
+//    loginUser.setPhoto(filename);
+//    
+//    if(memberService.update(loginUser) != 0) {
+//      content.put("loginUser", loginUser);
+//      content.put("status", "success");
+//      
+//    } else {
+//      content.put("status", "fail");
+//    }
     return content;
   }
   
