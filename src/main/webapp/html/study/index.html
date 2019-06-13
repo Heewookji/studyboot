@@ -96,7 +96,7 @@
 
 
  <!-- Modal -->
- <div class="modal fade" id="exampleModalCenter" role="dialog"
+ <div class="modal fade" id="stdAddModal" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
   data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -115,33 +115,36 @@
 
       <form action="add" class="study-add-form g-pa-10">
 
+
+<div class="rateit g-mb-10" data-rateit-mode="font" data-rateit-resetable="false" style="font-size:24px">
+</div>
+
        <!-- Text Input -->
        <div class="row">
         <div class="form-group g-mb-20 col-7">
          <label class="g-mb-10" for="name">이름</label> <input
-          id="inputGroup1_1"
           class="form-control form-control-md rounded" id="name"
           type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!">
         </div>
 
         <!-- Quantity -->
-        <div class="form-group col">
+        <div class="form-group col" id="limit">
          <label class="g-mb-10">인원</label>
          <div
           class="js-quantity input-group u-quantity-v1 g-width-170 g-height-40 g-brd-primary--focus">
           <div
            class="js-minus input-group-prepend rounded g-width-55 g-color-gray g-bg-white">
            <span class="input-group-text w-100"><i
-            class="fa fa-minus"></i></span>
+            class="ti ti-minus"></i></span>
           </div>
           <input
-           class="js-result form-control text-center rounded-0 g-pa-15"
-           type="text" value="0" readonly="">
+           class="js-result form-control text-center rounded-0 g-pa-15" 
+           type="text" value="2">
           <div
            class="js-plus input-group-append rounded  g-width-55 g-color-gray g-bg-grey-light-v3">
            <span
             class="input-group-text w-100 g-color-grey-light g-bg-white"><i
-            class="fa fa-plus"></i></span>
+            class="ti ti-plus"></i></span>
           </div>
          </div>
         </div>
@@ -257,212 +260,28 @@
        <!-- Textarea -->
        <div class="form-group g-mb-20">
         <label class="g-mb-10" for="contents">설명</label>
+        <div class="rounded">
         <textarea id="contents" name='contents'
-         class="form-control form-control-md g-resize-none rounded-0"
-         rows="5" placeholder="Text area"></textarea>
+         class="form-control form-control-md g-resize-none"
+         rows="5" placeholder="스터디에 관한 자세한 설명을 적어주세요"></textarea>
        </div>
+       </div>
+
 
       </form>
 
-
-
       <div class="col-4 ml-md-auto">
        <button type="button"
-        class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-16 g-rounded-30 g-py-13 ml-2 g-mt-0"
+        class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14 g-rounded-30 g-py-10 ml-2 g-mt-0 g-mb-10"
         data-dismiss="modal" id="init-btn">시작하기</button>
       </div>
      </div>
 
-
     </div>
    </div>
   </div>
  </div>
 
-
-
- <!-- 스터디 생성 -->
- <div class="modal fade" id="stdAddModal" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h5 class="modal-title" id="exampleModalLabel">스터디 생성</h5>
-     <button type="button" class="close" data-dismiss="modal"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
-    <div class="modal-body">
-
-
-
-     <form action="add" class="study-add-form g-pa-10">
-
-      <!-- Text Input -->
-      <div class="row">
-       <div class="form-group g-mb-20 col-7">
-        <label class="g-mb-10" for="name">이름</label> <input
-         id="inputGroup1_1"
-         class="form-control form-control-md rounded-0" id="name"
-         type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!">
-       </div>
-
-       <!-- Quantity -->
-       <div class="form-group col">
-        <label class="g-mb-10">인원</label>
-        <div
-         class="js-quantity input-group u-quantity-v1 g-width-170 g-height-40 g-brd-primary--focus">
-         <div
-          class="js-minus input-group-prepend g-width-55 g-color-gray g-bg-grey-light-v3">
-          <span class="input-group-text rounded-0 w-100"><i
-           class="fa fa-minus"></i></span>
-         </div>
-         <input
-          class="js-result form-control text-center rounded-0 g-pa-15"
-          type="text" value="0" readonly="">
-         <div
-          class="js-plus input-group-append g-width-55 g-color-gray g-bg-grey-light-v3">
-          <span
-           class="input-group-text rounded-0 w-100 g-color-grey-light"><i
-           class="fa fa-plus"></i></span>
-         </div>
-        </div>
-       </div>
-       <!-- End Quantity -->
-
-      </div>
-      <!-- End Text Input -->
-
-      <!-- Text Input -->
-      <div class="row">
-       <div class="form-group g-mb-20 col">
-        <label class="g-mb-10" for="goal">목표</label> <input
-         class="form-control form-control-md rounded-0" id="goal"
-         name='goal' type='text' placeholder="스터디 목표를 입력해주세요!">
-       </div>
-      </div>
-      <!-- End Text Input -->
-
-      <!-- Checkbox -->
-      <div class="row day-checkbox">
-       <div class="col g-mb-20" id="dayCheck">
-        <label class="g-mb-10">활동 요일</label>
-        <!-- Left Column -->
-        <div class="btn-group justified-content">
-         <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">월</span>
-         </label> <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">화</span>
-         </label> <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">수</span>
-         </label> <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">목</span>
-         </label> <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">금</span>
-         </label> <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">토</span>
-         </label> <label class="u-check g-pl-0"> <input
-          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-          type="checkbox"> <span
-          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">일</span>
-         </label>
-        </div>
-       </div>
-      </div>
-
-
-      <div class="row">
-
-       <div class="form-group g-mb-20 col  w-100">
-        <label class="g-mb-10" for="name">활동 시작일</label> <input
-         id="startDate" class="form-control form-control-md rounded-0" />
-       </div>
-       <div class="form-group g-mb-20 col w-100">
-        <label class="g-mb-10" for="name">활동 종료일</label> <input
-         id="endDate" class="form-control form-control-md  rounded-0" />
-       </div>
-      </div>
-
-
-      <div class="row">
-
-
-       <div class="form-group col g-mb-20">
-        <label class="g-mb-10" for="name">활동 지역</label> <select
-         class="ui dropdown rounded-0 g-height-40 w-100 g-mb-10">
-         <option value="">Gender</option>
-         <option value="1">Male</option>
-         <option value="0">Female</option>
-        </select> <select
-         class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
-         <option value="">Gender</option>
-         <option value="1">Male</option>
-         <option value="0">Female</option>
-        </select> <select
-         class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
-         <option value="">Gender</option>
-         <option value="1">Male</option>
-         <option value="0">Female</option>
-        </select>
-
-       </div>
-
-       <div class="form-group g-mb-20 col">
-        <label class="g-mb-10" for="name">활동 분야</label> <select
-         class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
-         <option value="">Gender</option>
-         <option value="1">Male</option>
-         <option value="0">Female</option>
-        </select> <select class="ui dropdown rounded-0 g-height-40 w-100 g-mb-10">
-         <option value="">Gender</option>
-         <option value="1">Male</option>
-         <option value="0">Female</option>
-        </select> <select
-         class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
-         <option value="">Gender</option>
-         <option value="1">Male</option>
-         <option value="0">Female</option>
-        </select>
-
-       </div>
-
-      </div>
-
-
-      <!-- Textarea -->
-      <div class="form-group g-mb-20">
-       <label class="g-mb-10" for="contents">설명</label>
-       <textarea id="contents" name='contents'
-        class="form-control form-control-md g-resize-none rounded-0"
-        rows="5" placeholder="Text area"></textarea>
-      </div>
-
-     </form>
-
-    </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">취소</button>
-     <button type="button" class="btn btn-primary" id="add-btn">생성</button>
-    </div>
-   </div>
-  </div>
- </div>
-
- <!-- #stdAddModal -->
 
 
 
@@ -517,6 +336,8 @@
 
      <!-- End Categories -->
 
+
+
      <!-- addr filter -->
      <h2 class="h5 text-uppercase g-color-gray-dark-v1"
       style="display: inline;">
@@ -530,7 +351,7 @@
 
       <div id="accordion-addr" class="u-accordion g-mb-30"
        role="tablist" aria-multiselectable="true">
-
+  
 
        <div class="card rounded-0 g-brd-none">
         <div id="accordion-laddr-heading"

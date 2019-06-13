@@ -35,7 +35,7 @@ $('#startDate').datepicker({
   iconsLibrary: 'fontawesome',
   minDate: today,
   maxDate: function () {
-      return $('#endDate').val();
+    return $('#endDate').val();
   }
 });
 $('#endDate').datepicker({
@@ -43,14 +43,14 @@ $('#endDate').datepicker({
   iconsLibrary: 'fontawesome',
   minDate: today,
   minDate: function () {
-      return $('#startDate').val();
+    return $('#startDate').val();
   }
 });
 $('.ui.dropdown')
 .dropdown()
 ;
-      
-      //JSON 형식의 데이터 목록 가져오기
+
+//JSON 형식의 데이터 목록 가져오기
 function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
   $.getJSON('../../app/json/study/list?pageNo=' + pageNo
@@ -459,6 +459,7 @@ $('#add-btn').click(function() {
 
 
 $('#stdAddModal').on('shown.bs.modal', function (e) {
+  
   $('.rateit').rateit({ 
     // min value
     min: 0, 
@@ -469,17 +470,102 @@ $('#stdAddModal').on('shown.bs.modal', function (e) {
     // 'bg', 'font'
     mode: 'font', 
     // size of star
-    starwidth: 16, 
-    starheight: 16, 
+    starwidth: 100, 
     // is readonly?
     readonly: false, 
     // is resetable?
     resetable: false, 
   });
+  
+  $('.rateit')
+  // if a direction if specified it will be obeyed
+  .transition('horizontal flip in')
+;
+ 
 })
 
-$('#exampleModalCenter').modal('show');
 
+$('#stdAddModal').modal('show');
+
+
+
+
+//이름 체크
+$( "#name" ).keyup(function(){
+  if(nickCheck($("#name").val()) == true){
+    if($("#name").attr("data-toggle")){
+      $('#name').tooltip('disable');
+      $('#name').tooltip('hide');
+    }
+  } else{
+    $("#name").attr("data-toggle","tooltip");
+    $("#name").attr("data-trigger","hover focus");
+    $("#name").attr("data-placement","bottom");
+    $("#name").attr("title","3~10자의 한글, 영문, 숫자만 사용할 수 있습니다");
+    $('#name').tooltip('enable');
+    $('#name').tooltip('show');
+  }
+});
+
+//닉네임 체크
+function nickCheck(str) {
+  if(str.length < 3 || str.length > 10) {
+    return false;
+  }
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+  for( var i = 0; i <= str.length -1 ; i++ )    {
+    if(chk.test(str.charAt(i))) {
+    }
+    else  {
+      return false;
+    }
+  }
+  return true;
+}
+
+//정원체크
+$('#limit').click(function(e) {
+  if($('#limit input').val() < 2){
+    $('#limit .input-group-append').click();
+  }
+  else if($('#limit input').val() > 10){
+    $('#limit .input-group-prepend').click();
+  }
+});
+
+$( "#goal" ).change(function(){
+  if($( "#goal" ).val().length > 15){
+    $("#goal").attr("data-toggle","tooltip");
+    $("#goal").attr("data-trigger","hover focus");
+    $("#goal").attr("data-placement","bottom");
+    $("#goal").attr("title","15자 이상으로 써주세요!");
+    $('#goal').tooltip('enable');
+    $('#goal').tooltip('show');
+    
+  } else{
+    if($("#goal").attr("data-toggle")){
+      $('#goal').tooltip('disable');
+      $('#goal').tooltip('hide');
+    }
+  }
+});
+
+
+//닉네임 체크
+function goalCheck(str) {
+  if(str.length < 5 || str.length > 15) {
+    return false;
+  }
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+  for( var i = 0; i <= str.length -1 ; i++ )    {
+    if(chk.test(str.charAt(i))) {
+    }
+    else  {
+      return false;
+    }
+  }
+  return true;
+}
 
 //뒤로가기 -진행중
 //생성 폼에서 입력받는 도중에 페이지 이동이 감지되면 작성중인 글이 있다는 알터창을 띄우고 싶은데
