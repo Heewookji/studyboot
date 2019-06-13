@@ -11,6 +11,26 @@ nosss = param.split('=')[1];
 //stdBoardListTemplateSrc = $('#std-BoardList').html();
 //
 //var stdBoardListGenerator = Handlebars.compile(stdBoardListTemplateSrc);
+var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+$('#startDate').datepicker({
+  uiLibrary: 'bootstrap4',
+  iconsLibrary: 'fontawesome',
+  minDate: today,
+  maxDate: function () {
+      return $('#endDate').val();
+  }
+});
+$('#endDate').datepicker({
+  uiLibrary: 'bootstrap4',
+  iconsLibrary: 'fontawesome',
+  minDate: today,
+  minDate: function () {
+      return $('#startDate').val();
+  }
+});
+$('.ui.dropdown')
+.dropdown();
+$.HSCore.components.HSCountQty.init('.js-quantity');
 
 $(document).ready(function() {
 

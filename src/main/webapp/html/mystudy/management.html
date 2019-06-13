@@ -38,6 +38,12 @@
   <link rel='stylesheet' href='./calendar/calendar.css'  />
   <link rel='stylesheet'  href='../../fullcalendar/timegrid/main.css'/>
   <link rel='stylesheet'  href='../../fullcalendar/list/main.css'/>
+  <link
+ href="/studyboot/node_modules/datepicker-bootstrap/css/datepicker.css"
+ rel="stylesheet" type="text/css">
+  <link href="/studyboot/node_modules/datepicker-bootstrap/css/core.css" rel="stylesheet" type="text/css">
+  <link href="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.css" rel="stylesheet" type="text/css">
+  <link href="/studyboot/js/Semantic-UI-master/dist/components/transition.min.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -114,63 +120,167 @@
         <div id="nav-1-1-default-hor-left-underline" class="tab-content">
           <!-- Edit Profile -->
           <div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel" data-parent="#nav-1-1-default-hor-left-underline">
-            <h2 class="h4 g-font-weight-300">Manage your Name, ID and Email Addresses</h2>
-            <p>Below are name, email addresse, contacts and more on file for your account.</p>
 
-            
-            <ul class="list-unstyled g-mb-0">
-              <!-- Name -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Name</strong>
-                  <input id="userName" type="text" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
-                </div>
-              </li>
-              <!-- End Name -->
-              
-              <!-- Email Address -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Email</strong>
-                  <input id="email" type="email" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
-                </div>
-              </li>
-              <!-- End Email Address -->
-            </ul>
+            <!-- 스터디 설정변경 -->
+                 <form action="add" class="study-add-form g-pa-10">
 
-            <form>
-            <ul class="list-unstyled g-mb-30">
-              <!-- Your NickName -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">NickName</strong>
-                  <div class="d-md-inline-block g-width-400">
-                    <input id="nickName" type="text" class="form-control d-md-inline-block g-width-200" readonly>
-                    <button type="button" class="btn u-btn-darkgray std-invisible" id="nickCheck-btn" disabled>중복체크</button>
-                  </div>
-                </div>
-                <i id="sb-nickname-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-nickname-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-              </li>
-              <!-- End Your NickName -->
-              
-              <!-- Phone number -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Phone number</strong>
-                  <input type="tel" class="form-control d-md-inline-block g-width-200" id="tel" readonly>
-                </div>
-                <i id="sb-tel-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-tel-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-              </li>
-              <!-- End Phone number -->
-            </ul>
-            </form>
+      <!-- Text Input -->
+      <div class="row">
+       <div class="form-group g-mb-20 col-7">
+        <label class="g-mb-10" for="name">이름</label> <input
+         id="inputGroup1_1"
+         class="form-control form-control-md rounded-0" id="name"
+         type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!">
+       </div>
 
-            <div class="text-sm-right">
-              <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#" id="sb-info-cancel">Cancel</a>
-              <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25" href="#" id="sb-info-change">Save Changes</a>
-            </div>
+       <!-- Quantity -->
+       <div class="form-group col">
+        <label class="g-mb-10">인원</label>
+        <div
+         class="js-quantity input-group u-quantity-v1 g-width-170 g-height-40 g-brd-primary--focus">
+         <div
+          class="js-minus input-group-prepend g-width-55 g-color-gray g-bg-grey-light-v3">
+          <span class="input-group-text rounded-0 w-100"><i
+           class="fa fa-minus"></i></span>
+         </div>
+         <input
+          class="js-result form-control text-center rounded-0 g-pa-15"
+          type="text" value="0" readonly="">
+         <div
+          class="js-plus input-group-append g-width-55 g-color-gray g-bg-grey-light-v3">
+          <span
+           class="input-group-text rounded-0 w-100 g-color-grey-light"><i
+           class="fa fa-plus"></i></span>
+         </div>
+        </div>
+       </div>
+       <!-- End Quantity -->
+
+      </div>
+      <!-- End Text Input -->
+
+      <!-- Text Input -->
+      <div class="row">
+       <div class="form-group g-mb-20 col">
+        <label class="g-mb-10" for="goal">목표</label> <input
+         class="form-control form-control-md rounded-0" id="goal"
+         name='goal' type='text' placeholder="스터디 목표를 입력해주세요!">
+       </div>
+      </div>
+      <!-- End Text Input -->
+
+      <!-- Checkbox -->
+      <div class="row day-checkbox">
+       <div class="col g-mb-20" id="dayCheck">
+        <label class="g-mb-10">활동 요일</label>
+        <!-- Left Column -->
+        <div class="btn-group justified-content">
+         <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">월</span>
+         </label> <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">화</span>
+         </label> <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">수</span>
+         </label> <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">목</span>
+         </label> <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">금</span>
+         </label> <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">토</span>
+         </label> <label class="u-check g-pl-0"> <input
+          class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+          type="checkbox"> <span
+          class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">일</span>
+         </label>
+        </div>
+       </div>
+      </div>
+
+
+      <div class="row">
+
+       <div class="form-group g-mb-20 col  w-100">
+        <label class="g-mb-10" for="name">활동 시작일</label> <input
+         id="startDate" class="form-control form-control-md rounded-0" />
+       </div>
+      <div class="form-group g-mb-20 col w-100">
+       <label class="g-mb-10" for="name">활동 종료일</label> <input
+        id="endDate"class="form-control form-control-md  rounded-0" />
+      </div>
+    </div>
+   
+    
+    <div class="row">
+    
+    
+    <div class="form-group col g-mb-20">
+    <label class="g-mb-10" for="name">활동 지역</label>
+ <select class="ui dropdown rounded-0 g-height-40 w-100 g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+</div>
+
+ <div class="form-group g-mb-20 col">
+ <label class="g-mb-10" for="name">활동 분야</label>
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100 g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+<select class="ui dropdown rounded-0 g-height-40 w-100  g-mb-10">
+  <option value="">Gender</option>
+  <option value="1">Male</option>
+  <option value="0">Female</option>
+</select>
+
+</div>
+
+   </div>
+
+
+<!-- Textarea -->
+  <div class="form-group g-mb-20">
+    <label class="g-mb-10" for="contents">설명</label>
+    <textarea id="contents" name='contents' class="form-control form-control-md g-resize-none rounded-0" rows="5" placeholder="Text area"></textarea>
+  </div>
+
+   </form>
+
+
           </div>
           <!-- End Edit Profile -->
 
@@ -329,9 +439,9 @@
   <script src="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
   <script src="/studyboot/Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
-    <script src="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/js/flatpickr.min.js"></script>
+  <script src="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/js/flatpickr.min.js"></script>
   <script src="/studyboot/Unify/admin-template/assets/vendor/chartist-js/chartist.min.js"></script>
-   <script src="../../Unify/admin-template/assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+  <script src="../../Unify/admin-template/assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
   <script src="../../Unify/admin-template/assets/vendor/bloodhound-js/js/bloodhound.min.js"></script>
   <script src="../../Unify/admin-template/assets/vendor/bloodhound-js/js/typeahead.jquery.min.js"></script>
   <script src="../../Unify/admin-template/assets/vendor/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
@@ -341,7 +451,7 @@
 
   <!-- JS Unify -->
   <script src="/studyboot/Unify/assets/js/hs.core.js"></script>
-   <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
+  <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
   <script src="/studyboot/Unify/assets/js/helpers/hs.hamburgers.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.header.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.tabs.js"></script>
@@ -351,13 +461,18 @@
   <script src="/studyboot/Unify/assets/js/components/hs.scrollbar.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.go-to.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.carousel.js"></script>
-   <script src="/studyboot/Unify/admin-template/assets/js/components/hs.range-datepicker.js"></script>
+  <script src="/studyboot/Unify/admin-template/assets/js/components/hs.range-datepicker.js"></script>
   <script src="/studyboot/Unify/admin-template/assets/js/components/hs.bar-chart.js"></script>
   
- <script src="../../Unify/admin-template/assets/js/components/hs.side-nav.js"></script>
+  <script src="../../node_modules/datepicker-bootstrap/js/core.js"></script>
+  <script src="../../Unify/admin-template/assets/js/components/hs.side-nav.js"></script>
   <script src="../../Unify/assets/js/components/hs.count-qty.js"></script>
   <script src="../../Unify/admin-template/assets/js/components/hs.text-editor.js"></script>
   <script src="../../Unify/assets/js/helpers/hs.focus-state.js"></script>
+  <script src="../../js/Semantic-UI-master/dist/components/dropdown.min.js"></script>
+  <script src="../../js/Semantic-UI-master/dist/components/transition.min.js"></script>
+  <script src="../../node_modules/datepicker-bootstrap/js/datepicker.js"></script>
+  
   <!-- JS Customization -->
   <script src="/studyboot/Unify/assets/js/custom.js"></script>
   <script src="/studyboot/html/header.js"></script>
