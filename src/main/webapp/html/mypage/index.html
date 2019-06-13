@@ -53,6 +53,10 @@
 <!-- CSS Customization -->
 <link rel="stylesheet"
  href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
+<link rel="stylesheet"
+ href="../../node_modules/cropperjs/dist/cropper.css">
+
+ 
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
 
@@ -109,7 +113,62 @@
   </div>
   <!-- inquiry modal -->
   
+  
+  
+  
+  
+  
   <!-- imageSetting modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">프로필 사진</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="img-container">
+              <img id="updateImage" src="" alt="Picture">
+            </div>
+          </div>
+          <div>
+            <label for="imageInput" class="btn btn-xl u-btn-primary g-width-170"><i class="fa fa-camera-retro"></i>
+            <input type="file" id="imageInput" name="files" class="std-hidden"></label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" id="imageUpdate-cancel">취소</button>
+          <button type="button" class="btn btn-primary"
+            id="imageUpdate-btn" disabled>변경</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End imageSetting modal -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ <!--  
+  imageSetting modal
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -138,8 +197,9 @@
       </div>
     </div>
   </div>
-  <!-- End imageSetting modal -->
-
+  End imageSetting modal
+ -->
+ 
   <!-- content -->
   <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
     <!-- title, breadcrumb -->
@@ -463,6 +523,8 @@
   <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
   <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+  <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
+  <script src="../../node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
   
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
