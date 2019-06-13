@@ -51,53 +51,10 @@
 <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
 <!-- CSS Customization -->
+<link rel="stylesheet"
+ href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
-<style type="text/css">
-/* rating star css */
-
-/* Ratings widget */
-.rate {
-    display: inline-block;
-    pointer-events: none;
-    border: 0;
-}
-/* Hide radio */
-.rate > input {
-    display: none;
-}
-/* Order correctly by floating highest to the right */
-.rate > label {
-    float: right;
-    margin: 0;
-}
-/* The star of the show */
-.rate > label:before {
-    display: inline-block;
-    font-size: 2rem;
-    padding: 0rem .2rem;
-    margin: 0;
-    cursor: pointer;
-    font-family: FontAwesome;
-    content: "\f005 "; /* full star */
-}
-
-/* Half star trick */
-.rate .half:before {
-    content: "\f089 "; /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
-/* Click + hover color */
-input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: rgb(255, 230, 0);  } /* color previous stars on hover */
-
-/* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
-/* rating star css */
-</style>
 
 </head>
 
@@ -227,18 +184,6 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
           <!-- User Info -->
           <span class="g-pos-abs g-top-0 g-absolute-centered--x">
             <a id="myRate-btn" class="btn btn-sm" href="#" data-toggle="modal" data-target="#historyModal" style="width: 175px;">
-              <fieldset class="rate" id="rating-form" disabled>
-                <input type="radio" id="rating10" name="rating"/><label id="star5" for="rating10"></label>
-                <input type="radio" id="rating9" name="rating"/><label id="star45" class="half" for="rating9"></label>
-                <input type="radio" id="rating8" name="rating"/><label id="star4" for="rating8"></label>
-                <input type="radio" id="rating7" name="rating"/><label id="star35" class="half" for="rating7"></label>
-                <input type="radio" id="rating6" name="rating"/><label id="star3" for="rating6"></label>
-                <input type="radio" id="rating5" name="rating"/><label id="star25" class="half" for="rating5"></label>
-                <input type="radio" id="rating4" name="rating"/><label id="star2" for="rating4"></label>
-                <input type="radio" id="rating3" name="rating"/><label id="star15" class="half" for="rating3"></label>
-                <input type="radio" id="rating2" name="rating"/><label id="star1" for="rating2"></label>
-                <input type="radio" id="rating1" name="rating"/><label id="star05" class="half" for="rating1"></label>
-              </fieldset>
             </a>
           </span>
           <!-- End User Info -->
@@ -516,6 +461,8 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
   <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
   <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
   <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+  <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
   
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>

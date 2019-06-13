@@ -17,6 +17,37 @@ historytemplateSrc = $('#history-template').html(),
 historyGenerator = Handlebars.compile(historytemplateSrc);
 
 
+// 히스토리 모달이 열리면 별점을 렌더함
+$('#historyModal').on('shown.bs.modal', function (e) {
+  
+  $('#history-rate').rateit({ 
+    // min value
+    min: 0, 
+    // max value
+    max: 5, 
+    // step size
+    step: 0.5, 
+    // 'bg', 'font'
+    mode: 'bg', 
+    // custom icon
+    icon: '★', 
+    // size of star
+    starwidth: 16, 
+    starheight: 16, 
+    // is readonly?
+    readonly: true, 
+    // is preset?
+    ispreset: true
+  });
+  
+  $(document.body).trigger('loaded-historyRate');
+});
+
+$(document.body).bind('loaded-historyRate', () => {
+  $('#history-rate').rateit('value', window.user.rate);
+});
+
+
 loadRateData();
 
 function loadRateData() {
@@ -24,14 +55,14 @@ function loadRateData() {
       function(data) {
     
     console.log(data);
+    user = data.rateInfo[0].member;
     
     // 사진을 꼽아준다.
     $('#history-profilePhoto')
-      .attr('src', '/studyboot/upload/images/member/' + data.rateInfo[0].member.photo);
+      .attr('src', '/studyboot/upload/images/member/' + user.photo);
     
-    // 이름과 평점을 꼽아준다. - 작업중..
-    $('#history-nick').val(data.rateInfo[0].member.nickName);
-    
+    // 닉네임을 꼽아준다.
+    $('#history-nick > strong').html(user.nickName);
     
     // bar 차트
     // 평점 데이터
@@ -123,8 +154,6 @@ function loadRateData() {
       }
     });
     
-    console.log(finishData, dropData, exileData);
-    
     $(document.body).trigger('loaded-rateData');
   });
 }
@@ -201,6 +230,9 @@ $(document.body).bind('loaded-rateData', () => {
               display: true,
               text: '출석률'
           },
+          plugins: {
+            labels: false
+          },
           scales: {
               yAxes: [{
                   ticks: {
@@ -234,6 +266,11 @@ $(document.body).bind('loaded-rateData', () => {
           },
           legend: {
               display: false
+          },
+          plugin: {
+              labels: {
+                  render: 'percentage'
+              }
           }
       }
   });
