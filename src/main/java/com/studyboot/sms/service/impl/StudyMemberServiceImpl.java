@@ -22,7 +22,20 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     this.studyMemberDao = studyMemberDao;
     this.studyDao = studyDao;
   }
-
+  
+  
+  @Override
+  public int addStudyMember(int studyNo, int memberNo, boolean leader) {
+    Map<String,Object> params = new HashMap<>();
+    
+    params.put("studyNo", studyNo);
+    params.put("memberNo", memberNo);
+    params.put("leader", leader);
+    
+    return studyMemberDao.add(params);
+  }
+  
+  
   @Override
   public List<Study> findMyStudyList(int no) {
     
