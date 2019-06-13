@@ -120,6 +120,10 @@ values('161411', '161411', '스터디47', '사진', 127, '2019-05-16', '2019-06-
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
 values('161412', '161412', '스터디48', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
+
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
+values('131213', '171311', '스터디49', '사진', 127, '06/19/2019', '08/19/2019', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+
 insert into sms_std(std_id, adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
 values(100, '161412', '161412', '지환탈퇴테스트', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 

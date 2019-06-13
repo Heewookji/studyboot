@@ -79,6 +79,9 @@
 <link
  href="/studyboot/node_modules/datepicker-bootstrap/css/datepicker.css"
  rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/node_modules/sweetalert2/dist/sweetalert2.min.css"
+ rel="stylesheet" type="text/css">
 <link rel="stylesheet"
  href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
@@ -97,8 +100,7 @@
 
  <!-- Modal -->
  <div class="modal fade" id="stdAddModal" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
-  data-backdrop="static">
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div
     class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
@@ -115,38 +117,26 @@
 
       <form action="add" class="study-add-form g-pa-10">
 
-
-<div class="rateit g-mb-10 invisible" data-rateit-mode="font" data-rateit-resetable="false" style="font-size:24px">
-</div>
-
        <!-- Text Input -->
        <div class="row">
-        <div class="form-group g-mb-20 col-7">
+        <div class="form-group g-mb-20 col-8">
          <label class="g-mb-10" for="name">이름</label> <input
           class="form-control form-control-md rounded" id="name"
           type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!">
         </div>
 
         <!-- Quantity -->
-        <div class="form-group col" id="limit">
-         <label class="g-mb-10">인원</label>
-         <div
-          class="js-quantity input-group u-quantity-v1 g-width-170 g-height-40 g-brd-primary--focus">
-          <div
-           class="js-minus input-group-prepend rounded g-width-55 g-color-gray g-bg-white">
-           <span class="input-group-text w-100"><i
-            class="ti ti-minus"></i></span>
-          </div>
-          <input
-           class="js-result form-control text-center rounded-0 g-pa-15" 
-           type="text" value="2">
-          <div
-           class="js-plus input-group-append rounded  g-width-55 g-color-gray g-bg-grey-light-v3">
-           <span
-            class="input-group-text w-100 g-color-grey-light g-bg-white"><i
-            class="ti ti-plus"></i></span>
-          </div>
-         </div>
+        <div class="form-group col g-mb-20">
+         <label class="g-mb-10" for="quantity">인원</label> <select id="quantity"
+          class="ui fluid dropdown quantity rounded g-height-40 g-mb-10">
+          <option value="2" >2명</option>
+          <option value="3">3명</option>
+          <option value="4">4명</option>
+          <option value="5">5명</option>
+          <option value="6">6명</option>
+          <option value="7">7명</option>
+          <option value="8">8명</option>
+         </select>
         </div>
         <!-- End Quantity -->
 
@@ -164,38 +154,38 @@
        <!-- End Text Input -->
 
        <!-- Checkbox -->
-       <div class="row day-checkbox">
-        <div class="form-group col g-mb-20" id="dayCheck">
+       <div class="row modalday-checkbox">
+        <div class="form-group col g-mb-20">
          <label class="g-mb-10">활동 요일</label>
          <!-- Left Column -->
          <div class="btn-group justified-content">
           <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="1"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked form-control rounded-left g-rounded-right-0">월</span>
           </label> <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="2"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md form-control rounded-0">화</span>
           </label> <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="4"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md form-control rounded-0">수</span>
           </label> <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="8"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md form-control rounded-0">목</span>
           </label> <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="16"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md form-control rounded-0">금</span>
           </label> <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="32"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md form-control rounded-0">토</span>
           </label> <label class="u-check g-pl-0"> <input
            class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
-           type="checkbox"> <span
+           type="checkbox" value="64"> <span
            class="btn btn-md g-bg-white btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md form-control rounded-right g-rounded-left-0">일</span>
           </label>
          </div>
@@ -204,13 +194,12 @@
 
 
        <div class="row">
-
         <div class="form-group g-mb-20 col rounded  w-100">
-         <label class="g-mb-10" for="name">활동 시작일</label> <input
+         <label class="g-mb-10" for="startDate">활동 시작일</label> <input
           id="startDate" class="form-control g-bg-white form-control-md" />
         </div>
         <div class="form-group g-mb-20 col rounded w-100">
-         <label class="g-mb-10" for="name">활동 종료일</label> <input
+         <label class="g-mb-10" for="endDate">활동 종료일</label> <input
           id="endDate" class="form-control g-bg-white form-control-md" />
         </div>
        </div>
@@ -220,36 +209,22 @@
 
 
         <div class="form-group col g-mb-20">
-         <label class="g-mb-10" for="name">활동 지역</label> <select
-          class="ui dropdown rounded g-height-40 w-100 g-mb-10">
-          <option value="">Gender</option>
-          <option value="1">Male</option>
-          <option value="0">Female</option>
-         </select> <select class="ui dropdown rounded g-height-40 w-100  g-mb-10">
-          <option value="">Gender</option>
-          <option value="1">Male</option>
-          <option value="0">Female</option>
-         </select> <select class="ui dropdown rounded g-height-40 w-100  g-mb-10">
-          <option value="">Gender</option>
-          <option value="1">Male</option>
-          <option value="0">Female</option>
+         <label class="g-mb-10" for="name">분야</label> <select
+          class="ui dropdown lcls rounded g-height-40 w-100 g-mb-10">
+         </select> <select
+          class="ui dropdown mcls rounded g-height-40 w-100  g-mb-10">
+         </select> <select
+          class="ui dropdown scls rounded g-height-40 w-100  g-mb-10">
          </select>
         </div>
 
         <div class="form-group g-mb-20 col">
-         <label class="g-mb-10" for="name">활동 분야</label> <select
-          class="ui dropdown rounded g-height-40 w-100  g-mb-10">
-          <option value="">Gender</option>
-          <option value="1">Male</option>
-          <option value="0">Female</option>
-         </select> <select class="ui dropdown rounded g-height-40 w-100 g-mb-10">
-          <option value="">Gender</option>
-          <option value="1">Male</option>
-          <option value="0">Female</option>
-         </select> <select class="ui dropdown rounded g-height-40 w-100  g-mb-10">
-          <option value="">Gender</option>
-          <option value="1">Male</option>
-          <option value="0">Female</option>
+         <label class="g-mb-10" for="name">활동 지역</label> <select
+          class="ui dropdown laddr rounded g-height-40 w-100  g-mb-10">
+         </select> <select
+          class="ui dropdown maddr rounded g-height-40 w-100 g-mb-10">
+         </select> <select
+          class="ui dropdown saddr rounded g-height-40 w-100  g-mb-10">
          </select>
 
         </div>
@@ -261,10 +236,10 @@
        <div class="form-group g-mb-20">
         <label class="g-mb-10" for="contents">설명</label>
         <div class="rounded">
-        <textarea id="contents" name='contents'
-         class="form-control form-control-md g-resize-none"
-         rows="5" placeholder="스터디에 관한 자세한 설명을 적어주세요"></textarea>
-       </div>
+         <textarea id="contents" name='contents'
+          class="form-control form-control-md g-resize-none" rows="5"
+          placeholder="스터디에 관한 자세한 설명을 적어주세요"></textarea>
+        </div>
        </div>
 
 
@@ -273,7 +248,7 @@
       <div class="col-4 ml-md-auto">
        <button type="button"
         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14 g-rounded-30 g-py-10 ml-2 g-mt-0 g-mb-10"
-        data-dismiss="modal" id="init-btn">시작하기</button>
+        id="init-btn">시작하기</button>
       </div>
      </div>
 
@@ -351,7 +326,7 @@
 
       <div id="accordion-addr" class="u-accordion g-mb-30"
        role="tablist" aria-multiselectable="true">
-  
+
 
        <div class="card rounded-0 g-brd-none">
         <div id="accordion-laddr-heading"
@@ -618,16 +593,16 @@
           src="/studyboot/images/studyimage.jpg" alt="Image Description">
         </div>
         <div class="g-bg-white g-pa-20">
-         <span
-          class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">
-          {{addressName}}</span>
+ <div id="std-rate" class="rateit mb-3" data-rateit-readonly="true" data-rateit-mode="font" style="font-size: 24px" data-rateit-resetable="false" data-rateit-value="{{rate}}"></div>
          <h2 class="h5 g-font-weight-600 mb-3">
           <a data-no="{{no}}"
            class="u-link-v5 g-color-black g-color-primary--hover"
            href="#">{{name}}</a>
          </h2>
          <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
-{{rate}}
+     <span
+          class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase">
+          {{addressName}}</span>
         </div>
        </article>
        <!-- End Blog Classic Blocks -->
@@ -780,6 +755,8 @@
  <!-- JS Custom -->
  <script src="../../node_modules/datepicker-bootstrap/js/core.js"
   type="text/javascript"></script>
+ <script src="../../node_modules/sweetalert2/dist/sweetalert2.js"
+  type="text/javascript"></script>
  <script
   src="../../js/Semantic-UI-master/dist/components/dropdown.min.js"></script>
  <script
@@ -827,6 +804,28 @@
                 breakpoint: 991
               });
             });
+
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(),
+            new Date().getDate());
+    $('#startDate').datepicker({
+      uiLibrary: 'bootstrap4',
+      iconsLibrary: 'fontawesome',
+      minDate: today,
+      format: 'yyyy-mm-dd',
+      maxDate: function() {
+        return $('#endDate').val();
+      }
+    });
+    $('#endDate').datepicker({
+      uiLibrary: 'bootstrap4',
+      iconsLibrary: 'fontawesome',
+      minDate: today,
+      format: 'yyyy-mm-dd',
+      minDate: function() {
+        return $('#startDate').val();
+      }
+    });
+
   </script>
 
 

@@ -169,3 +169,46 @@
   background: radial-gradient(ellipse at center, #e6574b 55%,#f6836b 77%,#f9d3cc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   background-position: 0 0;
 }
+
+
+/* Active */
+.ui.selection.active.dropdown {
+    border-color: #117fda;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+            box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+  }
+  .ui.selection.active.dropdown .menu {
+    border-color: #117fda;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+            box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+  }
+  
+  /* Focus */
+  .ui.selection.dropdown:focus {
+    border-color: #117fda;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .ui.selection.dropdown:focus .menu {
+    border-color: #117fda;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+            box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+  }
+  
+  /* Visible */
+  .ui.selection.visible.dropdown > .text:not(.default) {
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Visible Hover */
+  .ui.selection.active.dropdown:hover {
+    border-color: #117fda;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+            box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+  }
+  .ui.selection.active.dropdown:hover .menu {
+    border-color: #117fda;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+            box-shadow: 0px 2px 3px 0px rgba(34, 36, 38, 0.15);
+  }
