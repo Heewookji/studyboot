@@ -8,6 +8,7 @@ largeClsNo,
 clsTitle,
 keyword,
 dayNo,
+errorTitle = '오! 이런..',
 dayCheckList = $('.day-checkbox input'),
 tbody = $('#card-div'),
 //card 리스트 출력 - 스터디 목록
@@ -28,61 +29,6 @@ trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 소분류
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
 trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
-
-var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-$('#startDate').datepicker({
-  uiLibrary: 'bootstrap4',
-  iconsLibrary: 'fontawesome',
-  minDate: today,
-  maxDate: function () {
-    return $('#endDate').val();
-  }
-});
-$('#endDate').datepicker({
-  uiLibrary: 'bootstrap4',
-  iconsLibrary: 'fontawesome',
-  minDate: today,
-  minDate: function () {
-    return $('#startDate').val();
-  }
-});
-$('.ui.dropdown')
-.dropdown()
-;
-
-
-
-$('#stdAddModal').on('shown.bs.modal', function (e) {
-  
-  
-  $('.rateit').rateit({ 
-    // min value
-    min: 0, 
-    // max value
-    max: 5, 
-    // step size
-    step: 0.5, 
-    // 'bg', 'font'
-    mode: 'font', 
-    // size of star
-    starwidth: 100, 
-    // is readonly?
-    readonly: false, 
-    // is resetable?
-    resetable: false, 
-  });
-  
-  $('.rateit').removeClass("invisible");
-  
-  $('.rateit')
-  // if a direction if specified it will be obeyed
-  .transition('horizontal flip in')
-;
- 
-})
-
-
-$('#stdAddModal').modal('show');
 
 
 
@@ -134,6 +80,160 @@ function loadCategoryTitle(clsNo) {
     $(trGeneratorMediumCls(obj)).appendTo('#accordion-mcls');
 
     $(document.body).trigger('loaded-categorytitle');
+  });
+};
+
+//생성 모달의 카테고리 분류 로딩 함수
+function loadModalCategory() {
+
+
+  $.getJSON('../../app/json/study/category?clsNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.clsNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.lcls')
+    .dropdown({
+      placeholder: '대분류',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.mcls')
+        .dropdown({
+          placeholder: '중분류',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.scls')
+        .dropdown({
+          placeholder: '소분류',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+        $.getJSON('../../app/json/study/category?clsNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.clsNo;
+          }
+          $('.ui.dropdown.mcls')
+          .dropdown({
+            placeholder: '중분류',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('../../app/json/study/category?clsNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.clsNo;
+                }
+                $('.ui.dropdown.scls')
+                .dropdown({
+                  placeholder: '소분류',
+                  on: 'hover',
+                  values: objs.list
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
+
+
+//생성 모달의 카테고리 분류 로딩 함수
+function loadModalAddress() {
+
+
+  $.getJSON('../../app/json/study/addresscategory?addressNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.addressNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.laddr')
+    .dropdown({
+      placeholder: '시도',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.maddr')
+        .dropdown({
+          placeholder: '시군구',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.saddr')
+        .dropdown({
+          placeholder: '동읍면',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+
+        $.getJSON('../../app/json/study/addresscategory?addressNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.addressNo;
+          }
+          $('.ui.dropdown.maddr')
+          .dropdown({
+            placeholder: '시군구',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('../../app/json/study/addresscategory?addressNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.addressNo;
+                }
+                $('.ui.dropdown.saddr')
+                .dropdown({
+                  placeholder: '동읍면',
+                  on: 'hover',
+                  values: objs.list
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
   });
 };
 
@@ -202,6 +302,13 @@ if (param) {
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   loadCategoryTitle(clsNo);
   loadAddress();
+  loadModalCategory();
+  loadModalAddress();
+
+  $('.ui.dropdown.quantity')
+  .dropdown({
+    on: 'hover'
+  });
 }
 
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
@@ -249,7 +356,7 @@ $(document.body).bind('loaded-categorytitle', () => {
     $(e.target).removeClass("g-color-main");
     $(e.target).addClass("g-color-primary");
 
-    // 빵부스러기
+    // 빵부스러기 
 
     $('#large-tag i').remove()
     $('#small-tag').remove();
@@ -467,35 +574,6 @@ $('.day-checkbox input').change(function(e) {
 });
 
 
-//add-btn URI인코딩 방식으로 보냈음
-$('#add-btn').click(function() {
-  jQuery.ajax({
-    url:"../../app/json/study/add",
-    type:"POST",
-    data:  "name=" + encodeURIComponent($("#name").val()) +
-    "&cls=" + encodeURIComponent($("#cls").val()) +  
-    "&address=" + encodeURIComponent($("#address").val()) +
-    "&goal=" + encodeURIComponent($("#goal").val()) +
-    "&photo=" + encodeURIComponent($("#photo").val()) +
-    "&day=" + encodeURIComponent($("#day").val()) +
-    "&personnel=" + encodeURIComponent($("#personnel").val()) +
-    "&startDate=" + encodeURIComponent($("#startDate").val()) +
-    "&endDate=" + encodeURIComponent($("#endDate").val()) +
-    "&contents=" + encodeURIComponent($("#contents").val()),
-    contentType: "application/x-www-form-urlencoded",
-    success: function(data) {
-      if (data.status == 'success') {
-        alert("저장되었습니다.");
-        location.href = 'index.html';
-      } else {
-        alert("잠시 후에 시도해주세요.");
-      }
-    }
-  });
-});
-
-
-
 
 
 //이름 체크
@@ -509,18 +587,19 @@ $( "#name" ).keyup(function(){
     $("#name").attr("data-toggle","tooltip");
     $("#name").attr("data-trigger","hover focus");
     $("#name").attr("data-placement","bottom");
-    $("#name").attr("title","3~10자의 한글, 영문, 숫자만 사용할 수 있습니다");
+    $("#name").attr("data-html", true);
+    $("#name").attr("title","3~12자의 한글, 영문, 숫자만 <br>사용할 수 있습니다");
     $('#name').tooltip('enable');
     $('#name').tooltip('show');
   }
 });
 
-//닉네임 체크
+//이름 체크
 function nickCheck(str) {
-  if(str.length < 3 || str.length > 10) {
+  if(str.length < 3 || str.length > 12) {
     return false;
   }
-  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]|\s/;
   for( var i = 0; i <= str.length -1 ; i++ )    {
     if(chk.test(str.charAt(i))) {
     }
@@ -531,22 +610,16 @@ function nickCheck(str) {
   return true;
 }
 
-//정원체크
-$('#limit').click(function(e) {
-  if($('#limit input').val() < 2){
-    $('#limit .input-group-append').click();
-  }
-  else if($('#limit input').val() > 10){
-    $('#limit .input-group-prepend').click();
-  }
-});
 
-$( "#goal" ).change(function(){
-  if($( "#goal" ).val().length > 15){
+//목표체크
+$( "#goal" ).keyup(function(){
+  if($( "#goal" ).val().length > 25 ||
+          $( "#goal" ).val().length < 5 ){
     $("#goal").attr("data-toggle","tooltip");
     $("#goal").attr("data-trigger","hover focus");
     $("#goal").attr("data-placement","bottom");
-    $("#goal").attr("title","15자 이상으로 써주세요!");
+    $("#goal").attr("data-html", true);
+    $("#goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
     $('#goal').tooltip('enable');
     $('#goal').tooltip('show');
   } else{
@@ -557,22 +630,166 @@ $( "#goal" ).change(function(){
   }
 });
 
+//설명 체크
+$('#contents').keyup(function(){
+  if($( "#contents" ).val().length > 150 ||
+          $( "#contents" ).val().length < 10 ){
+    $("#contents").attr("data-toggle","tooltip");
+    $("#contents").attr("data-trigger","hover focus");
+    $("#contents").attr("data-placement","bottom");
+    $("#contents").attr("data-html", true);
+    $("#contents").attr("title","10자에서 150자 사이로 <br>상세설명을 적어주세요");
+    $('#contents').tooltip('enable');
+    $('#contents').tooltip('show');
+  } else{
+    if($("#contents").attr("data-toggle")){
+      $('#contents').tooltip('disable');
+      $('#contents').tooltip('hide');
+    }
+  }
+});
 
-//닉네임 체크
-function goalCheck(str) {
-  if(str.length < 5 || str.length > 15) {
-    return false;
+
+
+
+
+//시작하기 눌렀을 경우
+$('#init-btn').click(function(e) {
+
+  //이름 체크
+  if(!nickCheck($("#name").val())){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '올바른 이름을 입력해주세요!'
+    });
+    return;
   }
-  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
-  for( var i = 0; i <= str.length -1 ; i++ )    {
-    if(chk.test(str.charAt(i))) {
-    }
-    else  {
-      return false;
+
+  //목표 체크
+  if($( "#goal" ).val().length > 25 ||
+          $( "#goal" ).val().length < 5 ){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '5자 이상 25자 이하의 목표를 입력해주세요!'
+    });
+    return;
+  }
+
+//활동 요일
+  var addDayNo = 0;
+
+  for(var a of $('.modalday-checkbox input')){
+    if($(a).prop("checked")){
+      addDayNo += parseInt($(a).val());
     }
   }
-  return true;
-}
+  if(addDayNo == 0){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '최소 한개의 요일을 입력해주세요!'
+    });
+    return;
+  }
+
+  //시작 날짜와 종료 날짜
+  if($('#startDate').val()== null ||
+          $('#startDate').val()== undefined ||
+          $('#startDate').val().length == 0){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '활동 기간을 입력해주세요!'
+    });
+    return;
+  }
+  if($('#endDate').val()== null ||
+          $('#endDate').val()== undefined ||
+          $('#endDate').val().length == 0){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '활동 기간을 입력해주세요!'
+    });
+    return;
+  }
+
+  //활동 분류
+  if($('.scls').find(".selected").attr('data-value')== null ||
+          $('.scls').find(".selected").attr('data-value')== undefined){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '스터디 분류를 입력해주세요!'
+    });
+    return;
+  }
+  
+  //활동 지역
+  if($('.saddr').find(".selected").attr('data-value') == null ||
+          $('.saddr').find(".selected").attr('data-value') == undefined){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '스터디 활동 지역을 입력해주세요!'
+    });
+    return;
+  }
+
+  //내용
+  if($( "#contents" ).val().length > 150 ||
+          $( "#contents" ).val().length < 10 ){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '10자 이상 150자 이하의 스터디 설명을 입력해주세요!'
+    });
+    return;
+  }
+
+//모두 통과한다면, URI인코딩 방식으로 전송
+  jQuery.ajax({
+    url:"../../app/json/study/add",
+    type:"POST",
+    data:  "name=" + encodeURIComponent($("#name").val()) +
+    "&cls=" + encodeURIComponent($('.scls').find(".selected").attr('data-value')) +  
+    "&address=" + encodeURIComponent($('.saddr').find(".selected").attr('data-value')) +
+    "&goal=" + encodeURIComponent($("#goal").val()) +
+    "&photo=" + encodeURIComponent($("#photo").val()) +
+    "&day=" + encodeURIComponent(addDayNo) +
+    "&personnel=" + encodeURIComponent($('#quantity').dropdown('get value')) +
+    "&startDate=" + encodeURIComponent($("#startDate").val()) +
+    "&endDate=" + encodeURIComponent($("#endDate").val()) +
+    "&contents=" + encodeURIComponent($("#contents").val()),
+    contentType: "application/x-www-form-urlencoded",
+    success: function(data) {
+      if (data.status == 'success') {
+        Swal.fire({
+          type: 'success',
+          title: '스터디를 생성했습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        location.href = 'index.html';
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '스터디 생성을 실패했습니다!'
+        });
+      }
+    }
+  });
+  
+  
+});
+
+
+
+
+
 
 //뒤로가기 -진행중
 //생성 폼에서 입력받는 도중에 페이지 이동이 감지되면 작성중인 글이 있다는 알터창을 띄우고 싶은데

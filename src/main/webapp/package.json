@@ -23,7 +23,8 @@
     "jquery": "^3.4.1",
     "jquery.rateit": "^1.1.2",
     "moment": "^2.24.0",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "sweetalert2": "^8.12.1"
   },
   "description": ""
 }

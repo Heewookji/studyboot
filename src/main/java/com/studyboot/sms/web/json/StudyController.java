@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -274,15 +275,26 @@ public class StudyController {
   @GetMapping("addresscategory")
   public Object addressCategory(
       @RequestParam String addressNo) {
+    HashMap<String,Object> content = new HashMap<>();
 
     if (addressNo.equals("undefined")) {
       addressNo = "";
     }
-    HashMap<String,Object> content = new HashMap<>();
+    
     List<Address> list = addressService.addressList(addressNo);
     content.put("list", list);
     return content;
   }
+  
+  // 매일 마다 평가 기록을 자동으로 업데이트 한다.
+  @Scheduled(cron = "0 0 0 * * *")
+  public void rateLogSchedule() {
+    
+    //스터디 중 활동시작일에 이르지 않거나, 스터디 모집 선언이 true 인 스터디는 모집 상태를 true로 바꿔준다.
+    
+  }
+
+  
 
 }
 
