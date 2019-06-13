@@ -24,4 +24,5 @@ public interface StudyMemberDao {
   StudyMember findMyStudyByNo(Map<String, Object> map);
   List<StudyMember> findRateInfoByMemberId(int no);
   List<History> findHistoryByMemberId(Map<String,Object> params);
+  int add(Map<String, Object> params);
 }

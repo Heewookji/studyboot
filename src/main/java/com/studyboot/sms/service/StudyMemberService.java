@@ -16,5 +16,6 @@ public interface StudyMemberService {
   List<StudyMember> rateInfo(int no);
   List<History> userHistory(int no, int pageNo, int pageSize);
   int size(int no);
+  int addStudyMember(int studyNo, int memberNo, boolean leader);
 }
 

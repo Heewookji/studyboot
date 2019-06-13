@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Cls;
+import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.AddressService;
 import com.studyboot.sms.service.AmazonS3_Service;
@@ -35,12 +37,22 @@ public class StudyController {
   @Autowired AmazonS3_Service amazonService;
 
   @PostMapping("add")
-  public Object add(Study study ) throws IOException{
+  public Object add(Study study, HttpSession session) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     try {
       studyService.add(study);
       content.put("status", "success");
       int stdNo = study.getNo();
+      Member loginUser = (Member)session.getAttribute("loginUser");
+      
+      //갓 만든 스터디라서 스터디 멤버가 아무도 없다면, 지금 요청한 멤버가 스터디를 생성한 스터디장이다.
+      boolean leader = false;
+      if(studyMemberService.findStudyMember(stdNo).size() == 0) {
+        leader = true;
+      }
+
+      //스터디 멤버 테이블과, 스터디 자료실 생성한다.
+      studyMemberService.addStudyMember(stdNo, loginUser.getNo(), leader);
       amazonService.add(stdNo);
       
     } catch (Exception e) {
@@ -297,7 +309,7 @@ public class StudyController {
   @Scheduled(cron = "0 0 0 * * *")
   public void rateLogSchedule() {
     
-    //스터디 중 활동시작일에 이르지 않거나, 스터디 모집 선언이 true 인 스터디는 모집 상태를 true로 바꿔준다.
+    //스터디 중 활동시작일에 이르지 않거나, 스터디 모집 선언이 true 이거나, 모집 인원이 다 찬 스터디는 모집 상태를 true로 바꿔준다.
     
   }
 
