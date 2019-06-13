@@ -50,6 +50,41 @@ $('.ui.dropdown')
 .dropdown()
 ;
 
+
+
+$('#stdAddModal').on('shown.bs.modal', function (e) {
+  
+  $('.rateit')
+  // if a direction if specified it will be obeyed
+  .transition('horizontal flip in')
+;
+  
+  
+  $('.rateit').rateit({ 
+    // min value
+    min: 0, 
+    // max value
+    max: 5, 
+    // step size
+    step: 0.5, 
+    // 'bg', 'font'
+    mode: 'font', 
+    // size of star
+    starwidth: 100, 
+    // is readonly?
+    readonly: false, 
+    // is resetable?
+    resetable: false, 
+  });
+ 
+})
+
+
+$('#stdAddModal').modal('show');
+
+
+
+
 //JSON 형식의 데이터 목록 가져오기
 function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
@@ -458,35 +493,6 @@ $('#add-btn').click(function() {
 });
 
 
-$('#stdAddModal').on('shown.bs.modal', function (e) {
-  
-  $('.rateit').rateit({ 
-    // min value
-    min: 0, 
-    // max value
-    max: 5, 
-    // step size
-    step: 0.5, 
-    // 'bg', 'font'
-    mode: 'font', 
-    // size of star
-    starwidth: 100, 
-    // is readonly?
-    readonly: false, 
-    // is resetable?
-    resetable: false, 
-  });
-  
-  $('.rateit')
-  // if a direction if specified it will be obeyed
-  .transition('horizontal flip in')
-;
- 
-})
-
-
-$('#stdAddModal').modal('show');
-
 
 
 
@@ -541,7 +547,6 @@ $( "#goal" ).change(function(){
     $("#goal").attr("title","15자 이상으로 써주세요!");
     $('#goal').tooltip('enable');
     $('#goal').tooltip('show');
-    
   } else{
     if($("#goal").attr("data-toggle")){
       $('#goal').tooltip('disable');
