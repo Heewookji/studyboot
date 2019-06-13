@@ -2,7 +2,11 @@ package com.studyboot.sms.web.json;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +21,8 @@ import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 
 // AJAX 기반 JSON 데이터를 다루는 컨트롤러
@@ -28,6 +34,7 @@ public class MyStudyController {
   @Autowired MemberService memberService;
   @Autowired StudyService studyService;
   @Autowired StudyMemberService studyMemberService;
+  @Autowired ServletContext servletContext;
 
 
   @GetMapping("list")
@@ -262,6 +269,28 @@ public class MyStudyController {
         content.put("message", e.getMessage());
       }
     }
+
+    return content;
+  }
+  
+  
+  @PostMapping("fileAdd")
+  public Object fileAdd(
+      HttpSession session,
+      Part files) throws Exception {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    Map<String, Object> content = new HashMap<>();
+    
+    if (files.getSize() <= 0) {
+      content.put("status", "fail");
+      return content;
+    }
+    
+    // 이미지 저장
+    String uploadDir = servletContext.getRealPath("/upload/images/repository");
+    System.out.println(uploadDir);
+    // files.write(uploadDir);
 
     return content;
   }

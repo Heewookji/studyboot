@@ -137,7 +137,57 @@ $('#add-file').change(function() {
   alert("input박스 변화감지")
 })
 
-/*$('#save-btn').click((e) function() {
+$('#save-btn').click((e) => {
+  
+  $('#add-file').fileupload({
+    url: '../../app/json/member/fileAdd',        // 서버에 요청할 URL
+    dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+    sequentialUploads: true,
+    singleFileUploads: false,
+    autoUpload: false,
+    replaceFileInput : true,
+    processalways: function (e, data) {
+      
+      console.log(e);
+      console.log(data);
+      
+//      if (!checkImageType(data.files[0].name)) {
+//        alert('사진 파일만 선택 할 수 있습니다!')
+//        return false;
+//      }
+//      
+//      if (data.files && data.files[0]) {
+//        
+//        var reader = new FileReader();
+//        reader.onload = (e) => {
+//          $('#prevImage').attr('src', e.target.result);
+//        }
+//        reader.readAsDataURL(data.files[0]);
+//        
+//        imgUdt = false;
+//        $('#imageUpdate-btn').prop('disabled', false);
+//        $('#imageUpdate-btn').unbind("click");
+//        $('#imageUpdate-btn').click(function() {
+//          data.submit();
+//        });
+//      }
+    }, 
+    done: function (e, data) {
+      console.log(e);
+      console.log(data);
+    }
+  });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   $.ajax({
     url:'../../app/json/MyStudy/fileAdd',
@@ -158,7 +208,8 @@ $('#add-file').change(function() {
       alert("등록에 실패 했습니다.");
     }
   });
-});*/
+});
+
 
 $(document.body).bind('loaded-repository', () => {
 });
