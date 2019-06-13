@@ -42,9 +42,7 @@ $('#historyModal').on('shown.bs.modal', function (e) {
 });
 
 $(document.body).bind('loaded-historyRate', () => {
-  $('#history-rate')
-  // if a direction if specified it will be obeyed
-.transition('slide up in');
+  $('#history-rate').transition('slide up in');
 });
 
 

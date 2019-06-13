@@ -1,63 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Title -->
+<title>MyPage</title>
+
+<!-- Required Meta Tags Always Come First -->
+<meta charset="utf-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../Unify/favicon.ico">
+<!-- Google Fonts -->
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
+<!-- CSS Global Icons -->
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+  href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="../../Unify/assets/css/unify.css">
+
+<!-- CSS Customization -->
+<link rel="stylesheet"
+ href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
+<link rel="stylesheet"
+ href="../../node_modules/cropperjs/dist/cropper.min.css">
+<link rel="stylesheet" href="../../Unify/assets/css/custom.css">
+<link rel="stylesheet" href="/studyboot/css/common.css">
+
+</head>
 
 <body>
+<div>
+  <img id="image" src="../../upload/images/member/vven.jpg">
+</div>
 
-<canvas id="myChart" width="400" height="400"></canvas>
 
 
-<script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
 
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
+
+  <!-- JS Global Compulsory -->
+  <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+  <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+  
+  <script src="../../node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+  <script src="../../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
+  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+  <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+  <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+  <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
+  <script src="../../node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
+  
+  <!-- JS Implementing Plugins -->
+  <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+  <script
+    src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script
+    src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/hs.core.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.header.js"></script>
+  <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
+  <script src="../../Unify/assets/js/components/hs.popup.js"></script>
+  <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+
+  <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+
+  <!-- JS Custom -->
+  <script src="../../Unify/assets/js/custom.js"></script>
+  <script src="../header.js"></script>
+  <script src="../footer.js"></script>
+  <script src="index.js"></script>
+  <!-- JS Plugins Init. -->
+  <script>
+
+
+const $image = $('#image');
+$image.cropper({
+  viewMode: 2,
+  aspectRatio: 1 / 1,
+  crop(event) {
+    console.log(event.detail.x);
+    console.log(event.detail.y);
+    console.log(event.detail.width);
+    console.log(event.detail.height);
+    console.log(event.detail.rotate);
+    console.log(event.detail.scaleX);
+    console.log(event.detail.scaleY);
+  },
 });
 </script>
+  
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
 
 
 

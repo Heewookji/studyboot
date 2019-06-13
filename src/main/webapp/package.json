@@ -18,9 +18,11 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "chartjs-plugin-labels": "^1.1.0",
+    "cropperjs": "^1.5.1",
     "datepicker-bootstrap": "^1.9.13",
     "handlebars": "^4.1.2",
     "jquery": "^3.4.1",
+    "jquery-cropper": "^1.0.0",
     "jquery.rateit": "^1.1.2",
     "moment": "^2.24.0",
     "popper.js": "^1.15.0"
