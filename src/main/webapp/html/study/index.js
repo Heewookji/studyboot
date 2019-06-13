@@ -66,6 +66,24 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
     $(cardGenerator(obj)).appendTo(tbody);
 
+    for(var e of obj.list){
+      $('#std-rate-'+ e.no).rateit({
+        // min value
+           min: 0, 
+           // max value
+           max: 5, 
+           // 'bg', 'font'
+           mode: 'font', 
+           // size of star
+           starwidth: 50, 
+           // is readonly?
+           readonly: true, 
+           // is resetable?
+           resetable: false,
+           value: e.rate
+         });
+    }
+    
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
   });
@@ -332,6 +350,8 @@ $(document.body).bind('loaded-list', () => {
           }, function(e) {
           }
   );
+  
+  
 });
 
 
@@ -575,7 +595,7 @@ $('.day-checkbox input').change(function(e) {
 
 
 
-
+//add modal-----
 //이름 체크
 $( "#name" ).keyup(function(){
   if(nickCheck($("#name").val()) == true){
@@ -726,7 +746,7 @@ $('#init-btn').click(function(e) {
     });
     return;
   }
-  
+
   //활동 지역
   if($('.saddr').find(".selected").attr('data-value') == null ||
           $('.saddr').find(".selected").attr('data-value') == undefined){
@@ -771,8 +791,10 @@ $('#init-btn').click(function(e) {
           title: '스터디를 생성했습니다!',
           showConfirmButton: false,
           timer: 1500
-        });
-        location.href = 'index.html';
+        }).then((result) => {
+          location.href = '../mystudy/index.html?no=' + data.studyNo;
+        }
+        );
       } else {
         Swal.fire({
           type: 'error',
@@ -782,8 +804,8 @@ $('#init-btn').click(function(e) {
       }
     }
   });
-  
-  
+
+
 });
 
 

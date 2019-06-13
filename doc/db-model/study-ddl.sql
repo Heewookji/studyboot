@@ -142,6 +142,7 @@ CREATE TABLE sms_std (
   edt         DATE         NOT NULL COMMENT '스터디 종료일', -- 스터디 종료일
   rcrtm_state BOOLEAN      NOT NULL DEFAULT true COMMENT '모집상태여부', -- 모집상태여부
   goal        VARCHAR(100) NOT NULL COMMENT '스터디 목표', -- 스터디 목표
+  rcrtm_apply BOOLEAN      NULL     COMMENT '모집 선언', -- 모집 선언
   cont        TEXT         NOT NULL COMMENT '스터디 설명', -- 스터디 설명
   prsn        INTEGER      NOT NULL COMMENT '스터디 최대인원', -- 스터디 최대인원
   rate        DOUBLE       NOT NULL DEFAULT 0.0 COMMENT '스터디원 평균 평점' -- 스터디원 평균 평점
@@ -729,7 +730,7 @@ CREATE TABLE sms_member_rate_log (
   rate_log_id INTEGER NOT NULL COMMENT '회원 평점 기록 번호', -- 회원 평점 기록 번호
   member_id   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   rate        DOUBLE  NOT NULL COMMENT '평점', -- 평점
-  update_dt   DATE    NOT NULL DEFAULT current_timestamp() COMMENT '갱신일' -- 갱신일
+  update_dt   DATE    NOT NULL DEFAULT current_date() COMMENT '갱신일' -- 갱신일
 )
 COMMENT '회원 평점 기록';
 
@@ -739,11 +740,6 @@ ALTER TABLE sms_member_rate_log
     PRIMARY KEY (
       rate_log_id -- 회원 평점 기록 번호
     );
-
--- 회원 평점 기록 유니크 인덱스
-CREATE UNIQUE INDEX UIX_sms_member_rate_log
-  ON sms_member_rate_log ( -- 회원 평점 기록
-  );
 
 ALTER TABLE sms_member_rate_log
   MODIFY COLUMN rate_log_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원 평점 기록 번호';

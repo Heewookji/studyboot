@@ -17,6 +17,7 @@
 		<result column="sdt" property="startDate" />
 		<result column="edt" property="endDate" />
 		<result column="rcrtm_state" property="state" />
+		<result column="rcrtm_apply" property="recruitApply" />
 		<result column="cont" property="contents" />
 		<result column="prsn" property="personnel" />
 		<result column="rate" property="rate" />
@@ -32,6 +33,7 @@
 		cls_lms,
 		rate,
 		photo,
+		rcrtm_apply,
 		goal
 		from
 		sms_std
@@ -105,6 +107,7 @@
 		cls_lms,
 		rate,
 		photo,
+		rcrtm_apply,
 		goal
 		from
 		sms_std

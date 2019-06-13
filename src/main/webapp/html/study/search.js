@@ -7,6 +7,7 @@ rateValue = 3,
 largeClsNo,
 mediumClsNo,
 clsTitle,
+errorTitle = '오! 이런..',
 dayNo,
 dayCheckList = $('.day-checkbox input'),
 keyword,
@@ -54,13 +55,13 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
     if(keyword != undefined && obj.rowCount != 0){
       $('#clsTitle').text(obj.rowCount + "개의 검색결과");
-      
+
       $('#clsTitle').next('div').find('small').html('<small class="form-text g-opacity-0_8 g-font-size-default">지금 바로 해당 분야의 마음 맞는 사람들을 찾아보세요!</small>');
     } else{
       $('#clsTitle').text('찾으시는 스터디가 없네요..');
       $('#clsTitle').next('div').find('small').html('<small class="form-text g-opacity-0_8 g-font-size-default">지금 직접 만들어보는 것은 어떨까요?    <a href="#" data-toggle="modal" data-target="#stdAddModal">    Go!</a></small>');
     }
-    
+
     // keyword 검색된 스터디 개수 알려준다.(기존 분류제목에)
     // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
     // (이 조건이 없을 경우, 처음 들어왔는데도 출력이 안되는 경우 발생)출력하지않는다.
@@ -75,6 +76,25 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     }
 
     $(cardGenerator(obj)).appendTo(tbody);
+    
+    for(var e of obj.list){
+      $('#std-rate-'+ e.no).rateit({
+        // min value
+           min: 0, 
+           // max value
+           max: 5, 
+           // 'bg', 'font'
+           mode: 'font', 
+           // size of star
+           starwidth: 50, 
+           // is readonly?
+           readonly: true, 
+           // is resetable?
+           resetable: false,
+           value: e.rate
+         });
+    }
+    
 
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
@@ -82,6 +102,160 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 };
 
 
+
+//생성 모달의 카테고리 분류 로딩 함수
+function loadModalCategory() {
+
+
+  $.getJSON('../../app/json/study/category?clsNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.clsNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.lcls')
+    .dropdown({
+      placeholder: '대분류',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.mcls')
+        .dropdown({
+          placeholder: '중분류',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.scls')
+        .dropdown({
+          placeholder: '소분류',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+        $.getJSON('../../app/json/study/category?clsNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.clsNo;
+          }
+          $('.ui.dropdown.mcls')
+          .dropdown({
+            placeholder: '중분류',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('../../app/json/study/category?clsNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.clsNo;
+                }
+                $('.ui.dropdown.scls')
+                .dropdown({
+                  placeholder: '소분류',
+                  on: 'hover',
+                  values: objs.list
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
+
+
+//생성 모달의 카테고리 분류 로딩 함수
+function loadModalAddress() {
+
+
+  $.getJSON('../../app/json/study/addresscategory?addressNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.addressNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.laddr')
+    .dropdown({
+      placeholder: '시도',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.maddr')
+        .dropdown({
+          placeholder: '시군구',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.saddr')
+        .dropdown({
+          placeholder: '동읍면',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+
+        $.getJSON('../../app/json/study/addresscategory?addressNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.addressNo;
+          }
+          $('.ui.dropdown.maddr')
+          .dropdown({
+            placeholder: '시군구',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('../../app/json/study/addresscategory?addressNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.addressNo;
+                }
+                $('.ui.dropdown.saddr')
+                .dropdown({
+                  placeholder: '동읍면',
+                  on: 'hover',
+                  values: objs.list
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
 
 //카테고리 분류 로딩 함수
 function loadCategoryTitle(clsNo) {
@@ -148,6 +322,13 @@ if (param) {
   searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   loadCategoryTitle(clsNo);
   loadAddress();
+  loadModalCategory();
+  loadModalAddress();
+
+  $('.ui.dropdown.quantity')
+  .dropdown({
+    on: 'hover'
+  });
 }
 
 //스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
@@ -211,7 +392,7 @@ $(document.body).bind('loaded-smalltitle', () => {
 
     pageNo = 1; // 페이지 초기화
     tbody.html(''); // 스터디 목록 초기화
-    
+
 
     if($('.mcheck' + $(this).val()).is(":checked")){
       clsNo.push($(this).val());
@@ -225,8 +406,8 @@ $(document.body).bind('loaded-smalltitle', () => {
       clsNo.splice(index,1);
 
       if($(this).parent().parent().find('input:checked').length == 0){
-        
-       $(this).closest('div').parent().prev().find('input').prop('checked',false);
+
+        $(this).closest('div').parent().prev().find('input').prop('checked',false);
       }
     }
     console.log(clsNo);
@@ -389,31 +570,217 @@ $('.day-checkbox input').change(function(e) {
 });
 
 
-//add-btn URI인코딩 방식으로 보냈음
-$('#add-btn').click(function() {
+//add modal-----
+//이름 체크
+$( "#name" ).keyup(function(){
+  if(nickCheck($("#name").val()) == true){
+    if($("#name").attr("data-toggle")){
+      $('#name').tooltip('disable');
+      $('#name').tooltip('hide');
+    }
+  } else{
+    $("#name").attr("data-toggle","tooltip");
+    $("#name").attr("data-trigger","hover focus");
+    $("#name").attr("data-placement","bottom");
+    $("#name").attr("data-html", true);
+    $("#name").attr("title","3~12자의 한글, 영문, 숫자만 <br>사용할 수 있습니다");
+    $('#name').tooltip('enable');
+    $('#name').tooltip('show');
+  }
+});
+
+//이름 체크
+function nickCheck(str) {
+  if(str.length < 3 || str.length > 12) {
+    return false;
+  }
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]|\s/;
+  for( var i = 0; i <= str.length -1 ; i++ )    {
+    if(chk.test(str.charAt(i))) {
+    }
+    else  {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+//목표체크
+$( "#goal" ).keyup(function(){
+  if($( "#goal" ).val().length > 25 ||
+          $( "#goal" ).val().length < 5 ){
+    $("#goal").attr("data-toggle","tooltip");
+    $("#goal").attr("data-trigger","hover focus");
+    $("#goal").attr("data-placement","bottom");
+    $("#goal").attr("data-html", true);
+    $("#goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
+    $('#goal').tooltip('enable');
+    $('#goal').tooltip('show');
+  } else{
+    if($("#goal").attr("data-toggle")){
+      $('#goal').tooltip('disable');
+      $('#goal').tooltip('hide');
+    }
+  }
+});
+
+//설명 체크
+$('#contents').keyup(function(){
+  if($( "#contents" ).val().length > 150 ||
+          $( "#contents" ).val().length < 10 ){
+    $("#contents").attr("data-toggle","tooltip");
+    $("#contents").attr("data-trigger","hover focus");
+    $("#contents").attr("data-placement","bottom");
+    $("#contents").attr("data-html", true);
+    $("#contents").attr("title","10자에서 150자 사이로 <br>상세설명을 적어주세요");
+    $('#contents').tooltip('enable');
+    $('#contents').tooltip('show');
+  } else{
+    if($("#contents").attr("data-toggle")){
+      $('#contents').tooltip('disable');
+      $('#contents').tooltip('hide');
+    }
+  }
+});
+
+
+
+
+
+//시작하기 눌렀을 경우
+$('#init-btn').click(function(e) {
+
+//이름 체크
+  if(!nickCheck($("#name").val())){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '올바른 이름을 입력해주세요!'
+    });
+    return;
+  }
+
+//목표 체크
+  if($( "#goal" ).val().length > 25 ||
+          $( "#goal" ).val().length < 5 ){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '5자 이상 25자 이하의 목표를 입력해주세요!'
+    });
+    return;
+  }
+
+//활동 요일
+  var addDayNo = 0;
+
+  for(var a of $('.modalday-checkbox input')){
+    if($(a).prop("checked")){
+      addDayNo += parseInt($(a).val());
+    }
+  }
+  if(addDayNo == 0){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '최소 한개의 요일을 입력해주세요!'
+    });
+    return;
+  }
+
+//시작 날짜와 종료 날짜
+  if($('#startDate').val()== null ||
+          $('#startDate').val()== undefined ||
+          $('#startDate').val().length == 0){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '활동 기간을 입력해주세요!'
+    });
+    return;
+  }
+  if($('#endDate').val()== null ||
+          $('#endDate').val()== undefined ||
+          $('#endDate').val().length == 0){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '활동 기간을 입력해주세요!'
+    });
+    return;
+  }
+
+//활동 분류
+  if($('.scls').find(".selected").attr('data-value')== null ||
+          $('.scls').find(".selected").attr('data-value')== undefined){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '스터디 분류를 입력해주세요!'
+    });
+    return;
+  }
+
+//활동 지역
+  if($('.saddr').find(".selected").attr('data-value') == null ||
+          $('.saddr').find(".selected").attr('data-value') == undefined){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '스터디 활동 지역을 입력해주세요!'
+    });
+    return;
+  }
+
+//내용
+  if($( "#contents" ).val().length > 150 ||
+          $( "#contents" ).val().length < 10 ){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '10자 이상 150자 이하의 스터디 설명을 입력해주세요!'
+    });
+    return;
+  }
+
+//모두 통과한다면, URI인코딩 방식으로 전송
   jQuery.ajax({
     url:"../../app/json/study/add",
     type:"POST",
     data:  "name=" + encodeURIComponent($("#name").val()) +
-    "&cls=" + encodeURIComponent($("#cls").val()) +  
-    "&address=" + encodeURIComponent($("#address").val()) +
+    "&cls=" + encodeURIComponent($('.scls').find(".selected").attr('data-value')) +  
+    "&address=" + encodeURIComponent($('.saddr').find(".selected").attr('data-value')) +
     "&goal=" + encodeURIComponent($("#goal").val()) +
     "&photo=" + encodeURIComponent($("#photo").val()) +
-    "&day=" + encodeURIComponent($("#day").val()) +
-    "&personnel=" + encodeURIComponent($("#personnel").val()) +
+    "&day=" + encodeURIComponent(addDayNo) +
+    "&personnel=" + encodeURIComponent($('#quantity').dropdown('get value')) +
     "&startDate=" + encodeURIComponent($("#startDate").val()) +
     "&endDate=" + encodeURIComponent($("#endDate").val()) +
     "&contents=" + encodeURIComponent($("#contents").val()),
     contentType: "application/x-www-form-urlencoded",
     success: function(data) {
       if (data.status == 'success') {
-        alert("저장되었습니다.");
-        location.href = 'index.html';
+        Swal.fire({
+          type: 'success',
+          title: '스터디를 생성했습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          location.href = '../mystudy/index.html?no=' + data.studyNo;
+        }
+        );
       } else {
-        alert("잠시 후에 시도해주세요.");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '스터디 생성을 실패했습니다!'
+        });
       }
     }
   });
+
+
 });
 
 

@@ -41,7 +41,7 @@ public class StudyController {
     HashMap<String,Object> content = new HashMap<>();
     try {
       studyService.add(study);
-      content.put("status", "success");
+    
       int stdNo = study.getNo();
       Member loginUser = (Member)session.getAttribute("loginUser");
       
@@ -53,7 +53,14 @@ public class StudyController {
 
       //스터디 멤버 테이블과, 스터디 자료실 생성한다.
       studyMemberService.addStudyMember(stdNo, loginUser.getNo(), leader);
+      
+      //생성한 뒤에, 스터디 평점을 넣어준다.
+      studyService.updateRate(stdNo);
+      
       amazonService.add(stdNo);
+      
+      content.put("status", "success");
+      content.put("studyNo", stdNo);
       
     } catch (Exception e) {
       content.put("status", "fail");
@@ -305,11 +312,61 @@ public class StudyController {
     return content;
   }
   
-  // 매일 마다 평가 기록을 자동으로 업데이트 한다.
+  
+// 스터디 모집 선언요청처리
+  @GetMapping("recruitapply")
+  public Object recruitApply(
+      @RequestParam int no) {
+    
+    HashMap<String,Object> content = new HashMap<>();
+    
+    
+    //모집 선언을 취소하는 것이라면, 모집 선언을 false로 하고 리턴한다.
+    
+    
+    //먼저 스터디의 제한 인원이 꽉 차지 않았는지 확인한다.(스터디 멤버 리스트 사이즈와 스터디 테이블의 인원 수 비교)
+    
+    
+    
+    
+    //인원이 다 차지 않았다면, 모집 선언을 true 로 한다.
+    content.put("status", "success");
+    
+    
+    //다 차있다면,fail을 반환한다.
+    content.put("status", "fail");
+    
+    return content;
+  }
+  
+  
+  //계속 모집상태를 자동으로 업데이트 한다.
   @Scheduled(cron = "0 0 0 * * *")
   public void rateLogSchedule() {
     
-    //스터디 중 활동시작일에 이르지 않거나, 스터디 모집 선언이 true 이거나, 모집 인원이 다 찬 스터디는 모집 상태를 true로 바꿔준다.
+    //먼저 스터디의 인원이 다 찼는지 검사한다.
+    
+    
+        //다 차있다면, 모집 상태와 모집 선언을 false로 변경하고 리턴.
+    
+    
+    
+        //다 차지 않았다면, 모집 선언을 확인한다.
+    
+    
+            //모집 선언이 true라면 모집 상태를 true로 바꿔주고 리턴.
+    
+    
+    
+    
+            //모집 선언이 false이거나 null이라면, 스터디 활동시작일을 확인한다.
+    
+    
+    
+                  //스터디 활동 시작일이 지났다면, 모집 상태를 false 로 하고 리턴.
+    
+                  //스터디 활동 시작일이 지나지않았다면, 모집 상태를 true 로 하고 리턴.
+    
     
   }
 

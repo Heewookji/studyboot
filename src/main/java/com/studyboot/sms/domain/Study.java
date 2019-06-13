@@ -12,7 +12,7 @@ public class Study {
   private String photo;
   private int day;
   private double rate;
-  
+  private boolean recruitApply;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date startDate;
@@ -29,29 +29,7 @@ public class Study {
   private double endrate;
   private String clsName;
   private String addressName;
-  
-  @Override
-  public String toString() {
-    return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
-        + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", startDate=" + startDate
-        + ", endDate=" + endDate + ", state=" + state + ", goal=" + goal + ", contents=" + contents
-        + ", personnel=" + personnel + ", memberAge=" + memberAge + ", attendance=" + attendance
-        + ", endrate=" + endrate + ", clsName=" + clsName + ", addressName=" + addressName + "]";
-  }
-  
-  
-  public String getAddressName() {
-    return addressName;
-  }
-
-
-  public void setAddressName(String addressName) {
-    this.addressName = addressName;
-  }
-
-
   public int getNo() {
-    
     return no;
   }
   public void setNo(int no) {
@@ -92,6 +70,12 @@ public class Study {
   }
   public void setRate(double rate) {
     this.rate = rate;
+  }
+  public boolean isRecruitApply() {
+    return recruitApply;
+  }
+  public void setRecruitApply(boolean recruitApply) {
+    this.recruitApply = recruitApply;
   }
   public Date getStartDate() {
     return startDate;
@@ -152,6 +136,21 @@ public class Study {
   }
   public void setClsName(String clsName) {
     this.clsName = clsName;
+  }
+  public String getAddressName() {
+    return addressName;
+  }
+  public void setAddressName(String addressName) {
+    this.addressName = addressName;
+  }
+  @Override
+  public String toString() {
+    return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
+        + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", recruitApply=" + recruitApply
+        + ", startDate=" + startDate + ", endDate=" + endDate + ", state=" + state + ", goal="
+        + goal + ", contents=" + contents + ", personnel=" + personnel + ", memberAge=" + memberAge
+        + ", attendance=" + attendance + ", endrate=" + endrate + ", clsName=" + clsName
+        + ", addressName=" + addressName + "]";
   }
   
 }

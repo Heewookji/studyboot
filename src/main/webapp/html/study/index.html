@@ -127,9 +127,10 @@
 
         <!-- Quantity -->
         <div class="form-group col g-mb-20">
-         <label class="g-mb-10" for="quantity">인원</label> <select id="quantity"
+         <label class="g-mb-10" for="quantity">인원</label> <select
+          id="quantity"
           class="ui fluid dropdown quantity rounded g-height-40 g-mb-10">
-          <option value="2" >2명</option>
+          <option value="2">2명</option>
           <option value="3">3명</option>
           <option value="4">4명</option>
           <option value="5">5명</option>
@@ -257,7 +258,7 @@
   </div>
  </div>
 
-
+<!--  end addmodal -->
 
 
 
@@ -593,7 +594,7 @@
           src="/studyboot/images/studyimage.jpg" alt="Image Description">
         </div>
         <div class="g-bg-white g-pa-20">
- <div id="std-rate" class="rateit mb-3" data-rateit-readonly="true" data-rateit-mode="font" style="font-size: 24px" data-rateit-resetable="false" data-rateit-value="{{rate}}"></div>
+ <div class="rateit mb-3" id="std-rate-{{no}}"></div>
          <h2 class="h5 g-font-weight-600 mb-3">
           <a data-no="{{no}}"
            class="u-link-v5 g-color-black g-color-primary--hover"
@@ -825,7 +826,6 @@
         return $('#startDate').val();
       }
     });
-
   </script>
 
 
