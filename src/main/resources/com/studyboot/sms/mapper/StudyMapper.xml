@@ -217,7 +217,8 @@
 	<!-- <update id="increaseCount" parameterType="int"> update sms_std set 
 		vw_cnt = vw_cnt + 1 where std_id = #{value} </update> -->
 
-	<insert id="insert" parameterType="study">
+	<insert id="insert" parameterType="study"
+	useGeneratedKeys="true" keyColumn="std_id" keyProperty="no">
 		insert into sms_std(
 		name,
 		adr_lms,

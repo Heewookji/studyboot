@@ -34,7 +34,7 @@ $(document).ready(function() {
     $('#conts-list').append($stdBoard);
   }
 
-  $(document.body).trigger('loaded-board');
+  $(document.body).trigger('loaded-repository');
 //  boardList(1, "undefined", "undefined", noss);
 });
 
@@ -124,6 +124,62 @@ function boardList(pn, cls, keyword, noss) {
 //
 //
 //});
+
+$('#add-file').change(function() {
+  console.log($('#add-file').html());
+  console.log($('#add-file').val());
+  console.log($('#add-file').text());
+  
+  var fileName = $('#add-file').val().replace(/.*(\/|\\)/, '');
+  console.log(fileName);
+  
+  $('#file-upload').append("<p>" + fileName);
+  alert("input박스 변화감지")
+})
+
+/*$('#save-btn').click((e) function() {
+  
+  $.ajax({
+    url:'../../app/json/MyStudy/fileAdd',
+    type: 'post',
+    dataType: 'text',
+    data: {
+      studyNo : location.href.split('=')[1].substring(0,1),
+      ntc: $('input[id="checkboxSuccess"]:checked').val(),
+      title: $(inputHorizontalSuccess).val(),
+      contents: markup
+    },
+    success: function(data){
+      var obj = JSON.parse(data);
+      alert(obj.status);
+      location.reload();
+    },
+    error: function(request, status, error){
+      alert("등록에 실패 했습니다.");
+    }
+  });
+});*/
+
+$(document.body).bind('loaded-repository', () => {
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

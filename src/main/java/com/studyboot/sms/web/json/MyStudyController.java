@@ -156,7 +156,6 @@ public class MyStudyController {
         content.put("message", e.getMessage());
       }
     }
-
     return content;
   }
 

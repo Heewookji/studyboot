@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +14,12 @@ import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.AddressService;
+import com.studyboot.sms.service.AmazonS3_Service;
 import com.studyboot.sms.service.ClsService;
 import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyService;
+
 
 
 @RestController("json/StudyController")
@@ -28,13 +31,17 @@ public class StudyController {
   @Autowired ClsService clsService;
   @Autowired RateService rateService;
   @Autowired AddressService addressService;
+  @Autowired AmazonS3_Service amazonService;
 
   @PostMapping("add")
-  public Object add(Study study) {
+  public Object add(Study study ) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     try {
       studyService.add(study);
       content.put("status", "success");
+      int stdNo = study.getNo();
+      amazonService.add(stdNo);
+      
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
