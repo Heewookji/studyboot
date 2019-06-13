@@ -92,7 +92,6 @@ function loadData() {
     console.log(data);
     user = data;
 // $('#nickName').val(data.nickName);
-//    rateData(user.rate);
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
     $('#prevImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
     
