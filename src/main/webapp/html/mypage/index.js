@@ -13,6 +13,7 @@ user,
 ratingForm = $("#rating-form");
 
 
+
 // 페이지가 준비되면 평점 정보 모달창을 꽂아준다.
 $( document ).ready(function() {
   $("#sb-history").load("rateInfo.html")
@@ -91,7 +92,7 @@ function loadData() {
     console.log(data);
     user = data;
 // $('#nickName').val(data.nickName);
-    rateData(user.rate);
+//    rateData(user.rate);
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
     $('#prevImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
     

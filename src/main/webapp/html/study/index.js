@@ -54,11 +54,6 @@ $('.ui.dropdown')
 
 $('#stdAddModal').on('shown.bs.modal', function (e) {
   
-  $('.rateit')
-  // if a direction if specified it will be obeyed
-  .transition('horizontal flip in')
-;
-  
   
   $('.rateit').rateit({ 
     // min value
@@ -76,6 +71,13 @@ $('#stdAddModal').on('shown.bs.modal', function (e) {
     // is resetable?
     resetable: false, 
   });
+  
+  $('.rateit').removeClass("invisible");
+  
+  $('.rateit')
+  // if a direction if specified it will be obeyed
+  .transition('horizontal flip in')
+;
  
 })
 

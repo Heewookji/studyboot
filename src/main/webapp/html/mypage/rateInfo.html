@@ -1,3 +1,6 @@
+ <link
+ href="/studyboot/js/Semantic-UI-master/dist/components/transition.min.css"
+ rel="stylesheet" type="text/css">
  
   <!-- 나의 평점 -->
   <div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
@@ -19,8 +22,8 @@
                 <figure class="text-center">
                   <figcaption>
                     <span id="history-nick"><strong></strong></span>
-                    <div id="history-rate" class="rateit" data-rateit-mode="font" style="font-size: 30px" data-rateit-resetable="false"></div>
                   </figcaption>
+                  <div id="history-rate" class="rateit invisible g-mb-5" data-rateit-readonly="true" data-rateit-mode="font" style="font-size: 24px" data-rateit-resetable="false"></div>
                   <img id="history-profilePhoto" class="img-thumbnail"
                     alt="Image Description" style="height: 200px;">
                 </figure>
@@ -93,6 +96,8 @@
 {{/each}}
 </script>
 
+ <script
+  src="../../js/Semantic-UI-master/dist/components/transition.min.js"></script>
+<script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
 <script src="rateInfo.js"></script>
-
 

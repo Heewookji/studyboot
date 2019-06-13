@@ -16,35 +16,35 @@ currSpan = $('#history-currPage > span'),
 historytemplateSrc = $('#history-template').html(),
 historyGenerator = Handlebars.compile(historytemplateSrc);
 
-
 // 히스토리 모달이 열리면 별점을 렌더함
 $('#historyModal').on('shown.bs.modal', function (e) {
   
-  $('#history-rate').rateit({ 
-    // min value
+  $('#history-rate').rateit({
+ // min value
     min: 0, 
     // max value
     max: 5, 
     // step size
     step: 0.5, 
     // 'bg', 'font'
-    mode: 'bg', 
-    // custom icon
-    icon: '★', 
+    mode: 'font', 
     // size of star
-    starwidth: 16, 
-    starheight: 16, 
+    starwidth: 100, 
     // is readonly?
     readonly: true, 
-    // is preset?
-    ispreset: true
+    // is resetable?
+    resetable: false
   });
-  
+ 
+  $('#history-rate').rateit('value', window.user.rate);
+  $('#history-rate').removeClass("invisible");
   $(document.body).trigger('loaded-historyRate');
 });
 
 $(document.body).bind('loaded-historyRate', () => {
-  $('#history-rate').rateit('value', window.user.rate);
+  $('#history-rate')
+  // if a direction if specified it will be obeyed
+.transition('slide up in');
 });
 
 
