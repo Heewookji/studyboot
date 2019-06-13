@@ -61,7 +61,7 @@ function loadRateData() {
     $('#history-profilePhoto')
       .attr('src', '/studyboot/upload/images/member/' + user.photo);
     
-    // 이름과 평점을 꼽아준다. - 작업중..
+    // 닉네임을 꼽아준다.
     $('#history-nick > strong').html(user.nickName);
     
     // bar 차트

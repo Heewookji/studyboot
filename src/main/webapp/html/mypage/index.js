@@ -108,27 +108,6 @@ function loadData() {
   });
 };
 
-// 별점
-function rateData(rate) {
-  
-  var rateLabel;
-  
-  switch(rate) {
-    case 1: rateLabel = '#star1'; break;
-    case 1.5: rateLabel = '#star15'; break;
-    case 2: rateLabel = '#star2'; break;
-    case 2.5: rateLabel = '#star25'; break;
-    case 3: rateLabel = '#star3'; break;
-    case 3.5: rateLabel = '#star35'; break;
-    case 4: rateLabel = '#star4'; break;
-    case 4.5: rateLabel = '#star45'; break;
-    case 5: rateLabel = '#star5'; break;
-  }
-  
-  var rateInput = '#' + $(rateLabel).attr('for');
-  console.log(rateInput);
-  $(rateInput).prop("checked", true);
-}
 
 
 // 로그인 유저의 스터디 데이터 가져오기
