@@ -51,15 +51,14 @@
 					cls_lms = #{clsNo}
 				</if>
 			</if>
-			
-			 <if test="dayNoListSize > 0">
-        and (
-        <foreach collection="dayNoList" item="d"
-          separator="or">
-          day = #{d}
-        </foreach>
-        )
-      </if>
+
+			<if test="dayNoListSize > 0">
+				and (
+				<foreach collection="dayNoList" item="d" separator="or">
+					day = #{d}
+				</foreach>
+				)
+			</if>
 
 			<if test="addressNoSize != 0">
 				and
@@ -122,15 +121,14 @@
 				</foreach>
 				)
 			</if>
-			
-			 <if test="dayNoListSize > 0">
-        and (
-        <foreach collection="dayNoList" item="d"
-          separator="or">
-          day = #{d}
-        </foreach>
-        )
-      </if>
+
+			<if test="dayNoListSize > 0">
+				and (
+				<foreach collection="dayNoList" item="d" separator="or">
+					day = #{d}
+				</foreach>
+				)
+			</if>
 
 			<if test="addressNoSize != 0">
 				and
@@ -221,7 +219,7 @@
 		vw_cnt = vw_cnt + 1 where std_id = #{value} </update> -->
 
 	<insert id="insert" parameterType="study"
-	useGeneratedKeys="true" keyColumn="std_id" keyProperty="no">
+		useGeneratedKeys="true" keyColumn="std_id" keyProperty="no">
 		insert into sms_std(
 		name,
 		adr_lms,
@@ -296,9 +294,9 @@
 
 			<if test="dayNoListSize > 0">
 				and (
-				<foreach collection="dayNoList" item="d"
-					separator="or">
-					day = #{d}
+				<foreach collection="dayNoList" item="d" separator="or">
+					day =
+					#{d}
 				</foreach>
 				)
 			</if>
@@ -352,15 +350,14 @@
 				</foreach>
 				)
 			</if>
-			
-			 <if test="dayNoListSize > 0">
-        and (
-        <foreach collection="dayNoList" item="d"
-          separator="or">
-          day = #{d}
-        </foreach>
-        )
-      </if>
+
+			<if test="dayNoListSize > 0">
+				and (
+				<foreach collection="dayNoList" item="d" separator="or">
+					day = #{d}
+				</foreach>
+				)
+			</if>
 
 			<if test="addressSize != 0">
 				and
@@ -428,6 +425,34 @@
 		where
 		member_id = #{value}
 	</select>
+
+<!-- 스터디의 정원이 다 차있는가? -->
+  <select id="checkCapacityByStudyNo" resultType="boolean" parameterType="int">
+    
+    <if test="value != 0">
+    select 
+    @membersize := count(*)
+    from 
+    sms_std_member
+    where 
+    std_id = #{value}
+    and
+    end_date is
+    null;
+    
+    select 
+    if(
+    @membersize >= prsn,
+    true,
+    false
+    ) 
+    from 
+    sms_std
+    where std_id = #{value};
+    </if>
+    
+    
+  </select>
 
 </mapper>
 

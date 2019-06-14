@@ -90,9 +90,10 @@ public class StudyMemberServiceImpl implements StudyMemberService {
   }
   
   @Override
-  public int size(int no) {
-    return studyMemberDao.countAll(no);
+  public int sizeEndStudy(int no) {
+    return studyMemberDao.countEndStudyByMemberNo(no);
   }
+  
 }
 
 

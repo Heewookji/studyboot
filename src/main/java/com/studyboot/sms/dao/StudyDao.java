@@ -19,4 +19,5 @@ public interface StudyDao {
   List<Study> findByNos(List<Integer> list);
   Study findByStudy(int no);
   List<Study> findPickedStudyByUser(int no);
+  List<Boolean> checkCapacityByStudyNo(int studyNo);
 }

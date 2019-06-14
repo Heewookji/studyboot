@@ -229,4 +229,11 @@ public class StudyServiceImpl implements StudyService {
   }
 
 
+
+  @Override
+  public List<Boolean> checkCapacityByStudyNo(int studyNo) {
+    return studyDao.checkCapacityByStudyNo(studyNo);
+  }
+
+
 }
