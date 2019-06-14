@@ -15,5 +15,6 @@ public interface StudyService {
   List<Study> list(int pageNo, int pageSize, String clsNo, String addressNo, double rateValue, String keyword, List<Integer> dayNoList);
   List<Study> list(int pageNo, int pageSize, List<String> clsNo, String addressNo, double rateValue, String keyword, List<Integer> dayNoList);
   Study getStudy(int no);
-  List<Boolean> checkCapacityByStudyNo(int studyNo);
+  boolean checkFullCapacityByStudyNo(int studyNo);
+  int updateAllFullCapacityStudy();
 }

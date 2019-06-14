@@ -231,8 +231,15 @@ public class StudyServiceImpl implements StudyService {
 
 
   @Override
-  public List<Boolean> checkCapacityByStudyNo(int studyNo) {
-    return studyDao.checkCapacityByStudyNo(studyNo);
+  public boolean checkFullCapacityByStudyNo(int studyNo) {
+    return studyDao.checkFullCapacityByStudyNo(studyNo);
+  }
+
+
+
+  @Override
+  public int updateAllFullCapacityStudy() {
+    return studyDao.updateAllFullCapacityStudy();
   }
 
 

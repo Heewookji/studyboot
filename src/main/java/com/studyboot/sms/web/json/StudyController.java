@@ -343,29 +343,18 @@ public class StudyController {
   @Scheduled(cron = "0 0 0 1 * *")
   public void rateLogSchedule() {
 
-    //먼저 스터디의 인원이 다 찼는지 검사한다.
+    //먼저 인원이 꽉찬 스터디의 모집 상태와 선언을 false 로 변경한다.
 
-    studyService.checkCapacityByStudyNo(1);
-
-    //--다 차있다면, 모집 상태와 모집 선언을 false로 변경하고 리턴.
+    studyService.updateAllFullCapacityStudy();
 
 
 
-    //--다 차지 않았다면, 모집 선언을 확인한다.
+    //----인원 다 차지 않았고, 모집 선언이 null인데, 스터디 활동 시작일이 지나지않았다면, 모집 상태 true.
+    
+    
+    
 
 
-    //----모집 선언이 true라면 모집 상태를 true로 바꿔주고 리턴.
-
-
-
-
-    //----모집 선언이 false이거나 null이라면, 스터디 활동시작일을 확인한다.
-
-
-
-    //------스터디 활동 시작일이 지났다면, 모집 상태를 false 로 하고 리턴.
-
-    //------스터디 활동 시작일이 지나지않았다면, 모집 상태를 true 로 하고 리턴.
 
 
   }

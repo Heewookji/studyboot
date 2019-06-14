@@ -24,6 +24,7 @@ public class Study {
   private String goal;
   private String contents;
   private int personnel;
+  private int nowPersonnel;
   private int memberAge;
   private double attendance;
   private double endrate;
@@ -113,6 +114,12 @@ public class Study {
   public void setPersonnel(int personnel) {
     this.personnel = personnel;
   }
+  public int getNowPersonnel() {
+    return nowPersonnel;
+  }
+  public void setNowPersonnel(int nowPersonnel) {
+    this.nowPersonnel = nowPersonnel;
+  }
   public int getMemberAge() {
     return memberAge;
   }
@@ -148,9 +155,9 @@ public class Study {
     return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
         + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", recruitApply=" + recruitApply
         + ", startDate=" + startDate + ", endDate=" + endDate + ", state=" + state + ", goal="
-        + goal + ", contents=" + contents + ", personnel=" + personnel + ", memberAge=" + memberAge
-        + ", attendance=" + attendance + ", endrate=" + endrate + ", clsName=" + clsName
-        + ", addressName=" + addressName + "]";
+        + goal + ", contents=" + contents + ", personnel=" + personnel + ", nowPersonnel="
+        + nowPersonnel + ", memberAge=" + memberAge + ", attendance=" + attendance + ", endrate="
+        + endrate + ", clsName=" + clsName + ", addressName=" + addressName + "]";
   }
   
 }
