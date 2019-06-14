@@ -3,7 +3,6 @@ package com.studyboot.sms.web.json;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -21,8 +20,6 @@ import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyService;
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.name.Rename;
 
 
 // AJAX 기반 JSON 데이터를 다루는 컨트롤러
