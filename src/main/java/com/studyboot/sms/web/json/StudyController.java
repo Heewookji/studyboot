@@ -348,15 +348,6 @@ public class StudyController {
     studyService.updateAllFullCapacityStudy();
 
 
-
-    //----인원 다 차지 않았고, 모집 선언이 null인데, 스터디 활동 시작일이 지나지않았다면, 모집 상태 true.
-    
-    
-    
-
-
-
-
   }
 
 
