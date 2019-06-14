@@ -1,289 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<!-- Title -->
-<title>MyPage</title>
-
-<!-- Required Meta Tags Always Come First -->
-<meta charset="utf-8">
-<meta name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-
-<!-- Favicon -->
-<link rel="shortcut icon" href="../../Unify/favicon.ico">
-<!-- Google Fonts -->
-<link rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
-<!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
-<!-- CSS Global Icons -->
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/icon-etlinefont/style.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/icon-line-pro/style.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/icon-hs/style.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
-<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
-<link rel="stylesheet"
-  href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
-
-<!-- CSS Unify -->
-<link rel="stylesheet" href="../../Unify/assets/css/unify.css">
-
-<!-- CSS Customization -->
-<link rel="stylesheet"
- href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
-<link rel="stylesheet"
- href="../../node_modules/cropperjs/dist/cropper.min.css">
-<link rel="stylesheet" href="../../Unify/assets/css/custom.css">
-<link rel="stylesheet" href="/studyboot/css/common.css">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Cropper.js</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/cropper.css">
   <style>
-    .container {
-      margin: 20px auto;
-      max-width: 640px;
+    .label {
+      cursor: pointer;
     }
 
-    img {
+    .progress {
+      display: none;
+      margin-bottom: 1rem;
+    }
+
+    .alert {
+      display: none;
+    }
+
+    .img-container img {
       max-width: 100%;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>One to one crop box</h1>
-    <p>The image displays in its natural size, so the size of the crop box size equals real cropped size.</p>
-    <h3>Image</h3>
-    <div>
-      <img id="image" src="../../upload/images/member/vven.jpg" alt="Picture">
+    <h1>Upload cropped image to server</h1>
+    <label class="label" data-toggle="tooltip" title="Change your avatar">
+      <img class="rounded" id="avatar" src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
+      <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+    </label>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
     </div>
-    <p>Data: <span id="data"></span></p>
-    <p>Crop Box Data: <span id="cropBoxData"></span></p>
-    <h3>Result</h3>
-    <p>
-      <button type="button" id="button">Crop</button>
-    </p>
-    <div id="result"></div>
+    <div class="alert" role="alert"></div>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="img-container">
+              <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="crop">Crop</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  
-
-
-
-
-  <!-- JS Global Compulsory -->
-  <c                                                                                              src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
-  <script
-    src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
-  <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
-  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
-  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
-  
-  <script src="../../node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-  <script src="../../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-  <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
-  <script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
-  <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
-  <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
-  <script src="../../node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
-  
-  <!-- JS Implementing Plugins -->
-  <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
-  <script
-    src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
-  <script
-    src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
-  <script
-    src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
-  <script
-    src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script
-    src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-  <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
-  <script
-    src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
-
-  <!-- JS Unify -->
-  <script src="../../Unify/assets/js/hs.core.js"></script>
-
-  <script src="../../Unify/assets/js/components/hs.header.js"></script>
-  <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
-
-  <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
-  <script src="../../Unify/assets/js/components/hs.popup.js"></script>
-  <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
-
-  <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
-
-  <!-- JS Custom -->
-  <script src="../../Unify/assets/js/custom.js"></script>
-  <script src="../header.js"></script>
-  <script src="../footer.js"></script>
-  <script src="index.js"></script>
-  <script src="test.js"></script>
-  <!-- JS Plugins Init. -->
-  
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/cropper.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
-      var image = document.querySelector('#image');
-      var data = document.querySelector('#data');
-      var cropBoxData = document.querySelector('#cropBoxData');
-      var button = document.getElementById('button');
-      var result = document.getElementById('result');
-      var cropper = new Cropper(image, {
-        ready: function (event) {
-          // Zoom the image to its natural size
-          cropper.zoomTo(1);
-        },
+      var avatar = document.getElementById('avatar');
+      var image = document.getElementById('image');
+      var input = document.getElementById('input');
+      var $progress = $('.progress');
+      var $progressBar = $('.progress-bar');
+      var $alert = $('.alert');
+      var $modal = $('#modal');
+      var cropper;
 
-        crop: function (event) {
-          data.textContent = JSON.stringify(cropper.getData());
-          cropBoxData.textContent = JSON.stringify(cropper.getCropBoxData());w 
-        },
+      $('[data-toggle="tooltip"]').tooltip();
 
-        zoom: function (event) {
-          // Keep the image in its natural size
-          if (event.detail.oldRatio === 1) {
-            event.preventDefault();
+      input.addEventListener('change', function (e) {
+        var files = e.target.files;
+        var done = function (url) {
+          input.value = '';
+          image.src = url;
+          $alert.hide();
+          $modal.modal('show');
+        };
+        var reader;
+        var file;
+        var url;
+
+        if (files && files.length > 0) {
+          file = files[0];
+
+          if (URL) {
+            done(URL.createObjectURL(file));
+          } else if (FileReader) {
+            reader = new FileReader();
+            reader.onload = function (e) {
+              done(reader.result);
+            };
+            reader.readAsDataURL(file);
           }
-        },
+        }
       });
 
-      button.onclick = function () {
-        result.innerHTML = '';
-        result.appendChild(cropper.getCroppedCanvas());
-      };
+      $modal.on('shown.bs.modal', function () {
+        cropper = new Cropper(image, {
+          aspectRatio: 1,
+          viewMode: 3,
+        });
+      }).on('hidden.bs.modal', function () {
+        cropper.destroy();
+        cropper = null;
+      });
+
+      document.getElementById('crop').addEventListener('click', function () {
+        var initialAvatarURL;
+        var canvas;
+
+        $modal.modal('hide');
+
+        if (cropper) {
+          canvas = cropper.getCroppedCanvas({
+            width: 160,
+            height: 160,
+          });
+          initialAvatarURL = avatar.src;
+          avatar.src = canvas.toDataURL();
+          $progress.show();
+          $alert.removeClass('alert-success alert-warning');
+          canvas.toBlob(function (blob) {
+            var formData = new FormData();
+
+            formData.append('avatar', blob, 'avatar.jpg');
+            $.ajax('https://jsonplaceholder.typicode.com/posts', {
+              method: 'POST',
+              data: formData,
+              processData: false,
+              contentType: false,
+
+              xhr: function () {
+                var xhr = new XMLHttpRequest();
+
+                xhr.upload.onprogress = function (e) {
+                  var percent = '0';
+                  var percentage = '0%';
+
+                  if (e.lengthComputable) {
+                    percent = Math.round((e.loaded / e.total) * 100);
+                    percentage = percent + '%';
+                    $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                  }
+                };
+
+                return xhr;
+              },
+
+              success: function () {
+                $alert.show().addClass('alert-success').text('Upload success');
+              },
+
+              error: function () {
+                avatar.src = initialAvatarURL;
+                $alert.show().addClass('alert-warning').text('Upload error');
+              },
+
+              complete: function () {
+                $progress.hide();
+              },
+            });
+          });
+        }
+      });
     });
   </script>
-  
-  
-  
-  
-  
-<!--   <script>
-
-function cropperInit() {
-  
-  const $image = $('#image');
-  
-  $image.cropper({
-    viewMode: 2,
-    dragMode: 'none',
-    aspectRatio: 1 / 1,
-    responsive: true,
-    crop(event) {
-      console.log(event.detail.x);
-      console.log(event.detail.y);
-      console.log(event.detail.width);
-      console.log(event.detail.height);
-      console.log(event.detail.rotate);
-      console.log(event.detail.scaleX);
-      console.log(event.detail.scaleY);
-    },
-    modal: true,
-    guides: false,
-    highlight: false,
-    preview: '#prev-image'
-  });
-}
-
-
-
-$("#inputImage").change(function () {
-  readURL(this);
-  cropperInit();
-});
-
-function readURL(input) {
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-          // blob stuff
-          var blob = new Blob([e.target.result]); // create blob...
-          window.URL = window.URL || window.webkitURL;
-          var blobURL = window.URL.createObjectURL(blob); // and get it's URL
-          
-          // helper Image object
-          var image = new Image();
-          image.src = blobURL;
-          image.onload = function () {
-
-              for (var x = 0; x < self.ThumbSizes.length; x++) {
-                  // have to wait till it's loaded
-                  var resized = resizeMe(image, self.ThumbSizes[x]); // send it to canvas
-                  var resized_blob = dataURItoBlob(resized);
-                  uploadFile(resized_blob, self.ThumbSizes[x].Name);
-              }
-          }
-      }
-      reader.readAsDataURL(input.files[0]);
-  }
-}
-
-
-
-
-
-
-
-
-$('#upload-btn').click((e) => {
-  
-  $image.cropper('getCroppedCanvas').toBlob(function (blob) {
-    var formData = new FormData();
-    console.log(blob);
-    formData.append('croppedImage', blob);
-  
-    $.ajax('../../app/json/member/photo', {
-      method: "POST",
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function () {
-        console.log('Upload success');
-      },
-      error: function () {
-        console.log('Upload error');
-      }
-    });
-  });
-  
-});
-
-</script> -->
-  
 </body>
 </html>
-
-
-
-
-
-
-
-

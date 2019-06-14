@@ -280,7 +280,7 @@ public class MemberController {
   }
   
   // 매달 1일 마다 평가 기록을 자동으로 업데이트 한다.
-  @Scheduled(cron = "0 0 0 1 * *")
+  @Scheduled(cron = "0 0 0 20 * *")
   public void rateLogSchedule() {
     System.out.println("schedule start!!!");
     int count = rateService.addRateLog();
