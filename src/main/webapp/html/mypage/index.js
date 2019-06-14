@@ -222,10 +222,11 @@ uploadedImageURL,
 $alert = $('.alert'),
 // cropper options
 options = {
-    viewMode: 2,
+    viewMode: 3,
     dragMode: 'move',
     aspectRatio: 1/1,
     guides: false,
+    background: false,
     ready: function () {
         cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
       }
@@ -293,7 +294,7 @@ $(document.body).bind('import-new-image', () => {
           method: 'POST',
           data: formData,
           processData: false,
-          contentType: multipart/form-data,
+          contentType: 'multipart/form-data',
           success: function () {
             $alert.show().addClass('alert-success').text('Upload success');
           },
