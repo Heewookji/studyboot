@@ -9,7 +9,7 @@ nossss = param.split('=')[1];
 //currCls,
 //keyword = $("#board-search").val(),
 //stdBoardListTemplateSrc = $('#std-BoardList').html();
-//
+
 //var stdBoardListGenerator = Handlebars.compile(stdBoardListTemplateSrc);
 
 $(document).ready(function() {
@@ -35,7 +35,7 @@ $(document).ready(function() {
   }
 
   $(document.body).trigger('loaded-repository');
-//  boardList(1, "undefined", "undefined", noss);
+//boardList(1, "undefined", "undefined", noss);
 });
 
 
@@ -84,131 +84,82 @@ function boardList(pn, cls, keyword, noss) {
 
   }); //getJSON()
 } // boardList()
-*/
+ */
 //스터디 게시판
 //$(document.body).bind('loaded-board', () => {
-//  
-//  $('#prevPage > a').click((e) => {
-//    e.preventDefault();
-//    boardList(pageNo - 1, $("#currCls").html(), keyword, noss);
-//  });
-//
-//  $('#nextPage > a').click((e) => {
-//    e.preventDefault();
-//    boardList(pageNo + 1, $("#currCls").html(), keyword, noss);
-//  });
-//
-//  $('#bothClsPage').click((e) => {
-//    keyword = "";
-//    e.preventDefault();
-//    $("#currCls").html("전체");
-//    $("#board-search").val("");
-//    boardList(1, "undefined", "undefined", noss);
-//  });
-//
-//  $('#titlePage').click((e) => {
-//    e.preventDefault();
-//    $("#currCls").html("제목");
-//  });
-//
-//  $('#nickPage').click((e) => {
-//    e.preventDefault();
-//    $("#currCls").html("닉네임");
-//  });
-//
-//  $('#board-search-btn').click((e) => {
-//    keyword = $("#board-search").val();
-//    boardList(1, $("#currCls").html(), keyword, noss);
-//    $("#board-search").val("");
-//  });
-//
-//
+
+//$('#prevPage > a').click((e) => {
+//e.preventDefault();
+//boardList(pageNo - 1, $("#currCls").html(), keyword, noss);
+//});
+
+//$('#nextPage > a').click((e) => {
+//e.preventDefault();
+//boardList(pageNo + 1, $("#currCls").html(), keyword, noss);
+//});
+
+//$('#bothClsPage').click((e) => {
+//keyword = "";
+//e.preventDefault();
+//$("#currCls").html("전체");
+//$("#board-search").val("");
+//boardList(1, "undefined", "undefined", noss);
+//});
+
+//$('#titlePage').click((e) => {
+//e.preventDefault();
+//$("#currCls").html("제목");
+//});
+
+//$('#nickPage').click((e) => {
+//e.preventDefault();
+//$("#currCls").html("닉네임");
+//});
+
+//$('#board-search-btn').click((e) => {
+//keyword = $("#board-search").val();
+//boardList(1, $("#currCls").html(), keyword, noss);
+//$("#board-search").val("");
+//});
+
+
 //});
 
 $('#add-file').change(function() {
-  console.log($('#add-file').html());
-  console.log($('#add-file').val());
-  console.log($('#add-file').text());
-  
+
   var fileName = $('#add-file').val().replace(/.*(\/|\\)/, '');
   console.log(fileName);
-  
+
   $('#file-upload').append("<p>" + fileName);
   alert("input박스 변화감지")
+
 })
 
-$('#save-btn').click((e) => {
-  
-  $('#add-file').fileupload({
-    url: '../../app/json/member/fileAdd',        // 서버에 요청할 URL
-    dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
-    sequentialUploads: true,
-    singleFileUploads: false,
-    autoUpload: false,
-    replaceFileInput : true,
-    processalways: function (e, data) {
-      
-      console.log(e);
-      console.log(data);
-      
-//      if (!checkImageType(data.files[0].name)) {
-//        alert('사진 파일만 선택 할 수 있습니다!')
-//        return false;
-//      }
-//      
-//      if (data.files && data.files[0]) {
-//        
-//        var reader = new FileReader();
-//        reader.onload = (e) => {
-//          $('#prevImage').attr('src', e.target.result);
-//        }
-//        reader.readAsDataURL(data.files[0]);
-//        
-//        imgUdt = false;
-//        $('#imageUpdate-btn').prop('disabled', false);
-//        $('#imageUpdate-btn').unbind("click");
-//        $('#imageUpdate-btn').click(function() {
-//          data.submit();
-//        });
-//      }
-    }, 
-    done: function (e, data) {
-      console.log(e);
-      console.log(data);
-    }
-  });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  $.ajax({
-    url:'../../app/json/MyStudy/fileAdd',
-    type: 'post',
-    dataType: 'text',
-    data: {
-      studyNo : location.href.split('=')[1].substring(0,1),
-      ntc: $('input[id="checkboxSuccess"]:checked').val(),
-      title: $(inputHorizontalSuccess).val(),
-      contents: markup
-    },
-    success: function(data){
-      var obj = JSON.parse(data);
-      alert(obj.status);
-      location.reload();
-    },
-    error: function(request, status, error){
-      alert("등록에 실패 했습니다.");
-    }
-  });
+
+$('#add-file').fileupload({
+  url: '../../app/json/MyStudy/fileAdd',        // 서버에 요청할 URL
+  dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+  sequentialUploads: true,
+  singleFileUploads: false,
+  autoUpload: false,
+  replaceFileInput : true,
+  add : function (e, data) {
+    console.log(data);
+
+    $('#save-btn').click(function() {
+      alert("데이터 보내기");
+      data.submit();
+    });
+
+  },
+  formData : {studyNo: nossss},
+  done: function (e, data) {
+    alert("보내기 성공");
+  }
 });
+
+
+
 
 
 $(document.body).bind('loaded-repository', () => {
