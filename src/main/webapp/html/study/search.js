@@ -342,16 +342,20 @@ $(window).scroll(function(obj) {
 $(document.body).bind('loaded-list', () => {
 
   $('.study-view-link').click((e) => {
-    e.preventDefault();
-    window.location.href = 'view.html?no=' +
-    $(e.target).attr('data-no');
+    
+    
+    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
+    + '&name=' + $(e.target).parents('.card-div').find('a').html();
+    
   });
 
+  
   $( ".study-view-link" ).hover(
           function(e) {
           }, function(e) {
           }
   );
+  
 });
 
 

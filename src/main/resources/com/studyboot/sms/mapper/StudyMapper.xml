@@ -6,482 +6,482 @@
 
 <mapper namespace="com.studyboot.sms.dao.StudyDao">
 
-	<resultMap type="study" id="studyMap">
-		<id column="std_id" property="no" />
-		<result column="name" property="name" />
-		<result column="adr_lms" property="address" />
-		<result column="cls_lms" property="cls" />
-		<result column="goal" property="goal" />
-		<result column="photo" property="photo" />
-		<result column="day" property="day" />
-		<result column="sdt" property="startDate" />
-		<result column="edt" property="endDate" />
-		<result column="rcrtm_state" property="state" />
-		<result column="rcrtm_apply" property="recruitApply" />
-		<result column="cont" property="contents" />
-		<result column="prsn" property="personnel" />
-		<result column="now_prsn" property="nowPersonnel" />
-		<result column="rate" property="rate" />
-		<result column="cls_name" property="clsName" />
-	</resultMap>
+  <resultMap type="study" id="studyMap">
+    <id column="std_id" property="no" />
+    <result column="name" property="name" />
+    <result column="adr_lms" property="address" />
+    <result column="cls_lms" property="cls" />
+    <result column="goal" property="goal" />
+    <result column="photo" property="photo" />
+    <result column="day" property="day" />
+    <result column="sdt" property="startDate" />
+    <result column="edt" property="endDate" />
+    <result column="rcrtm_state" property="state" />
+    <result column="rcrtm_apply" property="recruitApply" />
+    <result column="cont" property="contents" />
+    <result column="prsn" property="personnel" />
+    <result column="now_prsn" property="nowPersonnel" />
+    <result column="rate" property="rate" />
+    <result column="cls_name" property="clsName" />
+  </resultMap>
 
-	<!-- 스터디 리스트 통합 -->
-	<select id="findAll" resultMap="studyMap" parameterType="map">
-		select
-		std_id,
-		name,
-		adr_lms,
-		cls_lms,
-		rate,
-		photo,
-		rcrtm_apply,
-		goal
-		from
-		sms_std
-		<where>
-			rate >= #{rateValue}
-			<if test="clsNoSize != 0">
-				and
-				<if test="clsNoSize == 2">
-					LEFT(cls_lms, 2) = #{clsNo}
-				</if>
-				<if test="clsNoSize == 4">
-					LEFT(cls_lms, 4) = #{clsNo}
-				</if>
-				<if test="clsNoSize == 6">
-					cls_lms = #{clsNo}
-				</if>
-			</if>
+  <!-- 스터디 리스트 통합 -->
+  <select id="findAll" resultMap="studyMap" parameterType="map">
+    select
+    std_id,
+    name,
+    adr_lms,
+    cls_lms,
+    rate,
+    photo,
+    rcrtm_state,
+    goal
+    from
+    sms_std
+    <where>
+      rate >= #{rateValue}
+      <if test="clsNoSize != 0">
+        and
+        <if test="clsNoSize == 2">
+          LEFT(cls_lms, 2) = #{clsNo}
+        </if>
+        <if test="clsNoSize == 4">
+          LEFT(cls_lms, 4) = #{clsNo}
+        </if>
+        <if test="clsNoSize == 6">
+          cls_lms = #{clsNo}
+        </if>
+      </if>
 
-			<if test="dayNoListSize > 0">
-				and (
-				<foreach collection="dayNoList" item="d" separator="or">
-					day =
-					#{d}
-				</foreach>
-				)
-			</if>
+      <if test="dayNoListSize > 0">
+        and (
+        <foreach collection="dayNoList" item="d" separator="or">
+          day =
+          #{d}
+        </foreach>
+        )
+      </if>
 
-			<if test="addressNoSize != 0">
-				and
-				<if test="addressNoSize == 2">
-					LEFT(adr_lms,2) = #{addressNo}
-				</if>
-				<if test="addressNoSize == 4">
-					LEFT(adr_lms,4) = #{addressNo}
-				</if>
-				<if test="addressNoSize == 6">
-					adr_lms = #{addressNo}
-				</if>
-			</if>
+      <if test="addressNoSize != 0">
+        and
+        <if test="addressNoSize == 2">
+          LEFT(adr_lms,2) = #{addressNo}
+        </if>
+        <if test="addressNoSize == 4">
+          LEFT(adr_lms,4) = #{addressNo}
+        </if>
+        <if test="addressNoSize == 6">
+          adr_lms = #{addressNo}
+        </if>
+      </if>
 
-			<if test="keyword != null">
-				<bind name="pattern1" value="'%' + keyword + '%'" />
-				and (
-				name like #{pattern1}
-				or goal like #{pattern1}
-				or cont like
-				#{pattern1}
-				<if test="findedClsNosByKeyword != null">
-					or
-					<foreach collection="findedClsNosByKeyword" item="k"
-						separator="or">
-						cls_lms = #{k}
-					</foreach>
-				</if>
-				)
-			</if>
-		</where>
-		order by
-		std_id desc
-		<if test="size != null and rowNo != null">
-			limit #{rowNo}, #{size}
-		</if>
-	</select>
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and (
+        name like #{pattern1}
+        or goal like #{pattern1}
+        or cont like
+        #{pattern1}
+        <if test="findedClsNosByKeyword != null">
+          or
+          <foreach collection="findedClsNosByKeyword" item="k" separator="or">
+            cls_lms = #{k}
+          </foreach>
+        </if>
+        )
+      </if>
+    </where>
+    order by
+    std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
 
-	<select id="findAllByKeyword" resultMap="studyMap"
-		parameterType="map">
-		select
-		std_id,
-		name,
-		adr_lms,
-		cls_lms,
-		rate,
-		photo,
-		rcrtm_apply,
-		goal
-		from
-		sms_std
-		<where>
-			rate >= #{rateValue}
-			<if test="clsNo != null">
-				and (
-				<foreach collection="clsNo" item="c" separator="or">
-					IF (
-					LENGTH(#{c}) = 2, LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) =
-					#{c})
-				</foreach>
-				)
-			</if>
+  <select id="findAllByKeyword" resultMap="studyMap" parameterType="map">
+    select
+    std_id,
+    name,
+    adr_lms,
+    cls_lms,
+    rate,
+    photo,
+    rcrtm_state,
+    goal
+    from
+    sms_std
+    <where>
+      rate >= #{rateValue}
+      <if test="clsNo != null">
+        and (
+        <foreach collection="clsNo" item="c" separator="or">
+          IF (
+          LENGTH(#{c}) = 2, LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) =
+          #{c})
+        </foreach>
+        )
+      </if>
 
-			<if test="dayNoListSize > 0">
-				and (
-				<foreach collection="dayNoList" item="d" separator="or">
-					day =
-					#{d}
-				</foreach>
-				)
-			</if>
+      <if test="dayNoListSize > 0">
+        and (
+        <foreach collection="dayNoList" item="d" separator="or">
+          day =
+          #{d}
+        </foreach>
+        )
+      </if>
 
-			<if test="addressNoSize != 0">
-				and
-				<if test="addressNoSize == 2">
-					LEFT(adr_lms,2) = #{addressNo}
-				</if>
-				<if test="addressNoSize == 4">
-					LEFT(adr_lms,4) = #{addressNo}
-				</if>
-				<if test="addressNoSize == 6">
-					adr_lms = #{addressNo}
-				</if>
-			</if>
+      <if test="addressNoSize != 0">
+        and
+        <if test="addressNoSize == 2">
+          LEFT(adr_lms,2) = #{addressNo}
+        </if>
+        <if test="addressNoSize == 4">
+          LEFT(adr_lms,4) = #{addressNo}
+        </if>
+        <if test="addressNoSize == 6">
+          adr_lms = #{addressNo}
+        </if>
+      </if>
 
-			<if test="keyword != null">
-				<bind name="pattern1" value="'%' + keyword + '%'" />
-				and (
-				name like #{pattern1}
-				or goal like #{pattern1}
-				or cont like
-				#{pattern1}
-				<if test="findedClsNosByKeyword != null">
-					or
-					<foreach collection="findedClsNosByKeyword" item="k"
-						separator="or">
-						cls_lms = #{k}
-					</foreach>
-				</if>
-				)
-			</if>
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and (
+        name like #{pattern1}
+        or goal like #{pattern1}
+        or cont like
+        #{pattern1}
+        <if test="findedClsNosByKeyword != null">
+          or
+          <foreach collection="findedClsNosByKeyword" item="k" separator="or">
+            cls_lms = #{k}
+          </foreach>
+        </if>
+        )
+      </if>
 
-		</where>
-		order by
-		std_id desc
-		<if test="size != null and rowNo != null">
-			limit #{rowNo}, #{size}
-		</if>
-	</select>
+    </where>
+    order by
+    std_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
 
 
 
 
-	<select id="findByNo" resultMap="studyMap" parameterType="int">
-		select
-		std_id,
-		adr_lms,
-		cls_lms,
-		name,
-		photo,
-		day,
-		sdt,
-		edt,
-		rcrtm_state,
-		goal,
-		cont,
-		prsn,
-		now_prsn,
-		rate
-		from
-		sms_std
-		where
-		std_id = #{value}
-	</select>
-
-	<select id="findByNos" resultMap="studyMap" parameterType="list">
-		select
-		std_id,
-		adr_lms,
-		cls_lms,
-		name,
-		photo,
-		day,
-		sdt,
-		edt,
-		rcrtm_state,
-		goal,
-		cont,
-		prsn,
-		rate
-		from
-		sms_std
-		where
-		<foreach collection="list" item="k" separator="or">
-			std_id = #{k}
-		</foreach>
-	</select>
-
-	<!-- <update id="increaseCount" parameterType="int"> update sms_std set 
-		vw_cnt = vw_cnt + 1 where std_id = #{value} </update> -->
-
-	<insert id="insert" parameterType="study"
-		useGeneratedKeys="true" keyColumn="std_id" keyProperty="no">
-		insert into sms_std(
-		name,
-		adr_lms,
-		cls_lms,
-		goal,
-		photo,
-		day,
-		sdt,
-		edt,
-		cont,
-		prsn,
-		rate)
-		values(
-		#{name},
-		#{address},
-		#{cls},
-		#{goal},
-		#{photo},
-		#{day},
-		#{startDate},
-		#{endDate},
-		#{contents},
-		#{personnel},
-		0)
-		<!-- rate 컬럼에 0 말고 생성하는 스터디장의 평점을 넣어준다. -->
-	</insert>
-
-	<update id="update" parameterType="study">
-		update sms_std
-		set
-		name =
-		#{name},
-		adr_lms = #{address},
-		cls_lms = #{cls},
-		goal = #{goal},
-		photo =
-		#{photo},
-		day = #{day},
-		sdt = #{startDate},
-		edt = #{endDate},
-		cont =
-		#{contents},
-		prsn = #{personnel},
-		now_prsn = #{nowPersonnel},
-		rate =
-		#{rate}
-		where std_id = #{no}
-	</update>
-
-	<delete id="delete" parameterType="int">
-		delete from sms_std
-		where
-		std_id = #{no}
-	</delete>
+  <select id="findByNo" resultMap="studyMap" parameterType="int">
+    select
+    std_id,
+    adr_lms,
+    cls_lms,
+    name,
+    photo,
+    day,
+    sdt,
+    edt,
+    rcrtm_state,
+    goal,
+    cont,
+    prsn,
+    now_prsn,
+    rate
+    from
+    sms_std
+    where
+    std_id = #{value}
+  </select>
 
 
 
-	<select id="countAll" resultType="int" parameterType="map">
-		select count(*) from sms_std
-		<where>
-			rate >= #{rateValue}
-			<if test="size != 0">
-				and
-				<if test="size == 2">
-					LEFT(cls_lms,2) = #{clsNo}
-				</if>
-				<if test="size == 4">
-					LEFT(cls_lms,4) = #{clsNo}
-				</if>
-				<if test="size == 6">
-					cls_lms = #{clsNo}
-				</if>
-			</if>
-
-			<if test="dayNoListSize > 0">
-				and (
-				<foreach collection="dayNoList" item="d" separator="or">
-					day =
-					#{d}
-				</foreach>
-				)
-			</if>
-
-			<if test="addressSize != 0">
-				and
-				<if test="addressSize == 2">
-					LEFT(adr_lms,2) = #{addressNo}
-				</if>
-				<if test="addressSize == 4">
-					LEFT(adr_lms,4) = #{addressNo}
-				</if>
-				<if test="addressSize == 6">
-					adr_lms = #{addressNo}
-				</if>
-			</if>
-
-			<if test="keyword != null">
-				<bind name="pattern1" value="'%' + keyword + '%'" />
-				and (
-				name like #{pattern1}
-				or goal like #{pattern1}
-				or cont like
-				#{pattern1}
-				<if test="findedClsNosByKeyword != null">
-					or
-					<foreach collection="findedClsNosByKeyword" item="k"
-						separator="or">
-						cls_lms = #{k}
-					</foreach>
-				</if>
-				)
-			</if>
-		</where>
-
-	</select>
+  <select id="findByNos" resultMap="studyMap" parameterType="list">
+    select
+    std_id,
+    adr_lms,
+    cls_lms,
+    name,
+    photo,
+    day,
+    sdt,
+    edt,
+    rcrtm_state,
+    goal,
+    cont,
+    prsn,
+    now_prsn,
+    rate
+    from
+    sms_std
+    where
+    <foreach collection="list" item="k" separator="or">
+      std_id = #{k}
+    </foreach>
+  </select>
 
 
+  <insert id="insert" parameterType="study" useGeneratedKeys="true" keyColumn="std_id" keyProperty="no">
+    insert into sms_std(
+    name,
+    adr_lms,
+    cls_lms,
+    goal,
+    photo,
+    day,
+    sdt,
+    edt,
+    cont,
+    prsn,
+    rate)
+    values(
+    #{name},
+    #{address},
+    #{cls},
+    #{goal},
+    #{photo},
+    #{day},
+    #{startDate},
+    #{endDate},
+    #{contents},
+    #{personnel},
+    0)
+    <!-- rate 컬럼에 0 말고 생성하는 스터디장의 평점을 넣어준다. -->
+  </insert>
 
-	<select id="countAllByKeyword" resultType="int"
-		parameterType="map">
-		select count(*) from sms_std
-		<where>
-			rate >= #{rateValue}
-			<if test="clsNo != null">
-				and (
-				<foreach collection="clsNo" item="c" separator="or">
-					IF (
-					LENGTH(#{c}) = 2, LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) =
-					#{c})
-				</foreach>
-				)
-			</if>
+  <update id="update" parameterType="study">
+    update sms_std
+    set
+    name =
+    #{name},
+    adr_lms = #{address},
+    cls_lms = #{cls},
+    goal = #{goal},
+    photo =
+    #{photo},
+    day = #{day},
+    sdt = #{startDate},
+    edt = #{endDate},
+    cont =
+    #{contents},
+    prsn = #{personnel},
+    now_prsn = #{nowPersonnel},
+    rate =
+    #{rate}
+    where std_id = #{no}
+  </update>
 
-			<if test="dayNoListSize > 0">
-				and (
-				<foreach collection="dayNoList" item="d" separator="or">
-					day =
-					#{d}
-				</foreach>
-				)
-			</if>
-
-			<if test="addressSize != 0">
-				and
-				<if test="addressSize == 2">
-					LEFT(adr_lms,2) = #{addressNo}
-				</if>
-				<if test="addressSize == 4">
-					LEFT(adr_lms,4) = #{addressNo}
-				</if>
-				<if test="addressSize == 6">
-					adr_lms = #{addressNo}
-				</if>
-			</if>
-
-			<if test="keyword != null">
-				<bind name="pattern1" value="'%' + keyword + '%'" />
-				and (
-				name like #{pattern1}
-				or goal like #{pattern1}
-				or cont like
-				#{pattern1}
-				<if test="findedClsNosByKeyword != null">
-					or
-					<foreach collection="findedClsNosByKeyword" item="k"
-						separator="or">
-						cls_lms = #{k}
-					</foreach>
-				</if>
-				)
-			</if>
-		</where>
-
-	</select>
-
-	<!-- 스터디 사진 조회 -->
-	<select id="findByStudy" resultMap="studyMap"
-		parameterType="int">
-		select
-		photo
-		from
-		sms_std
-		where
-		std_id = #{value}
-	</select>
-
-	<select id="findPickedStudyByUser" resultMap="studyMap"
-		parameterType="int">
-		select
-		s.std_id,
-		s.adr_lms,
-		s.cls_lms,
-		s.name,
-		s.photo,
-		s.day,
-		s.sdt,
-		s.edt,
-		s.rcrtm_state,
-		s.goal,
-		s.cont,
-		s.prsn,
-		s.rate
-		from
-		sms_pick_std p
-		inner join sms_std s on p.std_id = s.std_id
-		where
-		member_id = #{value}
-	</select>
-
-	<!-- 스터디의 정원이 다 차있는가? -->
-	<select id="checkFullCapacityByStudyNo" resultType="boolean"
-		parameterType="int">
-
-		<if test="value != 0">
-			select
-			if(
-			now_prsn >= prsn,
-			true,
-			false
-			)
-			from
-			sms_std
-			where std_id = #{value};
-		</if>
+  <delete id="delete" parameterType="int">
+    delete from sms_std
+    where
+    std_id = #{no}
+  </delete>
 
 
 
-	</select>
+  <select id="countAll" resultType="int" parameterType="map">
+    select count(*) from sms_std
+    <where>
+      rate >= #{rateValue}
+      <if test="size != 0">
+        and
+        <if test="size == 2">
+          LEFT(cls_lms,2) = #{clsNo}
+        </if>
+        <if test="size == 4">
+          LEFT(cls_lms,4) = #{clsNo}
+        </if>
+        <if test="size == 6">
+          cls_lms = #{clsNo}
+        </if>
+      </if>
+
+      <if test="dayNoListSize > 0">
+        and (
+        <foreach collection="dayNoList" item="d" separator="or">
+          day =
+          #{d}
+        </foreach>
+        )
+      </if>
+
+      <if test="addressSize != 0">
+        and
+        <if test="addressSize == 2">
+          LEFT(adr_lms,2) = #{addressNo}
+        </if>
+        <if test="addressSize == 4">
+          LEFT(adr_lms,4) = #{addressNo}
+        </if>
+        <if test="addressSize == 6">
+          adr_lms = #{addressNo}
+        </if>
+      </if>
+
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and (
+        name like #{pattern1}
+        or goal like #{pattern1}
+        or cont like
+        #{pattern1}
+        <if test="findedClsNosByKeyword != null">
+          or
+          <foreach collection="findedClsNosByKeyword" item="k" separator="or">
+            cls_lms = #{k}
+          </foreach>
+        </if>
+        )
+      </if>
+    </where>
+
+  </select>
 
 
-	<update id="updateAllFullCapacityStudy">
 
-		<!-- 모든 스터디 대상으로 인원이 다 찬 스터디는 모집상태와 선언을 false로 한다. -->
-		
-		
-    <!-- 인원 다 차지 않았고, 모집 선언이 true 인 스터디의 모집 상태를 true로 바꿔준다. false 는 false로 
-      바꿔준다. null은 그대로 유지한다. -->
-      
-      
+  <select id="countAllByKeyword" resultType="int" parameterType="map">
+    select count(*) from sms_std
+    <where>
+      rate >= #{rateValue}
+      <if test="clsNo != null">
+        and (
+        <foreach collection="clsNo" item="c" separator="or">
+          IF (
+          LENGTH(#{c}) = 2, LEFT(cls_lms,2) = #{c}, LEFT(cls_lms,4) =
+          #{c})
+        </foreach>
+        )
+      </if>
+
+      <if test="dayNoListSize > 0">
+        and (
+        <foreach collection="dayNoList" item="d" separator="or">
+          day =
+          #{d}
+        </foreach>
+        )
+      </if>
+
+      <if test="addressSize != 0">
+        and
+        <if test="addressSize == 2">
+          LEFT(adr_lms,2) = #{addressNo}
+        </if>
+        <if test="addressSize == 4">
+          LEFT(adr_lms,4) = #{addressNo}
+        </if>
+        <if test="addressSize == 6">
+          adr_lms = #{addressNo}
+        </if>
+      </if>
+
+      <if test="keyword != null">
+        <bind name="pattern1" value="'%' + keyword + '%'" />
+        and (
+        name like #{pattern1}
+        or goal like #{pattern1}
+        or cont like
+        #{pattern1}
+        <if test="findedClsNosByKeyword != null">
+          or
+          <foreach collection="findedClsNosByKeyword" item="k" separator="or">
+            cls_lms = #{k}
+          </foreach>
+        </if>
+        )
+      </if>
+    </where>
+
+  </select>
+
+  <!-- 스터디 사진 조회 -->
+  <select id="findPhotoByNo" resultMap="studyMap" parameterType="int">
+    select
+    photo
+    from
+    sms_std
+    where
+    std_id = #{value}
+  </select>
+
+  <select id="findPickedStudyByUser" resultMap="studyMap" parameterType="int">
+    select
+    s.std_id,
+    s.adr_lms,
+    s.cls_lms,
+    s.name,
+    s.photo,
+    s.day,
+    s.sdt,
+    s.edt,
+    s.rcrtm_state,
+    s.goal,
+    s.cont,
+    s.prsn,
+    s.rate
+    from
+    sms_pick_std p
+    inner join sms_std s on p.std_id = s.std_id
+    where
+    member_id = #{value}
+  </select>
+
+  <!-- 스터디의 정원이 다 차있는가? -->
+  <select id="checkFullCapacityByStudyNo" resultType="boolean" parameterType="int">
+
+      select
+      if(
+      now_prsn >= prsn,
+      true,
+      false
+      )
+      from
+      sms_std
+      where std_id = #{value};
+
+  </select>
+
+<!-- 모든 스터디 대상으로 인원이 다 찬 스터디는 모집상태와 선언을 false로 한다. -->
+<!-- 인원 다 차지 않았고, 모집 선언이 true 인 스터디의 모집 상태를 true로 바꿔준다. false 는 false로 바꿔준다. null은 그대로 유지한다. -->
+ <!-- 인원 다 차지 않았고, 모집 선언이 null인데, 스터디 활동 시작일이 지나지않았다면, 모집 상태 true. 지났다면 모집 상태 false. -->
+  <update id="updateAllStudyRecruitState">
+
+    update sms_std set
+    rcrtm_state = if(now_prsn >= prsn, false, rcrtm_state),
+    rcrtm_apply = if(now_prsn >= prsn, false, rcrtm_apply);
+    
+  </update>
+  
+  
+<!-- 인원 다 차지 않았고, 모집 선언이 true 인 스터디의 모집 상태를 true로 바꿔준다. false 는 false로 바꿔준다. null은 그대로 유지한다. -->
+  <update id="updateAllStudyRecruitState2">
+
+    update sms_std set
+    rcrtm_state = CASE
+    WHEN prsn > now_prsn and rcrtm_apply = true
+    THEN true
+    WHEN prsn > now_prsn and rcrtm_apply = false
+    THEN false
+    ELSE rcrtm_state
+    END;
+
+  </update>
+  
+  
+  
+ <!-- 인원 다 차지 않았고, 모집 선언이 null인데, 스터디 활동 시작일이 지나지않았다면, 모집 상태 true. 지났다면 모집 상태 false. -->
+  <update id="updateAllStudyRecruitState3">
+
 update sms_std set
-rcrtm_state = if(now_prsn >= prsn, false, rcrtm_state),
-rcrtm_apply = if(now_prsn >= prsn, false, rcrtm_apply);
-update sms_std set
-rcrtm_state = CASE
-WHEN prsn > now_prsn and rcrtm_apply = true
-THEN true
-WHEN prsn > now_prsn and rcrtm_apply = false
-THEN false
-ELSE rcrtm_state
-END;
+    rcrtm_state = CASE
+    WHEN prsn > now_prsn and rcrtm_apply is null and date(sdt) >= date(now())
+    THEN true
+    WHEN prsn > now_prsn and rcrtm_apply is null and date(now()) >= date(sdt)
+    THEN false
+    ELSE rcrtm_state
+    END;
 
-
-<!-- 인원 다 차지 않았고, 모집 선언이 null인데, 스터디 활동 시작일이 지나지않았다면, 모집 상태 true.
-  지났다면 모집 상태 false. -->
-
-
-
-	</update>
+  </update>
+  
 
 </mapper>
 

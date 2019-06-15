@@ -89,7 +89,6 @@ public class StudyController {
 
   @GetMapping("detail")
   public Object detail(int no) {
-    //studyService.updateRate(no);
     Study study = studyService.get(no);
     return study;
   }
@@ -316,37 +315,46 @@ public class StudyController {
   // 스터디 모집 선언요청처리
   @GetMapping("recruitapply")
   public Object recruitApply(
-      @RequestParam int no) {
+      @RequestParam int studyNo, boolean apply) {
 
     HashMap<String,Object> content = new HashMap<>();
 
+    Study study = studyService.get(studyNo);
 
-    //모집 선언을 취소하는 것이라면, 모집 선언을 false로 하고 리턴한다.
+    if(!apply) {
+      //모집 선언을 취소하는 것이라면, 모집 선언을 false로 하고 리턴한다.
 
+      study.setRecruitApply(apply);
+      studyService.update(study);
 
-    //먼저 스터디의 제한 인원이 꽉 차지 않았는지 확인한다.(스터디 멤버 리스트 사이즈와 스터디 테이블의 인원 수 비교)
+      content.put("status", "success");
+      return content;
 
+    } else {
 
+      //스터디 제한인원이 다 차지 않았다면, 모집 선언을 true 로 한다.
+      if(!studyService.checkFullCapacityByStudyNo(studyNo)) {
 
-    //인원이 다 차지 않았다면, 모집 선언을 true 로 한다.
-    content.put("status", "success");
+        study.setRecruitApply(apply);
+        studyService.update(study);
+        content.put("status", "success");
 
+      } else {
+        //스터디 제한인원이 다 차있다면,fail을 반환한다.
+        content.put("status", "fail");
 
-    //다 차있다면,fail을 반환한다.
-    content.put("status", "fail");
-
-    return content;
+      }
+      return content;
+    }
   }
 
 
-  //계속 모집상태를 자동으로 업데이트 한다.
-  @Scheduled(cron = "0 0 0 1 * *")
+  //계속 모집상태를 매일 자동으로 업데이트 한다.
+  @Scheduled(cron = "0 30 * * * *")
   public void rateLogSchedule() {
 
-    //먼저 인원이 꽉찬 스터디의 모집 상태와 선언을 false 로 변경한다.
-
-    studyService.updateAllFullCapacityStudy();
-
+    //모집 상태 업데이트
+    studyService.updateAllStudyRecruitState();
 
   }
 

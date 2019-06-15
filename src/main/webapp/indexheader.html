@@ -1,3 +1,10 @@
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/transition.min.css"
+ rel="stylesheet" type="text/css">
+
 
 <div
  class="u-header__section u-header__section--light g-transition-0_3 g-py-10"
@@ -38,41 +45,37 @@
      </span>
     </div>
    </div>
-   <!-- Navigation -->
+     <!-- Navigation -->
    <div
     class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg"
     id="navBar">
     <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
-    <li class="nav-item g-mx-20--lg">
-     <a href="/studyboot/html/inquiry/index.html"" class="nav-link px-0">Inquiry</a></li>
-     <li class="nav-item g-mx-20--lg">
-     <a href="/studyboot/html/space/index.html"" class="nav-link px-0">Space</a></li>
+     <li class="nav-item g-mx-20--lg"><a
+      href="/studyboot/html/inquiry/index.html" class="nav-link px-0">Inquiry</a></li>
+     <li class="nav-item g-mx-20--lg"><a
+      href="/studyboot/html/space/index.html" class="nav-link px-0">Space</a></li>
      <li class="nav-item g-mx-20--lg std-not-login"><a
-      href="/studyboot/html/auth/login.html" class="nav-link px-0">Login
-     </a></li>
+      href="/studyboot/html/auth/login.html" class="nav-link px-0">Login</a></li>
      <li class="nav-item g-ml-20--lg g-mr-0--lg std-not-login"><a
-      href="/studyboot/html/auth/register.html" class="nav-link px-0">Register
-     </a></li>
+      href="/studyboot/html/auth/register.html" class="nav-link px-0">Register</a></li>
 
-      <div class="btn-group std-login">
-      <li
-       class="nav-item g-mx-20--lg std-login g-cursor-pointer g-color-primary--hover 
-     dropdown-toggle"
-       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       <span class="d-inline-block g-pos-rel g-mr-20 g-mb-20"> <img id="hd-thumbnail"
-        class="media-object g-rounded-50x u-image-icon-size-sm"
-        alt="Image Description">
-      </span> <span id="nickname"></span>
-       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#" id="mypage-btn">마이페이지</a> 
-        <a class="dropdown-item" href="#" id="message-btn">쪽지함</a>
-        <div id="std-dropdown"></div>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" id="logout">로그아웃</a>
+
+
+     <li class="nav-item g-mx-20--lg std-login">
+      <div class="ui dropdown std-login">
+       <div class="text">
+        <img class="ui avatar image" id="hd-thumbnail"
+         src="/studyboot/Unify/assets/img-temp/100x100/img1.jpg">
+        <span id="nickname"></span>
        </div>
-      </li>
-     </div>
+       <i class="dropdown icon"></i>
 
+       <div class="menu" id="myDropdown">
+        <div class="item" id="mypage-btn">마이페이지</div>
+        <div class="item" id="message-btn">쪽지함</div>
+       </div>
+      </div>
+     </li>
     </ul>
    </div>
    <!-- End Navigation -->
@@ -123,12 +126,17 @@
 
 <!-- 카테고리 소분류 -->
 <script id="myStudy-template" type="text/x-handlebars-template">
- <div class="dropdown-divider"></div>
+ <div class="divider"></div>
 {{#each myStudyList}}
-<a class="dropdown-item myStudy-btn my-study" my-study-no={{no}}>{{name}}</a>
+<div class="item myStudy-btn my-study" my-study-no={{no}}>{{name}}</div>
 {{/each}}
 </script>
 
+
+<script
+ src="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.js"></script>
+<script
+ src="/studyboot/js/Semantic-UI-master/dist/components/transition.min.js"></script>
 <script src="/studyboot/node_modules/handlebars/dist/handlebars.min.js"></script>
 
 

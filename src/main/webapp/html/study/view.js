@@ -3,58 +3,14 @@ var param = location.href.split('?')[1];
 // param 변수는 값이 있으면 true를 리턴한다.
 if (param) {
   // loadData 함수를 호출한다. param 변수를 =로 나누어 파라미터의 값을 구한다.
-  loadData(param.split('=')[1]);
+  var no = param.split('&')[0];
+  var name = param.split('&')[1];
+  loadData(no.split('=')[1]);
+  
+  //이름 타이틀에 넣어준다.
+  $('#studyNameHead').html(decodeURIComponent(name.split('=')[1]));
 }
   
-/*
-document.querySelector('#delete-btn').onclick = () => {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState != 4 || xhr.status != 200) {
-      return;
-    }
-    var data = JSON.parse(xhr.responseText);
-    
-    if (data.status == 'success') {
-      location.href = 'index.html';
-      
-    } else {
-      alert('삭제 실패입니다!\n' + data.message);
-    }
-  };
-  
-  var no = document.querySelector('#no').value;
-  xhr.open('GET', '../../app/json/board/delete?no=' + no, true);
-  xhr.send();
-}; // delete-btn
-
-document.querySelector('#update-btn').onclick = () => {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState != 4 || xhr.status != 200) {
-      return;
-    }
-    var data = JSON.parse(xhr.responseText);
-    
-    if (data.status == 'success') {
-      location.href = 'index.html';
-      
-    } else {
-      alert('변경 실패입니다!\n' + data.message);
-    }
-  };
-  
-  xhr.open('POST', '../../app/json/board/update', true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  
-  var no = document.querySelector('#no').value;
-  var contents = document.querySelector('#contents').value;
-  
-  var qs = 'contents=' + encodeURIComponent(contents) + 
-      '&no=' + no;
-  xhr.send(qs);
-}; // update-btn
-*/
 
 // 스터디 상세 데이터를 불러오는 함수
 function loadData(no) {

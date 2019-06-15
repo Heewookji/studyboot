@@ -101,7 +101,7 @@ public class MyStudyController {
 
     HashMap<String,Object> content = new HashMap<>();
 
-    Study study = studyService.getStudy(no);
+    Study study = studyService.getStudyPhoto(no);
     List<StudyMember> list = studyMemberService.findStudyMember(no);
 
     content.put("list", list);
