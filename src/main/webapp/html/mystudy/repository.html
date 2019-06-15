@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify-core.css">
   <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify-components.css">
   <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify.css">
+  <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/css/unify-admin.css">
 
   <link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
   <link rel='stylesheet' href='../../fullcalendar/daygrid/main.css'/>
@@ -139,36 +140,94 @@
     </div>
   </div>
 </div>
-                              
+     <li>
+     <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
+     <i class="hs-admin-cloud-up g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
+     Archive</a>
+     </li>
+     <li>
+     <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
+     <i class="hs-admin-bookmark g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
+     Add to Favorites</a>
+     </li>
+     <li>
+     <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
+     <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
+     Delete</a>
+     </li>
+     </ul>
+     </div>
+      </div>
+              </div>
+              
+              <!-- 저장소 데이터 샘플 -->
+               <div class="col-md">
+                <div class="row" id="amazon-file">
+                <!-- pptx 확장자명  -->
+                  <div class="col-md-4 g-mb-30">
+                    <div class="d-flex flex-wrap h-100 g-brd-around g-brd-gray-light-v7 g-rounded-2 g-pa-25">
+                      <header class="w-100 align-self-start text-right justify-content-end g-pos-rel g-mb-10">
+                        <div class="g-pos-rel g-z-index-2">
+                          <a id="dropDown1Invoker" class="u-link-v5 g-line-height-0 g-font-size-24 g-color-gray-light-v6 g-color-secondary--hover" aria-controls="dropDown1" aria-haspopup="true" aria-expanded="false" data-dropdown-event="click" data-dropdown-target="#dropDown1"
+                          data-dropdown-type="jquery-slide" style="cursor: pointer;">
+                            <i class="hs-admin-more-alt"></i>
+                          </a>
+                          <div id="dropDown1" class="u-shadow-v31 g-pos-abs g-right-0 g-bg-white u-dropdown--jquery-slide u-dropdown--hidden" aria-labelledby="dropDown1Invoker" style="display: none;">
+                            <ul class="list-unstyled g-nowrap mb-0">
                               <li>
-                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
+                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" 
+                                style="cursor: pointer;" id="file-Download">
                                   <i class="hs-admin-cloud-up g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
                                   Archive
                                 </a>
                               </li>
                               <li>
-                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
-                                  <i class="hs-admin-bookmark g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
-                                  Add to Favorites
-                                </a>
-                              </li>
-                              <li>
-                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
+                                <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" 
+                                style="cursor: pointer;" id="file-delete">
                                   <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
                                   Delete
                                 </a>
                               </li>
                             </ul>
                           </div>
+                        </div>
+                      </header>
+
+                      <section class="w-100 align-self-center text-center g-color-darkblue-v2 g-mb-30">
+                        <svg width="50px" height="64px" viewbox="0 0 58 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-359.000000, -868.000000)" fill="#FF4B00">
+                              <g transform="translate(284.000000, 730.000000)">
+                                <g transform="translate(0.000000, 76.000000)">
+                                  <g transform="translate(75.000000, 62.000000)">
+                                    <rect opacity="0.15" x="0" y="36" width="58" height="27"></rect>
+                                    <path d="M40.0002553,0 L0,0 L0,74 L58,74 L58,17.9894 L40.0002553,0 Z M40.7234043,4.2106 L53.7869787,17.2666667 L40.7234043,17.2666667 L40.7234043,4.2106 Z M2.46808511,71.5333333 L2.46808511,2.46666667 L38.2553191,2.46666667 L38.2553191,19.7333333 L55.5319149,19.7333333 L55.5319149,71.5333333 L2.46808511,71.5333333 Z"
+                                    fill-rule="nonzero"></path>
+                                    <text font-size="14" font-weight="normal" letter-spacing="0.209999993">
+                                      <tspan x="12.0208985" y="52">.pptx</tspan>
+                                    </text>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </section>
+
+                      <footer class="w-100 align-self-end text-center">
+                        <div class="d-flex align-items-center justify-content-center g-mb-10">
+                          <span class="g-line-height-1_2 g-font-size-default g-color-black">Website Concept</span>
+                        </div>
+
+                        <p class="g-font-weight-300 g-font-size-default g-color-gray-dark-v6 mb-0">334.5 kb</p>
+                      </footer>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <!-- END 저장소 파일 -->
               
-              <!-- End Panel Header -->
               
-                <!-- Profle Content -->
-
-        <!-- Tab panes -->
-<p> 저장소가 들어갈 자리  
  </div>
  </div>
           
@@ -207,9 +266,9 @@
   <script src="/studyboot/Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="/studyboot/Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
   <script src="/studyboot/Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
-    <script src="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/js/flatpickr.min.js"></script>
+  <script src="/studyboot/Unify/admin-template/assets/vendor/flatpickr/dist/js/flatpickr.min.js"></script>
   <script src="/studyboot/Unify/admin-template/assets/vendor/chartist-js/chartist.min.js"></script>
-   <script src="../../Unify/admin-template/assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+  <script src="../../Unify/admin-template/assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
   <script src="../../Unify/admin-template/assets/vendor/bloodhound-js/js/bloodhound.min.js"></script>
   <script src="../../Unify/admin-template/assets/vendor/bloodhound-js/js/typeahead.jquery.min.js"></script>
   <script src="../../Unify/admin-template/assets/vendor/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
@@ -219,7 +278,7 @@
 
   <!-- JS Unify -->
   <script src="/studyboot/Unify/assets/js/hs.core.js"></script>
-   <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
+  <script src="/studyboot/Unify/assets/js/components/hs.dropdown.js"></script>
   <script src="/studyboot/Unify/assets/js/helpers/hs.hamburgers.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.header.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.tabs.js"></script>
@@ -229,7 +288,7 @@
   <script src="/studyboot/Unify/assets/js/components/hs.scrollbar.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.go-to.js"></script>
   <script src="/studyboot/Unify/assets/js/components/hs.carousel.js"></script>
-   <script src="/studyboot/Unify/admin-template/assets/js/components/hs.range-datepicker.js"></script>
+  <script src="/studyboot/Unify/admin-template/assets/js/components/hs.range-datepicker.js"></script>
   <script src="/studyboot/Unify/admin-template/assets/js/components/hs.bar-chart.js"></script>
   
   <script src="/studyboot/Unify/admin-template/assets/js/components/hs.side-nav.js"></script>
@@ -247,43 +306,125 @@
   <script src="/studyboot/Unify/assets/js/custom.js"></script>
   <script src="/studyboot/html/header.js"></script>
   <script src="navbar.js"></script>
-  <script src="repository.js"></script>
   <script src="../footer.js"></script>
 
+<!--<script id="attend-member" type="text/x-handlebars-template">
+{{#each list}}
+  <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
+    <div class="media">
+      <div class="d-flex g-mt-2 g-mr-15">
+        <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}"
+          alt="Image Description">
+      </div>
 
+      <div class="media-body">
+        <div
+          class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0">
+          <h3 class="h6 mb-0">
+            <strong>{{name}}</strong>({{member.nickName}})
+          </h3>
+          <div class="g-mb-10 g-mb-0--md">
+            <div class="g-mt-10">
+              <label for="calmember{{memberNo}}" class="u-check g-pl-30"> 
+              <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0 g-mb-10 g-mb-0--md attend-checkbox" 
+                name="attend-check"
+                type="checkbox" id="calmember{{memberNo}}"
+                value={{member.nickName}}>
+                <div class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
+                  <i class="fa" data-check-icon="&#xf00c"></i>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+{{/each}}
+</script>
+  -->
+  
+<!-- 버킷에 있는 파일리스트를 뽑아주는 핸들바스 (현재 pptx 확장자명만 가지고 있다.) -->
+<script id="amazonfile-add" type="text/x-handlebars-template">
+{{#each list}}
+<div class="col-md-4 g-mb-30">
+<div class="d-flex flex-wrap h-100 g-brd-around g-brd-gray-light-v7 g-rounded-2 g-pa-25">
+<header class="w-100 align-self-start text-right justify-content-end g-pos-rel g-mb-10">
+<div class="g-pos-rel g-z-index-2">
+<a id="dropDown1Invoker" class="u-link-v5 g-line-height-0 g-font-size-24 g-color-gray-light-v6 g-color-secondary--hover" aria-controls="dropDown1" aria-haspopup="true" aria-expanded="false" data-dropdown-event="click" data-dropdown-target="#dropDown1"
+data-dropdown-type="jquery-slide" style="cursor: pointer;">
+<i class="hs-admin-more-alt"></i>
+</a>
+<div id="dropDown1" class="u-shadow-v31 g-pos-abs g-right-0 g-bg-white u-dropdown--jquery-slide u-dropdown--hidden" aria-labelledby="dropDown1Invoker" style="display: none;">
+<ul class="list-unstyled g-nowrap mb-0">
+<li>
+<a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" style="cursor: pointer;">
+<i class="hs-admin-cloud-up g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
+Archive
+</a>
+</li>
+<li>
+<a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14"
+style="cursor: pointer;" id="file-delete">
+<i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
+Delete
+</a>
+</li>
+</ul>
+</div>
+</div>
+</header>
 
-  <script>
-    $(document).on('ready', function () {
-      // initialization of custom scrollbar
-       $.HSCore.components.HSScrollBar.init($('.js-custom-scroll')); 
+<section class="w-100 align-self-center text-center g-color-darkblue-v2 g-mb-30">
+<svg width="50px" height="64px" viewbox="0 0 58 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<g transform="translate(-359.000000, -868.000000)" fill="#FF4B00">
+<g transform="translate(284.000000, 730.000000)">
+<g transform="translate(0.000000, 76.000000)">
+<g transform="translate(75.000000, 62.000000)">
+<rect opacity="0.15" x="0" y="36" width="58" height="27"></rect>
+<path d="M40.0002553,0 L0,0 L0,74 L58,74 L58,17.9894 L40.0002553,0 Z M40.7234043,4.2106 L53.7869787,17.2666667 L40.7234043,17.2666667 L40.7234043,4.2106 Z M2.46808511,71.5333333 L2.46808511,2.46666667 L38.2553191,2.46666667 L38.2553191,19.7333333 L55.5319149,19.7333333 L55.5319149,71.5333333 L2.46808511,71.5333333 Z"
+fill-rule="nonzero"></path>
+<text font-size="14" font-weight="normal" letter-spacing="0.209999993">
+<tspan x="12.0208985" y="52">.pptx</tspan>
+</text>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
+</section>
 
-      // initialization of range datepicker
-      $.HSCore.components.HSRangeDatepicker.init('#datepicker, #datepicker2');
+<footer class="w-100 align-self-end text-center">
+<div class="d-flex align-items-center justify-content-center g-mb-10">
+<span class="g-line-height-1_2 g-font-size-default g-color-black">Website Concept</span>
+</div>
 
-      // initialization of charts
-      $.HSCore.components.HSBarChart.init('.js-bar-chart');
-
-      $('.js-select').selectpicker();
-
-      // initialization of sidebar navigation component
-      $.HSCore.components.HSSideNav.init('.js-side-nav');
-
-      // initialization of forms
-      $.HSCore.components.HSCountQty.init('.js-quantity');
-
-      // initialization of text editors
-      $.HSCore.components.HSTextEditor.init('.js-text-editor');
-      
-   // initialization of HSDropdown component
-     // $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
-      
-   
-    });
-    
-    
-  </script>
+<p class="g-font-weight-300 g-font-size-default g-color-gray-dark-v6 mb-0">334.5 kb</p>
+</footer>
+</div>
+</div>
+{{/each}}
+</script>
+  
+<script src="repository.js"></script>
+  
 
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
 

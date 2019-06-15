@@ -21,6 +21,7 @@ import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyService;
+import software.amazon.awssdk.services.s3.model.S3Object;
 
 
 // AJAX 기반 JSON 데이터를 다루는 컨트롤러
@@ -191,13 +192,13 @@ public class MyStudyController {
 
   @GetMapping("delete")
   public Object delete(@RequestParam int no, 
-                       @RequestParam int memberNo,
-                       HttpSession session) {
-    
+      @RequestParam int memberNo,
+      HttpSession session) {
+
     HashMap<String,Object> content = new HashMap<>();
-    
+
     Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
-    
+
     if (loginUser.getNo() == memberNo) {
       try {
         myStudyService.delete(no);
@@ -206,12 +207,12 @@ public class MyStudyController {
         content.put("status", "fail");
         content.put("message", e.getMessage());
       }
-      
+
     } else {
       content.put("status", "작성자만 게시글을 삭제할 수 있습니다.");
       return content;
     }
-    
+
     return content;
   }
 
@@ -222,15 +223,15 @@ public class MyStudyController {
 
     HashMap<String,Object> content = new HashMap<>();
     content.put("user", loginUser.getNo());
-    
+
     return content;
   }
-  
+
   @PostMapping("update")
   public Object update(StudyBoard studyBoard, HttpSession session) {
 
     System.out.println(studyBoard);
-    
+
     HashMap<String,Object> content = new HashMap<>();
 
     Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
@@ -271,28 +272,79 @@ public class MyStudyController {
 
     return content;
   }
-  
-  
+
   @PostMapping("fileAdd")
   public Object fileAdd(
       HttpSession session,
       Part files,
       @RequestParam int studyNo) throws Exception {
-    
+
     System.out.println(studyNo);
-    
+
     Map<String, Object> content = new HashMap<>();
-    
+
     if (files.getSize() <= 0) {
       content.put("status", "fail");
       return content;
     }
     amazonS3_Service.fileAdd(files, studyNo);
     content.put("status", "success");
-    
+
+    return content;
+  }
+
+  @GetMapping("fileList")
+  public Object fileList(
+      @RequestParam int studyNo) {
+
+    HashMap<String,Object> content = new HashMap<>();
+    List<S3Object> cont;
+
+    cont = amazonS3_Service.list(studyNo);
+    // 아마존 리스트를 실행하고 리턴값을 받아서 리턴된 맵 객체를 다시 리턴해준다.
+    content.put("list", cont);
+
+    return content;
+  }
+
+  @GetMapping("filDelete")
+  public Object filDelete(
+      @RequestParam String fileName,
+      @RequestParam int studyNo,
+      HttpSession session) {
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    try {
+      amazonS3_Service.fileDelete(studyNo, fileName);
+      content.put("status", "삭제가 완료 되었습니다.");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
     return content;
   }
   
+  @GetMapping("fileDownload")
+  public Object fileDownload(
+      @RequestParam String fileName,
+      @RequestParam int studyNo,
+      HttpSession session) {
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    try {
+      amazonS3_Service.fileDownload(studyNo, fileName);
+      content.put("status", "다운로드가 완료 되었습니다.");
+    } catch (Exception e) {
+      content.put("status", e.getMessage());
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
+
 }
 
 
