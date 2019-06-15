@@ -75,7 +75,8 @@
 		sms_member m on sm.member_id =
 		m.member_id
 		where
-		sm.std_id = #{no} and
+		sm.std_id = #{no} 
+		and
 		end_state_cls_id is null
 	</select>
 
@@ -175,7 +176,7 @@
 		</if>
 	</select>
 
-	<select id="countAll" resultType="int" parameterType="int">
+	<select id="countEndStudyByMemberNo" resultType="int" parameterType="int">
 		select
 		count(*)
 		from
@@ -184,6 +185,8 @@
 		member_id = #{value} and end_date is
 		not null
 	</select>
+	
+	
 
 	<insert id="add" parameterType="map">
 		insert

@@ -15,7 +15,7 @@ public interface StudyMemberService {
   StudyMember findMyStudyByNo(Map<String, Object> map);
   List<StudyMember> rateInfo(int no);
   List<History> userHistory(int no, int pageNo, int pageSize);
-  int size(int no);
   int addStudyMember(int studyNo, int memberNo, boolean leader);
+  int sizeEndStudy(int no);
 }
 

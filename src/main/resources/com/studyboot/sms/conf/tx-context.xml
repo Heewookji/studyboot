@@ -2,16 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:task="http://www.springframework.org/schema/task"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/task
-        http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
   
   <!-- AOP 관련 애노테이션을 처리하라면 그 작업을 수행할 객체를 등록해야 한다.
        스프링 IoC 컨테이너는 그 클래스가 무엇인지 몰라도 쉽게 등록할 수 있도록 
@@ -54,9 +51,6 @@
         <aop:advisor advice-ref="txAdvice" 
                      pointcut-ref="serviceOperation"/>
     </aop:config>
-    
-    <!-- 스케쥴링을 위한 task 애노테이션 추가 -->
-    <task:annotation-driven/>
     
 </beans>
 

@@ -14,16 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Rate;
 import com.studyboot.sms.domain.RateRequire;
+import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyRetireService;
+import com.studyboot.sms.service.StudyService;
 
 @RestController("json/RetireEvaluationController")
 @RequestMapping("/json/retireEvaluation")
 public class StudyRetireController {
 
   @Autowired MemberService memberService;
+  @Autowired StudyService studyService;
   @Autowired StudyRetireService studyRetireService;
   @Autowired StudyMemberService studyMemberService;
 
@@ -136,6 +139,11 @@ public class StudyRetireController {
       content.put("status", "평가점수 입력 중 에러가 발생 하였습니다.");
       content.put("message", e.getMessage());
     }
+    
+    //탈퇴를 완료한다면, 스터디 테이블에 현재 인원칼럼 값을 1개 줄인다. 현재 인원을 칼럼에 저장하는게 관리하기 편하기 때문(희욱)
+    Study study = studyService.get(studyNo);
+    study.setNowPersonnel(study.getNowPersonnel() - 1);
+    studyService.update(study);
 
     return content;
   }

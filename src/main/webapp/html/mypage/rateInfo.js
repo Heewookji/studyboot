@@ -4,7 +4,7 @@ rateDataset,
 atnDataset,
 now = new Date(),
 year = now.getFullYear(),
-month = now.getMonth(),
+month = now.getMonth() - 1,
 dropData = 0,
 exileData = 0,
 finishData = 0,
@@ -14,7 +14,8 @@ nextPage = $('#history-nextPage'),
 currSpan = $('#history-currPage > span'),
 //핸들바스로 데이터 준비
 historytemplateSrc = $('#history-template').html(),
-historyGenerator = Handlebars.compile(historytemplateSrc);
+historyGenerator = Handlebars.compile(historytemplateSrc),
+rateInit = true;
 
 // 히스토리 모달이 열리면 별점을 렌더함
 $('#historyModal').on('shown.bs.modal', function (e) {
@@ -38,11 +39,11 @@ $('#historyModal').on('shown.bs.modal', function (e) {
  
   $('#history-rate').rateit('value', window.user.rate);
   $('#history-rate').removeClass("invisible");
-  $(document.body).trigger('loaded-historyRate');
-});
-
-$(document.body).bind('loaded-historyRate', () => {
-  $('#history-rate').transition('slide up in');
+  
+  if (rateInit) {
+    $('#history-rate').transition('slide up in');
+    rateInit = false;
+  }
 });
 
 

@@ -153,7 +153,6 @@ public class StudyServiceImpl implements StudyService {
     // 총 평점을 멤버수 만큼 나눈다.
     totalRate /= memberList.size();
     
-    // 스터디 객체를 클라이언트쪽에 넘겨 줘야 한다.
     // 번호에 해당하는 스터디 정보를 꺼내서 rate 변수에 계산한 평점을 입력해 준다.
     Study study = studyDao.findByNo(studyNo);
     study.setRate(totalRate);
@@ -222,10 +221,26 @@ public class StudyServiceImpl implements StudyService {
   }
   
   @Override
-  public Study getStudy(int no) {
+  public Study getStudyPhoto(int no) {
     
-    Study study = studyDao.findByStudy(no);
+    Study study = studyDao.findPhotoByNo(no);
     return study;
+  }
+
+
+
+  @Override
+  public boolean checkFullCapacityByStudyNo(int studyNo) {
+    return studyDao.checkFullCapacityByStudyNo(studyNo);
+  }
+
+
+//스터디의 모집상태를 갱신해주는 메서드
+  @Override
+  public void updateAllStudyRecruitState() {
+    studyDao.updateAllStudyRecruitState();
+    studyDao.updateAllStudyRecruitState2();
+    studyDao.updateAllStudyRecruitState3();
   }
 
 

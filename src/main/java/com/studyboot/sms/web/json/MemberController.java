@@ -3,7 +3,6 @@ package com.studyboot.sms.web.json;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -24,8 +23,6 @@ import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.name.Rename;
 
 
 @RestController("json/MemberController")
@@ -247,7 +244,7 @@ public class MemberController {
       if (pageSize < 3 || pageSize > 8) 
         pageSize = 3;
 
-      int rowCount = studyMemberService.size(loginUser.getNo()); 
+      int rowCount = studyMemberService.sizeEndStudy(loginUser.getNo()); 
 
       if (rowCount == 0) {
         content.put("pageNo", 0);
@@ -280,7 +277,7 @@ public class MemberController {
   }
   
   // 매달 1일 마다 평가 기록을 자동으로 업데이트 한다.
-  @Scheduled(cron = "0 0 0 1 * *")
+  @Scheduled(cron = "0 0 0 20 * *")
   public void rateLogSchedule() {
     System.out.println("schedule start!!!");
     int count = rateService.addRateLog();

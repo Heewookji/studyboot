@@ -27,6 +27,8 @@ $( document ).ready(function() {
 
 
     $(document.body).trigger('loaded-header');
+    
+    
   });
 
 });
@@ -68,15 +70,6 @@ $(document.body).bind('loaded-header', () => {
 //로그인 사용자 불러온다.
   loadLoginUser();
 
-  $('#logout').click((e) => {
-    e.preventDefault();
-    $.getJSON('/studyboot/app/json/auth/logout',
-        function(obj) {
-      location.href = "/studyboot"
-    });
-    window.localStorage.removeItem("user");
-  });
-
 });
 
 
@@ -93,22 +86,40 @@ function loadLoginUser() {
       notLoginState.addClass('std-invisible');
     
       $("#nickname").html(user.nickName);
-      $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/' + 'thumbnail.' + user.photo + '.jpg');
+//      $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/' + 'thumbnail.' + user.photo + '.jpg');
 
       if(obj.myStudyList != undefined){
         var myStudyListTemplateSrc = $('#myStudy-template').html();
         var myStudyListGenerator = Handlebars.compile(myStudyListTemplateSrc);
-        $(myStudyListGenerator(obj)).appendTo($('#std-dropdown'));
+        $(myStudyListGenerator(obj)).appendTo($('#myDropdown'));
+        $('#myDropdown').append("<div class=\"divider\"></div><div class=\"item\" id=\"logout\">로그아웃</div>");
+        
       }
 
-      //관리자라면 관리자 페이지버튼 드롭다운에 추가
+//      관리자라면 관리자 페이지버튼 드롭다운에 추가
       if(obj.user.admin){
-        $("#std-dropdown").append("<div class=\"dropdown-divider\"></div>" +
-        "<a class=\"dropdown-item\" href=\"#\">관리자 페이지</a>");
+        $("#std-dropdown").append("<div class=\"divider\"></div>" + 
+                "<div class=\"item\" id=\"logout\">관리자</div>");
       }
       
       $('.my-study').click((e) => {
         window.location.href = '../mystudy/index.html?no=' + $(e.target).attr('my-study-no');
+      });
+      
+      $('#logout').click((e) => {
+        e.preventDefault();
+        $.getJSON('/studyboot/app/json/auth/logout',
+            function(obj) {
+          location.href = "/studyboot"
+        });
+        window.localStorage.removeItem("user");
+      });
+      
+      
+      $('.ui.dropdown.std-login')
+      .dropdown({
+        on: 'hover',
+        action: 'hide'
       });
 
     } else {

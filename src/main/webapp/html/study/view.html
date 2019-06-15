@@ -1,37 +1,231 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>게시물</title>
-  <style>
-    div {
-      border: 1px solid green;
-      width: 500px;
-      height: 100px;
-      margin: 10px;
-    }
-    .container {
-      border: 1px solid red;
-      width: 1200px;
-      height: 1000px;
-    }
-    
-    .study_detail {
-      width: 700px;
-      height: 800px;
-    }
-    
-    .right-conts{
-    width:380px;
-    height: 100px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>게시물</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../Unify/favicon.ico">
+
+<!-- Google Fonts -->
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
+
+
+
+
+
+
+
+<!-- CSS Global Icons -->
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-line-pro/style.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/icon-hs/style.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/themify-icons/themify-icons.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+<link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/jquery-ui/themes/base/jquery-ui.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
+<link rel="stylesheet"
+ href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
+<link rel="stylesheet"
+ href="/studyboot/Unify/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+
+
+<!-- CSS Unify -->
+<link rel="stylesheet" href="../../Unify/assets/css/unify.css">
+
+<!-- CSS Customization -->
+<link href="/studyboot/node_modules/datepicker-bootstrap/css/core.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/transition.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/node_modules/datepicker-bootstrap/css/datepicker.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/node_modules/sweetalert2/dist/sweetalert2.min.css"
+ rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+ href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
+<link rel="stylesheet" href="../../Unify/assets/css/custom.css">
+<link rel="stylesheet" href="../../css/common.css">
 </head>
 <body>
 
-<header></header>
+ <!-- Header -->
+ <header id="js-header"
+  class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+  data-header-fix-moment="300"> </header>
+ <!-- End Header -->
 
-<!-- container -->
+
+
+ <!-- Breadcrumbs -->
+ <section
+  class="dzsparallaxer auto-init height-is-based-on-content use-loading"
+  data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "100"}'>
+  <div
+   class="divimage dzsparallaxer--target w-100 g-bg-cover g-bg-white-gradient-opacity-v3--after"
+   style="height: 100%; background-image: url(/studyboot/images/it.jpg);"></div>
+
+  <div class="container g-py-50--md">
+
+   <div class="g-pt-110 d-sm-flex text-center">
+    <div class="align-self-center">
+     <h2 class="h3 g-font-weight-300 w-100 g-pt-10" id="studyNameHead">Portfolio
+      Single Item 9</h2>
+    </div>
+
+    <div class="align-self-center ml-auto ">
+     <ul class="u-list-inline">
+      <li class="list-inline-item g-mr-5"><a
+       class="u-link-v5 g-color-main g-color-primary--hover" href="#">Home</a>
+       <i class="g-color-gray-light-v2 g-ml-5">/</i></li>
+      <li class="list-inline-item g-mr-5"><a
+       class="u-link-v5 g-color-main g-color-primary--hover" href="#">Pages</a>
+       <i class="g-color-gray-light-v2 g-ml-5">/</i></li>
+      <li class="list-inline-item g-color-primary"><span>Portfolio
+        Single Item 9</span></li>
+     </ul>
+    </div>
+   </div>
+
+  </div>
+ </section>
+ <!-- End Breadcrumbs -->
+
+
+
+
+ <!-- Portfolio Single Item -->
+ <section class="container g-py-100">
+  <div class="row g-mb-50">
+   <div class="col-md-8 g-mb-30">
+    <div class="mb-5">
+     <h2 class="g-color-black mb-1">Branding work</h2>
+     <span class="d-block lead mb-4">Package of the year</span>
+     <p>This is where we sit down, grab a cup of coffee and dial in
+      the details. Understanding the task at hand and ironing out the
+      wrinkles is key. Whether through commerce or just an experience to
+      tell your brand's story, the time has come to start using
+      development languages that fit your projects needs.</p>
+     <p>Whether through commerce or just an experience to tell your
+      brand's story, the time has come to start using development
+      languages that fit your projects needs. The time has come to bring
+      those ideas and plans to life. This is where we really begin to
+      visualize your napkin sketches and make them into beautiful
+      pixels. We get it, you're busy and it's important that someone
+      keeps up with marketing and driving people to your brand. We've
+      got you covered. Working together on the daily requires each
+      individual to let the greater good of the team’s work surface
+      above their own ego.</p>
+    </div>
+
+    <a
+     class="btn btn-md u-btn-primary g-font-size-default g-rounded-25 g-px-30 g-py-12"
+     href="#">Launch website</a>
+   </div>
+
+   <div class="col-md-4 g-mb-30">
+    <!-- Client -->
+    <div class="mb-5">
+     <h3 class="h5 g-color-black mb-3">Client:</h3>
+     <a class="g-color-gray-dark-v4 g-text-underline--none--hover"
+      href="#"> <img
+      class="g-width-25 g-height-25 rounded-circle mr-2 mb-1"
+      src="/studyboot/Unify/assets/img-temp/100x100/img1.jpg"
+      alt="Image Description">Htmlstream
+     </a>
+    </div>
+    <!-- End Client -->
+
+    <!-- Designers -->
+    <div class="mb-5">
+     <h3 class="h5 g-color-black mb-3">Designers:</h3>
+     <ul class="list-unstyled">
+      <li class="my-3"><img
+       class="g-width-25 g-height-25 rounded-circle mb-1 mr-2"
+       src="/studyboot/Unify/assets/img-temp/100x100/img7.jpg"
+       alt="Image Description"> <a
+       class="g-color-gray-dark-v4 g-text-underline--none--hover"
+       href="#">Alex Teseira</a></li>
+     </ul>
+    </div>
+    <!-- End Designers -->
+
+    <!-- Tags -->
+    <div class="g-mb-30">
+     <h3 class="h5 g-color-black mb-3">Tags:</h3>
+     <ul class="u-list-inline mb-0">
+      <li class="list-inline-item g-mb-10"><a
+       class="u-tags-v1 g-color-main g-brd-around g-brd-gray-light-v3 g-bg-gray-dark-v2--hover g-brd-gray-dark-v2--hover g-color-white--hover g-rounded-50 g-py-4 g-px-15"
+       href="#">Design</a></li>
+      <li class="list-inline-item g-mb-10"><a
+       class="u-tags-v1 g-color-main g-brd-around g-brd-gray-light-v3 g-bg-gray-dark-v2--hover g-brd-gray-dark-v2--hover g-color-white--hover g-rounded-50 g-py-4 g-px-15"
+       href="#">Art</a></li>
+      <li class="list-inline-item g-mb-10"><a
+       class="u-tags-v1 g-color-main g-brd-around g-brd-gray-light-v3 g-bg-gray-dark-v2--hover g-brd-gray-dark-v2--hover g-color-white--hover g-rounded-50 g-py-4 g-px-15"
+       href="#">Graphic</a></li>
+     </ul>
+    </div>
+    <!-- End Tags -->
+
+    <!-- Share -->
+    <div class="mb-3">
+     <h3 class="h5 g-color-black mb-3">Share:</h3>
+     <ul class="list-inline mb-0">
+      <li class="list-inline-item mr-1 mb-1"><a
+       class="btn u-btn-outline-facebook g-rounded-25" href="#"> <i
+        class="mr-1 fa fa-facebook"></i> Facebook
+      </a></li>
+      <li class="list-inline-item mx-1 mb-1"><a
+       class="btn u-btn-outline-twitter g-rounded-25" href="#"> <i
+        class="mr-1 fa fa-twitter"></i> Twitter
+      </a></li>
+      <li class="list-inline-item mx-1 mb-1"><a
+       class="btn u-btn-outline-dribbble g-rounded-25" href="#"> <i
+        class="mr-1 fa fa-dribbble"></i> Dribbble
+      </a></li>
+     </ul>
+    </div>
+    <!-- End Share -->
+   </div>
+  </div>
+
+ </section>
+ <!-- End Cube Portfolio Blocks -->
+
+
+ <!--
 <div class="container">
 
   <div class="right_bar" style="float: right; width:400px; height: 700px;">
@@ -57,7 +251,7 @@
   </div>
   
   <div class="right-conts">
-  <h2>현재인원</h2>
+  <h2>정원</h2>
    <input type="text" readonly id="prsn">
   </div>
   
@@ -99,15 +293,168 @@
     </div>
   </div>
   
-</div> <!-- .container -->
+</div> container -->
 
 
 
 
-<script src="/Study-Web-Project/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/Study-Web-Project/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/Study-Web-Project/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="view.js"></script>
+
+ <!--  footer -->
+ <footer id="js-footer"> </footer>
+ <!--  footer end -->
+
+ <a class="js-go-to u-go-to-v1 animated" href="#" data-type="fixed"
+  data-position="{
+     &quot;bottom&quot;: 15,
+     &quot;right&quot;: 15
+   }"
+  data-offset-top="400" data-compensation="#js-header"
+  data-show-effect="zoomIn"
+  style="display: none; position: fixed; bottom: 15px; right: 15px; opacity: 0;">
+  <i class="hs-icon hs-icon-arrow-top"></i>
+ </a>
+
+
+ <!-- JS Global Compulsory -->
+ <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+ <script
+  src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+ <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+ <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+ <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+ <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+ <script
+  src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+
+ <!-- JS Implementing Plugins -->
+ <script
+  src="/studyboot/Unify/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+ <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+ <script
+  src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+ <script
+  src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+ <script
+  src="/studyboot/Unify/assets/vendor/jquery.maskedinput/src/jquery.maskedinput.js"></script>
+ <script
+  src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+ <script
+  src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+ <script
+  src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+ <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+ <script src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+ <script
+  src="/studyboot/Unify/assets/vendor/jquery.filer/js/jquery.filer.min.js"></script>
+
+ <!-- jQuery UI Core -->
+ <script
+  src="/studyboot/Unify/assets/vendor/jquery-ui/jquery-ui.core.min.js"></script>
+
+ <!-- jQuery UI Helpers -->
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/widgets/menu.js"></script>
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/widgets/mouse.js"></script>
+
+ <!-- jQuery UI Widgets -->
+ <script
+  src="/studyboot/Unify/assets/vendor/jquery-ui/ui/widgets/autocomplete.js"></script>
+ <script
+  src="../../Unify/assets/vendor/jquery-ui/ui/widgets/datepicker.js"></script>
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/widgets/slider.js"></script>
+
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/widget.js"></script>
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/version.js"></script>
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/keycode.js"></script>
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/position.js"></script>
+ <script src="../../Unify/assets/vendor/jquery-ui/ui/unique-id.js"></script>
+ <script
+  src="../../Unify/assets/vendor/jquery-ui/ui/safe-active-element.js"></script>
+
+
+
+ <!-- JS Unify -->
+ <script src="../../Unify/assets/js/hs.core.js"></script>
+ <script src="/studyboot/Unify/assets/js/helpers/hs.rating.js"></script>
+ <script src="../../Unify/assets/js/components/hs.header.js"></script>
+ <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+ <script src="/studyboot/Unify/assets/js/helpers/hs.not-empty-state.js"></script>
+ <script src="/studyboot/Unify/assets/js/helpers/hs.focus-state.js"></script>
+ <script src="/studyboot/Unify/assets/js/helpers/hs.file-attachments.js"></script>
+ <script
+  src="/studyboot/Unify/assets/js/components/hs.file-attachement.js"></script>
+ <script
+  src="/studyboot/Unify/assets/js/components/hs.datepicker-1.0.js"></script>
+ <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
+ <script src="../../Unify/assets/js/components/hs.popup.js"></script>
+ <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+ <script src="../../Unify/assets/js/components/hs.slider.js"></script>
+ <script src="../../Unify/assets/js/components/hs.sticky-block.js"></script>
+ <script src="/studyboot/Unify/assets/js/components/hs.masked-input.js"></script>
+ <script src="../../Unify/assets/js/components/hs.count-qty.js"></script>
+ <script src="../../Unify/assets/js/components/hs.datepicker.js"></script>
+ <script src="/studyboot/Unify/assets/js/components/hs.autocomplete.js"></script>
+ <script
+  src="/studyboot/Unify/assets/js/components/hs.autocomplete-local-search.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/cookiejs/jquery.cookie.js"></script>
+ <script src="/studyboot/Unify/assets/js/helpers/hs.shortcode-filter.js"></script>
+ <script src="/studyboot/Unify/assets/vendor/custombox/custombox.min.js"></script>
+ <script src="/studyboot/Unify/assets/js/components/hs.header-side.js"></script>
+ <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+
+
+ <!-- JS Custom -->
+ <script src="../../node_modules/datepicker-bootstrap/js/core.js"
+  type="text/javascript"></script>
+ <script src="../../node_modules/sweetalert2/dist/sweetalert2.js"
+  type="text/javascript"></script>
+ <script
+  src="../../js/Semantic-UI-master/dist/components/dropdown.min.js"></script>
+ <script
+  src="../../js/Semantic-UI-master/dist/components/transition.min.js"></script>
+ <script src="../../node_modules/datepicker-bootstrap/js/datepicker.js"></script>
+ <script src="../../Unify/assets/js/custom.js"></script>
+ <script src="../header.js"></script>
+ <script src="../footer.js"></script>
+ <script src="view.js"></script>
+ <script>
+  <!-- JS Plugins Init. -->
+    $(document)
+            .on(
+                    'ready',
+                    function() {
+                      $.HSCore.components.HSDatepicker
+                              .init('#datepickerDefault, #datepickerInline, #datepickerInlineFrom, #datepickerFrom');
+
+                      // initialization of sticky blocks
+                      $.HSCore.components.HSStickyBlock
+                              .init('.js-sticky-block');
+                      // initialization of forms
+                      $.HSCore.helpers.HSFocusState.init();
+                      $.HSCore.helpers.HSNotEmptyState.init();
+                      $.HSCore.components.HSSlider
+                              .init('#regularSlider, #regularSlider2, #regularSlider3, #rangeSlider, #rangeSlider2, #rangeSlider3, #stepSlider, #stepSlider2, #stepSlider3');
+                      $.HSCore.components.HSCountQty.init('.js-quantity');
+
+                    });
+
+    $(window).on(
+            'load',
+            function() {
+              // initialization of autocomplet
+              $.HSCore.components.HSLocalSearchAutocomplete
+                      .init('#u-sidebar-navigation__search-autocomplete');
+
+              // initialization of autocomplet
+              $.HSCore.components.HSAutocomplete.init('#autocomplete2');
+
+              // initialization of HSMegaMenu component
+              $('.js-mega-menu').HSMegaMenu({
+                event: 'hover',
+                pageContainer: $('.container'),
+                breakpoint: 991
+              });
+            });
+  </script>
 
 </body>
 </html>

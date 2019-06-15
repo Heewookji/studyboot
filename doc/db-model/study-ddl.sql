@@ -145,6 +145,7 @@ CREATE TABLE sms_std (
   rcrtm_apply BOOLEAN      NULL     COMMENT '모집 선언', -- 모집 선언
   cont        TEXT         NOT NULL COMMENT '스터디 설명', -- 스터디 설명
   prsn        INTEGER      NOT NULL COMMENT '스터디 최대인원', -- 스터디 최대인원
+  now_prsn    INTEGER      NOT NULL DEFAULT 1 COMMENT '스터디 현재인원', -- 스터디 현재인원
   rate        DOUBLE       NOT NULL DEFAULT 0.0 COMMENT '스터디원 평균 평점' -- 스터디원 평균 평점
 )
 COMMENT '스터디';

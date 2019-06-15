@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 // ContextLoaderListener의 IoC 컨테이너가 준비해야 할 객체에 대한 정보.
 // => application-context.xml을 이 Java config 클래스가 대체한다.
@@ -16,6 +17,8 @@ import org.springframework.context.annotation.ImportResource;
     <context:exclude-filter type="regex" expression="com.eomcs.lms.web.*"/>
   </context:component-scan>
  */
+// 스케쥴링을 위한 애노테이션 추가
+@EnableScheduling
 @ComponentScan(
     basePackages="com.studyboot.sms",
     excludeFilters= @Filter(
