@@ -16,6 +16,7 @@ import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyBoard;
 import com.studyboot.sms.domain.StudyMember;
+import com.studyboot.sms.service.AmazonS3_Service;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
 import com.studyboot.sms.service.StudyMemberService;
@@ -32,6 +33,7 @@ public class MyStudyController {
   @Autowired StudyService studyService;
   @Autowired StudyMemberService studyMemberService;
   @Autowired ServletContext servletContext;
+  @Autowired AmazonS3_Service amazonS3_Service;
 
 
   @GetMapping("list")
@@ -274,21 +276,20 @@ public class MyStudyController {
   @PostMapping("fileAdd")
   public Object fileAdd(
       HttpSession session,
-      Part files) throws Exception {
+      Part files,
+      @RequestParam int studyNo) throws Exception {
     
-    Member loginUser = (Member) session.getAttribute("loginUser");
+    System.out.println(studyNo);
+    
     Map<String, Object> content = new HashMap<>();
     
     if (files.getSize() <= 0) {
       content.put("status", "fail");
       return content;
     }
+    amazonS3_Service.fileAdd(files, studyNo);
+    content.put("status", "success");
     
-    // 이미지 저장
-    String uploadDir = servletContext.getRealPath("/upload/images/repository");
-    System.out.println(uploadDir);
-    // files.write(uploadDir);
-
     return content;
   }
   
