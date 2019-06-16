@@ -220,6 +220,13 @@
 		where
 		std_id = #{studyNo} and std_board_id = #{no} 
 	</update>
+	
+	<update id="increaseCount" parameterType="int">
+      update sms_std_board
+      set 
+        vw_cnt = vw_cnt + 1 
+      where std_board_id = #{value}
+    </update>
 
 </mapper>
 

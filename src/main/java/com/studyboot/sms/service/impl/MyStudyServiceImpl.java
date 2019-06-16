@@ -71,7 +71,11 @@ public class MyStudyServiceImpl implements MyStudyService {
 
   @Override
   public StudyBoard get(int no) {
-    return studyBoardDao.findByNo(no);
+    StudyBoard board = studyBoardDao.findByNo(no);
+    if (board != null) {
+      studyBoardDao.increaseCount(no);
+    }
+    return board;
   }
 
   @Override
