@@ -800,7 +800,7 @@ $('#init-btn').click(function(e) {
         Swal.fire({
           type: 'error',
           title: errorTitle,
-          text: '스터디 생성을 실패했습니다!'
+          text: '스터디 생성을 실패했습니다!' + data.message
         });
       }
     }

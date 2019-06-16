@@ -9,6 +9,7 @@ public interface ClsDao {
   List<Cls> findMediumClsName(String clsNo);
   List<Cls> findSmallClsName(String clsNo);
   List<String> findedClsNoByKeyword(HashMap<String, Object> clsParam);
+  Cls findClsName(HashMap<String, Object> clsParam);
 }
 
 

@@ -34,6 +34,21 @@ public class Study {
   private List<String> dayStrList;
   private Long totalDateDiff;
   private Long currentDateDiff;
+  private List<StudyMember> studyMembers;
+  private List<Cls> clsList;
+  
+  public List<Cls> getClsList() {
+    return clsList;
+  }
+  public void setClsList(List<Cls> clsList) {
+    this.clsList = clsList;
+  }
+  public List<StudyMember> getStudyMembers() {
+    return studyMembers;
+  }
+  public void setStudyMembers(List<StudyMember> studyMembers) {
+    this.studyMembers = studyMembers;
+  }
   public int getNo() {
     return no;
   }
@@ -181,7 +196,7 @@ public class Study {
         + nowPersonnel + ", memberAge=" + memberAge + ", attendance=" + attendance + ", endrate="
         + endrate + ", clsName=" + clsName + ", addressName=" + addressName + ", dayStrList="
         + dayStrList + ", totalDateDiff=" + totalDateDiff + ", currentDateDiff=" + currentDateDiff
-        + "]";
+        + ", studyMembers=" + studyMembers + ", clsList=" + clsList + "]";
   }
   
   

@@ -6,202 +6,197 @@
 
 <mapper namespace="com.studyboot.sms.dao.StudyMemberDao">
 
-	<resultMap type="studyMember" id="studyMemberMap">
-		<id column="std_id" property="studyNo" />
-		<id column="member_id" property="memberNo" />
-		<result column="std_name" property="studyName" />
-		<result column="nick_name" property="nickName" />
-		<result column="join_date" property="registeredDate" />
-		<result column="name" property="name" />
-		<result column="rate" property="rate" />
-		<result column="birth" property="birth" />
-		<result column="tel" property="tel" />
-		<result column="photo" property="photo" />
-		<result column="admin" property="admin" />
-		<result column="adr_lms" property="address" />
-		<result column="end_state_cls_id" property="endNo" />
-		<result column="join_date" property="joinDate" />
-		<result column="end_date" property="endDate" />
-		<result column="leader" property="leader" />
-		<result column="atn_pct" property="attendance" />
-		<result column="arch_cnt" property="upload" />
+  <resultMap type="studyMember" id="studyMemberMap">
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="memberNo" />
+    <result column="std_name" property="studyName" />
+    <result column="nick_name" property="nickName" />
+    <result column="join_date" property="registeredDate" />
+    <result column="name" property="name" />
+    <result column="rate" property="rate" />
+    <result column="birth" property="birth" />
+    <result column="tel" property="tel" />
+    <result column="photo" property="photo" />
+    <result column="admin" property="admin" />
+    <result column="adr_lms" property="address" />
+    <result column="end_state_cls_id" property="endNo" />
+    <result column="join_date" property="joinDate" />
+    <result column="end_date" property="endDate" />
+    <result column="leader" property="leader" />
+    <result column="atn_pct" property="attendance" />
+    <result column="arch_cnt" property="upload" />
 
-		<association property="member" javaType="member">
-			<id column="members_id" property="no" />
-			<result column="members_nick" property="nickName" />
-		</association>
-	</resultMap>
+    <association property="member" javaType="member">
+      <id column="members_id" property="no" />
+      <result column="members_nick" property="nickName" />
+    </association>
+  </resultMap>
 
-	<!-- 회원의 평가 정보 -->
-	<resultMap type="studyMember" id="memberRateInfoMap">
-		<id column="std_id" property="studyNo" />
-		<result column="end_state_cls_id" property="endNo" />
-		<result column="join_date" property="joinDate" />
-		<result column="end_date" property="endDate" />
-		<result column="leader" property="leader" />
-		<result column="atn_pct" property="attendance" />
+  <!-- 회원의 평가 정보 -->
+  <resultMap type="studyMember" id="memberRateInfoMap">
+    <id column="std_id" property="studyNo" />
+    <result column="end_state_cls_id" property="endNo" />
+    <result column="join_date" property="joinDate" />
+    <result column="end_date" property="endDate" />
+    <result column="leader" property="leader" />
+    <result column="atn_pct" property="attendance" />
 
-		<result column="std_name" property="studyName" />
+    <result column="std_name" property="studyName" />
 
-		<association property="member" javaType="member">
-			<result column="nick_name" property="nickName" />
-			<result column="rate" property="rate" />
-			<result column="photo" property="photo" />
-		</association>
-	</resultMap>
+    <association property="member" javaType="member">
+      <result column="nick_name" property="nickName" />
+      <result column="rate" property="rate" />
+      <result column="photo" property="photo" />
+    </association>
+  </resultMap>
 
-	<!-- 회원의 평가 정보 -->
-	<resultMap type="history" id="historyMap">
-		<result column="name" property="studyName" />
-		<result column="join_date" property="joinDate" />
-		<result column="end_date" property="endDate" />
-		<result column="atn_pct" property="attendance" />
-	</resultMap>
+  <!-- 회원의 평가 정보 -->
+  <resultMap type="history" id="historyMap">
+    <result column="name" property="studyName" />
+    <result column="join_date" property="joinDate" />
+    <result column="end_date" property="endDate" />
+    <result column="atn_pct" property="attendance" />
+  </resultMap>
 
-	<!-- 스터디 구성원들 가져오기 -->
-	<select id="findStudyMembersByNo" resultMap="studyMemberMap"
-		parameterType="int">
-		select
-		m.member_id,
-		m.rate,
-		m.birth,
-		m.name,
-		m.photo,
-		m.nick_name as members_nick,
-		sm.atn_pct
-		from
-		sms_std_member sm
-		inner join
-		sms_member m on sm.member_id =
-		m.member_id
-		where
-		sm.std_id = #{no} 
-		and
-		end_state_cls_id is null
-	</select>
-
-
-	<!-- 마이스터디 목록 가져오기 -->
-	<select id="findStudyNoByMemberNo" resultType="int"
-		parameterType="int">
-		select
-		std_id
-		from
-		sms_std_member
-		where
-		member_id = #{no}
-		and
-		end_date is null
-	</select>
-
-	<!-- 스터디 장인지 판단 -->
-	<select id="findStudyMemberLeaderByMap" resultType="boolean"
-		parameterType="map">
-		select
-		leader
-		from
-		sms_std_member
-		where
-		member_id =
-		#{loginUser} and std_id= #{studyNo}
-	</select>
-
-	<!-- 해당 스터디 맴버인지 판단 -->
-	<select id="findMyStudyByNo" resultMap="studyMemberMap"
-		parameterType="int">
-		select
-		*
-		from
-		sms_std_member
-		where
-		std_id = #{studyNo} and
-		member_id = #{memberNo}
-	</select>
+  <!-- 스터디 구성원들 가져오기 -->
+  <select id="findStudyMembersByNo" resultMap="studyMemberMap" parameterType="int">
+    select
+    m.member_id,
+    m.rate,
+    m.birth,
+    m.name,
+    m.photo,
+    m.nick_name as members_nick,
+    sm.leader,
+    sm.atn_pct
+    from
+    sms_std_member sm
+    inner join
+    sms_member m on sm.member_id =
+    m.member_id
+    where
+    sm.std_id = #{no}
+    and
+    end_state_cls_id is null
+  </select>
 
 
-	<!-- 스터디 탈퇴 -->
-	<update id="attendUpdate" parameterType="map">
-		update
-		sms_std_member
-		set
-		end_state_cls_id = #{endNo},
-		end_date = #{endDate}
-		where std_id =
-		#{studyNo} and member_id = #{memberNo}
-	</update>
+  <!-- 마이스터디 목록 가져오기 -->
+  <select id="findStudyNoByMemberNo" resultType="int" parameterType="int">
+    select
+    std_id
+    from
+    sms_std_member
+    where
+    member_id = #{no}
+    and
+    end_date is null
+  </select>
+
+  <!-- 스터디 장인지 판단 -->
+  <select id="findStudyMemberLeaderByMap" resultType="boolean" parameterType="map">
+    select
+    leader
+    from
+    sms_std_member
+    where
+    member_id =
+    #{loginUser} and std_id= #{studyNo}
+  </select>
+
+  <!-- 해당 스터디 맴버인지 판단 -->
+  <select id="findMyStudyByNo" resultMap="studyMemberMap" parameterType="int">
+    select
+    *
+    from
+    sms_std_member
+    where
+    std_id = #{studyNo} and
+    member_id = #{memberNo}
+  </select>
 
 
-	<!-- 회원의 평가 정보 가져오기 -->
-	<select id="findRateInfoByMemberId"
-		resultMap="memberRateInfoMap" parameterType="int">
-		select
-		sm.std_id,
-		sm.end_state_cls_id,
-		sm.join_date,
-		sm.end_date,
-		sm.leader,
-		sm.atn_pct,
-		m.nick_name,
-		m.rate,
-		m.photo
-		from
-		sms_std_member sm
-		inner join sms_member m
-		on sm.member_id = m.member_id
-		inner join sms_std s on sm.std_id =
-		s.std_id
-		where
-		sm.member_id = #{value}
-	</select>
+  <!-- 스터디 탈퇴 -->
+  <update id="attendUpdate" parameterType="map">
+    update
+    sms_std_member
+    set
+    end_state_cls_id = #{endNo},
+    end_date = #{endDate}
+    where std_id =
+    #{studyNo} and member_id = #{memberNo}
+  </update>
 
 
-	<!-- 회원의 히스토리 가져오기 -->
-	<select id="findHistoryByMemberId" resultMap="historyMap"
-		parameterType="map">
-		select
-		s.name,
-		sm.join_date,
-		sm.end_date,
-		sm.atn_pct
-		from
-		sms_std_member sm
-		inner join sms_std s on sm.std_id = s.std_id
-		where
-		sm.member_id =
-		#{memberNo} and sm.end_date is not null
-		order by
-		sm.join_date desc
-		<if test="size != null and rowNo != null">
-			limit #{rowNo}, #{size}
-		</if>
-	</select>
+  <!-- 회원의 평가 정보 가져오기 -->
+  <select id="findRateInfoByMemberId" resultMap="memberRateInfoMap" parameterType="int">
+    select
+    sm.std_id,
+    sm.end_state_cls_id,
+    sm.join_date,
+    sm.end_date,
+    sm.leader,
+    sm.atn_pct,
+    m.nick_name,
+    m.rate,
+    m.photo
+    from
+    sms_std_member sm
+    inner join sms_member m
+    on sm.member_id = m.member_id
+    inner join sms_std s on sm.std_id =
+    s.std_id
+    where
+    sm.member_id = #{value}
+  </select>
 
-	<select id="countEndStudyByMemberNo" resultType="int" parameterType="int">
-		select
-		count(*)
-		from
-		sms_std_member
-		where
-		member_id = #{value} and end_date is
-		not null
-	</select>
-	
-	
 
-	<insert id="add" parameterType="map">
-		insert
-		into
-		sms_std_member(
-		std_id,
-		member_id,
-		leader
-		)
-		values(
-		#{studyNo},
-		#{memberNo},
-		#{leader}
-		);
-	</insert>
+  <!-- 회원의 히스토리 가져오기 -->
+  <select id="findHistoryByMemberId" resultMap="historyMap" parameterType="map">
+    select
+    s.name,
+    sm.join_date,
+    sm.end_date,
+    sm.atn_pct
+    from
+    sms_std_member sm
+    inner join sms_std s on sm.std_id = s.std_id
+    where
+    sm.member_id =
+    #{memberNo} and sm.end_date is not null
+    order by
+    sm.join_date desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+
+  <select id="countEndStudyByMemberNo" resultType="int" parameterType="int">
+    select
+    count(*)
+    from
+    sms_std_member
+    where
+    member_id = #{value} and end_date is
+    not null
+  </select>
+
+
+
+  <insert id="add" parameterType="map">
+    insert
+    into
+    sms_std_member(
+    std_id,
+    member_id,
+    leader
+    )
+    values(
+    #{studyNo},
+    #{memberNo},
+    #{leader}
+    );
+  </insert>
 
 </mapper>
 
