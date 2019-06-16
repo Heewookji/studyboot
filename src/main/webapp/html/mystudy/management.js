@@ -1,39 +1,33 @@
-//var pageNo = 1,
-//pageSize = 6,
-//tbody = $('tbody'),
-//prevPageLi = $('#prevPage'),
-//nextPageLi = $('#nextPage'),
 var param = location.href.split('?')[1],
-nosss = param.split('=')[1];
-//currSpan = $('#currPage > span'), 
-//currCls,
-//keyword = $("#board-search").val(),
-//stdBoardListTemplateSrc = $('#std-BoardList').html();
-//
-//var stdBoardListGenerator = Handlebars.compile(stdBoardListTemplateSrc);
+nosss = param.split('=')[1],
+approvalTemplateSrc = $('#approval-list').html();
+
+var approvalGenerator = Handlebars.compile(approvalTemplateSrc);
+
 var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 $('#startDate').datepicker({
   uiLibrary: 'bootstrap4',
   iconsLibrary: 'fontawesome',
   minDate: today,
+  format: 'yyyy-mm-dd',
   maxDate: function () {
-      return $('#endDate').val();
+    return $('#endDate').val();
   }
 });
 $('#endDate').datepicker({
   uiLibrary: 'bootstrap4',
   iconsLibrary: 'fontawesome',
   minDate: today,
+  format: 'yyyy-mm-dd',
   minDate: function () {
-      return $('#startDate').val();
+    return $('#startDate').val();
   }
 });
-$('.ui.dropdown')
-.dropdown();
+$('.ui.dropdown').dropdown();
 $.HSCore.components.HSCountQty.init('.js-quantity');
 
-$(document).ready(function() {
 
+$(document).ready(function() {
   // 게시판으로 진입했을 때 탭 색깔 활성화
   $(document.body).bind('loaded-nav', () => {
     $('#std-management').removeClass('list-group-item list-group-item-action justify-content-between');
@@ -52,99 +46,54 @@ $(document).ready(function() {
     var $stdBoard = $("<li class='list-inline-item g-color-primary' id='std-main2'>"
         + "<span>Study Management</span></li>");
     $('#conts-list').append($stdBoard);
-  }
-
-  $(document.body).trigger('loaded-board');
-//  boardList(1, "undefined", "undefined", noss);
+  };
+  
+  // 평점 모달을 준비한다.
+  $("#sb-history").load("../mypage/rateInfo.html")
 });
 
 
-/*//JSON 형식으로 데이터 목록 가져오기 (게시판 리스트 )
-function boardList(pn, cls, keyword, noss) {
-  $.getJSON('../../app/json/MyStudy/list?pageNo=' + pn + '&pageSize=' + pageSize
-      + '&pageCls=' + cls + "&keyword=" + keyword + "&no=" + noss,
-      function(obj) {
-
+function loadStudyDetail(nosss) {
+  $.getJSON('../../app/json/MyStudy/mmntUpdate?no=' + nosss,
+      function(obj){
+    
     console.log(obj);
-
-    tbody.html('');
-
-    if(obj.pageNo != 0){
-
-      pageNo = obj.pageNo;
-
-      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
-      $(stdBoardListGenerator(obj)).appendTo('#board-list-hb');
-
-      // 현재 페이지의 번호를 갱신한다.
-      currSpan.html(String(pageNo));
-
-      // 1페이지일 경우 버튼을 비활성화 한다.
-      if (pageNo == 1) {
-        prevPageLi.addClass('disabled');
-      } else {
-        prevPageLi.removeClass('disabled');
-      }
-
-      // 마지막 페이지일 경우 버튼을 비활성화 한다.
-      if (pageNo == obj.totalPage) {
-        nextPageLi.addClass('disabled');
-      } else {
-        nextPageLi.removeClass('disabled');
-      }
-
-    } else{
-      currSpan.html(obj.pageNo);
-      prevPageLi.addClass('disabled');
-      nextPageLi.addClass('disabled');
-    }
-   //  데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
-    $(document.body).trigger('loaded-list');
+    $('#std-name').val(obj.name);
+    $('#std-goal').val(obj.goal);
+    
+//    var $per = "<option value=" + '"' + obj.personnel + '"' + ">" + obj.personnel + "명" + 
+//    "</option>"
+//    console.log($per);
+    // 드롭다운과 날짜 형식 / 요일 라이브러리 사용법 알아야함
+    //$('#quantity').append($per);
+    $('#startDate').val(obj.startDate);
+    $('#endDate').val(obj.endDate);
+    $('#std-contents').html(obj.contents);
+    
+    
+  });
+};
+loadStudyDetail(nosss);
 
 
-  }); //getJSON()
-} // boardList()
-*/
-//스터디 게시판
-//$(document.body).bind('loaded-board', () => {
-//  
-//  $('#prevPage > a').click((e) => {
-//    e.preventDefault();
-//    boardList(pageNo - 1, $("#currCls").html(), keyword, noss);
-//  });
-//
-//  $('#nextPage > a').click((e) => {
-//    e.preventDefault();
-//    boardList(pageNo + 1, $("#currCls").html(), keyword, noss);
-//  });
-//
-//  $('#bothClsPage').click((e) => {
-//    keyword = "";
-//    e.preventDefault();
-//    $("#currCls").html("전체");
-//    $("#board-search").val("");
-//    boardList(1, "undefined", "undefined", noss);
-//  });
-//
-//  $('#titlePage').click((e) => {
-//    e.preventDefault();
-//    $("#currCls").html("제목");
-//  });
-//
-//  $('#nickPage').click((e) => {
-//    e.preventDefault();
-//    $("#currCls").html("닉네임");
-//  });
-//
-//  $('#board-search-btn').click((e) => {
-//    keyword = $("#board-search").val();
-//    boardList(1, $("#currCls").html(), keyword, noss);
-//    $("#board-search").val("");
-//  });
-//
-//
-//});
+function loadStudyApl(nosss) {
+  $.getJSON('../../app/json/MyStudy/mmntApl?no=' + nosss,
+      function(obj){
+    console.log(obj);
+    $(approvalGenerator(obj)).appendTo('#approval-row');
+    
+  //트리거 발생
+    $(document.body).trigger('loaded-approval');
+  });
+};
+loadStudyApl(nosss);
 
+
+$(document.body).bind('loaded-approval', () => {
+  
+  
+  
+});
 
 
 
