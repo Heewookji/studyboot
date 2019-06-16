@@ -8,6 +8,10 @@ $(document).ready(function() {
     $('#std-repository').click((e) => {
       window.location.href = "/studyboot/html/mystudy/repository.html?no=" + nos;
     });
+    
+    $('#std-management').click((e) => {
+      window.location.href = "/studyboot/html/mystudy/management.html?no=" + nos;
+    });
 
     
     $(document.body).trigger('loaded-nav');

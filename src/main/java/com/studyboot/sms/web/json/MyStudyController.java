@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyBoard;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.AmazonS3_Service;
+import com.studyboot.sms.service.ApprovalService;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
 import com.studyboot.sms.service.StudyMemberService;
@@ -35,6 +37,7 @@ public class MyStudyController {
   @Autowired StudyMemberService studyMemberService;
   @Autowired ServletContext servletContext;
   @Autowired AmazonS3_Service amazonS3_Service;
+  @Autowired ApprovalService approvalService;
 
 
   @GetMapping("list")
@@ -345,6 +348,23 @@ public class MyStudyController {
     return content;
   }
 
+  @GetMapping("mmntUpdate")
+  public Object mmntUpdate(@RequestParam int no) {
+
+    Study study = studyService.get(no);
+    System.out.println(study);
+    return study;
+  }
+  
+  @GetMapping("mmntApl")
+  public Object mmntApl(@RequestParam int no) {
+
+    HashMap<String,Object> content = new HashMap<>();
+    List<AppliedStudy> approval = approvalService.list(no);
+    content.put("list", approval);
+    return content;
+  }
+  
 }
 
 
