@@ -12,10 +12,10 @@ user,
 ratingForm = $("#rating-form");
 
 
-// 페이지가 준비되면 평점 정보 모달창을 꽂아준다.
+// 페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
 $( document ).ready(function() {
-  $("#sb-history").load("rateInfo.html")
-  $(document.body).trigger('loaded-history');
+  $("#sb-history").load("rateInfo.html");
+  $("#sb-imagesetting").load("imagesetting.html");
 });
 
 
@@ -29,20 +29,9 @@ function loadData() {
     
     console.log(data);
     user = data;
-// $('#nickName').val(data.nickName);
-    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' + user.photo);
-    $('#updateImage').attr('src', '/studyboot/upload/images/member/' + user.photo);
-    
-// $('#cls').val(data.cls);
-// $('#sdt').val(data.startDate);
-// $('#edt').val(data.endDate);
-// $('#prsn').val(data.personnel);
-// $('#rate').val(data.rate);
-// $('#age').val(data.memberAge);
-// $('#attendance').val(data.attendance);
-// $('#endrate').val(data.endrate);
-    
-    $(document.body).trigger('loaded-data');
+    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
+    $('#inqryName').html(user.name);
+    $('#inqryNo').val(user.no);
   });
 };
 
@@ -130,14 +119,15 @@ $('#pickedStudyTab').on('shown.bs.tab', () => {
 $('#inqryForm-btn').click((e) => {
   e.preventDefault();
   $('.sspctForm-Format').addClass('std-invisible');
-  $('#inqryName').html("홍길동");
   $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
   $('#sspctName').val("");
-  $('#inqryNo').val(1);
   $('#sspctNo').val(0);
   $('#inqryClsNo').val(1);
 });
 
+$('#inqryModal').on('hidden.bs.modal', () => {
+  $('#inqryContents').val('');
+});
 
 // inquiry add
 $('#inqryAdd-btn').click((e) => {
@@ -152,8 +142,8 @@ $('#inqryAdd-btn').click((e) => {
       suspectPersonNo: $(sspctNo).val()
     },
     success: function(data){
-      var obj = JSON.parse(data);
-      location.reload();
+      alert('문의 글 등록 성공!!');
+      $('#inqryModal').modal('hide');
     }
   });
 });
@@ -206,142 +196,6 @@ $('#inqryAdd-btn').click((e) => {
 // $('#imageUpdate-btn').prop('disabled', true);
 // }
 // });
-
-
-// cropper var
-var image = document.getElementById('updateImage'),
-imageInput = $('#imageInput'),
-avatar = $('#profilePhoto'),
-cropBoxData,
-canvasData,
-cropper,
-URL = window.URL || window.webkitURL,
-originalImageURL,
-uploadedImageType = 'image/jpeg',
-uploadedImageURL,
-imageChanged = null,
-$alert = $('.alert'),
-// cropper options
-options = {
-    viewMode: 3,
-    dragMode: 'move',
-    aspectRatio: 1/1,
-    guides: false,
-    background: false,
-    ready: function () {
-        cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
-      }
-  };
-
-
-// Import image
-if (URL) {
-  imageInput.change(function() {
-    
-    var files = this.files;
-    var file;
-
-    if (files && files.length) {
-      file = files[0];
-
-      if (/^image\/\w+/.test(file.type)) {
-        uploadedImageType = file.type;
-        imageChanged = false;
-
-        if (originalImageURL) {
-          URL.revokeObjectURL(originalImageURL);
-        }
-        
-        if (uploadedImageURL) {
-          URL.revokeObjectURL(uploadedImageURL);
-        }
-        
-        originalImageURL = image.src;
-        image.src = uploadedImageURL = URL.createObjectURL(file);
-        
-        if (cropper) {
-          cropper.destroy();
-        }
-        cropper = new Cropper(image, options);
-        imageInput.value = null;
-        $(document.body).trigger('import-new-image');
-        
-      } else {
-        window.alert('Please choose an image file.');
-      }
-    }
-  });
-  
-} else {
-  imageInput.attr('disabled', true);
-  imageInput.parent()[0].className += ' disabled';
-}
-
-$(document.body).bind('import-new-image', () => {
-  
-  $('#imageUpload-btn').prop('disabled', false);
-  
-  // 프사 모달 닫힐 때
-  $('#imageModal').on('hidden.bs.modal', () => {
-    if (cropper) {
-      if (!imageChanged) {
-        image.src = originalImageURL;
-      }
-      cropper.destroy();
-      $('#imageUpload-btn').prop('disabled', true);
-    }
-  });
-
-});
-
-$('#imageUpload-btn').click(() => {
-  
-  var initialAvatarURL;
-  var canvas;
-  
-  $('#imageModal').modal('hide');
-  
-  if (cropper) {
-    // 캔버스 변수에 크랍박스 데이터를 넣는다.
-    canvas = cropper.getCroppedCanvas();
-    // 기존의 이미지 소스를 저장
-    initialAvatarURL = avatar.attr('src');
-    avatar.attr('src', canvas.toDataURL());
-    image.src = canvas.toDataURL();
-    // 앨럿 요소의 클래스를 초기화
-    $alert.removeClass('alert-success alert-warning');
-    // 캔버스의 데이터를 Blob 형식으로 출력하는 함수 호출
-    // anonymous 함수에 파라미터로 blob을 넘기고 실행
-    canvas.toBlob(function (blob) {
-      var formData = new FormData();
-      // formdata 객체에 blob 데이터를 꼽아준다.
-      formData.append('avatar', blob, 'avatar.jpg');
-      
-      // 비동기 요청 실행
-      $.ajax({
-        url: '../../app/json/member/photo',
-        method: 'POST',
-        data: formData,
-        enctype: "multipart/form-data",
-        processData: false,
-        contentType: false,
-        success: function (data) {
-          $('#history-profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
-          $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
-          imageChanged = true;
-          $alert.show().addClass('alert-success').text('Upload success');
-        },
-        error: function () {
-          avatar.attr('src', initialAvatarURL);
-          image.src = originalImageURL;
-          imageChanged = false;
-          $alert.show().addClass('alert-warning').text('Upload error');
-        }
-      });
-    });
-  }
-});
-
 
 
 

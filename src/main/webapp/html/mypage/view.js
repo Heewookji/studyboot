@@ -1,12 +1,61 @@
 var param = location.href.split('?')[1],
 no,
-user,
+userData,
 nickCheck,
 telCheck,
 pwdCheck = 0;
 
 
+//페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
+$( document ).ready(function() {
+  $("#sb-history").load("rateInfo.html");
+  $("#sb-imagesetting").load("imagesetting.html");
+});
+
+
+
+// JSON 형식의 데이터 가져오기
+function loadData() {
+  $.getJSON('../../app/json/member/detail',
+      function(data) {
+    
+    userData = data;
+    console.log(userData);
+    
+    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + userData.photo + '.jpg');
+    $('#inqryName').html(userData.name);
+    $('#inqryNo').val(userData.no);
+    
+    $('#userName').val(userData.name);
+    $('#nickName').val(userData.nickName);
+    $('#email').val(userData.email);
+    $('#tel').val(userData.tel);
+    
+    $(document.body).trigger('loaded-data');
+  });
+};
+
+loadData();
+
+// 닉네임 체크
+function nickNameCheck() {
+  var str = $("#nickName").val();
+  if (str.length < 3 || str.length > 10) {
+    return false;
+  }
+  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
+
+  for (var i = 0; i <= str.length -1 ; i++ ) {
+    if (chk.test(str.charAt(i))) {
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
 $(document.body).bind('loaded-data', () => {
+  
   // 닉네임 중복체크
   $(function() {
     // nickCheck 버튼을 클릭했을 때
@@ -46,127 +95,26 @@ $(document.body).bind('loaded-data', () => {
         });
     });
   });
-});
-
-// JSON 형식의 데이터 가져오기
-function loadData() {
-  $.getJSON('../../app/json/member/detail',
-      function(data) {
-    
-    user = data;
-    console.log(data);
-    $('#userName').val(user.name);
-    $('#nickName').val(user.nickName);
-    $('#email').val(user.email);
-    $('#tel').val(user.tel);
-// $('#cls').val(data.cls);
-// $('#sdt').val(data.startDate);
-// $('#edt').val(data.endDate);
-// $('#prsn').val(data.personnel);
-// $('#rate').val(data.rate);
-// $('#age').val(data.memberAge);
-// $('#attendance').val(data.attendance);
-// $('#endrate').val(data.endrate);
-    
-    $(document.body).trigger('loaded-data');
-  });
-};
-
-loadData();
-
-// inquiry
-$('#inqryForm-btn').click((e) => {
-  e.preventDefault();
-  $('.sspctForm-Format').addClass('std-invisible');
-  $('#inqryName').html(user.nickName);
-  $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
-  $('#sspctName').val("");
-  $('#inqryNo').val(user.no);
-  $('#sspctNo').val(0);
-  $('#inqryClsNo').val(1);
-});
-
-// inquiry add
-$('#inqryAdd-btn').click((e) => {
-  $.ajax({
-    url:'../../app/json/inquiry/add',
-    type: 'post',
-    dataType: 'text',
-    data: {
-      clsNo: $(inqryClsNo).val(),
-      contents:$(inqryContents).val(),
-      inquiryPersonNo: $(inqryNo).val(),
-      suspectPersonNo: $(sspctNo).val()
-    },
-    success: function(data){
-      var obj = JSON.parse(data);
-      location.reload();
-    }
-  });
-});
-
-// 닉네임 체크
-function nickNameCheck() {
-  var str = $("#nickName").val();
-  if(str.length < 4 || str.length > 10) {
-    return false;
-  }
-  var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]/;
-
-  for(var i = 0; i <= str.length -1 ; i++ ) {
-    if(chk.test(str.charAt(i))) {
-    } else {
-      return false;
-    }
-  }
-  return true;
-}
-
-$(document).ready(() => {
+  
   
   // nickName
   $('#sb-nickname-edit').click(() => {
     $('#nickName').prop('readonly', false);
-    $('#nickCheck-btn').removeClass('std-invisible');
     $('#sb-nickname-edit').addClass('std-invisible');
     $('#sb-nickname-cancel').removeClass('std-invisible');
   });
   
   $('#sb-nickname-cancel').click(() => {
-    $('#nickName').val(user.nickName);
-  
+    $('#nickName').val(userData.nickName);
+    
     $('#nickName').closest('div').removeClass('u-has-error-v1');
     $('#nickName').closest('div').removeClass('u-has-success-v1-1');
     $('#nickName').prop('readonly', true);
-    $('#nickCheck-btn').addClass('std-invisible');
     $('#sb-nickname-cancel').addClass('std-invisible');
     $('#sb-nickname-edit').removeClass('std-invisible');
     nickCheck = undefined;
   });
   
-  // 닉네임 체크
-  $( '#nickName' ).keyup(function(){
-
-    if(nickNameCheck() == true){
-      $('#nickCheck-btn').prop('disabled',false);
-      $('#nickName').tooltip('disable');
-      $('#nickName').tooltip('hide');
-      $('#nickName').closest('div').removeClass('u-has-error-v1');
-      $('#nickName').closest('div').addClass('u-has-success-v1-1');
-    } else{
-      
-      $('#nickName').attr('data-toggle','tooltip');
-      $('#nickName').attr('data-trigger','hover focus');
-      $('#nickName').attr('data-placement','bottom');
-      $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
-      
-      $('#nickName').tooltip('enable');
-      $('#nickName').tooltip('show');
-      $('#nickCheck-btn').prop('disabled',true);
-      $('#nickName').closest('div').removeClass('u-has-success-v1-1');
-      $('#nickName').closest('div').addClass('u-has-error-v1');
-    }
-  });
 
   // tel
   $('#sb-tel-edit').click(() => {
@@ -176,8 +124,8 @@ $(document).ready(() => {
   });
   
   $('#sb-tel-cancel').click(() => {
-    $('#tel').val(user.tel);
-  
+    $('#tel').val(userData.tel);
+    
     $('#tel').closest('div').removeClass('u-has-success-v1-1');
     $('#tel').closest('div').removeClass('u-has-error-v1');
     $('#tel').prop('readonly', true);
@@ -186,31 +134,56 @@ $(document).ready(() => {
     telCheck = undefined;
   });
   
-  // change
-  $('#tel').keyup(function() {
-    
-    var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-    
-    if(telRule.test($("input[id='tel']").val())) {
-      
-      $('#tel').closest('div').removeClass('u-has-error-v1');
-      $('#tel').closest('div').addClass('u-has-success-v1-1');
-      telCheck = 1;
-      
-    } else {
-      $('#tel').attr('data-toggle','tooltip');
-      $('#tel').attr('data-trigger','hover focus');
-      $('#tel').attr('data-placement','bottom');
-      $('#tel').attr('title','010-xxxx-xxxx');
-      
-      $('#tel').tooltip('enable');
-      $('#tel').tooltip('show');
-      $('#tel').closest('div').removeClass('u-has-success-v1-1');
-      $('#tel').closest('div').addClass('u-has-error-v1');
-      telCheck = 0;
-    }
-  });
   
+});
+
+// 닉네임 체크
+$( '#nickName' ).keyup(function(){
+  
+  if(nickNameCheck() == true){
+    $('#nickCheck-btn').prop('disabled',false);
+    $('#nickName').tooltip('disable');
+    $('#nickName').tooltip('hide');
+    $('#nickName').closest('div').removeClass('u-has-error-v1');
+    $('#nickName').closest('div').addClass('u-has-success-v1-1');
+  } else{
+    
+    $('#nickName').attr('data-toggle','tooltip');
+    $('#nickName').attr('data-trigger','hover focus');
+    $('#nickName').attr('data-placement','bottom');
+    $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
+    
+    $('#nickName').tooltip('enable');
+    $('#nickName').tooltip('show');
+    $('#nickCheck-btn').prop('disabled',true);
+    $('#nickName').closest('div').removeClass('u-has-success-v1-1');
+    $('#nickName').closest('div').addClass('u-has-error-v1');
+  }
+});
+
+// 전화번호 체크
+$('#tel').keyup(function() {
+  
+  var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+  
+  if(telRule.test($("input[id='tel']").val())) {
+    
+    $('#tel').closest('div').removeClass('u-has-error-v1');
+    $('#tel').closest('div').addClass('u-has-success-v1-1');
+    telCheck = 1;
+    
+  } else {
+    $('#tel').attr('data-toggle','tooltip');
+    $('#tel').attr('data-trigger','hover focus');
+    $('#tel').attr('data-placement','bottom');
+    $('#tel').attr('title','010-xxxx-xxxx');
+    
+    $('#tel').tooltip('enable');
+    $('#tel').tooltip('show');
+    $('#tel').closest('div').removeClass('u-has-success-v1-1');
+    $('#tel').closest('div').addClass('u-has-error-v1');
+    telCheck = 0;
+  }
 });
 
 // 정보 업데이트 이벤트
@@ -433,6 +406,44 @@ $('#sb-password-cancel').click((e) => {
   e.preventDefault();
   location.href = 'index.html';
 });
+
+
+
+//inquiry
+$('#inqryForm-btn').click((e) => {
+  e.preventDefault();
+  $('.sspctForm-Format').addClass('std-invisible');
+  $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
+  $('#sspctName').val("");
+  $('#sspctNo').val(0);
+  $('#inqryClsNo').val(1);
+});
+
+$('#inqryModal').on('hidden.bs.modal', () => {
+  $('#inqryContents').val('');
+});
+
+// inquiry add
+$('#inqryAdd-btn').click((e) => {
+  $.ajax({
+    url:'../../app/json/inquiry/add',
+    type: 'post',
+    dataType: 'text',
+    data: {
+      clsNo: $(inqryClsNo).val(),
+      contents:$(inqryContents).val(),
+      inquiryPersonNo: $(inqryNo).val(),
+      suspectPersonNo: $(sspctNo).val()
+    },
+    success: function(data){
+      alert('문의 글 등록 성공!!');
+      $('#inqryModal').modal('hide');
+    }
+  });
+});
+
+
+
 
 
 

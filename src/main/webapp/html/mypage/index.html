@@ -70,11 +70,14 @@
     data-header-fix-moment="300"> </header>
   <!-- End Header -->
   
-   <div class="alert" role="alert" style="display: none;"></div>
-  <!-- 나의 평점 -->
+  <!-- MyRate -->
   <div id="sb-history"></div>
-  <!-- 나의 평점 -->
+  <!-- End MyRate -->
 
+  <!-- imageSetting modal -->
+  <div id="sb-imagesetting"></div>
+  <!-- End imageSetting modal -->
+  
   <!-- inquiry modal -->
   <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -112,63 +115,7 @@
       </div>
     </div>
   </div>
-  <!-- inquiry modal -->
-  
-  
-  
-  
-  
-  
-  <!-- imageSetting modal -->
-  <div class="modal fade" data-backdrop="static" id="imageModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">프로필 사진</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="">
-            <div class="img-container" style="width: 400px;">
-              <img id="updateImage" src="" alt="Picture" style="width: 400px;">
-            </div>
-          </div>
-          <div>
-            <label for="imageInput" class="btn btn-xl u-btn-primary g-width-170">
-            <i class="fa fa-camera-retro"></i>
-            <input type="file" id="imageInput" name="files" class="std-hidden">
-            </label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"
-            data-dismiss="modal" id="imageUpload-cancel">취소</button>
-          <button type="button" class="btn btn-primary"
-            id="imageUpload-btn" disabled>변경</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End imageSetting modal -->
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  <!-- End inquiry modal -->
   
  <!--  
   imageSetting modal
@@ -232,11 +179,11 @@
                 <!-- Figure Social Icons -->
                 <ul
                   class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
-                  <li class="list-inline-item align-middle g-mx-7"><a
-                    class="u-icon-v1 u-icon-size--md g-color-white"
-                    href="#" data-toggle="modal" data-target="#imageModal">
+                  <li class="list-inline-item align-middle g-mx-7"><label
+                    class="u-icon-v1 u-icon-size--md g-color-white">
                     <i class="icon-settings u-line-icon-pro"></i>
-                  </a></li>
+                    <input type="file" class="sr-only" id="imageInput" name="image" accept="image/*">
+                  </label></li>
                 </ul>
                 <!-- End Figure Social Icons -->
               </div>
@@ -244,47 +191,49 @@
           </figure>
           <!-- End Figure Caption -->
 
-          <!-- User Info -->
-          <span class="g-pos-abs g-top-0 g-absolute-centered--x">
-            <a id="myRate-btn" class="btn btn-sm" href="#" data-toggle="modal" data-target="#historyModal" style="width: 175px;">
-            </a>
-          </span>
-          <!-- End User Info -->
         </div>
         <!-- User Image -->
 
         <!-- Sidebar Navigation -->
         <div class="list-group list-group-border-0 g-mb-40">
 
-          <!-- Comments -->
+          <!-- My StudyList -->
           <a href="index.html"
             class="list-group-item justify-content-between active">
             <span><i class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
           </a>
-          <!-- End Comments -->
+          <!-- End My StudyList -->
 
-          <!-- My Projects -->
+          <!-- My InfoSettings -->
           <a href="view.html"
             class="list-group-item list-group-item-action justify-content-between">
             <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내 정보</span>
           </a>
-          <!-- End My Projects -->
+          <!-- End My InfoSettings -->
+          
+          <!-- My rateInfo -->
+          <a href="#"
+            class="list-group-item list-group-item-action justify-content-between"
+            data-toggle="modal" data-target="#historyModal">
+            <span><i class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
+          </a>
+          <!-- End My rateInfo -->
 
-          <!-- Overall -->
+          <!-- Message -->
           <a href="../message/index.html"
             class="list-group-item list-group-item-action justify-content-between">
             <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
           </a>
-          <!-- End Overall -->
+          <!-- End Message -->
 
-          <!-- History -->
+          <!-- Inquiry -->
           <a href="#"
             class="list-group-item list-group-item-action justify-content-between"
             data-toggle="modal" data-target="#inqryModal"
             id="inqryForm-btn"> <span><i
               class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
           </a>
-          <!-- End History -->
+          <!-- End Inquiry -->
         </div>
         <!-- End Sidebar Navigation -->
       </div>
