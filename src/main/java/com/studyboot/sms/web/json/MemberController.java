@@ -1,12 +1,12 @@
 package com.studyboot.sms.web.json;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Member;
@@ -36,6 +37,7 @@ public class MemberController {
   @Autowired StudyMemberService studyMemberService;
   @Autowired RateService rateService;
   @Autowired ServletContext servletContext;
+
   
   /*
   @GetMapping("delete")
@@ -166,40 +168,40 @@ public class MemberController {
     return map;
   }
   
-  @PostMapping("photo")
+  @PostMapping(
+      value = "photo",
+      consumes = "multipart/form-data")
   public Object photo(
-      HttpSession session,
-      Part croppedImage) throws Exception {
-    
-    System.out.println(croppedImage);
-//    Member loginUser = (Member) session.getAttribute("loginUser");
+      HttpSession session,      MultipartFile avatar) throws Exception {
+   
+    Member loginUser = (Member) session.getAttribute("loginUser");
     Map<String, Object> content = new HashMap<>();
     
-//    if (croppedImage.getSize() <= 0) {
-//      content.put("status", "fail");
-//      return content;
-//    }
-//    
-//    // 이미지 저장
-//    String uploadDir = servletContext.getRealPath("/upload/images/member");
-//    String filename = UUID.randomUUID().toString();
-//    croppedImage.write(uploadDir + "/" + filename);
-//    
-//    // 썸네일 이미지 저장
-//    Thumbnails.of(uploadDir + "/" + filename)
-//    .size(100, 100)
-//    .outputFormat("jpg")
-//    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-//    
-//    loginUser.setPhoto(filename);
-//    
-//    if(memberService.update(loginUser) != 0) {
-//      content.put("loginUser", loginUser);
-//      content.put("status", "success");
-//      
-//    } else {
-//      content.put("status", "fail");
-//    }
+    if (avatar.isEmpty()) {
+      content.put("status", "fail");
+      return content;
+    }
+    
+    // 이미지 저장
+    String filename = UUID.randomUUID().toString();
+    String path = servletContext.getRealPath("/upload/images/member/" + filename);
+    avatar.transferTo(new File(path));
+    
+    // 썸네일 이미지 저장
+    Thumbnails.of(path)
+    .size(500, 500)
+    .outputFormat("jpg")
+    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+    
+    loginUser.setPhoto(filename);
+    
+    if(memberService.update(loginUser) != 0) {
+      content.put("loginUser", loginUser);
+      content.put("status", "success");
+      
+    } else {
+      content.put("status", "fail");
+    }
     return content;
   }
   
@@ -294,6 +296,7 @@ public class MemberController {
   }
 
 }
+
 
 
 
