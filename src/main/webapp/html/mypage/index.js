@@ -216,9 +216,10 @@ cropBoxData,
 canvasData,
 cropper,
 URL = window.URL || window.webkitURL,
-originalImageURL = image.src,
+originalImageURL,
 uploadedImageType = 'image/jpeg',
 uploadedImageURL,
+imageChanged = null,
 $alert = $('.alert'),
 // cropper options
 options = {
@@ -233,10 +234,10 @@ options = {
   };
 
 
-
 // Import image
 if (URL) {
   imageInput.change(function() {
+    
     var files = this.files;
     var file;
 
@@ -245,11 +246,17 @@ if (URL) {
 
       if (/^image\/\w+/.test(file.type)) {
         uploadedImageType = file.type;
+        imageChanged = false;
 
+        if (originalImageURL) {
+          URL.revokeObjectURL(originalImageURL);
+        }
+        
         if (uploadedImageURL) {
           URL.revokeObjectURL(uploadedImageURL);
         }
         
+        originalImageURL = image.src;
         image.src = uploadedImageURL = URL.createObjectURL(file);
         
         if (cropper) {
@@ -258,6 +265,7 @@ if (URL) {
         cropper = new Cropper(image, options);
         imageInput.value = null;
         $(document.body).trigger('import-new-image');
+        
       } else {
         window.alert('Please choose an image file.');
       }
@@ -273,50 +281,66 @@ $(document.body).bind('import-new-image', () => {
   
   $('#imageUpload-btn').prop('disabled', false);
   
-  $('#imageUpload-btn').click(() => {
-    var initialAvatarURL;
-    var canvas;
-    
-    $('#imageModal').modal('hide');
-    
-    if (cropper) {
-      canvas = cropper.getCroppedCanvas({
-        width: 160,
-        height: 160,
-      });
-      initialAvatarURL = avatar.attr('src');
-      avatar.attr('src', canvas.toDataURL());
-      $alert.removeClass('alert-success alert-warning');
-      canvas.toBlob(function (blob) {
-        var formData = new FormData();
-        formData.append('avatar', blob, 'avatar.jpg');
-        $.ajax('../../app/json/member/photo', {
-          method: 'POST',
-          data: formData,
-          processData: false,
-          contentType: 'multipart/form-data',
-          success: function () {
-            $alert.show().addClass('alert-success').text('Upload success');
-          },
-          error: function () {
-            avatar.src = initialAvatarURL;
-            $alert.show().addClass('alert-warning').text('Upload error');
-          }
-        });
-      });
-    }
-  });
-  
-  
   // 프사 모달 닫힐 때
   $('#imageModal').on('hidden.bs.modal', () => {
-    cropper.destroy();
-    image.src = '/studyboot/upload/images/member/' + user.photo;
-    $('#imageUpload-btn').prop('disabled', true);
+    if (cropper) {
+      if (!imageChanged) {
+        image.src = originalImageURL;
+      }
+      cropper.destroy();
+      $('#imageUpload-btn').prop('disabled', true);
+    }
   });
 
 });
 
+$('#imageUpload-btn').click(() => {
+  
+  var initialAvatarURL;
+  var canvas;
+  
+  $('#imageModal').modal('hide');
+  
+  if (cropper) {
+    // 캔버스 변수에 크랍박스 데이터를 넣는다.
+    canvas = cropper.getCroppedCanvas();
+    // 기존의 이미지 소스를 저장
+    initialAvatarURL = avatar.attr('src');
+    avatar.attr('src', canvas.toDataURL());
+    image.src = canvas.toDataURL();
+    // 앨럿 요소의 클래스를 초기화
+    $alert.removeClass('alert-success alert-warning');
+    // 캔버스의 데이터를 Blob 형식으로 출력하는 함수 호출
+    // anonymous 함수에 파라미터로 blob을 넘기고 실행
+    canvas.toBlob(function (blob) {
+      var formData = new FormData();
+      // formdata 객체에 blob 데이터를 꼽아준다.
+      formData.append('avatar', blob, 'avatar.jpg');
+      
+      // 비동기 요청 실행
+      $.ajax({
+        url: '../../app/json/member/photo',
+        method: 'POST',
+        data: formData,
+        enctype: "multipart/form-data",
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          $('#history-profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
+          $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
+          imageChanged = true;
+          $alert.show().addClass('alert-success').text('Upload success');
+        },
+        error: function () {
+          avatar.attr('src', initialAvatarURL);
+          image.src = originalImageURL;
+          imageChanged = false;
+          $alert.show().addClass('alert-warning').text('Upload error');
+        }
+      });
+    });
+  }
+});
 
 
 

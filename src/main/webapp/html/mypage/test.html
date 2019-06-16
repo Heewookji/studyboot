@@ -6,21 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Cropper.js</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/cropper.css">
+  <link rel="stylesheet" href="/studyboot/node_modules/cropperjs/dist/cropper.css">
   <style>
     .label {
       cursor: pointer;
     }
-
     .progress {
       display: none;
       margin-bottom: 1rem;
     }
-
     .alert {
       display: none;
     }
-
     .img-container img {
       max-width: 100%;
     }
@@ -61,7 +58,7 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/cropper.js"></script>
+  <script src="/studyboot/node_modules/cropperjs/dist/cropper.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       var avatar = document.getElementById('avatar');
@@ -72,9 +69,7 @@
       var $alert = $('.alert');
       var $modal = $('#modal');
       var cropper;
-
       $('[data-toggle="tooltip"]').tooltip();
-
       input.addEventListener('change', function (e) {
         var files = e.target.files;
         var done = function (url) {
@@ -86,10 +81,8 @@
         var reader;
         var file;
         var url;
-
         if (files && files.length > 0) {
           file = files[0];
-
           if (URL) {
             done(URL.createObjectURL(file));
           } else if (FileReader) {
@@ -101,7 +94,6 @@
           }
         }
       });
-
       $modal.on('shown.bs.modal', function () {
         cropper = new Cropper(image, {
           aspectRatio: 1,
@@ -111,13 +103,10 @@
         cropper.destroy();
         cropper = null;
       });
-
       document.getElementById('crop').addEventListener('click', function () {
         var initialAvatarURL;
         var canvas;
-
         $modal.modal('hide');
-
         if (cropper) {
           canvas = cropper.getCroppedCanvas({
             width: 160,
@@ -129,40 +118,34 @@
           $alert.removeClass('alert-success alert-warning');
           canvas.toBlob(function (blob) {
             var formData = new FormData();
-
             formData.append('avatar', blob, 'avatar.jpg');
+            
+            console.log(formData);
             $.ajax('https://jsonplaceholder.typicode.com/posts', {
               method: 'POST',
               data: formData,
               processData: false,
               contentType: false,
-
               xhr: function () {
                 var xhr = new XMLHttpRequest();
-
                 xhr.upload.onprogress = function (e) {
                   var percent = '0';
                   var percentage = '0%';
-
                   if (e.lengthComputable) {
                     percent = Math.round((e.loaded / e.total) * 100);
                     percentage = percent + '%';
                     $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
                   }
                 };
-
                 return xhr;
               },
-
               success: function () {
                 $alert.show().addClass('alert-success').text('Upload success');
               },
-
               error: function () {
                 avatar.src = initialAvatarURL;
                 $alert.show().addClass('alert-warning').text('Upload error');
               },
-
               complete: function () {
                 $progress.hide();
               },
