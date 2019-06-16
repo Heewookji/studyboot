@@ -90,6 +90,8 @@ public class StudyController {
   @GetMapping("detail")
   public Object detail(int no) {
     Study study = studyService.get(no);
+    study.setStudyMembers(studyMemberService.findStudyMember(no));
+    study.setClsList(clsService.getClsName(study.getCls()));
     return study;
   }
 

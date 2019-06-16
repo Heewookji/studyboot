@@ -60,4 +60,47 @@
   </select>
   
   
+  
+  <!--일련번호 주면 대.중.소들의 이름을 알려줌 -->
+  <select id="findClsName" resultMap="cls" parameterType="string">
+  
+  <if test="length == 2">
+  select 
+      name,
+      cls_l_id
+    from
+      sms_std_cls_l
+    where
+    cls_l_id = #{clsNo}
+  </if>
+  
+   <if test="length == 4">
+   select 
+      name,
+      cls_m_id,
+      cls_l_id
+    from
+      sms_std_cls_m 
+    where 
+    cls_m_id = RIGHT(#{clsNo},2)
+    and cls_l_id = LEFT(#{clsNo},2)
+  </if>
+  
+   <if test="length == 6">
+  select 
+      name,
+      cls_s_id,
+      cls_m_id,
+      cls_l_id
+    from 
+      sms_std_cls_s
+    where 
+    cls_l_id = LEFT(#{clsNo},2)
+    and cls_m_id = MID(#{clsNo},3,2)
+    and cls_s_id = RIGHT(#{clsNo},2)
+  </if>
+  
+  </select>
+  
+  
 </mapper>

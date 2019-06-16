@@ -5,4 +5,5 @@ import com.studyboot.sms.domain.Cls;
 
 public interface ClsService {
   List<Cls> clsList(String clsNo);
+  List<Cls> getClsName(String clsNo);
 }
