@@ -58,7 +58,7 @@ function loadRateData() {
     
     // 사진을 꼽아준다.
     $('#history-profilePhoto')
-      .attr('src', '/studyboot/upload/images/member/' + user.photo);
+      .attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
     
     // 닉네임을 꼽아준다.
     $('#history-nick > strong').html(user.nickName);

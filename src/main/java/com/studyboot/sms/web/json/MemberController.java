@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 
 @RestController("json/MemberController")
@@ -186,7 +189,7 @@ public class MemberController {
     
     // 썸네일 이미지 저장
     Thumbnails.of(path)
-    .size(500, 500)
+    .size(1000, 1000)
     .outputFormat("jpg")
     .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
     

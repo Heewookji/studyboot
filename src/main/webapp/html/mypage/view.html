@@ -63,6 +63,14 @@
     class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
     data-header-fix-moment="300"> </header>
   <!-- End Header -->
+  
+  <!-- MyRate -->
+  <div id="sb-history"></div>
+  <!-- End MyRate -->
+
+  <!-- imageSetting modal -->
+  <div id="sb-imagesetting"></div>
+  <!-- End imageSetting modal -->
 
   <!-- inquiry modal -->
   <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
@@ -105,84 +113,91 @@
   <!-- inquiry modal -->
 
   <!-- content -->
-  <div class="container g-mb-100" style="margin-top: 200px; margin-bottom: 200px;">
+  <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
+    <!-- title, breadcrumb -->
+    <div class="row">
+      <div class="col-lg-3 g-mb-20">
+        <h1>MyPage</h1>
+      </div>
+      <div class="col-lg-9 g-mb-20">
+        
+      </div>
+    </div>
+    
     <div class="row">
       <!-- Profile Sidebar -->
       <div class="col-lg-3 g-mb-50 g-mb-0--lg">
         <!-- User Image -->
         <div class="u-block-hover g-pos-rel">
           <figure>
-            <img class="img-fluid w-100 u-block-hover__main--zoom-v1" src="../../Unify/assets/img-temp/400x450/img5.jpg" alt="Image Description">
-          </figure>
-
-          <!-- Figure Caption -->
-          <figcaption class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
-            <div class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
-              <!-- Figure Social Icons -->
-              <ul class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
-                <li class="list-inline-item align-middle g-mx-7">
-                  <a class="u-icon-v1 u-icon-size--md g-color-white" href="#">
-                    <i class="icon-note u-line-icon-pro"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item align-middle g-mx-7">
-                  <a class="u-icon-v1 u-icon-size--md g-color-white" href="#">
-                    <i class="icon-notebook u-line-icon-pro"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item align-middle g-mx-7">
-                  <a class="u-icon-v1 u-icon-size--md g-color-white" href="#">
+            <img id="profilePhoto" class="img-fluid w-100 u-block-hover__main--zoom-v1"
+              alt="Image Description">
+          
+            <!-- Figure Caption -->
+            <figcaption
+              class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
+              <div
+                class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
+                <!-- Figure Social Icons -->
+                <ul
+                  class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
+                  <li class="list-inline-item align-middle g-mx-7"><label
+                    class="u-icon-v1 u-icon-size--md g-color-white">
                     <i class="icon-settings u-line-icon-pro"></i>
-                  </a>
-                </li>
-              </ul>
-              <!-- End Figure Social Icons -->
-            </div>
-          </figcaption>
+                    <input type="file" class="sr-only" id="imageInput" name="image" accept="image/*">
+                  </label></li>
+                </ul>
+                <!-- End Figure Social Icons -->
+              </div>
+            </figcaption>
+          </figure>
           <!-- End Figure Caption -->
 
-          <!-- User Info -->
-          <span class="g-pos-abs g-top-20 g-left-0">
-              <a class="btn btn-sm u-btn-primary rounded-0" href="#">Johne Doe</a>
-              <small class="d-block g-bg-black g-color-white g-pa-5">Project Manager</small>
-            </span>
-          <!-- End User Info -->
         </div>
         <!-- User Image -->
 
         <!-- Sidebar Navigation -->
         <div class="list-group list-group-border-0 g-mb-40">
-        
-         <!-- 내 스터디 -->
-          <a href="#" class="list-group-item list-group-item-action justify-content-between">
-            <span><i class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
-            <span class="u-label g-font-size-11 g-bg-pink g-rounded-20 g-px-8">24</span>
-          </a>
-          <!-- End 내 스터디 -->
-          
-             <!-- 내 정보 -->
-          <a href="view.html" class="list-group-item justify-content-between active">
-            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내 정보</span>
-            <span class="u-label g-font-size-11 g-bg-white g-color-main g-rounded-20 g-px-10">9</span>
-          </a>
-          <!-- End 내 정보 -->
-          
-        
-          <!-- 쪽지함 -->
-          <a href="../message/index.html" class="list-group-item list-group-item-action justify-content-between">
-            <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
-            <span class="u-label g-font-size-11 g-bg-gray-dark-v2 g-rounded-20 g-px-10">2</span>
-          </a>
-          <!-- End 쪽지함 -->
 
-          <!-- 문의하기 -->
-          <a href="#" class="list-group-item list-group-item-action justify-content-between"
-           data-toggle="modal" data-target="#inqryModal" id="inqryForm-btn">
-            <span><i class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
+          <!-- My StudyList -->
+          <a href="index.html"
+            class="list-group-item list-group-item-action justify-content-between">
+            <span><i class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
           </a>
-          <!-- End 문의하기 -->
+          <!-- End My StudyList -->
+
+          <!-- My InfoSettings -->
+          <a href="view.html"
+            class="list-group-item justify-content-between active">
+            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내 정보</span>
+          </a>
+          <!-- End My InfoSettings -->
+          
+          <!-- My rateInfo -->
+          <a href="#"
+            class="list-group-item list-group-item-action justify-content-between"
+            data-toggle="modal" data-target="#historyModal">
+            <span><i class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
+          </a>
+          <!-- End My rateInfo -->
+
+          <!-- Message -->
+          <a href="../message/index.html"
+            class="list-group-item list-group-item-action justify-content-between">
+            <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
+          </a>
+          <!-- End Message -->
+
+          <!-- Inquiry -->
+          <a href="#"
+            class="list-group-item list-group-item-action justify-content-between"
+            data-toggle="modal" data-target="#inqryModal"
+            id="inqryForm-btn"> <span><i
+              class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
+          </a>
+          <!-- End Inquiry -->
         </div>
-      <!-- End Sidebar Navigation -->
+        <!-- End Sidebar Navigation -->
       </div>
       <!-- End Profile Sidebar -->
 
@@ -235,7 +250,7 @@
                   <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">NickName</strong>
                   <div class="d-md-inline-block g-width-400">
                     <input id="nickName" type="text" class="form-control d-md-inline-block g-width-200" readonly>
-                    <button type="button" class="btn u-btn-darkgray std-invisible" id="nickCheck-btn" disabled>중복체크</button>
+                    <button type="button" class="btn u-btn-darkgray g-pos-rel g-top-minus-2" id="nickCheck-btn" disabled>중복체크</button>
                   </div>
                 </div>
                 <i id="sb-nickname-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
