@@ -655,13 +655,12 @@ $( "#goal" ).keyup(function(){
 
 //설명 체크
 $('#contents').keyup(function(){
-  if($( "#contents" ).val().length > 150 ||
-          $( "#contents" ).val().length < 10 ){
+  if($( "#contents" ).val().length < 50 ){
     $("#contents").attr("data-toggle","tooltip");
     $("#contents").attr("data-trigger","hover focus");
     $("#contents").attr("data-placement","bottom");
     $("#contents").attr("data-html", true);
-    $("#contents").attr("title","10자에서 150자 사이로 <br>상세설명을 적어주세요");
+    $("#contents").attr("title","50자 이상의<br>상세설명을 적어주세요");
     $('#contents').tooltip('enable');
     $('#contents').tooltip('show');
   } else{
@@ -762,12 +761,11 @@ $('#init-btn').click(function(e) {
   }
 
   //내용
-  if($( "#contents" ).val().length > 150 ||
-          $( "#contents" ).val().length < 10 ){
+  if($( "#contents" ).val().length < 50 ){
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '10자 이상 150자 이하의 스터디 설명을 입력해주세요!'
+      text: '50자 이상의 스터디 설명을 입력해주세요!'
     });
     return;
   }

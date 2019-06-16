@@ -19,23 +19,43 @@ function loadData(no) {
       function(data) {
     
     console.log(data);
-    $('#name').val(data.name);
-    $('#goal').val(data.goal);
-    $('#contents').val(data.contents);
-    $('#day').val(data.day);
+    $('#name').text(data.name);
+    $('#goal').html('<span class=" g-font-size-30 ">"  </span>' + data.goal 
+            + '<span class="g-font-size-30 ">  "</span>');
+    $('#contents').append(data.contents);
+    
+    for(var day of data.dayStrList){
+      $('#day').append("<li class=\"list-inline-item g-mb-10\"><a class=\"u-tags-v1 g-color-main g-brd-around g-brd-gray-light-v3 g-bg-gray-dark-v2--hover g-brd-gray-dark-v2--hover g-color-white--hover g-rounded-50 g-py-4 g-px-15\">"
+              + day+"</a></li>");
+    }
+    
+    
+    
+    
     $('#cls').val(data.cls);
-    $('#sdt').val(data.startDate);
-    $('#edt').val(data.endDate);
+    $('#sdt').text(data.startDate);
+    $('#edt').text(data.endDate);
     $('#prsn').val(data.personnel);
-    $('#rate').val(data.rate);
     $('#age').val(data.memberAge);
     $('#attendance').val(data.attendance);
     $('#endrate').val(data.endrate);
+    //rate
+    $('#rate').rateit();
+    $('#rate').rateit('value', data.rate);
+    $('#leftDay').text(data.currentDateDiff);
     
+    $('#dayProgress').css("width", Math.round((data.totalDateDiff - data.currentDateDiff)/data.totalDateDiff * 100) + '%'); 
+    $('#dayProgressText').html(Math.round((data.totalDateDiff - data.currentDateDiff)/data.totalDateDiff * 100) + '%');
+  
+    // 값을 넣어준 뒤, 프로그래스 바를 초기화해야 실행이 원활하게 된다.
+    var horizontalProgressBars = $.HSCore.components.HSProgressBar.init('.js-hr-progress-bar', {
+      direction: 'horizontal',
+      indicatorSelector: '.js-hr-progress-bar-indicator'
+    });
+  
   });
   
 };
-
 
 // 목록으로 돌아가기
 // 무한스크롤 하고 상세보기 클릭했을 때 기존에 무한 스크롤한 리스트를 그대로 보여주고 싶은데

@@ -2,6 +2,8 @@ package com.studyboot.sms.service.impl;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -120,10 +122,11 @@ public class StudyServiceImpl implements StudyService {
     int totalAge = 0;
     double totalAttendance = 0;
     
+    LocalDate now = LocalDate.now();
+    
     //생년월일과 현재날짜의 차로 나이를 계산한다.
     for (StudyMember sm : memberList) {
       LocalDate birth = sm.getBirth().toLocalDate();
-      LocalDate now = LocalDate.now();
       Period period = Period.between(birth, now);
       int age = period.getYears() + 1;
       totalAge += age;
@@ -135,6 +138,35 @@ public class StudyServiceImpl implements StudyService {
     Study study = studyDao.findByNo(no);
     study.setMemberAge(totalAge);
     study.setAttendance(totalAttendance);
+    
+    
+    
+    //활동요일을 변환해준다.
+    HashMap<Integer,String> dayMap = new HashMap<>();
+    dayMap.put(1, "월");
+    dayMap.put(2, "화");
+    dayMap.put(4, "수");
+    dayMap.put(8, "목");
+    dayMap.put(16, "금");
+    dayMap.put(32, "토");
+    dayMap.put(64, "일");
+    ArrayList<String> dayStrList = new ArrayList<>();
+    dayMap.forEach((dayNo, dayStr)->{
+      if(dayNo == (dayNo & study.getDay())) {
+        dayStrList.add(dayStr);
+      }
+    });
+    study.setDayStrList(dayStrList);
+    
+    //전체 일수와 남은 일수를 계산해준다.
+    
+    long totalCal = study.getEndDate().getTime() - study.getStartDate().getTime();
+    long totalDiff = totalCal / (24 * 60 * 60 * 1000);
+    long CurrentCal = study.getEndDate().getTime() - new Date().getTime();
+    long currentDiff = CurrentCal / (24 * 60 * 60 * 1000);
+    
+    study.setTotalDateDiff(totalDiff);
+    study.setCurrentDateDiff(currentDiff);
     
     return study;
   }

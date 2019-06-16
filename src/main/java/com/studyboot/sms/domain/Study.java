@@ -1,6 +1,7 @@
 package com.studyboot.sms.domain;
 
 import java.sql.Date;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Study {
@@ -30,6 +31,9 @@ public class Study {
   private double endrate;
   private String clsName;
   private String addressName;
+  private List<String> dayStrList;
+  private Long totalDateDiff;
+  private Long currentDateDiff;
   public int getNo() {
     return no;
   }
@@ -150,6 +154,24 @@ public class Study {
   public void setAddressName(String addressName) {
     this.addressName = addressName;
   }
+  public List<String> getDayStrList() {
+    return dayStrList;
+  }
+  public void setDayStrList(List<String> dayStrList) {
+    this.dayStrList = dayStrList;
+  }
+  public Long getTotalDateDiff() {
+    return totalDateDiff;
+  }
+  public void setTotalDateDiff(Long totalDateDiff) {
+    this.totalDateDiff = totalDateDiff;
+  }
+  public Long getCurrentDateDiff() {
+    return currentDateDiff;
+  }
+  public void setCurrentDateDiff(Long currentDateDiff) {
+    this.currentDateDiff = currentDateDiff;
+  }
   @Override
   public String toString() {
     return "Study [no=" + no + ", name=" + name + ", address=" + address + ", cls=" + cls
@@ -157,7 +179,10 @@ public class Study {
         + ", startDate=" + startDate + ", endDate=" + endDate + ", state=" + state + ", goal="
         + goal + ", contents=" + contents + ", personnel=" + personnel + ", nowPersonnel="
         + nowPersonnel + ", memberAge=" + memberAge + ", attendance=" + attendance + ", endrate="
-        + endrate + ", clsName=" + clsName + ", addressName=" + addressName + "]";
+        + endrate + ", clsName=" + clsName + ", addressName=" + addressName + ", dayStrList="
+        + dayStrList + ", totalDateDiff=" + totalDateDiff + ", currentDateDiff=" + currentDateDiff
+        + "]";
   }
+  
   
 }
