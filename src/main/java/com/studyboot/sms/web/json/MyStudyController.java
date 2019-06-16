@@ -115,6 +115,28 @@ public class MyStudyController {
 
     return content;
   }
+  
+  @GetMapping("membersExceptLoginUser") // 로그인 한 유저를 제외한 스터디 멤버
+  public Object membersExceptLoginUser(int no, HttpSession session) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    List<StudyMember> studyMemberList = studyMemberService.findStudyMember(no);
+
+    for (int i = 0; i < studyMemberList.size(); i++) {
+      
+      if (loginUser.getNo() == (int) studyMemberList.get(i).getMemberNo()) {
+        studyMemberList.remove(i);
+      }
+      System.out.println("남은 스터디 멤버 넘어: " + studyMemberList.get(i));
+    }
+    
+    content.put("list", studyMemberList);
+
+    return content;
+  }
 
   @GetMapping("studyNtc")
   public Object getNtc(int no) {

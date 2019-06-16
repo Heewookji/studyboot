@@ -407,7 +407,6 @@ insert into sms_std_member(std_id, member_id) values(100,3);
 insert into sms_std_member(std_id, member_id) values(100,4);
 insert into sms_std_member(std_id, member_id) values(100,5);
 insert into sms_std_member(std_id, member_id) values(100,6);
-insert into sms_std_member(std_id, end_date, member_id) values(100,'2019-06-19',7);
 
 
 -- 스터디 회원 정보(종료 상태, 종료 날짜, 출석률 포함)
