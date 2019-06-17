@@ -24,29 +24,19 @@ $(document).ready(function() {
         + "<span>Study Repository</span></li>");
     $('#conts-list').append($stdBoard);
   }
-  $(document.body).trigger('loaded-repository');
 });
 
 
 function loadFileList(nossss) {
   $.getJSON('../../app/json/MyStudy/fileList?stdNo=' + nossss,
       function(obj){
-    
-    // 초기화 작업
-    $('amazon-file').html("");
-    
+
     // 핸들바스를 통해서 가져온 리스트 업핸드 해주기
     $(fileGenerator(obj)).appendTo('#amazon-file');
+    $(document.body).trigger('loaded-repository');
   });
 };
-
-// loadFileList(nossss);
-
-
-
-
-
-
+loadFileList(nossss);
 
 
 $('#add-file').change(function() {
@@ -54,7 +44,6 @@ $('#add-file').change(function() {
   var fileName = $('#add-file').val().replace(/.*(\/|\\)/, '');
   console.log(fileName);
   $('#file-upload').append("<p>" + fileName);
-  alert("input박스 변화감지")
 })
 
 $('#add-file').fileupload({
@@ -68,45 +57,45 @@ $('#add-file').fileupload({
     console.log(data);
 
     $('#save-btn').click(function() {
-      alert("데이터 보내기");
       data.submit();
     });
   },
   formData : {studyNo: nossss},
   done: function (e, data) {
-    alert("보내기 성공");
+    alert("업로드가 완료되었습니다.");
+    location.reload();
   }
 });
 
 
 $(document.body).bind('loaded-repository', () => {
-  alert("트리거 발동 파일을 삭제하는 이벤트 발생")
-  
+  alert("트리거 왔음");
   // 파일을 삭제하는 이벤트
-  $('#file-delete').click((e) => {
+  $('#delete-files').click((e) => {
     
-    // 아직까지 핸들바스로 받아온 파일이 없고 받아온 파일에 해당 파일의 이름을 받을 수 있는 조건이 없어서 임시로 fileName 설정
-    var fileName = "joo.jpg"
     
+    alert("삭제 버튼");
+    var fileName = $(e.target).attr('data-content')
+
     $.getJSON('../../app/json/MyStudy/fileDelete?fileName=' + fileName + "&studyNo=" + nossss,
         function(obj){
       alert(obj.status);
       location.reload();
     });
   });
-  
+
   // 파일을 다운로드하는 이벤트
   $('#file-Download').click((e) => {
-    
+
     // 아직까지 핸들바스로 받아온 파일이 없고 받아온 파일에 해당 파일의 이름을 받을 수 있는 조건이 없어서 임시로 fileName 설정
     var fileName = "joo.jpg"
-    
-    $.getJSON('../../app/json/MyStudy/fileDownload?fileName=' + fileName + "&studyNo=" + nossss,
-        function(obj){
-      alert(obj.status);
-    });
+
+      $.getJSON('../../app/json/MyStudy/fileDownload?fileName=' + fileName + "&studyNo=" + nossss,
+          function(obj){
+        alert(obj.status);
+      });
   });
-  
+
 });
 
 
