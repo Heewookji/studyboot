@@ -36,23 +36,17 @@
       std_id,
       member_id,
       confirm_member_id,
+      rate_cls,
       rate,
       rate_dt)
     values(
       #{studyNo},
       #{memberNo},
-      #{confirmMemberId},
+      #{confirmMemberNo},
+      #{rateClass},
       #{rate},
       #{rateDate})
   </insert>
-  
-  <update id="rateRequireUpdate" parameterType="map">
-    update 
-      sms_member_retire 
-    set 
-      rate_require = true 
-    where std_id = #{studyNo} and member_id= #{memberNo}
-  </update>
 
   <!-- 평가 업데이트 기록을 가져온다. -->
   <select id="findRateLog" resultMap="rateLogMap" parameterType="int">

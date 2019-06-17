@@ -6,24 +6,26 @@
 
 <mapper namespace="com.studyboot.sms.dao.RateRequireDao">
 
- <!-- sms_member_rate_info 테이블 -->
+ <!-- sms_member_retire 테이블 -->
   <resultMap type="RateRequire" id="rateRequireMap">
     <id column="std_id" property="studyNo" />
     <id column="member_id" property="memberNo" />
     <result column="rate_require" property="rateRequire" />
-    <result column="std_member_cnt" property="studyMemberCount" />
+    <result column="std_rate_require_cnt" property="studyMemberCount" />
     <result column="nick_name" property="nickName" />
     <result column="photo" property="photo" />
     <result column="name" property="name" />
   </resultMap>
 
   <insert id="rateRequire" parameterType="map">
-    insert into  sms_member_retire 
+    insert into  sms_member_retire(
+       std_id, member_id, rate_require, std_rate_require_cnt
+    )
       values(
       #{studyNo},
       #{memberNo},
       #{rateRequire},
-      #{memberCount}
+      #{studyRateRequireCount}
       )
   </insert>
   
@@ -59,18 +61,34 @@
     where smr.std_id = #{studyNo} and smr.rate_require = #{rateRequire} and smr.member_id = #{confirmNo}
   </select>
 
-  <insert id="retireeEvaluation" parameterType="map">
-    insert into  sms_member_rate_info(
-      std_id, member_id, confirm_member_id, rate, rate_dt
-      )
-    values(
-    #{studyNo},
-    #{memberNo},
-    #{confirmMember},
-    #{rate},
-    #{rateDate}
-    )
-  </insert>
+  <!-- 스터디 탈퇴 당시 남은 멤버의 수 -->
+  <select id="evaluationMemberCount" resultType="int" parameterType="int">
+    select 
+      std_rate_require_cnt
+    from 
+      sms_member_retire 
+    where 
+      member_id = #{value};
+  </select>
+
+  <!-- 스터디 탈퇴자를 몇명이 평가 했는지 카운트 -->
+  <select id="retireeEvaluationCount" resultType="int" parameterType="map">
+    select 
+      count(*) 
+    from 
+      sms_member_rate_info 
+    where 
+      std_id = #{studyNo} and confirm_member_id = #{reitreeMemberNo} and rate_cls = 1;  
+  </select>
+
+  <update id="rateRequireUpdate" parameterType="map">
+    update 
+      sms_member_retire 
+    set 
+      rate_require = false 
+    where std_id = #{studyNo} and member_id= #{reitreeMemberNo}
+  </update>
+
 </mapper>
 
 

@@ -1,4 +1,5 @@
 
+
 -- 활동 지역
 insert into sms_adr_l(adr_l_id, name) values(11, '수도권');
 insert into sms_adr_l(adr_l_id, name) values(12, '강원권');
@@ -864,3 +865,121 @@ insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "
 insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성1', '내용작성1');
 insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항 최상단 테스트", "공지사항입니다.");
 
+
+-- 스터디 출석률 테스트 데이터
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(11, '캘린더..', 100, 2, '2019-05-29T00:00', '2019-05-31T18:00', '캘린더 뼈대 완성');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(12, 'DB모델링', 100, 2, '2019-05-01T00:00', '2019-05-01T18:00', '모델링 1차 끝내기');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(13, 'DB모델링 리뷰', 100, 2, '2019-05-03T00:00', '2019-05-03T18:00', '강사님의 피드백을 잘 듣고 수정하기');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(14, '프로젝트 완성하기', 100, 2, '2019-06-17T00:00', '2019-06-28T18:00', '버그잡기, 디자인 수정, PPT만들기');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(15, '지환 예비군', 100, 2, '2019-06-12T13:00', '2019-06-14T18:00', '예비군 훈련으로 인해 학원 빠짐');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(16 ,'공간!!', 100, 2, '2019-06-06T13:00', '2019-06-06T18:00', '공간예약 test');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(17 ,'공간 2!!', 100, 2, '2019-06-06T13:00', '2019-06-06T18:00', '공간예약 test');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(18, '일정 1', 100, 2, '2019-06-12T13:00', '2019-06-14T18:00', '일정 1');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(19, '일정 2', 100, 2, '2019-06-20T13:00', '2019-06-21T18:00', '일정 2');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(20, '일정 3', 100, 2, '2019-06-5T13:00', '2019-06-6T18:00', '일정 3');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(21, '일정 4', 100, 2, '2019-06-7T13:00', '2019-06-7T18:00', '일정 4');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(22, '일정 5', 100, 2, '2019-06-17T13:00', '2019-06-17T18:00', '일정 5');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(23, '일정 5', 100, 2, '2019-06-21T13:00', '2019-06-22T18:00', '일정 5');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(24, '일정 6', 100, 2, '2019-06-24T13:00', '2019-06-24T18:00', '일정 6');
+
+insert into sms_std_schdl(std_schdl_id, name, std_id, member_id, schdl_sdt, schdl_edt, memo)
+values(25, '일정 7', 100, 2, '2019-06-28T13:00', '2019-06-28T18:00', '일정 7');
+insert into sms_std_atnd values(11, 100, 2);
+insert into sms_std_atnd values(11, 100, 5);
+insert into sms_std_atnd values(11, 100, 6);
+
+insert into sms_std_atnd values(12, 100, 2);
+insert into sms_std_atnd values(12, 100, 3);
+insert into sms_std_atnd values(12, 100, 4);
+insert into sms_std_atnd values(12, 100, 6);
+
+insert into sms_std_atnd values(13, 100, 3);
+insert into sms_std_atnd values(13, 100, 4);
+insert into sms_std_atnd values(13, 100, 5);
+
+insert into sms_std_atnd values(14, 100, 2);
+insert into sms_std_atnd values(14, 100, 4);
+insert into sms_std_atnd values(14, 100, 5);
+
+insert into sms_std_atnd values(15, 100, 2);
+insert into sms_std_atnd values(15, 100, 3);
+insert into sms_std_atnd values(15, 100, 5);
+insert into sms_std_atnd values(15, 100, 6);
+
+insert into sms_std_atnd values(16, 100, 2);
+insert into sms_std_atnd values(16, 100, 3);
+insert into sms_std_atnd values(16, 100, 5);
+insert into sms_std_atnd values(16, 100, 6);
+
+insert into sms_std_atnd values(17, 100, 2);
+insert into sms_std_atnd values(17, 100, 3);
+insert into sms_std_atnd values(17, 100, 4);
+insert into sms_std_atnd values(17, 100, 5);
+insert into sms_std_atnd values(17, 100, 6);
+
+insert into sms_std_atnd values(18, 100, 3);
+insert into sms_std_atnd values(18, 100, 4);
+insert into sms_std_atnd values(18, 100, 6);
+
+insert into sms_std_atnd values(19, 100, 2);
+insert into sms_std_atnd values(19, 100, 4);
+insert into sms_std_atnd values(19, 100, 5);
+insert into sms_std_atnd values(19, 100, 6);
+
+insert into sms_std_atnd values(20, 100, 2);
+insert into sms_std_atnd values(20, 100, 3);
+insert into sms_std_atnd values(20, 100, 5);
+insert into sms_std_atnd values(20, 100, 6);
+
+insert into sms_std_atnd values(21, 100, 2);
+insert into sms_std_atnd values(21, 100, 3);
+insert into sms_std_atnd values(21, 100, 4);
+insert into sms_std_atnd values(21, 100, 6);
+
+insert into sms_std_atnd values(22, 100, 3);
+insert into sms_std_atnd values(22, 100, 4);
+insert into sms_std_atnd values(22, 100, 5);
+insert into sms_std_atnd values(22, 100, 6);
+
+insert into sms_std_atnd values(23, 100, 2);
+insert into sms_std_atnd values(23, 100, 4);
+insert into sms_std_atnd values(23, 100, 5);
+insert into sms_std_atnd values(23, 100, 6);
+
+insert into sms_std_atnd values(24, 100, 2);
+insert into sms_std_atnd values(24, 100, 3);
+insert into sms_std_atnd values(24, 100, 4);
+insert into sms_std_atnd values(24, 100, 5);
+insert into sms_std_atnd values(24, 100, 6);
+
+insert into sms_std_atnd values(25, 100, 2);
+insert into sms_std_atnd values(25, 100, 3);
+insert into sms_std_atnd values(25, 100, 4);
+insert into sms_std_atnd values(25, 100, 5);

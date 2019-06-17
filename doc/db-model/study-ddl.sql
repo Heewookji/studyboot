@@ -589,6 +589,7 @@ CREATE TABLE sms_member_rate_info (
   std_id              INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
   member_id           INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
   confirm_member_id   INTEGER NOT NULL COMMENT '평가한 회원 번호', -- 평가한 회원 번호
+  rate_cls            BOOLEAN NOT NULL DEFAULT true COMMENT '나갈때평가나간사람평가', -- 나갈때평가나간사람평가
   rate                DOUBLE  NOT NULL COMMENT '평점', -- 평점
   rate_dt             DATE    NOT NULL DEFAULT current_date() COMMENT '평가일' -- 평가일
 )
@@ -712,9 +713,10 @@ COMMENT '관심분야';
 
 -- 탈퇴 회원 정보
 CREATE TABLE sms_member_retire (
-  std_id       INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-  member_id    INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  rate_require BOOLEAN NOT NULL DEFAULT true COMMENT '평가필요여부' -- 평가필요여부
+  std_id               INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  member_id            INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  rate_require         BOOLEAN NOT NULL DEFAULT true COMMENT '평가필요여부', -- 평가필요여부
+  std_rate_require_cnt INTEGER NOT NULL COMMENT '평가해줘야할회원수' -- 평가해줘야할회원수
 )
 COMMENT '탈퇴 회원 정보';
 

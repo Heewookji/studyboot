@@ -8,13 +8,13 @@ public class RateRequire {
   private String nickName;
   private String photo;
   private String name;
-  private int studyMemberCount;
+  private int studyRateRequireCount;
   
   @Override
   public String toString() {
     return "RateRequire [studyNo=" + studyNo + ", memberNo=" + memberNo + ", rateRequire="
         + rateRequire + ", nickName=" + nickName + ", photo=" + photo + ", name=" + name
-        + ", studyMemberCount=" + studyMemberCount + "]";
+        + ", studyRateRequireCount=" + studyRateRequireCount + "]";
   }
   
   public int getStudyNo() {
@@ -53,11 +53,11 @@ public class RateRequire {
   public void setName(String name) {
     this.name = name;
   }
-  public int getStudyMemberCount() {
-    return studyMemberCount;
+  public int getStudyRateRequireCount() {
+    return studyRateRequireCount;
   }
-  public void setStudyMemberCount(int studyMemberCount) {
-    this.studyMemberCount = studyMemberCount;
+  public void setStudyRateRequireCount(int studyRateRequireCount) {
+    this.studyRateRequireCount = studyRateRequireCount;
   }
-
+  
 }

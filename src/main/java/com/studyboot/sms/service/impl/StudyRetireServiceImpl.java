@@ -51,9 +51,20 @@ public class StudyRetireServiceImpl implements StudyRetireService {
   }
   
   @Override
-  public int retireeRateAdd(Map<String, Object> map) {
-    
-    
-    return rateRequireDao.retireeEvaluation(map);
+  public int evaluationMemberCount(int retireeMemberNo) {
+
+    return rateRequireDao.evaluationMemberCount(retireeMemberNo);
+  }
+  
+  @Override
+  public int retireeEvaluationCount(Map<String, Object> retireeEcaluationCountMap) {
+   
+    return rateRequireDao.retireeEvaluationCount(retireeEcaluationCountMap);
+  }
+  
+  @Override
+  public int rateRequireUpdate(Map<String, Object> map) {
+   
+    return rateRequireDao.rateRequireUpdate(map);
   }
 }
