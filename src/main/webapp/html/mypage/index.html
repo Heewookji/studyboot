@@ -56,6 +56,11 @@
 <link rel="stylesheet"
  href="../../node_modules/cropperjs/dist/cropper.css">
 
+<link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
+<link rel='stylesheet' href='../../fullcalendar/daygrid/main.css'/>
+<link rel='stylesheet' href='../mystudy/calendar/calendar.css'/>
+<link rel='stylesheet'  href='../../fullcalendar/timegrid/main.css'/>
+<link rel='stylesheet'  href='../../fullcalendar/list/main.css'/>
  
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
@@ -116,6 +121,32 @@
     </div>
   </div>
   <!-- End inquiry modal -->
+  
+  
+<!-- -------------------------------캘린더 모달------------------------------------- -->
+
+<!-- 일정 디테일 모달 -->
+<div class="modal fade" id="schdulDetailModal" tabindex="-1" role="dialog" aria-labelledby="schedleDetailHead" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="schedleDetailTitle"></h4> <!-- 일정 제목 -->
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="calendar-detail-close-modal-btn">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="study-start-date"></div> <!-- 일정 시작 시간 -->
+      <!-- <div class="modal-body" id="study-end-date"></div> --> <!-- 일정 종료 시간 -->
+      <div class="modal-body" id="event-detail"></div> <!-- 일정 내용 --> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="event-close-btn">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
   
  <!--  
   imageSetting modal
@@ -181,7 +212,7 @@
                   class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
                   <li class="list-inline-item align-middle g-mx-7"><label
                     class="u-icon-v1 u-icon-size--md g-color-white">
-                    <i class="icon-settings u-line-icon-pro"></i>
+                    <i class="icon-settings u-line-icon-pro g-cursor-pointer"></i>
                     <input type="file" class="sr-only" id="imageInput" name="image" accept="image/*">
                   </label></li>
                 </ul>
@@ -379,7 +410,7 @@
         </div>
         <!-- End Tab panels -->
 
-        <div class="sb-calendar">캘린더</div>
+        <div id="sb-calendar"></div>
       </div>
       <!-- End mypage Main -->
     </div>
@@ -465,16 +496,16 @@
   <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
   
-  <script src="../../node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-  <script src="../../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
   <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
   <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
   <script src="../../node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
+  <script src='../../node_modules/@fullcalendar/core/main.js'></script>
+  <script src='../../node_modules/@fullcalendar/interaction/main.js'></script>
+  <script src='../../node_modules/@fullcalendar/daygrid/main.js'></script>
+  <script src='../../node_modules/@fullcalendar/core/locales/ko.js'></script>
+  <script src='../../fullcalendar/timegrid/main.js'></script>
+  <script src='../../fullcalendar/list/main.js'></script>
+  
   
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
@@ -509,6 +540,7 @@
   <script src="../header.js"></script>
   <script src="../footer.js"></script>
   <script src="index.js"></script>
+  <script src="calendar.js"></script>
   <!-- JS Plugins Init. -->
   
   

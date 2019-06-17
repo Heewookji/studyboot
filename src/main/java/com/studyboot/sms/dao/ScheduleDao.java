@@ -8,6 +8,7 @@ public interface ScheduleDao {
   
   int insert(Schedule schedule);
   List<Object> findAll(int no);
+  List<Schedule>findAllByAllStudy(Map<String, Object> studyNoList);
   Schedule findByNo(int no);
   int delete(int no);
   int update(Schedule schedule);

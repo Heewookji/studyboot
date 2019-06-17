@@ -55,7 +55,25 @@
     from
       sms_std_schdl
     where std_id = #{value}
-      
+  </select>
+  
+  <select id="findAllByAllStudy" resultMap="scheduleMap" parameterType="list">
+    select
+      std_schdl_id,
+      std_id,
+      member_id,
+      space_bkng_id,
+      name,
+      schdl_sdt,
+      schdl_edt,
+      memo
+    from
+      sms_std_schdl
+    where std_id in
+      <foreach collection="studyNoList" item="value" open="(" close=")" separator=",">
+          #{value}
+      </foreach>
+      order by std_id ASC
   </select>
 
   <select id="findByNo" resultMap="scheduleMap" parameterType="int">

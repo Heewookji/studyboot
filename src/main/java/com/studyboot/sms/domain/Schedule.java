@@ -11,14 +11,23 @@ public class Schedule {
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
   private String end;
   private String memo;
+  private String color;
   
   private int studyNo;
   private int memberNo;
   private int spaceBookingNo;
   
   private boolean allDay = false;
-  
   private boolean studyLeader; // 스터디 장 판단을 위해 넣은 필드
+
+  
+  @Override
+  public String toString() {
+    return "Schedule [id=" + id + ", title=" + title + ", start=" + start + ", end=" + end
+        + ", memo=" + memo + ", color=" + color + ", studyNo=" + studyNo + ", memberNo=" + memberNo
+        + ", spaceBookingNo=" + spaceBookingNo + ", allDay=" + allDay + ", studyLeader="
+        + studyLeader + "]";
+  }
 
   public int getId() {
     return id;
@@ -58,6 +67,14 @@ public class Schedule {
 
   public void setMemo(String memo) {
     this.memo = memo;
+  }
+  
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
   }
 
   public int getStudyNo() {
