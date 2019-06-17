@@ -132,7 +132,6 @@ public class MyStudyController {
       if (loginUser.getNo() == (int) studyMemberList.get(i).getMemberNo()) {
         studyMemberList.remove(i);
       }
-      System.out.println("남은 스터디 멤버 넘어: " + studyMemberList.get(i));
     }
     
     content.put("list", studyMemberList);

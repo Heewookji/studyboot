@@ -12,6 +12,7 @@
     <id column="std_id" property="studyNo" />
     <id column="member_id" property="no" />
     <id column="confirm_member_id" property="confirmNo" />
+    <result column="retire_after_confirm_member_id" property="retireAfterConfirmMemberNo" />
     <result column="rate" property="rate" />
     <result column="rate_dt" property="rateDate" />
   </resultMap>

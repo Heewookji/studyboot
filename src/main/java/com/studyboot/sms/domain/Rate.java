@@ -8,13 +8,15 @@ public class Rate {
   private int studyNo;
   private int no;
   private int confirmNo;
+  private int retireAfterConfirmMemberNo;
   private double rate;
   private Date rateDate;
   
   @Override
   public String toString() {
-    return "Rate [memberRateNo=" + memberRateNo + ", studyNo=" + studyNo + ", memberNo=" + no
-        + ", confirmNo=" + confirmNo + ", rate=" + rate + ", rateDate=" + rateDate + "]";
+    return "Rate [memberRateNo=" + memberRateNo + ", studyNo=" + studyNo + ", no=" + no
+        + ", confirmNo=" + confirmNo + ", retireAfterConfirmMemberNo=" + retireAfterConfirmMemberNo
+        + ", rate=" + rate + ", rateDate=" + rateDate + "]";
   }
   
   public int getMemberRateNo() {
@@ -29,17 +31,23 @@ public class Rate {
   public void setStudyNo(int studyNo) {
     this.studyNo = studyNo;
   }
-  public int getMemberNo() {
+  public int getNo() {
     return no;
   }
-  public void setMemberNo(int memberNo) {
-    this.no = memberNo;
+  public void setNo(int no) {
+    this.no = no;
   }
   public int getConfirmNo() {
     return confirmNo;
   }
   public void setConfirmNo(int confirmNo) {
     this.confirmNo = confirmNo;
+  }
+  public int getRetireAfterConfirmMemberNo() {
+    return retireAfterConfirmMemberNo;
+  }
+  public void setRetireAfterConfirmMemberNo(int retireAfterConfirmMemberNo) {
+    this.retireAfterConfirmMemberNo = retireAfterConfirmMemberNo;
   }
   public double getRate() {
     return rate;
@@ -53,5 +61,5 @@ public class Rate {
   public void setRateDate(Date rateDate) {
     this.rateDate = rateDate;
   }
-  
+
 }

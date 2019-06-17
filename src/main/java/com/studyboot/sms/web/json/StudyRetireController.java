@@ -86,10 +86,8 @@ public class StudyRetireController {
       return content;
     }
 
-
     // 닉네임을 멤버넘버로 바꾸는 코드
-    List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames);
-
+    
     HashMap<String,Object> evaluationMap = new HashMap<>(); // 평가 맵
     HashMap<String,Object> rateRequireMap = new HashMap<>(); // 탈퇴자 평가 여부 맵
 
@@ -98,7 +96,6 @@ public class StudyRetireController {
     retireMap.put("endDate", format.format(new Date()));
     retireMap.put("studyNo", studyNo);
     retireMap.put("memberNo", loginUser.getNo());
-
 
     try {
       // 스터디 탈퇴
@@ -111,13 +108,7 @@ public class StudyRetireController {
       rateRequireMap.put("studyNo", studyNo);
       rateRequireMap.put("memberNo", loginUser.getNo());
       rateRequireMap.put("rateRequire", true);
-      //rateRequireMap.put("memberCount", nickNames.length);
-      
-      
-      
-      
-      
-      
+      rateRequireMap.put("memberCount", nickNames.length); // 나를 평가해야 하는 멤버 수
       
       
       studyRetireService.rateRequire(rateRequireMap);
@@ -129,6 +120,8 @@ public class StudyRetireController {
 
 
     try {
+      List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames);
+
       // 평가점수 입력
       for(int i = 0; i < nickNames.length; i++) {
         evaluationMap.put("studyNo", studyNo); // 스터디 넘버
@@ -291,7 +284,11 @@ public class StudyRetireController {
         evaluationMap.put("rateDate", format.format(new Date()));
 
         studyRetireService.retireeRateAdd(evaluationMap);
+        System.out.println("********************************");
+        System.out.println(retireeNo.get(i)); // 탈퇴자들 번호
       }
+      
+      
       
       
       // 새로운 try문 만들던지 여기다 하던지 선택
@@ -306,13 +303,17 @@ public class StudyRetireController {
       //     만약 내가 탈퇴 후 누군가 나를 평가하고 탈퇴를 했다. 그럼 남은 스터 원은 5명이기에 스터디 회원으로 뽑을 수는 없다.
       
       
-      
-
       content.put("status", "탈퇴자 평가가 완료 되었습니다.");
     } catch (Exception e) {
       content.put("status", "평가중 오류가 발생 하였습니다.");
       content.put("message", e.getMessage());
       System.out.println(e.getMessage());
+    }
+    
+    try {
+      
+    } catch (Exception e) {
+      
     }
 
     return content;

@@ -23,8 +23,8 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
 	$.getJSON('../../app/json/MyStudy/membersExceptLoginUser?no=' + myStudyNo,
 			function(obj) {
 		console.log("obj" + obj);
-		console.log("evaluationMemberList: " + obj.studyMemberList);
-		evaluationMemberList = obj.studyMemberList;
+		console.log("evaluationMemberList: " + obj.list);
+		evaluationMemberList = obj.list;
 
 		$(evaluationGenerator(obj)).appendTo('#retire-evaluation');
 		$(document.body).trigger('loaded-retireform');
@@ -177,7 +177,7 @@ $('#retire-evaluation-btn').click(() => {
 		ratingArr.push($('#ratingForm'+evaluationMemberList[i].member.nickName).attr("data-value")); // 평가 정보를 담는다.
 
 	});
-	console.log(typeof ratingArr[0]);
+//	console.log(typeof ratingArr[0]);
 
 	$.getJSON('../../app/json/retireEvaluation/retireEvaluation?nickNames=' + nickNames
 			+ '&evaluations=' + ratingArr  + '&studyNo=' + myStudyNo,
