@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.studyboot.sms.domain.Amazon;
 import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
@@ -112,6 +114,28 @@ public class MyStudyController {
 
     content.put("list", list);
     content.put("study", study);
+
+    return content;
+  }
+  
+  @GetMapping("membersExceptLoginUser") // 로그인 한 유저를 제외한 스터디 멤버
+  public Object membersExceptLoginUser(int no, HttpSession session) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    List<StudyMember> studyMemberList = studyMemberService.findStudyMember(no);
+
+    for (int i = 0; i < studyMemberList.size(); i++) {
+      
+      if (loginUser.getNo() == (int) studyMemberList.get(i).getMemberNo()) {
+        studyMemberList.remove(i);
+      }
+      System.out.println("남은 스터디 멤버 넘어: " + studyMemberList.get(i));
+    }
+    
+    content.put("list", studyMemberList);
 
     return content;
   }
@@ -298,20 +322,34 @@ public class MyStudyController {
 
   @GetMapping("fileList")
   public Object fileList(
-      @RequestParam int studyNo) {
+      @RequestParam int stdNo) {
 
     HashMap<String,Object> content = new HashMap<>();
     List<S3Object> cont;
+    List<Amazon> amazon = new ArrayList<>();
 
-    cont = amazonS3_Service.list(studyNo);
+    cont = amazonS3_Service.list(stdNo);
+    
+    for (int i = 0; i < cont.size(); i++) {
+      Amazon mazon = new Amazon();
+      mazon.setFileName(cont.get(i).key());
+      mazon.setFileSize(cont.get(i).size());
+      
+      String extenstion = cont.get(i).key().substring(cont.get(i).key().lastIndexOf(".")+1);
+      mazon.setExtenstion(extenstion);
+      System.out.println(extenstion);
+      amazon.add(mazon);
+    }
+    System.out.println("버킷==>" + cont.get(0).toString());
+    
     // 아마존 리스트를 실행하고 리턴값을 받아서 리턴된 맵 객체를 다시 리턴해준다.
-    content.put("list", cont);
+     content.put("list", amazon);
 
     return content;
   }
 
-  @GetMapping("filDelete")
-  public Object filDelete(
+  @GetMapping("fileDelete")
+  public Object fileDelete(
       @RequestParam String fileName,
       @RequestParam int studyNo,
       HttpSession session) {
@@ -365,6 +403,32 @@ public class MyStudyController {
     return content;
   }
   
+  // 가입거절
+  @GetMapping("registerDelete")
+  public Object registerDelete(@RequestParam int no, 
+      @RequestParam int memberNo,
+      HttpSession session) {
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    if (loginUser.getNo() == memberNo) {
+      try {
+        myStudyService.delete(no);
+        content.put("status", "삭제가 완료 되었습니다.");
+      } catch (Exception e) {
+        content.put("status", "fail");
+        content.put("message", e.getMessage());
+      }
+
+    } else {
+      content.put("status", "작성자만 게시글을 삭제할 수 있습니다.");
+      return content;
+    }
+
+    return content;
+  }
 }
 
 

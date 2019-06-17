@@ -94,7 +94,6 @@ public class Amazon_S3_ServiceImpl implements AmazonS3_Service {
       
       // 파일을 하나씩 꺼내서 List에 담는다.
       filecont.add(content);
-      //System.out.println(" Key: " + content.key() + " size = " + content.size());
     }
     // List에 담은 객체를 컨트롤러 쪽으로 넘겨준다.
     return filecont;

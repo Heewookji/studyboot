@@ -407,7 +407,6 @@ insert into sms_std_member(std_id, member_id) values(100,3);
 insert into sms_std_member(std_id, member_id) values(100,4);
 insert into sms_std_member(std_id, member_id) values(100,5);
 insert into sms_std_member(std_id, member_id) values(100,6);
-insert into sms_std_member(std_id, end_date, member_id) values(100,'2019-06-19',7);
 
 
 -- 스터디 회원 정보(종료 상태, 종료 날짜, 출석률 포함)
@@ -864,6 +863,4 @@ insert into sms_std_board(std_id, member_id, title, cont) values(1, 7, '게시�
 insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항3", "내용3");
 insert into sms_std_board(std_id, member_id, title, cont) values(1, 3, '게시판작성1', '내용작성1');
 insert into sms_std_board(std_id, member_id, ntc, title, cont) values(1, 2, 1, "공지사항 최상단 테스트", "공지사항입니다.");
-
-
 
