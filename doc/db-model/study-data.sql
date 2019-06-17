@@ -321,8 +321,8 @@ values('111412', '111412', '스터디56', '사진', 127, '2019-05-16', '2019-06-
 insert into sms_std(std_id, adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
 values(100, '161412', '161412', '지환탈퇴테스트', '사진', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
-insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn,now_prsn, rate)
-values('121111', '111111', '스터디57', 'test.png', 64, '2019-07-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,4 ,  3);
+insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn,now_prsn, rcrtm_apply, rate)
+values('121111', '111111', '스터디57', 'test.png', 64, '2019-06-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,4 ,true,  3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn,now_prsn, rate)
 values('151212', '161414', '스터디58', 'test.png', 64, '2019-07-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,5  , 3);
 
@@ -391,7 +391,7 @@ insert into sms_std_member(std_id, member_id) values(1,6);
 insert into sms_std_member(std_id, member_id) values(1,7);
 
 
-insert into sms_std_member(std_id, member_id) values(2,2);
+insert into sms_std_member(std_id, member_id, leader) values(2,2,true);
 insert into sms_std_member(std_id, member_id) values(2,3);
 insert into sms_std_member(std_id, member_id) values(2,4);
 insert into sms_std_member(std_id, member_id) values(2,5);
@@ -401,12 +401,23 @@ insert into sms_std_member(std_id, member_id) values(3,4);
 insert into sms_std_member(std_id, member_id) values(3,5);
 insert into sms_std_member(std_id, member_id) values(3,6);
 insert into sms_std_member(std_id, member_id) values(3,7);
+
+insert into sms_std_member(std_id, member_id, leader) values(4,4, true);
+insert into sms_std_member(std_id, member_id) values(4,5);
+insert into sms_std_member(std_id, member_id) values(4,6);
+insert into sms_std_member(std_id, member_id) values(4,7);
   
 insert into sms_std_member(std_id, member_id,leader) values(100,2,true);
 insert into sms_std_member(std_id, member_id) values(100,3);
 insert into sms_std_member(std_id, member_id) values(100,4);
 insert into sms_std_member(std_id, member_id) values(100,5);
 insert into sms_std_member(std_id, member_id) values(100,6);
+
+
+insert into sms_std_member(std_id, member_id,leader) values(101,2,true);
+insert into sms_std_member(std_id, member_id) values(101,4);
+insert into sms_std_member(std_id, member_id) values(101,5);
+insert into sms_std_member(std_id, member_id) values(101,6);
 
 
 -- 스터디 회원 정보(종료 상태, 종료 날짜, 출석률 포함)

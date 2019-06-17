@@ -3,87 +3,100 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.studyboot.sms.dao.AppliedStudyDao">
-  
+
   <resultMap type="appliedStudy" id="appliedStudyMap">
-    <id column="member_id" property="studyNo"/>
-    <id column="std_id" property="memberNo"/>
-    <result column="dtrm" property="determination"/>
-    <result column="state" property="state"/>
-    <result column="apl_date" property="appliedDate"/>
-    <result column="name" property="studyName"/>
-    <result column="photo" property="photo"/>
-    <result column="sdt" property="startDate"/>
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="memberNo" />
+    <result column="dtrm" property="determination" />
+    <result column="state" property="state" />
+    <result column="apl_date" property="appliedDate" />
+    <result column="name" property="studyName" />
+    <result column="photo" property="photo" />
+    <result column="sdt" property="startDate" />
   </resultMap>
-  
+
   <resultMap type="appliedStudy" id="approvalStudyMap">
-    <id column="member_id" property="studyNo"/>
-    <id column="std_id" property="memberNo"/>
-    <result column="dtrm" property="determination"/>
-    <result column="state" property="state"/>
-    <result column="apl_date" property="appliedDate"/>
-    <result column="name" property="studyName"/>
-    <result column="photo" property="photo"/>
-    <result column="sdt" property="startDate"/>
-    
+    <id column="std_id" property="studyNo" />
+    <id column="member_id" property="memberNo" />
+    <result column="dtrm" property="determination" />
+    <result column="state" property="state" />
+    <result column="apl_date" property="appliedDate" />
+    <result column="name" property="studyName" />
+    <result column="photo" property="photo" />
+    <result column="sdt" property="startDate" />
+
     <association property="member" javaType="member">
-     <id column="member_id"        property="no"/>
-     <result column="member_name"  property="name"/>
-      <result column="member_photo"  property="photo"/>
-      <result column="member_rate"  property="rate"/>
+      <id column="member_id" property="no" />
+      <result column="member_name" property="name" />
+      <result column="member_photo" property="photo" />
+      <result column="member_rate" property="rate" />
     </association>
   </resultMap>
-  
+
+
+  <insert id="insertAppliedStudyByUserNoAndStudyNo" parameterType="map">
+    insert into sms_apl_std(
+    member_id,
+    std_id,
+    dtrm)
+    values(
+    #{userNo},
+    #{studyNo},
+    #{determination})
+  </insert>
+
+
 
   <select id="findAllByUser" resultMap="appliedStudyMap" parameterType="int">
     select
-      a.member_id,
-      a.std_id,
-      a.dtrm,
-      a.state,
-      a.apl_date,
-      s.name,
-      s.photo,
-      s.sdt
+    a.member_id,
+    a.std_id,
+    a.dtrm,
+    a.state,
+    a.apl_date,
+    s.name,
+    s.photo,
+    s.sdt
     from
-      sms_apl_std a
-      inner join sms_std s on a.std_id = s.std_id
+    sms_apl_std a
+    inner join sms_std s on a.std_id = s.std_id
     where
-      member_id = #{value}
+    member_id = #{value}
   </select>
-  
+
   <select id="findAllByStudy" resultMap="appliedStudyMap" parameterType="int">
     select
-      member_id,
-      std_id,
-      dtrm,
-      state,
-      apl_date
+    member_id,
+    std_id,
+    dtrm,
+    state,
+    apl_date
     from
-      sms_apl_std
+    sms_apl_std
     where
-      std_id = #{value}
+    std_id = #{value}
   </select>
-  
+
   <select id="findUserApproval" resultMap="approvalStudyMap" parameterType="int">
     select
-      a.member_id,
-      a.std_id,
-      a.dtrm,
-      a.state,
-      a.apl_date,
-      s.name as member_name,
-      s.photo as member_photo,
-      s.rate as member_rate
+    a.member_id,
+    a.std_id,
+    a.dtrm,
+    a.state,
+    a.apl_date,
+    s.name as member_name,
+    s.photo as member_photo,
+    s.rate as member_rate
     from
-      sms_apl_std a
-      inner join sms_member s on a.member_id = s.member_id
+    sms_apl_std a
+    inner join sms_member s on a.member_id = s.member_id
     where
-      std_id = #{value}
+    std_id = #{value}
   </select>
-  
-  
+
+
 </mapper>
 
 

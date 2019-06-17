@@ -437,7 +437,7 @@
    
    
     <delete id="deletePickedStudyByUserNoAndStudyNo" parameterType="map">
-    delete from sms_std
+    delete from sms_pick_std
     where
     std_id = #{studyNo}
     and member_id = #{userNo}

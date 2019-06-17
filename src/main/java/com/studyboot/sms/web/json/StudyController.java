@@ -69,14 +69,41 @@ public class StudyController {
     return content;
   }
   
-  @GetMapping("addPickedStudy")
+  @GetMapping("pickedStudy")
   public Object addPickedStudy(int studyNo, boolean insertRemove, HttpSession session) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     Member member = (Member)session.getAttribute("loginUser");
-    content.put("studyNo", studyNo);
-    content.put("userNo", member.getNo());
+    
+    try {
+    if(insertRemove == true) {
+      studyService.insertPickedStudy(member.getNo(), studyNo);
+      content.put("status", "success");
+    } else {
+      studyService.deletePickedStudy(member.getNo(), studyNo);
+      content.put("status", "success");
+    }
+    
+    }catch(Exception e) {
+      content.put("status", "fail");
+    }
+    
     return content;
   }
+  
+  @GetMapping("appliedStudy")
+  public Object appliedStudy(int studyNo, String determination, HttpSession session) throws IOException{
+    HashMap<String,Object> content = new HashMap<>();
+    Member member = (Member)session.getAttribute("loginUser");
+    
+    try {
+      studyService.insertAppliedStudy(member.getNo(), studyNo, determination);
+      content.put("status", "success");
+    }catch(Exception e) {
+      content.put("status", "fail");
+    }
+    return content;
+  }
+  
   
 
   /*

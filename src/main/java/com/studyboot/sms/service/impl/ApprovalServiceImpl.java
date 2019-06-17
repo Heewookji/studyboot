@@ -1,5 +1,6 @@
 package com.studyboot.sms.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.AppliedStudyDao;
@@ -21,6 +22,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     List<AppliedStudy> list = appliedStudyDao.findUserApproval(stdNo);
     return list;
   }
+  
 
 }
 

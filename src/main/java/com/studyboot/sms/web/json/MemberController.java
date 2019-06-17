@@ -100,7 +100,7 @@ public class MemberController {
     }
     return member;
   }
-
+  
 
   @PostMapping("update")
   public Object update(HttpSession session, Member member) {

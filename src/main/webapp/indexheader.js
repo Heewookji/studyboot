@@ -110,9 +110,8 @@ function loadLoginUser() {
         var myStudyListTemplateSrc = $('#myStudy-template').html();
         var myStudyListGenerator = Handlebars.compile(myStudyListTemplateSrc);
         $(myStudyListGenerator(obj)).appendTo($('#myDropdown'));
-        $('#myDropdown').append("<div class=\"divider\"></div><div class=\"item\" id=\"logout\">로그아웃</div>");
-        
       }
+      $('#myDropdown').append("<div class=\"divider\"></div><div class=\"item\" id=\"logout\">로그아웃</div>");
 
 //      관리자라면 관리자 페이지버튼 드롭다운에 추가
       if(obj.user.admin){
