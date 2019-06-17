@@ -199,6 +199,7 @@
     );
 
   </insert>
+  
 <!-- 
   <select id="studyMemberCount" resultType="int">
     select
@@ -210,10 +211,6 @@
       end_state_cls_id is null;
   </select>
    -->
-
-  </insert>
-  
-
 </mapper>
 
 
