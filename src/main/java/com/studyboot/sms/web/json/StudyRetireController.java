@@ -37,7 +37,6 @@ public class StudyRetireController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
-
     // 리더 판단을 위한 코드
     Map<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
@@ -113,12 +112,21 @@ public class StudyRetireController {
       studyRetireService.rateRequire(rateRequireMap);
 
     } catch (Exception e) {
-      System.out.println("에러===>>>" + e.getMessage());
-      content.put("status", "스터디 탈퇴 중 에러가 발생 하였습니다.");
+      content.put("status", "스터디 탈퇴 중 오류가 발생 하였습니다.");
       content.put("message", e.getMessage());
     }
 
-
+    try {
+      
+      
+    } catch (Exception e) {
+      content.put("status", "출석률 업데이트 중 오류가 발생 하였습니다.");
+      content.put("message", e.getMessage());
+      System.out.println(e.getMessage());
+    }
+    
+    
+    
     try {
       List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames);
 
@@ -134,7 +142,7 @@ public class StudyRetireController {
       }
       content.put("status", "탈퇴가 완료 되었습니다.");
     } catch (Exception e) {
-      content.put("status", "평가점수 입력 중 에러가 발생 하였습니다.");
+      content.put("status", "평가점수 입력 중 오류가 발생 하였습니다.");
       content.put("message", e.getMessage());
     }
 
@@ -215,9 +223,6 @@ public class StudyRetireController {
             }
           });
 
-          System.out.println(rateRequireRetirees);
-
-
           content.put("retire", rateRequireRetirees);
 
         } else { // inner if // 탈퇴자는 있지만 아무도 평가를 안했을 경우
@@ -230,12 +235,6 @@ public class StudyRetireController {
 
         content.put("retire", "x");
       }
-
-
-      //모든 멤버가 평가했다면 update해야
-
-
-
 
     } catch (Exception e) {
       content.put("status", "fail");
@@ -290,25 +289,8 @@ public class StudyRetireController {
         System.out.println("********************************");
         System.out.println(retireeNo.get(i)); // 탈퇴자들 번호
       }
-
-
-
-
-
-
-      // 새로운 try문 만들던지 여기다 하던지 선택
-      // sms_member_retire 카운트를 뽑음
-      // sms_member_rate_info 스터디번호, 회원번호, 평가한 회원번호 입력 갖고 select 카운팅 
-      // 두 숫자가 같은 경우 sms_member_retire 의 rate_requir false로 update
-
-      // 기존의 문제점은 내가 탈퇴하고 누군가 또 탈퇴할 경우 스터디 멤버의 개수(나를 평가해야하는 사람 수)를 찾을 수 없
-      // ex) 내가 탈퇴할때 나를 제외한 멤버의 수는 6명이다
-      //     고로 나를 평가해줘야하는 사람은 6명이다
-      //     이 6명의 숫자를 어디선가 뽑아내야 평가필요여부를 false로 바꾸는데 
-      //     만약 내가 탈퇴 후 누군가 나를 평가하고 탈퇴를 했다. 그럼 남은 스터 원은 5명이기에 스터디 회원으로 뽑을 수는 없다.
-
-
       content.put("status", "탈퇴자 평가가 완료 되었습니다.");
+
     } catch (Exception e) {
       content.put("status", "평가중 오류가 발생 하였습니다.");
       content.put("message", e.getMessage());
@@ -318,8 +300,7 @@ public class StudyRetireController {
     map.put("studyNo", studyNo);
     int evaluationMemberCount = 0; // 스터디 탈퇴 당시 남은 멤버의 수
     int retireeEvaluationCount = 0; // 스터디 탈퇴자를 몇명이 평가 했는지 카운트
-    
-    
+
     try { // 스터디에 남은 멤버가 탈퇴자를 모두 평가했다면 평가 필요여부를 false로 바꿈
       for (int i = 0; i < retireeNo.size(); i++) {
 
@@ -339,15 +320,12 @@ public class StudyRetireController {
         }
 
       }
-
-
     } catch (Exception e) {
-
+      content.put("status", "평가중 오류가 발생 하였습니다.");
+      content.put("message", e.getMessage());
     }
 
     return content;
-
   }
-
 
 }
