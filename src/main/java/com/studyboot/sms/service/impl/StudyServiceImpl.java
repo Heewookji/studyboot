@@ -258,6 +258,30 @@ public class StudyServiceImpl implements StudyService {
     Study study = studyDao.findPhotoByNo(no);
     return study;
   }
+  
+  @Override
+  public int insertPickedStudy(int userNo, int studyNo) {
+    
+   HashMap<String,Object> params = new HashMap<>();
+    
+    params.put("userNo", userNo);
+    params.put("studyNo", studyNo);
+    
+    
+    return studyDao.insertPickedStudyByUserNoAndStudyNo(params);
+  }
+  
+
+  @Override
+  public int deletePickedStudy(int userNo, int studyNo) {
+    
+    HashMap<String,Object> params = new HashMap<>();
+    
+    params.put("userNo", userNo);
+    params.put("studyNo", studyNo);
+    
+    return studyDao.deletePickedStudyByUserNoAndStudyNo(params);
+  }
 
 
 

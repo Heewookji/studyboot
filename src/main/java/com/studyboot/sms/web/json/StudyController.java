@@ -68,6 +68,16 @@ public class StudyController {
     }
     return content;
   }
+  
+  @GetMapping("addPickedStudy")
+  public Object addPickedStudy(int studyNo, boolean insertRemove, HttpSession session) throws IOException{
+    HashMap<String,Object> content = new HashMap<>();
+    Member member = (Member)session.getAttribute("loginUser");
+    content.put("studyNo", studyNo);
+    content.put("userNo", member.getNo());
+    return content;
+  }
+  
 
   /*
   @GetMapping("delete")

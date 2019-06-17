@@ -42,13 +42,6 @@ $(document.body).bind('loaded-header', () => {
   // initialization of go to
   $.HSCore.components.HSGoTo.init('.js-go-to');
 
-  // initialization of HSDropdown component
-  $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
-    afterOpen: function(){
-      $(this).find('input[type="search"]').focus();
-    }
-  });
-
   // initialization of masonry
   $('.masonry-grid').imagesLoaded().then(function () {
     $('.masonry-grid').masonry({

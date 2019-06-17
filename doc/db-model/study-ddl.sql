@@ -330,8 +330,8 @@ CREATE TABLE sms_std_member (
   join_date        DATE    NOT NULL DEFAULT current_date() COMMENT '스터디 가입일', -- 스터디 가입일
   end_date         DATE    NULL     COMMENT '스터디원 종료일', -- 스터디원 종료일
   leader           BOOLEAN NOT NULL DEFAULT false COMMENT '스터디장여부', -- 스터디장여부
-  atn_pct          DOUBLE  NULL     COMMENT '스터디 출석율', -- 스터디 출석율
-  arch_cnt         INTEGER NULL     COMMENT '업로드 횟수' -- 업로드 횟수
+  atn_pct          DOUBLE  NULL     DEFAULT 0 COMMENT '스터디 출석율', -- 스터디 출석율
+  arch_cnt         INTEGER NULL     DEFAULT 0 COMMENT '업로드 횟수' -- 업로드 횟수
 )
 COMMENT '스터디회원';
 
@@ -712,9 +712,10 @@ COMMENT '관심분야';
 
 -- 탈퇴 회원 정보
 CREATE TABLE sms_member_retire (
-  std_id       INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-  member_id    INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-  rate_require BOOLEAN NOT NULL DEFAULT true COMMENT '평가필요여부' -- 평가필요여부
+  std_id         INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  member_id      INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  rate_require   BOOLEAN NOT NULL DEFAULT true COMMENT '평가필요여부', -- 평가필요여부
+  std_member_cnt INTEGER NOT NULL COMMENT '탈퇴시회원수' -- 탈퇴시회원수
 )
 COMMENT '탈퇴 회원 정보';
 

@@ -402,6 +402,7 @@
     std_id = #{value}
   </select>
 
+<!-- 유저번호로 찜한 스터디 조회 -->
   <select id="findPickedStudyByUser" resultMap="studyMap" parameterType="int">
     select
     s.std_id,
@@ -423,6 +424,25 @@
     where
     member_id = #{value}
   </select>
+  
+  
+   <insert id="insertPickedStudyByUserNoAndStudyNo" parameterType="map">
+      insert into sms_pick_std(
+    member_id,
+    std_id)
+    values(
+    #{userNo},
+    #{studyNo})
+   </insert>
+   
+   
+    <delete id="deletePickedStudyByUserNoAndStudyNo" parameterType="map">
+    delete from sms_std
+    where
+    std_id = #{studyNo}
+    and member_id = #{userNo}
+  </delete>
+  
 
   <!-- 스터디의 정원이 다 차있는가? -->
   <select id="checkFullCapacityByStudyNo" resultType="boolean" parameterType="int">
