@@ -45,12 +45,6 @@ public class StudyRetireServiceImpl implements StudyRetireService {
   }
   
   @Override
-  public RateRequire retireEvaluationWait(Map<String, Object> map) { // 삭제하기
-
-    return rateRequireDao.retireEvaluationWait(map);
-  }
-  
-  @Override
   public int evaluationMemberCount(int retireeMemberNo) {
 
     return rateRequireDao.evaluationMemberCount(retireeMemberNo);
