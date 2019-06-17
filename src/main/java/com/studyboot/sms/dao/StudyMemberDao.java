@@ -26,4 +26,5 @@ public interface StudyMemberDao {
   List<History> findHistoryByMemberId(Map<String,Object> params);
   int add(Map<String, Object> params);
   boolean checkCapacityByStudyNo(int studyNo);
+//  int studyMemberCount(); // 스터디 멤버의 수
 }

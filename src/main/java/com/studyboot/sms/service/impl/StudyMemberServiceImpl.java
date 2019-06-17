@@ -94,6 +94,11 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return studyMemberDao.countEndStudyByMemberNo(no);
   }
   
+//  @Override
+//  public int studyMemberCount() {
+//    return studyMemberDao.studyMemberCount();
+//  }
+  
 }
 
 

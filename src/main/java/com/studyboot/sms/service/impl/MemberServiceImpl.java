@@ -146,6 +146,8 @@ public class MemberServiceImpl implements MemberService {
     for(String nickName : nickNames) {
       nickNameList.add(nickName);
     }
+    
+    System.out.println("==========================여기여기!!여기!!여기!!여기!!");
     return memberDao.findMemberNoByNickNameList(nickNameList);
   }
 

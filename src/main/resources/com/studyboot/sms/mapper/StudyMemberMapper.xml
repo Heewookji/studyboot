@@ -197,7 +197,17 @@
     #{leader}
     );
   </insert>
-
+<!-- 
+  <select id="studyMemberCount" resultType="int">
+    select
+     count(*)
+    from
+      sms_std_member sm
+    where
+      sm.std_id = 100 and
+      end_state_cls_id is null;
+  </select>
+   -->
 </mapper>
 
 

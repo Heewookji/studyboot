@@ -11,6 +11,7 @@
     <id column="std_id" property="studyNo" />
     <id column="member_id" property="memberNo" />
     <result column="rate_require" property="rateRequire" />
+    <result column="std_member_cnt" property="studyMemberCount" />
     <result column="nick_name" property="nickName" />
     <result column="photo" property="photo" />
     <result column="name" property="name" />
@@ -21,7 +22,8 @@
       values(
       #{studyNo},
       #{memberNo},
-      #{rateRequire}
+      #{rateRequire},
+      #{memberCount}
       )
   </insert>
   
@@ -69,7 +71,6 @@
     #{rateDate}
     )
   </insert>
-
 </mapper>
 
 
