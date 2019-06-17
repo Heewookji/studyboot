@@ -432,9 +432,9 @@ public class MyStudyController {
     System.out.println("register 접근" + "" +  stdNo + "" + memberNo);
 
     HashMap<String,Object> content = new HashMap<>();
-    boolean a = false;
+    
     try {
-      if (a == studyService.checkFullCapacityByStudyNo(stdNo)) {
+      if (!studyService.checkFullCapacityByStudyNo(stdNo)) {
         
         // 현재 인원이 총원보다 작다면 스터디에 해댱 맴버를 추가시켜주고
         studyMemberService.addStudyMember(stdNo, memberNo, false);
