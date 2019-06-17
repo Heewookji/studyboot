@@ -117,10 +117,10 @@ public class MyStudyController {
 
     return content;
   }
-  
+
   @GetMapping("membersExceptLoginUser") // 로그인 한 유저를 제외한 스터디 멤버
   public Object membersExceptLoginUser(int no, HttpSession session) {
-    
+
     Member loginUser = (Member) session.getAttribute("loginUser");
 
     HashMap<String,Object> content = new HashMap<>();
@@ -128,12 +128,12 @@ public class MyStudyController {
     List<StudyMember> studyMemberList = studyMemberService.findStudyMember(no);
 
     for (int i = 0; i < studyMemberList.size(); i++) {
-      
+
       if (loginUser.getNo() == (int) studyMemberList.get(i).getMemberNo()) {
         studyMemberList.remove(i);
       }
     }
-    
+
     content.put("list", studyMemberList);
 
     return content;
@@ -328,21 +328,21 @@ public class MyStudyController {
     List<Amazon> amazon = new ArrayList<>();
 
     cont = amazonS3_Service.list(stdNo);
-    
+
     for (int i = 0; i < cont.size(); i++) {
       Amazon mazon = new Amazon();
       mazon.setFileName(cont.get(i).key());
       mazon.setFileSize(cont.get(i).size());
-      
+
       String extenstion = cont.get(i).key().substring(cont.get(i).key().lastIndexOf(".")+1);
       mazon.setExtenstion(extenstion);
       System.out.println(extenstion);
       amazon.add(mazon);
     }
     System.out.println("버킷==>" + cont.get(0).toString());
-    
+
     // 아마존 리스트를 실행하고 리턴값을 받아서 리턴된 맵 객체를 다시 리턴해준다.
-     content.put("list", amazon);
+    content.put("list", amazon);
 
     return content;
   }
@@ -365,7 +365,7 @@ public class MyStudyController {
 
     return content;
   }
-  
+
   @GetMapping("fileDownload")
   public Object fileDownload(
       @RequestParam String fileName,
@@ -392,42 +392,72 @@ public class MyStudyController {
     System.out.println(study);
     return study;
   }
-  
+
   @GetMapping("mmntApl")
   public Object mmntApl(@RequestParam int no) {
 
     HashMap<String,Object> content = new HashMap<>();
     List<AppliedStudy> approval = approvalService.list(no);
+    for (AppliedStudy a : approval) {
+      System.out.println("가입신청 넣은 회원 번호 => " + a.getMemberNo());
+    }
     content.put("list", approval);
     return content;
   }
-  
+
   // 가입거절
   @GetMapping("registerDelete")
-  public Object registerDelete(@RequestParam int no, 
+  public Object registerDelete(@RequestParam int stdNo,
       @RequestParam int memberNo,
       HttpSession session) {
 
+    System.out.println("스터디 번호=" + stdNo + "맴버번호=" + memberNo);
     HashMap<String,Object> content = new HashMap<>();
-
-    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
-
-    if (loginUser.getNo() == memberNo) {
-      try {
-        myStudyService.delete(no);
-        content.put("status", "삭제가 완료 되었습니다.");
-      } catch (Exception e) {
-        content.put("status", "fail");
-        content.put("message", e.getMessage());
-      }
-
-    } else {
-      content.put("status", "작성자만 게시글을 삭제할 수 있습니다.");
-      return content;
+    try {
+      approvalService.delete(stdNo, memberNo);
+      content.put("status", "삭제가 완료 되었습니다.");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
     }
 
     return content;
   }
+
+  //가입승인
+  @GetMapping("register")
+  public Object register(@RequestParam int stdNo,
+      @RequestParam int memberNo,
+      HttpSession session) {
+    System.out.println("register 접근" + "" +  stdNo + "" + memberNo);
+
+    HashMap<String,Object> content = new HashMap<>();
+    boolean a = false;
+    try {
+      if (a == studyService.checkFullCapacityByStudyNo(stdNo)) {
+        
+        // 현재 인원이 총원보다 작다면 스터디에 해댱 맴버를 추가시켜주고
+        studyMemberService.addStudyMember(stdNo, memberNo, false);
+        System.out.println(memberNo + "번 회원 가입승인 완료 add 시켜주기");
+        // 현재인원을 하나 올려서 카운트 해준다.
+        studyService.prsnCount(stdNo);
+        // 가입 신청에 있는 회원 정보를 없애준다.
+        approvalService.delete(stdNo, memberNo);
+        
+      } else {
+        System.out.println("가입 실패");
+        content.put("status", "인원이 꽉 찼습니다.");
+      }
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
+
+
 }
 
 

@@ -177,6 +177,8 @@ $checkAll.change(function () {
     });
 });
 
+
+// 
 $(document.body).bind('loaded-list', () => {
   
 $('#messageForm-btn').click((e) => {

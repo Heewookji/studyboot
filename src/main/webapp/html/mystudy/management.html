@@ -347,7 +347,7 @@
   <script src="/studyboot/html/header.js"></script>
   <script src="navbar.js"></script>
   <script src="../footer.js"></script>
-
+  
 <!-- 버킷에 있는 파일리스트를 뽑아주는 핸들바스 (현재 pptx 확장자명만 가지고 있다.) -->
 <script id="approval-list" type="text/x-handlebars-template">
 {{#each list}}
@@ -360,7 +360,7 @@
 </div>
 </div>
 <div class="media-body">
-<h4 class="h5 g-mb-2">{{member.name}}</h4>
+<h4 class="h5 g-mb-2">{{member.nickName}}</h4>
 <div class="d-block">
 <i class="g-color-primary g-font-size-default icon-location-pin"></i>
 <span class="g-color-gray-dark-v4 g-font-size-13">{{appliedDate}}</span>
@@ -375,14 +375,16 @@
 <hr class="g-brd-gray-light-v4 g-my-20">
 
 <ul class="d-flex justify-content-between list-inline g-mb-0">
-<li class="list-inline-item" id="approval-btn">
-<a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+<li class="list-inline-item refuse">
+<a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover approval-btn" 
+style="cursor: pointer;" data-no='{{memberNo}}'>
 <i class="icon-finance-206 u-line-icon-pro"></i>
 <span class="g-ml-5">승인</span>
 </a>
 </li>
-<li class="list-inline-item" id="refusal-btn">
-<a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover" href="#">
+<li class="list-inline-item refuse">
+<a class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover refusal-btn" 
+style="cursor: pointer;" data-no='{{memberNo}}'>
 <i class="icon-finance-175 u-line-icon-pro"></i>
 <span class="g-ml-5">거절</span>
 </a>

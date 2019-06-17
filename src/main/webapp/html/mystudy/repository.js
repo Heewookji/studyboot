@@ -69,10 +69,9 @@ $('#add-file').fileupload({
 
 
 $(document.body).bind('loaded-repository', () => {
-  alert("트리거 왔음");
+  
   // 파일을 삭제하는 이벤트
   $('#delete-files').click((e) => {
-    
     
     alert("삭제 버튼");
     var fileName = $(e.target).attr('data-content')

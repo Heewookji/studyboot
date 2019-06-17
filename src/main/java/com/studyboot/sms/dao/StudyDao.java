@@ -25,4 +25,5 @@ public interface StudyDao {
   int updateAllStudyRecruitState3();
   int insertPickedStudyByUserNoAndStudyNo(HashMap<String, Object> params);
   int deletePickedStudyByUserNoAndStudyNo(HashMap<String, Object> params);
+  int addPrsn(int stdNo);
 }
