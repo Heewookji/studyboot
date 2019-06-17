@@ -91,6 +91,7 @@
     member_id = #{no}
     and
     end_date is null
+    order by std_id ASC
   </select>
 
   <!-- 스터디 장인지 판단 -->

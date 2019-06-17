@@ -8,6 +8,7 @@ public interface MyStudyScheduleService {
   
   int add(Schedule schedule);
   List<Object> list(int no);
+  List<Schedule> allSchedules(int no);
   Schedule get(int no);
   int delete(int no);
   int update(Schedule schedule);

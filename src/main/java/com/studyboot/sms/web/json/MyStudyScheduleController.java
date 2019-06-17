@@ -75,6 +75,18 @@ public class MyStudyScheduleController {
 
     return schedule;
   }
+  
+  @GetMapping("allSchedules")
+  public Object allSchedules(HttpSession session) {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    List<Schedule> schedule = null;
+    
+    if (loginUser != null) {
+      schedule = myStudyScheduleService.allSchedules(loginUser.getNo());
+    }
+    return schedule;
+  }
 
   @GetMapping("detail")
   public Object detail(int no) {
