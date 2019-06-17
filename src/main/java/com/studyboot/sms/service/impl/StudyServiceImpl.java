@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.AddressDao;
+import com.studyboot.sms.dao.AppliedStudyDao;
 import com.studyboot.sms.dao.ClsDao;
 import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
@@ -22,16 +23,19 @@ public class StudyServiceImpl implements StudyService {
   StudyMemberDao studyMemberDao;
   AddressDao addressDao;
   ClsDao clsDao;
+  AppliedStudyDao appliedStudyDao;
   
   public StudyServiceImpl(
       StudyDao studyDao,
       StudyMemberDao studyMemberDao,
       AddressDao addressDao,
-      ClsDao clsDao) {
+      ClsDao clsDao,
+      AppliedStudyDao appliedStudyDao) {
     this.clsDao = clsDao;
     this.studyDao = studyDao;
     this.studyMemberDao = studyMemberDao;
     this.addressDao = addressDao;
+    this.appliedStudyDao = appliedStudyDao;
   }
 
   
@@ -139,24 +143,34 @@ public class StudyServiceImpl implements StudyService {
     study.setMemberAge(totalAge);
     study.setAttendance(totalAttendance);
     
-    
+   
     
     //활동요일을 변환해준다.
-    HashMap<Integer,String> dayMap = new HashMap<>();
-    dayMap.put(1, "월");
-    dayMap.put(2, "화");
-    dayMap.put(4, "수");
-    dayMap.put(8, "목");
-    dayMap.put(16, "금");
-    dayMap.put(32, "토");
-    dayMap.put(64, "일");
+    HashMap<String,Integer> dayMap = new HashMap<>();
+    dayMap.put("월",1);
+    dayMap.put( "화",2);
+    dayMap.put( "수",4);
+    dayMap.put( "목",8);
+    dayMap.put( "금",16);
+    dayMap.put( "토",32);
+    dayMap.put( "일",64);
     ArrayList<String> dayStrList = new ArrayList<>();
-    dayMap.forEach((dayNo, dayStr)->{
+    dayMap.forEach((dayStr, dayNo)->{
       if(dayNo == (dayNo & study.getDay())) {
         dayStrList.add(dayStr);
       }
     });
+    
+   dayStrList.sort((String str1, String str2)->{
+     if(dayMap.get(str1) > dayMap.get(str2)) {
+       return 0;
+     } else {
+       return 1;
+     }
+   });
+    
     study.setDayStrList(dayStrList);
+    
     
     //전체 일수와 남은 일수를 계산해준다.
     
@@ -284,6 +298,19 @@ public class StudyServiceImpl implements StudyService {
   }
 
 
+  @Override
+  public int insertAppliedStudy(int userNo, int studyNo, String determination) {
+
+    HashMap<String,Object> params = new HashMap<>();
+     
+     params.put("userNo", userNo);
+     params.put("studyNo", studyNo);
+     params.put("determination", determination);
+     
+     return appliedStudyDao.insertAppliedStudyByUserNoAndStudyNo(params);
+  }
+  
+  
 
   @Override
   public boolean checkFullCapacityByStudyNo(int studyNo) {
@@ -298,7 +325,6 @@ public class StudyServiceImpl implements StudyService {
     studyDao.updateAllStudyRecruitState2();
     studyDao.updateAllStudyRecruitState3();
   }
-
 
 // 현재인원 증가
   @Override

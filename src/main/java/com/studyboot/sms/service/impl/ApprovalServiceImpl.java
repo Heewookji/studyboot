@@ -22,6 +22,7 @@ public class ApprovalServiceImpl implements ApprovalService {
     List<AppliedStudy> list = appliedStudyDao.findUserApproval(stdNo);
     return list;
   }
+  
 
   @Override
   public int delete(int stdNo, int memberNo) {

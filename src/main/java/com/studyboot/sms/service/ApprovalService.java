@@ -7,6 +7,8 @@ public interface ApprovalService {
 
   List<AppliedStudy> list(int stdNo); // 저장소에 있는 파일목록 출력
   int delete(int stdNo, int memberNo);
+
+  
 //  void add(int stdNo); // 스터디 생성시 저장소 생성
 //  void fileAdd(Part files, int stdNo) throws IOException; // 저장소에 파일 저장
 //  void fileDelete(int stdNo, String fileName); // 저장소에 파일 삭제

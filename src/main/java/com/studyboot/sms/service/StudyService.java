@@ -20,4 +20,5 @@ public interface StudyService {
   int insertPickedStudy(int userNo, int studyNo);
   int deletePickedStudy(int userNo, int studyNo);
   int prsnCount(int stdNo);
+  int insertAppliedStudy(int no, int studyNo, String determination);
 }
