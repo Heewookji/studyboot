@@ -387,6 +387,32 @@ public class MyStudyController {
     return content;
   }
   
+  // 가입거절
+  @GetMapping("registerDelete")
+  public Object registerDelete(@RequestParam int no, 
+      @RequestParam int memberNo,
+      HttpSession session) {
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    Member loginUser = (Member) session.getAttribute("loginUser"); // 로그인한 유저의 정보를 담는다.
+
+    if (loginUser.getNo() == memberNo) {
+      try {
+        myStudyService.delete(no);
+        content.put("status", "삭제가 완료 되었습니다.");
+      } catch (Exception e) {
+        content.put("status", "fail");
+        content.put("message", e.getMessage());
+      }
+
+    } else {
+      content.put("status", "작성자만 게시글을 삭제할 수 있습니다.");
+      return content;
+    }
+
+    return content;
+  }
 }
 
 
