@@ -89,8 +89,20 @@ function loadStudyApl(nosss) {
 loadStudyApl(nosss);
 
 
+// 가입 승인 관리 버튼기능들
 $(document.body).bind('loaded-approval', () => {
   
+  $('#refusal-btn').click((e) => {
+    
+    alert("거절버튼");
+    $.getJSON('../../app/json/MyStudy/mmntApl?no=' + nosss,
+        function(obj){
+  });
+
+  
+  $('#approval-btn').click((e) => {
+    alert("승낙버튼");
+  });
   
   
 });
