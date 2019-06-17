@@ -7,8 +7,8 @@
 <mapper namespace="com.studyboot.sms.dao.AppliedStudyDao">
   
   <resultMap type="appliedStudy" id="appliedStudyMap">
-    <id column="member_id" property="studyNo"/>
-    <id column="std_id" property="memberNo"/>
+    <id column="member_id" property="memberNo"/>
+    <id column="std_id" property="studyNo"/>
     <result column="dtrm" property="determination"/>
     <result column="state" property="state"/>
     <result column="apl_date" property="appliedDate"/>
@@ -18,8 +18,8 @@
   </resultMap>
   
   <resultMap type="appliedStudy" id="approvalStudyMap">
-    <id column="member_id" property="studyNo"/>
-    <id column="std_id" property="memberNo"/>
+    <id column="member_id" property="memberNo"/>
+    <id column="std_id" property="studyNo"/>
     <result column="dtrm" property="determination"/>
     <result column="state" property="state"/>
     <result column="apl_date" property="appliedDate"/>
@@ -32,6 +32,7 @@
      <result column="member_name"  property="name"/>
       <result column="member_photo"  property="photo"/>
       <result column="member_rate"  property="rate"/>
+      <result column="member_nick"  property="nickName"/>
     </association>
   </resultMap>
   
@@ -75,7 +76,8 @@
       a.apl_date,
       s.name as member_name,
       s.photo as member_photo,
-      s.rate as member_rate
+      s.rate as member_rate,
+      s.nick_name as member_nick
     from
       sms_apl_std a
       inner join sms_member s on a.member_id = s.member_id
@@ -83,6 +85,10 @@
       std_id = #{value}
   </select>
   
+  <delete id="delete" parameterType="map">
+    delete from sms_apl_std
+    where std_id=#{stdNo} and member_id=#{memberNo}
+  </delete>
   
 </mapper>
 

@@ -481,6 +481,11 @@ update sms_std set
 
   </update>
   
+  <update id="addPrsn" parameterType="int">
+    update sms_std set
+    now_prsn = now_prsn + 1
+    where std_id = #{stdNo}
+  </update>
 
 </mapper>
 

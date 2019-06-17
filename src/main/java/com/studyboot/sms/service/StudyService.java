@@ -17,4 +17,5 @@ public interface StudyService {
   boolean checkFullCapacityByStudyNo(int studyNo);
   void updateAllStudyRecruitState();
   Study getStudyPhoto(int no);
+  int prsnCount(int stdNo);
 }

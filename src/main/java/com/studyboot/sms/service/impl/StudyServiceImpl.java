@@ -276,4 +276,11 @@ public class StudyServiceImpl implements StudyService {
   }
 
 
+// 현재인원 증가
+  @Override
+  public int prsnCount(int stdNo) {
+    return studyDao.addPrsn(stdNo);
+  }
+
+
 }

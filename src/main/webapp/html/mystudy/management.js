@@ -47,7 +47,7 @@ $(document).ready(function() {
         + "<span>Study Management</span></li>");
     $('#conts-list').append($stdBoard);
   };
-  
+
   // 평점 모달을 준비한다.
   $("#sb-history").load("../mypage/rateInfo.html")
 });
@@ -56,21 +56,21 @@ $(document).ready(function() {
 function loadStudyDetail(nosss) {
   $.getJSON('../../app/json/MyStudy/mmntUpdate?no=' + nosss,
       function(obj){
-    
+
     console.log(obj);
     $('#std-name').val(obj.name);
     $('#std-goal').val(obj.goal);
-    
-//    var $per = "<option value=" + '"' + obj.personnel + '"' + ">" + obj.personnel + "명" + 
-//    "</option>"
-//    console.log($per);
+
+//  var $per = "<option value=" + '"' + obj.personnel + '"' + ">" + obj.personnel + "명" + 
+//  "</option>"
+//  console.log($per);
     // 드롭다운과 날짜 형식 / 요일 라이브러리 사용법 알아야함
     //$('#quantity').append($per);
     $('#startDate').val(obj.startDate);
     $('#endDate').val(obj.endDate);
     $('#std-contents').html(obj.contents);
-    
-    
+
+
   });
 };
 loadStudyDetail(nosss);
@@ -81,31 +81,39 @@ function loadStudyApl(nosss) {
       function(obj){
     console.log(obj);
     $(approvalGenerator(obj)).appendTo('#approval-row');
-    
-  //트리거 발생
+
+    //트리거 발생
     $(document.body).trigger('loaded-approval');
   });
 };
 loadStudyApl(nosss);
 
 
-// 가입 승인 관리 버튼기능들
+//가입 승인 관리 버튼기능들
 $(document.body).bind('loaded-approval', () => {
-  
-  $('#refusal-btn').click((e) => {
-    
-    alert("거절버튼");
-    $.getJSON('../../app/json/MyStudy/mmntApl?no=' + nosss,
+
+  // 거절시 테이블 데이터를 삭제 (가입 거절)
+  $('.refusal-btn').click((e) => {
+    $.getJSON("../../app/json/MyStudy/registerDelete?stdNo=" + nosss + "&memberNo="
+        + $(e.target).parents('.refuse').find('a').attr('data-no'),
         function(obj){
+      location.reload();
+    });
+  });
+
+
+  $('.approval-btn').click((e) => {
+    console.log($(e.target).parents('.refuse').find('a').attr('data-no'));
+    $.getJSON("../../app/json/MyStudy/register?stdNo=" + nosss + "&memberNo="
+        + $(e.target).parents('.refuse').find('a').attr('data-no'),
+        function(obj){
+      console.log("박상민 가입승인 확인 겟제이슨 콜백 함수");
+      location.reload();
+    });
   });
 
   
-  $('#approval-btn').click((e) => {
-    alert("승낙버튼");
-  });
+  
   
   
 });
-
-
-

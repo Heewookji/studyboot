@@ -23,4 +23,5 @@ public interface StudyDao {
   int updateAllStudyRecruitState();
   int updateAllStudyRecruitState2();
   int updateAllStudyRecruitState3();
+  int addPrsn(int stdNo);
 }
