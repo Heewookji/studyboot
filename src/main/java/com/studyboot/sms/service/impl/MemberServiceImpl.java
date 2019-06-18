@@ -91,7 +91,10 @@ public class MemberServiceImpl implements MemberService {
     if (member.getPassword() != null) {
       return memberDao.updatePassword(member);
     }
-    return memberDao.update(member);
+    int count = memberDao.update(member);
+    memberDao.clsInsert(member);
+    
+    return count;
   }
 
 

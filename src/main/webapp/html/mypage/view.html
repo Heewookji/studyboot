@@ -267,118 +267,126 @@
               <!-- End Birth -->
             </ul>
 
-            <form>
-              <ul class="list-unstyled g-mb-30">
-                <!-- Your NickName -->
-                <li
-                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                  <div class="g-pr-10">
-                    <strong
-                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">닉네임</strong>
-                    <div class="d-md-inline-block g-width-400">
-                      <input id="nickName" type="text"
-                        class="form-control d-md-inline-block g-width-200"
-                        readonly>
-                      <button type="button"
-                        class="btn u-btn-darkgray g-pos-rel g-top-minus-2"
-                        id="nickCheck-btn" disabled>중복체크</button>
-                    </div>
-                  </div> <i id="sb-nickname-edit"
-                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                  <i id="sb-nickname-cancel"
-                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                </li>
-                <!-- End Your NickName -->
-
-                <!-- Phone number -->
-                <li
-                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                  <div class="g-pr-10">
-                    <strong
-                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">전화번호</strong>
-                    <input type="tel"
+            <ul class="list-unstyled g-mb-30">
+              <!-- Your NickName -->
+              <li
+                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="g-pr-10">
+                  <strong
+                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">닉네임</strong>
+                  <div class="d-md-inline-block g-width-400">
+                    <input id="nickName" type="text"
                       class="form-control d-md-inline-block g-width-200"
-                      id="tel" readonly>
-                  </div> <i id="sb-tel-edit"
-                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                  <i id="sb-tel-cancel"
-                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                </li>
-                <!-- End Phone number -->
+                      readonly>
+                    <button type="button"
+                      class="btn u-btn-darkgray g-pos-rel g-top-minus-2"
+                      id="nickCheck-btn" disabled>중복체크</button>
+                  </div>
+                </div> <i id="sb-nickname-edit"
+                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                <i id="sb-nickname-cancel"
+                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+              </li>
+              <!-- End Your NickName -->
 
-                <!-- Phone number -->
-                <li
-                  class="d-flex align-items-center justify-content-between g-brd-gray-light-v4 g-py-15 g-height-100">
-                  <div class="g-pr-10">
-                    <strong
-                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Phone
-                      number</strong>
-                    <div class="ui compact selection dropdown sample">
-                      <input name="gender" type="hidden" value="default">
-                      <i class="dropdown icon"></i>
-                      <div class="default text">소분류</div>
-                      <div class="menu">
-                        <div class="item" data-value="111">시각디자인</div>
-                        <div class="item" data-value="1122">오우 디자인</div>
+              <!-- Phone number -->
+              <li
+                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="g-pr-10">
+                  <strong
+                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">전화번호</strong>
+                  <input type="tel"
+                    class="form-control d-md-inline-block g-width-200"
+                    id="tel" readonly>
+                </div> <i id="sb-tel-edit"
+                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                <i id="sb-tel-cancel"
+                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+              </li>
+              <!-- End Phone number -->
+
+              <!-- 관심분야 -->
+              <li
+                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-200">
+                <div class="g-pr-10 g-width-100x--lg">
+                  <strong
+                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">관심분야</strong>
+                  <div id="myClsList" class="d-block d-md-inline-block g-pos-rel g-width-560">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-pr-10 g-mb-5"><i class="tags icon g-mr-5"></i>:</strong>
+                    
+                    <div class="g-pos-abs g-mt-20 g-width-100x--lg">
+                      <div class="ui compact selection dropdown lcls disabled">
+                        <input name="lcls" type="hidden" value="default">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">관심분야(대)</div>
+                        <div class="menu">
+                        </div>
+                      </div>
+                      <div class="ui compact selection dropdown mcls disabled">
+                        <input name="mcls" type="hidden" value="default">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">관심분야(중)</div>
+                        <div class="menu">
+                        </div>
+                      </div>
+                      <div class="ui compact selection dropdown scls disabled">
+                        <input name="scls" type="hidden" value="default">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">관심분야(소)</div>
+                        <div class="menu">
+                        </div>
                       </div>
                     </div>
-                    <div class="ui compact selection dropdown sample">
-                      <input name="gender" type="hidden" value="default">
-                      <i class="dropdown icon"></i>
-                      <div class="default text">소분류</div>
-                      <div class="menu">
-                        <div class="item" data-value="111">시각디자인</div>
-                        <div class="item" data-value="1122">오우 디자인</div>
+                    
+                  </div>
+                </div> <i id="sb-cls-edit"
+                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                <i id="sb-cls-cancel"
+                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+              </li>
+              <!-- End 관심분야 -->
+              
+              <!-- 활동지역 -->
+              <li
+                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-200">
+                <div class="g-pr-10 g-width-100x--lg">
+                  <strong
+                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">활동지역</strong>
+                  <div id="myAddrList" class="d-block d-md-inline-block g-pos-rel g-width-560">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-pr-10 g-mb-5"><i class="tags icon g-mr-5"></i>:</strong>
+                    
+                    <div class="g-pos-abs g-mt-20 g-width-100x--lg">
+                      <div class="ui compact selection dropdown laddr disabled">
+                        <input name="laddr" type="hidden" value="default">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">활동지역(대)</div>
+                        <div class="menu">
+                        </div>
+                      </div>
+                      <div class="ui compact selection dropdown maddr disabled">
+                        <input name="maddr" type="hidden" value="default">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">활동지역(중)</div>
+                        <div class="menu">
+                        </div>
+                      </div>
+                      <div class="ui compact selection dropdown saddr disabled">
+                        <input name="saddr" type="hidden" value="default">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">활동지역(소)</div>
+                        <div class="menu">
+                        </div>
                       </div>
                     </div>
-                    <div class="ui compact selection dropdown sample">
-                      <input name="gender" type="hidden" value="default">
-                      <i class="dropdown icon"></i>
-                      <div class="default text">소분류</div>
-                      <div class="menu">
-                        <div class="item" data-value="111">시각디자인</div>
-                        <div class="item" data-value="1122">오우 디자인</div>
-                      </div>
-                    </div>
-                  </div> <i id="sb-tel-edit"
-                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                  <i id="sb-tel-cancel"
-                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                </li>
-                <!-- End Phone number -->
-                <!-- 관심분야 -->
-                <li
-                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                  <div class="g-pr-10">
-                    <strong
-                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">관심분야</strong>
-                    <input type="text"
-                      class="form-control d-md-inline-block g-width-200"
-                      id="clsName" readonly>
-                  </div> <i id="sb-cls-edit"
-                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                  <i id="sb-cls-cancel"
-                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                </li>
-                <!-- End 관심분야 -->
-
-                <!-- 활동지역 -->
-                <li
-                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                  <div class="g-pr-10">
-                    <strong
-                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">활동지역</strong>
-                    <input type="text"
-                      class="form-control d-md-inline-block g-width-200"
-                      id="adrName" readonly>
-                  </div> <i id="sb-adr-edit"
-                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                  <i id="sb-adr-cancel"
-                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                </li>
-                <!-- End 활동지역 -->
-              </ul>
-            </form>
+                    
+                  </div>
+                </div> <i id="sb-addr-edit"
+                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                <i id="sb-addr-cancel"
+                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+              </li>
+              <!-- End 활동지역 -->
+            </ul>
 
             <div class="text-sm-right">
               <a
@@ -484,6 +492,12 @@
   <footer id="js-footer"></footer>
 
 
+  <script id="cls-template" type="text/x-handlebars-template">
+{{#each clsList}}
+    <a class="ui label transition visible" data-no="{{clsNo}}"
+       style="display: inline-block !important;">{{name}}<i class="delete icon"></i></a>
+{{/each}}
+  </script>
   <!-- JS Global Compulsory -->
   <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
   <script
