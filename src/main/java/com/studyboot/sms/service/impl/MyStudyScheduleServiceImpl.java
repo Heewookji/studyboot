@@ -98,6 +98,17 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
     return scheduleDao.attendTrueFalse(scheduleNo);
   }
   
+  @Override
+  public int allEventCount(int studyNo) {
+
+    return scheduleDao.allEventCount(studyNo);
+  }
+  
+  @Override
+  public int studyAttendCount(Map<String, Object> map) {
+    
+    return scheduleDao.studyAttendCount(map);
+  }
 }
 
 

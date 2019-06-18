@@ -94,10 +94,11 @@ public class StudyMemberServiceImpl implements StudyMemberService {
     return studyMemberDao.countEndStudyByMemberNo(no);
   }
   
-//  @Override
-//  public int studyMemberCount() {
-//    return studyMemberDao.studyMemberCount();
-//  }
+  @Override
+  public int attendPercentUpdate(Map<String, Object> map) {
+   
+    return studyMemberDao.attendPercentUpdate(map);
+  }
   
 }
 

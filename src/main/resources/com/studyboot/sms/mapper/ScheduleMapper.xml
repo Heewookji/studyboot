@@ -135,4 +135,23 @@
       std_atnd_id = #{value}
   </select>
 
+  <select id="allEventCount"  resultType="int" parameterType="int">
+    select 
+      count(*) 
+    from
+      sms_std_schdl 
+    where 
+      std_id = #{value};
+  </select>
+  
+  <select id="studyAttendCount"  resultType="int" parameterType="map">
+    select 
+      count(*) 
+    from 
+      sms_std_atnd 
+    where 
+      std_id = #{studyNo}
+        and 
+      member_id = #{memberNo};
+  </select>  
 </mapper>

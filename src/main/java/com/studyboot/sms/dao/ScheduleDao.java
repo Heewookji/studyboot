@@ -14,6 +14,8 @@ public interface ScheduleDao {
   int update(Schedule schedule);
   int attend(Map<String, Object> attendMap);
   List<Schedule> attendTrueFalse(int scheduleNo);
+  int allEventCount(int studyNo);
+  int studyAttendCount(Map<String, Object> map);
 }
 
 

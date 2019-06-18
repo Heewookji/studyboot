@@ -17,6 +17,6 @@ public interface StudyMemberService {
   List<History> userHistory(int no, int pageNo, int pageSize);
   int addStudyMember(int studyNo, int memberNo, boolean leader);
   int sizeEndStudy(int no);
-//  int studyMemberCount();
+  int attendPercentUpdate(Map<String, Object> map);
 }
 
