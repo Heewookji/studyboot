@@ -447,3 +447,12 @@ $('#inqryAdd-btn').click((e) => {
 
 
 
+$('.ui.dropdown.sample')
+.dropdown({
+  on: 'hover',
+  onChange: function(value, text, $selectedItem) {
+    $('#sample1').append('<a class="ui label transition visible g-mb-30" data-no="'+value+'" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
+  }
+});
+
+

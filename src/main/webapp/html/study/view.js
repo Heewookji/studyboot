@@ -278,8 +278,22 @@ $( "#goal" ).keyup(function(){
 
 
 
+//drop down 샘플 ------------------
 
 
+$('.ui.fluid.normal.dropdown.sample')
+.dropdown({
+  maxSelections: 3
+})
+;
+
+$('.ui.dropdown.sample')
+.dropdown({
+  on: 'hover',
+  onChange: function(value, text, $selectedItem) {
+    $('#sample1').append('<a class="ui label transition visible" data-no="'+value+'" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
+  }
+});
 
 
 

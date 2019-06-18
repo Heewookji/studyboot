@@ -48,6 +48,15 @@
   href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
 
 <!-- CSS Unify -->
+<link
+  href="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.css"
+  rel="stylesheet" type="text/css">
+<link
+  href="/studyboot/js/Semantic-UI-master/dist/components/label.min.css"
+  rel="stylesheet" type="text/css">
+<link
+  href="/studyboot/js/Semantic-UI-master/dist/components/icon.min.css"
+  rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify.css">
 
 <!-- CSS Customization -->
@@ -63,7 +72,7 @@
     class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
     data-header-fix-moment="300"> </header>
   <!-- End Header -->
-  
+
   <!-- MyRate -->
   <div id="sb-history"></div>
   <!-- End MyRate -->
@@ -119,20 +128,19 @@
       <div class="col-lg-3 g-mb-20">
         <h1>MyPage</h1>
       </div>
-      <div class="col-lg-9 g-mb-20">
-        
-      </div>
+      <div class="col-lg-9 g-mb-20"></div>
     </div>
-    
+
     <div class="row">
       <!-- Profile Sidebar -->
       <div class="col-lg-3 g-mb-50 g-mb-0--lg">
         <!-- User Image -->
         <div class="u-block-hover g-pos-rel">
           <figure>
-            <img id="profilePhoto" class="img-fluid w-100 u-block-hover__main--zoom-v1"
+            <img id="profilePhoto"
+              class="img-fluid w-100 u-block-hover__main--zoom-v1"
               alt="Image Description">
-          
+
             <!-- Figure Caption -->
             <figcaption
               class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
@@ -143,8 +151,10 @@
                   class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
                   <li class="list-inline-item align-middle g-mx-7"><label
                     class="u-icon-v1 u-icon-size--md g-color-white">
-                    <i class="icon-settings u-line-icon-pro g-cursor-pointer"></i>
-                    <input type="file" class="sr-only" id="imageInput" name="image" accept="image/*">
+                      <i
+                      class="icon-settings u-line-icon-pro g-cursor-pointer"></i>
+                      <input type="file" class="sr-only" id="imageInput"
+                      name="image" accept="image/*">
                   </label></li>
                 </ul>
                 <!-- End Figure Social Icons -->
@@ -152,7 +162,6 @@
             </figcaption>
           </figure>
           <!-- End Figure Caption -->
-
         </div>
         <!-- User Image -->
 
@@ -162,22 +171,24 @@
           <!-- My StudyList -->
           <a href="index.html"
             class="list-group-item list-group-item-action justify-content-between">
-            <span><i class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
+            <span><i
+              class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
           </a>
           <!-- End My StudyList -->
 
           <!-- My InfoSettings -->
           <a href="view.html"
             class="list-group-item justify-content-between active">
-            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내 정보</span>
+            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내
+              정보</span>
           </a>
           <!-- End My InfoSettings -->
-          
+
           <!-- My rateInfo -->
           <a href="#"
             class="list-group-item list-group-item-action justify-content-between"
-            data-toggle="modal" data-target="#historyModal">
-            <span><i class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
+            data-toggle="modal" data-target="#historyModal"> <span><i
+              class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
           </a>
           <!-- End My rateInfo -->
 
@@ -204,94 +215,204 @@
       <!-- Profle Content -->
       <div class="col-lg-9">
         <!-- Nav tabs -->
-        <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20" role="tablist" data-target="nav-1-1-default-hor-left-underline" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
-          <li class="nav-item">
-            <a class="nav-link g-py-10 active" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1" role="tab">Edit Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2" role="tab">Security Settings</a>
-          </li>
+        <ul
+          class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
+          role="tablist"
+          data-target="nav-1-1-default-hor-left-underline"
+          data-tabs-mobile-type="slide-up-down"
+          data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
+          <li class="nav-item"><a class="nav-link g-py-10 active"
+            data-toggle="tab"
+            href="#nav-1-1-default-hor-left-underline--1" role="tab">프로필
+              변경</a></li>
+          <li class="nav-item"><a class="nav-link g-py-10"
+            data-toggle="tab"
+            href="#nav-1-1-default-hor-left-underline--2" role="tab">비밀번호
+              변경</a></li>
         </ul>
-        <!-- End Nav tabs -->
 
         <!-- Tab panes -->
         <div id="nav-1-1-default-hor-left-underline" class="tab-content">
           <!-- Edit Profile -->
-          <div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel" data-parent="#nav-1-1-default-hor-left-underline">
-            <h2 class="h4 g-font-weight-300">Manage your Name, ID and Email Addresses</h2>
-            <p>Below are name, email addresse, contacts and more on file for your account.</p>
+          <div class="tab-pane fade show active"
+            id="nav-1-1-default-hor-left-underline--1" role="tabpanel"
+            data-parent="#nav-1-1-default-hor-left-underline">
+            <h2 class="h4 g-font-weight-300">자신의 정보 조회, 변경</h2>
 
-            
             <ul class="list-unstyled g-mb-0">
               <!-- Name -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+              <li
+                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
                 <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Name</strong>
-                  <input id="userName" type="text" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
+                  <strong
+                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">이름</strong>
+                  <input id="userName" type="text"
+                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200"
+                    readonly>
                 </div>
               </li>
               <!-- End Name -->
-              
-              <!-- Email Address -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+
+              <!-- Birth -->
+              <li
+                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
                 <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Email</strong>
-                  <input id="email" type="email" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
+                  <strong
+                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">생일</strong>
+                  <input id="birthday" type="text"
+                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200"
+                    readonly>
                 </div>
               </li>
-              <!-- End Email Address -->
+              <!-- End Birth -->
             </ul>
 
             <form>
-            <ul class="list-unstyled g-mb-30">
-              <!-- Your NickName -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">NickName</strong>
-                  <div class="d-md-inline-block g-width-400">
-                    <input id="nickName" type="text" class="form-control d-md-inline-block g-width-200" readonly>
-                    <button type="button" class="btn u-btn-darkgray g-pos-rel g-top-minus-2" id="nickCheck-btn" disabled>중복체크</button>
-                  </div>
-                </div>
-                <i id="sb-nickname-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-nickname-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-              </li>
-              <!-- End Your NickName -->
-              
-              <!-- Phone number -->
-              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Phone number</strong>
-                  <input type="tel" class="form-control d-md-inline-block g-width-200" id="tel" readonly>
-                </div>
-                <i id="sb-tel-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-tel-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-              </li>
-              <!-- End Phone number -->
-            </ul>
+              <ul class="list-unstyled g-mb-30">
+                <!-- Your NickName -->
+                <li
+                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                  <div class="g-pr-10">
+                    <strong
+                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">닉네임</strong>
+                    <div class="d-md-inline-block g-width-400">
+                      <input id="nickName" type="text"
+                        class="form-control d-md-inline-block g-width-200"
+                        readonly>
+                      <button type="button"
+                        class="btn u-btn-darkgray g-pos-rel g-top-minus-2"
+                        id="nickCheck-btn" disabled>중복체크</button>
+                    </div>
+                  </div> <i id="sb-nickname-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-nickname-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </li>
+                <!-- End Your NickName -->
+
+                <!-- Phone number -->
+                <li
+                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                  <div class="g-pr-10">
+                    <strong
+                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">전화번호</strong>
+                    <input type="tel"
+                      class="form-control d-md-inline-block g-width-200"
+                      id="tel" readonly>
+                  </div> <i id="sb-tel-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-tel-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </li>
+                <!-- End Phone number -->
+
+                <!-- Phone number -->
+                <li
+                  class="d-flex align-items-center justify-content-between g-brd-gray-light-v4 g-py-15 g-height-100">
+                  <div class="g-pr-10">
+                    <strong
+                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Phone
+                      number</strong>
+                    <div class="ui compact selection dropdown sample">
+                      <input name="gender" type="hidden" value="default">
+                      <i class="dropdown icon"></i>
+                      <div class="default text">소분류</div>
+                      <div class="menu">
+                        <div class="item" data-value="111">시각디자인</div>
+                        <div class="item" data-value="1122">오우 디자인</div>
+                      </div>
+                    </div>
+                    <div class="ui compact selection dropdown sample">
+                      <input name="gender" type="hidden" value="default">
+                      <i class="dropdown icon"></i>
+                      <div class="default text">소분류</div>
+                      <div class="menu">
+                        <div class="item" data-value="111">시각디자인</div>
+                        <div class="item" data-value="1122">오우 디자인</div>
+                      </div>
+                    </div>
+                    <div class="ui compact selection dropdown sample">
+                      <input name="gender" type="hidden" value="default">
+                      <i class="dropdown icon"></i>
+                      <div class="default text">소분류</div>
+                      <div class="menu">
+                        <div class="item" data-value="111">시각디자인</div>
+                        <div class="item" data-value="1122">오우 디자인</div>
+                      </div>
+                    </div>
+                  </div> <i id="sb-tel-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-tel-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </li>
+                <!-- End Phone number -->
+                <!-- 관심분야 -->
+                <li
+                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                  <div class="g-pr-10">
+                    <strong
+                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">관심분야</strong>
+                    <input type="text"
+                      class="form-control d-md-inline-block g-width-200"
+                      id="clsName" readonly>
+                  </div> <i id="sb-cls-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-cls-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </li>
+                <!-- End 관심분야 -->
+
+                <!-- 활동지역 -->
+                <li
+                  class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                  <div class="g-pr-10">
+                    <strong
+                      class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">활동지역</strong>
+                    <input type="text"
+                      class="form-control d-md-inline-block g-width-200"
+                      id="adrName" readonly>
+                  </div> <i id="sb-adr-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-adr-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </li>
+                <!-- End 활동지역 -->
+              </ul>
             </form>
 
             <div class="text-sm-right">
-              <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#" id="sb-info-cancel">Cancel</a>
-              <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25" href="#" id="sb-info-change">Save Changes</a>
+              <a
+                class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10"
+                href="#" id="sb-info-cancel">Cancel</a> <a
+                class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
+                href="#" id="sb-info-change">Save Changes</a>
             </div>
           </div>
           <!-- End Edit Profile -->
 
           <!-- Security Settings -->
-          <div class="tab-pane fade" id="nav-1-1-default-hor-left-underline--2" role="tabpanel" data-parent="#nav-1-1-default-hor-left-underline">
+          <div class="tab-pane fade"
+            id="nav-1-1-default-hor-left-underline--2" role="tabpanel"
+            data-parent="#nav-1-1-default-hor-left-underline">
             <h2 class="h4 g-font-weight-300">Security Settings</h2>
-            <p class="g-mb-25">Reset your password, change verifications and so on.</p>
+            <p class="g-mb-25">Reset your password, change
+              verifications and so on.</p>
 
             <form>
               <!-- Current Password -->
               <div class="form-group row g-mb-25">
-                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Current password</label>
+                <label
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Current
+                  password</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
-                    <input id="password" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="Current password">
+                    <input id="password"
+                      class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
+                      type="password" placeholder="Current password">
                     <div class="input-group-append">
-                      <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
+                      <span
+                        class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
+                        class="icon-lock"></i></span>
                     </div>
                   </div>
                 </div>
@@ -300,12 +421,18 @@
 
               <!-- New Password -->
               <div class="form-group row g-mb-25">
-                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">New password</label>
+                <label
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">New
+                  password</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
-                    <input id="newPassword" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="New password">
+                    <input id="newPassword"
+                      class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
+                      type="password" placeholder="New password">
                     <div class="input-group-append">
-                      <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
+                      <span
+                        class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
+                        class="icon-lock"></i></span>
                     </div>
                   </div>
                 </div>
@@ -314,12 +441,18 @@
 
               <!-- Verify Password -->
               <div class="form-group row g-mb-25">
-                <label class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Verify password</label>
+                <label
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Verify
+                  password</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
-                    <input id="verifyPassword" class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0" type="password" placeholder="Verify password">
+                    <input id="verifyPassword"
+                      class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
+                      type="password" placeholder="Verify password">
                     <div class="input-group-append">
-                      <span class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i class="icon-lock"></i></span>
+                      <span
+                        class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
+                        class="icon-lock"></i></span>
                     </div>
                   </div>
                 </div>
@@ -329,8 +462,11 @@
               <hr class="g-brd-gray-light-v4 g-my-25">
 
               <div class="text-sm-right">
-                <a class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10" href="#" id="sb-password-cancel">Cancel</a>
-                <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25" href="#" id="sb-password-change">Save Changes</a>
+                <a
+                  class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10"
+                  href="#" id="sb-password-cancel">Cancel</a> <a
+                  class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
+                  href="#" id="sb-password-change">Save Changes</a>
               </div>
             </form>
           </div>
@@ -340,6 +476,7 @@
         <!-- End Tab panes -->
       </div>
       <!-- End Profle Content -->
+
     </div>
   </div>
 
@@ -383,6 +520,8 @@
   <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
 
   <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+  <script
+    src="../../js/Semantic-UI-master/dist/components/dropdown.min.js"></script>
 
   <!-- JS Custom -->
   <script src="../../Unify/assets/js/custom.js"></script>
