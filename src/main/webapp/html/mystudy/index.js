@@ -28,7 +28,7 @@ loadList(no);
 
 
 $(document).on('ready', function () {
-
+  
   // initialization of tabs
   $.HSCore.components.HSTabs.init('[role="tablist"]');
 

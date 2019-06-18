@@ -49,7 +49,7 @@ $(document).ready(function() {
   };
 
   // 평점 모달을 준비한다.
-  $("#sb-history").load("../mypage/rateInfo.html")
+  $("#sb-history").load("rateInfo.html")
 });
 
 
