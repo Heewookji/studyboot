@@ -99,18 +99,23 @@ function loadData(no) {
 
 
     //지도 출력
-//    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-//    var options = { //지도를 생성할 때 필요한 기본 옵션
-//            center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-//            level: 3 //지도의 레벨(확대, 축소 정도)
-//    };
-//
-//    var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+//  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+//  var options = { //지도를 생성할 때 필요한 기본 옵션
+//  center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+//  level: 3 //지도의 레벨(확대, 축소 정도)
+//  };
+
+//  var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 
     $.getJSON('../../app/json/member/mystudy',
             function(mystudyData) {
 
       if(mystudyData.status == "success"){
+
+
+
+
+
         var doingList = mystudyData.doingStudyList,
         appliedList = mystudyData.appliedStudyList,
         pickedList = mystudyData.pickedStudyList;
@@ -148,11 +153,12 @@ function loadData(no) {
             }
           }
 
+          $('.ui.sticky').append('<hr id="hr"><div class="mb-3" id="btns-div"><ul class="list-inline mb-0 pull-right" id="btns"><li class="list-inline-item mx-1 mb-1"><a class="btn u-btn-outline-primary g-rounded-25" href="#" id="message-btn"><i class="mr-1 fa fa-comment"></i> 문의하기 </a></li></ul></div>');
           $('#btns').append(appliedTag);
           $('#btns').prepend(pickedTag);
         }
 
-      }
+      } 
 
       $(document.body).trigger('loaded-studyInfo');
 
@@ -171,10 +177,10 @@ function loadChart(no) {
   var studyRateChart = c.getContext("2d");
   var gradientStroke = studyRateChart.createLinearGradient(500, 0, 100, 0);
   gradientStroke.addColorStop(0, 'rgba(128, 182, 244, 0.7)');
-  gradientStroke.addColorStop(1, 'rgba(244, 144, 128, 0.7)');
+  gradientStroke.addColorStop(1, 'rgba(244, 144, 128,0.7)');
   var gradientFill = studyRateChart.createLinearGradient(500, 0, 100, 0);
-  gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.3)");
-  gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.3)");
+  gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.1)");
+  gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.1)");
 
 
   var studyRateChartShow = new Chart(studyRateChart, {
@@ -192,7 +198,7 @@ function loadChart(no) {
         pointRadius: 5,
         fill: true,
         backgroundColor: gradientFill,
-        borderWidth: 4,
+        borderWidth: 1,
         data: [
           10, 20, 30, 40 , 20, 0
           ],
@@ -207,8 +213,11 @@ function loadChart(no) {
       },
       responsive: true,
       title: {
-        display: false,
-        text: 'Chart.js Line Chart'
+        display: true,
+        text: '스터디 평균 평점 순위',
+        fontStyle: 'normal',
+        fontSize: 14,
+        padding: 30
       },
       tooltips: {
         mode: 'index',
@@ -250,7 +259,7 @@ function loadChart(no) {
 
   var ageRateChart = $("#ageRateChart");
 
-  var myBarChart = new Chart(ageRateChart, {
+  var ageRateChartShow = new Chart(ageRateChart, {
     type: 'horizontalBar',
     data: {
       labels: ['10', '20', '30', '40', '50', '60'],
@@ -258,22 +267,22 @@ function loadChart(no) {
         label: '# of Votes',
         data: [12, 30, 3, 5, 2, 3],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(255, 99, 132, 0.1)',
+          'rgba(54, 162, 235, 0.1)',
+          'rgba(255, 206, 86, 0.1)',
+          'rgba(75, 192, 192, 0.1)',
+          'rgba(153, 102, 255, 0.1)',
+          'rgba(255, 159, 64, 0.1)'
           ],
           borderColor: [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 206, 86, 0.5)',
-            'rgba(75, 192, 192, 0.5)',
-            'rgba(153, 102, 255, 0.5)',
-            'rgba(255, 159, 64, 0.5)'
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)'
             ],
-            borderWidth: 4
+            borderWidth: 1
       }]
     },
     options: {
@@ -285,8 +294,11 @@ function loadChart(no) {
       },
       responsive: true,
       title: {
-        display: false,
-        text: 'Chart.js Line Chart'
+        display: true,
+        text: '스터디 구성원 평균 연령대',
+        fontStyle: 'normal',
+        padding: 20,
+        fontSize: 14
       },
       tooltips: {
         mode: 'index',
@@ -326,26 +338,26 @@ function loadChart(no) {
     }
   });
 
-  var ageRateChart = $("#attendRateChart");
+  var finishRateChart = $("#finishRateChart");
 
 //For a pie chart
-  var myPieChart = new Chart(ageRateChart, {
+  var finishRateChartShow = new Chart(finishRateChart, {
     type: 'pie',
     data: {
-      
+
       datasets: [{
         data: [10, 20, 30],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)'
+          'rgba(255, 99, 132, 0.1)',
+          'rgba(54, 162, 235, 0.1)',
+          'rgba(255, 206, 86, 0.1)'
           ],
           borderColor: [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 206, 86, 0.5)'
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)'
             ],
-          borderWidth: 4
+            borderWidth: 1
       }],
 
       // These labels appear in the legend and in the tooltips when hovering different arcs
@@ -356,9 +368,95 @@ function loadChart(no) {
         ]
     },
     options: {
+      title: {
+        display: true,
+        text: '구성원 스터디 종료 정보',
+        fontStyle: 'normal',
+        fontSize: 14,
+        padding: 20
+      },
+      legend: {
+        boxWidth: 70,
+        position: 'left'
+      },
     }
 
   });
+
+
+  var attendRateChart = $("#attendRateChart");
+
+  var attendRateChartShow = new Chart(attendRateChart, {
+    type: 'line',
+    data: {
+      labels: ['0', '1', '2', '3', '4', '5'],
+      datasets: [{
+        borderColor: gradientStroke,
+        pointHoverRadius: 15,
+        pointRadius: 10,
+        fill: false,
+        backgroundColor: gradientFill,
+        borderWidth: 1,
+        showLine: false,
+        data: [
+          10, 20, 30, 40 , 20, 0
+          ],
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: '스터디 구성원 출석율',
+        fontStyle: 'normal',
+        fontSize: 14,
+        padding: 40
+      },
+      legend: {
+        position: 'right'
+      },
+      elements: {
+        point: {
+          pointStyle: 'circle'
+        }
+      },
+      responsive: true,
+      tooltips: {
+        mode: 'index',
+        intersect: false
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: true,
+            drawBorder: true,
+            drawOnChartArea: false,
+          },
+          scaleLabel: {
+            display: false,
+            labelString: 'Month'
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+            display: true,
+            drawBorder: true,
+            drawOnChartArea: false,
+          },
+          scaleLabel: {
+            display: false,
+            labelString: 'Value'
+          }
+        }]
+      }
+    }
+  });
+
+
+
 
 }
 

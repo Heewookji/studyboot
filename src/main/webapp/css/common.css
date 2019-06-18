@@ -14,6 +14,11 @@
  background-color: none;
 }
 
+.g-bg-gray-light-v6 {
+ 
+ background-color: #80c6ff0e;
+}
+
 #rateRange {
  
  width: 100px;
@@ -131,7 +136,7 @@
   }
 
   .rateit-font .rateit-empty {
-      color: #ccc;
+      color: rgb(240, 240, 240);
   }
 
   .rateit-font .rateit-range > div {
