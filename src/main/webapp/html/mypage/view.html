@@ -206,10 +206,10 @@
         <!-- Nav tabs -->
         <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20" role="tablist" data-target="nav-1-1-default-hor-left-underline" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
           <li class="nav-item">
-            <a class="nav-link g-py-10 active" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1" role="tab">Edit Profile</a>
+            <a class="nav-link g-py-10 active" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1" role="tab">프로필 변경</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2" role="tab">Security Settings</a>
+            <a class="nav-link g-py-10" data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2" role="tab">비밀번호 변경</a>
           </li>
         </ul>
         <!-- End Nav tabs -->
@@ -218,28 +218,26 @@
         <div id="nav-1-1-default-hor-left-underline" class="tab-content">
           <!-- Edit Profile -->
           <div class="tab-pane fade show active" id="nav-1-1-default-hor-left-underline--1" role="tabpanel" data-parent="#nav-1-1-default-hor-left-underline">
-            <h2 class="h4 g-font-weight-300">Manage your Name, ID and Email Addresses</h2>
-            <p>Below are name, email addresse, contacts and more on file for your account.</p>
-
+            <h2 class="h4 g-font-weight-300">자신의 정보 조회, 변경</h2>
             
             <ul class="list-unstyled g-mb-0">
               <!-- Name -->
               <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
                 <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Name</strong>
+                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">이름</strong>
                   <input id="userName" type="text" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
                 </div>
               </li>
               <!-- End Name -->
               
-              <!-- Email Address -->
+              <!-- Birth -->
               <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
                 <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Email</strong>
-                  <input id="email" type="email" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
+                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">생일</strong>
+                  <input id="birthday" type="text" class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
                 </div>
               </li>
-              <!-- End Email Address -->
+              <!-- End Birth -->
             </ul>
 
             <form>
@@ -247,7 +245,7 @@
               <!-- Your NickName -->
               <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
                 <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">NickName</strong>
+                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">닉네임</strong>
                   <div class="d-md-inline-block g-width-400">
                     <input id="nickName" type="text" class="form-control d-md-inline-block g-width-200" readonly>
                     <button type="button" class="btn u-btn-darkgray g-pos-rel g-top-minus-2" id="nickCheck-btn" disabled>중복체크</button>
@@ -261,13 +259,35 @@
               <!-- Phone number -->
               <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
                 <div class="g-pr-10">
-                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">Phone number</strong>
+                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">전화번호</strong>
                   <input type="tel" class="form-control d-md-inline-block g-width-200" id="tel" readonly>
                 </div>
                 <i id="sb-tel-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
                 <i id="sb-tel-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
               </li>
               <!-- End Phone number -->
+              
+              <!-- 관심분야 -->
+              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="g-pr-10">
+                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">관심분야</strong>
+                  <input type="text" class="form-control d-md-inline-block g-width-200" id="clsName" readonly>
+                </div>
+                <i id="sb-cls-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                <i id="sb-cls-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+              </li>
+              <!-- End 관심분야 -->
+              
+              <!-- 활동지역 -->
+              <li class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="g-pr-10">
+                  <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">활동지역</strong>
+                  <input type="text" class="form-control d-md-inline-block g-width-200" id="adrName" readonly>
+                </div>
+                <i id="sb-adr-edit" class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                <i id="sb-adr-cancel" class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+              </li>
+              <!-- End 활동지역 -->
             </ul>
             </form>
 

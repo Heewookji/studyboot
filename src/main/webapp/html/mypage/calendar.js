@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     locale: 'ko',
     defaultDate: new Date(),
-    editable: true,
     eventLimit: true, // allow "more" link when too many events
-    selectable: true,
+    editable: false,
+    selectable: false,
     header: {
       left: 'prev,next today',
       center: 'title',
@@ -28,15 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     },
 
     events: '../../app/json/mystudyschedule/allSchedules',
-//    eventSourceSuccess: function(content, xhr) {
-//      return content.eventArray;
-//    },
-    eventDragStop: function(event, jsEvent, ui, view) { // 드래그 & 드롭 못하게 막음
-      //console.log(event.id); 
-      if (isElemOverDiv(ui, $('div#delete-events'))) {
-        calendar.fullCalendar('removeEvents', event.id); 
-      } 
-    },
     eventColor: '#72c02c',
     eventTextColor: 'white'
   });
@@ -58,15 +49,14 @@ function loadDetail(no) {
     var endT = obj.end.substring(11, 16); // 시간
 
     $('#schedleDetailTitle').html(obj.title);
+    $('#event-detail').html(obj.memo);
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
     } else {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endM + "월" + endD + "일 " + endT);
     }
-    $('#event-detail').html(obj.memo);
   });
 }
-
 
 
 
