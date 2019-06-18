@@ -54,5 +54,4 @@ $(document.body).bind('loaded-nav', () => {
   });
 }(nos));
 */
->>>>>>> refs/heads/jihwan0618
 
