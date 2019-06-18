@@ -133,23 +133,29 @@
         <div class="form-group g-mb-20 col-8">
          <label class="g-mb-10" for="name">이름</label> 
          <input class="form-control form-control-md rounded" id="std-name"
-          type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!">
+          type="text" name="name" placeholder="스터디 대표 이름을 입력해주세요!" readonly="readonly">
         </div>
+
 
         <!-- Quantity -->
         <div class="form-group col g-mb-20">
          <label class="g-mb-10" for="quantity">인원</label> 
-         <select id="quantity"
-          class="ui fluid dropdown quantity rounded g-height-40 g-mb-10">
-          <option value="2">2명</option>
-          <option value="3">3명</option>
-          <option value="4">4명</option>
-          <option value="5">5명</option>
-          <option value="6">6명</option>
-          <option value="7">7명</option>
-          <option value="8">8명</option>
-         </select>
-        </div>
+          <div class="ui divider"></div>
+			<div class="ui selection dropdown">
+  			<input name="gender" type="hidden" value="default">
+ 			 <i class="dropdown icon"></i>
+			 <div class="text" id="prsn-count"></div>
+ 			 <div class="menu">
+   			 <div class="item" data-value="2">2명</div>
+   			 <div class="item" data-value="3">3명</div>
+     		 <div class="item" data-value="4">4명</div>
+     		 <div class="item" data-value="5">5명</div>
+    		 <div class="item" data-value="6">6명</div>
+    		 <div class="item" data-value="7">7명</div>
+    		 <div class="item" data-value="8">8명</div>
+  		     </div>
+ 		     </div>
+             </div>
         <!-- End Quantity -->
 
        </div>
@@ -159,7 +165,7 @@
        <div class="row">
         <div class="form-group g-mb-20 col">
          <label class="g-mb-10" for="goal">목표</label> 
-         <input class="form-control form-control-md rounded" id="std-goal"
+         <input class="form-control form-control-md rounded" id="goal"
           name='goal' type='text' placeholder="스터디 목표를 입력해주세요!">
         </div>
        </div>
@@ -207,7 +213,7 @@
        <div class="row">
         <div class="form-group g-mb-20 col rounded  w-100">
          <label class="g-mb-10" for="startDate">활동 시작일</label> <input
-          id="startDate" class="form-control g-bg-white form-control-md" />
+          id="startDate" class="form-control g-bg-white form-control-md" readonly="readonly" />
         </div>
         <div class="form-group g-mb-20 col rounded w-100">
          <label class="g-mb-10" for="endDate">활동 종료일</label> <input
@@ -218,23 +224,23 @@
        <div class="row">
 
         <div class="form-group col g-mb-20">
-         <label class="g-mb-10" for="name">분야</label> <select
-          class="ui dropdown lcls rounded g-height-40 w-100 g-mb-10">
-         </select> <select
-          class="ui dropdown mcls rounded g-height-40 w-100  g-mb-10">
-         </select> <select
-          class="ui dropdown scls rounded g-height-40 w-100  g-mb-10">
-         </select>
+         <label class="g-mb-10" for="name">분야</label> 
+          <input class="form-control form-control-md rounded" id="std-cls-L"
+          type="text" name="name" readonly="readonly" style="text-align: center;">
+          <input class="form-control form-control-md rounded" id="std-cls-M"
+          type="text" name="name" readonly="readonly" style="margin-top: 10px; text-align: center;">
+          <input class="form-control form-control-md rounded" id="std-cls-S"
+          type="text" name="name" readonly="readonly" style="margin-top: 10px; text-align: center;">
         </div>
 
         <div class="form-group g-mb-20 col">
-         <label class="g-mb-10" for="name">활동 지역</label> <select
-          class="ui dropdown laddr rounded g-height-40 w-100  g-mb-10">
-         </select> <select
-          class="ui dropdown maddr rounded g-height-40 w-100 g-mb-10">
-         </select> <select
-          class="ui dropdown saddr rounded g-height-40 w-100  g-mb-10">
-         </select>
+         <label class="g-mb-10" for="name">활동 지역</label>
+         <input class="form-control form-control-md rounded" id="std-area-L"
+          type="text" name="name" readonly="readonly" style="text-align: center;">
+          <input class="form-control form-control-md rounded" id="std-area-M"
+          type="text" name="name" readonly="readonly" style="margin-top: 10px; text-align: center;">
+          <input class="form-control form-control-md rounded" id="std-area-S"
+          type="text" name="name" readonly="readonly" style="margin-top: 10px; text-align: center;">
         </div>
        </div>
 
@@ -249,6 +255,13 @@
        </div>
       </form>
 
+            <div class="text-sm-right">
+              <a
+                class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10"
+                href="#" id="sb-info-cancel">Cancel</a> <a
+                class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
+                href="#" id="sb-info-change">Save Changes</a>
+            </div>
 
           </div>
           <!-- End Edit Profile -->
@@ -389,9 +402,9 @@ style="cursor: pointer;" data-no='{{memberNo}}'>
 <span class="g-ml-5">거절</span>
 </a>
 </li>
-<li class="list-inline-item" id="memberInfo-btn">
-<a id="myRate-btn" class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover"
-data-toggle="modal" data-target="#historyModal" style="cursor: pointer;" data-no='{{memberNo}}'>
+<li class="list-inline-item refuse-mem" id="memberInfo-btn">
+<a id="myRate-btn" class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-default g-text-underline--none--hover apply-modal-btn"
+style="cursor: pointer;" data-no='{{memberNo}}'>
 <i class="icon-christmas-043 u-line-icon-pro">회원정보</i></a>
 </li>
 </ul>

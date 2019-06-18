@@ -40,8 +40,10 @@ $(document.body).bind('loaded-nav', () => {
     var stdMemberListGenerator = Handlebars.compile(stdMemberListTemplateSrc);
     $(stdMemberListGenerator(obj)).appendTo('#std-MemberList')
 
-    // 평점 꽂아주기
+    // 평점 꽂아주기 가입한 스터디 회원이 핸들바스를 통해 꽂힌 다음 모달창을 꽂아 준다.
     $("#sb-history").load("rateInfo.html");
+    
+    $(document.body).trigger('navbar-rate');
   });
 });
 
@@ -54,4 +56,8 @@ $(document.body).bind('loaded-nav', () => {
   });
 }(nos));
 */
+
+
+$(document.body).bind('navbar-rate', () => {
+});
 

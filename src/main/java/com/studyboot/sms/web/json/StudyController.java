@@ -129,6 +129,7 @@ public class StudyController {
     Study study = studyService.get(no);
     study.setStudyMembers(studyMemberService.findStudyMember(no));
     study.setClsList(clsService.getClsName(study.getCls()));
+     study.setAddressName(addressService.addressFullName(study.getAddress()));
     return study;
   }
 
