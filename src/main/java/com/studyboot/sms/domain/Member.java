@@ -19,7 +19,7 @@ public class Member implements Cloneable, Serializable {
   private String photo;
   private String tel;
   private List<String> cls;
-  
+  private List<Cls> clsList;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date birth;
@@ -29,7 +29,16 @@ public class Member implements Cloneable, Serializable {
 
   private boolean admin;
   private String address;
+  private String addressName;
   
+  @Override
+  public String toString() {
+    return "Member [no=" + no + ", rate=" + rate + ", password=" + password + ", name=" + name
+        + ", nickName=" + nickName + ", email=" + email + ", photo=" + photo + ", tel=" + tel
+        + ", cls=" + cls + ", clsList=" + clsList + ", birth=" + birth + ", registeredDate="
+        + registeredDate + ", admin=" + admin + ", address=" + address + ", addressName="
+        + addressName + "]";
+  }
   public int getNo() {
     return no;
   }
@@ -84,6 +93,12 @@ public class Member implements Cloneable, Serializable {
   public void setCls(List<String> cls) {
     this.cls = cls;
   }
+  public List<Cls> getClsList() {
+    return clsList;
+  }
+  public void setClsList(List<Cls> clsList) {
+    this.clsList = clsList;
+  }
   public Date getBirth() {
     return birth;
   }
@@ -108,11 +123,11 @@ public class Member implements Cloneable, Serializable {
   public void setAddress(String address) {
     this.address = address;
   }
-  @Override
-  public String toString() {
-    return "Member [no=" + no + ", rate=" + rate + ", password=" + password + ", name=" + name
-        + ", nickName=" + nickName + ", email=" + email + ", photo=" + photo + ", tel=" + tel
-        + ", cls=" + cls + ", birth=" + birth + ", registeredDate=" + registeredDate + ", admin="
-        + admin + ", address=" + address + "]";
+  public String getAddressName() {
+    return addressName;
   }
+  public void setAddressName(String addressName) {
+    this.addressName = addressName;
+  }
+  
 }

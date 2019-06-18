@@ -1,6 +1,7 @@
 package com.studyboot.sms.web.json;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.studyboot.sms.domain.AppliedStudy;
+import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.RateLog;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyMember;
+import com.studyboot.sms.service.AddressService;
+import com.studyboot.sms.service.ClsService;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
@@ -37,7 +41,9 @@ public class MemberController {
   @Autowired StudyMemberService studyMemberService;
   @Autowired RateService rateService;
   @Autowired ServletContext servletContext;
-
+  @Autowired ClsService clsService;
+  @Autowired AddressService addressService;
+  
   
   /*
   @GetMapping("delete")
@@ -94,16 +100,36 @@ public class MemberController {
     
     Member loginUser = (Member) session.getAttribute("loginUser");
     Member member = memberService.get(loginUser.getNo());
+    member.setClsList(new ArrayList<>());
+    
+    for (String cls : member.getCls()) {
+      List<Cls> clsList = clsService.getClsName(cls);
+      
+      for (Cls c : clsList) {
+        if (c.getClsSmallNo() != null) {
+          c.setClsNo(cls);
+          member.getClsList().add(c);
+        }
+      }
+    }
+    
+    if (member.getAddress() != null) {
+      member.setAddressName(addressService.addressFullName(member.getAddress()));
+    }
     
     if (member.getPhoto() == null) {
-      member.setPhoto("vven.jpg");
+      member.setPhoto("defaultphoto");
     }
+    
     return member;
   }
   
 
   @PostMapping("update")
   public Object update(HttpSession session, Member member) {
+    
+    if (member.getCls() == null)
+      System.out.println("!!!!!!!!!!!!controller ==============>" + member);
     
     Member loginUser = (Member) session.getAttribute("loginUser");
     member.setNo(loginUser.getNo());
@@ -112,7 +138,7 @@ public class MemberController {
     
     try {
       if (memberService.update(member) == 0) 
-        throw new RuntimeException("해당 번호의 공간이 없습니다.");
+        throw new RuntimeException("해당 번호의 회원이 없습니다.");
       
       loginUser = memberService.get(loginUser.getNo());
       

@@ -111,15 +111,34 @@
     </if>
     </where>
   </select>
-
+  
+  <!-- 내 정보 업데이트 -->
   <update id="update" parameterType="member">
     update sms_member
     set
       nick_name = #{nickName},
       tel = #{tel},
-      photo = #{photo}
+      photo = #{photo},
+      adr_lms = #{address}
     where member_id = #{no}
   </update>
+  
+  <!-- 내 정보 업데이트 - 관심 분야 번호 -->
+  <insert id="clsInsert" parameterType="member">
+    insert into
+    sms_member_cls
+      (
+      member_id,
+      cls_lms
+      )
+    values
+      (
+      #{no},
+      <foreach collection="cls" item="k" separator=",">
+        cls_lms = #{k}
+      </foreach>
+      )
+  </insert>
   
    <insert id="insert" parameterType="member">
    insert 

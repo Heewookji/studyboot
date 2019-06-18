@@ -1,9 +1,10 @@
-var param = location.href.split('?')[1],
-no,
-userData,
+var userData,
 nickCheck,
 telCheck,
-pwdCheck = 0;
+clsCheck,
+pwdCheck = 0,
+clsTemplateSrc = $('#cls-template').html(),
+clsGenerator = Handlebars.compile(clsTemplateSrc);
 
 
 //페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
@@ -13,6 +14,200 @@ $( document ).ready(function() {
 });
 
 
+// 카테고리 분류 로딩 함수
+function loadModalCategory() {
+
+  $.getJSON('../../app/json/study/category?clsNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.clsNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.lcls')
+    .dropdown({
+      placeholder: '관심분야(대)',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.mcls')
+        .dropdown({
+          placeholder: '관심분야(중)',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.scls')
+        .dropdown({
+          placeholder: '관심분야(소)',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+        $.getJSON('../../app/json/study/category?clsNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.clsNo;
+          }
+          $('.ui.dropdown.mcls')
+          .dropdown({
+            placeholder: '관심분야(중)',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('../../app/json/study/category?clsNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.clsNo;
+                }
+                $('.ui.dropdown.scls')
+                .dropdown({
+                  placeholder: '관심분야(소)',
+                  on: 'hover',
+                  values: objs.list,
+                  onChange: function(value, text) {
+                    
+                    if (text == undefined) {
+                      return false;
+                    }
+                    if ($('#myClsList a').length > 2) {
+                      alert('갯수 초과!!');
+                      return false;
+                    }
+                    
+                    $('#myClsList').append(
+                        '<a class="ui label transition visible" data-no="' + value
+                        + '" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
+                    
+                    $('#myClsList a .delete.icon').click(function() {
+                      $(this).parent().remove();
+                    });
+                  }
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
+
+// 지역 분류 로딩 함수
+function loadModalAddress() {
+
+  $.getJSON('../../app/json/study/addresscategory?addressNo=',
+          function(obj) {
+    
+    var laddrName,
+        maddrName;
+
+    for(var e of obj.list){
+      e.value = e.addressNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.laddr')
+    .dropdown({
+      placeholder: '활동지역(대)',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        laddrName = text; // 활동지역(대) 이름
+        
+        $('.ui.dropdown.maddr')
+        .dropdown({
+          placeholder: '활동지역(중)',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.saddr')
+        .dropdown({
+          placeholder: '활동지역(소)',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+
+        $.getJSON('../../app/json/study/addresscategory?addressNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.addressNo;
+          }
+          $('.ui.dropdown.maddr')
+          .dropdown({
+            placeholder: '활동지역(중)',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              
+              maddrName = text; // 활동지역(중) 이름
+              
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('../../app/json/study/addresscategory?addressNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.addressNo;
+                }
+                $('.ui.dropdown.saddr')
+                .dropdown({
+                  placeholder: '활동지역(소)',
+                  on: 'hover',
+                  values: objs.list,
+                  onChange: function(value, text, $selectedItem) {
+                    
+                    if (text == undefined) {
+                      return false;
+                    }
+                    if ($('#myAddrList a').length > 0) {
+                      alert('갯수 초과!!');
+                      return false;
+                    }
+                  
+                    $('#myAddrList').append(
+                        '<a class="ui label transition visible" data-no="' + value
+                        + '" style="display: inline-block !important;">'
+                        + laddrName + ' ' + maddrName + ' ' + text +'<i class="delete icon"></i></a>');
+                    
+                    $('#myAddrList a .delete.icon').click(function() {
+                      $(this).parent().remove();
+                    });
+                  }
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
 
 // JSON 형식의 데이터 가져오기
 function loadData() {
@@ -31,10 +226,19 @@ function loadData() {
     $('#email').val(userData.email);
     $('#tel').val(userData.tel);
     
+    $(clsGenerator(userData)).appendTo('#myClsList');
+    
+    $('#myAddrList').append(
+        '<a class="ui label transition visible" data-no="' + userData.address
+        + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+    
     $(document.body).trigger('loaded-data');
   });
 };
 
+// 데이터 불러오기 실행
+loadModalCategory();
+loadModalAddress();
 loadData();
 
 // 닉네임 체크
@@ -55,6 +259,14 @@ function nickNameCheck() {
 }
 
 $(document.body).bind('loaded-data', () => {
+  
+  $('#myClsList a .delete.icon').click(function() {
+    $(this).parent().remove();
+  });
+  
+  $('#myAddrList a .delete.icon').click(function() {
+    $(this).parent().remove();
+  });
   
   // 닉네임 중복체크
   $(function() {
@@ -96,46 +308,92 @@ $(document.body).bind('loaded-data', () => {
     });
   });
   
-  
-  // nickName
-  $('#sb-nickname-edit').click(() => {
-    $('#nickName').prop('readonly', false);
-    $('#sb-nickname-edit').addClass('std-invisible');
-    $('#sb-nickname-cancel').removeClass('std-invisible');
-  });
-  
-  $('#sb-nickname-cancel').click(() => {
-    $('#nickName').val(userData.nickName);
-    
-    $('#nickName').closest('div').removeClass('u-has-error-v1');
-    $('#nickName').closest('div').removeClass('u-has-success-v1-1');
-    $('#nickName').prop('readonly', true);
-    $('#sb-nickname-cancel').addClass('std-invisible');
-    $('#sb-nickname-edit').removeClass('std-invisible');
-    nickCheck = undefined;
-  });
-  
-
-  // tel
-  $('#sb-tel-edit').click(() => {
-    $('#tel').prop('readonly', false);
-    $('#sb-tel-edit').addClass('std-invisible');
-    $('#sb-tel-cancel').removeClass('std-invisible');
-  });
-  
-  $('#sb-tel-cancel').click(() => {
-    $('#tel').val(userData.tel);
-    
-    $('#tel').closest('div').removeClass('u-has-success-v1-1');
-    $('#tel').closest('div').removeClass('u-has-error-v1');
-    $('#tel').prop('readonly', true);
-    $('#sb-tel-cancel').addClass('std-invisible');
-    $('#sb-tel-edit').removeClass('std-invisible');
-    telCheck = undefined;
-  });
-  
-  
 });
+
+// 개인정보 변경시 아이콘 클릭 이벤트
+// nickName
+$('#sb-nickname-edit').click(() => {
+  $('#nickName').prop('readonly', false);
+  $('#sb-nickname-edit').addClass('std-invisible');
+  $('#sb-nickname-cancel').removeClass('std-invisible');
+});
+
+$('#sb-nickname-cancel').click(() => {
+  $('#nickName').val(userData.nickName);
+  
+  $('#nickName').closest('div').removeClass('u-has-error-v1');
+  $('#nickName').closest('div').removeClass('u-has-success-v1-1');
+  $('#nickName').prop('readonly', true);
+  $('#sb-nickname-cancel').addClass('std-invisible');
+  $('#sb-nickname-edit').removeClass('std-invisible');
+  nickCheck = undefined;
+});
+
+
+// tel
+$('#sb-tel-edit').click(() => {
+  $('#tel').prop('readonly', false);
+  $('#sb-tel-edit').addClass('std-invisible');
+  $('#sb-tel-cancel').removeClass('std-invisible');
+});
+
+$('#sb-tel-cancel').click(() => {
+  $('#tel').val(userData.tel);
+  
+  $('#tel').closest('div').removeClass('u-has-success-v1-1');
+  $('#tel').closest('div').removeClass('u-has-error-v1');
+  $('#tel').prop('readonly', true);
+  $('#sb-tel-cancel').addClass('std-invisible');
+  $('#sb-tel-edit').removeClass('std-invisible');
+  telCheck = undefined;
+});
+
+// cls
+$('#sb-cls-edit').click(() => {
+  $('#myClsList .ui.dropdown').removeClass('disabled');
+  $('#sb-cls-edit').addClass('std-invisible');
+  $('#sb-cls-cancel').removeClass('std-invisible');
+});
+
+$('#sb-cls-cancel').click(() => {
+  $('#myClsList a').remove();
+  $(clsGenerator(userData)).appendTo('#myClsList');
+  
+  $('#myClsList a .delete.icon').click(function() {
+    $(this).parent().remove();
+  });
+  loadModalCategory();
+  
+  $('#myClsList .ui.dropdown').addClass('disabled');
+  $('#sb-cls-cancel').addClass('std-invisible');
+  $('#sb-cls-edit').removeClass('std-invisible');
+  telCheck = undefined;
+});
+
+// addr
+$('#sb-addr-edit').click(() => {
+  $('#myAddrList .ui.dropdown').removeClass('disabled');
+  $('#sb-addr-edit').addClass('std-invisible');
+  $('#sb-addr-cancel').removeClass('std-invisible');
+});
+
+$('#sb-addr-cancel').click(() => {
+  $('#myAddrList a').remove();
+  $('#myAddrList').append(
+      '<a class="ui label transition visible" data-no="' + userData.address
+      + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+  
+  $('#myAddrList a .delete.icon').click(function() {
+    $(this).parent().remove();
+  });
+  loadModalAddress();
+  
+  $('#myAddrList .ui.dropdown').addClass('disabled');
+  $('#sb-addr-cancel').addClass('std-invisible');
+  $('#sb-addr-edit').removeClass('std-invisible');
+  telCheck = undefined;
+});
+
 
 // 닉네임 체크
 $( '#nickName' ).keyup(function(){
@@ -198,13 +456,21 @@ $('#sb-info-change').click((e) => {
     return false;
   } else {
     
+    var clsList = new Array();
+    
+    $('#myClsList a').each(function() {
+      clsList.push($(this).attr('data-no'));
+    });
+    alert(clsList);
+    
     $.ajax({
       url:'../../app/json/member/update',
       type: 'post',
       dataType: 'text',
       data: {
         nickName: $(nickName).val(),
-        tel: $(tel).val()
+        tel: $(tel).val(),
+        //cls: clsList
       },
       success: function() {
         alert("정보 변경 성공!")
@@ -446,13 +712,5 @@ $('#inqryAdd-btn').click((e) => {
 
 
 
-
-$('.ui.dropdown.sample')
-.dropdown({
-  on: 'hover',
-  onChange: function(value, text, $selectedItem) {
-    $('#sample1').append('<a class="ui label transition visible g-mb-30" data-no="'+value+'" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
-  }
-});
 
 
