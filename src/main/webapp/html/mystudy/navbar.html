@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="../../css/common.css">
 
 
+ <!-- 나의 평점 -->
+<div id="sb-history"></div>
+  <!-- 나의 평점 -->
 
 
 <!-- 스터디 그룹 사진 -->
@@ -217,6 +220,7 @@
 {{/each}}
 </script>
 -->
+
 <!-- 스터디원 리스트 드롭다운 추가 -->
 <script id="study-memberList" type="text/x-handlebars-template">
 {{#each list}}
@@ -233,7 +237,8 @@
  <div class="dropdown-menu">
  <ul class="list-unstyled g-nowrap mb-0">
  <li>
- <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" href="#">
+ <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14"
+ style="cursor: pointer;" data-toggle="modal" data-target="#historyModal">
  <i class="hs-admin-pencil g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
   정보</a>
  </li>

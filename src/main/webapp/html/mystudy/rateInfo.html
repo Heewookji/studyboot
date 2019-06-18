@@ -1,0 +1,107 @@
+ <link
+ href="/studyboot/js/Semantic-UI-master/dist/components/transition.min.css"
+ rel="stylesheet" type="text/css">
+ 
+  <!-- 나의 평점 -->
+  <div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</h5>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+          
+            <div class="row g-mb-20">
+              <div class="col-md-6 u-block-hover g-pos-rel">
+                <figure class="text-center">
+                  <figcaption>
+                    <span id="history-nick"><strong></strong></span>
+                  </figcaption>
+                  <img id="history-profilePhoto" class="img-thumbnail"
+                    alt="Image Description" style="height: 200px;">
+                </figure>
+                <div class="g-pos-abs g-bottom-0 g-absolute-centered--x">
+                  <div id="history-rate" class="rateit invisible g-mb-5" data-rateit-readonly="true" data-rateit-mode="font" style="font-size: 24px" data-rateit-resetable="false"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div>
+                  <canvas id="pieChart" width="200" height="200"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row g-mb-20">
+              <div class="col-md-6">
+                <canvas id="rate-barChart" width="200" height="200"></canvas>
+              </div>
+              <div class="col-md-6">
+                <canvas id="atn-barChart" width="200" height="200"></canvas>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="container">
+                <div class="row g-min-height-200">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">스터디 이름</th>
+                        <th scope="col">가입일</th>
+                        <th scope="col">탈퇴일</th>
+                        <th scope="col">출석률</th>
+                      </tr>
+                    </thead>
+                    <tbody id="history-tbody"></tbody>
+                  </table>
+                </div>
+                <nav aria-label="목록 페이지 이동">
+                  <ul class="pagination justify-content-center">
+                    <li id="history-prevPage" class="page-item"><a
+                      class="page-link" href="#">이전</a></li>
+                    <li id="history-currPage" class="page-item active"><span
+                      class="page-link">1</span></li>
+                    <li id="history-nextPage" class="page-item "><a
+                      class="page-link" href="#">다음</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- .container -->
+            </div>
+            
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 나의 평점 -->
+  
+  
+<script id="history-template" type="text/x-handlebars-template">
+{{#each history}}
+<tr>
+<td>{{studyName}}</td>
+<td>{{joinDate}}</td>
+<td>{{endDate}}</td>
+<td align="center">{{attendance}}%</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
+<script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<script src="../../js/Semantic-UI-master/dist/components/transition.min.js"></script>
+<script src="../../js/Semantic-UI-master/dist/components/transition.min.js"></script>
+<script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+<script src="/studyboot/html/mypage/rateInfo.js"></script>
+

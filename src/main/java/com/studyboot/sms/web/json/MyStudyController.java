@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.studyboot.sms.domain.Amazon;
 import com.studyboot.sms.domain.AppliedStudy;
+import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Member;
+import com.studyboot.sms.domain.RateLog;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyBoard;
 import com.studyboot.sms.domain.StudyMember;
@@ -23,6 +25,7 @@ import com.studyboot.sms.service.AmazonS3_Service;
 import com.studyboot.sms.service.ApprovalService;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
+import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyService;
 import software.amazon.awssdk.services.s3.model.S3Object;
@@ -40,6 +43,7 @@ public class MyStudyController {
   @Autowired ServletContext servletContext;
   @Autowired AmazonS3_Service amazonS3_Service;
   @Autowired ApprovalService approvalService;
+  @Autowired RateService rateService;
 
 
   @GetMapping("list")
@@ -432,10 +436,10 @@ public class MyStudyController {
     System.out.println("register 접근" + "" +  stdNo + "" + memberNo);
 
     HashMap<String,Object> content = new HashMap<>();
-    
+
     try {
       if (!studyService.checkFullCapacityByStudyNo(stdNo)) {
-        
+
         // 현재 인원이 총원보다 작다면 스터디에 해댱 맴버를 추가시켜주고
         studyMemberService.addStudyMember(stdNo, memberNo, false);
         System.out.println(memberNo + "번 회원 가입승인 완료 add 시켜주기");
@@ -443,17 +447,94 @@ public class MyStudyController {
         studyService.prsnCount(stdNo);
         // 가입 신청에 있는 회원 정보를 없애준다.
         approvalService.delete(stdNo, memberNo);
-        
+
       } else {
         System.out.println("가입 실패");
         content.put("status", "인원이 꽉 찼습니다.");
       }
-      
+
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
 
+    return content;
+  }
+
+  // 회원의 평가 정보
+  @GetMapping("rateinfo")
+  public Object rateinfo(@RequestParam int memberNo, HttpSession session) {
+
+    Member loginUser = (Member)session.getAttribute("loginUser");
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    if (loginUser != null) {
+
+      List<StudyMember> rateInfo = studyMemberService.rateInfo(memberNo);
+      List<RateLog> rateLog = rateService.list(memberNo);
+
+      if(rateInfo != null) {
+        content.put("rateInfo", rateInfo);
+      }
+
+      if(rateLog != null) {
+        content.put("rateLog", rateLog);
+      }
+
+      content.put("status", "success");
+
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
+  }
+
+  @GetMapping("history")
+  public Object history(
+      HttpSession session,
+      @RequestParam int memberNo,
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="3") int pageSize) {
+
+    Member loginUser = (Member)session.getAttribute("loginUser");
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    if (loginUser != null) {
+
+      if (pageSize < 3 || pageSize > 8) 
+        pageSize = 3;
+
+      int rowCount = studyMemberService.sizeEndStudy(memberNo); 
+
+      if (rowCount == 0) {
+        content.put("pageNo", 0);
+        content.put("status", "success");
+        return content;
+      }
+
+      int totalPage = rowCount / pageSize;
+
+      if (rowCount % pageSize > 0)
+        totalPage++;
+
+      if (pageNo < 1) 
+        pageNo = 1;
+      else if (pageNo > totalPage)
+        pageNo = totalPage;
+
+      List<History> history = studyMemberService.userHistory(memberNo, pageNo, pageSize);
+
+      content.put("history", history);
+      content.put("pageNo", pageNo);
+      content.put("pageSize", pageSize);
+      content.put("totalPage", totalPage);
+      content.put("status", "success");
+
+    } else {
+      content.put("status", "fail");
+    }
     return content;
   }
 
