@@ -63,6 +63,9 @@
 <!-- CSS Customization -->
 <link href="/studyboot/node_modules/datepicker-bootstrap/css/core.css"
  rel="stylesheet" type="text/css">
+ <!-- CSS Customization -->
+<link href="/studyboot/node_modules/chart.js/dist/Chart.css"
+ rel="stylesheet" type="text/css">
 <link
  href="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.css"
  rel="stylesheet" type="text/css">
@@ -122,8 +125,8 @@
        <!-- Text Input -->
        <div class="row">
         <div class="form-group g-mb-20 col">
-         <label class="g-mb-10" for="goal">패기넘치는 포부를 적어주세요!</label> <input
-          class="form-control form-control-md rounded" id="goal"
+         <label class="g-mb-10" for="userGoal">패기넘치는 포부를 적어주세요!</label> <input
+          class="form-control form-control-md rounded" id="userGoal"
           name='goal' type='text' placeholder="30자 이내로 적어주세요!">
         </div>
        </div>
@@ -137,10 +140,6 @@
         class="btn btn-md u-btn-outline-primary g-rounded-50"
         data-dismiss="modal">취소</button>
       </div>
-
-
-
-
      </div>
     </div>
    </div>
@@ -186,7 +185,6 @@
  <section class="container g-py-100">
   <div class="row g-mb-50 ui segment" id="example1">
 
-
    <div class="col-md-8 g-mb-30">
     <div class="mb-5" id="contents">
      <h2 id="name" style="display: inline;"></h2>
@@ -201,20 +199,46 @@
      <i
       class="fa fa-bar-chart u-divider__icon g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
     </div>
+    
+    <div class="row justify-content-md-center">
+    <div class="col-md-auto g-pb-70" style="width: 75%;">
+    <canvas id="studyRateChart"></canvas>
+    </div>
+    </div>
+    
+     
+    <div class="row justify-content-md-center">
+    <div class="col-md-auto g-pb-70" style="width: 55%;">
+    <canvas id="ageRateChart"></canvas>
+     <div class="col-md-auto" style="width: 55%;">
+     </div>
+    </div>
+    
+   </div>
 
+
+   <div class="row justify-content-md-center">
+    <div class="col-md-auto" style="width: 55%;">
+    <canvas id="attendRateChart"></canvas>
+    </div>
+     <div class="col-md-auto" style="width: 55%;">
+     </div>
+    </div>
+    
    </div>
 
 
 
-
    <div class="col-md-4 right ui rail">
-    <div class="ui sticky" style="z-index: 2;">
+    <div class="ui sticky g-brd-around rounded g-brd-gray-light-v3 g-pr-30  g-pl-30  g-pt-30 g-pb-50" style="z-index: 2;">
+     
+     
      <!-- Client -->
-     <div class="mb-5">
-      <h3 class="h5 g-color-black mb-3">활동 지역</h3>
-      <div id="map" class="align-self-center"
+    <!--   <h3 class="h5 g-color-black mb-3">활동 지역</h3>
+     <div class="row justify-content-md-center mb-5">
+      <div id="map" class="col-md-auto"
        style="width: 250px; height: 150px;"></div>
-     </div>
+     </div> -->
      <!-- End Client -->
 
      <!--members -->
@@ -281,21 +305,6 @@
  </section>
  <!-- End Cube Portfolio Blocks -->
 
-  
-
-<div class="ui selection dropdown sample">
-  <input name="gender" type="hidden" value="default">
-  <i class="dropdown icon"></i>
-  <div class="default text">소분류</div>
-  <div class="menu">
-      <div class="item" data-value="111">시각디자인</div>
-      <div class="item" data-value="1122">오우 디자인</div>
-  </div>
- </div>
-
-
-<div id="sample1">
-</div>
 
 
  <!--  footer -->
@@ -414,6 +423,8 @@
 
 
  <!-- JS Custom -->
+ <script src="../../node_modules/chart.js/dist/Chart.js"></script>
+<script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
  <script type="text/javascript"
   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4eae5ff811ddc98b3b18e3ad262f4543"></script>
  <script src="/studyboot/Unify/assets/js/components/hs.progress-bar.js"></script>
@@ -430,6 +441,7 @@
  <script src="../../Unify/assets/js/custom.js"></script>
  <script src="../header.js"></script>
  <script src="../footer.js"></script>
+ <script src="chartUtil.js"></script>
  <script src="view.js"></script>
  <script>
     <!-- JS Plugins Init. -->
