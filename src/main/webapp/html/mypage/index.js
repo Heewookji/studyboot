@@ -149,53 +149,6 @@ $('#inqryAdd-btn').click((e) => {
 });
 
 
-// 사진 파일 업로드
-// $('#imageInput').fileupload({
-// url: '../../app/json/member/photo', // 서버에 요청할 URL
-// dataType: 'json', // 서버가 보낸 응답이 JSON임을 지정하기
-// sequentialUploads: true,
-// singleFileUploads: false,
-// autoUpload: false,
-// replaceFileInput : true,
-// processalways: function (e, data) {
-//    
-// console.log('add()...');
-// console.log(data);
-//    
-// if (!checkImageType(data.files[0].name)) {
-// alert('사진 파일만 선택 할 수 있습니다!')
-// return false;
-// }
-//    
-// if (data.files && data.files[0]) {
-//      
-// var reader = new FileReader();
-// reader.onload = (e) => {
-// $('#prevImage').attr('src', e.target.result);
-// }
-// reader.readAsDataURL(data.files[0]);
-//      
-// imgUdt = false;
-// $('#imageUpdate-btn').prop('disabled', false);
-// $('#imageUpdate-btn').unbind("click");
-// $('#imageUpdate-btn').click(function() {
-// data.submit();
-// });
-// }
-// },
-// done: function (e, data) {
-// $('#profilePhoto').attr('src', '/studyboot/upload/images/member/' +
-// data.result.loginUser.photo);
-// $('#history-profilePhoto').attr('src', '/studyboot/upload/images/member/' +
-// data.result.loginUser.photo);
-// $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' +
-// data.result.loginUser.photo + '.jpg');
-// user.photo = data.result.loginUser.photo;
-// imgUdt = true;
-// $('#imageModal').modal('hide');
-// $('#imageUpdate-btn').prop('disabled', true);
-// }
-// });
 
 
 
