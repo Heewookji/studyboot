@@ -14,51 +14,51 @@ public class StudyRetireServiceImpl implements StudyRetireService {
 
   RateDao rateDao;
   RateRequireDao rateRequireDao;
-  
+
   public StudyRetireServiceImpl(RateDao rateDao, RateRequireDao rateRequireDao) {
     this.rateDao = rateDao;
     this.rateRequireDao = rateRequireDao;
   }
-  
+
   @Override
   public int evaluationAdd(Map<String, Object> evaluationMap) {
 
     return rateDao.evaluationAdd(evaluationMap);
   }
-  
+
   @Override
   public int rateRequire(Map<String, Object> rateRequireMap) {
-    
+
     return rateRequireDao.rateRequire(rateRequireMap);
   }
-  
+
   @Override
   public List<RateRequire> retireTrueOrFalse(Map<String, Object> map) {
 
     return rateRequireDao.retireTrueOrFalse(map);
   }
-  
+
   @Override
   public List<Rate> retireEvaluation(Map<String, Object> map) {
-   
+
     return rateDao.findAll(map);
   }
-  
+
   @Override
   public int evaluationMemberCount(int retireeMemberNo) {
 
     return rateRequireDao.evaluationMemberCount(retireeMemberNo);
   }
-  
+
   @Override
   public int retireeEvaluationCount(Map<String, Object> retireeEcaluationCountMap) {
-   
+
     return rateRequireDao.retireeEvaluationCount(retireeEcaluationCountMap);
   }
-  
+
   @Override
   public int rateRequireUpdate(Map<String, Object> map) {
-   
+    
     return rateRequireDao.rateRequireUpdate(map);
   }
 }
