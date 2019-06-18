@@ -49,31 +49,69 @@ $(document).ready(function() {
   };
 
   // 평점 모달을 준비한다.
-  $("#sb-history").load("rateInfo.html")
+  $("#sb-history").load("rateInfo.html", function(e){
+    $('.apply-modal-btn').click((e) => {
+      $('#userNo').attr('data-no',$(e.target).parents('.refuse-mem').find('a').attr('data-no'));
+      $('#historyModal').modal('show');
+    });
+  });
+
+
 });
 
 
 function loadStudyDetail(nosss) {
-  $.getJSON('../../app/json/MyStudy/mmntUpdate?no=' + nosss,
+  $.getJSON('../../app/json/study/detail?no=' + nosss,
       function(obj){
-
     console.log(obj);
-    $('#std-name').val(obj.name);
-    $('#std-goal').val(obj.goal);
 
-//  var $per = "<option value=" + '"' + obj.personnel + '"' + ">" + obj.personnel + "명" + 
-//  "</option>"
-//  console.log($per);
-    // 드롭다운과 날짜 형식 / 요일 라이브러리 사용법 알아야함
-    //$('#quantity').append($per);
+    $('#std-name').val(obj.name);
+    $('#prsn-count').text(obj.personnel + "명");
+    $('#goal').val(obj.goal);
+
+    for(var a of obj.dayStrList){
+      for(var b of $('.modalday-checkbox span')){
+        if(a == $(b).text()){
+          $(b).prev('input').prop('checked', true);
+        }
+      }
+    }
     $('#startDate').val(obj.startDate);
     $('#endDate').val(obj.endDate);
+    $('#std-cls-L').val(obj.clsList[0].name);
+    $('#std-cls-M').val(obj.clsList[1].name);
+    $('#std-cls-S').val(obj.clsList[2].name);
+    $('#std-area-L').val(obj.addressName.split(" ")[0]);
+    $('#std-area-M').val(obj.addressName.split(" ")[1]);
+    $('#std-area-S').val(obj.addressName.split(" ")[2]);
     $('#std-contents').html(obj.contents);
-
-
+    
+  //목표체크
+    $( "#goal" ).keyup(function(){
+      if($( "#goal" ).val().length > 25 ||
+              $( "#goal" ).val().length < 5 ){
+        $("#goal").attr("data-toggle","tooltip");
+        $("#goal").attr("data-trigger","hover focus");
+        $("#goal").attr("data-placement","bottom");
+        $("#goal").attr("data-html", true);
+        $("#goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
+        $('#goal').tooltip('enable');
+        $('#goal').tooltip('show');
+      } else{
+        if($("#goal").attr("data-toggle")){
+          $('#goal').tooltip('disable');
+          $('#goal').tooltip('hide');
+        }
+      }
+    });
+    
+    $(document.body).trigger('loaded-saveData');
   });
-};
+}
+
 loadStudyDetail(nosss);
+
+
 
 
 function loadStudyApl(nosss) {
@@ -101,7 +139,7 @@ $(document.body).bind('loaded-approval', () => {
     });
   });
 
-
+  // 가입승인시 스터디 맴버에 insert시키고 apl_std에 등록된 신청서 삭제 시키고 스터디 테이블에 현재인원을 하나 카운트 시킨다.
   $('.approval-btn').click((e) => {
     console.log($(e.target).parents('.refuse').find('a').attr('data-no'));
     $.getJSON("../../app/json/MyStudy/register?stdNo=" + nosss + "&memberNo="
@@ -111,9 +149,49 @@ $(document.body).bind('loaded-approval', () => {
       location.reload();
     });
   });
+});
 
+
+$(document.body).bind('loaded-saveData', () => {
   
-  
-  
+//불러온 데이터 변경하고 버튼 눌렀을 때 업데이트 처리
+  $('#sb-info-change').click((e) => {
+    // 요일 유효성 검사
+    var addDayNo = 0;
+    for(var a of $('.modalday-checkbox input')){
+      if($(a).prop("checked")){
+        addDayNo += parseInt($(a).val());
+      }
+    }
+    if(addDayNo == 0){
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '최소 한개의 요일을 입력해주세요!'
+      });
+      return;
+    }
+    alert(addDayNo);
+  });
   
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
