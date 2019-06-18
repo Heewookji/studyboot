@@ -17,6 +17,7 @@ import com.studyboot.sms.domain.RateRequire;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
+import com.studyboot.sms.service.MyStudyScheduleService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyRetireService;
 import com.studyboot.sms.service.StudyService;
@@ -29,6 +30,7 @@ public class StudyRetireController {
   @Autowired StudyService studyService;
   @Autowired StudyRetireService studyRetireService;
   @Autowired StudyMemberService studyMemberService;
+  @Autowired MyStudyScheduleService myStudyScheduleService;
 
   @GetMapping("retireEvaluation")
   public Object retireEvaluation(String[] nickNames, String[] evaluations, int studyNo, HttpSession session) {
@@ -59,9 +61,16 @@ public class StudyRetireController {
 
     // 로그인한 유저가 해당 스터디의 멤버(탈퇴자들)를 평가한 정보 목록 뽑아옴(회원 평점 정보 테이블)
     List<Rate> retireeRateList = (List<Rate>) studyRetireService.retireEvaluation(map);//RateMapper (findAll)
-
     // 탈퇴자가 있다면 리턴
-    if (retireeList.size() != retireeRateList.size()) {
+    
+    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
+    System.out.println("retireeList: "+retireeList);
+    System.out.println("retireeRateList: "+retireeRateList);
+    System.out.println("retireeList.size: "+retireeList.size());
+    System.out.println("retireeRateList.size(): "+retireeRateList.size());
+    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
+    if (retireeList.size() != retireeRateList.size()) { 
+    // 1번스터디에 5번회원이 탈퇴할때 에러 나는 이유: 
 
       content.put("status", "이 전에 탈퇴한 회원을 먼저 평가해 주세요!");
 
@@ -84,8 +93,6 @@ public class StudyRetireController {
       content.put("status", "스터디 멤버가 아닙니다.");
       return content;
     }
-
-    // 닉네임을 멤버넘버로 바꾸는 코드
 
     HashMap<String,Object> evaluationMap = new HashMap<>(); // 평가 맵
     HashMap<String,Object> rateRequireMap = new HashMap<>(); // 탈퇴자 평가 여부 맵
@@ -116,19 +123,54 @@ public class StudyRetireController {
       content.put("message", e.getMessage());
     }
 
+    
+    
+    
+    
+    
     try {
       
+      int allEventNumber = myStudyScheduleService.allEventCount(studyNo); // 모든 일정의 수
+
+      // 필요한 정보가 put 되어 있어서 retireMap을 재사용 하였다.
+      int studyAttendNumber = myStudyScheduleService.studyAttendCount(retireMap); // 로그인 한 사용자가 출석한 수
+      
+      double attendPercent = (double) studyAttendNumber / allEventNumber * 100;
+          
+      double attendPercentCut = (Math.round((attendPercent)*10)/10.0);
+      
+      Map<String, Object> attendPercentUpdateMap = new HashMap<>();
+      
+      
+      System.out.println("모든일정 수: " + allEventNumber);
+      System.out.println("출석한횟 수: " + studyAttendNumber);
+      System.out.println("확률: " + attendPercent);
+      System.out.println("확률자른거: " + attendPercentCut);
+      
+      attendPercentUpdateMap.put("percent", attendPercentCut);
+      attendPercentUpdateMap.put("studyNo", studyNo);
+      attendPercentUpdateMap.put("memberNo", loginUser.getNo());
+      
+      studyMemberService.attendPercentUpdate(attendPercentUpdateMap); // 출석률을 업데이트 한다.
       
     } catch (Exception e) {
       content.put("status", "출석률 업데이트 중 오류가 발생 하였습니다.");
       content.put("message", e.getMessage());
-      System.out.println(e.getMessage());
+      System.out.println("출석률 업데이트 오류 내용: " + e.getMessage());
     }
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
     try {
-      List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames);
+      List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames); // 닉네임을 멤버넘버로 바꾸는 코드
 
       // 평가점수 입력
       for(int i = 0; i < nickNames.length; i++) {

@@ -182,8 +182,6 @@
     not null
   </select>
 
-
-
   <insert id="add" parameterType="map">
     insert
     into
@@ -197,20 +195,19 @@
     #{memberNo},
     #{leader}
     );
-
   </insert>
   
-<!-- 
-  <select id="studyMemberCount" resultType="int">
-    select
-     count(*)
-    from
-      sms_std_member sm
+  <update id="attendPercentUpdate" parameterType="map">
+    update 
+      sms_std_member
+    set
+      atn_pct = #{percent}
     where
-      sm.std_id = 100 and
-      end_state_cls_id is null;
-  </select>
-   -->
+      std_id = #{studyNo}
+        and
+      member_id = #{memberNo}
+  </update>
+  
 </mapper>
 
 
