@@ -507,6 +507,13 @@ update sms_std set
     where std_id = #{stdNo}
   </update>
 
+  <update id="photoUpdate" parameterType="map">
+     update sms_std
+      set photo = #{fileName}
+     where
+      std_id = #{studyNo}
+  </update>
+
 </mapper>
 
 

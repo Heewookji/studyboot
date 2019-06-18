@@ -9,7 +9,6 @@ URL = window.URL || window.webkitURL,
 originalImageURL,
 uploadedImageType = 'image/jpeg',
 uploadedImageURL,
-imageChanged = null,
 $alert = $('.alert'),
 $modal = $('#imageModal'),
 // cropper options
@@ -70,7 +69,6 @@ if (URL) {
 
       if (/^image\/\w+/.test(file.type)) {
         uploadedImageType = file.type;
-        imageChanged = false;
 
         if (originalImageURL) {
           URL.revokeObjectURL(originalImageURL);
@@ -143,12 +141,10 @@ $('#imageUpload-btn').click(() => {
           avatar.attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
           $('#history-profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
           $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
-          imageChanged = true;
           $alert.show().addClass('alert-success').text('Upload success');
         },
         error: function () {
           avatar.attr('src', initialAvatarURL);
-          imageChanged = false;
           $alert.show().addClass('alert-warning').text('Upload error');
         }
       });
@@ -156,7 +152,7 @@ $('#imageUpload-btn').click(() => {
   }
 });
 
-
+// 스터디 프로필 사진 변경
 $('#myStudy-imageUpload-btn').click(() => {
   
   var initialAvatarURL;
@@ -176,26 +172,25 @@ $('#myStudy-imageUpload-btn').click(() => {
     canvas.toBlob(function (blob) {
       var formData = new FormData();
       // formdata 객체에 blob 데이터를 꼽아준다.
-      formData.append('avatar', blob, 'avatar.jpg');
+      formData.append('avatar', blob, 'avatar.jpg'); // 'avatar'는 서버의 파라미터 명이랑 맞춰 줘야한다. 
       
       // 비동기 요청 실행
       $.ajax({
-        url: '../../app/json/member/photo',
+        url: '../../app/json/MyStudy/photo?studyNo=' + studyNo,
         method: 'POST',
         data: formData,
         enctype: "multipart/form-data",
         processData: false,
         contentType: false,
         success: function (data) {
-          avatar.attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
-          $('#history-profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
-          $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.' + data.loginUser.photo + '.jpg');
-          imageChanged = true;
+          
+          if(data.notStudyLeader != undefined) {
+            alert("스터디 장만 변경 가능합니다.");
+          }
+          $('#study-img').attr('src', '/studyboot/upload/images/mystudy/thumbnail.' + data.fileName + '.jpg');
           $alert.show().addClass('alert-success').text('Upload success');
         },
         error: function () {
-          avatar.attr('src', initialAvatarURL);
-          imageChanged = false;
           $alert.show().addClass('alert-warning').text('Upload error');
         }
       });
@@ -206,3 +201,4 @@ $('#myStudy-imageUpload-btn').click(() => {
 
 
 
+ 

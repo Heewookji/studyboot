@@ -2,6 +2,7 @@ package com.studyboot.sms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.StudyBoardDao;
 import com.studyboot.sms.dao.StudyDao;
@@ -14,10 +15,11 @@ public class MyStudyServiceImpl implements MyStudyService {
   StudyDao studyDao;
   StudyBoardDao studyBoardDao;
 
-  public MyStudyServiceImpl(StudyBoardDao studyBoardDao) {
+  public MyStudyServiceImpl(StudyBoardDao studyBoardDao, StudyDao studyDao) {
     this.studyBoardDao = studyBoardDao;
+    this.studyDao = studyDao;
   }
-
+  
   @Override
   public List<StudyBoard> list(int pageNo, int pageSize, 
       int clsNo, List<Integer> memberNos, String keyword, int no) {
@@ -93,7 +95,11 @@ public class MyStudyServiceImpl implements MyStudyService {
     return studyBoardDao.update(studyBoard);
   }
 
+  @Override
+  public int photoUpdate(Map<String, Object> map) {
 
+    return studyDao.photoUpdate(map);
+  }
 
 
 

@@ -1,9 +1,11 @@
 package com.studyboot.sms.web.json;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import com.studyboot.sms.domain.Amazon;
 import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
@@ -25,6 +28,8 @@ import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyService;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 
@@ -432,10 +437,10 @@ public class MyStudyController {
     System.out.println("register 접근" + "" +  stdNo + "" + memberNo);
 
     HashMap<String,Object> content = new HashMap<>();
-    
+
     try {
       if (!studyService.checkFullCapacityByStudyNo(stdNo)) {
-        
+
         // 현재 인원이 총원보다 작다면 스터디에 해댱 맴버를 추가시켜주고
         studyMemberService.addStudyMember(stdNo, memberNo, false);
         System.out.println(memberNo + "번 회원 가입승인 완료 add 시켜주기");
@@ -443,12 +448,12 @@ public class MyStudyController {
         studyService.prsnCount(stdNo);
         // 가입 신청에 있는 회원 정보를 없애준다.
         approvalService.delete(stdNo, memberNo);
-        
+
       } else {
         System.out.println("가입 실패");
         content.put("status", "인원이 꽉 찼습니다.");
       }
-      
+
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -457,7 +462,60 @@ public class MyStudyController {
     return content;
   }
 
+  @PostMapping(value = "photo", consumes = "multipart/form-data")
+  public Object photo(HttpSession session, MultipartFile avatar, int studyNo) throws Exception {
+                                                         //formData
+    Map<String, Object> content = new HashMap<>();
+    // 리더 판단을 위한 코드
+    Map<String,Object> studyAndUserNo = new HashMap<>();
 
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", studyNo);
+    if (studyMemberService.findStudyMemberLeader(studyAndUserNo) == false) {
+
+      content.put("notStudyLeader", "fail");
+      return content;
+    }
+    
+    
+    if (avatar.isEmpty()) {
+      content.put("status", "fail");
+      return content;
+    }
+    
+    // 이미지 저장
+    String fileName = UUID.randomUUID().toString();
+    String path = servletContext.getRealPath("/upload/images/mystudy/" + fileName);
+    avatar.transferTo(new File(path)); // 파일로 만들어서 path에 저장
+
+    // 썸네일 이미지 저장
+    Thumbnails.of(path)
+    .size(1000, 1000)
+    .outputFormat("jpg")
+    .toFiles(Rename.PREFIX_DOT_THUMBNAIL); // thumbnail.을 붙여줌
+
+    Map<String, Object> photoUpdateMap = new HashMap<>();
+    photoUpdateMap.put("studyNo", studyNo);
+    photoUpdateMap.put("fileName", fileName);
+    
+    System.out.println("controller: "+photoUpdateMap);
+    
+    if(myStudyService.photoUpdate(photoUpdateMap) != 0) {
+      content.put("fileName", fileName);
+      content.put("status", "success");
+
+    } else {
+      content.put("status", "fail");
+    }
+    return content;
+  }
+  
+  /*
+   * @GetMapping("studyProfile") public Object studyProfile (@RequestParam int no) {
+   * 
+   * Study study = studyService.get(no); System.out.println(study); return study; }
+   */
 }
 
 
