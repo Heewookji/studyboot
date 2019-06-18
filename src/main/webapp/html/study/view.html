@@ -63,13 +63,13 @@
 <!-- CSS Customization -->
 <link href="/studyboot/node_modules/datepicker-bootstrap/css/core.css"
  rel="stylesheet" type="text/css">
- <!-- CSS Customization -->
+<!-- CSS Customization -->
 <link href="/studyboot/node_modules/chart.js/dist/Chart.css"
  rel="stylesheet" type="text/css">
 <link
  href="/studyboot/js/Semantic-UI-master/dist/components/dropdown.min.css"
  rel="stylesheet" type="text/css">
- <link
+<link
  href="/studyboot/js/Semantic-UI-master/dist/components/icon.min.css"
  rel="stylesheet" type="text/css">
 <link
@@ -125,9 +125,10 @@
        <!-- Text Input -->
        <div class="row">
         <div class="form-group g-mb-20 col">
-         <label class="g-mb-10" for="userGoal">패기넘치는 포부를 적어주세요!</label> <input
-          class="form-control form-control-md rounded" id="userGoal"
-          name='goal' type='text' placeholder="30자 이내로 적어주세요!">
+         <label class="g-mb-10" for="userGoal">패기넘치는 포부를 적어주세요!</label>
+         <input class="form-control form-control-md rounded"
+          id="userGoal" name='goal' type='text'
+          placeholder="30자 이내로 적어주세요!">
         </div>
        </div>
        <!-- End Text Input -->
@@ -160,7 +161,7 @@
 
   <div class="container g-py-50--md">
 
-   <div class="g-pt-110 d-sm-flex text-center">
+   <div class="g-mt-110 d-sm-flex text-center">
 
     <div class="align-self-center ml-auto g-pt-10  g-pb-10">
      <ul class="u-list-inline">
@@ -182,59 +183,98 @@
 
 
  <!-- Portfolio Single Item -->
- <section class="container g-py-100">
+ <section class="container g-pt-40 g-pb-100">
   <div class="row g-mb-50 ui segment" id="example1">
 
    <div class="col-md-8 g-mb-30">
-    <div class="mb-5" id="contents">
-     <h2 id="name" style="display: inline;"></h2>
-     <div class="rateit g-pl-20" id="rate" data-rateit-readonly="true"
-      data-rateit-mode="font" style="font-size: 33px"
-      data-rateit-resetable="false"></div>
-     <span class="d-block lead g-pb-15" id="goal"></span>
+    <div class="mb-5 g-font-weight-400" id="contents">
+     <h1 class="h2 text-uppercase g-font-weight-400 u-heading-v2__title"
+      id="name" style="display: inline;"></h1>
+     <div class="rateit g-pl-20 g-pb-20" id="rate"
+      data-rateit-readonly="true" data-rateit-mode="font"
+      style="font-size: 33px" data-rateit-resetable="false"></div>
+     <div class="u-divider u-divider-solid g-brd-primary g-width-80--md">
+     </div>
+     <span class="d-block lead g-pb-20 g-pt-40" id="goal"></span>
     </div>
 
-    <div
-     class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-80">
-     <i
-      class="fa fa-bar-chart u-divider__icon g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>
-    </div>
-    
+
+    <!-- Gray Colored Blockquotes -->
+    <blockquote
+     class="blockquote g-bg-gray-light-v6 rounded g-brd-primary g-font-size-16 g-pa-40 g-mb-50">
+     <p>지금부터 20년 뒤 여러분은 잘못하고 후회할 일보다 하지 않아서 후회하는 일이 더 많을 겁니다.<br> 그러니
+      밧줄을 던져 버리십시오. 안전한 항구에서 떠나 멀리 항해하십시오.<br> 당신의 돛에 무역풍을 가득 담으십시오. 탐험합시다.
+      꿈을 꿉시다. 발견합시다.</p>
+     <footer class="blockquote-footer">
+      <cite title="Source Title">Mark Twain</cite>
+     </footer>
+    </blockquote>
+    <!-- End Gray Colored Blockquotes -->
+
+
+    <hr>
+
+
+
+
     <div class="row justify-content-md-center">
-    <div class="col-md-auto g-pb-70" style="width: 75%;">
-    <canvas id="studyRateChart"></canvas>
+
+     <p class="text-left lead g-font-size-25 g-pb-30">전체 스터디 중 상위
+      <span class="g-color-primary">
+       10% </span>의 스터디입니다!</p>
+
+     <div class="col-md-auto g-pb-100" style="width: 75%;">
+      <canvas id="studyRateChart"></canvas>
+     </div>
     </div>
+
+
+    <div class="row g-px-60 justify-content-md-center">
+     <div class="col" style="width: 30%;">
+      <canvas id="ageRateChart"></canvas>
+     </div>
+     <div class="col-4 align-self-end">
+      <p class="text-bottom lead g-font-size-20">전체 스터디 중 상위
+       <span class="g-color-primary">
+       10% </span>의 스터디입니다!</p>
+     </div>
     </div>
-    
-     
-    <div class="row justify-content-md-center">
-    <div class="col-md-auto g-pb-70" style="width: 55%;">
-    <canvas id="ageRateChart"></canvas>
-     <div class="col-md-auto" style="width: 55%;">
+
+ <div class="row g-px-60 justify-content-md-center">
+     <div class="col g-pt-100" style="width: 60%;">
+      <canvas id="finishRateChart"></canvas>
+     </div>
+     <div class="col-4 align-self-end">
+      <p class="text-left lead g-font-size-20">전체 스터디 중 상위<span class="g-color-primary">
+       10% </span>의 스터디입니다!</p>
      </div>
     </div>
     
-   </div>
-
-
-   <div class="row justify-content-md-center">
-    <div class="col-md-auto" style="width: 55%;">
-    <canvas id="attendRateChart"></canvas>
-    </div>
-     <div class="col-md-auto" style="width: 55%;">
+    <div class="row g-px-60 justify-content-md-center">
+     <div class="col g-pt-100" style="width: 50%;">
+      <canvas id="attendRateChart"></canvas>
+     </div>
+     <div class="col-4 align-self-end">
+      <p class="text-left lead g-font-size-20">전체 스터디 중 상위
+       <span class="g-color-primary">
+       10% </span>의 스터디입니다!</p>
      </div>
     </div>
     
+    
+
    </div>
 
 
 
    <div class="col-md-4 right ui rail">
-    <div class="ui sticky g-brd-around rounded g-brd-gray-light-v3 g-pr-30  g-pl-30  g-pt-30 g-pb-50" style="z-index: 2;">
-     
-     
+    <div
+     class="ui sticky g-brd-around g-brd-gray-light-v3 g-brd-top-2 g-brd-primary-top g-line-height-1_8 g-rounded-3 g-pr-30  g-pl-30  g-pt-30 g-pb-50"
+     style="z-index: 2;">
+
+
      <!-- Client -->
-    <!--   <h3 class="h5 g-color-black mb-3">활동 지역</h3>
+     <!--   <h3 class="h5 g-color-black mb-3">활동 지역</h3>
      <div class="row justify-content-md-center mb-5">
       <div id="map" class="col-md-auto"
        style="width: 250px; height: 150px;"></div>
@@ -242,13 +282,14 @@
      <!-- End Client -->
 
      <!--members -->
-     <div class="mb-3">
+     <div class="mb-4">
       <h3 class="h5 g-color-black" style="display: inline;">구성원</h3>
       <span class=" g-font-size-12 g-letter-spacing-0_5">
        <div class="pull-right g-pt-5">
         현재 인원: <span class="g-color-primary" id="personnel"></span>
        </div>
       </span>
+
      </div>
      <div class="ui  dropdown memberDropdown mb-5">
       <div class="text" id="studyLeader"></div>
@@ -288,16 +329,6 @@
 
      </div>
 
-
-     <hr>
-
-     <div class="mb-3">
-      <ul class="list-inline mb-0 pull-right" id="btns">
-       <li class="list-inline-item mx-1 mb-1"><a
-        class="btn u-btn-outline-primary g-rounded-25" href="#"
-        id="message-btn"><i class="mr-1 fa fa-comment"></i> 문의하기 </a></li>
-      </ul>
-     </div>
      <!-- End Share -->
     </div>
    </div>
@@ -424,7 +455,8 @@
 
  <!-- JS Custom -->
  <script src="../../node_modules/chart.js/dist/Chart.js"></script>
-<script src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+ <script
+  src="../../node_modules/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
  <script type="text/javascript"
   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4eae5ff811ddc98b3b18e3ad262f4543"></script>
  <script src="/studyboot/Unify/assets/js/components/hs.progress-bar.js"></script>
@@ -444,48 +476,48 @@
  <script src="chartUtil.js"></script>
  <script src="view.js"></script>
  <script>
-    <!-- JS Plugins Init. -->
-      $(document)
-              .on(
-                      'ready',
-                      function() {
-                        $.HSCore.components.HSDatepicker
-                                .init('#datepickerDefault, #datepickerInline, #datepickerInlineFrom, #datepickerFrom');
+  <!-- JS Plugins Init. -->
+    $(document)
+            .on(
+                    'ready',
+                    function() {
+                      $.HSCore.components.HSDatepicker
+                              .init('#datepickerDefault, #datepickerInline, #datepickerInlineFrom, #datepickerFrom');
 
-                        //sticky block
-                        $('.ui.sticky').sticky({
-                          offset: 150,
-                          BoundBottom: false,
-                          context: '#example1'
-                        });
-
-                        // initialization of forms
-                        $.HSCore.helpers.HSFocusState.init();
-                        $.HSCore.helpers.HSNotEmptyState.init();
-                        $.HSCore.components.HSSlider
-                                .init('#regularSlider, #regularSlider2, #regularSlider3, #rangeSlider, #rangeSlider2, #rangeSlider3, #stepSlider, #stepSlider2, #stepSlider3');
-                        $.HSCore.components.HSCountQty.init('.js-quantity');
-
+                      //sticky block
+                      $('.ui.sticky').sticky({
+                        offset: 150,
+                        BoundBottom: false,
+                        context: '#example1'
                       });
 
-      $(window).on(
-              'load',
-              function() {
-                // initialization of autocomplet
-                $.HSCore.components.HSLocalSearchAutocomplete
-                        .init('#u-sidebar-navigation__search-autocomplete');
+                      // initialization of forms
+                      $.HSCore.helpers.HSFocusState.init();
+                      $.HSCore.helpers.HSNotEmptyState.init();
+                      $.HSCore.components.HSSlider
+                              .init('#regularSlider, #regularSlider2, #regularSlider3, #rangeSlider, #rangeSlider2, #rangeSlider3, #stepSlider, #stepSlider2, #stepSlider3');
+                      $.HSCore.components.HSCountQty.init('.js-quantity');
 
-                // initialization of autocomplet
-                $.HSCore.components.HSAutocomplete.init('#autocomplete2');
+                    });
 
-                // initialization of HSMegaMenu component
-                $('.js-mega-menu').HSMegaMenu({
-                  event: 'hover',
-                  pageContainer: $('.container'),
-                  breakpoint: 991
-                });
+    $(window).on(
+            'load',
+            function() {
+              // initialization of autocomplet
+              $.HSCore.components.HSLocalSearchAutocomplete
+                      .init('#u-sidebar-navigation__search-autocomplete');
+
+              // initialization of autocomplet
+              $.HSCore.components.HSAutocomplete.init('#autocomplete2');
+
+              // initialization of HSMegaMenu component
+              $('.js-mega-menu').HSMegaMenu({
+                event: 'hover',
+                pageContainer: $('.container'),
+                breakpoint: 991
               });
-    </script>
+            });
+  </script>
 </body>
 </html>
 
