@@ -29,8 +29,13 @@ $(document.body).bind('loaded-nav', () => {
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + nos,
       function(obj) {
 
-    $('#study_img').attr("src", "/studyboot/upload/images/" + obj.study.photo);
-
+    if(obj.study.photo === 'default.jpg') {
+  
+      $('#study-img').attr('src', '/studyboot/upload/images/mystudy/default.jpg');
+    } else {
+     
+      $('#study-img').attr('src', '/studyboot/upload/images/mystudy/thumbnail.' + obj.study.photo + '.jpg');
+    }
     var stdMemberListTemplateSrc = $('#study-memberList').html();
     var stdMemberListGenerator = Handlebars.compile(stdMemberListTemplateSrc);
     $(stdMemberListGenerator(obj)).appendTo('#std-MemberList')
@@ -39,4 +44,15 @@ $(document.body).bind('loaded-nav', () => {
     $("#sb-history").load("rateInfo.html");
   });
 });
+
+/*
+(function (nos) {
+  $.getJSON('../../app/json/MyStudy/studyProfile?no=' + nos,
+      function(obj) {
+    
+    $('#study-img').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
+  });
+}(nos));
+*/
+>>>>>>> refs/heads/jihwan0618
 

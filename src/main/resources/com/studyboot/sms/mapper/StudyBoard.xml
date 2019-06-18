@@ -226,8 +226,8 @@
       set 
         vw_cnt = vw_cnt + 1 
       where std_board_id = #{value}
-    </update>
-
+  </update>
+  
 </mapper>
 
 
