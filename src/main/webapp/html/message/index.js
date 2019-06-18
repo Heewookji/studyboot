@@ -204,6 +204,7 @@ $('#msg-response').click((e) => {
 
 });
 
+/*
 $('#messageAdd-btn').click((e) => {
 $.ajax({
 url:'../../app/json/message/add',
@@ -224,7 +225,7 @@ error: function(){
      }
  });
 });
-
+*/
 
 $('#msg-Delete-btn').click((e) => {
   var test = [];

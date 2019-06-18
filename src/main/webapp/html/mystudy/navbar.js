@@ -23,9 +23,10 @@ $(document).ready(function() {
 
 
 $(document.body).bind('loaded-nav', () => {
-  
+	
   $("#mystudy-imagesetting").load("/studyboot/html/mypage/imagesetting.html");
-  
+  $("#message-add").load("/studyboot/html/message/messageAddModal.html");
+	  
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + nos,
       function(obj) {
 
@@ -60,4 +61,3 @@ $(document.body).bind('loaded-nav', () => {
 
 $(document.body).bind('navbar-rate', () => {
 });
-

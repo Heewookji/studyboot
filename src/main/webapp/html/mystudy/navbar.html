@@ -173,11 +173,12 @@
   </div>
 </div>
 
-  <div id="mystudy-imagesetting"></div>
 
 <!-- --------------------------------------------- 모달 --------------------------------------------- -->
-
-
+  <!--프로필 사진 변경하는 모달 -->
+  <div id="mystudy-imagesetting"></div>
+  
+  <div id="message-add"></div>
 
 
 
@@ -220,8 +221,8 @@
   정보</a>
  </li>
  <li>
- <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14 navList-msg" 
- style="cursor: pointer;" id="detail-delete">
+ <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14 navList-msg study-message" 
+ style="cursor: pointer;" id="detail-delete" nick-name={{member.nickName}}>
  <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
   쪽지</a></li>
  <li>
@@ -279,7 +280,7 @@
 {{/each}}
 </script>
 
-<script id="retire-person-evaluation-list" type="text/x-handlebars-template">
+<script id="retiree-evaluation-list" type="text/x-handlebars-template">
 {{#each retire}}
  <div class="col-md-4 g-mb-30 g-mt-30">
 <div id="rateit{{nickName}}" data-rateit-mode="font"  style="font-size:30px" data-rateit-resetable="false">
@@ -307,5 +308,14 @@
 </div>
 {{/each}}
 </script>
+
+<script>
+
+$('.study-message').click(() => {
+  alert(11);
+});
+
+</script>
 <script src="./retire.js"></script>
+<script src="studyboot/html/message/messageAddModal.js"></script>
 <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>

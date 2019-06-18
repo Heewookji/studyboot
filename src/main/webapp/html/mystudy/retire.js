@@ -6,7 +6,7 @@ retireeList;
 var evaluationTemplateSrc = $('#retire-evaluation-list').html(),
 evaluationGenerator = Handlebars.compile(evaluationTemplateSrc);
 
-var retirePersonEvaluationTemplateSrc = $('#retire-person-evaluation-list').html(),
+var retirePersonEvaluationTemplateSrc = $('#retiree-evaluation-list').html(),
 retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
 
 //리더인지 판단
