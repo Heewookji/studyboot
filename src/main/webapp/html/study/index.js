@@ -770,7 +770,7 @@ $('#init-btn').click(function(e) {
     return;
   }
 
-//모두 통과한다면, URI인코딩 방식으로 전송
+  //모두 통과한다면, URI인코딩 방식으로 전송
   jQuery.ajax({
     url:"../../app/json/study/add",
     type:"POST",
