@@ -344,7 +344,6 @@ $('#event-attend-btn').click(() => {
       for (var j = 0; j < calendarMemberList.length; j ++) {
 
         if (obj.attendNickName[i].nickName === calendarMemberList[j].member.nickName) {
-          console.log("출석한사람"+calendarMemberList[j].memberNo);
           $("#calmember"+calendarMemberList[j].memberNo).attr("checked", true);
         }
       }
