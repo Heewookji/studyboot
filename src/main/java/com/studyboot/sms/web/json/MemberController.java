@@ -128,15 +128,17 @@ public class MemberController {
   @PostMapping("update")
   public Object update(HttpSession session, Member member) {
     
-    System.out.println(member);
-    System.out.println(member.getCls());
-    System.out.println(member.getClsList());
     Member loginUser = (Member) session.getAttribute("loginUser");
     member.setNo(loginUser.getNo());
     
     Map<String,Object> content = new HashMap<>();
     
     try {
+      
+      if (member.getAddress().equals("undefined")) {
+        member.setAddress(null);
+      }
+      
       if (memberService.update(member) == 0) 
         throw new RuntimeException("해당 번호의 회원이 없습니다.");
       

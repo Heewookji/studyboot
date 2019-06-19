@@ -208,10 +208,15 @@ $(document.body).bind('loaded-rateData', () => {
           },
           scales: {
               yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      max: 5
-                  }
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                  drawOnChartArea: false,
+                },
+                ticks: {
+                  beginAtZero: true,
+                  max: 5
+                }
               }]
           }
       }
@@ -234,10 +239,15 @@ $(document.body).bind('loaded-rateData', () => {
           },
           scales: {
               yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      max: 100
-                  }
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                  drawOnChartArea: false,
+                },
+                ticks: {
+                  beginAtZero: true,
+                  max: 100
+                }
               }]
           }
       }
@@ -266,10 +276,8 @@ $(document.body).bind('loaded-rateData', () => {
           legend: {
               display: false
           },
-          plugin: {
-              labels: {
-                  render: 'percentage'
-              }
+          plugins: {
+            labels: false
           }
       }
   });

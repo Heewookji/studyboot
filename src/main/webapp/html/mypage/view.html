@@ -223,12 +223,10 @@
           data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
           <li class="nav-item"><a class="nav-link g-py-10 active"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--1" role="tab">프로필
-              변경</a></li>
+            href="#nav-1-1-default-hor-left-underline--1" role="tab">프로필</a></li>
           <li class="nav-item"><a class="nav-link g-py-10"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--2" role="tab">비밀번호
-              변경</a></li>
+            href="#nav-1-1-default-hor-left-underline--2" role="tab">보안 설정</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -237,99 +235,94 @@
           <div class="tab-pane fade show active"
             id="nav-1-1-default-hor-left-underline--1" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
-            <h2 class="h4 g-font-weight-300">자신의 정보 조회, 변경</h2>
+            
+            <h2 class="h4 g-font-weight-300">조회 / 변경</h2>
+            <p class="g-mb-25">자신의 정보를 조회하고 변경할 수 있습니다.</p>
 
-            <ul class="list-unstyled g-mb-0">
+            <ul class="list-unstyled g-mb-25">
               <!-- Name -->
               <li
-                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong
-                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">이름</strong>
+                class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="col-md-3">
+                  <strong class="g-color-gray-dark-v2">이름</strong>
+                </div>
+                <div class="col-md-8">
                   <input id="userName" type="text"
-                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200"
-                    readonly>
+                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
+                </div>
+                <div class="col-md-1 text-right">
                 </div>
               </li>
               <!-- End Name -->
 
               <!-- Birth -->
               <li
-                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong
-                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">생일</strong>
-                  <input id="birthday" type="text"
-                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200"
-                    readonly>
+                class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="col-md-3">
+                  <strong class="g-color-gray-dark-v2">생일</strong>
+                </div>
+                <div class="col-md-8">
+                  <input id="birthday" type="date"
+                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200" readonly>
+                </div>
+                <div class="col-md-1 text-right">
                 </div>
               </li>
               <!-- End Birth -->
-            </ul>
-
-            <ul class="list-unstyled g-mb-30">
+              
               <!-- Your NickName -->
               <li
-                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong
-                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">닉네임</strong>
-                  <div class="d-md-inline-block g-width-400">
-                    <input id="nickName" type="text"
-                      class="form-control d-md-inline-block g-width-200"
-                      readonly>
-                    <button type="button"
-                      class="btn u-btn-darkgray g-pos-rel g-top-minus-2"
-                      id="nickCheck-btn" disabled>중복체크</button>
-                  </div>
-                </div> <i id="sb-nickname-edit"
-                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-nickname-cancel"
-                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+                <div class="col-md-3">
+                  <strong class="g-color-gray-dark-v2">닉네임</strong>
+                </div>
+                <div class="col-md-8">
+                  <input id="nickName" type="text"
+                    class="form-control-plaintext d-md-inline-block g-bg-white g-width-200 g-my-2"
+                    readonly>
+                  <button type="button"
+                    class="btn u-btn-darkgray g-pos-rel g-top-minus-2 std-invisible"
+                    id="nickCheck-btn" disabled>중복체크</button>
+                </div>
+                <div class="col-md-1 text-right">
+                  <i id="sb-nickname-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-nickname-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </div>
               </li>
               <!-- End Your NickName -->
 
-              <!-- Phone number -->
-              <li
-                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-                <div class="g-pr-10">
-                  <strong
-                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">전화번호</strong>
-                  <input type="tel"
-                    class="form-control d-md-inline-block g-width-200"
-                    id="tel" readonly>
-                </div> <i id="sb-tel-edit"
-                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-tel-cancel"
-                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-              </li>
-              <!-- End Phone number -->
-
               <!-- 관심분야 -->
               <li
-                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-200">
-                <div class="g-pr-10 g-width-100x--lg">
-                  <strong
-                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">관심분야</strong>
-                  <div id="myClsList" class="d-block d-md-inline-block g-pos-rel g-width-560">
-                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-pr-10 g-mb-5"><i class="tags icon g-mr-5"></i>:</strong>
-                    
-                    <div class="g-pos-abs g-mt-20 g-width-100x--lg">
-                      <div class="ui compact selection dropdown lcls disabled">
+                class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-170">
+                
+                <div class="col-md-3">
+                  <strong class="g-color-gray-dark-v2">관심분야</strong>
+                </div>
+                <div class="g-pos-rel col-md-8">
+                  
+                  <div id="clsDrop" class="row g-width-100x--lg g-pos-abs g-bottom-40">
+                    <div class="col-md-4">
+                      <div class="ui fluid selection dropdown lcls disabled">
                         <input name="lcls" type="hidden" value="default">
                         <i class="dropdown icon"></i>
                         <div class="default text">관심분야(대)</div>
                         <div class="menu">
                         </div>
                       </div>
-                      <div class="ui compact selection dropdown mcls disabled">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="ui fluid selection dropdown mcls disabled">
                         <input name="mcls" type="hidden" value="default">
                         <i class="dropdown icon"></i>
                         <div class="default text">관심분야(중)</div>
                         <div class="menu">
                         </div>
                       </div>
-                      <div class="ui compact selection dropdown scls disabled">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="ui fluid selection dropdown scls disabled">
                         <input name="scls" type="hidden" value="default">
                         <i class="dropdown icon"></i>
                         <div class="default text">관심분야(소)</div>
@@ -337,53 +330,72 @@
                         </div>
                       </div>
                     </div>
-                    
                   </div>
-                </div> <i id="sb-cls-edit"
-                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-cls-cancel"
-                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  
+                  <div id="myClsList" class="row">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-pr-10 g-mt-3 g-mb-2"><i class="tags icon g-mr-5"></i>:</strong>
+                  </div>
+                  
+                </div>
+                <div class="col-md-1 text-right">
+                  <i id="sb-cls-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-cls-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </div>
               </li>
               <!-- End 관심분야 -->
               
               <!-- 활동지역 -->
               <li
-                class="d-flex align-items-center justify-content-between g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-200">
-                <div class="g-pr-10 g-width-100x--lg">
-                  <strong
-                    class="d-block d-md-inline-block g-color-gray-dark-v2 g-width-200 g-pr-10">활동지역</strong>
-                  <div id="myAddrList" class="d-block d-md-inline-block g-pos-rel g-width-560">
-                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-pr-10 g-mb-5"><i class="tags icon g-mr-5"></i>:</strong>
-                    
-                    <div class="g-pos-abs g-mt-20 g-width-100x--lg">
-                      <div class="ui compact selection dropdown laddr disabled">
-                        <input name="laddr" type="hidden" value="default">
+                class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-170">
+                
+                <div class="col-md-3">
+                  <strong class="g-color-gray-dark-v2">활동지역</strong>
+                </div>
+                <div class="g-pos-rel col-md-8">
+                  
+                  <div id="addrDrop" class="row g-width-100x--lg g-pos-abs g-bottom-40">
+                    <div class="col-md-4">
+                      <div class="ui fluid selection dropdown laddr disabled">
+                        <input name="lcls" type="hidden" value="default">
                         <i class="dropdown icon"></i>
                         <div class="default text">활동지역(대)</div>
                         <div class="menu">
                         </div>
                       </div>
-                      <div class="ui compact selection dropdown maddr disabled">
-                        <input name="maddr" type="hidden" value="default">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="ui fluid selection dropdown maddr disabled">
+                        <input name="mcls" type="hidden" value="default">
                         <i class="dropdown icon"></i>
                         <div class="default text">활동지역(중)</div>
                         <div class="menu">
                         </div>
                       </div>
-                      <div class="ui compact selection dropdown saddr disabled">
-                        <input name="saddr" type="hidden" value="default">
+                    </div>
+                    <div class="col-md-4">
+                      <div class="ui fluid selection dropdown saddr disabled">
+                        <input name="scls" type="hidden" value="default">
                         <i class="dropdown icon"></i>
                         <div class="default text">활동지역(소)</div>
                         <div class="menu">
                         </div>
                       </div>
                     </div>
-                    
                   </div>
-                </div> <i id="sb-addr-edit"
-                class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
-                <i id="sb-addr-cancel"
-                class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  
+                  <div id="myAddrList" class="row">
+                    <strong class="d-block d-md-inline-block g-color-gray-dark-v2 g-pr-10 g-mt-3 g-mb-2"><i class="tags icon g-mr-5"></i>:</strong>
+                  </div>
+                  
+                </div>
+                <div class="col-md-1 text-right">
+                  <i id="sb-addr-edit"
+                  class="icon-pencil g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                  <i id="sb-addr-cancel"
+                  class="icon-media-066 std-invisible g-color-gray-dark-v5 g-color-primary--hover g-cursor-pointer g-pos-rel g-top-1"></i>
+                </div>
               </li>
               <!-- End 활동지역 -->
             </ul>
@@ -391,9 +403,9 @@
             <div class="text-sm-right">
               <a
                 class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10"
-                href="#" id="sb-info-cancel">Cancel</a> <a
+                href="#" id="sb-info-cancel">취소</a> <a
                 class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
-                href="#" id="sb-info-change">Save Changes</a>
+                href="#" id="sb-info-change">저장</a>
             </div>
           </div>
           <!-- End Edit Profile -->
@@ -402,21 +414,21 @@
           <div class="tab-pane fade"
             id="nav-1-1-default-hor-left-underline--2" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
-            <h2 class="h4 g-font-weight-300">Security Settings</h2>
-            <p class="g-mb-25">Reset your password, change
-              verifications and so on.</p>
+            <h2 class="h4 g-font-weight-300">비밀번호 변경</h2>
+            <p class="g-mb-25">기존에 사용하고 있는 비밀번호 입력 후
+            변경하실 수 있습니다.</p>
 
             <form>
               <!-- Current Password -->
               <div class="form-group row g-mb-25">
                 <label
-                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Current
-                  password</label>
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">
+                  현재 비밀번호</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
                     <input id="password"
                       class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
-                      type="password" placeholder="Current password">
+                      type="password" placeholder="현재 비밀번호">
                     <div class="input-group-append">
                       <span
                         class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
@@ -430,13 +442,13 @@
               <!-- New Password -->
               <div class="form-group row g-mb-25">
                 <label
-                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">New
-                  password</label>
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">
+                  새 비밀번호</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
                     <input id="newPassword"
                       class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
-                      type="password" placeholder="New password">
+                      type="password" placeholder="새 비밀번호">
                     <div class="input-group-append">
                       <span
                         class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
@@ -450,13 +462,13 @@
               <!-- Verify Password -->
               <div class="form-group row g-mb-25">
                 <label
-                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">Verify
-                  password</label>
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">
+                  새 비밀번호 확인</label>
                 <div class="col-sm-9">
                   <div class="input-group g-brd-primary--focus">
                     <input id="verifyPassword"
                       class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
-                      type="password" placeholder="Verify password">
+                      type="password" placeholder="새 비밀번호 확인">
                     <div class="input-group-append">
                       <span
                         class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
@@ -472,9 +484,9 @@
               <div class="text-sm-right">
                 <a
                   class="btn u-btn-darkgray rounded-0 g-py-12 g-px-25 g-mr-10"
-                  href="#" id="sb-password-cancel">Cancel</a> <a
+                  href="#" id="sb-password-cancel">취소</a> <a
                   class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
-                  href="#" id="sb-password-change">Save Changes</a>
+                  href="#" id="sb-password-change">저장</a>
               </div>
             </form>
           </div>
