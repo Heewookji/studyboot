@@ -262,11 +262,6 @@ function nickNameCheck() {
 
 $(document.body).bind('loaded-data', () => {
   
-  $('#myClsList a .delete.icon').click(function() {
-    clsCheck = 1;
-    $(this).parent().remove();
-  });
-  
   $('#myAddrList a .delete.icon').click(function() {
     $(this).parent().remove();
   });
@@ -353,6 +348,11 @@ $('#sb-tel-cancel').click(() => {
 
 // cls
 $('#sb-cls-edit').click(() => {
+  $('#myClsList a .delete.icon').click(function() {
+    clsCheck = 1;
+    $(this).parent().remove();
+  });
+  
   $('#myClsList .ui.dropdown').removeClass('disabled');
   $('#sb-cls-edit').addClass('std-invisible');
   $('#sb-cls-cancel').removeClass('std-invisible');
@@ -362,9 +362,6 @@ $('#sb-cls-cancel').click(() => {
   $('#myClsList a').remove();
   $(clsGenerator(userData)).appendTo('#myClsList');
   
-  $('#myClsList a .delete.icon').click(function() {
-    $(this).parent().remove();
-  });
   loadModalCategory();
   
   $('#myClsList .ui.dropdown').addClass('disabled');

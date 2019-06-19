@@ -96,11 +96,14 @@ public class MemberServiceImpl implements MemberService {
       int count = memberDao.update(member);
       
       memberDao.clsDelete(member.getNo());
-      for (String c : member.getCls()) {
-        Map<String,Object> clsData = new HashMap<>();
-        clsData.put("no", member.getNo());
-        clsData.put("cls", c);
-        memberDao.clsInsert(clsData);
+      
+      if (member.getCls().size() != 0) {
+        for (String c : member.getCls()) {
+          Map<String,Object> clsData = new HashMap<>();
+          clsData.put("no", member.getNo());
+          clsData.put("cls", c);
+          memberDao.clsInsert(clsData);
+        }
       }
       return count;
       
