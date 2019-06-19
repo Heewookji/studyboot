@@ -45,11 +45,12 @@ public class AddressServiceImpl implements AddressService {
     
     HashMap<String, Object> params = new HashMap<>(); // dao에 값을 보내기 위한 Map
     
+    try {
       
-    String largeNo = addressNo.substring(0, 2); // 공간정보를 쪼갠다.
-    String mediumNo = addressNo.substring(2, 4);
-    String smallNo = addressNo.substring(4, 6);
-      
+      String largeNo = addressNo.substring(0, 2); // 공간정보를 쪼갠다.
+      String mediumNo = addressNo.substring(2, 4);
+      String smallNo = addressNo.substring(4, 6);
+        
       params.put("smallNo", smallNo);
       params.put("mediumNo", mediumNo);
       params.put("largeNo", largeNo);
@@ -62,6 +63,11 @@ public class AddressServiceImpl implements AddressService {
          + address.getSmallName() ;
       
       return fullAddress;
+      
+    } catch (Exception e) {
+      System.out.println("유효하지 않은 지역 코드 입니다.!!");
+      return null;
+    }
   }
 
 

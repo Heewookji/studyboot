@@ -123,8 +123,8 @@
     where member_id = #{no}
   </update>
   
-  <!-- 내 정보 업데이트 - 관심 분야 번호 -->
-  <insert id="clsInsert" parameterType="member">
+  <!-- 내 정보 업데이트 - 관심분야 번호 등록 -->
+  <insert id="clsInsert" parameterType="map">
     insert into
     sms_member_cls
       (
@@ -134,11 +134,18 @@
     values
       (
       #{no},
-      <foreach collection="cls" item="k" separator=",">
-        cls_lms = #{k}
-      </foreach>
+      #{cls}
       )
   </insert>
+  
+  <!-- 내 정보 업데이트 - 관심분야 번호 제거 -->
+  <delete id="clsDelete" parameterType="int">
+    delete
+    from
+      sms_member_cls
+    where
+      member_id = #{value}
+  </delete>
   
    <insert id="insert" parameterType="member">
    insert 

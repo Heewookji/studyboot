@@ -87,17 +87,34 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int update(Member member) {
-
-    if (member.getPassword() != null) {
-      return memberDao.updatePassword(member);
-    }
-    int count = memberDao.update(member);
-    memberDao.clsInsert(member);
     
-    return count;
+    try {
+    
+      if (member.getPassword() != null) {
+        return memberDao.updatePassword(member);
+      }
+      int count = memberDao.update(member);
+      
+      memberDao.clsDelete(member.getNo());
+      for (String c : member.getCls()) {
+        Map<String,Object> clsData = new HashMap<>();
+        clsData.put("no", member.getNo());
+        clsData.put("cls", c);
+        memberDao.clsInsert(clsData);
+      }
+      return count;
+      
+    } catch (Exception e) {
+      System.out.println("회원 정보 업데이트 도중 에러..!");
+      return 0;
+    }
+    
   }
-
-
+  
+  @Override
+  public int updatePhoto(Member member) {
+    return memberDao.update(member);
+  }
 
   @Override
   public int nickNameCheck(String nickName) {

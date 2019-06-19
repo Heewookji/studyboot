@@ -16,6 +16,7 @@ public interface MemberService {
   Member get(int no);
   int findByNickName(String nickName);
   int update(Member member);
+  int updatePhoto(Member member);
   int nickNameCheck(String nickName);
   boolean passwordCheck(String email, String password);
   List<AppliedStudy> appliedStudyList(int no);
