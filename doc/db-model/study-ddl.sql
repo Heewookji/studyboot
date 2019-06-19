@@ -134,9 +134,10 @@ ALTER TABLE sms_member
 CREATE TABLE sms_std (
   std_id      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
   adr_lms     CHAR(6)      NOT NULL COMMENT '활동지역', -- 활동지역
+  state       BOOLEAN      NOT NULL DEFAULT true COMMENT '스터디 상태', -- 스터디 상태
   cls_lms     CHAR(6)      NOT NULL COMMENT '스터디분류', -- 스터디분류
   name        VARCHAR(50)  NOT NULL COMMENT '스터디 이름', -- 스터디 이름
-  photo       VARCHAR(255) NOT NULL COMMENT '스터디 사진', -- 스터디 사진
+  photo       VARCHAR(255) NOT NULL DEFAULT "default" COMMENT '스터디 사진', -- 스터디 사진
   day         INTEGER      NOT NULL COMMENT '스터디 활동일', -- 스터디 활동일
   sdt         DATE         NOT NULL COMMENT '스터디 시작일', -- 스터디 시작일
   edt         DATE         NOT NULL COMMENT '스터디 종료일', -- 스터디 종료일
