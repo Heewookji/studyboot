@@ -462,6 +462,9 @@ function loadChart(no) {
 
 
 $(document.body).bind('loaded-studyInfo', () => {
+  
+  $('#board-div').addClass('g-brd-around');
+  
   $('.ui.dropdown.memberDropdown')
   .dropdown({
     on: 'hover',
