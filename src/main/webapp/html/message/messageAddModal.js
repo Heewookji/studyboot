@@ -16,24 +16,19 @@ if (messagePage === "mystudy") { // 현재 페이지가 mystudy 이면..
     console.log(window.studyMemberList[0].member.nickName);
   });
 
-//  $(document.body).trigger('messageClick');
 }
-$('.study-message').click(() => {
-  alert("??");
-  });
 
+//모달이 켜지기 전에 준비하는 함수
+$('#addModal').on('show.bs.modal', function (e) { 
 
+  if(messagePage === "mystudy") { // 현재 페이지가 mystudy면 보내는이를 넣어준다.
+    messageReceiver = $('#message-add-nick').attr('nick-name');
+    $('#recv_id').attr("value", messageReceiver);
+    $('#recv_id').attr("readonly", true);
+  }
+});
 
-$('#addModal').on('show.bs.modal', function (e) {
-  
-  messageReceiver = $('#message-add-nick').attr('nick-name');
-  alert(messageReceiver);
- });
-
-
-
-
-
+// 모달에서 보내기 버튼 누를때
 $('#messageAdd-btn').click((e) => {
   $.ajax({
     url:'../../app/json/message/add',

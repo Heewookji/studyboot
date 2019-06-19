@@ -325,9 +325,12 @@ $('#event-attend-btn').click(() => {
     if (obj.attend) { // 해당 일정에 대해 출석을 한 적이 있으면 출석체크 모달에서 출석 버튼 숨기기
       $('#attend-btn').hide();
       $('#attend-head').html('출석 확인');
+      $('.attend-check').attr("onclick", "return false");
+      //onclick="return false;" 
     } else {
       $('#attend-btn').show();
       $('#attend-head').html('출석 체크');
+      $('.attend-check').attr("onclick", "return true");
     }
 
     // 체크박스 모두 false로 초기화
