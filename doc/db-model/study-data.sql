@@ -519,6 +519,9 @@ insert into sms_apl_std(member_id, std_id, dtrm) values(4, 4, '같이 공부하�
 insert into sms_apl_std(member_id, std_id, dtrm, state, apl_date) values(4, 9, '열심히 하겠습니다!', true, 20190420);
 insert into sms_apl_std(member_id, std_id, dtrm, apl_date) values(4, 10, '이 스터디 정말 하고 싶습니다', 20190522);
 
+insert into sms_apl_std(member_id, std_id, dtrm) values(3, 1, '잘부탁드려요~1');
+insert into sms_apl_std(member_id, std_id, dtrm) values(4, 1, '잘');
+insert into sms_apl_std(member_id, std_id, dtrm) values(8, 1, '잘부탁드려요~3잘부탁드려요~3잘부탁드려요~3');
 -- 회원 스터디 신청 정보
 -- 회원번호, 스터디번호, 스터디 각오, 열람여부, 신청일
 
