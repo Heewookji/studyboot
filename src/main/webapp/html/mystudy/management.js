@@ -127,7 +127,6 @@ $(document.body).bind('loaded-approval', () => {
     $.getJSON("../../app/json/MyStudy/register?stdNo=" + nosss + "&memberNo="
         + $(e.target).parents('.refuse').find('a').attr('data-no'),
         function(obj){
-      console.log("박상민 가입승인 확인 겟제이슨 콜백 함수");
       location.reload();
     });
   });

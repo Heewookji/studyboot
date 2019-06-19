@@ -468,7 +468,7 @@ public class MyStudyController {
 
   // 회원의 평가 정보
   @GetMapping("rateinfo")
-  public Object rateinfo(@RequestParam int memberNo, HttpSession session) {
+  public Object rateinfo(int userNo, HttpSession session) {
 
     Member loginUser = (Member)session.getAttribute("loginUser");
 
@@ -476,8 +476,8 @@ public class MyStudyController {
 
     if (loginUser != null) {
 
-      List<StudyMember> rateInfo = studyMemberService.rateInfo(memberNo);
-      List<RateLog> rateLog = rateService.list(memberNo);
+      List<StudyMember> rateInfo = studyMemberService.rateInfo(userNo);
+      List<RateLog> rateLog = rateService.list(userNo);
 
       if(rateInfo != null) {
         content.put("rateInfo", rateInfo);
@@ -498,7 +498,7 @@ public class MyStudyController {
   @GetMapping("history")
   public Object history(
       HttpSession session,
-      @RequestParam int memberNo,
+      @RequestParam int userNo,
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize) {
 
@@ -511,7 +511,7 @@ public class MyStudyController {
       if (pageSize < 3 || pageSize > 8) 
         pageSize = 3;
 
-      int rowCount = studyMemberService.sizeEndStudy(memberNo); 
+      int rowCount = studyMemberService.sizeEndStudy(userNo); 
 
       if (rowCount == 0) {
         content.put("pageNo", 0);
@@ -529,7 +529,7 @@ public class MyStudyController {
       else if (pageNo > totalPage)
         pageNo = totalPage;
 
-      List<History> history = studyMemberService.userHistory(memberNo, pageNo, pageSize);
+      List<History> history = studyMemberService.userHistory(userNo, pageNo, pageSize);
 
       content.put("history", history);
       content.put("pageNo", pageNo);

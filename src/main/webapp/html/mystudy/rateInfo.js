@@ -16,7 +16,8 @@ currSpan = $('#history-currPage > span'),
 historytemplateSrc = $('#history-template').html(),
 historyGenerator = Handlebars.compile(historytemplateSrc),
 rateInit = true;
-var userNo = $('#userNo').attr('data-no');
+
+var userNo;
 
 //$(document).ready(function() {
 //  $("#js-header").load("/studyboot/html/header.html", function(){
@@ -53,18 +54,23 @@ $('#historyModal').on('shown.bs.modal', function (e) {
 });
 
 //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-
+// 모달창이 켜지기 전에 준비한다.
 $('#historyModal').on('show.bs.modal', function (e) {
   
- alert($('#userNo').attr('data-no'));
-  loadRateData( $('#userNo').attr('data-no'));
-  loadHistory(pageNo,  $('#userNo').attr('data-no'));
+  userNo = $('#userNo').attr('data-no');
+  
+  dropData = 0;
+  exileData = 0;
+  finishData = 0;
+  
+  loadRateData(userNo);
+  loadHistory(pageNo, userNo);
 });
 
 
 
 function loadRateData(userNo) {
-  $.getJSON('../../app/json/member/rateinfo',
+  $.getJSON('../../app/json/MyStudy/rateinfo?userNo=' + userNo,
       function(data) {
 
     console.log(data);
@@ -292,8 +298,8 @@ $(document.body).bind('loaded-rateData', () => {
 
 
 
-function loadHistory(pn) {
-  $.getJSON('../../app/json/member/history?pageNo=' + pn + '&pageSize=' + 3,
+function loadHistory(pn, userNo) {
+  $.getJSON('../../app/json/MyStudy/history?pageNo=' + pn + '&pageSize=' + 3 + '&userNo=' + userNo,
       function(data) {
 
     console.log(data);
@@ -339,12 +345,12 @@ function loadHistory(pn) {
 //페이지 버튼 이벤트 등록
 $('#history-prevPage > a').click((e) => {
   e.preventDefault();
-  loadHistory(pageNo - 1);
+  loadHistory(pageNo - 1, userNo);
 });
 
 $('#history-nextPage > a').click((e) => {
   e.preventDefault();
-  loadHistory(pageNo + 1);
+  loadHistory(pageNo + 1, userNo);
 });
 
 
