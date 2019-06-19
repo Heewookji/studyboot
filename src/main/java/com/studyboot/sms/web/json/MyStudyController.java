@@ -545,7 +545,7 @@ public class MyStudyController {
 
   @PostMapping(value = "photo", consumes = "multipart/form-data")
   public Object photo(HttpSession session, MultipartFile avatar, int studyNo) throws Exception {
-                                                         //formData
+    //formData
     Map<String, Object> content = new HashMap<>();
     // 리더 판단을 위한 코드
     Map<String,Object> studyAndUserNo = new HashMap<>();
@@ -558,13 +558,13 @@ public class MyStudyController {
       content.put("notStudyLeader", "fail");
       return content;
     }
-    
-    
+
+
     if (avatar.isEmpty()) {
       content.put("status", "fail");
       return content;
     }
-    
+
     // 이미지 저장
     String fileName = UUID.randomUUID().toString();
     String path = servletContext.getRealPath("/upload/images/mystudy/" + fileName);
@@ -579,9 +579,9 @@ public class MyStudyController {
     Map<String, Object> photoUpdateMap = new HashMap<>();
     photoUpdateMap.put("studyNo", studyNo);
     photoUpdateMap.put("fileName", fileName);
-    
+
     System.out.println("controller: "+photoUpdateMap);
-    
+
     if(myStudyService.photoUpdate(photoUpdateMap) != 0) {
       content.put("fileName", fileName);
       content.put("status", "success");
@@ -591,6 +591,32 @@ public class MyStudyController {
     }
     return content;
   }
+
+  @PostMapping("stdUpdate")
+  public Object stdUpdate(Study study, HttpSession session) {
+
+    System.out.println(study);
+
+    HashMap<String,Object> content = new HashMap<>();
+    Study studyOrgin = studyService.get(study.getNo());
+    
+    try {
+      studyOrgin.setNo(study.getNo());
+      studyOrgin.setPersonnel(study.getPersonnel());
+      studyOrgin.setGoal(study.getGoal());
+      studyOrgin.setDay(study.getDay());
+      studyOrgin.setEndDate(study.getEndDate());
+      studyOrgin.setContents(study.getContents());
+      studyService.update(studyOrgin);
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+
+    return content;
+  }
+
 }
 
 
