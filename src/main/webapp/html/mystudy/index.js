@@ -10,15 +10,26 @@ currCls,
 ntcTemplateSrc = $('#ntc-list').html();
 
 var ntcGenerator = Handlebars.compile(ntcTemplateSrc);
+var ntcNo;
 
 $('#ntc-board').attr("href", "/studyboot/html/mystudy/board.html?no=" + no);
 
 function loadList(no) {
   $.getJSON('../../app/json/MyStudy/studyNtc?no=' + no,
       function(obj){
-    
+
     $(ntcGenerator(obj)).appendTo('#ntc-board-list');
-    
+
+    // 공지사항 클릭시 디테일 부분으로 넘어가기
+    $('.ntcList-btn').click((e) => {
+      e.preventDefault();
+      ntcNo = $(e.target).attr('data-no');
+      $("#contents").load("/studyboot/html/mystudy/view.html", function(e) {
+        $('#ntc-no').attr('data-no', ntcNo);
+      });
+      
+    });
+
   });
 };
 
@@ -28,7 +39,7 @@ loadList(no);
 
 
 $(document).on('ready', function () {
-  
+
   // initialization of tabs
   $.HSCore.components.HSTabs.init('[role="tablist"]');
 
@@ -53,7 +64,7 @@ $(document).on('ready', function () {
   }, 1);
 });
 
-  
+
 
 
 

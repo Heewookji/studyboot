@@ -3,6 +3,12 @@ param = location.href.split('?')[1],
 nosss = param.split('=')[1],
 leader;
 
+$(document).ready(function() {
+  if($('#ntc-no').attr('data-no') != "undefiende"){
+    loadDetail($('#ntc-no').attr('data-no'));
+  }
+});
+
 
 $(document.body).bind('loaded-list', () => {
   $('.detail-btn').click((e) => {
@@ -119,7 +125,7 @@ function loadDetail(no) {
     }); // end delete
 
     $('#board-list-btn').click((e) => {
-      location.reload();
+      location.href = "/studyboot/html/mystudy/board.html?no=" + nosss;
     });
   });
 }

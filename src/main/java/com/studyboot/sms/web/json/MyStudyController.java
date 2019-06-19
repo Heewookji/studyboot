@@ -79,8 +79,8 @@ public class MyStudyController {
       keyword = null;
     } 
 
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
+    if (pageSize < 3 || pageSize > 30) 
+      pageSize = 20;
 
 
     int rowCount = myStudyService.size(clsNo, memberNos, keyword, no);

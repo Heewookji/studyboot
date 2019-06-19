@@ -1,5 +1,5 @@
 var pageNo = 1,
-pageSize = 6,
+pageSize = 20,
 tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
 nextPageLi = $('#nextPage'),
