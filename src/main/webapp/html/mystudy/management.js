@@ -67,7 +67,8 @@ function loadStudyDetail(nosss) {
 
     $('#std-name').val(obj.name);
     $('#prsn-count').text(obj.personnel + "명");
-    $('#goal').val(obj.goal);
+    $('#prsn-input').val(obj.personnel);
+    $('#std-goal').val(obj.goal);
 
     for(var a of obj.dayStrList){
       for(var b of $('.modalday-checkbox span')){
@@ -85,26 +86,7 @@ function loadStudyDetail(nosss) {
     $('#std-area-M').val(obj.addressName.split(" ")[1]);
     $('#std-area-S').val(obj.addressName.split(" ")[2]);
     $('#std-contents').html(obj.contents);
-    
-  //목표체크
-    $( "#goal" ).keyup(function(){
-      if($( "#goal" ).val().length > 25 ||
-              $( "#goal" ).val().length < 5 ){
-        $("#goal").attr("data-toggle","tooltip");
-        $("#goal").attr("data-trigger","hover focus");
-        $("#goal").attr("data-placement","bottom");
-        $("#goal").attr("data-html", true);
-        $("#goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
-        $('#goal').tooltip('enable');
-        $('#goal').tooltip('show');
-      } else{
-        if($("#goal").attr("data-toggle")){
-          $('#goal').tooltip('disable');
-          $('#goal').tooltip('hide');
-        }
-      }
-    });
-    
+
     $(document.body).trigger('loaded-saveData');
   });
 }
@@ -152,9 +134,48 @@ $(document.body).bind('loaded-approval', () => {
 });
 
 
+
+//스터디 업데이트 유효성 검사
+//목표체크
+$( "#std-goal" ).keyup(function(){
+  if($( "#std-goal" ).val().length > 25 ||
+      $( "#std-goal" ).val().length < 5 ){
+    $("#std-goal").attr("data-toggle","tooltip");
+    $("#std-goal").attr("data-trigger","hover focus");
+    $("#std-goal").attr("data-placement","bottom");
+    $("#std-goal").attr("data-html", true);
+    $("#std-goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
+    $('#std-goal').tooltip('enable');
+    $('#std-goal').tooltip('show');
+  } else{
+    if($("#std-goal").attr("data-toggle")){
+      $('#std-goal').tooltip('disable');
+      $('#std-goal').tooltip('hide');
+    }
+  }
+});
+
+//설명 체크
+$('#std-contents').keyup(function(){
+  if($( "#std-contents" ).val().length < 50 ){
+    $("#std-contents").attr("data-toggle","tooltip");
+    $("#std-contents").attr("data-trigger","hover focus");
+    $("#std-contents").attr("data-placement","bottom");
+    $("#std-contents").attr("data-html", true);
+    $("#std-contents").attr("title","50자 이상의<br>상세설명을 적어주세요");
+    $('#std-contents').tooltip('enable');
+    $('#std-contents').tooltip('show');
+  } else{
+    if($("#std-contents").attr("data-toggle")){
+      $('#std-contents').tooltip('disable');
+      $('#std-contents').tooltip('hide');
+    }
+  }
+});
+
+
 $(document.body).bind('loaded-saveData', () => {
-  
-//불러온 데이터 변경하고 버튼 눌렀을 때 업데이트 처리
+
   $('#sb-info-change').click((e) => {
     // 요일 유효성 검사
     var addDayNo = 0;
@@ -171,9 +192,62 @@ $(document.body).bind('loaded-saveData', () => {
       });
       return;
     }
-    alert(addDayNo);
+
+    //목표 체크
+    if($( "#std-goal" ).val().length > 25 ||
+        $( "#std-goal" ).val().length < 5 ){
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '5자 이상 25자 이하의 목표를 입력해주세요!'
+      });
+      return;
+    }
+
+    //내용
+    if($( "#std-contents" ).val().length < 50 ){
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '50자 이상의 스터디 설명을 입력해주세요!'
+      });
+      return;
+    }
+
+    //모두 통과한다면, URI인코딩 방식으로 전송
+    jQuery.ajax({
+      url:"../../app/json/MyStudy/stdUpdate",
+      type:"POST",
+      data: "no=" + nosss +
+      "&personnel=" + encodeURIComponent($('#prsn-input').val()) +
+      "&goal=" + encodeURIComponent($("#std-goal").val()) +
+      "&day=" + encodeURIComponent(addDayNo) +
+      "&endDate=" + encodeURIComponent($("#endDate").val()) +
+      "&contents=" + encodeURIComponent($("#std-contents").val()),
+      contentType: "application/x-www-form-urlencoded",
+      success: function(data) {
+        if (data.status == 'success') {
+          Swal.fire({
+            type: 'success',
+            title: '스터디를 수정했습니다!',
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            location.reload();
+          }
+          );
+        } else {
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '스터디 수정을 실패했습니다!' + data.message
+          });
+        }
+      }
+    });
   });
-  
+
+
 });
 
 
