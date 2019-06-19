@@ -128,9 +128,9 @@ public class MemberController {
   @PostMapping("update")
   public Object update(HttpSession session, Member member) {
     
-    if (member.getCls() == null)
-      System.out.println("!!!!!!!!!!!!controller ==============>" + member);
-    
+    System.out.println(member);
+    System.out.println(member.getCls());
+    System.out.println(member.getClsList());
     Member loginUser = (Member) session.getAttribute("loginUser");
     member.setNo(loginUser.getNo());
     
@@ -221,7 +221,7 @@ public class MemberController {
     
     loginUser.setPhoto(filename);
     
-    if(memberService.update(loginUser) != 0) {
+    if(memberService.updatePhoto(loginUser) != 0) {
       content.put("loginUser", loginUser);
       content.put("status", "success");
       

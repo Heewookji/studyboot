@@ -87,7 +87,7 @@ function loadModalCategory() {
                       alert('갯수 초과!!');
                       return false;
                     }
-                    
+                    clsCheck = 1;
                     $('#myClsList').append(
                         '<a class="ui label transition visible" data-no="' + value
                         + '" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
@@ -228,9 +228,11 @@ function loadData() {
     
     $(clsGenerator(userData)).appendTo('#myClsList');
     
-    $('#myAddrList').append(
-        '<a class="ui label transition visible" data-no="' + userData.address
-        + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+    if (userData.addressName != null) {
+      $('#myAddrList').append(
+          '<a class="ui label transition visible" data-no="' + userData.address
+          + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+    }
     
     $(document.body).trigger('loaded-data');
   });
@@ -261,6 +263,7 @@ function nickNameCheck() {
 $(document.body).bind('loaded-data', () => {
   
   $('#myClsList a .delete.icon').click(function() {
+    clsCheck = 1;
     $(this).parent().remove();
   });
   
@@ -367,7 +370,7 @@ $('#sb-cls-cancel').click(() => {
   $('#myClsList .ui.dropdown').addClass('disabled');
   $('#sb-cls-cancel').addClass('std-invisible');
   $('#sb-cls-edit').removeClass('std-invisible');
-  telCheck = undefined;
+  clsCheck = undefined;
 });
 
 // addr
@@ -379,9 +382,11 @@ $('#sb-addr-edit').click(() => {
 
 $('#sb-addr-cancel').click(() => {
   $('#myAddrList a').remove();
-  $('#myAddrList').append(
-      '<a class="ui label transition visible" data-no="' + userData.address
-      + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+  if (userData.addressName != null) {
+    $('#myAddrList').append(
+        '<a class="ui label transition visible" data-no="' + userData.address
+        + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+  }
   
   $('#myAddrList a .delete.icon').click(function() {
     $(this).parent().remove();
@@ -448,7 +453,7 @@ $('#tel').keyup(function() {
 $('#sb-info-change').click((e) => {
   e.preventDefault();
   
-  if (nickCheck == undefined && telCheck == undefined) {
+  if (nickCheck == undefined && telCheck == undefined && clsCheck == undefined) {
     alert('변경 사항이 없습니다!');
     return false;
   } else if (nickCheck == 0 || telCheck == 0){
@@ -457,21 +462,18 @@ $('#sb-info-change').click((e) => {
   } else {
     
     var clsList = new Array();
-    
     $('#myClsList a').each(function() {
       clsList.push($(this).attr('data-no'));
     });
-    alert(clsList);
     
     $.ajax({
       url:'../../app/json/member/update',
       type: 'post',
       dataType: 'text',
-      data: {
-        nickName: $(nickName).val(),
-        tel: $(tel).val(),
-        //cls: clsList
-      },
+      data: "nickName=" + encodeURIComponent($("#nickName").val()) +
+      "&tel=" + encodeURIComponent($('#tel').val()) +  
+      "&cls=" + encodeURIComponent(clsList),
+      contentType: "application/x-www-form-urlencoded",
       success: function() {
         alert("정보 변경 성공!")
         location.href = 'index.html';
