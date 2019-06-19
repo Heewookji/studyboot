@@ -59,29 +59,9 @@ public class StudyRetireController {
 
     // 모든 스터디원에게 평가받지 못한 탈퇴자들의 리스트를 뽑아온다.(평가가 끝나지 않은 탈퇴자들)
     List<RateRequire> retireeList = (List<RateRequire>) studyRetireService.retireTrueOrFalse(map); //RateRequireMapper (retireTrueOrFalse)
-    // 이걸 꺼내서 
-    // 서비스 하나더 돌림 있냐고
-
-    //    select 
-    //    smr.std_id,
-    //    smr.member_id,
-    //    smr.rate_require,
-    //    sm.nick_name,
-    //    sm.photo,
-    //    sm.name
-    //  from
-    //   sms_member_retire smr
-    //    inner join sms_std_member ssm on ssm.member_id = smr.member_id and smr.std_id = ssm.std_id
-    //    inner join sms_member sm on sm.member_id = ssm.member_id
-    //  where smr.std_id = #{studyNo} and smr.rate_require = #{rateRequire}
 
     // 로그인한 유저가 해당 스터디의 멤버(탈퇴자들)를 평가한 정보 목록 뽑아옴(회원 평점 정보 테이블)
     List<Rate> retireeRateList = (List<Rate>) studyRetireService.retireEvaluation(map);//RateMapper (findAll)
-    //    select * from sms_member_rate_info
-    //    where std_id = #{studyNo} and member_id = #{no}
-
-
-
 
 
     //select * from sms_member_rate_info where std_id=100 and member_id=5 and confirm_member_id = #{memberNo};
@@ -92,18 +72,15 @@ public class StudyRetireController {
     System.out.println("retireeList.size: "+retireeList.size());
     System.out.println("retireeRateList.size(): "+retireeRateList.size());
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
-//    if (retireeList.size() != retireeRateList.size()) { 
-//      // 1번스터디에 5번회원이 탈퇴할때 에러 나는 이유: 
-//      if (retireeList.size() == 0) {
-//
-//        
-//      } else {
-//        content.put("status", "이 전에 탈퇴한 회원을 먼저 평가해 주세요!");
-//        return content;
-//      }
-//      
-//    }
 
+    // 평가 완료되지 않은 탈퇴자들의 수와 로그인한 유저가 평가한 유저의 수가 일치하지 않으면 실행
+    if (retireeList.size() != retireeRateList.size()) { 
+      if (retireeList.size() == 0) { } // 탈퇴자들이 모두 평가되었다면 그냥 지나가야 된다.
+        else { 
+          content.put("status", "이 전에 탈퇴한 회원을 먼저 평가해 주세요!");
+          return content;
+        }
+    }
 
     // 탈퇴하려는 유저가 스터디 맴버인지 판단.
     HashMap<String,Object> studyUserMap = new HashMap<>();
@@ -151,11 +128,6 @@ public class StudyRetireController {
       content.put("message", e.getMessage());
     }
 
-
-
-
-
-
     try {
 
       int allEventNumber = myStudyScheduleService.allEventCount(studyNo); // 모든 일정의 수
@@ -168,7 +140,6 @@ public class StudyRetireController {
       double attendPercentCut = (Math.round((attendPercent)*10)/10.0);
 
       Map<String, Object> attendPercentUpdateMap = new HashMap<>();
-
 
       System.out.println("모든일정 수: " + allEventNumber);
       System.out.println("출석한횟 수: " + studyAttendNumber);
@@ -186,16 +157,6 @@ public class StudyRetireController {
       content.put("message", e.getMessage());
       System.out.println("출석률 업데이트 오류 내용: " + e.getMessage());
     }
-
-
-
-
-
-
-
-
-
-
 
     try {
       List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames); // 닉네임을 멤버넘버로 바꾸는 코드
@@ -223,7 +184,6 @@ public class StudyRetireController {
 
     return content;
   }
-
 
   @GetMapping("retireTrueOrFalse")
   public Object retireTrueOrFalse(int studyNo, HttpSession session) {

@@ -220,14 +220,14 @@
  <i class="hs-admin-pencil g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
   정보</a>
  </li>
- <li>
- <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14 navList-msg study-message" 
- style="cursor: pointer;" id="detail-delete" nick-name={{member.nickName}}>
+ <li class="message-li">
+ <a   id="message-{{member.nickName}}"class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14 navList-msg study-message" 
+ style="cursor: pointer;"data-toggle="modal"  nick-name={{member.nickName}}>
  <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
   쪽지</a></li>
  <li>
  <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" 
- href="#" id="detail-delete">
+ href="#">
  <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
   신고</a></li>
 </ul>
@@ -309,13 +309,6 @@
 {{/each}}
 </script>
 
-<script>
-
-$('.study-message').click(() => {
-  alert(11);
-});
-
-</script>
 <script src="./retire.js"></script>
-<script src="studyboot/html/message/messageAddModal.js"></script>
+<!-- <script src="/studyboot/html/message/messageAddModal.js"></script> -->
 <script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>

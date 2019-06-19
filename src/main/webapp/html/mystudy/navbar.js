@@ -25,7 +25,6 @@ $(document).ready(function() {
 $(document.body).bind('loaded-nav', () => {
 	
   $("#mystudy-imagesetting").load("/studyboot/html/mypage/imagesetting.html");
-  $("#message-add").load("/studyboot/html/message/messageAddModal.html");
 	  
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + nos,
       function(obj) {
@@ -41,11 +40,15 @@ $(document.body).bind('loaded-nav', () => {
     var stdMemberListGenerator = Handlebars.compile(stdMemberListTemplateSrc);
     $(stdMemberListGenerator(obj)).appendTo('#std-MemberList')
 
+     $(document.body).trigger('messageAddModalLoad');
+    
     // 평점 꽂아주기 가입한 스터디 회원이 핸들바스를 통해 꽂힌 다음 모달창을 꽂아 준다.
     $("#sb-history").load("rateInfo.html");
     
     $(document.body).trigger('navbar-rate');
   });
+  
+  
 });
 
 /*
@@ -61,3 +64,15 @@ $(document.body).bind('loaded-nav', () => {
 
 $(document.body).bind('navbar-rate', () => {
 });
+
+$(document.body).bind('messageAddModalLoad', () => {
+  
+  $("#message-add").load("/studyboot/html/message/messageAddModal.html", function(e) {
+    $('.study-message').click((e) => {
+
+      $('#message-add-nick').attr('nick-name',$(e.target).parents('.message-li').find('a').attr('nick-name'));
+      $('#addModal').modal('show');
+    });
+  });
+});
+
