@@ -2,6 +2,7 @@ var userData,
 nickCheck,
 telCheck,
 clsCheck,
+addrCheck,
 pwdCheck = 0,
 clsTemplateSrc = $('#cls-template').html(),
 clsGenerator = Handlebars.compile(clsTemplateSrc);
@@ -188,7 +189,7 @@ function loadModalAddress() {
                       alert('갯수 초과!!');
                       return false;
                     }
-                  
+                    addrCheck = 1;
                     $('#myAddrList').append(
                         '<a class="ui label transition visible" data-no="' + value
                         + '" style="display: inline-block !important;">'
@@ -222,9 +223,8 @@ function loadData() {
     $('#inqryNo').val(userData.no);
     
     $('#userName').val(userData.name);
+    $('#birthday').val(userData.birth);
     $('#nickName').val(userData.nickName);
-    $('#email').val(userData.email);
-    $('#tel').val(userData.tel);
     
     $(clsGenerator(userData)).appendTo('#myClsList');
     
@@ -260,90 +260,73 @@ function nickNameCheck() {
   return true;
 }
 
-$(document.body).bind('loaded-data', () => {
-  
-  $('#myAddrList a .delete.icon').click(function() {
-    $(this).parent().remove();
+
+// 닉네임 중복체크
+$(function() {
+  // nickCheck 버튼을 클릭했을 때
+  $("#nickCheck-btn").click(function() {
+      
+      // nickName 을 param으로 보내기 위한 변수
+      var nickName =  $("#nickName").val();
+      
+      $.ajax({
+          async: true,
+          type : 'POST',
+          data : nickName,
+          url : "../../app/json/member/nickcheck",
+          dataType : "json",
+          contentType: "application/json; charset=UTF-8",
+          success : function(data) {
+              if (data.cnt > 0) {
+                  
+                  alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                  $('#nickName').closest('div').addClass('u-has-error-v1');
+                  $('#nickName').focus();
+                  nickCheck = 0;
+                  
+              } else {
+                  alert("사용가능한 아이디입니다.");
+                  $('#nickCheck-btn').prop('disabled', true);
+                  $('#nickName').closest('div').removeClass('u-has-error-v1');
+                  $('#nickName').closest('div').addClass('u-has-success-v1-1');
+                  nickCheck = 1;
+              }
+          },
+          error : function(error) {
+              alert("error : " + error);
+          }
+      });
   });
-  
-  // 닉네임 중복체크
-  $(function() {
-    // nickCheck 버튼을 클릭했을 때
-    $("#nickCheck-btn").click(function() {
-        
-        // nickName 을 param으로 보내기 위한 변수
-        var nickName =  $("#nickName").val();
-        
-        $.ajax({
-            async: true,
-            type : 'POST',
-            data : nickName,
-            url : "../../app/json/member/nickcheck",
-            dataType : "json",
-            contentType: "application/json; charset=UTF-8",
-            success : function(data) {
-                if (data.cnt > 0) {
-                    
-                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-                    // 아이디가 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
-                    $('#nickName').closest('div').addClass('u-has-error-v1');
-                    $('#nickName').focus();
-                    nickCheck = 0;
-                    
-                } else {
-                    alert("사용가능한 아이디입니다.");
-                    // 아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                    $('#nickName').closest('div').removeClass('u-has-error-v1');
-                    $('#nickName').closest('div').addClass('u-has-success-v1-1');
-                    // 아이디가 중복하지 않으면 idck = 1
-                    nickCheck = 1;
-                }
-            },
-            error : function(error) {
-                alert("error : " + error);
-            }
-        });
-    });
-  });
-  
 });
+  
 
 // 개인정보 변경시 아이콘 클릭 이벤트
 // nickName
 $('#sb-nickname-edit').click(() => {
+  initNickCheck();
   $('#nickName').prop('readonly', false);
+  $('#nickName').removeClass('form-control-plaintext');
+  $('#nickName').removeClass('g-bg-white');
+  $('#nickName').addClass('form-control');
+  $('#nickCheck-btn').removeClass('std-invisible');
   $('#sb-nickname-edit').addClass('std-invisible');
   $('#sb-nickname-cancel').removeClass('std-invisible');
 });
 
 $('#sb-nickname-cancel').click(() => {
+  $('#nickName').unbind();
   $('#nickName').val(userData.nickName);
   
   $('#nickName').closest('div').removeClass('u-has-error-v1');
   $('#nickName').closest('div').removeClass('u-has-success-v1-1');
   $('#nickName').prop('readonly', true);
+  $('#nickName').removeClass('form-control');
+  $('#nickName').addClass('g-bg-white');
+  $('#nickName').addClass('form-control-plaintext');
+  $('#nickCheck-btn').addClass('std-invisible');
   $('#sb-nickname-cancel').addClass('std-invisible');
   $('#sb-nickname-edit').removeClass('std-invisible');
   nickCheck = undefined;
-});
-
-
-// tel
-$('#sb-tel-edit').click(() => {
-  $('#tel').prop('readonly', false);
-  $('#sb-tel-edit').addClass('std-invisible');
-  $('#sb-tel-cancel').removeClass('std-invisible');
-});
-
-$('#sb-tel-cancel').click(() => {
-  $('#tel').val(userData.tel);
-  
-  $('#tel').closest('div').removeClass('u-has-success-v1-1');
-  $('#tel').closest('div').removeClass('u-has-error-v1');
-  $('#tel').prop('readonly', true);
-  $('#sb-tel-cancel').addClass('std-invisible');
-  $('#sb-tel-edit').removeClass('std-invisible');
-  telCheck = undefined;
 });
 
 // cls
@@ -353,7 +336,7 @@ $('#sb-cls-edit').click(() => {
     $(this).parent().remove();
   });
   
-  $('#myClsList .ui.dropdown').removeClass('disabled');
+  $('#clsDrop div .ui.dropdown').removeClass('disabled');
   $('#sb-cls-edit').addClass('std-invisible');
   $('#sb-cls-cancel').removeClass('std-invisible');
 });
@@ -364,7 +347,7 @@ $('#sb-cls-cancel').click(() => {
   
   loadModalCategory();
   
-  $('#myClsList .ui.dropdown').addClass('disabled');
+  $('#clsDrop div .ui.dropdown').addClass('disabled');
   $('#sb-cls-cancel').addClass('std-invisible');
   $('#sb-cls-edit').removeClass('std-invisible');
   clsCheck = undefined;
@@ -372,7 +355,12 @@ $('#sb-cls-cancel').click(() => {
 
 // addr
 $('#sb-addr-edit').click(() => {
-  $('#myAddrList .ui.dropdown').removeClass('disabled');
+  $('#myAddrList a .delete.icon').click(function() {
+    addrCheck = 1;
+    $(this).parent().remove();
+  });
+  
+  $('#addrDrop div .ui.dropdown').removeClass('disabled');
   $('#sb-addr-edit').addClass('std-invisible');
   $('#sb-addr-cancel').removeClass('std-invisible');
 });
@@ -385,75 +373,52 @@ $('#sb-addr-cancel').click(() => {
         + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
   }
   
-  $('#myAddrList a .delete.icon').click(function() {
-    $(this).parent().remove();
-  });
   loadModalAddress();
   
-  $('#myAddrList .ui.dropdown').addClass('disabled');
+  $('#addrDrop div .ui.dropdown').addClass('disabled');
   $('#sb-addr-cancel').addClass('std-invisible');
   $('#sb-addr-edit').removeClass('std-invisible');
-  telCheck = undefined;
+  addrCheck = undefined;
 });
 
 
 // 닉네임 체크
-$( '#nickName' ).keyup(function(){
+function initNickCheck() {
   
-  if(nickNameCheck() == true){
-    $('#nickCheck-btn').prop('disabled',false);
-    $('#nickName').tooltip('disable');
-    $('#nickName').tooltip('hide');
-    $('#nickName').closest('div').removeClass('u-has-error-v1');
-    $('#nickName').closest('div').addClass('u-has-success-v1-1');
-  } else{
+  $( '#nickName' ).keyup(function(){
     
-    $('#nickName').attr('data-toggle','tooltip');
-    $('#nickName').attr('data-trigger','hover focus');
-    $('#nickName').attr('data-placement','bottom');
-    $('#nickName').attr('title','4~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
-    
-    $('#nickName').tooltip('enable');
-    $('#nickName').tooltip('show');
-    $('#nickCheck-btn').prop('disabled',true);
-    $('#nickName').closest('div').removeClass('u-has-success-v1-1');
-    $('#nickName').closest('div').addClass('u-has-error-v1');
-  }
-});
+    if(nickNameCheck() == true){
+      $('#nickCheck-btn').prop('disabled',false);
+      $('#nickName').tooltip('disable');
+      $('#nickName').tooltip('hide');
+      $('#nickName').closest('div').removeClass('u-has-error-v1');
+      $('#nickName').closest('div').addClass('u-has-success-v1-1');
+    } else{
+      
+      $('#nickName').attr('data-toggle','tooltip');
+      $('#nickName').attr('data-trigger','hover focus');
+      $('#nickName').attr('data-placement','bottom');
+      $('#nickName').attr('title','3~10자의 한글, 영문, 숫자만 사용할 수 있습니다');
+      
+      $('#nickName').tooltip('enable');
+      $('#nickName').tooltip('show');
+      $('#nickCheck-btn').prop('disabled',true);
+      $('#nickName').closest('div').removeClass('u-has-success-v1-1');
+      $('#nickName').closest('div').addClass('u-has-error-v1');
+    }
+  });
+}
 
-// 전화번호 체크
-$('#tel').keyup(function() {
-  
-  var telRule = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-  
-  if(telRule.test($("input[id='tel']").val())) {
-    
-    $('#tel').closest('div').removeClass('u-has-error-v1');
-    $('#tel').closest('div').addClass('u-has-success-v1-1');
-    telCheck = 1;
-    
-  } else {
-    $('#tel').attr('data-toggle','tooltip');
-    $('#tel').attr('data-trigger','hover focus');
-    $('#tel').attr('data-placement','bottom');
-    $('#tel').attr('title','010-xxxx-xxxx');
-    
-    $('#tel').tooltip('enable');
-    $('#tel').tooltip('show');
-    $('#tel').closest('div').removeClass('u-has-success-v1-1');
-    $('#tel').closest('div').addClass('u-has-error-v1');
-    telCheck = 0;
-  }
-});
 
 // 정보 업데이트 이벤트
 $('#sb-info-change').click((e) => {
   e.preventDefault();
   
-  if (nickCheck == undefined && telCheck == undefined && clsCheck == undefined) {
+  if (nickCheck == undefined 
+      && clsCheck == undefined && addrCheck == undefined) {
     alert('변경 사항이 없습니다!');
     return false;
-  } else if (nickCheck == 0 || telCheck == 0){
+  } else if (nickCheck == 0){
     alert('변경할 수 없습니다..\n 수정 사항을 확인하세요!');
     return false;
   } else {
@@ -463,17 +428,22 @@ $('#sb-info-change').click((e) => {
       clsList.push($(this).attr('data-no'));
     });
     
+    var address = $('#myAddrList a').attr('data-no');
+    
     $.ajax({
       url:'../../app/json/member/update',
       type: 'post',
       dataType: 'text',
       data: "nickName=" + encodeURIComponent($("#nickName").val()) +
-      "&tel=" + encodeURIComponent($('#tel').val()) +  
-      "&cls=" + encodeURIComponent(clsList),
+      "&cls=" + encodeURIComponent(clsList) +
+      "&address=" + encodeURIComponent(address),
       contentType: "application/x-www-form-urlencoded",
       success: function() {
-        alert("정보 변경 성공!")
+        alert("정보 변경 성공!");
         location.href = 'index.html';
+      },
+      error: function() {
+        alert("정보 변경을 실패 했습니다!");
       }
     });
   }

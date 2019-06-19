@@ -96,23 +96,31 @@ $(document.body).bind('loaded-loadList', () => {
   // initialization of carousel
   $.HSCore.components.HSCarousel.init('#doingStudy .js-carousel');
 });
+// 진행중인 스터디 탭 이벤트 발생 시
+$('#doingStudyTab').on('shown.bs.tab', () => {
+  $('#doingStudy .js-carousel').slick('unslick');
+  $.HSCore.components.HSCarousel.init('#doingStudy .js-carousel');
+});
 
 // 신청한 스터디 탭 이벤트 발생 시
 $('#appliedStudyTab').on('shown.bs.tab', () => {
-  if(!appliedinit) {
-    // initialization of carousel
-    $.HSCore.components.HSCarousel.init('#appliedStudy .js-carousel');
+  if (appliedinit) {
+    $('#appliedStudy .js-carousel').slick('unslick');
   }
+  $.HSCore.components.HSCarousel.init('#appliedStudy .js-carousel');
   appliedinit = true;
 });
+
+
 // 찜한 스터디 탭 이벤트 발생 시
 $('#pickedStudyTab').on('shown.bs.tab', () => {
-  if(!pickedinit) {
-    // initialization of carousel
-    $.HSCore.components.HSCarousel.init('#pickedStudy .js-carousel');
+  if (pickedinit) {
+    $('#pickedStudy .js-carousel').slick('unslick');
   }
+  $.HSCore.components.HSCarousel.init('#pickedStudy .js-carousel');
   pickedinit = true;
 });
+
 
 
 // inquiry

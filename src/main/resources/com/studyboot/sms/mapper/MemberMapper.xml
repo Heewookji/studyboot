@@ -117,7 +117,6 @@
     update sms_member
     set
       nick_name = #{nickName},
-      tel = #{tel},
       photo = #{photo},
       adr_lms = #{address}
     where member_id = #{no}
@@ -168,6 +167,7 @@
     );
   </insert>
   
+  <!-- 비밀번호 업데이트 -->
   <update id="updatePassword" parameterType="member">
     update sms_member
     set
