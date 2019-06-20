@@ -110,32 +110,15 @@ function loadData(no) {
     $.getJSON('../../app/json/member/mystudy',
             function(mystudyData) {
 
+      //로그인 되어있을때.
       if(mystudyData.status == "success"){
 
         var doingList = mystudyData.doingStudyList,
         appliedList = mystudyData.appliedStudyList,
         pickedList = mystudyData.pickedStudyList;
 
-        for(var study of doingList){
-          if(study.no == studyNo){
-            doingInit = true;
-          }
-        }
 
-        if(!doingInit){
-
-          if(data.state == false){
-            appliedTag = '';
-          }else{
-            for(var appliedStudy of appliedList){
-              if(appliedStudy.studyNo == studyNo){
-                appliedTag = '';
-                break;
-              } else{
-              }
-            }
-          }
-
+        if(pickedList != undefined){
           for(var pickedStudy of pickedList){
             if(pickedStudy.no == studyNo){
               $('#heart-btn').removeClass('u-btn-outline-dribbble');
@@ -145,14 +128,115 @@ function loadData(no) {
               break;
             }
           }
+        }
 
+        if(doingList != undefined){
+          for(var study of doingList){
+            if(study.no == studyNo){
+              doingInit = true;
+            }
+          }
+        }
+
+        //현재 속한 스터디가 아닐때.
+        if(!doingInit){
+
+          //해당 스터디가 모집중이 아닐때
+          if(data.state == false){
+
+            $('#apply-btn').click(function(){
+              Swal.fire({
+                type: 'error',
+                title: errorTitle,
+                text: '해당 스터디가 모집중이 아닙니다!'
+              });
+            });
+            heartClick();
+            messageClick();
+            return;
+
+            //해당 스터디가 모집 중일때
+          }else{
+
+            //이미 신청한 스터디인가
+            if(appliedList != undefined){
+              for(var appliedStudy of appliedList){
+                if(appliedStudy.studyNo == studyNo){
+
+                  $('#apply-btn').click(function(){
+                    Swal.fire({
+                      type: 'error',
+                      title: errorTitle,
+                      text: '이미 가입신청한 스터디입니다!'
+                    });
+                  });
+                  heartClick();
+                  messageClick();
+                  return;
+                }
+              }
+            }
+          }
+          //현재 속한 스터디일때.
+        }else{
+
+          $('#message-btn').click(function(){
+            Swal.fire({
+              type: 'error',
+              title: errorTitle,
+              text: '이미 스터디 활동중입니다!'
+            });
+          });
+
+          $('#apply-btn').click(function(){
+            Swal.fire({
+              type: 'error',
+              title: errorTitle,
+              text: '이미 스터디 활동중입니다!'
+            });
+          });
+          heartClick();
+
+          return;
         } 
 
-        $(document.body).trigger('loaded-studyInfo');
+        //로그인 안되어있다면
+      } else {
+
+        $('#message-btn').click(function(){
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '로그인 해주세요!'
+          });
+        });
+
+        $('#apply-btn').click(function(){
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '로그인 해주세요!'
+          });
+
+        });
+
+        $('#heart-btn').click(function(){
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '로그인 해주세요!'
+          });
+
+        });
 
       }
-    });
 
+      //그 외에 정상 작동
+      applyClick();
+      heartClick();
+      messageClick();
+    });
+    $(document.body).trigger('loaded-studyInfo');
   });
 }
 
@@ -442,17 +526,12 @@ function loadChart(no) {
         }]
       }
     }
-  });
-
-
-
+  });
 
 }
 
 
 $(document.body).bind('loaded-studyInfo', () => {
-
-  $('#board-div').addClass('g-brd-around');
 
   $('.ui.dropdown.memberDropdown')
   .dropdown({
@@ -463,55 +542,6 @@ $(document.body).bind('loaded-studyInfo', () => {
   });
 
   $('#studyMemberRate').rateit();
-
-
-
-  $('#heart-btn').click(function(e) {
-    e.preventDefault();
-    if(!heartClicked){
-      $.getJSON('../../app/json/study/pickedStudy?studyNo=' + studyNo + '&insertRemove='+ !heartClicked,
-              function(data) {
-        if(data.status == "success"){
-          $('#heart-btn').removeClass('u-btn-outline-dribbble');
-          $('#heart-btn').addClass('g-bg-dribbble');
-          $('#heart-btn').addClass('g-color-white');
-          heartClicked = true;
-        } else{
-          Swal.fire({
-            type: 'error',
-            title: errorTitle,
-            text: '찜하기를 실패했습니다!'
-          });
-        }
-      });
-    } else{
-      $.getJSON('../../app/json/study/pickedStudy?studyNo=' + studyNo + '&insertRemove='+ !heartClicked,
-              function(data) {
-        if(data.status == "success"){
-          $('#heart-btn').addClass('u-btn-outline-dribbble');
-          $('#heart-btn').removeClass('g-bg-dribbble');
-          $('#heart-btn').removeClass('g-color-white');
-          heartClicked = false;
-        } else{
-          Swal.fire({
-            type: 'error',
-            title: errorTitle,
-            text: '찜하기 취소를 실패했습니다!'
-          });
-        }
-      });
-    }
-  });
-
-  $('#apply-btn').click(function(e) {
-    e.preventDefault();
-    $('#applyModal').modal('toggle');
-  });
-
-  $('#message-btn').click(function(e) {
-
-
-  });
 
 
 });
@@ -571,7 +601,62 @@ $( "#userGoal" ).keyup(function(){
     }
   }
 });
+
+//클릭 이벤트 등록 함수
+
+function heartClick() {
+
+  $('#heart-btn').click(function(e) {
+    e.preventDefault();
+    if(!heartClicked){
+      $.getJSON('../../app/json/study/pickedStudy?studyNo=' + studyNo + '&insertRemove='+ !heartClicked,
+              function(data) {
+        if(data.status == "success"){
+          $('#heart-btn').removeClass('u-btn-outline-dribbble');
+          $('#heart-btn').addClass('g-bg-dribbble');
+          $('#heart-btn').addClass('g-color-white');
+          heartClicked = true;
+        } else{
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '찜하기를 실패했습니다!'
+          });
+        }
+      });
+    } else{
+      $.getJSON('../../app/json/study/pickedStudy?studyNo=' + studyNo + '&insertRemove='+ !heartClicked,
+              function(data) {
+        if(data.status == "success"){
+          $('#heart-btn').addClass('u-btn-outline-dribbble');
+          $('#heart-btn').removeClass('g-bg-dribbble');
+          $('#heart-btn').removeClass('g-color-white');
+          heartClicked = false;
+        } else{
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '찜하기 취소를 실패했습니다!'
+          });
+        }
+      });
+    }
+  });
+
+}
+
+function applyClick() {
+  $('#apply-btn').click(function(e) {
+    e.preventDefault();
+    $('#applyModal').modal('toggle');
+  });
+}
+
+function messageClick() {
+  $('#message-btn').click(function(e) {
 
 
+  });
+}
 
 

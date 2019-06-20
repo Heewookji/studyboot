@@ -450,6 +450,8 @@ public class MyStudyController {
         System.out.println(memberNo + "번 회원 가입승인 완료 add 시켜주기");
         // 현재인원을 하나 올려서 카운트 해준다.
         studyService.prsnCount(stdNo);
+        //스터디 평점을 업데이트 해준다.
+        studyService.updateRate(stdNo);
         // 가입 신청에 있는 회원 정보를 없애준다.
         approvalService.delete(stdNo, memberNo);
 
