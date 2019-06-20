@@ -18,7 +18,11 @@ $('#add-board').click((e) => {
 
     $('#checkboxSuccess').click((e) => {
       if (leader != true){
-        alert("스터디장만 공지사항입력이 가능합니다.");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '스터디장만 가능합니다.'
+        });
         $("input:checkbox[id='checkboxSuccess']").prop("checked", false);
       }
     });
@@ -27,11 +31,21 @@ $('#add-board').click((e) => {
     $('#add-min-btn').click((e) => {
       var markup = $('.js-text-editor').summernote('code');
       console.log(markup);
+      
       if($('#inputHorizontalSuccess').val().length === 0) {
-        alert("제목을 입력해 주세요.");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '제목을 입력해 주세요.'
+        });
         return;
+        
       } else if($('.note-editable').text().length === 0) {
-        alert("게시글을 입력해 주세요.");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '게시글을 입력해 주세요.'
+        });
         return;
       } 
 
@@ -46,12 +60,21 @@ $('#add-board').click((e) => {
           contents: markup
         },
         success: function(data){
-          var obj = JSON.parse(data);
-          alert(obj.status);
-          location.reload();
+          Swal.fire({
+            type: 'success',
+            title: '게시글을 등록했습니다.',
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            location.reload();
+          })
         },
         error: function(request, status, error){
-          alert("등록에 실패 했습니다.");
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '등록에 실패 했습니다.'
+          });
         }
       });
     });
