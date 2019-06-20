@@ -185,26 +185,6 @@ public class StudyServiceImpl implements StudyService {
     return study;
   }
   
-  @Override
-  public int updateRate(int studyNo) {
-
-    // 스터디원의 평점을 가져온다.
-    List<StudyMember> memberList = studyMemberDao.findStudyMembersByNo(studyNo);
-    double totalRate = 0;
-    
-    // 스터디의 멤버들의 현재 평점을 모두 더한다.
-    for (StudyMember sm : memberList) {
-      totalRate += sm.getRate();
-    }
-    // 총 평점을 멤버수 만큼 나눈다.
-    totalRate /= memberList.size();
-    
-    // 번호에 해당하는 스터디 정보를 꺼내서 rate 변수에 계산한 평점을 입력해 준다.
-    Study study = studyDao.findByNo(studyNo);
-    study.setRate(totalRate);
-    
-    return studyDao.update(study);
-  }
   
 
   @Override
@@ -332,5 +312,30 @@ public class StudyServiceImpl implements StudyService {
     return studyDao.addPrsn(stdNo);
   }
 
+  
+  
+
+
+  @Override
+  public int updateRate(int studyNo) {
+  //스터디 평점을 갱신해준다.
+    List<StudyMember> memberList = studyMemberDao.findStudyMembersByNo(studyNo);
+    double totalRate = 0;
+
+    // 스터디의 멤버들의 현재 평점을 모두 더한다.
+    for (StudyMember sm : memberList) {
+      totalRate += sm.getRate();
+    }
+    // 총 평점을 멤버수 만큼 나눈다.
+    totalRate /= memberList.size();
+
+    // 번호에 해당하는 스터디 정보를 꺼내서 rate 변수에 계산한 평점을 입력해 준다.
+    Study study = studyDao.findByNo(studyNo);
+    
+    study.setRate(totalRate);
+    return studyDao.update(study);
+  }
+ 
+  
 
 }

@@ -180,7 +180,11 @@ public class StudyRetireController {
     //탈퇴를 완료한다면, 스터디 테이블에 현재 인원칼럼 값을 1개 줄인다. 현재 인원을 칼럼에 저장하는게 관리하기 편하기 때문(희욱)
     Study study = studyService.get(studyNo);
     study.setNowPersonnel(study.getNowPersonnel() - 1);
+    
     studyService.update(study);
+    
+    //스터디 회원 탈퇴시키고, 스터디의 평균 평점을 갱신해준다.
+    studyService.updateRate(studyNo);
 
     return content;
   }

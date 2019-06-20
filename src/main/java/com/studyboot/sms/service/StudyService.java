@@ -7,7 +7,6 @@ public interface StudyService {
   
   int add(Study study);
   Study get(int no);
-  int updateRate(int no);
   int update(Study study);
   int delete(int no);
   int size(String clsNo, String addressNo, double rateValue, String keyword, List<Integer> dayNoList);
@@ -21,4 +20,5 @@ public interface StudyService {
   int deletePickedStudy(int userNo, int studyNo);
   int prsnCount(int stdNo);
   int insertAppliedStudy(int no, int studyNo, String determination);
+  int updateRate(int studyNo);
 }

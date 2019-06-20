@@ -40,8 +40,13 @@ public class StudyController {
   public Object add(Study study, HttpSession session) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     try {
+      
+      
+      if(study.getPhoto().equals("undefined")) {
+        study.setPhoto("default");
+      }
       studyService.add(study);
-
+      
       int stdNo = study.getNo();
       Member loginUser = (Member)session.getAttribute("loginUser");
 
@@ -53,8 +58,8 @@ public class StudyController {
 
       //스터디 멤버 테이블과, 스터디 자료실 생성한다.
       studyMemberService.addStudyMember(stdNo, loginUser.getNo(), leader);
-
-      //생성한 뒤에, 스터디 평점을 넣어준다.
+      
+      //스터디평점 갱신한다.
       studyService.updateRate(stdNo);
 
       amazonService.add(stdNo);
