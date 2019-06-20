@@ -112,10 +112,6 @@ function loadData(no) {
 
       if(mystudyData.status == "success"){
 
-
-
-
-
         var doingList = mystudyData.doingStudyList,
         appliedList = mystudyData.appliedStudyList,
         pickedList = mystudyData.pickedStudyList;
@@ -127,8 +123,6 @@ function loadData(no) {
         }
 
         if(!doingInit){
-          var pickedTag;
-          var appliedTag;
 
           if(data.state == false){
             appliedTag = '';
@@ -138,30 +132,25 @@ function loadData(no) {
                 appliedTag = '';
                 break;
               } else{
-                appliedTag ='<li class="list-inline-item mx-1 mb-1"><a class="btn u-btn-outline-primary g-rounded-25" href="#" id="apply-btn"> <i class="mr-1 fa fa-pencil"></i> 가입신청 </a></li>';
               }
             }
           }
 
           for(var pickedStudy of pickedList){
             if(pickedStudy.no == studyNo){
-              pickedTag = '<li class="list-inline-item mx-1 mb-1"><a class="btn g-bg-dribbble g-color-white g-rounded-25" href="#" id="heart-btn"> <i class="mr-1 fa fa-heart"></i> 찜하기 </a></li>';
+              $('#heart-btn').removeClass('u-btn-outline-dribbble');
+              $('#heart-btn').addClass('g-color-white');
+              $('#heart-btn').addClass('g-bg-dribbble');
               heartClicked = true;
               break;
-            }else{
-              pickedTag = '<li class="list-inline-item mx-1 mb-1"><a class="btn u-btn-outline-dribbble g-rounded-25" href="#" id="heart-btn"> <i class="mr-1 fa fa-heart"></i> 찜하기 </a></li>';
             }
           }
 
-          $('.ui.sticky').append('<hr id="hr"><div class="mb-3" id="btns-div"><ul class="list-inline mb-0 pull-right" id="btns"><li class="list-inline-item mx-1 mb-1"><a class="btn u-btn-outline-primary g-rounded-25" href="#" id="message-btn"><i class="mr-1 fa fa-comment"></i> 문의하기 </a></li></ul></div>');
-          $('#btns').append(appliedTag);
-          $('#btns').prepend(pickedTag);
-        }
+        } 
 
-      } 
+        $(document.body).trigger('loaded-studyInfo');
 
-      $(document.body).trigger('loaded-studyInfo');
-
+      }
     });
 
   });
@@ -462,9 +451,9 @@ function loadChart(no) {
 
 
 $(document.body).bind('loaded-studyInfo', () => {
-  
+
   $('#board-div').addClass('g-brd-around');
-  
+
   $('.ui.dropdown.memberDropdown')
   .dropdown({
     on: 'hover',
