@@ -13,6 +13,7 @@ $('#add-board').click((e) => {
 
   $("#contents").load("/studyboot/html/mystudy/forms.html", function(){
 
+    alert("스터디넘버: "+ noss);
     $('#update-min-btn').hide();
 
     $('#checkboxSuccess').click((e) => {
@@ -39,7 +40,7 @@ $('#add-board').click((e) => {
         type: 'post',
         dataType: 'text',
         data: {
-          studyNo : location.href.split('=')[1].substring(0,1),
+          studyNo : noss,
           ntc: $('input[id="checkboxSuccess"]:checked').val(),
           title: $(inputHorizontalSuccess).val(),
           contents: markup
