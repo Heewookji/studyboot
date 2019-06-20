@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/vendor/chartist-js/chartist.min.css">
   <!-- CSS Unify -->
   <link rel="stylesheet" href="/studyboot/Unify/admin-template/assets/css/unify-admin.css">
+    <link rel="stylesheet" href="../../Unify/admin-template/assets/vendor/summernote-themes/unify-lite.css">
+  
 
 </head>
 
@@ -38,7 +40,7 @@
                           </div>
                         </div>
                       </div>
-
+<!-- <button id="detail-edit">gdgd</button> -->
                       <div class="media-body d-flex align-self-center justify-content-end">
                         <div id="datepickerWrapper2" class="u-datepicker-right u-datepicker--v3">
                         <!-- 
@@ -108,11 +110,15 @@
             
           <!-- 게시물 넘버를 꼽아주는 곳 -->
          <div id="ntc-no"></div>
+         <div id="mem-no"></div>
   </main>
 
 
   <script src="/studyboot/Unify/admin-template/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
   <script src="view.js"></script>
+    <script>
+  $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
+  </script>
 
 </body>
 
