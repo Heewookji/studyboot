@@ -27,4 +27,7 @@ public interface StudyDao {
   int deletePickedStudyByUserNoAndStudyNo(Map<String, Object> params);
   int addPrsn(int stdNo);
   int photoUpdate(Map<String, Object> map);
+  int chartCount(double rate);
+  int percentCount(double rate);
+  int chartCountAll();
 }

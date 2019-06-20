@@ -1,5 +1,6 @@
 package com.studyboot.sms.service;
 
+import java.util.HashMap;
 import java.util.List;
 import com.studyboot.sms.domain.Study;
 
@@ -21,4 +22,6 @@ public interface StudyService {
   int prsnCount(int stdNo);
   int insertAppliedStudy(int no, int studyNo, String determination);
   int updateRate(int studyNo);
+  HashMap<String, Integer> chartCount(double stdRate);
+  int percentCount(double stdRate);
 }

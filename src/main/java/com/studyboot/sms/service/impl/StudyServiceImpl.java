@@ -18,13 +18,13 @@ import com.studyboot.sms.service.StudyService;
 
 @Service
 public class StudyServiceImpl implements StudyService {
-  
+
   StudyDao studyDao;
   StudyMemberDao studyMemberDao;
   AddressDao addressDao;
   ClsDao clsDao;
   AppliedStudyDao appliedStudyDao;
-  
+
   public StudyServiceImpl(
       StudyDao studyDao,
       StudyMemberDao studyMemberDao,
@@ -38,24 +38,24 @@ public class StudyServiceImpl implements StudyService {
     this.appliedStudyDao = appliedStudyDao;
   }
 
-  
-  
+
+
   @Override
   public List<Study> list(int pageNo, int pageSize, List<String> clsNo, String addressNo,
       double rateValue, String keyword, List<Integer> dayNoList) {
 
     HashMap<String,Object> params = new HashMap<>();
 
-//    키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
-//    그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
-      HashMap<String,Object> clsParam = new HashMap<>();
-      clsParam.put("keyword", keyword);
+    //    키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
+    //    그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
+    HashMap<String,Object> clsParam = new HashMap<>();
+    clsParam.put("keyword", keyword);
     List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
-    
+
     if(findedClsNosByKeyword.size() != 0) {
       params.put("findedClsNosByKeyword", findedClsNosByKeyword);
     }
-    
+
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("dayNoList", dayNoList);
@@ -65,12 +65,12 @@ public class StudyServiceImpl implements StudyService {
     params.put("addressNoSize", addressNo.length());
     params.put("rateValue", rateValue);
     params.put("keyword", keyword);
-    
+
     List<Study> list;
-    
+
     list = studyDao.findAllByKeyword(params);
-    
-      return list;
+
+    return list;
   }
   @Override
   public List<Study> list(
@@ -78,23 +78,23 @@ public class StudyServiceImpl implements StudyService {
       String clsNo, String addressNo,
       double rateValue, String keyword,
       List<Integer> dayNoList) {
-    
+
     HashMap<String,Object> params = new HashMap<>();
 
-//    키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
-//    그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
+    //    키워드 검색시, 키워드로 스터디 이름,목표, 설명, 분야번호를 찾아내야한다. 때문에 키워드로 먼저 관심분야 번호를 검색한다.
+    //    그 뒤에 스터디 매퍼에서 관심분야 번호로 스터디를 검색한다.
     if(keyword != null) {
       HashMap<String,Object> clsParam = new HashMap<>();
       clsParam.put("keyword", keyword);
-    List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
-    
-    if(findedClsNosByKeyword.size() != 0) {
-      params.put("findedClsNosByKeyword", findedClsNosByKeyword);
+      List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
+
+      if(findedClsNosByKeyword.size() != 0) {
+        params.put("findedClsNosByKeyword", findedClsNosByKeyword);
+      }
+
     }
-    
-    }
-    
-    
+
+
     params.put("size", pageSize);
     params.put("dayNoList", dayNoList);
     params.put("dayNoListSize", dayNoList.size());
@@ -105,46 +105,49 @@ public class StudyServiceImpl implements StudyService {
     params.put("addressNoSize", addressNo.length());
     params.put("rateValue", rateValue);
     params.put("keyword", keyword);
-    
+
     List<Study> list;
-    
+
     list = studyDao.findAll(params);
-    
-      return list;
+
+    return list;
   }
 
   @Override
   public int add(Study study) {
-    
+
     return studyDao.insert(study);
   }
 
   @Override
   public Study get(int no) {
-    
+
     List<StudyMember> memberList = studyMemberDao.findStudyMembersByNo(no);
     int totalAge = 0;
     double totalAttendance = 0;
-    
+    List<Integer> memberAges = new ArrayList<>();
+
     LocalDate now = LocalDate.now();
-    
+
     //생년월일과 현재날짜의 차로 나이를 계산한다.
     for (StudyMember sm : memberList) {
       LocalDate birth = sm.getBirth().toLocalDate();
       Period period = Period.between(birth, now);
       int age = period.getYears() + 1;
       totalAge += age;
+      memberAges.add(age);
       totalAttendance += sm.getAttendance();
     }
     totalAge /= memberList.size();
     totalAttendance /= memberList.size();
-    
+
     Study study = studyDao.findByNo(no);
+    study.setMemberAges(memberAges);
     study.setMemberAge(totalAge);
     study.setAttendance(totalAttendance);
-    
-   
-    
+
+
+
     //활동요일을 변환해준다.
     HashMap<String,Integer> dayMap = new HashMap<>();
     dayMap.put("월",1);
@@ -160,36 +163,36 @@ public class StudyServiceImpl implements StudyService {
         dayStrList.add(dayStr);
       }
     });
-    
-   dayStrList.sort((String str1, String str2)->{
-     if(dayMap.get(str1) > dayMap.get(str2)) {
-       return 0;
-     } else {
-       return 1;
-     }
-   });
-    
+
+    dayStrList.sort((String str1, String str2)->{
+      if(dayMap.get(str1) > dayMap.get(str2)) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+
     study.setDayStrList(dayStrList);
-    
-    
+
+
     //전체 일수와 남은 일수를 계산해준다.
-    
+
     long totalCal = study.getEndDate().getTime() - study.getStartDate().getTime();
     long totalDiff = totalCal / (24 * 60 * 60 * 1000);
     long CurrentCal = study.getEndDate().getTime() - new Date().getTime();
     long currentDiff = CurrentCal / (24 * 60 * 60 * 1000);
-    
+
     study.setTotalDateDiff(totalDiff);
     study.setCurrentDateDiff(currentDiff);
-    
+
     return study;
   }
-  
-  
+
+
 
   @Override
   public int update(Study study) {
-    
+
     return studyDao.update(study);
   }
 
@@ -202,7 +205,7 @@ public class StudyServiceImpl implements StudyService {
   @Override
   public int size(
       String clsNo, String addressNo , double rateValue, String keyword, List<Integer> dayNoList) {
-    
+
     HashMap<String,Object> params = new HashMap<>();
     if(keyword != null) {
       HashMap<String,Object> clsParam = new HashMap<>();
@@ -211,7 +214,7 @@ public class StudyServiceImpl implements StudyService {
       if(findedClsNosByKeyword.size() != 0) {
         params.put("findedClsNosByKeyword", findedClsNosByKeyword);
       }
-      }
+    }
     params.put("clsNo", clsNo);
     params.put("dayNoList", dayNoList);
     params.put("dayNoListSize", dayNoList.size());
@@ -220,21 +223,21 @@ public class StudyServiceImpl implements StudyService {
     params.put("addressSize", addressNo.length());
     params.put("keyword", keyword);
     params.put("rateValue", rateValue);
-    
+
     return  studyDao.countAll(params);
   }
-  
+
   @Override
   public int size(
       List<String> clsNo, String addressNo , double rateValue, String keyword, List<Integer> dayNoList) {
-    
+
     HashMap<String,Object> params = new HashMap<>();
-      HashMap<String,Object> clsParam = new HashMap<>();
-      clsParam.put("keyword", keyword);
-      List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
-      if(findedClsNosByKeyword.size() != 0) {
-        params.put("findedClsNosByKeyword", findedClsNosByKeyword);
-      }
+    HashMap<String,Object> clsParam = new HashMap<>();
+    clsParam.put("keyword", keyword);
+    List<String> findedClsNosByKeyword = clsDao.findedClsNoByKeyword(clsParam);
+    if(findedClsNosByKeyword.size() != 0) {
+      params.put("findedClsNosByKeyword", findedClsNosByKeyword);
+    }
     params.put("clsNo", clsNo);
     params.put("dayNoList", dayNoList);
     params.put("dayNoListSize", dayNoList.size());
@@ -242,38 +245,38 @@ public class StudyServiceImpl implements StudyService {
     params.put("addressSize", addressNo.length());
     params.put("keyword", keyword);
     params.put("rateValue", rateValue);
-    
+
     return  studyDao.countAllByKeyword(params);
   }
-  
+
   @Override
   public Study getStudyPhoto(int no) {
-    
+
     Study study = studyDao.findPhotoByNo(no);
     return study;
   }
-  
+
   @Override
   public int insertPickedStudy(int userNo, int studyNo) {
-    
-   HashMap<String,Object> params = new HashMap<>();
-    
+
+    HashMap<String,Object> params = new HashMap<>();
+
     params.put("userNo", userNo);
     params.put("studyNo", studyNo);
-    
-    
+
+
     return studyDao.insertPickedStudyByUserNoAndStudyNo(params);
   }
-  
+
 
   @Override
   public int deletePickedStudy(int userNo, int studyNo) {
-    
+
     HashMap<String,Object> params = new HashMap<>();
-    
+
     params.put("userNo", userNo);
     params.put("studyNo", studyNo);
-    
+
     return studyDao.deletePickedStudyByUserNoAndStudyNo(params);
   }
 
@@ -282,15 +285,15 @@ public class StudyServiceImpl implements StudyService {
   public int insertAppliedStudy(int userNo, int studyNo, String determination) {
 
     HashMap<String,Object> params = new HashMap<>();
-     
-     params.put("userNo", userNo);
-     params.put("studyNo", studyNo);
-     params.put("determination", determination);
-     
-     return appliedStudyDao.insertAppliedStudyByUserNoAndStudyNo(params);
+
+    params.put("userNo", userNo);
+    params.put("studyNo", studyNo);
+    params.put("determination", determination);
+
+    return appliedStudyDao.insertAppliedStudyByUserNoAndStudyNo(params);
   }
-  
-  
+
+
 
   @Override
   public boolean checkFullCapacityByStudyNo(int studyNo) {
@@ -298,7 +301,7 @@ public class StudyServiceImpl implements StudyService {
   }
 
 
-//스터디의 모집상태를 갱신해주는 메서드
+  //스터디의 모집상태를 갱신해주는 메서드
   @Override
   public void updateAllStudyRecruitState() {
     studyDao.updateAllStudyRecruitState();
@@ -306,19 +309,19 @@ public class StudyServiceImpl implements StudyService {
     studyDao.updateAllStudyRecruitState3();
   }
 
-// 현재인원 증가
+  // 현재인원 증가
   @Override
   public int prsnCount(int stdNo) {
     return studyDao.addPrsn(stdNo);
   }
 
-  
-  
+
+
 
 
   @Override
   public int updateRate(int studyNo) {
-  //스터디 평점을 갱신해준다.
+    //스터디 평점을 갱신해준다.
     List<StudyMember> memberList = studyMemberDao.findStudyMembersByNo(studyNo);
     double totalRate = 0;
 
@@ -331,11 +334,38 @@ public class StudyServiceImpl implements StudyService {
 
     // 번호에 해당하는 스터디 정보를 꺼내서 rate 변수에 계산한 평점을 입력해 준다.
     Study study = studyDao.findByNo(studyNo);
-    
+
     study.setRate(totalRate);
     return studyDao.update(study);
   }
- 
-  
+
+
+
+  @Override
+  public HashMap<String, Integer> chartCount(double stdRate) {
+
+    HashMap<String,Integer> params = new HashMap<>();
+    params.put("rateOne", studyDao.chartCount(1));
+    params.put("rateTwo", studyDao.chartCount(2));
+    params.put("rateThree", studyDao.chartCount(3));
+    params.put("rateFour", studyDao.chartCount(4));
+    params.put("rateStudy", studyDao.chartCount(stdRate));
+
+    return params;
+  }
+
+  @Override
+  public int percentCount(double stdRate) {
+
+    //    int percentage = ((studyDao.percentCount(stdRate)+1)/())*100;
+
+    double all = studyDao.chartCountAll();
+    double std = studyDao.percentCount(stdRate)+1;
+    int a = (int) ((std/all)*100);
+
+    return a;
+  }
+
+
 
 }

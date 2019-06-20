@@ -27,6 +27,7 @@ public class Study {
   private int personnel;
   private int nowPersonnel;
   private int memberAge;
+  private List<Integer> memberAges;
   private double attendance;
   private double endrate;
   private String clsName;
@@ -37,6 +38,12 @@ public class Study {
   private List<StudyMember> studyMembers;
   private List<Cls> clsList;
   
+  public List<Integer> getMemberAges() {
+    return memberAges;
+  }
+  public void setMemberAges(List<Integer> memberAges) {
+    this.memberAges = memberAges;
+  }
   public List<Cls> getClsList() {
     return clsList;
   }
@@ -193,10 +200,11 @@ public class Study {
         + ", photo=" + photo + ", day=" + day + ", rate=" + rate + ", recruitApply=" + recruitApply
         + ", startDate=" + startDate + ", endDate=" + endDate + ", state=" + state + ", goal="
         + goal + ", contents=" + contents + ", personnel=" + personnel + ", nowPersonnel="
-        + nowPersonnel + ", memberAge=" + memberAge + ", attendance=" + attendance + ", endrate="
-        + endrate + ", clsName=" + clsName + ", addressName=" + addressName + ", dayStrList="
-        + dayStrList + ", totalDateDiff=" + totalDateDiff + ", currentDateDiff=" + currentDateDiff
-        + ", studyMembers=" + studyMembers + ", clsList=" + clsList + "]";
+        + nowPersonnel + ", memberAge=" + memberAge + ", memberAges=" + memberAges + ", attendance="
+        + attendance + ", endrate=" + endrate + ", clsName=" + clsName + ", addressName="
+        + addressName + ", dayStrList=" + dayStrList + ", totalDateDiff=" + totalDateDiff
+        + ", currentDateDiff=" + currentDateDiff + ", studyMembers=" + studyMembers + ", clsList="
+        + clsList + "]";
   }
   
   
