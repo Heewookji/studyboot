@@ -72,8 +72,9 @@ $(document.body).bind('loaded-list', () => {
 function loadDetail(no) {
 
   $.getJSON('../../app/json/MyStudy/detail?no=' + no, function(obj) {
-
-    $('#detail-photo').attr("src", "/studyboot/upload/images/" + obj.member.photo);
+    src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg"
+    $('#detail-photo').attr("src", "/studyboot/upload/images/member/thumbnail." + obj.member.photo + 
+        ".jpg");
     $('#detail-nick').html(obj.member.nickName);
     $('#detail-date').html(obj.date);
     $('#detail-title').html(obj.title);

@@ -12,8 +12,6 @@ $.getJSON('../../app/json/MyStudy/leader?no=' + noss,
 $('#add-board').click((e) => {
 
   $("#contents").load("/studyboot/html/mystudy/forms.html", function(){
-
-    alert("스터디넘버: "+ noss);
     $('#update-min-btn').hide();
 
     $('#checkboxSuccess').click((e) => {

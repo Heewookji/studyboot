@@ -54,16 +54,20 @@ $('#add-file').fileupload({
   autoUpload: false,
   replaceFileInput : true,
   add : function (e, data) {
-    console.log(data);
-
     $('#save-btn').click(function() {
       data.submit();
     });
   },
   formData : {studyNo: nossss},
   done: function (e, data) {
-    alert("업로드가 완료되었습니다.");
-    location.reload();
+    Swal.fire({
+      type: 'success',
+      title: '업로드가 완료되었습니다.',
+      showConfirmButton: false,
+      timer: 1500
+    }).then((result) => {
+      location.reload();
+    })
   }
 });
 
@@ -74,32 +78,25 @@ $(document.body).bind('loaded-repository', () => {
   
   // 파일을 삭제하는 이벤트
   $('.delete-files').click((e) => {
-    
-    alert("삭제 버튼");
     var fileName = $(e.target).attr('data-content')
 
     $.getJSON('../../app/json/MyStudy/fileDelete?fileName=' + fileName + "&studyNo=" + nossss,
         function(obj){
-      alert(obj.status);
-      location.reload();
+      Swal.fire({
+        type: 'success',
+        title: '삭제가 완료되었습니다.',
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        location.reload();
+      })
     });
   });
 
   // 파일을 다운로드하는 이벤트
   $('.file-Download').click((e) => {
-
-    alert("파일 다운");
-    
     // 아직까지 핸들바스로 받아온 파일이 없고 받아온 파일에 해당 파일의 이름을 받을 수 있는 조건이 없어서 임시로 fileName 설정
     var fileName = $('.file-Download').attr('data-content');
-    
-    alert(fileName);
-    
-
-      //$.getJSON(,
-      //   function(obj){
-      //  alert(obj.status);
-      //});
     location.href = '../../app/json/FileDown/fileDownload?fileName=' + fileName + "&studyNo=" + nossss;
   });
 

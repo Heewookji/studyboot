@@ -233,7 +233,6 @@ $(document.body).bind('loaded-saveData', () => {
           }).then((result) => {
             location.reload();
           })
-          );
         } else {
           Swal.fire({
             type: 'error',
