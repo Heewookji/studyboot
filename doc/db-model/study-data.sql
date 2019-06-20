@@ -203,129 +203,129 @@ insert into sms_end_state_cls(end_state_cls_id, name) values(3, "추방");
 
 -- 스터디 생성 입력
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121111', '111111', '스터디1', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
+values('121111', '111111', '스터디1', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111112', '111112', '스터디2', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);
+values('111112', '111112', '스터디2', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121211', '111211', '스터디3', 'default.jpg', 96, '2019-05-13', '2019-07-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);
+values('121211', '111211', '스터디3', 'default', 96, '2019-05-13', '2019-07-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111212', '111212', '스터디4', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);
+values('111212', '111212', '스터디4', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121311', '111311', '스터디5', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);
+values('121311', '111311', '스터디5', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111312', '111312', '스터디6', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);
+values('111312', '111312', '스터디6', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121411', '111411', '스터디7', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  4 ,  3.25);
+values('121411', '111411', '스터디7', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  4 ,  3.25);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111412', '111412', '스터디8', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  6 ,  1.8 );
+values('111412', '111412', '스터디8', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  6 ,  1.8 );
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111111', '121111', '스터디9', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합합시다1.',  5,   3);                    
+values('111111', '121111', '스터디9', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합합시다1.',  5,   3);                    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('121112', '121112', '스터디10', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);                    
+values('121112', '121112', '스터디10', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);                    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('111211', '121211', '스터디11', 'default.jpg', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);                    
+values('111211', '121211', '스터디11', 'default', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);                    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('121212', '121212', '스터디12', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);                    
+values('121212', '121212', '스터디12', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);                    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('111311', '121311', '스터디13', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);                   
+values('111311', '121311', '스터디13', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);                   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('121312', '121312', '스터디14', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);                   
+values('121312', '121312', '스터디14', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);                   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('111411', '121411', '스터디15', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부부합시다6.',  4 ,  3.25);                 
+values('111411', '121411', '스터디15', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부부합시다6.',  4 ,  3.25);                 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                                             
-values('121412', '121412', '스터디16', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부부합시다6.',  6 ,  1.8 );                 
+values('121412', '121412', '스터디16', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부부합시다6.',  6 ,  1.8 );                 
                                                                                                                                               
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('131111', '131111', '스터디17', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
+values('131111', '131111', '스터디17', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131112', '131112', '스터디18', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
+values('131112', '131112', '스터디18', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131211', '131211', '스터디19', 'default.jpg', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
+values('131211', '131211', '스터디19', 'default', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131212', '131212', '스터디20', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
+values('131212', '131212', '스터디20', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131311', '131311', '스터디21', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
+values('131311', '131311', '스터디21', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131312', '131312', '스터디22', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
+values('131312', '131312', '스터디22', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131411', '131411', '스터디23', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4,   3.25); 
+values('131411', '131411', '스터디23', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4,   3.25); 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('131412', '131412', '스터디24', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+values('131412', '131412', '스터디24', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('141111', '141111', '스터디25', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
+values('141111', '141111', '스터디25', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141112', '141112', '스터디26', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
+values('141112', '141112', '스터디26', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141211', '141211', '스터디27', 'default.jpg', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
+values('141211', '141211', '스터디27', 'default', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141212', '141212', '스터디28', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
+values('141212', '141212', '스터디28', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141311', '141311', '스터디29', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
+values('141311', '141311', '스터디29', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141312', '141312', '스터디30', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
+values('141312', '141312', '스터디30', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141411', '141411', '스터디31', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4 ,  3.25); 
+values('141411', '141411', '스터디31', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4 ,  3.25); 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('141412', '141412', '스터디32', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+values('141412', '141412', '스터디32', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('151111', '151111', '스터디33', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
+values('151111', '151111', '스터디33', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151112', '151112', '스터디34', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
+values('151112', '151112', '스터디34', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151211', '151211', '스터디35', 'default.jpg', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
+values('151211', '151211', '스터디35', 'default', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151212', '151212', '스터디36', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
+values('151212', '151212', '스터디36', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151311', '151311', '스터디37', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
+values('151311', '151311', '스터디37', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151312', '151312', '스터디38', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
+values('151312', '151312', '스터디38', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151411', '151411', '스터디39', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4  , 3.25); 
+values('151411', '151411', '스터디39', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4  , 3.25); 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('151412', '151412', '스터디40', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+values('151412', '151412', '스터디40', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('161111', '161111', '스터디41', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
+values('161111', '161111', '스터디41', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공합시다1.',  5,   3);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161112', '161112', '스터디42', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
+values('161112', '161112', '스터디42', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공시다2.',   3,   4);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161211', '161211', '스터디43', 'default.jpg', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
+values('161211', '161211', '스터디43', 'default', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공합시다3.',  6, 4.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161212', '161212', '스터디44', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
+values('161212', '161212', '스터디44', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공합시다4.',  3, 3.5);    
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161311', '161311', '스터디45', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
+values('161311', '161311', '스터디45', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  3.1);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161312', '161312', '스터디46', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
+values('161312', '161312', '스터디46', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공시다5.',   5,  2.5);   
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161411', '161411', '스터디47', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4 ,  3.25); 
+values('161411', '161411', '스터디47', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  4 ,  3.25); 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values('161412', '161412', '스터디48', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+values('161412', '161412', '스터디48', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121111', '111111', '스터디49', 'default.jpg', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
+values('121111', '111111', '스터디49', 'default', 64, '2019-05-11', '2019-06-11', '정처기 합격', '열심히 공부합시다1.',  5,   3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111112', '111112', '스터디50', 'default.jpg', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);
+values('111112', '111112', '스터디50', 'default', 1, '2019-05-12', '2019-06-12', '박상민 합격', '열심히 공부합시다2.',   3,   4);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121211', '111211', '스터디51', 'default.jpg', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);
+values('121211', '111211', '스터디51', 'default', 96, '2019-05-13', '2019-06-13', '박상현 합격', '열심히 공부합시다3.',  6, 4.5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111212', '111212', '스터디52', 'default.jpg', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);
+values('111212', '111212', '스터디52', 'default', 21, '2019-05-14', '2019-06-14', '지희욱 합격', '열심히 공부합시다4.',  3, 3.5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121311', '111311', '스터디53', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);
+values('121311', '111311', '스터디53', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  3.1);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111312', '111312', '스터디54', 'default.jpg', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);
+values('111312', '111312', '스터디54', 'default', 3, '2019-05-15', '2019-06-15', '임현우 합격', '열심히 공부합시다5.',   5,  2.5);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('121411', '111411', '스터디55', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  4 ,  3.25);
+values('121411', '111411', '스터디55', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  4 ,  3.25);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)
-values('111412', '111412', '스터디56', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  6 ,  1.8 );
+values('111412', '111412', '스터디56', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 공부합시다6.',  6 ,  1.8 );
 insert into sms_std(std_id, adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn, rate)                                          
-values(100, '161412', '161412', '지환탈퇴테스트', 'default.jpg', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
+values(100, '161412', '161412', '지환탈퇴테스트', 'default', 127, '2019-05-16', '2019-06-16', '최지환 합격', '열심히 부합시다6.',  6 ,  1.8 ); 
 
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn,now_prsn, rcrtm_apply, rate)
-values('121111', '111111', '스터디57', 'default.jpg', 64, '2019-06-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,4 ,true,  3);
+values('121111', '111111', '스터디57', 'default', 64, '2019-06-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,4 ,true,  3);
 insert into sms_std(adr_lms, cls_lms, name, photo, day, sdt, edt, goal, cont, prsn,now_prsn, rate)
-values('151212', '161414', '스터디58', 'default.jpg', 64, '2019-07-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,5  , 3);
+values('151212', '161414', '스터디58', 'default', 64, '2019-07-11', '2019-07-16', '정처기 합격', '열심히 공부합시다1.',  5,5  , 3);
 
 -- 회원 생성
   -- 관리자
