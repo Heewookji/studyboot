@@ -41,10 +41,19 @@ $('#messageAdd-btn').click((e) => {
     },
     success: function(data){
       var obj = JSON.parse(data);
-      location.reload();
+      
+      if (messagePage == "mystudy") { // 현재 페이지가 mystudy면 쪽지 보내고 리로드 안함
+        $('#addModal').modal('hide');
+      } else {
+        location.reload();
+      }
     },
     error: function(){
-      alert("닉네임을 확인해주세요.");
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '닉네임을 확인해주세요.'
+      });
       $(recv_id).val("");
     }
   });

@@ -31,8 +31,6 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
   });
 }(myStudyNo));
 
-//<button onclick="alert($('#rateit10').rateit('value'))">Get value</button>
-
 /* --------------------------------------- 탈퇴시 평가 --------------------------------------- */
 
 //모달을 생성후 별을 그리게 하기 위해
@@ -61,7 +59,11 @@ $('#retireRateModal').on('shown.bs.modal', function (e) {
 $('#retire-request').click(() => {
 
   if (window.leader === true) {
-    alert("스터디 장은 스터디에 탈퇴 할 수 없습니다.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '스터디 장은 스터디에 탈퇴 할 수 없습니다.'
+    });
     return;
   }
 
@@ -94,11 +96,23 @@ $('#retire-evaluation-btn').click(() => {
       + '&evaluations=' + ratingArr  + '&studyNo=' + myStudyNo,
       function(obj) {
     if (obj.status === "이 전에 탈퇴한 회원을 먼저 평가해 주세요!") {
-      alert(obj.status);
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: obj.status
+      });
       location.reload();
     } else {
-      alert(obj.status);
-      window.location.href = "/studyboot/";
+      
+      Swal.fire({
+        type: 'success',
+        title: obj.status,
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        window.location.href = "/studyboot/";
+      });
+      
     }
   })
 
@@ -150,14 +164,11 @@ $('#retireeRateModal').on('shown.bs.modal', function (e) {
   });
 }(myStudyNo));
 
-//<button onclick="alert($('#rateit10').rateit('value'))">Get value</button>
 $(document.body).bind('retiree-evaluation-star', () => {
 
   $(retireeList).each(function( i, element ) {
 
-//  console.log($('#rateit-' + retireeList[i].nickName).rateit('value')); // 탈퇴자들 가져오기 전에 이걸실행하는
     $('#rateit-' + retireeList[i].nickName).click(() => { // 탈퇴자 평가 별점 클릭
-//    alert($('#rateit-' + retireeList[i].nickName).rateit('value'))
     }); 
   });
 });
@@ -181,8 +192,14 @@ $('#retiree-rate-button').click(() => {
   $.getJSON('../../app/json/retireEvaluation/retireeEvaluationRate?retireeNickNames=' + retireeNickNames
       + '&retireeEvaluationRateArr=' + retireeEvaluationRateArr  + '&studyNo=' + myStudyNo,
       function(obj) {
-    alert(obj.status);
-    location.reload();
+    Swal.fire({
+      type: 'success',
+      title: obj.status,
+      showConfirmButton: false,
+      timer: 1500
+    }).then((result) => {
+      location.reload();
+    });
   })
 
 });
