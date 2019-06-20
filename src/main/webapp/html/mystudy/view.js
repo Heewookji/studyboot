@@ -10,30 +10,33 @@ $(document).ready(function() {
         function(obj) {
 
       user = obj.user;
-      console.log("유저정보" + user);
     });
 
     $('#drop-menu').click(function() {
       console.log("유저정보" + user);
       console.log("게시글유저" + $('#mem-no').attr('data-mem'));
       if ($('#mem-no').attr('data-mem') != user) {
-        alert("작성자만 수정이 가능합니다");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '작성자만 수정이 가능합니다'
+        });
         $('#detail-edit').hide();
         $('#detail-del').hide();
       }
     });
-    
+
     loadDetail($('#ntc-no').attr('data-no'));
   }
-  
+
 });
 
 
 $(document.body).bind('loaded-list', () => {
-  
+
   $('.detail-btn').click((e) => {
     $("#contents").load("/studyboot/html/mystudy/view.html", function(){
-      
+
       //리더 유무 받아오기
       $.getJSON('../../app/json/MyStudy/leader?no=' + nosss,
           function(obj) {
@@ -46,14 +49,17 @@ $(document.body).bind('loaded-list', () => {
           function(obj) {
 
         user = obj.user;
-        console.log("유저정보" + user);
       });
 
       $('#drop-menu').click(function() {
         console.log("유저정보" + user);
         console.log("게시글유저" + $(e.target).attr('data-member'));
         if ($(e.target).attr('data-member') != user) {
-          alert("작성자만 수정이 가능합니다");
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '작성자만 수정이 가능합니다'
+          });
           $('#detail-edit').hide();
           $('#detail-del').hide();
         }
@@ -66,16 +72,15 @@ $(document.body).bind('loaded-list', () => {
 function loadDetail(no) {
 
   $.getJSON('../../app/json/MyStudy/detail?no=' + no, function(obj) {
-
-    $('#detail-photo').attr("src", "/studyboot/upload/images/" + obj.member.photo);
+    src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg"
+    $('#detail-photo').attr("src", "/studyboot/upload/images/member/thumbnail." + obj.member.photo + 
+        ".jpg");
     $('#detail-nick').html(obj.member.nickName);
     $('#detail-date').html(obj.date);
     $('#detail-title').html(obj.title);
     $('#detail-cont').html(obj.contents);
     $('#detail-no').html(obj.no);
     $('#detail-member').html(obj.memberNo);
-    console.log(obj.ntc);
-    console.log(obj.no);
 
     // 업데이트 버튼
     $('#detail-edit').click((e) => {
@@ -90,7 +95,11 @@ function loadDetail(no) {
         // 공지사항 유효성 검사
         $('#checkboxSuccess').click((e) => {
           if (leader != true){
-            alert("스터디장만 공지사항입력이 가능합니다.");
+            Swal.fire({
+              type: 'error',
+              title: errorTitle,
+              text: '스터디장만 공지사항입력이 가능합니다.'
+            });
             $("input:checkbox[id='checkboxSuccess']").prop("checked", false);
           }
         });
@@ -99,10 +108,18 @@ function loadDetail(no) {
           var markup = $('.js-text-editor').summernote('code');
 
           if($('#inputHorizontalSuccess').val().length === 0) {
-            alert("제목을 입력해 주세요.");
+            Swal.fire({
+              type: 'error',
+              title: errorTitle,
+              text: '제목을 입력해 주세요.'
+            });
             return;
           } else if($('.note-editable').text().length === 0) {
-            alert("게시글을 입력해 주세요.");
+            Swal.fire({
+              type: 'error',
+              title: errorTitle,
+              text: '게시글을 입력해 주세요.'
+            });
             return;
           } 
 
@@ -118,12 +135,21 @@ function loadDetail(no) {
               contents: markup
             },
             success: function(data){
-              var obj = JSON.parse(data);
-              alert(obj.status);
-              location.reload();
+              Swal.fire({
+                type: 'success',
+                title: '게시글을 수정했습니다.',
+                showConfirmButton: false,
+                timer: 1500
+              }).then((result) => {
+                location.reload();
+              })
             },
             error: function(request, status, error){
-              alert("등록에 실패 했습니다.");
+              Swal.fire({
+                type: 'error',
+                title: errorTitle,
+                text: '등록에 실패 했습니다.'
+              });
             }
           });
         }); // ajax 끝
@@ -136,8 +162,15 @@ function loadDetail(no) {
 
       $.getJSON('../../app/json/MyStudy/delete?no=' + obj.no + 
           '&memberNo=' + obj.memberNo, function(obj) {
-        alert(obj.status);
-        location.reload();
+        Swal.fire({
+          type: 'success',
+          title: '삭제되었습니다.',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          location.reload();
+        })
+        
 //      $(document.body).trigger('loaded-test'); // 트리거 실행이 안됨
       })
     }); // end delete

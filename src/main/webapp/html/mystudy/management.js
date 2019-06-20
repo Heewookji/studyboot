@@ -63,7 +63,6 @@ $(document).ready(function() {
 function loadStudyDetail(nosss) {
   $.getJSON('../../app/json/study/detail?no=' + nosss,
       function(obj){
-    console.log(obj);
 
     $('#std-name').val(obj.name);
     $('#prsn-count').text(obj.personnel + "명");
@@ -233,8 +232,7 @@ $(document.body).bind('loaded-saveData', () => {
             timer: 1500
           }).then((result) => {
             location.reload();
-          }
-          );
+          })
         } else {
           Swal.fire({
             type: 'error',

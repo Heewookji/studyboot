@@ -36,10 +36,14 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
   @Override
   public List<Schedule> allSchedules(int no) {
     
-    List<Integer> studyNoList = studyMemberDao.findStudyNoByMemberNo(no);
     HashMap<String,Object> params = new HashMap<>();
-    params.put("studyNoList", studyNoList);
+    List<Integer> studyNoList = studyMemberDao.findStudyNoByMemberNo(no);
     
+    if (studyNoList == null || studyNoList.size() <= 0) {
+      return null;
+    }
+    
+    params.put("studyNoList", studyNoList);
     List<Schedule> list = scheduleDao.findAllByAllStudy(params);
     //                  보라색      빨간색    하늘색     똥색       ???
     String[] colors = {"#9932CC", "#DC143C", "#B8860B", "#20B2AA", "#A0522D"};

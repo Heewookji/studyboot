@@ -228,38 +228,13 @@
 
 <footer id="js-footer"> </footer>
 
-<!-- 
- <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
- <div class="media">
- <div class="d-flex g-mt-2 g-mr-15">
- <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}" alt="Image Description">
- </div>
- <div class="media-body">
- <p class="m-0"><strong>{{name}}</strong> saved your pin</p>
- <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
- </div>
- </div>
- </li>
- -->
 
-<!-- 
- <span class="g-font-size-12 g-color-gray">5 minutes ago</span>
- -->
- 
- 
-<!--  <div class="form-group g-mb-15 align-items-center justify-content-between">
-<strong>{{name}}</strong>({{member.nickName}})
-
-            
-                </div>
-  -->
- <!-- 스터디원 리스트 모달 -->
 <script id="attend-member" type="text/x-handlebars-template">
 {{#each list}}
   <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
     <div class="media">
       <div class="d-flex g-mt-2 g-mr-15">
-        <img class="g-width-40 g-height-40 rounded-circle" src="../../upload/images/{{photo}}"
+        <img class="g-width-40 g-height-40 rounded-circle" src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg"
           alt="Image Description">
       </div>
 
@@ -295,7 +270,7 @@
 <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
 <div class="d-flex g-mt-2 g-mr-15">
 <img class="g-width-40 g-height-40 rounded-circle" 
-src="/studyboot/upload/images/{{member.photo}}" alt="Image Description">
+src="/studyboot/upload/images/member/thumbnail.{{member.photo}}.jpg" alt="Image Description">
 </div>
 <div class="media-body">
 <div class="d-flex justify-content-between">

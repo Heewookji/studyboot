@@ -103,13 +103,18 @@ public class MemberController {
     member.setClsList(new ArrayList<>());
     
     for (String cls : member.getCls()) {
-      List<Cls> clsList = clsService.getClsName(cls);
-      
-      for (Cls c : clsList) {
-        if (c.getClsSmallNo() != null) {
-          c.setClsNo(cls);
-          member.getClsList().add(c);
+      try {
+        List<Cls> clsList = clsService.getClsName(cls);
+        
+        for (Cls c : clsList) {
+          if (c.getClsSmallNo() != null) {
+            c.setClsNo(cls);
+            member.getClsList().add(c);
+          }
         }
+        
+      } catch (Exception e) {
+        // 유효한 관심분야 번호가 아니면 걸러낸다.
       }
     }
     
@@ -135,7 +140,7 @@ public class MemberController {
     
     try {
       
-      if (member.getAddress().equals("undefined")) {
+      if (member.getAddress() == null || member.getAddress().equals("undefined")) {
         member.setAddress(null);
       }
       
@@ -148,6 +153,7 @@ public class MemberController {
       content.put("status", "success");
 
     } catch (Exception e) {
+      e.printStackTrace();
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
@@ -190,7 +196,6 @@ public class MemberController {
     Member loginUser = (Member) session.getAttribute("loginUser");
 
     result = memberService.passwordCheck(loginUser.getEmail(), password);
-    System.out.println(result);
     map.put("result", result);
 
     return map;

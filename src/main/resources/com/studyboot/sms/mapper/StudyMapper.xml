@@ -391,6 +391,26 @@
     </where>
 
   </select>
+  
+  
+  <select id="chartCount" resultType="int" parameterType="double">
+   select count(*) from sms_std
+   where
+   rate >= #{value} and #{value} + 1 > rate
+  </select>
+  
+  
+  <select id="percentCount" resultType="int" parameterType="double">
+   select count(*) from sms_std
+   where
+   rate > #{value}
+  </select>
+  
+   <select id="chartCountAll" resultType="int">
+   select count(*) from sms_std
+  </select>
+  
+  
 
   <!-- 스터디 사진 조회 -->
   <select id="findPhotoByNo" resultMap="studyMap" parameterType="int">

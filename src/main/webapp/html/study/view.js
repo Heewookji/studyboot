@@ -246,285 +246,298 @@ function loadData(no) {
 //스터디 차트데이터를 불러오는 함수
 function loadChart(no) {
 
-  var c = document.getElementById("studyRateChart");
-  var studyRateChart = c.getContext("2d");
-  var gradientStroke = studyRateChart.createLinearGradient(500, 0, 100, 0);
-  gradientStroke.addColorStop(0, 'rgba(128, 182, 244, 0.7)');
-  gradientStroke.addColorStop(1, 'rgba(244, 144, 128,0.7)');
-  var gradientFill = studyRateChart.createLinearGradient(500, 0, 100, 0);
-  gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.1)");
-  gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.1)");
+  $.getJSON('../../app/json/study/chart?no=' + no,
+          function(data) {
+    if(data.status == "success"){
+      
+     console.log(data);
+
+     var studyChartCountData = data.studyChartCount;
+     
+    $('#percentCount').html(data.percentCount+"% ");
+
+    var c = document.getElementById("studyRateChart");
+    var studyRateChart = c.getContext("2d");
+    var gradientStroke = studyRateChart.createLinearGradient(500, 0, 100, 0);
+    gradientStroke.addColorStop(0, 'rgba(128, 182, 244, 0.7)');
+    gradientStroke.addColorStop(1, 'rgba(244, 144, 128,0.7)');
+    var gradientFill = studyRateChart.createLinearGradient(500, 0, 100, 0);
+    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.1)");
+    gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.1)");
 
 
-  var studyRateChartShow = new Chart(studyRateChart, {
-    type: 'line',
-    data: {
-      labels: ['0', '1', '2', '3', '4', '5'],
-      datasets: [{
-        borderColor: gradientStroke,
-        pointBorderColor: gradientStroke,
-        pointBackgroundColor: gradientStroke,
-        pointHoverBackgroundColor: gradientStroke,
-        pointHoverBorderColor: gradientStroke,
-        pointHoverRadius: 10,
-        pointHoverBorderWidth: 1,
-        pointRadius: 5,
-        fill: true,
-        backgroundColor: gradientFill,
-        borderWidth: 1,
-        data: [
-          10, 20, 30, 40 , 20, 0
-          ],
-      }]
-    },
-    options: {
-      legend: false,
-      elements: {
-        point: {
-          pointStyle: 'circle'
-        }
-      },
-      responsive: true,
-      title: {
-        display: true,
-        text: '스터디 평균 평점 순위',
-        fontStyle: 'normal',
-        fontSize: 14,
-        padding: 30
-      },
-      tooltips: {
-        mode: 'index',
-        intersect: false,
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
-      },
-      scales: {
-        xAxes: [{
-          gridLines: {
-            display: true,
-            drawBorder: true,
-            drawOnChartArea: false,
-          },
-          scaleLabel: {
-            display: false,
-            labelString: 'Month'
-          }
-        }],
-        yAxes: [{
-          gridLines: {
-            display: false,
-            drawBorder: false,
-            drawOnChartArea: false,
-          },
-          scaleLabel: {
-            display: false,
-            labelString: 'Value'
-          },
-          ticks: {
-            display: false
-          }
+    var studyRateChartShow = new Chart(studyRateChart, {
+      type: 'line',
+      data: {
+        labels: ['0', '1', '2', '3','4', '5'],
+        datasets: [{
+          borderColor: gradientStroke,
+          pointBorderColor: gradientStroke,
+          pointBackgroundColor: gradientStroke,
+          pointHoverBackgroundColor: gradientStroke,
+          pointHoverBorderColor: gradientStroke,
+          pointHoverRadius: 10,
+          pointHoverBorderWidth: 1,
+          pointRadius: 5,
+          fill: true,
+          backgroundColor: gradientFill,
+          borderWidth: 1,
+          data: [
+            0, studyChartCountData.rateOne, studyChartCountData.rateTwo, 
+            studyChartCountData.rateThree , studyChartCountData.rateFour, 0
+            ]
         }]
+      },
+      options: {
+        legend: false,
+        elements: {
+          point: {
+            pointStyle: 'circle'
+          }
+        },
+        responsive: true,
+        title: {
+          display: true,
+          text: '스터디 평균 평점 그래프',
+          fontStyle: 'normal',
+          fontSize: 14,
+          padding: 30
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: false,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: 'Month'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: false,
+              drawBorder: false,
+              drawOnChartArea: false,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: 'Value'
+            },
+            ticks: {
+              display: false
+            }
+          }]
+        }
       }
-    }
-  });
+    });
 
-  var ageRateChart = $("#ageRateChart");
+    var ageRateChart = $("#ageRateChart");
 
-  var ageRateChartShow = new Chart(ageRateChart, {
-    type: 'horizontalBar',
-    data: {
-      labels: ['10', '20', '30', '40', '50', '60'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 30, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.1)',
-          'rgba(54, 162, 235, 0.1)',
-          'rgba(255, 206, 86, 0.1)',
-          'rgba(75, 192, 192, 0.1)',
-          'rgba(153, 102, 255, 0.1)',
-          'rgba(255, 159, 64, 0.1)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
-            'rgba(255, 206, 86, 0.7)',
-            'rgba(75, 192, 192, 0.7)',
-            'rgba(153, 102, 255, 0.7)',
-            'rgba(255, 159, 64, 0.7)'
+    var ageRateChartShow = new Chart(ageRateChart, {
+      type: 'horizontalBar',
+      data: {
+        labels: ['10', '20', '30', '40', '50', '60'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 30, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.1)',
+            'rgba(54, 162, 235, 0.1)',
+            'rgba(255, 206, 86, 0.1)',
+            'rgba(75, 192, 192, 0.1)',
+            'rgba(153, 102, 255, 0.1)',
+            'rgba(255, 159, 64, 0.1)'
             ],
-            borderWidth: 1
-      }]
-    },
-    options: {
-      legend: false,
-      elements: {
-        point: {
-          pointStyle: 'circle'
-        }
-      },
-      responsive: true,
-      title: {
-        display: true,
-        text: '스터디 구성원 평균 연령대',
-        fontStyle: 'normal',
-        padding: 20,
-        fontSize: 14
-      },
-      tooltips: {
-        mode: 'index',
-        intersect: false,
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
-      },
-      scales: {
-        yAxes: [{
-          gridLines: {
-            display: true,
-            drawBorder: true,
-            drawOnChartArea: false,
-          },
-          scaleLabel: {
-            display: false,
-            labelString: 'Month'
-          }
-        }],
-        xAxes: [{
-          gridLines: {
-            display: false,
-            drawBorder: false,
-            drawOnChartArea: false,
-          },
-          scaleLabel: {
-            display: false,
-            labelString: 'Value'
-          },
-          ticks: {
-            display: false
-          }
+            borderColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)',
+              'rgba(153, 102, 255, 0.7)',
+              'rgba(255, 159, 64, 0.7)'
+              ],
+              borderWidth: 1
         }]
+      },
+      options: {
+        legend: false,
+        elements: {
+          point: {
+            pointStyle: 'circle'
+          }
+        },
+        responsive: true,
+        title: {
+          display: true,
+          text: '스터디 구성원 평균 연령대',
+          fontStyle: 'normal',
+          padding: 20,
+          fontSize: 14
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          yAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: false,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: 'Month'
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false,
+              drawBorder: false,
+              drawOnChartArea: false,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: 'Value'
+            },
+            ticks: {
+              display: false
+            }
+          }]
+        }
       }
-    }
-  });
+    });
 
-  var finishRateChart = $("#finishRateChart");
+    var finishRateChart = $("#finishRateChart");
 
-//For a pie chart
-  var finishRateChartShow = new Chart(finishRateChart, {
-    type: 'pie',
-    data: {
+//  For a pie chart
+    var finishRateChartShow = new Chart(finishRateChart, {
+      type: 'pie',
+      data: {
 
-      datasets: [{
-        data: [10, 20, 30],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.1)',
-          'rgba(54, 162, 235, 0.1)',
-          'rgba(255, 206, 86, 0.1)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
-            'rgba(255, 206, 86, 0.7)'
+        datasets: [{
+          data: [10, 20, 30],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.1)',
+            'rgba(54, 162, 235, 0.1)',
+            'rgba(255, 206, 86, 0.1)'
             ],
-            borderWidth: 1
-      }],
-
-      // These labels appear in the legend and in the tooltips when hovering different arcs
-      labels: [
-        '탈퇴',
-        '완료',
-        '추방'
-        ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: '구성원 스터디 종료 정보',
-        fontStyle: 'normal',
-        fontSize: 14,
-        padding: 20
-      },
-      legend: {
-        boxWidth: 70,
-        position: 'left'
-      },
-    }
-
-  });
-
-
-  var attendRateChart = $("#attendRateChart");
-
-  var attendRateChartShow = new Chart(attendRateChart, {
-    type: 'line',
-    data: {
-      labels: ['0', '1', '2', '3', '4', '5'],
-      datasets: [{
-        borderColor: gradientStroke,
-        pointHoverRadius: 15,
-        pointRadius: 10,
-        fill: false,
-        backgroundColor: gradientFill,
-        borderWidth: 1,
-        showLine: false,
-        data: [
-          10, 20, 30, 40 , 20, 0
-          ],
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: '스터디 구성원 출석율',
-        fontStyle: 'normal',
-        fontSize: 14,
-        padding: 40
-      },
-      legend: {
-        position: 'right'
-      },
-      elements: {
-        point: {
-          pointStyle: 'circle'
-        }
-      },
-      responsive: true,
-      tooltips: {
-        mode: 'index',
-        intersect: false
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
-      },
-      scales: {
-        xAxes: [{
-          gridLines: {
-            display: true,
-            drawBorder: true,
-            drawOnChartArea: false,
-          },
-          scaleLabel: {
-            display: false,
-            labelString: 'Month'
-          }
+            borderColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)'
+              ],
+              borderWidth: 1
         }],
-        yAxes: [{
-          gridLines: {
-            display: true,
-            drawBorder: true,
-            drawOnChartArea: false,
-          },
-          scaleLabel: {
-            display: false,
-            labelString: 'Value'
-          }
-        }]
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+        labels: [
+          '탈퇴',
+          '완료',
+          '추방'
+          ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: '구성원 스터디 종료 정보',
+          fontStyle: 'normal',
+          fontSize: 14,
+          padding: 20
+        },
+        legend: {
+          boxWidth: 70,
+          position: 'left'
+        },
       }
+
+    });
+
+
+    var attendRateChart = $("#attendRateChart");
+
+    var attendRateChartShow = new Chart(attendRateChart, {
+      type: 'line',
+      data: {
+        labels: ['0', '1', '2', '3', '4', '5'],
+        datasets: [{
+          borderColor: gradientStroke,
+          pointHoverRadius: 15,
+          pointRadius: 10,
+          fill: false,
+          backgroundColor: gradientFill,
+          borderWidth: 1,
+          showLine: false,
+          data: [
+            10, 20, 30, 40 , 20, 0
+            ],
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: '스터디 구성원 출석율',
+          fontStyle: 'normal',
+          fontSize: 14,
+          padding: 40
+        },
+        legend: {
+          position: 'right'
+        },
+        elements: {
+          point: {
+            pointStyle: 'circle'
+          }
+        },
+        responsive: true,
+        tooltips: {
+          mode: 'index',
+          intersect: false
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: false,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: 'Month'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: false,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: 'Value'
+            }
+          }]
+        }
+      }
+    });
     }
   });
 
