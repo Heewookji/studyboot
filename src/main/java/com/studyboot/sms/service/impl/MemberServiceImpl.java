@@ -11,10 +11,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.studyboot.sms.dao.AppliedStudyDao;
 import com.studyboot.sms.dao.MemberDao;
 import com.studyboot.sms.dao.StudyDao;
-import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
@@ -23,15 +21,12 @@ import com.studyboot.sms.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
-  AppliedStudyDao appliedStudyDao;
   StudyDao studyDao;
 
   public MemberServiceImpl(
       MemberDao memberDao,
-      AppliedStudyDao appliedStudyDao,
       StudyDao studyDao) {
     this.memberDao = memberDao;
-    this.appliedStudyDao = appliedStudyDao;
     this.studyDao = studyDao;
   }
 
@@ -142,9 +137,9 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public List<AppliedStudy> appliedStudyList(int no) {
+  public List<Study> appliedStudyList(int no) {
     
-    List<AppliedStudy> list = appliedStudyDao.findAllByUser(no);
+    List<Study> list = studyDao.findAppliedStudyByUser(no);
     if (list.size() > 0) {
       return list;
     } else {

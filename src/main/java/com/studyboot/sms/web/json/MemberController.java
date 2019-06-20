@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.studyboot.sms.domain.AppliedStudy;
 import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.domain.History;
 import com.studyboot.sms.domain.Member;
@@ -74,16 +73,31 @@ public class MemberController {
     if (loginUser != null) {
 
       List<Study> doingStudyList = studyMemberService.findMyStudyList(loginUser.getNo());
-      List<AppliedStudy> appliedStudyList = memberService.appliedStudyList(loginUser.getNo());
+      List<Study> appliedStudyList = memberService.appliedStudyList(loginUser.getNo());
       List<Study> pickedStudyList = memberService.pickedStudyList(loginUser.getNo());
       
       if(doingStudyList != null) {
+        
+        for (Study study : doingStudyList) {
+          String addressName = addressService.addressFullName(study.getAddress());
+          study.setAddressName(addressName);
+        }
         content.put("doingStudyList", doingStudyList);
       }
       if(appliedStudyList != null) {
+        
+        for (Study study : appliedStudyList) {
+          String addressName = addressService.addressFullName(study.getAddress());
+          study.setAddressName(addressName);
+        }
         content.put("appliedStudyList", appliedStudyList);
       }
       if(pickedStudyList != null) {
+        
+        for (Study study : pickedStudyList) {
+          String addressName = addressService.addressFullName(study.getAddress());
+          study.setAddressName(addressName);
+        }
         content.put("pickedStudyList", pickedStudyList);
       }
       

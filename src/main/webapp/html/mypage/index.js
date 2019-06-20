@@ -43,11 +43,33 @@ function loadList() {
     
     console.log(obj);
     
+    // 별점 준비용 함수
+    function initStar(list) {
+      for(var e of list){
+        $('#std-rate-'+ e.no).rateit({
+          // min value
+          min: 0, 
+          // max value
+          max: 5, 
+          // 'bg', 'font'
+          mode: 'font', 
+          // size of star
+          starwidth: 50, 
+          // is readonly?
+          readonly: true, 
+          // is resetable?
+          resetable: false,
+          value: e.rate
+        });
+      }
+    }
+    
     if (obj.doingStudyList == null) {
       studyIsEmpty('doingStudy');
       
     } else {
       $(doingStudyGenerator(obj)).appendTo($('#doingStudy .js-carousel'));
+      initStar(obj.doingStudyList);
     }
     
     if (obj.appliedStudyList == null) {
@@ -55,6 +77,7 @@ function loadList() {
       
     } else {
       $(appliedStudyGenerator(obj)).appendTo($('#appliedStudy .js-carousel'));
+      initStar(obj.appliedStudyList);
     }
     
     if (obj.pickedStudyList == null) {
@@ -62,7 +85,10 @@ function loadList() {
       
     } else {
       $(pickedStudyGenerator(obj)).appendTo($('#pickedStudy .js-carousel'));
+      initStar(obj.pickedStudyList);
     }
+    
+    
     
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-loadList');
@@ -74,9 +100,9 @@ function loadList() {
 function studyIsEmpty(study) {
   
   var $empty = $('<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">'
-      + '<article><img class="img-fluid w-100" src="/studyboot/upload/images/test2.jpeg" alt="Image Description">'
+      + '<article><img class="img-fluid w-100" src="/studyboot/upload/images/test3.jpg" alt="Image Description">'
       + '<div class="g-bg-white g-pa-20"><h2 class="h5 g-color-black g-font-weight-600 mb-3">'
-      + '스터디가 없습니다...</h2>'
+      + '새로운 스터디를 시작해 보세요!</h2>'
       + '<a href="/studyboot/">스터디 보러 가기</a></div></article></div>');
   
   if (study == 'doingStudy') {
@@ -92,6 +118,22 @@ function studyIsEmpty(study) {
 
 // 스터디 리스트 가져온 후
 $(document.body).bind('loaded-loadList', () => {
+  
+  $('.myStudy-view-link').click((e) => {
+    location.href = '../mystudy/index.html?no=' + $(e.target).parents('.card-div').find('a').attr("data-no");
+  });
+  
+  $('.study-view-link').click((e) => {
+    location.href = '../study/view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
+    + '&name=' + $(e.target).parents('.card-div').find('a').html();
+  });
+
+  $( ".study-view-link" ).hover(
+          function(e) {
+          }, function(e) {
+          }
+  );
+  
   // initialization of carousel
   $.HSCore.components.HSCarousel.init('#doingStudy .js-carousel');
 });

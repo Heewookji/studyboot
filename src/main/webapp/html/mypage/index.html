@@ -155,11 +155,11 @@
     <div class="row g-mb-30 col-lg-12">
       <ul class="u-list-inline" id= "conts-list">
         <li class="list-inline-item g-mr-7">
-          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">Home</a>
+          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">홈</a>
           <i class="fa fa-angle-right g-ml-7"></i>
         </li>
         <li class="list-inline-item g-color-primary">
-          <span>My page</span>
+          <span>마이페이지</span>
         </li>
       </ul>
     </div>
@@ -396,19 +396,20 @@
   <!-- 진행중인 스터디 리스트 -->
   <script id="doing-study-template" type="text/x-handlebars-template">
 {{#each doingStudyList}}
-<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-  <article>
+<div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div">
+  <article class="u-shadow-v11 u-shadow-v41--hover">
     <img class="img-fluid w-100"
-      src="/studyboot/upload/images/test.png"
+      src="/studyboot/upload/images/study/{{photo}}"
       alt="Image Description">
     <div class="g-bg-white g-pa-20">
-      <span class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">
-      {{startDate}}</span>
-      <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-        <a class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+      <div class="rateit mb-3" id="std-rate-{{no}}"></div>
+      <h2 class="h5 g-font-weight-600 mb-3">
+        <a class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer myStudy-view-link"
           href="#" data-no="{{no}}">{{name}}</a>
       </h2>
       <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
+      <span class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase">
+        {{addressName}}</span>
     </div>
   </article>
 </div>
@@ -418,19 +419,20 @@
   <!-- 신청한 스터디 리스트 -->
   <script id="applied-study-template" type="text/x-handlebars-template">
 {{#each appliedStudyList}}
-<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-  <article>
+<div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div">
+  <article class="u-shadow-v11 u-shadow-v41--hover">
     <img class="img-fluid w-100"
-      src="/studyboot/upload/images/test3.jpg"
+      src="/studyboot/upload/images/study/{{photo}}"
       alt="Image Description">
     <div class="g-bg-white g-pa-20">
-      <span class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">
-      {{startDate}}</span>
-      <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-        <a class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
-          href="#" data-no="{{studyNo}}">{{studyName}}</a>
+      <div class="rateit mb-3" id="std-rate-{{no}}"></div>
+      <h2 class="h5 g-font-weight-600 mb-3">
+        <a class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer study-view-link"
+          href="#" data-no="{{no}}">{{name}}</a>
       </h2>
-      <p class="g-color-gray-dark-v4 g-line-height-1_8">신청일 : {{appliedDate}}</p>
+      <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
+      <span class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase">
+        {{addressName}}</span>
     </div>
   </article>
 </div>
@@ -440,19 +442,20 @@
 <!-- 찜한 스터디 -->
   <script id="picked-study-template" type="text/x-handlebars-template">
 {{#each pickedStudyList}}
-<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">
-  <article>
+<div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div">
+  <article class="u-shadow-v11 u-shadow-v41--hover">
     <img class="img-fluid w-100"
-      src="/studyboot/upload/images/test.png"
+      src="/studyboot/upload/images/study/{{photo}}"
       alt="Image Description">
     <div class="g-bg-white g-pa-20">
-      <span class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase mb-2">
-      {{startDate}}</span>
-      <h2 class="h5 g-color-black g-font-weight-600 mb-3">
-        <a class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer"
+      <div class="rateit mb-3" id="std-rate-{{no}}"></div>
+      <h2 class="h5 g-font-weight-600 mb-3">
+        <a class="u-link-v5 g-color-black g-color-primary--hover g-cursor-pointer study-view-link"
           href="#" data-no="{{no}}">{{name}}</a>
       </h2>
       <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
+      <span class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase">
+        {{addressName}}</span>
     </div>
   </article>
 </div>

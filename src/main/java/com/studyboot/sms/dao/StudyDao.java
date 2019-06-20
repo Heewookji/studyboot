@@ -17,6 +17,7 @@ public interface StudyDao {
   List<Study> findAllByKeyword(Map<String, Object> params);
   List<Study> findByNos(List<Integer> list);
   Study findPhotoByNo(int no);
+  List<Study> findAppliedStudyByUser(int no);
   List<Study> findPickedStudyByUser(int no);
   boolean checkFullCapacityByStudyNo(int studyNo);
   int updateAllStudyRecruitState();

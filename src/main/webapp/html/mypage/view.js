@@ -453,7 +453,7 @@ $('#sb-info-change').click((e) => {
 // 정보 업데이트 취소 이벤트
 $('#sb-info-cancel').click((e) => {
   e.preventDefault();
-  location.href = 'index.html';
+  location.reload();
 });
 
 // 비밀번호 유효성 검사
@@ -639,11 +639,52 @@ function savePassword(newPwd, verifyPwd) {
   }
 }
 
-// 정보 업데이트 취소 이벤트
+// 비밀번호 업데이트 취소 이벤트
 $('#sb-password-cancel').click((e) => {
   e.preventDefault();
-  location.href = 'index.html';
+  location.reload();
 });
+
+// 회원 탈퇴 이벤트
+$('#sb-member-withdrawal').click((e) => {
+  e.preventDefault();
+  
+  var password = $("#withdrawal").val();
+  
+  // 비밀번호 확인
+  if (password.length == 0 || password == undefined) {
+    alert('비밀번호를 입력하세요!!!');
+    $("#withdrawal").focus();
+    return false;
+  }
+  
+  $.ajax({
+      async: true,
+      type : 'POST',
+      data : password,
+      url : "../../app/json/member/passwordcheck",
+      dataType : "json",
+      contentType: "application/json; charset=UTF-8",
+      success : function(data) {
+        
+        if(data.result == true){
+          alert('정말 탈퇴하실 건가요??');
+          
+          
+        } else{
+          alert('비밀번호가 틀렸습니다!!');
+          $('#withdrawal').focus();
+          
+        }
+      },
+      error : function(error) {
+          alert("error : " + error);
+      }
+  });
+  
+  
+});
+
 
 
 

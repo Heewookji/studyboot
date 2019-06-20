@@ -50,7 +50,7 @@
 
 
 
-  <select id="findAllByUser" resultMap="appliedStudyMap" parameterType="int">
+<!--   <select id="findAllByUser" resultMap="appliedStudyMap" parameterType="int">
     select
     a.member_id,
     a.std_id,
@@ -61,11 +61,11 @@
     s.photo,
     s.sdt
     from
-    sms_apl_std a
+    sms_apl_std a 
     inner join sms_std s on a.std_id = s.std_id
     where
     member_id = #{value}
-  </select>
+  </select> -->
 
   <select id="findAllByStudy" resultMap="appliedStudyMap" parameterType="int">
     select

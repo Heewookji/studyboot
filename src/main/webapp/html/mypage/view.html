@@ -129,11 +129,11 @@
     <div class="row g-mb-30 col-lg-12">
       <ul class="u-list-inline" id= "conts-list">
         <li class="list-inline-item g-mr-7">
-          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">Home</a>
+          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">홈</a>
           <i class="fa fa-angle-right g-ml-7"></i>
         </li>
         <li class="list-inline-item g-mr-7">
-          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/html/mypage/">My page</a>
+          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/html/mypage/">마이페이지</a>
           <i class="fa fa-angle-right g-ml-7"></i>
         </li>
         <li class="list-inline-item g-color-primary">
@@ -426,11 +426,13 @@
           <div class="tab-pane fade"
             id="nav-1-1-default-hor-left-underline--2" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
+            
+            <!-- 비밀번호 변경 -->
             <h2 class="h4 g-font-weight-300">비밀번호 변경</h2>
             <p class="g-mb-25">기존에 사용하고 있는 비밀번호 입력 후
             변경하실 수 있습니다.</p>
 
-            <form>
+            <form class="g-mb-50">
               <!-- Current Password -->
               <div class="form-group row g-mb-25">
                 <label
@@ -501,6 +503,43 @@
                   href="#" id="sb-password-change">저장</a>
               </div>
             </form>
+            <!-- End 비밀번호 변경 -->
+            
+            <!-- 회원 탈퇴 -->
+            <h2 class="h4 g-font-weight-300">회원 탈퇴</h2>
+            <p class="g-mb-25">비밀번호 입력 후
+            탈퇴하실 수 있습니다.</p>
+            
+            <div>
+              <!-- Current Password -->
+              <div class="form-group row g-mb-25">
+                <label
+                  class="col-sm-3 col-form-label g-color-gray-dark-v2 g-font-weight-700 text-sm-right g-mb-10">
+                  비밀번호</label>
+                <div class="col-sm-9">
+                  <div class="input-group g-brd-primary--focus">
+                    <input id="withdrawal"
+                      class="form-control form-control-md border-right-0 rounded-0 g-py-13 pr-0"
+                      type="password" placeholder="비밀번호">
+                    <div class="input-group-append">
+                      <span
+                        class="input-group-text g-bg-white g-color-gray-light-v1 rounded-0"><i
+                        class="icon-lock"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Current Password -->
+
+              <hr class="g-brd-gray-light-v4 g-my-25">
+
+              <div class="text-sm-right">
+                <a class="btn u-btn-primary rounded-0 g-py-12 g-px-25"
+                  href="#" id="sb-member-withdrawal">탈퇴</a>
+              </div>
+            </div>
+            <!-- End 회원 탈퇴 -->
+            
           </div>
           <!-- End Security Settings -->
 
