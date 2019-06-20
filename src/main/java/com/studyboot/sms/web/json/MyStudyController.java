@@ -1,6 +1,7 @@
 package com.studyboot.sms.web.json;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -337,7 +338,10 @@ public class MyStudyController {
     List<Amazon> amazon = new ArrayList<>();
 
     cont = amazonS3_Service.list(stdNo);
-
+    
+    if(cont == null) {
+      System.out.println("버킷에 파일이 없습니다.");
+    } else {
     for (int i = 0; i < cont.size(); i++) {
       Amazon mazon = new Amazon();
       mazon.setFileName(cont.get(i).key());
@@ -348,11 +352,9 @@ public class MyStudyController {
       System.out.println(extenstion);
       amazon.add(mazon);
     }
-    System.out.println("버킷==>" + cont.get(0).toString());
-
     // 아마존 리스트를 실행하고 리턴값을 받아서 리턴된 맵 객체를 다시 리턴해준다.
     content.put("list", amazon);
-
+    }
     return content;
   }
 
@@ -375,24 +377,25 @@ public class MyStudyController {
     return content;
   }
 
-  @GetMapping("fileDownload")
-  public Object fileDownload(
-      @RequestParam String fileName,
-      @RequestParam int studyNo,
-      HttpSession session) {
-
-    HashMap<String,Object> content = new HashMap<>();
-
-    try {
-      amazonS3_Service.fileDownload(studyNo, fileName);
-      content.put("status", "다운로드가 완료 되었습니다.");
-    } catch (Exception e) {
-      content.put("status", e.getMessage());
-      content.put("message", e.getMessage());
-    }
-
-    return content;
-  }
+//  @GetMapping("fileDownload")
+//  public Object fileDownload(
+//      @RequestParam String fileName,
+//      @RequestParam int studyNo,
+//      HttpSession session,
+//      OutputStream out) {
+//
+//    HashMap<String,Object> content = new HashMap<>();
+//
+//    try {
+//      amazonS3_Service.fileDownload(studyNo, fileName);
+//      content.put("status", "다운로드가 완료 되었습니다.");
+//    } catch (Exception e) {
+//      content.put("status", e.getMessage());
+//      content.put("message", e.getMessage());
+//    }
+//
+//    return content;
+//  }
 
   @GetMapping("mmntUpdate")
   public Object mmntUpdate(@RequestParam int no) {
