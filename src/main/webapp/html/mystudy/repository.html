@@ -96,6 +96,7 @@
                   <!-- <span class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5" id="add-board">
                      <i class="icon-options-vertical g-pos-rel g-top-1" id="ntc-board"></i>
                     </span> -->
+                    <!--  -->
                     <a id="dropDown2Invoker" class="u-link-v5 g-line-height-0 g-font-size-15 g-color-gray-light-v6 g-color-secondary--hover"
                        aria-controls="dropDown2" aria-haspopup="true" aria-expanded="false" data-dropdown-event="click" data-dropdown-target="#dropDown2"
                           data-dropdown-type="jquery-slide" style="cursor: pointer;">
@@ -105,8 +106,6 @@
                           <div id="dropDown2" class="u-shadow-v31 g-pos-abs g-right-0 g-bg-white u-dropdown--jquery-slide u-dropdown--hidden" aria-labelledby="dropDown2Invoker" style="display: none;">
                             <ul class="list-unstyled g-nowrap mb-0">
                               <li>
-                              <!-- <i class="hs-admin-pencil g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
-                              <input type="file"> -->
                                 <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14"
                                    type="file" data-toggle="modal" href="#add-modal" style="color: gray;">
                                   <i class="hs-admin-pencil g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
@@ -140,23 +139,10 @@
     </div>
   </div>
 </div>
-     <li>
-     <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
-     <i class="hs-admin-cloud-up g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
-     Archive</a>
-     </li>
-     <li>
-     <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
-     <i class="hs-admin-bookmark g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
-     Add to Favorites</a>
-     </li>
-     <li>
-     <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14">
-     <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
-     Delete</a>
-     </li>
      </ul>
      </div>
+     
+     
       </div>
               </div>
               
@@ -210,7 +196,7 @@
   <div class="u-outer-spaces-helper"></div>
 
 
-<!-- 버킷에 있는 파일리스트를 뽑아주는 핸들바스 (현재 pptx 확장자명만 가지고 있다.) 
+<!-- 버킷에 있는 파일리스트를 뽑아주는 핸들바스 (현재 pptx 확장자명만 가지고 있다.) -->
 <script id="amazonfile-add" type="text/x-handlebars-template">
 {{#each list}}
 <div class="col-md-4 g-mb-30">
@@ -225,14 +211,14 @@ data-dropdown-type="jquery-slide" style="cursor: pointer;">
 <ul class="list-unstyled g-nowrap mb-0">
 <li>
 <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14" 
-style="cursor: pointer;" data-content='{{fileName}}'>
+style="cursor: pointer;" data-content='{{fileName}}' id="file-Download">
 <i class="hs-admin-cloud-up g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
 Archive
 </a>
 </li>
 <li>
 <a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14"
-style="cursor: pointer;" id="file-deletes" data-content='{{fileName}}'>
+style="cursor: pointer;" id="delete-files" data-content='{{fileName}}'>
 <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
 Delete
 </a>
@@ -272,16 +258,11 @@ fill-rule="nonzero"></path>
 </footer>
 </div>
 </div>
-
-
-<a class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14"
-style="cursor: pointer;" id="delete-files" data-content='{{fileName}}'>
-<i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
-Delete
-</a>
 {{/each}}
 </script>
--->
+
+
+<!-- 
 <script id="amazonfile-add" type="text/x-handlebars-template">
 {{#each list}}
 <div class="col-md-4 g-mb-30">
@@ -358,7 +339,7 @@ Delete
                   </div>
 {{/each}}
 </script>
-
+ -->
 
   <!-- JS Global Compulsory -->
   <script src="/studyboot/Unify/assets/vendor/jquery/jquery.min.js"></script>

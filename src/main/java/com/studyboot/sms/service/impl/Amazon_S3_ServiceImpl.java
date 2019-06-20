@@ -1,7 +1,7 @@
 package com.studyboot.sms.service.impl;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.Part;
@@ -101,7 +101,7 @@ public class Amazon_S3_ServiceImpl implements AmazonS3_Service {
   // END listㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ90% 완료 리턴한 리스트에서 값을 어떻게 꺼내는지 질문해야함
   
   @Override
-  public void fileDownload(int stdNo, String fileName) {
+  public void fileDownload(int stdNo, String fileName, OutputStream out) {
     
     Region region = Region.AP_NORTHEAST_2;
     S3Client s3 = S3Client.builder().region(region).build();
@@ -109,9 +109,10 @@ public class Amazon_S3_ServiceImpl implements AmazonS3_Service {
     s3.getObject(GetObjectRequest.builder()
         .bucket("b2.sangminpark.site" + stdNo).key(fileName).build(),
         // 저장할 파일의 경로를 지정해 줘야한다.
-        ResponseTransformer.toFile(Paths.get("./tmp/" + fileName)));
+        ResponseTransformer.toOutputStream(out));
     // ResponseTransformer = 다운로드 대행자
     // Paths = 파일 클래스와 동일 하지만 논블럭 파일 클래스의 역할을 한다.
+    // toFile(Paths.get("./tmp/" + fileName))
     
     System.out.println("버킷의 파일 다운로드 완료!");
   }
