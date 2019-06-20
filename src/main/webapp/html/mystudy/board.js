@@ -45,8 +45,6 @@ function boardList(pn, cls, keyword, noss) {
       + '&pageCls=' + cls + "&keyword=" + keyword + "&no=" + noss,
       function(obj) {
 
-    console.log(obj);
-
     tbody.html('');
 
     if(obj.pageNo != 0){

@@ -73,7 +73,7 @@ $(document.body).bind('loaded-repository', () => {
   $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
   
   // 파일을 삭제하는 이벤트
-  $('#delete-files').click((e) => {
+  $('.delete-files').click((e) => {
     
     alert("삭제 버튼");
     var fileName = $(e.target).attr('data-content')
@@ -86,12 +86,15 @@ $(document.body).bind('loaded-repository', () => {
   });
 
   // 파일을 다운로드하는 이벤트
-  $('#file-Download').click((e) => {
+  $('.file-Download').click((e) => {
 
     alert("파일 다운");
     
     // 아직까지 핸들바스로 받아온 파일이 없고 받아온 파일에 해당 파일의 이름을 받을 수 있는 조건이 없어서 임시로 fileName 설정
-    var fileName = 
+    var fileName = $('.file-Download').attr('data-content');
+    
+    alert(fileName);
+    
 
       //$.getJSON(,
       //   function(obj){
