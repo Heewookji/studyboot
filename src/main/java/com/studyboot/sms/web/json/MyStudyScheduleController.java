@@ -1,5 +1,6 @@
 package com.studyboot.sms.web.json;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -80,10 +81,13 @@ public class MyStudyScheduleController {
   public Object allSchedules(HttpSession session) {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
-    List<Schedule> schedule = null;
+    List<Schedule> schedule;
     
     if (loginUser != null) {
       schedule = myStudyScheduleService.allSchedules(loginUser.getNo());
+      
+    } else {
+      schedule = new ArrayList<>();
     }
     return schedule;
   }
