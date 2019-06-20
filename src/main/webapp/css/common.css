@@ -139,7 +139,7 @@
   }
 
   .rateit-font .rateit-empty {
-      color: rgb(240, 240, 240);
+      color: rgb(201, 201, 201);
   }
 
   .rateit-font .rateit-range > div {
@@ -154,8 +154,8 @@
   width: 0.6em;
   height: 0.6em;
   margin-top: 0.2em;
-  background: rgb(223, 223, 223);
-  border-radius: 50%;
+  background: rgb(153, 145, 72);
+  border-radius: 90%;
   position: relative;
 }
 

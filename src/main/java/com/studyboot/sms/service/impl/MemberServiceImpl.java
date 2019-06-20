@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -193,11 +194,11 @@ public class MemberServiceImpl implements MemberService {
     if (member != null)
       return member;
 
-
+    
     Member newbie = new Member();
     newbie.setEmail(response.get("id").toString());
     newbie.setName(response.get("name").toString());
-    newbie.setNickName(response.get("name").toString());
+    newbie.setNickName(UUID.randomUUID().toString().replace("-", "").substring(0, 10));
 
     memberDao.insert(newbie);
 
@@ -228,7 +229,7 @@ public class MemberServiceImpl implements MemberService {
     Member newbie = new Member();
     newbie.setEmail(result.get("email").toString());
     newbie.setName(result.get("name").toString());
-    newbie.setNickName(result.get("nickname").toString());
+    newbie.setNickName(UUID.randomUUID().toString().replace("-", "").substring(0, 10));
 
     memberDao.insert(newbie);
 
