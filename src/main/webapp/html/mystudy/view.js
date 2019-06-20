@@ -4,17 +4,35 @@ nosss = param.split('=')[1],
 leader;
 
 $(document).ready(function() {
-  if($('#ntc-no').attr('data-no') != "undefiende"){
+  if($('#ntc-no').attr('data-no') != undefined){
+    //사용자 정보 받아오기
+    $.getJSON('../../app/json/MyStudy/user?',
+        function(obj) {
+
+      user = obj.user;
+      console.log("유저정보" + user);
+    });
+
+    $('#drop-menu').click(function() {
+      console.log("유저정보" + user);
+      console.log("게시글유저" + $('#mem-no').attr('data-mem'));
+      if ($('#mem-no').attr('data-mem') != user) {
+        alert("작성자만 수정이 가능합니다");
+        $('#detail-edit').hide();
+        $('#detail-del').hide();
+      }
+    });
+    
     loadDetail($('#ntc-no').attr('data-no'));
   }
+  
 });
 
 
 $(document.body).bind('loaded-list', () => {
+  
   $('.detail-btn').click((e) => {
     $("#contents").load("/studyboot/html/mystudy/view.html", function(){
-
-      $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {dropdownHideOnScroll: false});
       
       //리더 유무 받아오기
       $.getJSON('../../app/json/MyStudy/leader?no=' + nosss,

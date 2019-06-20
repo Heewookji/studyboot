@@ -10,7 +10,8 @@ currCls,
 ntcTemplateSrc = $('#ntc-list').html();
 
 var ntcGenerator = Handlebars.compile(ntcTemplateSrc);
-var ntcNo;
+var ntcNo,
+memNo;
 
 $('#ntc-board').attr("href", "/studyboot/html/mystudy/board.html?no=" + no);
 
@@ -24,8 +25,10 @@ function loadList(no) {
     $('.ntcList-btn').click((e) => {
       e.preventDefault();
       ntcNo = $(e.target).attr('data-no');
+      memNo = $(e.target).attr('data-mem');
       $("#contents").load("/studyboot/html/mystudy/view.html", function(e) {
         $('#ntc-no').attr('data-no', ntcNo);
+        $('#mem-no').attr('data-mem', memNo);
       });
       
     });
