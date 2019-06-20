@@ -1,4 +1,4 @@
-var userData,
+var user,
 nickCheck,
 telCheck,
 clsCheck,
@@ -215,23 +215,23 @@ function loadData() {
   $.getJSON('../../app/json/member/detail',
       function(data) {
     
-    userData = data;
-    console.log(userData);
+    window.user = data;
+    console.log(user);
     
-    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + userData.photo + '.jpg');
-    $('#inqryName').html(userData.name);
-    $('#inqryNo').val(userData.no);
+    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
+    $('#inqryName').html(user.name);
+    $('#inqryNo').val(user.no);
     
-    $('#userName').val(userData.name);
-    $('#birthday').val(userData.birth);
-    $('#nickName').val(userData.nickName);
+    $('#userName').val(user.name);
+    $('#birthday').val(user.birth);
+    $('#nickName').val(user.nickName);
     
-    $(clsGenerator(userData)).appendTo('#myClsList');
+    $(clsGenerator(user)).appendTo('#myClsList');
     
-    if (userData.addressName != null) {
+    if (user.addressName != null) {
       $('#myAddrList').append(
-          '<a class="ui label transition visible" data-no="' + userData.address
-          + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+          '<a class="ui label transition visible" data-no="' + user.address
+          + '" style="display: inline-block !important;">'+ user.addressName +'<i class="delete icon"></i></a>');
     }
     
     $(document.body).trigger('loaded-data');
@@ -315,7 +315,7 @@ $('#sb-nickname-edit').click(() => {
 
 $('#sb-nickname-cancel').click(() => {
   $('#nickName').unbind();
-  $('#nickName').val(userData.nickName);
+  $('#nickName').val(user.nickName);
   
   $('#nickName').closest('div').removeClass('u-has-error-v1');
   $('#nickName').closest('div').removeClass('u-has-success-v1-1');
@@ -336,18 +336,18 @@ $('#sb-cls-edit').click(() => {
     $(this).parent().remove();
   });
   
-  $('#clsDrop div .ui.dropdown').removeClass('disabled');
+  $('#clsDrop div .ui.dropdown').removeClass('invisible');
   $('#sb-cls-edit').addClass('std-invisible');
   $('#sb-cls-cancel').removeClass('std-invisible');
 });
 
 $('#sb-cls-cancel').click(() => {
   $('#myClsList a').remove();
-  $(clsGenerator(userData)).appendTo('#myClsList');
+  $(clsGenerator(user)).appendTo('#myClsList');
   
   loadModalCategory();
   
-  $('#clsDrop div .ui.dropdown').addClass('disabled');
+  $('#clsDrop div .ui.dropdown').addClass('invisible');
   $('#sb-cls-cancel').addClass('std-invisible');
   $('#sb-cls-edit').removeClass('std-invisible');
   clsCheck = undefined;
@@ -360,22 +360,22 @@ $('#sb-addr-edit').click(() => {
     $(this).parent().remove();
   });
   
-  $('#addrDrop div .ui.dropdown').removeClass('disabled');
+  $('#addrDrop div .ui.dropdown').removeClass('invisible');
   $('#sb-addr-edit').addClass('std-invisible');
   $('#sb-addr-cancel').removeClass('std-invisible');
 });
 
 $('#sb-addr-cancel').click(() => {
   $('#myAddrList a').remove();
-  if (userData.addressName != null) {
+  if (user.addressName != null) {
     $('#myAddrList').append(
-        '<a class="ui label transition visible" data-no="' + userData.address
-        + '" style="display: inline-block !important;">'+ userData.addressName +'<i class="delete icon"></i></a>');
+        '<a class="ui label transition visible" data-no="' + user.address
+        + '" style="display: inline-block !important;">'+ user.addressName +'<i class="delete icon"></i></a>');
   }
   
   loadModalAddress();
   
-  $('#addrDrop div .ui.dropdown').addClass('disabled');
+  $('#addrDrop div .ui.dropdown').addClass('invisible');
   $('#sb-addr-cancel').addClass('std-invisible');
   $('#sb-addr-edit').removeClass('std-invisible');
   addrCheck = undefined;
@@ -591,7 +591,10 @@ $('#sb-password-change').click((e) => {
         if(data.result == true){
           
           pwdCheck = 1;
-          $(document.body).trigger('checked-password');
+          var newPwd = $('#newPassword').val();
+          var verifyPwd = $('#verifyPassword').val();
+          
+          savePassword(newPwd, verifyPwd);
           
         } else{
           alert('비밀번호가 틀렸습니다!!');
@@ -606,10 +609,7 @@ $('#sb-password-change').click((e) => {
   });
 });
 
-$(document.body).bind('checked-password', () => {
-  
-  var newPwd = $('#newPassword').val();
-  var verifyPwd = $('#verifyPassword').val();
+function savePassword(newPwd, verifyPwd) {
   
   if (newPwd.length == 0 || verifyPwd.length == 0) {
     alert('변경할 비밀번호를 입력하세요!!');
@@ -623,7 +623,7 @@ $(document.body).bind('checked-password', () => {
   } else {
     $.ajax({
       url:'../../app/json/member/update',
-      type: 'post',
+      type : 'POST',
       dataType: 'text',
       data: {
         password: newPwd
@@ -631,10 +631,13 @@ $(document.body).bind('checked-password', () => {
       success: function() {
         alert("비밀번호 변경 성공!")
         location.href = 'index.html';
+      },
+      error: function() {
+        alert("변경 실패!!!")
       }
     });
   }
-});
+}
 
 // 정보 업데이트 취소 이벤트
 $('#sb-password-cancel').click((e) => {

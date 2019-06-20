@@ -1,6 +1,5 @@
-var param = location.href.split('?')[1],
 // 스터디 리스트 출력 - 스터디 목록
-doingStudyTemplateSrc = $('#doing-study-template').html(),
+var doingStudyTemplateSrc = $('#doing-study-template').html(),
 doingStudyGenerator = Handlebars.compile(doingStudyTemplateSrc),
 appliedStudyTemplateSrc = $('#applied-study-template').html(),
 appliedStudyGenerator = Handlebars.compile(appliedStudyTemplateSrc),
@@ -8,8 +7,7 @@ pickedStudyTemplateSrc = $('#picked-study-template').html(),
 pickedStudyGenerator = Handlebars.compile(pickedStudyTemplateSrc),
 appliedinit = false,
 pickedinit = false,
-user,
-ratingForm = $("#rating-form");
+user;
 
 
 // 페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
@@ -28,12 +26,13 @@ function loadData() {
       function(data) {
     
     console.log(data);
-    user = data;
+    window.user = data;
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
-    $('#inqryName').html(user.name);
+    $('#inqryName').html(user.nickName);
     $('#inqryNo').val(user.no);
   });
 };
+
 
 
 
@@ -77,8 +76,8 @@ function studyIsEmpty(study) {
   var $empty = $('<div class="js-slide g-flex-centered u-shadow-v39 rounded g-mx-15 g-my-30">'
       + '<article><img class="img-fluid w-100" src="/studyboot/upload/images/test2.jpeg" alt="Image Description">'
       + '<div class="g-bg-white g-pa-20"><h2 class="h5 g-color-black g-font-weight-600 mb-3">'
-      + '스터디가 없습니다...'
-      + '</h2></div></article></div>');
+      + '스터디가 없습니다...</h2>'
+      + '<a href="/studyboot/">스터디 보러 가기</a></div></article></div>');
   
   if (study == 'doingStudy') {
     $('#doingStudy .js-carousel').append($empty);
@@ -96,6 +95,7 @@ $(document.body).bind('loaded-loadList', () => {
   // initialization of carousel
   $.HSCore.components.HSCarousel.init('#doingStudy .js-carousel');
 });
+
 // 진행중인 스터디 탭 이벤트 발생 시
 $('#doingStudyTab').on('shown.bs.tab', () => {
   $('#doingStudy .js-carousel').slick('unslick');
@@ -110,7 +110,6 @@ $('#appliedStudyTab').on('shown.bs.tab', () => {
   $.HSCore.components.HSCarousel.init('#appliedStudy .js-carousel');
   appliedinit = true;
 });
-
 
 // 찜한 스터디 탭 이벤트 발생 시
 $('#pickedStudyTab').on('shown.bs.tab', () => {
