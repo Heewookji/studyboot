@@ -136,6 +136,7 @@ function loadList(no) {
       $("#ntc-board-list").append(ntcTag3);
       
     } else {
+      
       $(ntcGenerator(obj)).appendTo('#ntc-board-list');
     } 
 

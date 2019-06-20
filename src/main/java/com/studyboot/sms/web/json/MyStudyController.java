@@ -1,7 +1,6 @@
 package com.studyboot.sms.web.json;
 
 import java.io.File;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -179,7 +178,7 @@ public class MyStudyController {
 
       try {
         myStudyService.add(studyBoard);
-        content.put("status", "등록이 완료 되었습니다.");
+        content.put("status", "success");
       } catch (Exception e) {
         content.put("status", "fail");
         content.put("message", e.getMessage());
@@ -193,7 +192,7 @@ public class MyStudyController {
 
       try {
         myStudyService.add(studyBoard);
-        content.put("status", "등록이 완료 되었습니다.");
+        content.put("status", "success");
       } catch (Exception e) {
         content.put("status", "fail");
         content.put("message", e.getMessage());

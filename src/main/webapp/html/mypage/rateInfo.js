@@ -46,6 +46,14 @@ $('#historyModal').on('shown.bs.modal', function (e) {
   }
 });
 
+$('document').ready(() => {
+  
+  // 사진을 꼽아준다.
+  $('#history-profilePhoto')
+  .attr('src', '/studyboot/upload/images/member/thumbnail.' + window.user.photo + '.jpg');
+  // 닉네임을 꼽아준다.
+  $('#history-nick > strong').html(window.user.nickName);
+})
 
 loadRateData();
 
@@ -54,14 +62,6 @@ function loadRateData() {
       function(data) {
     
     console.log(data);
-    user = data.rateInfo[0].member;
-    
-    // 사진을 꼽아준다.
-    $('#history-profilePhoto')
-      .attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
-    
-    // 닉네임을 꼽아준다.
-    $('#history-nick > strong').html(user.nickName);
     
     // bar 차트
     // 평점 데이터
@@ -207,10 +207,17 @@ $(document.body).bind('loaded-rateData', () => {
               text: '평점'
           },
           scales: {
+              xAxes: [{
+                gridLines: {
+                  display: true,
+                  drawBorder: true,
+                  drawOnChartArea: false,
+                }
+              }],
               yAxes: [{
                 gridLines: {
-                  display: false,
-                  drawBorder: false,
+                  display: true,
+                  drawBorder: true,
                   drawOnChartArea: false,
                 },
                 ticks: {
@@ -238,10 +245,17 @@ $(document.body).bind('loaded-rateData', () => {
             labels: false
           },
           scales: {
+              xAxes: [{
+                gridLines: {
+                  display: true,
+                  drawBorder: true,
+                  drawOnChartArea: false,
+                }
+              }],
               yAxes: [{
                 gridLines: {
-                  display: false,
-                  drawBorder: false,
+                  display: true,
+                  drawBorder: true,
                   drawOnChartArea: false,
                 },
                 ticks: {
@@ -297,9 +311,11 @@ function loadHistory(pn) {
     if(data.pageNo != 0){
 
       pageNo = data.pageNo;
-
+      $('#noneHistory').addClass('std-invisible');
+      
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(historyGenerator(data)).appendTo('#history-tbody');
+      
 
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
@@ -319,7 +335,9 @@ function loadHistory(pn) {
       }
 
     } else{
+      $('#noneHistory').removeClass('std-invisible');
       currSpan.html(data.pageNo);
+      currSpan.addClass('disabled');
       prevPage.addClass('disabled');
       nextPage.addClass('disabled');
     }
