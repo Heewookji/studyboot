@@ -125,6 +125,7 @@ public class StudyServiceImpl implements StudyService {
     List<StudyMember> memberList = studyMemberDao.findStudyMembersByNo(no);
     int totalAge = 0;
     double totalAttendance = 0;
+    List<Integer> memberAges = new ArrayList<>();
 
     LocalDate now = LocalDate.now();
 
@@ -134,12 +135,14 @@ public class StudyServiceImpl implements StudyService {
       Period period = Period.between(birth, now);
       int age = period.getYears() + 1;
       totalAge += age;
+      memberAges.add(age);
       totalAttendance += sm.getAttendance();
     }
     totalAge /= memberList.size();
     totalAttendance /= memberList.size();
 
     Study study = studyDao.findByNo(no);
+    study.setMemberAges(memberAges);
     study.setMemberAge(totalAge);
     study.setAttendance(totalAttendance);
 
@@ -353,13 +356,13 @@ public class StudyServiceImpl implements StudyService {
 
   @Override
   public int percentCount(double stdRate) {
-    
-//    int percentage = ((studyDao.percentCount(stdRate)+1)/())*100;
-    
-   double all = studyDao.chartCountAll();
-   double std = studyDao.percentCount(stdRate)+1;
-   int a = (int) ((std/all)*100);
-    
+
+    //    int percentage = ((studyDao.percentCount(stdRate)+1)/())*100;
+
+    double all = studyDao.chartCountAll();
+    double std = studyDao.percentCount(stdRate)+1;
+    int a = (int) ((std/all)*100);
+
     return a;
   }
 
