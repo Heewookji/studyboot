@@ -14,23 +14,23 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+//    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+    plugins: [ 'interaction', 'dayGrid' ],
     locale: 'ko',
     defaultDate: new Date(),
     editable: true,
     eventLimit: true, // allow "more" link when too many events
     //editable: false,   이걸 false로 두면 드래그앤 드롭 막는데, 커서 손가락 모양이 안됨
     selectable: true,
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-    },
+//    header: {
+//      left: 'prev,next today',
+//      center: 'title',
+//      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+//    },
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       window.eventDate = info.event; // 클릭한 일정의 객체를 뽑아 넣음
       if(window.calendarContent === false) { // 스터디 장이 아니면 이벤트 버튼을 눌렀을 때 닫기 버튼만 보이기
         $('#calendar-detail-modal-btn').click();
-        $('#event-review-btn').hide();
         //$('#event-attend-btn').hide();
         $('#event-update-btn').hide();
         $('#event-delete-btn').hide();
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#event-close-btn').show();
       } else { // 그 외의 회원일 경우 닫기 버튼만 안보이고 모든 버튼 보이기
         $('#calendar-detail-modal-btn').click();
-        $('#event-review-btn').show();
         // $('#event-attend-btn').show();
         $('#event-update-btn').show();
         $('#event-delete-btn').show();
@@ -70,10 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       window.dateStr = info.dateStr;
       if(window.calendarContent === false){
-        alert("스터디 장만 일정을 등록 할 수 있습니다.");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '스터디 장만 일정을 등록 할 수 있습니다.'
+        });
         return;
       }
-      //alert(window.dateStr);
       $(document.body).trigger('dateClick');
     },
     eventColor: '#72c02c',
@@ -101,16 +103,32 @@ $(document.body).bind('dateClick', () => {
 $('#schedule-add-btn').click(() => {
 
   if($('#schedule-title').val().length === 0) {
-    alert("일정 제목을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '제목을 입력해 주세요.'
+    });
     return;
   } else if($('#schedule-sdt').val().length === 0) {
-    alert("일정 시작일을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '시작일을 입력해 주세요.'
+    });
     return;
   } else if($('#schedule-edt').val().length === 0) {
-    alert("일정 종료일을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '종료일을 입력해 주세요.'
+    });
     return;
   } else if($('#schedule-memo').val().length === 0) {
-    alert("일정 내용을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '내용을 입력해 주세요.'
+    });
     return;
   } 
 
@@ -132,7 +150,11 @@ $('#schedule-add-btn').click(() => {
         $('#schedule-edt').val().substring(14, 16));
 
   if(startDateTime >= endDateTime) {
-    alert("시작일과 종료일을 확인 해 주세요");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '시작일과 종료일을 확인 해 주세요'
+    });
     return;
   }
 
@@ -148,12 +170,22 @@ $('#schedule-add-btn').click(() => {
     },
     success : function(data) {
       console.log(data);
-      alert(data.status);
-      location.reload();
+      Swal.fire({
+        type: 'success',
+        title: data.status,
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        location.reload();
+      });
       //$(calendarEl).fullCalendar("refetchEvents");
     },
     error : function(request, status, error) {
-      alert("등록에 실패 했습니다.");
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '등록에 실패 했습니다.'
+      });
     }
   });
 });
@@ -190,7 +222,11 @@ function loadDetail(no) {
 $('#event-delete-btn').click(() => {
 
   if(window.calendarContent === false){
-    alert("삭제 권한이 없습니다.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '삭제 권한이 없습니다.'
+    });
     return;
   }
 
@@ -199,7 +235,11 @@ $('#event-delete-btn').click(() => {
         + '&studyNo=' + studyNo, 
         function(obj) {
       if (obj.status != 'success') {
-        alert(obj.status)
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: obj.status
+        });
       }
       location.reload();
     })
@@ -210,7 +250,11 @@ $('#event-delete-btn').click(() => {
 $('#event-update-btn').click(() => {
 
   if(window.calendarContent === false){
-    alert("수정 권한이 없습니다.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '수정 권한이 없습니다.'
+    });
     return;
   }
 
@@ -237,16 +281,32 @@ $('#event-update-btn').click(() => {
 $('#schedule-update-btn').click(() => {
 
   if($('#schedule-title').val().length === 0) {
-    alert("일정 제목을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '제목을 입력해 주세요.'
+    });
     return;
   } else if($('#schedule-sdt').val().length === 0) {
-    alert("일정 시작일을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '시작일을 입력해 주세요.'
+    });
     return;
   } else if($('#schedule-edt').val().length === 0) {
-    alert("일정 종료일을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '종료일을 입력해 주세요.'
+    });
     return;
   } else if($('#schedule-memo').val().length === 0) {
-    alert("일정 내용을 입력해 주세요.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '내용을 입력해 주세요.'
+    });
     return;
   } 
 
@@ -261,12 +321,20 @@ $('#schedule-update-btn').click(() => {
       $('#schedule-edt').val().substring(11, 13) +  $('#schedule-edt').val().substring(14, 16));
 
   if(startDateTime >= endDateTime) {
-    alert("시작일과 종료일을 확인 해 주세요");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '시작일과 종료일을 확인 해 주세요.'
+    });
     return;
   }
 
   if(window.calendarContent === false){
-    alert("수정 권한이 없습니다.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '수정 권한이 없습니다.'
+    });
     return;
   }
 
@@ -282,13 +350,21 @@ $('#schedule-update-btn').click(() => {
       memo: $('#schedule-memo').val()
     },
     success : function(data) {
-
-      alert(data.status);
-      location.reload();
-      //$(calendarEl).fullCalendar("refetchEvents");
+      Swal.fire({
+        type: 'success',
+        title: data.status,
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        location.reload();
+      });
     },
     error : function(request, status, error) {
-      alert("일정 변경에 실패 했습니다.");
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '일정 변경에 실패 했습니다.'
+      });
     }
   });
 });
@@ -358,7 +434,11 @@ $('#event-attend-btn').click(() => {
 $('#attend-btn').click(() => {
 
   if(window.calendarContent === false){
-    alert("출석 권한이 없습니다.");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '출석 권한이 없습니다.'
+    });
     return;
   }
 
@@ -372,8 +452,14 @@ $('#attend-btn').click(() => {
   $.getJSON('../../app/json/mystudyschedule/attend?nickNames=' + nickNames
       + '&studyNo=' + location.href.split('=')[1] + '&scheduleNo=' + window.eventDate.id,
       function(obj) {
-    alert(obj.status);
-    location.reload();
+    Swal.fire({
+      type: 'success',
+      title: obj.status,
+      showConfirmButton: false,
+      timer: 1500
+    }).then((result) => {
+      location.reload();
+    });
   })
 
 });

@@ -32,13 +32,15 @@
   <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify-core.css">
   <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify-components.css">
   <link rel="stylesheet" href="/studyboot/Unify/assets/css/unify.css">
-
+  <link href="/studyboot/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css">
+  
   <link rel='stylesheet' href='../../fullcalendar/core/main.css'/>
   <link rel='stylesheet' href='../../fullcalendar/daygrid/main.css'/>
   <link rel='stylesheet' href='./calendar/calendar.css'  />
+  <!-- 
   <link rel='stylesheet'  href='../../fullcalendar/timegrid/main.css'/>
   <link rel='stylesheet'  href='../../fullcalendar/list/main.css'/>
-
+ -->
 </head>
 
 <body>
@@ -190,7 +192,6 @@
       <!-- <div class="modal-body" id="study-end-date"></div> --> <!-- 일정 종료 시간 -->
       <div class="modal-body" id="event-detail"></div> <!-- 일정 내용 --> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="event-review-btn">후기</button>
         <button type="button" class="btn btn-primary" id="event-attend-btn">출석</button>
         <button type="button" class="btn btn-primary" id="event-update-btn">수정</button>
         <button type="button" class="btn btn-primary" id="event-delete-btn">삭제</button>
@@ -361,16 +362,18 @@ src="/studyboot/upload/images/{{member.photo}}" alt="Image Description">
   <script src="../footer.js"></script>
 
   <!-- JS Plugins Init. -->
+
   <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
   <script src='/studyboot/node_modules/@fullcalendar/core/locales/ko.js'></script>
-  
+  <!-- 
 <script src='../../fullcalendar/timegrid/main.js'></script>
 <script src='../../fullcalendar/list/main.js'></script>
+   -->
   
-  
-  <script src='./calendar/calendar.js?v=<%=System.currentTimeMillis() %>'></script>
+<script src='./calendar/calendar.js'></script>
+<script src="/studyboot/node_modules/sweetalert2/dist/sweetalert2.js" type="text/javascript"></script>
 
 
 
