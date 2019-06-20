@@ -40,13 +40,13 @@ public class StudyController {
   public Object add(Study study, HttpSession session) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     try {
-      
-      
+
+
       if(study.getPhoto().equals("undefined")) {
         study.setPhoto("default");
       }
       studyService.add(study);
-      
+
       int stdNo = study.getNo();
       Member loginUser = (Member)session.getAttribute("loginUser");
 
@@ -58,7 +58,7 @@ public class StudyController {
 
       //스터디 멤버 테이블과, 스터디 자료실 생성한다.
       studyMemberService.addStudyMember(stdNo, loginUser.getNo(), leader);
-      
+
       //스터디평점 갱신한다.
       studyService.updateRate(stdNo);
 
@@ -73,33 +73,33 @@ public class StudyController {
     }
     return content;
   }
-  
+
   @GetMapping("pickedStudy")
   public Object addPickedStudy(int studyNo, boolean insertRemove, HttpSession session) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     Member member = (Member)session.getAttribute("loginUser");
-    
+
     try {
-    if(insertRemove == true) {
-      studyService.insertPickedStudy(member.getNo(), studyNo);
-      content.put("status", "success");
-    } else {
-      studyService.deletePickedStudy(member.getNo(), studyNo);
-      content.put("status", "success");
-    }
-    
+      if(insertRemove == true) {
+        studyService.insertPickedStudy(member.getNo(), studyNo);
+        content.put("status", "success");
+      } else {
+        studyService.deletePickedStudy(member.getNo(), studyNo);
+        content.put("status", "success");
+      }
+
     }catch(Exception e) {
       content.put("status", "fail");
     }
-    
+
     return content;
   }
-  
+
   @GetMapping("appliedStudy")
   public Object appliedStudy(int studyNo, String determination, HttpSession session) throws IOException{
     HashMap<String,Object> content = new HashMap<>();
     Member member = (Member)session.getAttribute("loginUser");
-    
+
     try {
       studyService.insertAppliedStudy(member.getNo(), studyNo, determination);
       content.put("status", "success");
@@ -108,8 +108,8 @@ public class StudyController {
     }
     return content;
   }
-  
-  
+
+
 
   /*
   @GetMapping("delete")
@@ -134,9 +134,36 @@ public class StudyController {
     Study study = studyService.get(no);
     study.setStudyMembers(studyMemberService.findStudyMember(no));
     study.setClsList(clsService.getClsName(study.getCls()));
-     study.setAddressName(addressService.addressFullName(study.getAddress()));
+    study.setAddressName(addressService.addressFullName(study.getAddress()));
     return study;
   }
+
+
+  @GetMapping("chart")
+  public Object chart(int no) {
+
+    HashMap<String,Object> content = new HashMap<>();
+
+    try {
+      Study study = studyService.get(no);
+      
+      HashMap<String, Integer> studyChartCount = studyService.chartCount(study.getRate());
+      
+      study.setStudyMembers(studyMemberService.findStudyMember(no));
+
+      content.put("study", study);
+      content.put("percentCount",studyService.percentCount(study.getRate()));
+      content.put("studyChartCount", studyChartCount);
+      content.put("status", "success");
+
+    } catch (Exception e) {
+
+      content.put("status", "fail");
+    }
+
+    return content;
+  }
+
 
   @GetMapping("search")
   public Object search(
