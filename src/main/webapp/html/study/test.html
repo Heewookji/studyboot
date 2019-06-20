@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" /> <!-- reset css -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+<style>
+    body{ background-color: ivory; }
+    #canvas{border:1px solid red;}
+</style>
+
+<script>
+$(function(){
+
+    var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext("2d");
+
+    // draw a top bezier
+    ctx.beginPath();
+    ctx.moveTo(50,50);
+    ctx.bezierCurveTo(125,0,150,100,250,75);
+    ctx.lineWidth=3;
+    ctx.strokeStyle="black";
+    ctx.stroke();
+
+    // draw a bottom bezier
+    ctx.beginPath();
+    ctx.moveTo(50,150);
+    ctx.bezierCurveTo(125,0,150,100,250,175);
+    ctx.lineWidth=3;
+    ctx.strokeStyle="blue";
+    ctx.stroke();
+
+    // get an array of all the pixels in the canvas
+    var x=100;  // put your X coordinate value here
+    var iData = ctx.getImageData(x,0,1,canvas.height);
+    var data = iData.data;
+    var w=canvas.width;
+    var h=canvas.height;
+    var theY1=-999;  // your top result
+    var theY2=-999;  // your bottom result
+
+
+    // iterate through each Y at your vertical X coordinate
+    // Examine the opacity value at the XY
+    // if the pixel is not transparent, you have found your Y
+    for(var y=0; y<h; y++) {
+        if(data[y*4+3]>10){
+            theY1=y;
+            break;
+      }
+    }
+
+    // now iterate backwards to get the Y of the bottom curve
+    for(var y=0; y<h; y++) {
+        if(data[(h-y)*4+3]>10){
+            theY2=(h-y);
+            break;
+      }
+    }
+
+
+    // testing -- display the results
+
+    ctx.beginPath();
+    ctx.moveTo(100,0);
+    ctx.lineTo(x,h);
+    ctx.strokeStyle="lightgray";
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(x,theY1,4,Math.PI*2,false);
+    ctx.closePath();
+    ctx.arc(x,theY2,4,Math.PI*2,false);
+    ctx.closePath();
+    ctx.fillStyle="red";
+    ctx.fill();
+
+}); // end $(function(){});
+</script>
+
+</head>
+
+<body>
+    <canvas id="canvas" width=300 height=300></canvas>
+</body>
+</html>
