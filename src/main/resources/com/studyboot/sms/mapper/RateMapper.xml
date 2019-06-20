@@ -30,6 +30,15 @@
     where std_id = #{studyNo} and member_id = #{no}
   </select>
 
+  <select id="findRate" resultMap="rateMap" parameterType="int">
+    select 
+      rate 
+    from
+     sms_member_rate_info
+    where
+      confirm_member_id = #{no}
+  </select>
+  
   <!-- 스터디 탈퇴자가 스터디원을 평가하는 테이블 -->
   <insert id="evaluationAdd" parameterType="map">
     insert into sms_member_rate_info(

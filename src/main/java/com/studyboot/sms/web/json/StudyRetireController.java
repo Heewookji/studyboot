@@ -18,6 +18,7 @@ import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.MemberService;
 import com.studyboot.sms.service.MyStudyScheduleService;
+import com.studyboot.sms.service.RateService;
 import com.studyboot.sms.service.StudyMemberService;
 import com.studyboot.sms.service.StudyRetireService;
 import com.studyboot.sms.service.StudyService;
@@ -31,6 +32,7 @@ public class StudyRetireController {
   @Autowired StudyRetireService studyRetireService;
   @Autowired StudyMemberService studyMemberService;
   @Autowired MyStudyScheduleService myStudyScheduleService;
+  @Autowired RateService rateService;
 
   @GetMapping("retireEvaluation")
   public Object retireEvaluation(String[] nickNames, String[] evaluations, int studyNo, HttpSession session) {
@@ -63,8 +65,6 @@ public class StudyRetireController {
     // 로그인한 유저가 해당 스터디의 멤버(탈퇴자들)를 평가한 정보 목록 뽑아옴(회원 평점 정보 테이블)
     List<Rate> retireeRateList = (List<Rate>) studyRetireService.retireEvaluation(map);//RateMapper (findAll)
 
-
-    //select * from sms_member_rate_info where std_id=100 and member_id=5 and confirm_member_id = #{memberNo};
     // 탈퇴자가 있다면 리턴
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
     System.out.println("retireeList: "+retireeList);
@@ -76,10 +76,10 @@ public class StudyRetireController {
     // 평가 완료되지 않은 탈퇴자들의 수와 로그인한 유저가 평가한 유저의 수가 일치하지 않으면 실행
     if (retireeList.size() != retireeRateList.size()) { 
       if (retireeList.size() == 0) { } // 탈퇴자들이 모두 평가되었다면 그냥 지나가야 된다.
-        else { 
-          content.put("status", "이 전에 탈퇴한 회원을 먼저 평가해 주세요!");
-          return content;
-        }
+      else { 
+        content.put("status", "이 전에 탈퇴한 회원을 먼저 평가해 주세요!");
+        return content;
+      }
     }
 
     // 탈퇴하려는 유저가 스터디 맴버인지 판단.
@@ -99,6 +99,7 @@ public class StudyRetireController {
       return content;
     }
 
+
     HashMap<String,Object> evaluationMap = new HashMap<>(); // 평가 맵
     HashMap<String,Object> rateRequireMap = new HashMap<>(); // 탈퇴자 평가 여부 맵
 
@@ -109,11 +110,8 @@ public class StudyRetireController {
     retireMap.put("memberNo", loginUser.getNo());
 
     try {
-      // 스터디 탈퇴
-      studyMemberService.attendUpdate(retireMap);
-
-      // 남은 스터디 원 조회
-      //List<StudyMember> studyMemberList = studyMemberService.findStudyMember(studyNo);
+      // 스터디 탈퇴 -> 탈퇴 추방 완료 분류번호, 스터디 종료일 업데이트 
+      studyMemberService.attendUpdate(retireMap); 
 
       // 스터디 원 들이 탈퇴자를 평가 할 수 있게 sms_member_retire 테이블 true로 입력
       rateRequireMap.put("studyNo", studyNo);
@@ -128,48 +126,22 @@ public class StudyRetireController {
       content.put("message", e.getMessage());
     }
 
-    try {
-
-      int allEventNumber = myStudyScheduleService.allEventCount(studyNo); // 모든 일정의 수
-
-      // 필요한 정보가 put 되어 있어서 retireMap을 재사용 하였다.
-      int studyAttendNumber = myStudyScheduleService.studyAttendCount(retireMap); // 로그인 한 사용자가 출석한 수
-
-      double attendPercent = (double) studyAttendNumber / allEventNumber * 100;
-
-      double attendPercentCut = (Math.round((attendPercent)*10)/10.0);
-
-      Map<String, Object> attendPercentUpdateMap = new HashMap<>();
-
-      System.out.println("모든일정 수: " + allEventNumber);
-      System.out.println("출석한횟 수: " + studyAttendNumber);
-      System.out.println("확률: " + attendPercent);
-      System.out.println("확률자른거: " + attendPercentCut);
-
-      attendPercentUpdateMap.put("percent", attendPercentCut);
-      attendPercentUpdateMap.put("studyNo", studyNo);
-      attendPercentUpdateMap.put("memberNo", loginUser.getNo());
-
-      studyMemberService.attendPercentUpdate(attendPercentUpdateMap); // 출석률을 업데이트 한다.
-
-    } catch (Exception e) {
-      content.put("status", "출석률 업데이트 중 오류가 발생 하였습니다.");
-      content.put("message", e.getMessage());
-      System.out.println("출석률 업데이트 오류 내용: " + e.getMessage());
-    }
+    List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames); // 닉네임을 멤버넘버로 바꾸는 코드
 
     try {
-      List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames); // 닉네임을 멤버넘버로 바꾸는 코드
 
-      // 평가점수 입력
+      // 스터디에 남은 멤버 평가점수 입력
       for(int i = 0; i < nickNames.length; i++) {
         evaluationMap.put("studyNo", studyNo); // 스터디 넘버
         evaluationMap.put("memberNo", loginUser.getNo()); // 평가자
         evaluationMap.put("confirmMemberNo", studyMemberNoList.get(i)); // 평가받는 자
-        evaluationMap.put("rateClass", 0); // 평점 정보
+        evaluationMap.put("rateClass", 0); // 평점 분류
         evaluationMap.put("rate", evaluations[i]); // 평점 정보
         evaluationMap.put("rateDate", format.format(new Date())); // 오늘 일자
         studyRetireService.evaluationAdd(evaluationMap);
+
+        // 남은 스터디 원들 평점 업데이트
+        rateService.updateRate((int) studyMemberNoList.get(i));
       }
       content.put("status", "탈퇴가 완료 되었습니다.");
     } catch (Exception e) {
@@ -177,12 +149,13 @@ public class StudyRetireController {
       content.put("message", e.getMessage());
     }
 
+
     //탈퇴를 완료한다면, 스터디 테이블에 현재 인원칼럼 값을 1개 줄인다. 현재 인원을 칼럼에 저장하는게 관리하기 편하기 때문(희욱)
     Study study = studyService.get(studyNo);
     study.setNowPersonnel(study.getNowPersonnel() - 1);
-    
+
     studyService.update(study);
-    
+
     //스터디 회원 탈퇴시키고, 스터디의 평균 평점을 갱신해준다.
     studyService.updateRate(studyNo);
 
@@ -288,7 +261,7 @@ public class StudyRetireController {
     SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
     List retireeNo =  memberService.findMemberNoByNickNameList(retireeNickNames); // 닉네임을 회원번호로
-//System.out.println("!!!!!!회원번호: " + retireeNo);
+    //System.out.println("!!!!!!회원번호: " + retireeNo);
 
     Map<String,Object> evaluationMap = new HashMap<>();
 
@@ -309,7 +282,7 @@ public class StudyRetireController {
       return content;
     }
 
-    
+
     try {
 
       for (int i = 0; i < retireeNo.size(); i++) {
@@ -324,6 +297,9 @@ public class StudyRetireController {
 
         System.out.println("********************************");
         System.out.println(retireeNo.get(i)); // 탈퇴자들 번호
+
+        rateService.updateRate((int) retireeNo.get(i));
+
       }
       content.put("status", "탈퇴자 평가가 완료 되었습니다.");
 
@@ -363,7 +339,18 @@ public class StudyRetireController {
       System.out.println("오류2: " + e.getMessage());
     }
 
+
+    //    for(int i = 0; i < retireeNo.size(); i++) {
+    //      rateService.updateRate((int) retireeNo.get(i));
+    //    }
+
+
     return content;
   }
 
 }
+
+//for(int i = 0; i < studyMemberNoList.size(); i++) {
+//rateService.updateRate((int) studyMemberNoList.get(i));
+//}
+

@@ -298,7 +298,8 @@ public class StudyController {
     return content;
   }
 
-  // 테스트용
+  /*테스트용
+  
   @GetMapping("rate")
   public Object rate(int nom, int no) {
 
@@ -309,7 +310,7 @@ public class StudyController {
     rateService.updateRate(params);
     return params;
   }
-
+*/
   /*
   @PostMapping("update")
   public Object update(Study study) {

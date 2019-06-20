@@ -1,7 +1,9 @@
 package com.studyboot.sms.web.json;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,13 +77,13 @@ public class MyStudyScheduleController {
 
     return schedule;
   }
-  
+
   @GetMapping("allSchedules")
   public Object allSchedules(HttpSession session) {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
     List<Schedule> schedule = null;
-    
+
     if (loginUser != null) {
       schedule = myStudyScheduleService.allSchedules(loginUser.getNo());
     }
@@ -98,7 +100,7 @@ public class MyStudyScheduleController {
 
   @GetMapping("delete")
   public Object delete(int eventNo, int studyNo, HttpSession session) {
-    
+
     HashMap<String,Object> content = new HashMap<>();
 
     HashMap<String,Object> studyAndUserNo = new HashMap<>();
@@ -175,59 +177,90 @@ public class MyStudyScheduleController {
       content.put("status", "스터디 장만 출석 체크를 할 수 있습니다.");
       return content;
     }
-    
-    
+
+
     // 이미 출석한 경험이 있다면 리턴 한다.
     List<Schedule> attendTrueFalse = myStudyScheduleService.attendTrueFalse(scheduleNo); 
-    
+
     if (attendTrueFalse.size() > 0) {
       content.put("status", "이미 출석체크를 하였습니다.");
-      
+
       return content;
     }
-    
+
     // 닉네임을 멤버넘버로 바꾸는 코드
     List memberNo =  memberService.findMemberNoByNickNameList(nickNames);
 
     HashMap<String,Object> attendMap = new HashMap<>();
     try {
-      for(int i = 0; i < memberNo.size(); i++) {
+      for(int i = 0; i < memberNo.size(); i++) { 
+        //출석체크
         attendMap.put("scheduleNo", scheduleNo);
         attendMap.put("studyNo", studyNo);
         attendMap.put("memberNo", memberNo.get(i));
-        myStudyScheduleService.attend(attendMap);
+        myStudyScheduleService.attend(attendMap); // 출석체크!
+        
+        
+        // 출석체크 후 출석률 업데이트!
+        int allEventNumber = myStudyScheduleService.allEventCount(studyNo); // 모든 일정의 수
+
+        HashMap<String,Object> studyNoMemberNo = new HashMap<>(); // 탈퇴 탭
+        studyNoMemberNo.put("studyNo", studyNo);
+        studyNoMemberNo.put("memberNo", memberNo.get(i));
+
+        // 해당 사용자가 출석한 수
+        int studyAttendNumber = myStudyScheduleService.studyAttendCount(studyNoMemberNo); 
+
+        double attendPercent = (double) studyAttendNumber / allEventNumber * 100;
+
+        double attendPercentCut = (Math.round((attendPercent)*10)/10.0);
+
+        Map<String, Object> attendPercentUpdateMap = new HashMap<>();
+
+        System.out.println("모든일정 수: " + allEventNumber);
+        System.out.println("출석한횟 수: " + studyAttendNumber);
+        System.out.println("확률: " + attendPercent);
+        System.out.println("확률자른거: " + attendPercentCut);
+
+        attendPercentUpdateMap.put("percent", attendPercentCut);
+        attendPercentUpdateMap.put("studyNo", studyNo);
+        attendPercentUpdateMap.put("memberNo",  memberNo.get(i));
+
+        studyMemberService.attendPercentUpdate(attendPercentUpdateMap); // 출석률을 업데이트 한다.
+        
       }
       content.put("status", "출석 체크가 완료 되었습니다.");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
+      System.out.println("출석체크 도중 오류! " + e.getMessage());
     }
-    
+
     return content;
   }
 
   @GetMapping("attendTrueFalse") // 한 일정에 출석체크 한번만 하기 위한 메서드
   public Object attendTrueFalse(int scheduleNo) {
-    
+
     HashMap<String,Object> content = new HashMap<>();
-    
+
     List<Schedule> attendTrueFalse = myStudyScheduleService.attendTrueFalse(scheduleNo);
 
     content.put("attendNickName", attendTrueFalse);
-    
+
     System.out.println(attendTrueFalse);
-    
+
     if (attendTrueFalse.size() > 0) {
-    
+
       content.put("attend", true);
 
       return content;
     } else {
-      
+
       content.put("attend", false);
       return content;
     }
   }
-  
+
 }
 
