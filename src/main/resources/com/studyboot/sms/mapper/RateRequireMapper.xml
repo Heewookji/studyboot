@@ -11,7 +11,7 @@
     <id column="std_id" property="studyNo" />
     <id column="member_id" property="memberNo" />
     <result column="rate_require" property="rateRequire" />
-    <result column="std_rate_require_cnt" property="studyMemberCount" />
+    <result column="std_rate_require_cnt" property="studyRateRequireCount" />
     <result column="nick_name" property="nickName" />
     <result column="photo" property="photo" />
     <result column="name" property="name" />
@@ -46,13 +46,13 @@
   </select> 
 
   <!-- 스터디 탈퇴 당시 남은 멤버의 수 -->
-  <select id="evaluationMemberCount" resultType="int" parameterType="int">
+  <select id="evaluationMemberCount" resultType="int" parameterType="map">
     select 
       std_rate_require_cnt
     from 
       sms_member_retire 
     where 
-      member_id = #{value};
+      std_id = #{studyNo} and member_id = #{retireeMemberNo};
   </select>
 
   <!-- 스터디 탈퇴자를 몇명이 평가 했는지 카운트 -->
@@ -62,7 +62,7 @@
     from 
       sms_member_rate_info 
     where 
-      std_id = #{studyNo} and confirm_member_id = #{reitreeMemberNo} and rate_cls = 1;  
+      std_id = #{studyNo} and confirm_member_id = #{retireeMemberNo} and rate_cls = 1;  
   </select>
 
   <update id="rateRequireUpdate" parameterType="map">

@@ -283,8 +283,8 @@ public class StudyRetireController {
     Member loginUser = (Member) session.getAttribute("loginUser");
     SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
-
     List retireeNo =  memberService.findMemberNoByNickNameList(retireeNickNames); // 닉네임을 회원번호로
+//System.out.println("!!!!!!회원번호: " + retireeNo);
 
     Map<String,Object> evaluationMap = new HashMap<>();
 
@@ -305,6 +305,7 @@ public class StudyRetireController {
       return content;
     }
 
+    
     try {
 
       for (int i = 0; i < retireeNo.size(); i++) {
@@ -336,9 +337,9 @@ public class StudyRetireController {
     try { // 스터디에 남은 멤버가 탈퇴자를 모두 평가했다면 평가 필요여부를 false로 바꿈
       for (int i = 0; i < retireeNo.size(); i++) {
 
-        map.put("reitreeMemberNo", (int) retireeNo.get(i));
+        map.put("retireeMemberNo", (int) retireeNo.get(i));
 
-        evaluationMemberCount = studyRetireService.evaluationMemberCount((int) retireeNo.get(i));
+        evaluationMemberCount = studyRetireService.evaluationMemberCount(map);
         retireeEvaluationCount = studyRetireService.retireeEvaluationCount(map);
 
         System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");

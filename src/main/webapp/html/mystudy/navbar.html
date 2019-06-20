@@ -124,7 +124,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"
   hidden="hidden" id="retire-modal">modal</button>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+<div id="retireRateModal" class="modal fade bd-example-modal-lg evaluation-star" tabindex="-1" role="dialog"
   aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -155,7 +155,7 @@
   id="retire-person-modal" hidden="hidden">Launch demo modal</button>
 
 <!-- Modal -->
-<div class="modal fade" id="retireeRateModal" tabindex="-1" role="dialog"
+<div class="modal fade evaluation-star" id="retireeRateModal" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -260,22 +260,8 @@
 
     <hr class="g-brd-gray-light-v4 g-my-0">
 
-    <form id="ratingEvalationForm{{member.nickName}}" action="add/review">
-      <div class="form-group">
-        <fieldset class="review-rating-form rate" id="ratingForm{{member.nickName}}">
-        <input type="radio" id="rating10{{member.nickName}}" name="rating"/><label id="star5{{member.nickName}}" for="rating10{{member.nickName}}"></label>
-              <input type="radio" id="rating9{{member.nickName}}" name="rating"/><label id="star45{{member.nickName}}" class="half" for="rating9{{member.nickName}}"></label>
-              <input type="radio" id="rating8{{member.nickName}}" name="rating"/><label id="star4{{member.nickName}}" for="rating8{{member.nickName}}"></label>
-              <input type="radio" id="rating7{{member.nickName}}" name="rating"/><label id="star35{{member.nickName}}" class="half" for="rating7{{member.nickName}}"></label>
-              <input type="radio" id="rating6{{member.nickName}}" name="rating"/ checked><label id="star3{{member.nickName}}" for="rating6{{member.nickName}}"></label>
-              <input type="radio" id="rating5{{member.nickName}}" name="rating"/><label id="star25{{member.nickName}}" class="half" for="rating5{{member.nickName}}"></label>
-              <input type="radio" id="rating4{{member.nickName}}" name="rating"/><label id="star2{{member.nickName}}" for="rating4{{member.nickName}}"></label>
-              <input type="radio" id="rating3{{member.nickName}}" name="rating"/><label id="star15{{member.nickName}}" class="half" for="rating3{{member.nickName}}"></label>
-              <input type="radio" id="rating2{{member.nickName}}" name="rating"/><label id="star1{{member.nickName}}" for="rating2{{member.nickName}}"></label>
-              <input type="radio" id="rating1{{member.nickName}}" name="rating"/><label id="star05{{member.nickName}}" class="half" for="rating1{{member.nickName}}"></label>
-        </fieldset>
-      </div>
-    </form>
+    <div id="retire-evaluation-{{member.nickName}}" class="rateit" data-rateit-mode="font" style="font-size: 30px"
+      data-rateit-resetable="false"></div>
   </figure>
 </div>
 {{/each}}
