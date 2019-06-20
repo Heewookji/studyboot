@@ -154,21 +154,17 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retireeRateModal"
   id="retire-person-modal" hidden="hidden">Launch demo modal</button>
 
-<!-- Modal -->
-<div class="modal fade evaluation-star" id="retireeRateModal" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal --> <!-- tabinex 속성을 없애고 data-backdrop="static"을 줘서 모달 못끄게 설정 -->
+<div class="modal fade evaluation-star" id="retireeRateModal" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">함께 했던 스터디 원을 평가 해 주세요!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body" id="retire-person-evaluation"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="retiree-rate-button" type="button" class="btn btn-primary">Save changes</button>
+        <button id="retiree-rate-button" type="button" class="btn btn-primary">제출</button>
       </div>
     </div>
   </div>

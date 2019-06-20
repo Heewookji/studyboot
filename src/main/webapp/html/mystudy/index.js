@@ -18,7 +18,125 @@ function loadList(no) {
   $.getJSON('../../app/json/MyStudy/studyNtc?no=' + no,
       function(obj){
 
-    $(ntcGenerator(obj)).appendTo('#ntc-board-list');
+    if (obj.ntcList.length === 0) {
+      var ntcTag0 =
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " <h5 class='h5 g-font-weight-600 g-color-black'  style='margin-top:12px;'>스터디 개설을 축하 드립니다. 게시글을 작성 해 보세요!</h5>" +
+        " </div>" +
+        " </div>" +
+        " </li>" +
+
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>" +
+       
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>" +
+      
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>";
+      
+      $("#ntc-board-list").html(ntcTag0);
+      
+    } else if (obj.ntcList.length === 1) {
+      
+      $(ntcGenerator(obj)).appendTo('#ntc-board-list');
+      
+      var ntcTag1 =
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>" +
+
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>" +
+       
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>" ;
+      
+      $("#ntc-board-list").append(ntcTag1);
+      
+    } else if (obj.ntcList.length === 2) {
+      
+      $(ntcGenerator(obj)).appendTo('#ntc-board-list');
+      
+      var ntcTag2 =
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>" +
+
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>";
+      
+      $("#ntc-board-list").append(ntcTag2);
+      
+    } else if (obj.ntcList.length === 3) {
+      
+      $(ntcGenerator(obj)).appendTo('#ntc-board-list');
+      
+      var ntcTag3 =
+        "<li class='media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10' style='height:90px;'>" +
+        " <div class='d-flex g-mt-2 g-mr-15'>" +
+        " </div>" +
+        " <div class='media-body'>" +
+        " <div class='d-flex justify-content-between'>" +
+        " </div>" +
+        " </div>" +
+        " </li>";
+      
+      $("#ntc-board-list").append(ntcTag3);
+      
+    } else {
+      $(ntcGenerator(obj)).appendTo('#ntc-board-list');
+    } 
 
     // 공지사항 클릭시 디테일 부분으로 넘어가기
     $('.ntcList-btn').click((e) => {
