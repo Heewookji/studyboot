@@ -198,8 +198,8 @@ public class MyStudyScheduleController {
         attendMap.put("studyNo", studyNo);
         attendMap.put("memberNo", memberNo.get(i));
         myStudyScheduleService.attend(attendMap); // 출석체크!
-        
-        
+
+
         // 출석체크 후 출석률 업데이트!
         int allEventNumber = myStudyScheduleService.allEventCount(studyNo); // 모든 일정의 수
 
@@ -210,9 +210,11 @@ public class MyStudyScheduleController {
         // 해당 사용자가 출석한 수
         int studyAttendNumber = myStudyScheduleService.studyAttendCount(studyNoMemberNo); 
 
+        // 출석률
         double attendPercent = (double) studyAttendNumber / allEventNumber * 100;
-
-        double attendPercentCut = (Math.round((attendPercent)*10)/10.0);
+        
+        // 출석률 소수점 한자리만 남기고 버림
+        double attendPercentCut = (int)(attendPercent*10)/10.0; 
 
         Map<String, Object> attendPercentUpdateMap = new HashMap<>();
 
@@ -226,7 +228,7 @@ public class MyStudyScheduleController {
         attendPercentUpdateMap.put("memberNo",  memberNo.get(i));
 
         studyMemberService.attendPercentUpdate(attendPercentUpdateMap); // 출석률을 업데이트 한다.
-        
+
       }
       content.put("status", "출석 체크가 완료 되었습니다.");
     } catch (Exception e) {

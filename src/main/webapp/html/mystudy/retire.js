@@ -67,16 +67,29 @@ $('#retire-request').click(() => {
     return;
   }
 
-  if (confirm("스터디에 탈퇴 하시겠습니까?")) {
+  
+  Swal.fire({
+    title: '스터디에 탈퇴 하시겠습니까?',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '확인',
+    cancelButtonText: '취소'
+  }).then((result) => {
+    if (result.value) {
     $('#retire-modal').click();
-    /*
-		$(evaluationMemberList).each(function( i, element ) {
-			// 탈퇴할때 평가할 스터디 원들 기본 별점 3으로.
-			$('#star3' + evaluationMemberList[i].member.nickName).click();
-			$('#ratingForm' + evaluationMemberList[i].member.nickName).attr("data-value", "3");
-		});
-     */
-  }
+//    /*
+//    $(evaluationMemberList).each(function( i, element ) {
+//      // 탈퇴할때 평가할 스터디 원들 기본 별점 3으로.
+//      $('#star3' + evaluationMemberList[i].member.nickName).click();
+//      $('#ratingForm' + evaluationMemberList[i].member.nickName).attr("data-value", "3");
+//    });
+//     */
+//  }
+    }
+  })
+  
 });
 
 

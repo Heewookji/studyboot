@@ -8,7 +8,7 @@ import com.studyboot.sms.domain.RateLog;
 
 public interface RateDao {
   List<Rate> findAll(Map<String, Object> params);
-  List<Rate> findRate(int no); // 멤버 아이디로 해당 멤버 평점을 가져옴
+  double findRate(Map<String, Object> evaluationMap); // 멤버 아이디로 해당 멤버 평점을 가져옴
   int evaluationAdd(Map<String, Object> evaluationMap);
 //  int rateRequireUpdate(Map<String, Object> rateRequireMap);
   List<RateLog> findRateLog(int no);

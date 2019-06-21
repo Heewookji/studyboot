@@ -16,6 +16,7 @@ import com.studyboot.sms.domain.Address;
 import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
+import com.studyboot.sms.domain.StudyMember;
 import com.studyboot.sms.service.AddressService;
 import com.studyboot.sms.service.AmazonS3_Service;
 import com.studyboot.sms.service.ClsService;
@@ -146,14 +147,47 @@ public class StudyController {
 
     try {
       Study study = studyService.get(no);
-      
+
       HashMap<String, Integer> studyChartCount = studyService.chartCount(study.getRate());
-      
+
       study.setStudyMembers(studyMemberService.findStudyMember(no));
+      
+      //스터디원들의 출석데이터 총합과 평균완료율구하기
+      
+      double finish = 0;
+      double drop = 0;
+      double exile = 0;
+      double sum = 0;
+      
+      for(StudyMember sm : study.getStudyMembers()) {
+        
+        List<StudyMember> rateInfos = studyMemberService.rateInfo(sm.getMemberNo());
+
+        for(StudyMember rateInfo : rateInfos ) {
+          switch(rateInfo.getEndNo()) {
+            case 1: finish++; break;
+            case 2: drop++; break;
+            case 3: exile++; break;
+          }
+        }
+
+      }
+      
+      sum = finish + drop + exile;
+      int finishPercentage = (int) ((finish/sum)*100);
+      
+      
+      System.out.println(finishPercentage);
+      
 
       content.put("study", study);
       content.put("percentCount",studyService.percentCount(study.getRate()));
       content.put("studyChartCount", studyChartCount);
+      content.put("finishCount", finish);
+      content.put("dropCount", drop);
+      content.put("exileCount", exile);
+      content.put("finishPercentage", finishPercentage);
+      
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -326,7 +360,7 @@ public class StudyController {
   }
 
   /*테스트용
-  
+
   @GetMapping("rate")
   public Object rate(int nom, int no) {
 
@@ -337,7 +371,7 @@ public class StudyController {
     rateService.updateRate(params);
     return params;
   }
-*/
+   */
   /*
   @PostMapping("update")
   public Object update(Study study) {

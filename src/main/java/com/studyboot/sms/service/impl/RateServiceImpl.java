@@ -23,43 +23,29 @@ public class RateServiceImpl implements RateService {
   }
 
   @Override
-  public int updateRate(int no) {
+  public int updateRate(Map<String, Object> map) {
 
-    List<Rate> rateList = rateDao.findRate(no);
+    // 최근에 들어온 점수를 가져온다.
+    double rate = rateDao.findRate(map);
 
-    double totalRate = 0;
-    System.out.println("탈퇴평가리스트: " + rateList);
-
-    // 가져온 점수의 평점을 모두 더하고 평균 값을 구한다.
-    for (Rate r : rateList) {
-      System.out.println("점수: " + r.getRate());
-      totalRate += (double) r.getRate();
-    }
-    System.out.println("총점: " + totalRate);
-
-
-    double rateAvg = (double) (totalRate / rateList.size());
-    System.out.println("총점 평균: " + rateAvg);
+    System.out.println("최근에 넣은 점수: " + rate);
 
     // 해당 멤버의 평균 평점을 가져온다.
-    double memRateAvg = (double) memberDao.findByNo(no).getRate();
+    double memRateAvg = (double) memberDao.findByNo((int) map.get("confirmMemberNo")).getRate();
     System.out.println("디비에 저장된 평균 평점: " + memRateAvg);
-    
-    
-    // 총 점수와 , 평균 평점을 더해 나누기 2를 한다. (조금 더 신뢰성 있는 평점을 위해) 
-    // (평가를 많이 받지 않은 회원이 평균 점수에 영향을 많이 줄 수 있어서)
-    double avgSum = (rateAvg + memRateAvg) / 2;
+
+    // 최근 들어온 점수와 디비에 저장된 평균 값을 더하여 2로 나눈다.
+    double avgSum = (rate + memRateAvg) / 2;
     System.out.println("합쳐서 나누기 2 한 값: " + avgSum);
 
-    double rateAvgCut = (Math.round((avgSum)*10)/10.0); // 소수점 한자리 까지 자른다.
+    double rateAvgCut = (int)(avgSum*10)/10.0; // 소수점 한자리 까지 자른다.
     System.out.println("소수점 자른 값: " + rateAvgCut);
     
-    Map<String, Object> map = new HashMap<>();
-    map.put("rateAvg", rateAvgCut);
-    map.put("no", no);
+    Map<String, Object> rateAvgNo = new HashMap<>();
+    rateAvgNo.put("rateAvg", rateAvgCut);
+    rateAvgNo.put("no", (int) map.get("confirmMemberNo"));
 
-
-    return memberDao.updateRate(map);
+    return memberDao.updateRate(rateAvgNo);
   }
 
   @Override

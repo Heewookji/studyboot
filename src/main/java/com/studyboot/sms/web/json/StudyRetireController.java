@@ -128,6 +128,7 @@ public class StudyRetireController {
 
     List studyMemberNoList =  memberService.findMemberNoByNickNameList(nickNames); // 닉네임을 멤버넘버로 바꾸는 코드
 
+    
     try {
 
       // 스터디에 남은 멤버 평가점수 입력
@@ -141,7 +142,7 @@ public class StudyRetireController {
         studyRetireService.evaluationAdd(evaluationMap);
 
         // 남은 스터디 원들 평점 업데이트
-        rateService.updateRate((int) studyMemberNoList.get(i));
+        rateService.updateRate(evaluationMap); // updateRate에 필요한 key는 studyNo, memberNo,confirmMemberNo
       }
       content.put("status", "탈퇴가 완료 되었습니다.");
     } catch (Exception e) {
@@ -298,8 +299,7 @@ public class StudyRetireController {
         System.out.println("********************************");
         System.out.println(retireeNo.get(i)); // 탈퇴자들 번호
 
-        rateService.updateRate((int) retireeNo.get(i));
-
+        rateService.updateRate(evaluationMap); // updateRate에 필요한 key는 studyNo, memberNo,confirmMemberNo
       }
       content.put("status", "탈퇴자 평가가 완료 되었습니다.");
 
@@ -338,12 +338,6 @@ public class StudyRetireController {
       content.put("message", e.getMessage());
       System.out.println("오류2: " + e.getMessage());
     }
-
-
-    //    for(int i = 0; i < retireeNo.size(); i++) {
-    //      rateService.updateRate((int) retireeNo.get(i));
-    //    }
-
 
     return content;
   }

@@ -1,4 +1,5 @@
-
+errorTitle = '오! 이런..'
+  ;
 
 //초기화 작업이다.
 $(document).on('ready', function () {
@@ -74,7 +75,11 @@ document.querySelector('#login-btn').onclick = () => {
       if (obj.status == 'success') {
         location.href = "/studyboot";
       } else {
-        alert('로그인 실패입니다!');
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '로그인 실패입니다!'
+        });
       }
     }
   });
@@ -110,7 +115,11 @@ $("#modalEmail-btn").click((e) => {
 //이메일 중복체크
   $.getJSON('/studyboot/app/json/member/emailcheck?email='+ $("#modalEmail").val(), function(obj) {
     if(obj.status == "fail"){
-      alert("해당 이메일이 없습니다.");
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '해당 이메일이 없습니다!'
+      });
     } else{
 
       //발송됐다는 것을 알려주자!

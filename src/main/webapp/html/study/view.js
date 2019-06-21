@@ -7,7 +7,10 @@ studyMemberGenerator = Handlebars.compile(studyMemberSrc),
 heartClicked = false,
 doingInit = false,
 memberAges,
-memberAge
+memberAge,
+finishData,
+dropData,
+exileData
 ;
 
 
@@ -55,6 +58,7 @@ function loadData(no) {
     $('#goal').html(data.goal);
     $('#contents').append(data.contents);
 
+    $('#day').html('');
     for(var day of data.dayStrList){
       $('#day').append("<li class=\"list-inline-item g-mb-10\"><a class=\"u-tags-v1 g-color-main g-brd-around g-brd-gray-light-v3 g-bg-gray-dark-v2--hover g-brd-gray-dark-v2--hover g-color-white--hover g-rounded-50 g-py-4 g-px-15\">"
               + day+"</a></li>");
@@ -91,7 +95,7 @@ function loadData(no) {
 
     for(var member of data.studyMembers){
       if(member.leader){
-        $('#studyLeader').append('<img class="ui avatar image" src="/studyboot/upload/images/member/'+ member.photo  + '">'+ member.name);
+        $('#studyLeader').append('<img class="ui avatar image" src="/studyboot/upload/images/member/'+ member.photo  + '">'+ member.member.nickName);
         $('#applyModal').find('img').attr('src', '/studyboot/upload/images/member/'+ member.photo);
         $("#memberRate").html('<div class="rateit g-pl-20" id="studyMemberRate" data-rateit-readonly="true"data-rateit-mode="font" style="font-size: 20px"data-rateit-resetable="false" data-rateit-value="'+member.rate+'"></div>')
       }
@@ -118,7 +122,6 @@ function loadData(no) {
         var doingList = mystudyData.doingStudyList,
         appliedList = mystudyData.appliedStudyList,
         pickedList = mystudyData.pickedStudyList;
-
 
         if(pickedList != undefined){
           for(var pickedStudy of pickedList){
@@ -269,7 +272,7 @@ function loadChart(no) {
       gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.1)");
       gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.1)");
 
-      
+
 
       var studyRateChartShow = new Chart(studyRateChart, {
         type: 'line',
@@ -366,11 +369,11 @@ function loadChart(no) {
 
 
 
-
+      $('#ageAverage').html(memberAge);
 
 
       var ageRateChart = $("#ageRateChart");
-      $('#ageAverage').html(memberAge);
+
 
       var tenCount = 0;
       var twentyCount = 0;
@@ -471,6 +474,8 @@ function loadChart(no) {
         }
       });
 
+      $('#finishAverage').html(data.finishPercentage + "% ");
+
       var finishRateChart = $("#finishRateChart");
 
 //    For a pie chart
@@ -479,15 +484,15 @@ function loadChart(no) {
         data: {
 
           datasets: [{
-            data: [10, 20, 30],
+            data: [data.finishCount, data.dropCount, data.exileCount],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.1)',
               'rgba(54, 162, 235, 0.1)',
+              'rgba(255, 99, 132, 0.1)',
               'rgba(255, 206, 86, 0.1)'
               ],
               borderColor: [
-                'rgba(255, 99, 132, 0.7)',
                 'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 99, 132, 0.7)',
                 'rgba(255, 206, 86, 0.7)'
                 ],
                 borderWidth: 1
@@ -495,8 +500,8 @@ function loadChart(no) {
 
           // These labels appear in the legend and in the tooltips when hovering different arcs
           labels: [
-            '탈퇴',
             '완료',
+            '탈퇴',
             '추방'
             ]
         },
@@ -512,6 +517,9 @@ function loadChart(no) {
             boxWidth: 70,
             position: 'left'
           },
+          plugins: {
+            labels: false
+          }
         }
 
       });
@@ -519,21 +527,41 @@ function loadChart(no) {
 
       var attendRateChart = $("#attendRateChart");
 
+      var attendLabel = new Array();
+
+      for(var sm of data.study.studyMembers){
+        attendLabel.push(sm.member.nickName);
+      }
+
       var attendRateChartShow = new Chart(attendRateChart, {
         type: 'line',
         data: {
-          labels: ['0', '1', '2', '3', '4', '5'],
+          labels: attendLabel,
           datasets: [{
-            borderColor: gradientStroke,
-            pointHoverRadius: 15,
-            pointRadius: 10,
-            fill: false,
-            backgroundColor: gradientFill,
-            borderWidth: 1,
-            showLine: false,
-            data: [
-              10, 20, 30, 40 , 20, 0
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.1)',
+              'rgba(54, 162, 235, 0.1)',
+              'rgba(255, 206, 86, 0.1)',
+              'rgba(75, 192, 192, 0.1)',
+              'rgba(153, 102, 255, 0.1)',
+              'rgba(255, 159, 64, 0.1)'
               ],
+              borderColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)',
+                'rgba(255, 159, 64, 0.7)'
+                ],
+                pointHoverRadius: 20,
+                pointRadius: 15,
+                fill: false,
+                borderWidth: 1,
+                showLine: false,
+                data: [
+                  10, 20, 30, 40 , 20, 0
+                  ],
           }]
         },
         options: {
@@ -544,9 +572,8 @@ function loadChart(no) {
             fontSize: 14,
             padding: 40
           },
-          legend: {
-            position: 'right'
-          },
+          legend: false
+          ,
           elements: {
             point: {
               pointStyle: 'circle'
@@ -575,13 +602,16 @@ function loadChart(no) {
             }],
             yAxes: [{
               gridLines: {
-                display: true,
-                drawBorder: true,
+                display: false,
+                drawBorder: false,
                 drawOnChartArea: false,
               },
               scaleLabel: {
                 display: false,
                 labelString: 'Value'
+              },
+              ticks: {
+                display: false
               }
             }]
           }
@@ -607,7 +637,7 @@ $(document.body).bind('loaded-studyInfo', () => {
 
   //차트를 준비합니다람쥐.
   loadChart(studyNo);
- 
+
 });
 
 

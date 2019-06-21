@@ -2,6 +2,7 @@ var emailNo,
 emailInit = true,
 nickName,
 emailCountDownFunction,
+errorTitle = '오! 이런..',
 email
 ;
 
@@ -85,7 +86,11 @@ $("#email-btn").click((e) => {
   //이메일 중복체크
   $.getJSON('/studyboot/app/json/member/emailcheck?email='+ $("#email").val(), function(obj) {
     if(obj.status == "success"){
-      alert("해당 이메일이 이미 있습니다.");
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: '해당 이메일이 이미 있습니다!'
+      });
     } else{
 
       //다시 요청하세요 지우기
@@ -194,16 +199,30 @@ $("#nickCheck-btn").click(function() {
     contentType: "application/json; charset=UTF-8",
     success : function(data) {
       if (data.cnt > 0) {
-        alert("닉네임이 존재합니다. 다른 닉네임을 입력해주세요.");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '닉네임이 존재합니다. 다른 닉네임을 입력해주세요!'
+        });
         nickChecked = 0;
       } else {
-        alert("사용가능한 닉네임입니다.");
-        $( "#nickCheck-btn").prop("disabled",true);
-        nickName = $("#nickName").val();
+        Swal.fire({
+          type: 'success',
+          title: '사용 가능합니다!',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          $( "#nickCheck-btn").prop("disabled",true);
+          nickName = $("#nickName").val();
+        });
       }
     },
     error : function(error) {
-      alert("error : " + error);
+      Swal.fire({
+        type: 'error',
+        title: errorTitle,
+        text: error
+      });
     }
   });
 });
@@ -374,33 +393,61 @@ $("#submit-btn").click(function() {
           email != $("#email").val()||
           $("#email").val() == null ||
           !$( "#emailNo" ).hasClass( "is-valid" )){
-    alert("이메일을 인증해주세요!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '이메일을 인증해주세요!'
+    });
     return;
   }
   if(checkName($( "#name" ).val()) == false){
-    alert("이름을 양식에 맞게 입력해주세요!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: "이름을 양식에 맞게 입력해주세요!"
+    });
     return;
   }
   if(nickCheck($("#nickName").val()) == false){
-    alert("닉네임을 양식에 맞게 입력해주세요!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: "닉네임을 양식에 맞게 입력해주세요!"
+    });
     return;
   } 
   if(nickName == undefined ||
           nickName != $("#nickName").val()||
           $("#nickName").val() == null){
-    alert("닉네임을 중복체크해주세요!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: "닉네임을 중복체크해주세요!"
+    });
     return;
   }
   if(checkPassword($( "#password" ).val()) == false){
-    alert("비밀번호를 양식에 맞게 입력해주세요!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: "비밀번호를 양식에 맞게 입력해주세요!"
+    });
     return;
   }
   if(equalPassword($( "#passwordConfirm" ).val(), $( "#password" ).val()) == false){
-    alert("비밀번호가 일치하지 않습니다!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: "비밀번호가 일치하지 않습니다!"
+    });
     return;
   }
   if(!$("#agree-btn").prop('checked')){
-    alert("이용 약관에 동의해주세요!");
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: "이용 약관에 동의해주세요!"
+    });
     return;
   }
 
@@ -431,7 +478,11 @@ $("#submit-btn").click(function() {
           }
         });
       } else {
-        alert("등록에 실패했습니다");
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: "등록에 실패했습니다!"
+        });
       }
     }
 
