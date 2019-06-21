@@ -185,25 +185,35 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 
   <!-- content -->
   <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
-    <!-- title, breadcrumb -->
-    <div class="row">
-      <div class="col-lg-3 g-mb-20">
-        <h1>MyPage</h1>
-      </div>
-      <div class="col-lg-9 g-mb-20">
-        
-      </div>
+  
+    <!-- breadcrumb -->
+    <div class="row g-mb-30 col-lg-12">
+      <ul class="u-list-inline" id= "conts-list">
+        <li class="list-inline-item g-mr-7">
+          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">홈</a>
+          <i class="fa fa-angle-right g-ml-7"></i>
+        </li>
+        <li class="list-inline-item g-mr-7">
+          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/html/mypage/">마이페이지</a>
+          <i class="fa fa-angle-right g-ml-7"></i>
+        </li>
+        <li class="list-inline-item g-color-primary">
+          <span>쪽지함</span>
+        </li>
+      </ul>
     </div>
-    
+    <!-- End breadcrumb -->
+
     <div class="row">
       <!-- Profile Sidebar -->
-      <div class="col-lg-3 g-mb-50 g-mb-0--lg">
+      <div class="col-lg-3">
         <!-- User Image -->
         <div class="u-block-hover g-pos-rel">
           <figure>
-            <img id="profilePhoto" class="img-fluid w-100 u-block-hover__main--zoom-v1"
+            <img id="profilePhoto"
+              class="img-fluid w-100 u-block-hover__main--zoom-v1"
               alt="Image Description">
-          
+
             <!-- Figure Caption -->
             <figcaption
               class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
@@ -212,71 +222,64 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
                 <!-- Figure Social Icons -->
                 <ul
                   class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
-                  <li class="list-inline-item align-middle g-mx-7"><a
-                    class="u-icon-v1 u-icon-size--md g-color-white"
-                    href="#" data-toggle="modal" data-target="#imageModal">
-                    <i class="icon-settings u-line-icon-pro"></i>
-                  </a></li>
+                  <li class="list-inline-item align-middle g-mx-7"><label
+                    class="u-icon-v1 u-icon-size--md g-color-white">
+                      <i
+                      class="icon-settings u-line-icon-pro g-cursor-pointer"></i>
+                      <input type="file" class="sr-only" id="imageInput"
+                      name="image" accept="image/*">
+                  </label></li>
                 </ul>
                 <!-- End Figure Social Icons -->
               </div>
             </figcaption>
           </figure>
           <!-- End Figure Caption -->
-
-          <!-- User Info -->
-          <span class="g-pos-abs g-top-0 g-absolute-centered--x">
-            <a id="myRate-btn" class="btn btn-sm" href="#" data-toggle="modal" data-target="#historyModal" style="width: 175px;">
-              <fieldset class="rate" id="rating-form" disabled>
-                <input type="radio" id="rating10" name="rating"/><label id="star5" for="rating10"></label>
-                <input type="radio" id="rating9" name="rating"/><label id="star45" class="half" for="rating9"></label>
-                <input type="radio" id="rating8" name="rating"/><label id="star4" for="rating8"></label>
-                <input type="radio" id="rating7" name="rating"/><label id="star35" class="half" for="rating7"></label>
-                <input type="radio" id="rating6" name="rating"/><label id="star3" for="rating6"></label>
-                <input type="radio" id="rating5" name="rating"/><label id="star25" class="half" for="rating5"></label>
-                <input type="radio" id="rating4" name="rating"/><label id="star2" for="rating4"></label>
-                <input type="radio" id="rating3" name="rating"/><label id="star15" class="half" for="rating3"></label>
-                <input type="radio" id="rating2" name="rating"/><label id="star1" for="rating2"></label>
-                <input type="radio" id="rating1" name="rating"/><label id="star05" class="half" for="rating1"></label>
-              </fieldset>
-            </a>
-          </span>
-          <!-- End User Info -->
         </div>
         <!-- User Image -->
 
         <!-- Sidebar Navigation -->
         <div class="list-group list-group-border-0 g-mb-40">
 
-          <!-- Comments -->
+          <!-- My StudyList -->
+          <a href="../mypage/index.html"
+            class="list-group-item list-group-item-action justify-content-between">
+            <span><i
+              class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
+          </a>
+          <!-- End My StudyList -->
+
+          <!-- My InfoSettings -->
+          <a href="../mypage/view.html"
+            class="list-group-item list-group-item-action justify-content-between">
+            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내
+              정보</span>
+          </a>
+          <!-- End My InfoSettings -->
+
+          <!-- My rateInfo -->
+          <a href="#"
+            class="list-group-item list-group-item-action justify-content-between"
+            data-toggle="modal" data-target="#historyModal"> <span><i
+              class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
+          </a>
+          <!-- End My rateInfo -->
+
+          <!-- Message -->
           <a href="index.html"
             class="list-group-item justify-content-between active">
-            <span><i class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
-          </a>
-          <!-- End Comments -->
-
-          <!-- My Projects -->
-          <a href="view.html"
-            class="list-group-item list-group-item-action justify-content-between">
-            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내 정보</span>
-          </a>
-          <!-- End My Projects -->
-
-          <!-- Overall -->
-          <a href="../message/index.html"
-            class="list-group-item list-group-item-action justify-content-between">
             <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
           </a>
-          <!-- End Overall -->
+          <!-- End Message -->
 
-          <!-- History -->
+          <!-- Inquiry -->
           <a href="#"
             class="list-group-item list-group-item-action justify-content-between"
             data-toggle="modal" data-target="#inqryModal"
             id="inqryForm-btn"> <span><i
               class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
           </a>
-          <!-- End History -->
+          <!-- End Inquiry -->
         </div>
         <!-- End Sidebar Navigation -->
       </div>
