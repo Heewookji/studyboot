@@ -107,7 +107,7 @@ function loadLoginUser() {
       if(user.photo == null){
         $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/defaultphoto');
       }else{
-        $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/'+ user.photo);
+        $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/thumbnail.'+ user.photo +'.jpg');
       }
 
       if(obj.myStudyList != undefined){
