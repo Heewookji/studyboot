@@ -195,7 +195,7 @@
       style="font-size: 33px" data-rateit-resetable="false"></div>
      <div class="u-divider u-divider-solid g-brd-primary g-width-80--md">
      </div>
-<h4 class=" g-pt-40">스터디 목표</h4>
+     <h4 class=" g-pt-40">스터디 목표</h4>
      <span class="g-pb-20" id="goal"></span>
      <h4 class=" g-pt-40">설명</h4>
     </div>
@@ -207,7 +207,8 @@
     <div class="row justify-content-md-center g-pt-30">
 
      <p class="text-left lead g-font-size-25 g-pb-30">
-      전체 스터디 중 상위 <span class="g-color-primary" id="percentCount">  </span>평점의 스터디입니다!
+      전체 스터디 중 상위 <span class="g-color-primary" id="percentCount">
+      </span>평점의 스터디입니다!
      </p>
 
      <div class="col-md-auto g-pb-100" style="width: 75%;">
@@ -222,7 +223,8 @@
      </div>
      <div class="col-4 align-self-end">
       <p class="text-bottom lead g-font-size-20">
-      평균 연령이 <span class="g-color-primary" id="ageAverage">  </span>살인<br> 스터디입니다!
+       평균 연령이 <span class="g-color-primary" id="ageAverage"> </span>살인<br>
+       스터디입니다!
       </p>
      </div>
     </div>
@@ -233,18 +235,20 @@
      </div>
      <div class="col-4 align-self-end">
       <p class="text-left lead g-font-size-20">
-       전체 스터디 중 상위<span class="g-color-primary"> 10% </span>의 스터디입니다!
+       구성원들의<br> 스터디 완료율이 <br> 평균 <span
+        class="g-color-primary" id="finishAverage"> </span> 입니다!
       </p>
      </div>
     </div>
 
     <div class="row g-px-60 justify-content-md-center">
-     <div class="col g-pt-100" style="width: 50%;">
+     <div class="col g-pt-100 g-pr-20" style="width: 10%; height: 10%">
       <canvas id="attendRateChart"></canvas>
      </div>
      <div class="col-4 align-self-end">
       <p class="text-left lead g-font-size-20">
-       전체 스터디 중 상위 <span class="g-color-primary"> 10% </span>의 스터디입니다!
+       구성원들의<br> 일정 출석율이 <br> 평균 <span class="g-color-primary">
+        33% </span> 입니다!
       </p>
      </div>
     </div>
@@ -293,7 +297,10 @@
       <!-- Tags -->
       <div class="g-mb-30">
        <h3 class="h5 g-color-black mb-3">활동 요일</h3>
-       <ul class="u-list-inline mb-0" id="day">
+       <ul class="u-list-inline" id="day">
+        <li class="list-inline-item g-mb-10 invisible"><a
+         class="u-tags-v1 g-color-main g-brd-around g-brd-gray-light-v3 g-bg-gray-dark-v2--hover g-brd-gray-dark-v2--hover g-color-white--hover g-rounded-50 g-py-4 g-px-15">
+        그런거에요?</a></li>
        </ul>
       </div>
       <!-- End Tags -->
@@ -327,7 +334,8 @@
          id="heart-btn"><i class="mr-1 fa fa-heart"></i>찜하기 </a></li>
         <li class="list-inline-item mx-1 mb-1"><a
          class="btn u-btn-outline-primary g-rounded-25" href="#"
-         id="sendMessage-btn"><i class="mr-1 fa fa-comment"></i>문의하기 </a></li>
+         id="sendMessage-btn"><i class="mr-1 fa fa-comment"></i>문의하기
+        </a></li>
         <li class="list-inline-item mx-1 mb-1"><a
          class="btn u-btn-outline-primary g-rounded-25" href="#"
          id="apply-btn"> <i class="mr-1 fa fa-pencil"> </i>가입신청
@@ -366,7 +374,7 @@
  <script id="view-studymember" type="text/x-handlebars-template">
 {{#each studyMembers}}
     <div class="item"  data-value="{{rate}}">
-       <img class="ui avatar image" src="/studyboot/upload/images/member/{{photo}}">{{name}} 
+       <img class="ui avatar image" src="/studyboot/upload/images/member/{{photo}}">{{member.nickName}} 
     </div>
 {{/each}}
 </script>
