@@ -678,7 +678,7 @@ function savePassword(newPwd, verifyPwd) {
   if (newPwd.length == 0 || verifyPwd.length == 0) {
     Swal.fire({
       type: 'warning',
-      title: '변경할 비밀번호를 입력하세요!',
+      title: '유효하지 않은 비밀번호입니다!',
       showConfirmButton: false,
       timer: 1500
     });
