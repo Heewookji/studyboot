@@ -91,7 +91,7 @@ function loadData(no) {
       indicatorSelector: '.js-hr-progress-bar-indicator'
     });
     $(studyMemberGenerator(data)).appendTo('#studyMemberList');
-
+    
 
     for(var member of data.studyMembers){
       if(member.leader){

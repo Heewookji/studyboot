@@ -16,12 +16,23 @@ $( document ).ready(function() {
       keyword = $("#study-search").val();
       window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
     });
+    
+    $("#study-search").keydown((e) => {
+      if(e.keyCode == 13)
+        $('#search-btn').click();
+    });
 
     $('#main-search-btn').click((e) => {
       pageNo = 1;
       keyword = $("#main-search").val();
       window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
     });
+    
+    $("#main-search").keydown((e) => {
+      if(e.keyCode == 13)
+        $('#main-search-btn').click();
+    });
+
 
     $('#mypage-btn').click((e) => {
       window.location.href = '/studyboot/html/mypage/index.html';

@@ -16,6 +16,11 @@ $( document ).ready(function() {
       keyword = $("#study-search").val();
       window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
     });
+    
+    $("#study-search").keydown((e) => {
+      if(e.keyCode == 13)
+        $('#search-btn').click();
+    });
 
     $('#mypage-btn').click((e) => {
       window.location.href = '/studyboot/html/mypage/index.html';
