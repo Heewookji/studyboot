@@ -758,7 +758,20 @@ $('#sb-member-withdrawal').click((e) => {
       success : function(data) {
         
         if(data.result == true){
-          alert('정말 탈퇴하실 건가요??');
+          Swal.fire({
+            title: '정말 탈퇴 하시겠습니까?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '확인',
+            cancelButtonText: '취소'
+          }).then((result) => {
+            
+            if (result.value) {
+              
+            }
+          });
           
           
         } else{
@@ -815,7 +828,12 @@ $('#inqryAdd-btn').click((e) => {
       suspectPersonNo: $(sspctNo).val()
     },
     success: function(data){
-      alert('문의 글 등록 성공!!');
+      Swal.fire({
+        type: 'success',
+        title: '문의 글을 보냈습니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
       $('#inqryModal').modal('hide');
     }
   });
