@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-//    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+//  plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     plugins: [ 'interaction', 'dayGrid' ],
     locale: 'ko',
     defaultDate: new Date(),
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
     eventLimit: true, // allow "more" link when too many events
     //editable: false,   이걸 false로 두면 드래그앤 드롭 막는데, 커서 손가락 모양이 안됨
     selectable: true,
-//    header: {
-//      left: 'prev,next today',
-//      center: 'title',
-//      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-//    },
+//  header: {
+//  left: 'prev,next today',
+//  center: 'title',
+//  right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+//  },
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       window.eventDate = info.event; // 클릭한 일정의 객체를 뽑아 넣음
       if(window.calendarContent === false) { // 스터디 장이 아니면 이벤트 버튼을 눌렀을 때 닫기 버튼만 보이기
@@ -230,20 +230,50 @@ $('#event-delete-btn').click(() => {
     return;
   }
 
-  if(confirm('정말 삭제 하시겠습니까?')) {
-    $.getJSON('../../app/json/mystudyschedule/delete?eventNo=' + window.eventDate.id
-        + '&studyNo=' + studyNo, 
-        function(obj) {
-      if (obj.status != 'success') {
-        Swal.fire({
-          type: 'error',
-          title: errorTitle,
-          text: obj.status
-        });
-      }
-      location.reload();
-    })
-  }
+  Swal.fire({
+    title: '정말 삭제 하시겠습니까?',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '확인',
+    cancelButtonText: '취소'
+  }).then((result) => {
+    
+    if (result.value) {
+      $.getJSON('../../app/json/mystudyschedule/delete?eventNo=' + window.eventDate.id
+          + '&studyNo=' + studyNo, 
+          function(obj) {
+        console.log(obj);
+        if (obj.status != 'success') {
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '해당 일정은 삭제할 수 없습니다!'
+          });
+        } else {
+          location.reload();
+        }
+      })
+    }
+  })
+
+
+
+//if(confirm('정말 삭제 하시겠습니까?')) {
+//$.getJSON('../../app/json/mystudyschedule/delete?eventNo=' + window.eventDate.id
+//+ '&studyNo=' + studyNo, 
+//function(obj) {
+//if (obj.status != 'success') {
+//Swal.fire({
+//type: 'error',
+//title: errorTitle,
+//text: obj.status
+//});
+//}
+//location.reload();
+//})
+//}
 });
 
 //디테일에서 수정버튼 누르면 실행되는 곳. 
@@ -263,14 +293,14 @@ $('#event-update-btn').click(() => {
   $('#schedule-memo').empty(); // textarea(memo)에 누적이 안되게 일단 비워준다.
 
   resetForm();
-  
+
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
   $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
 
   $('#calendar-add-modal-btn').click(); // 수정하는 모달 띄움
   $('#event-close-btn').click(); // 디테일 모달 닫고,
 
-//  $('#schedule-title').val(updateTitleDate); // 디테일에 있던 일정 이름 모달창으로 가져옴
+//$('#schedule-title').val(updateTitleDate); // 디테일에 있던 일정 이름 모달창으로 가져옴
   $('#schedule-title').attr("value", updateTitleDate); // 디테일에 있던 일정 이름 모달창으로 가져옴
   $('#schedule-sdt').attr("value", updateStartDate + 'T00:00');
   $('#schedule-edt').attr("value", updateEndDate + 'T00:00');
