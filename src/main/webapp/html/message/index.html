@@ -53,51 +53,6 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
-<style type="text/css">
-/* rating star css */
-
-/* Ratings widget */
-.rate {
-    display: inline-block;
-    pointer-events: none;
-    border: 0;
-}
-/* Hide radio */
-.rate > input {
-    display: none;
-}
-/* Order correctly by floating highest to the right */
-.rate > label {
-    float: right;
-    margin: 0;
-}
-/* The star of the show */
-.rate > label:before {
-    display: inline-block;
-    font-size: 2rem;
-    padding: 0rem .2rem;
-    margin: 0;
-    cursor: pointer;
-    font-family: FontAwesome;
-    content: "\f005 "; /* full star */
-}
-
-/* Half star trick */
-.rate .half:before {
-    content: "\f089 "; /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
-/* Click + hover color */
-input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: rgb(255, 230, 0);  } /* color previous stars on hover */
-
-/* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
-/* rating star css */
-</style>
 
 </head>
 
@@ -112,6 +67,10 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
   <!-- 나의 평점 -->
   <div id="sb-history"></div>
   <!-- 나의 평점 -->
+  
+  <!-- imageSetting modal -->
+  <div id="sb-imagesetting"></div>
+  <!-- End imageSetting modal -->
 
   <!-- inquiry modal -->
   <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
@@ -152,37 +111,6 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
   </div>
   <!-- inquiry modal -->
   
-  <!-- imageSetting modal -->
-  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">프로필 사진</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div>
-            <img id="prevImage" class="img-fluid w-100" alt="Responsive image"/>
-          </div>
-          <div>
-            <label for="imageInput" class="btn btn-xl u-btn-primary g-width-170"><i class="fa fa-camera-retro"></i></label>
-            <input type="file" id="imageInput" name="files" class="std-hidden" multiple>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"
-            data-dismiss="modal" id="imageUpdate-cancel">취소</button>
-          <button type="button" class="btn btn-primary"
-            id="imageUpdate-btn" disabled>변경</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End imageSetting modal -->
-
   <!-- content -->
   <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
   
@@ -348,7 +276,7 @@ sendPage
       </form>
     </nav>
 
-    <div class="msg-list">
+    <div class="msg-list g-min-height-400">
       <table class="table table-hover">
         <thead>
           <tr>
