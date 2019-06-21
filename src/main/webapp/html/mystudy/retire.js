@@ -62,7 +62,9 @@ $('#retire-request').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '스터디 장은 스터디에 탈퇴 할 수 없습니다.'
+      text: '스터디 장은 스터디에 탈퇴 할 수 없습니다.',
+      showConfirmButton: false,
+      timer: 1000
     });
     return;
   }
@@ -112,7 +114,9 @@ $('#retire-evaluation-btn').click(() => {
       Swal.fire({
         type: 'error',
         title: errorTitle,
-        text: obj.status
+        text: obj.status,
+        showConfirmButton: false,
+        timer: 1500
       });
       location.reload();
     } else {
