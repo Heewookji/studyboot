@@ -1,14 +1,36 @@
 var pageNo = 1,
-pageSize = 3,
+pageSize = 8,
 tbody = $('tbody'),
 prevPageLi = $('#prevPage'),
 nextPageLi = $('#nextPage'),
 currSpan = $('#currPage > span'),
 keyword = $("#message-search").val(),
-templateSrc = $('#tr-template').html();
+templateSrc = $('#tr-template').html(),
+user;
 //templateSrcSend = $('#ms-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 
+//페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
+$( document ).ready(function() {
+  $("#sb-history").load("../mypage/rateInfo.html");
+  $("#sb-imagesetting").load("../mypage/imagesetting.html");
+});
+
+
+loadData();
+
+function loadData() {
+  $.getJSON('../../app/json/member/detail',
+      function(data) {
+    
+    window.user = data;
+    console.log(user);
+    
+    $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
+    $('#inqryName').html(user.name);
+    $('#inqryNo').val(user.no);
+  });
+};
 
 
 var trGenerator = Handlebars.compile(templateSrc);
@@ -209,7 +231,38 @@ $('#msg-Delete-btn').click((e) => {
 
 
 
+//inquiry
+$('#inqryForm-btn').click((e) => {
+  e.preventDefault();
+  $('.sspctForm-Format').addClass('std-invisible');
+  $('#formTitle').html($('#inqryName').html() +"님  문의"+ " 내용을 적어주세요");
+  $('#sspctName').val("");
+  $('#sspctNo').val(0);
+  $('#inqryClsNo').val(1);
+});
 
+$('#inqryModal').on('hidden.bs.modal', () => {
+  $('#inqryContents').val('');
+});
+
+// inquiry add
+$('#inqryAdd-btn').click((e) => {
+  $.ajax({
+    url:'../../app/json/inquiry/add',
+    type: 'post',
+    dataType: 'text',
+    data: {
+      clsNo: $(inqryClsNo).val(),
+      contents:$(inqryContents).val(),
+      inquiryPersonNo: $(inqryNo).val(),
+      suspectPersonNo: $(sspctNo).val()
+    },
+    success: function(data){
+      alert('문의 글 등록 성공!!');
+      $('#inqryModal').modal('hide');
+    }
+  });
+});
 
 
 

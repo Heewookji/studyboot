@@ -22,7 +22,6 @@ options = {
         cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
       }
   };
-
 var page = location.href.split('/')[5],
       studyNo;
 

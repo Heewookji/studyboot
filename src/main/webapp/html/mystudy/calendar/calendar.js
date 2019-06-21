@@ -72,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
           type: 'error',
           title: errorTitle,
-          text: '스터디 장만 일정을 등록 할 수 있습니다.'
+          text: '스터디 장만 일정을 등록 할 수 있습니다.',
+          showConfirmButton: false,
+          timer: 1500
         });
         return;
       }
@@ -106,28 +108,36 @@ $('#schedule-add-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '제목을 입력해 주세요.'
+      text: '제목을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } else if($('#schedule-sdt').val().length === 0) {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '시작일을 입력해 주세요.'
+      text: '시작일을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } else if($('#schedule-edt').val().length === 0) {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '종료일을 입력해 주세요.'
+      text: '종료일을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } else if($('#schedule-memo').val().length === 0) {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '내용을 입력해 주세요.'
+      text: '내용을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } 
@@ -153,7 +163,9 @@ $('#schedule-add-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '시작일과 종료일을 확인 해 주세요'
+      text: '시작일과 종료일을 확인 해 주세요',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   }
@@ -184,7 +196,9 @@ $('#schedule-add-btn').click(() => {
       Swal.fire({
         type: 'error',
         title: errorTitle,
-        text: '등록에 실패 했습니다.'
+        text: '등록에 실패 했습니다.',
+        showConfirmButton: false,
+        timer: 1500
       });
     }
   });
@@ -225,7 +239,9 @@ $('#event-delete-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '삭제 권한이 없습니다.'
+      text: '삭제 권한이 없습니다.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   }
@@ -249,7 +265,9 @@ $('#event-delete-btn').click(() => {
           Swal.fire({
             type: 'error',
             title: errorTitle,
-            text: '해당 일정은 삭제할 수 없습니다!'
+            text: '해당 일정은 삭제할 수 없습니다!',
+            showConfirmButton: false,
+            timer: 1500
           });
         } else {
           location.reload();
@@ -283,7 +301,9 @@ $('#event-update-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '수정 권한이 없습니다.'
+      text: '수정 권한이 없습니다.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   }
@@ -314,28 +334,36 @@ $('#schedule-update-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '제목을 입력해 주세요.'
+      text: '제목을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } else if($('#schedule-sdt').val().length === 0) {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '시작일을 입력해 주세요.'
+      text: '시작일을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } else if($('#schedule-edt').val().length === 0) {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '종료일을 입력해 주세요.'
+      text: '종료일을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } else if($('#schedule-memo').val().length === 0) {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '내용을 입력해 주세요.'
+      text: '내용을 입력해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   } 
@@ -354,7 +382,9 @@ $('#schedule-update-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '시작일과 종료일을 확인 해 주세요.'
+      text: '시작일과 종료일을 확인 해 주세요.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   }
@@ -363,7 +393,9 @@ $('#schedule-update-btn').click(() => {
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '수정 권한이 없습니다.'
+      text: '수정 권한이 없습니다.',
+      showConfirmButton: false,
+      timer: 1500
     });
     return;
   }
@@ -393,7 +425,9 @@ $('#schedule-update-btn').click(() => {
       Swal.fire({
         type: 'error',
         title: errorTitle,
-        text: '일정 변경에 실패 했습니다.'
+        text: '일정 변경에 실패 했습니다.',
+        showConfirmButton: false,
+        timer: 1500
       });
     }
   });

@@ -8,7 +8,7 @@ clsTemplateSrc = $('#cls-template').html(),
 clsGenerator = Handlebars.compile(clsTemplateSrc);
 
 
-//페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
+// 페이지가 준비되면 평점 정보, 이미지세팅 모달창을 꽂아준다.
 $( document ).ready(function() {
   $("#sb-history").load("rateInfo.html");
   $("#sb-imagesetting").load("imagesetting.html");
@@ -26,7 +26,7 @@ function loadModalCategory() {
       e.value = e.clsNo;
     }
 
-    //분류 드롭다운
+    // 분류 드롭다운
     $('.ui.dropdown.lcls')
     .dropdown({
       placeholder: '관심분야(대)',
@@ -85,7 +85,12 @@ function loadModalCategory() {
                       return false;
                     }
                     if ($('#myClsList a').length > 2) {
-                      alert('갯수 초과!!');
+                      Swal.fire({
+                        type: 'info',
+                        title: '3가지 분야만 선택 가능합니다!',
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
                       return false;
                     }
                     clsCheck = 1;
@@ -121,7 +126,7 @@ function loadModalAddress() {
       e.value = e.addressNo;
     }
 
-    //분류 드롭다운
+    // 분류 드롭다운
     $('.ui.dropdown.laddr')
     .dropdown({
       placeholder: '활동지역(대)',
@@ -186,7 +191,12 @@ function loadModalAddress() {
                       return false;
                     }
                     if ($('#myAddrList a').length > 0) {
-                      alert('갯수 초과!!');
+                      Swal.fire({
+                        type: 'info',
+                        title: '하나의 지역만 선택 가능합니다!',
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
                       return false;
                     }
                     addrCheck = 1;
@@ -234,7 +244,6 @@ function loadData() {
           + '" style="display: inline-block !important;">'+ user.addressName +'<i class="delete icon"></i></a>');
     }
     
-    $(document.body).trigger('loaded-data');
   });
 };
 
@@ -279,13 +288,23 @@ $(function() {
           success : function(data) {
               if (data.cnt > 0) {
                   
-                  alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+                  Swal.fire({
+                    type: 'error',
+                    title: '해당 닉네임이 존재합니다.\n다른 닉네임을 입력해주세요.',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                   $('#nickName').closest('div').addClass('u-has-error-v1');
                   $('#nickName').focus();
                   nickCheck = 0;
                   
               } else {
-                  alert("사용가능한 아이디입니다.");
+                  Swal.fire({
+                    type: 'success',
+                    title: '사용가능한 닉네임입니다.',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                   $('#nickCheck-btn').prop('disabled', true);
                   $('#nickName').closest('div').removeClass('u-has-error-v1');
                   $('#nickName').closest('div').addClass('u-has-success-v1-1');
@@ -293,7 +312,12 @@ $(function() {
               }
           },
           error : function(error) {
-              alert("error : " + error);
+              Swal.fire({
+                type: 'error',
+                title: '닉네임 중복 검사에 실패했습니다!',
+                showConfirmButton: false,
+                timer: 1500
+              });
           }
       });
   });
@@ -392,9 +416,9 @@ function initNickCheck() {
       $('#nickName').tooltip('disable');
       $('#nickName').tooltip('hide');
       $('#nickName').closest('div').removeClass('u-has-error-v1');
-      $('#nickName').closest('div').addClass('u-has-success-v1-1');
-    } else{
+      nickCheck = 0;
       
+    } else{
       $('#nickName').attr('data-toggle','tooltip');
       $('#nickName').attr('data-trigger','hover focus');
       $('#nickName').attr('data-placement','bottom');
@@ -403,8 +427,8 @@ function initNickCheck() {
       $('#nickName').tooltip('enable');
       $('#nickName').tooltip('show');
       $('#nickCheck-btn').prop('disabled',true);
-      $('#nickName').closest('div').removeClass('u-has-success-v1-1');
       $('#nickName').closest('div').addClass('u-has-error-v1');
+      nickCheck = 0;
     }
   });
 }
@@ -416,10 +440,20 @@ $('#sb-info-change').click((e) => {
   
   if (nickCheck == undefined 
       && clsCheck == undefined && addrCheck == undefined) {
-    alert('변경 사항이 없습니다!');
+    Swal.fire({
+      type: 'warning',
+      title: '변경 사항이 없습니다!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     return false;
   } else if (nickCheck == 0){
-    alert('변경할 수 없습니다..\n 수정 사항을 확인하세요!');
+    Swal.fire({
+      type: 'error',
+      title: '변경할 수 없습니다..\n닉네임을 확인하세요!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     return false;
   } else {
     
@@ -439,11 +473,22 @@ $('#sb-info-change').click((e) => {
       "&address=" + encodeURIComponent(address),
       contentType: "application/x-www-form-urlencoded",
       success: function() {
-        alert("정보 변경 성공!");
-        location.href = 'index.html';
+        Swal.fire({
+          type: 'success',
+          title: '변경 사항을 저장했습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          location.reload();
+        });
       },
       error: function() {
-        alert("정보 변경을 실패 했습니다!");
+        Swal.fire({
+          type: 'error',
+          title: '변경 사항을 저장하지 못했습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     });
   }
@@ -521,7 +566,12 @@ $("#verifyPassword").keyup(function(){
   var password = $("#newPassword").val();
   
   if (password.length == 0 || password == undefined) {
-    alert('먼저 새로운 비밀번호를 입력하세요!!')
+    Swal.fire({
+      type: 'warning',
+      title: '먼저 새로운 비밀번호를 입력하세요!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     $('#verifyPassword').val('')
     $('#verifyPassword').closest('div').removeClass('u-has-error-v1');
     $('#verifyPassword').closest('div').removeClass('u-has-success-v1-1');
@@ -574,7 +624,12 @@ $('#sb-password-change').click((e) => {
   
   // 비밀번호 확인
   if (password.length == 0 || password == undefined) {
-    alert('비밀번호를 입력하세요!!!');
+    Swal.fire({
+      type: 'warning',
+      title: '비밀번호를 입력하세요!!!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     $("#password").focus();
     return false;
   }
@@ -593,18 +648,27 @@ $('#sb-password-change').click((e) => {
           pwdCheck = 1;
           var newPwd = $('#newPassword').val();
           var verifyPwd = $('#verifyPassword').val();
-          
           savePassword(newPwd, verifyPwd);
           
         } else{
-          alert('비밀번호가 틀렸습니다!!');
+          Swal.fire({
+            type: 'error',
+            title: '비밀번호가 틀렸습니다!!',
+            showConfirmButton: false,
+            timer: 1500
+          });
           $('#password').focus();
           
           pwdCheck = 0;
         }
       },
       error : function(error) {
-          alert("error : " + error);
+          Swal.fire({
+            type: 'error',
+            title: '비밀번호 변경에 실패했습니다!',
+            showConfirmButton: false,
+            timer: 1500
+          });
       }
   });
 });
@@ -612,12 +676,22 @@ $('#sb-password-change').click((e) => {
 function savePassword(newPwd, verifyPwd) {
   
   if (newPwd.length == 0 || verifyPwd.length == 0) {
-    alert('변경할 비밀번호를 입력하세요!!');
+    Swal.fire({
+      type: 'warning',
+      title: '변경할 비밀번호를 입력하세요!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     return false;
   }
   
   if (newPwd != verifyPwd || pwdCheck == 0) {
-    alert('변경할 수 없습니다..\n 비밀번호를 확인하세요!');
+    Swal.fire({
+      type: 'error',
+      title: '변경할 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하세요!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     return false;
     
   } else {
@@ -629,11 +703,22 @@ function savePassword(newPwd, verifyPwd) {
         password: newPwd
       },
       success: function() {
-        alert("비밀번호 변경 성공!")
-        location.href = 'index.html';
+        Swal.fire({
+          type: 'success',
+          title: '비밀번호가 변경되었습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          location.reload();
+        });
       },
       error: function() {
-        alert("변경 실패!!!")
+        Swal.fire({
+          type: 'error',
+          title: '비밀번호 변경에 실패했습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     });
   }
@@ -653,7 +738,12 @@ $('#sb-member-withdrawal').click((e) => {
   
   // 비밀번호 확인
   if (password.length == 0 || password == undefined) {
-    alert('비밀번호를 입력하세요!!!');
+    Swal.fire({
+      type: 'warning',
+      title: '비밀번호를 입력하세요!!!',
+      showConfirmButton: false,
+      timer: 1500
+    });
     $("#withdrawal").focus();
     return false;
   }
@@ -668,17 +758,40 @@ $('#sb-member-withdrawal').click((e) => {
       success : function(data) {
         
         if(data.result == true){
-          alert('정말 탈퇴하실 건가요??');
+          Swal.fire({
+            title: '정말 탈퇴 하시겠습니까?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '확인',
+            cancelButtonText: '취소'
+          }).then((result) => {
+            
+            if (result.value) {
+              
+            }
+          });
           
           
         } else{
-          alert('비밀번호가 틀렸습니다!!');
+          Swal.fire({
+            type: 'error',
+            title: '비밀번호가 틀렸습니다!',
+            showConfirmButton: false,
+            timer: 1500
+          });
           $('#withdrawal').focus();
           
         }
       },
       error : function(error) {
-          alert("error : " + error);
+          Swal.fire({
+            type: 'error',
+            title: '회원 탈퇴에 실패했습니다!',
+            showConfirmButton: false,
+            timer: 1500
+          });
       }
   });
   
@@ -688,7 +801,7 @@ $('#sb-member-withdrawal').click((e) => {
 
 
 
-//inquiry
+// inquiry
 $('#inqryForm-btn').click((e) => {
   e.preventDefault();
   $('.sspctForm-Format').addClass('std-invisible');
@@ -715,7 +828,12 @@ $('#inqryAdd-btn').click((e) => {
       suspectPersonNo: $(sspctNo).val()
     },
     success: function(data){
-      alert('문의 글 등록 성공!!');
+      Swal.fire({
+        type: 'success',
+        title: '문의 글을 보냈습니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
       $('#inqryModal').modal('hide');
     }
   });
