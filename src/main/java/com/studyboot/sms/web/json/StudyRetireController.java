@@ -215,15 +215,16 @@ public class StudyRetireController {
 
                 }else {
                   count = retireMap.get(retireNo);
-                  retireMap.put(retireNo, ++count);
+                  retireMap.put(retireNo, ++count); // 몇번멤버가 몇번 카운트 했느지 
                 }
               }
 
             } //in for
           } //out for
-
+          
+                            // 작업만하고 리턴값은 없음              
           retireMap.forEach((Integer no, Integer countValue) ->{
-
+                                //  key         value
             if(countValue == retireeRateList.size()) {
               for(RateRequire i : retireeList) {
                 if(no == i.getMemberNo())

@@ -29,13 +29,13 @@ $(document.body).bind('loaded-nav', () => {
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + nos,
       function(obj) {
 
-    if(obj.study.photo === 'default.jpg') {
-  
-      $('#study-img').attr('src', '/studyboot/upload/images/mystudy/default.jpg');
-    } else {
+//    if(obj.study.photo === 'default.jpg') {
+//  
+//      $('#study-img').attr('src', '/studyboot/upload/images/mystudy/default.jpg');
+//    } else {
      
       $('#study-img').attr('src', '/studyboot/upload/images/mystudy/thumbnail.' + obj.study.photo + '.jpg');
-    }
+//    }
     var stdMemberListTemplateSrc = $('#study-memberList').html();
     var stdMemberListGenerator = Handlebars.compile(stdMemberListTemplateSrc);
     $(stdMemberListGenerator(obj)).appendTo('#std-MemberList')
