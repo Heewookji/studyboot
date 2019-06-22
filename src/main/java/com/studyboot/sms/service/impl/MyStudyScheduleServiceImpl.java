@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.ScheduleDao;
+import com.studyboot.sms.dao.StudyDao;
 import com.studyboot.sms.dao.StudyMemberDao;
 import com.studyboot.sms.domain.Schedule;
 import com.studyboot.sms.service.MyStudyScheduleService;
@@ -14,11 +15,13 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
 
   ScheduleDao scheduleDao;
   StudyMemberDao studyMemberDao;
+  StudyDao studyDao;
 
   public MyStudyScheduleServiceImpl(
-      ScheduleDao scheduleDao, StudyMemberDao studyMemberDao) {
+      ScheduleDao scheduleDao, StudyMemberDao studyMemberDao, StudyDao studyDao) {
     this.scheduleDao = scheduleDao;
     this.studyMemberDao = studyMemberDao;
+    this.studyDao = studyDao;
   }
   
   @Override
@@ -45,6 +48,8 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
     
     params.put("studyNoList", studyNoList);
     List<Schedule> list = scheduleDao.findAllByAllStudy(params);
+    System.out.println(list);
+    
     //                  보라색      빨간색    하늘색     똥색       ???
     String[] colors = {"#9932CC", "#DC143C", "#B8860B", "#20B2AA", "#A0522D"};
     int colorIndex = 0;
@@ -64,8 +69,8 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
           list.get(j).setColor(colors[colorIndex]);
           continue;
         }
-        i = j - 1;
-        colorIndex++;
+        list.get(j).setColor(colors[++colorIndex]);
+        i = j;
         break;
       }
     }
@@ -74,8 +79,9 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
   
   @Override
   public Schedule get(int no) {
-    
-    return scheduleDao.findByNo(no);
+    Schedule schedule = scheduleDao.findByNo(no);
+    schedule.setStudyName(studyDao.findByNo(schedule.getStudyNo()).getName());
+    return schedule;
   }
   
   @Override
