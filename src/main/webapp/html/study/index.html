@@ -255,17 +255,17 @@
   </div>
  </div>
 
-<!--  end addmodal -->
+ <!--  end addmodal -->
 
  <!-- Breadcrumbs -->
-    <section
+ <section
   class="dzsparallaxer auto-init height-is-based-on-content use-loading"
   data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "150"}'>
   <div
    class="divimage dzsparallaxer--target w-100 g-bg-cover g-bg-white-gradient-opacity-v3--after"
    style="height: 100%; background-image: url(/studyboot/images/it.jpg);"></div>
-   
-   <div class="container text-center g-py-50--md">
+
+  <div class="container text-center g-py-50--md">
    <form class="g-width-60x--md mx-auto g-pt-110">
     <h1 class="h1 text-uppercase g-font-weight-500 g-mb-30"
      id="clsTitle"></h1>
@@ -275,8 +275,8 @@
     </div>
    </form>
   </div>
-    </section>
-    <!-- End Breadcrumbs -->
+ </section>
+ <!-- End Breadcrumbs -->
 
 
 
@@ -395,6 +395,7 @@
       <div id="stepSlider3" class="u-slider-v1-3"
        data-result-container="rateRange" data-step="0.5"
        data-default="3" data-min="0" data-max="5"></div>
+      <label class="g-pt-5">0점</label> <label class="g-pt-5 pull-right">5점</label>
      </div>
      <!-- End rate filter -->
 
@@ -517,9 +518,9 @@
        class="fa fa-asterisk g-font-size-25 g-ml-20"></i>
       </a>
      </div>
-     
-     
-     
+
+
+
      <!-- End Example Button -->
     </div>
     <!-- End Sidebar -->
@@ -573,7 +574,7 @@
        <article class="u-shadow-v11 u-shadow-v41--hover g-cursor-pointer study-view-link">
         <div class="g-bg-cover g-bg-bluegray-gradient-opacity-v1--after">
          <img class="img-fluid w-100"
-          src="/studyboot/upload/images/study/{{photo}}" alt="Image Description">
+          src="/studyboot/upload/images/mystudy/thumbnail.{{photo}}.jpg" alt="Image Description">
         </div>
         <div class="g-bg-white g-pa-20">
  <div class="rateit mb-3" id="std-rate-{{no}}"></div>
@@ -582,7 +583,12 @@
            class="u-link-v5 g-color-black g-color-primary--hover"
            href="#" data-no="{{no}}">{{name}}</a>
          </h2>
-         <p class="g-color-gray-dark-v4 g-line-height-1_8">{{goal}}</p>
+         <p class="g-color-gray-dark-v4 g-line-height-1_8" style="overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box;  
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+  width:170px;">{{goal}}</p>
      <span
           class="d-block g-color-gray-dark-v4 g-font-weight-600 g-font-size-12 text-uppercase">
           {{addressName}}</span>

@@ -69,21 +69,21 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     for(var e of obj.list){
       $('#std-rate-'+ e.no).rateit({
         // min value
-           min: 0, 
-           // max value
-           max: 5, 
-           // 'bg', 'font'
-           mode: 'font', 
-           // size of star
-           starwidth: 50, 
-           // is readonly?
-           readonly: true, 
-           // is resetable?
-           resetable: false,
-           value: e.rate
-         });
+        min: 0, 
+        // max value
+        max: 5, 
+        // 'bg', 'font'
+        mode: 'font', 
+        // size of star
+        starwidth: 50, 
+        // is readonly?
+        readonly: true, 
+        // is resetable?
+        resetable: false,
+        value: e.rate
+      });
     }
-    
+
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
   });
@@ -340,21 +340,21 @@ $(window).scroll(function(obj) {
 $(document.body).bind('loaded-list', () => {
 
   $('.study-view-link').click((e) => {
-    
-    
+
+
     location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
     + '&name=' + $(e.target).parents('.card-div').find('a').html();
-    
+
   });
 
-  
+
   $( ".study-view-link" ).hover(
           function(e) {
           }, function(e) {
           }
   );
-  
-  
+
+
 });
 
 
@@ -636,13 +636,13 @@ function nickCheck(str) {
 
 //목표체크
 $( "#goal" ).keyup(function(){
-  if($( "#goal" ).val().length > 25 ||
-          $( "#goal" ).val().length < 5 ){
+  if($( "#goal" ).val().length > 80 ||
+          $( "#goal" ).val().length < 30 ){
     $("#goal").attr("data-toggle","tooltip");
     $("#goal").attr("data-trigger","hover focus");
     $("#goal").attr("data-placement","bottom");
     $("#goal").attr("data-html", true);
-    $("#goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
+    $("#goal").attr("title","30자 이상 80자 이하의<br>목표를 입력해주세요!");
     $('#goal').tooltip('enable');
     $('#goal').tooltip('show');
   } else{
@@ -689,12 +689,12 @@ $('#init-btn').click(function(e) {
   }
 
   //목표 체크
-  if($( "#goal" ).val().length > 25 ||
-          $( "#goal" ).val().length < 5 ){
+  if($( "#goal" ).val().length > 80 ||
+          $( "#goal" ).val().length < 30 ){
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '5자 이상 25자 이하의 목표를 입력해주세요!'
+      text: '30자 이상 80자 이하의 목표를 입력해주세요!'
     });
     return;
   }

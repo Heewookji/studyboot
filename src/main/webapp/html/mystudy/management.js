@@ -136,13 +136,13 @@ $(document.body).bind('loaded-approval', () => {
 //스터디 업데이트 유효성 검사
 //목표체크
 $( "#std-goal" ).keyup(function(){
-  if($( "#std-goal" ).val().length > 25 ||
-      $( "#std-goal" ).val().length < 5 ){
+  if($( "#std-goal" ).val().length > 80 ||
+          $( "#std-goal" ).val().length < 30 ){
     $("#std-goal").attr("data-toggle","tooltip");
     $("#std-goal").attr("data-trigger","hover focus");
     $("#std-goal").attr("data-placement","bottom");
     $("#std-goal").attr("data-html", true);
-    $("#std-goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
+    $("#std-goal").attr("title","30자 이상 80자 이하의<br>목표를 입력해주세요!");
     $('#std-goal').tooltip('enable');
     $('#std-goal').tooltip('show');
   } else{
@@ -192,12 +192,12 @@ $(document.body).bind('loaded-saveData', () => {
     }
 
     //목표 체크
-    if($( "#std-goal" ).val().length > 25 ||
-        $( "#std-goal" ).val().length < 5 ){
+    if($( "#std-goal" ).val().length > 80 ||
+            $( "#std-goal" ).val().length < 30 ){
       Swal.fire({
         type: 'error',
         title: errorTitle,
-        text: '5자 이상 25자 이하의 목표를 입력해주세요!'
+        text: '30자 이상 80자 이하의 목표를 입력해주세요!'
       });
       return;
     }
