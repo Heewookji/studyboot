@@ -15,6 +15,67 @@ $( document ).ready(function() {
 });
 
 
+// 관심분야 추가 함수
+function clsAdd(value, text) {
+  $('#clsAdd-btn').unbind();
+  
+  $('#clsAdd-btn').click((e) => {
+    e.preventDefault();
+    
+    if ($('#myClsList a').length > 2) {
+      Swal.fire({
+        type: 'info',
+        title: '3가지 분야만 선택 가능합니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return false;
+    }
+    
+    $('#clsAdd-btn').addClass('std-invisible');
+    clsCheck = 1;
+    $('#myClsList').append(
+        '<a class="ui label transition visible" data-no="' + value
+        + '" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
+    
+    $('#myClsList a .delete.icon').click(function() {
+      $(this).parent().remove();
+    });
+    
+  });
+}
+
+// 활동지역 추가 함수
+function addrAdd(value, text) {
+  $('#addrAdd-btn').unbind();
+  
+  $('#addrAdd-btn').click((e) => {
+    e.preventDefault();
+    
+    if ($('#myAddrList a').length > 0) {
+      Swal.fire({
+        type: 'info',
+        title: '하나의 지역만 선택 가능합니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return false;
+    }
+    
+    $('#addrAdd-btn').addClass('std-invisible');
+    addrCheck = 1;
+    $('#myAddrList').append(
+        '<a class="ui label transition visible" data-no="' + value
+        + '" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
+    
+    $('#myAddrList a .delete.icon').click(function() {
+      $(this).parent().remove();
+    });
+    
+  });
+}
+
+
 // 카테고리 분류 로딩 함수
 function loadModalCategory() {
 
@@ -84,23 +145,9 @@ function loadModalCategory() {
                     if (text == undefined) {
                       return false;
                     }
-                    if ($('#myClsList a').length > 2) {
-                      Swal.fire({
-                        type: 'info',
-                        title: '3가지 분야만 선택 가능합니다!',
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      return false;
-                    }
-                    clsCheck = 1;
-                    $('#myClsList').append(
-                        '<a class="ui label transition visible" data-no="' + value
-                        + '" style="display: inline-block !important;">'+text+'<i class="delete icon"></i></a>');
                     
-                    $('#myClsList a .delete.icon').click(function() {
-                      $(this).parent().remove();
-                    });
+                    $('#clsAdd-btn').removeClass('std-invisible');
+                    clsAdd(value, text);
                   }
                 });
 
@@ -190,24 +237,11 @@ function loadModalAddress() {
                     if (text == undefined) {
                       return false;
                     }
-                    if ($('#myAddrList a').length > 0) {
-                      Swal.fire({
-                        type: 'info',
-                        title: '하나의 지역만 선택 가능합니다!',
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      return false;
-                    }
-                    addrCheck = 1;
-                    $('#myAddrList').append(
-                        '<a class="ui label transition visible" data-no="' + value
-                        + '" style="display: inline-block !important;">'
-                        + laddrName + ' ' + maddrName + ' ' + text +'<i class="delete icon"></i></a>');
                     
-                    $('#myAddrList a .delete.icon').click(function() {
-                      $(this).parent().remove();
-                    });
+                    var fullName = laddrName + ' ' + maddrName + ' ' + text;
+                    
+                    $('#addrAdd-btn').removeClass('std-invisible');
+                    addrAdd(value, fullName);
                   }
                 });
 
@@ -360,7 +394,7 @@ $('#sb-cls-edit').click(() => {
     $(this).parent().remove();
   });
   
-  $('#clsDrop div .ui.dropdown').removeClass('invisible');
+  $('#clsDrop').removeClass('std-invisible');
   $('#sb-cls-edit').addClass('std-invisible');
   $('#sb-cls-cancel').removeClass('std-invisible');
 });
@@ -371,7 +405,7 @@ $('#sb-cls-cancel').click(() => {
   
   loadModalCategory();
   
-  $('#clsDrop div .ui.dropdown').addClass('invisible');
+  $('#clsDrop').addClass('std-invisible');
   $('#sb-cls-cancel').addClass('std-invisible');
   $('#sb-cls-edit').removeClass('std-invisible');
   clsCheck = undefined;
@@ -384,7 +418,7 @@ $('#sb-addr-edit').click(() => {
     $(this).parent().remove();
   });
   
-  $('#addrDrop div .ui.dropdown').removeClass('invisible');
+  $('#addrDrop').removeClass('std-invisible');
   $('#sb-addr-edit').addClass('std-invisible');
   $('#sb-addr-cancel').removeClass('std-invisible');
 });
@@ -399,7 +433,7 @@ $('#sb-addr-cancel').click(() => {
   
   loadModalAddress();
   
-  $('#addrDrop div .ui.dropdown').addClass('invisible');
+  $('#addrDrop').addClass('std-invisible');
   $('#sb-addr-cancel').addClass('std-invisible');
   $('#sb-addr-edit').removeClass('std-invisible');
   addrCheck = undefined;
@@ -675,25 +709,16 @@ $('#sb-password-change').click((e) => {
 
 function savePassword(newPwd, verifyPwd) {
   
-  if (newPwd.length == 0 || verifyPwd.length == 0) {
-    Swal.fire({
-      type: 'warning',
-      title: '유효하지 않은 비밀번호입니다!',
-      showConfirmButton: false,
-      timer: 1500
-    });
-    return false;
-  }
-  
-  if (newPwd != verifyPwd || pwdCheck == 0) {
+  if (newPwd.length == 0 || verifyPwd.length == 0 || 
+      newPwd != verifyPwd || pwdCheck == 0) {
     Swal.fire({
       type: 'error',
-      title: '변경할 비밀번호가 일치하지 않습니다.\n비밀번호를 확인하세요!',
+      title: '변경할 비밀번호를 다시 확인하세요!',
       showConfirmButton: false,
       timer: 1500
     });
     return false;
-    
+  
   } else {
     $.ajax({
       url:'../../app/json/member/update',
@@ -729,6 +754,7 @@ $('#sb-password-cancel').click((e) => {
   e.preventDefault();
   location.reload();
 });
+
 
 // 회원 탈퇴 이벤트
 $('#sb-member-withdrawal').click((e) => {
@@ -769,7 +795,9 @@ $('#sb-member-withdrawal').click((e) => {
           }).then((result) => {
             
             if (result.value) {
-              
+              memberWithdrawal();
+            } else {
+              location.reload();
             }
           });
           
@@ -795,9 +823,11 @@ $('#sb-member-withdrawal').click((e) => {
       }
   });
   
-  
 });
 
+function memberWithdrawal() {
+  
+}
 
 
 
