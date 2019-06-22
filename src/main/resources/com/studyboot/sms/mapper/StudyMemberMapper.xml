@@ -40,6 +40,7 @@
     <result column="end_date" property="endDate" />
     <result column="leader" property="leader" />
     <result column="atn_pct" property="attendance" />
+    <result column="member_id" property="memberNo" />
 
     <result column="std_name" property="studyName" />
 
@@ -138,6 +139,7 @@
     sm.end_date,
     sm.leader,
     sm.atn_pct,
+    m.member_id,
     m.nick_name,
     m.rate,
     m.photo
@@ -196,18 +198,18 @@
     #{leader}
     );
   </insert>
-  
+
   <update id="attendPercentUpdate" parameterType="map">
-    update 
-      sms_std_member
+    update
+    sms_std_member
     set
-      atn_pct = #{percent}
+    atn_pct = #{percent}
     where
-      std_id = #{studyNo}
-        and
-      member_id = #{memberNo}
+    std_id = #{studyNo}
+    and
+    member_id = #{memberNo}
   </update>
-  
+
 </mapper>
 
 

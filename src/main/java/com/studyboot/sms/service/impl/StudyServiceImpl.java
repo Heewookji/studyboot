@@ -146,8 +146,6 @@ public class StudyServiceImpl implements StudyService {
     study.setMemberAge(totalAge);
     study.setAttendance(totalAttendance);
 
-
-
     //활동요일을 변환해준다.
     HashMap<String,Integer> dayMap = new HashMap<>();
     dayMap.put("월",1);
@@ -185,7 +183,10 @@ public class StudyServiceImpl implements StudyService {
     study.setTotalDateDiff(totalDiff);
     study.setCurrentDateDiff(currentDiff);
 
+    
     return study;
+    
+  
   }
 
 

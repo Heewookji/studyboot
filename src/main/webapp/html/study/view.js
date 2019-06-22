@@ -103,7 +103,6 @@ function loadData(no) {
 
     $('#personnel').html(data.nowPersonnel + '/' + data.personnel );
 
-
     //지도 출력
 //  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 //  var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -524,27 +523,29 @@ function loadChart(no) {
 
       });
 
+      var attendance = 0;
+      for(var attendVal of data.attendanceValue){
+        attendance += attendVal;
+      }
+      attendance = attendance/data.attendanceValue.length;
+      
+      $('#attendAverage').html(Math.round(attendance) + "%");
 
       var attendRateChart = $("#attendRateChart");
 
-      var attendLabel = new Array();
-
-      for(var sm of data.study.studyMembers){
-        attendLabel.push(sm.member.nickName);
-      }
 
       var attendRateChartShow = new Chart(attendRateChart, {
         type: 'line',
         data: {
-          labels: attendLabel,
+          labels: data.attendanceLabel,
           datasets: [{
             backgroundColor: [
-              'rgba(255, 99, 132, 0.1)',
-              'rgba(54, 162, 235, 0.1)',
-              'rgba(255, 206, 86, 0.1)',
-              'rgba(75, 192, 192, 0.1)',
-              'rgba(153, 102, 255, 0.1)',
-              'rgba(255, 159, 64, 0.1)'
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)',
+              'rgba(153, 102, 255, 0.7)',
+              'rgba(255, 159, 64, 0.7)'
               ],
               borderColor: [
                 'rgba(255, 99, 132, 0.7)',
@@ -555,13 +556,12 @@ function loadChart(no) {
                 'rgba(255, 159, 64, 0.7)'
                 ],
                 pointHoverRadius: 20,
-                pointRadius: 15,
+                pointRadius: 10,
                 fill: false,
                 borderWidth: 1,
                 showLine: false,
-                data: [
-                  10, 20, 30, 40 , 20, 0
-                  ],
+                data: data.attendanceValue
+                ,
           }]
         },
         options: {

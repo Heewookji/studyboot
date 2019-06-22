@@ -110,7 +110,8 @@ CREATE TABLE sms_member (
   tel       VARCHAR(30)  NULL     COMMENT '전화', -- 전화
   photo     VARCHAR(255) NULL     DEFAULT "defaultphoto" COMMENT '사진', -- 사진
   admin     BOOLEAN      NOT NULL DEFAULT false COMMENT '관리자여부', -- 관리자여부
-  adr_lms   CHAR(6)      NULL     COMMENT '활동지역' -- 활동지역
+  adr_lms   CHAR(6)      NULL     COMMENT '활동지역', -- 활동지역
+  withdraw  BOOLEAN      NOT NULL DEFAULT false COMMENT '탈퇴여부' -- 탈퇴여부
 )
 COMMENT '회원';
 

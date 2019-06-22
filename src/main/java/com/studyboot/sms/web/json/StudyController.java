@@ -151,17 +151,22 @@ public class StudyController {
       HashMap<String, Integer> studyChartCount = studyService.chartCount(study.getRate());
 
       study.setStudyMembers(studyMemberService.findStudyMember(no));
-      
+
       //스터디원들의 출석데이터 총합과 평균완료율구하기
-      
+
       double finish = 0;
       double drop = 0;
       double exile = 0;
       double sum = 0;
-      
+      ArrayList<Integer> attendanceValue = new ArrayList<>();
+      ArrayList<String> attendanceLabel = new ArrayList<>();
+
       for(StudyMember sm : study.getStudyMembers()) {
-        
+
         List<StudyMember> rateInfos = studyMemberService.rateInfo(sm.getMemberNo());
+
+        double memberAttendance = 0;
+        int rateInfoSize = 0;
 
         for(StudyMember rateInfo : rateInfos ) {
           switch(rateInfo.getEndNo()) {
@@ -169,16 +174,29 @@ public class StudyController {
             case 2: drop++; break;
             case 3: exile++; break;
           }
+
+          if(rateInfo.getEndNo() != 0 ) {
+            memberAttendance += rateInfo.getAttendance();
+            rateInfoSize++;
+          }
         }
 
+        memberAttendance = memberAttendance/rateInfoSize;
+
+        //완료 스터디가 하나도 없을경우
+        if(rateInfoSize != 0 ) {
+          attendanceValue.add((int)memberAttendance);
+          attendanceLabel.add(sm.getMember().getNickName());
+        }
       }
-      
+
       sum = finish + drop + exile;
       int finishPercentage = (int) ((finish/sum)*100);
-      
-      
+
+
       System.out.println(finishPercentage);
-      
+      System.out.println(attendanceValue);
+      System.out.println(attendanceLabel);
 
       content.put("study", study);
       content.put("percentCount",studyService.percentCount(study.getRate()));
@@ -187,7 +205,9 @@ public class StudyController {
       content.put("dropCount", drop);
       content.put("exileCount", exile);
       content.put("finishPercentage", finishPercentage);
-      
+      content.put("attendanceValue", attendanceValue);
+      content.put("attendanceLabel", attendanceLabel);
+
       content.put("status", "success");
 
     } catch (Exception e) {
