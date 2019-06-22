@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadDetail(no) {
   $.getJSON('../../app/json/mystudyschedule/detail?no=' + no, function(obj) {
 
+    console.log(obj);
     var startM = obj.start.substring(5, 7); // 월
     var endM = obj.end.substring(5, 7); // 월
     var startD = obj.start.substring(8, 10); // 일
@@ -50,6 +51,7 @@ function loadDetail(no) {
     var endT = obj.end.substring(11, 16); // 시간
 
     $('#schedleDetailTitle').html(obj.title);
+    $('#study-name').html(obj.studyName);
     $('#event-detail').html(obj.memo);
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
