@@ -154,14 +154,18 @@ public class StudyController {
 
       //스터디원들의 출석데이터 총합과 평균완료율구하기
 
-      double finish = 0;
-      double drop = 0;
-      double exile = 0;
-      double sum = 0;
+    double finishPercentage = 0;
+    double dropPercentage = 0;
+    double exilePercentage = 0;
+    
       ArrayList<Integer> attendanceValue = new ArrayList<>();
       ArrayList<String> attendanceLabel = new ArrayList<>();
 
       for(StudyMember sm : study.getStudyMembers()) {
+        
+        double finish = 0;
+        double drop = 0;
+        double exile = 0;
 
         List<StudyMember> rateInfos = studyMemberService.rateInfo(sm.getMemberNo());
 
@@ -180,38 +184,61 @@ public class StudyController {
             rateInfoSize++;
           }
         }
-
+        
+        
+        
+        
         memberAttendance = memberAttendance/rateInfoSize;
 
-        //완료 스터디가 하나도 없을경우
+        //종료 스터디가 있을경우에만.
         if(rateInfoSize != 0 ) {
+          
+          //한명의 종료퍼센트 정보
+          double oneSum = finish + drop + exile;
+          double oneFinishPercentage = (finish/oneSum)*100;
+          double oneDropPercentage = (drop/oneSum)*100;
+          double oneExilePercentage = (exile/oneSum)*100;
+          
+          finishPercentage += oneFinishPercentage;
+          dropPercentage += oneDropPercentage;
+          exilePercentage += oneExilePercentage;
+          
+          
+          System.out.println( sm.getMember().getNickName());
+          System.out.println( oneFinishPercentage  );
+          System.out.println( oneDropPercentage  );
+          System.out.println( oneExilePercentage  );
+          System.out.println("-----------------------");
+          
           attendanceValue.add((int)memberAttendance);
           attendanceLabel.add(sm.getMember().getNickName());
         }
       }
 
-      sum = finish + drop + exile;
-      int finishPercentage = (int) ((finish/sum)*100);
-
+      //종료 정보가 있는 스터디회원의 수 (attendanceLabel.size()) 로 나눈다.
+      finishPercentage = finishPercentage/attendanceLabel.size();
+      dropPercentage = dropPercentage/attendanceLabel.size();
+      exilePercentage = exilePercentage/attendanceLabel.size();
 
       System.out.println(finishPercentage);
+      System.out.println(dropPercentage);
+      System.out.println(exilePercentage);
+      
+      
       System.out.println(attendanceValue);
       System.out.println(attendanceLabel);
 
       content.put("study", study);
       content.put("percentCount",studyService.percentCount(study.getRate()));
       content.put("studyChartCount", studyChartCount);
-      content.put("finishCount", finish);
-      content.put("dropCount", drop);
-      content.put("exileCount", exile);
       content.put("finishPercentage", finishPercentage);
+      content.put("dropPercentage", dropPercentage);
+      content.put("exilePercentage", exilePercentage);
       content.put("attendanceValue", attendanceValue);
       content.put("attendanceLabel", attendanceLabel);
-
       content.put("status", "success");
 
     } catch (Exception e) {
-
       content.put("status", "fail");
     }
 

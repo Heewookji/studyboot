@@ -206,12 +206,12 @@
 
     <div class="row justify-content-md-center g-pt-30">
 
-     <p class="text-left lead g-font-size-25 g-pb-30">
+     <p class="text-left lead g-font-size-25 g-pb-60">
       전체 스터디 중 상위 <span class="g-color-primary" id="percentCount">
       </span>평점의 스터디입니다!
      </p>
 
-     <div class="col-md-auto g-pb-100" style="width: 75%;">
+     <div class="col-md-auto g-pb-100" style="width: 55%;">
       <canvas id="studyRateChart"></canvas>
      </div>
     </div>
@@ -261,7 +261,7 @@
 
    <div class="col-md-4 right ui rail">
 
-    <div id="board-div">
+    <div id="board-div" hidden>
 
      <div
       class="ui sticky g-brd-around g-brd-gray-light-v3 g-brd-top-2 g-brd-primary-top g-line-height-1_8 g-rounded-3 g-pr-30  g-pl-30  g-pt-30 g-pb-50"
@@ -286,12 +286,16 @@
        </span>
 
       </div>
-      <div class="ui  dropdown memberDropdown mb-5">
-       <div class="text" id="studyLeader"></div>
+      <!-- <div class="ui  dropdown memberDropdown mb-5">
+        <div class="text" id="studyLeader"></div> 
        <i class="dropdown icon"></i>
        <div class="menu" id="studyMemberList"></div>
+      </div> 
+      <div class="text" id="studyLeader"></div>-->
+      
+      <div id="studyMemberList" class="mb-5">
       </div>
-      <div class="pull-right" id="memberRate"></div>
+<!--       <div class="pull-right" id="memberRate"></div> -->
       <!-- End members -->
 
       <!-- Tags -->
@@ -371,11 +375,22 @@
 
 
  <!-- 지역 대분류 -->
- <script id="view-studymember" type="text/x-handlebars-template">
+ <script id="view-studymember2" type="text/x-handlebars-template">
 {{#each studyMembers}}
     <div class="item"  data-value="{{rate}}">
        <img class="ui avatar image" src="/studyboot/upload/images/member/{{photo}}">{{member.nickName}} 
     </div>
+{{/each}}
+</script>
+
+<!-- 지역 대분류 -->
+ <script id="view-studymember" type="text/x-handlebars-template">
+{{#each list}}
+<div class="g-pb-5">
+       <img class=" rounded-circle g-width-30" src="/studyboot/upload/images/member/{{photo}}"><span class="g-pl-10">{{member.nickName}}</span> <div class="pull-right">
+<div class="rateit g-pl-20 studyMemberRate" data-rateit-readonly="true"data-rateit-mode="font" style="font-size: 20px"data-rateit-resetable="false" data-rateit-value="{{rate}}"></div>
+</div>
+</div>
 {{/each}}
 </script>
 
@@ -488,7 +503,6 @@
  <script src="../../Unify/assets/js/custom.js"></script>
  <script src="../header.js"></script>
  <script src="../footer.js"></script>
- <script src="chartUtil.js"></script>
  <script src="view.js"></script>
  <script>
   <!-- JS Plugins Init. -->

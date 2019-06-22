@@ -134,7 +134,8 @@
       member_id = #{value}
   </delete>
   
-   <insert id="insert" parameterType="member">
+   <insert id="insert" parameterType="member" 
+   useGeneratedKeys="true" keyColumn="member_id" keyProperty="no">
    insert 
    into 
    sms_member(

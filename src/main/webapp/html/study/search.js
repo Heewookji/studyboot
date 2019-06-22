@@ -53,14 +53,8 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
             'rateValue=' + rateValue, 'keyword=' + keyword, 'dayNo=' + dayNo);
 
-    if(keyword != undefined && obj.rowCount != 0){
-      $('#clsTitle').text(obj.rowCount + "개의 검색결과");
-
-      $('#clsTitle').next('div').find('small').html('<small class="form-text g-opacity-0_8 g-font-size-default">지금 바로 해당 분야의 마음 맞는 사람들을 찾아보세요!</small>');
-    } else{
-      $('#clsTitle').text('찾으시는 스터디가 없네요..');
-      $('#clsTitle').next('div').find('small').html('<small class="form-text g-opacity-0_8 g-font-size-default">지금 직접 만들어보는 것은 어떨까요?    <a href="#" data-toggle="modal" data-target="#stdAddModal">    Go!</a></small>');
-    }
+    $('#clsTitle').text(obj.rowCount + "개의 검색결과");
+    $('#clsTitle').next('div').find('small').html('<small class="form-text g-opacity-0_8 g-font-size-default">지금 바로 해당 분야의 마음 맞는 사람들을 찾아보세요!</small>');
 
     // keyword 검색된 스터디 개수 알려준다.(기존 분류제목에)
     // 현재 끝페이지까지 왔고, 처음 출력이 아니라면
@@ -76,25 +70,25 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     }
 
     $(cardGenerator(obj)).appendTo(tbody);
-    
+
     for(var e of obj.list){
       $('#std-rate-'+ e.no).rateit({
         // min value
-           min: 0, 
-           // max value
-           max: 5, 
-           // 'bg', 'font'
-           mode: 'font', 
-           // size of star
-           starwidth: 50, 
-           // is readonly?
-           readonly: true, 
-           // is resetable?
-           resetable: false,
-           value: e.rate
-         });
+        min: 0, 
+        // max value
+        max: 5, 
+        // 'bg', 'font'
+        mode: 'font', 
+        // size of star
+        starwidth: 50, 
+        // is readonly?
+        readonly: true, 
+        // is resetable?
+        resetable: false,
+        value: e.rate
+      });
     }
-    
+
 
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
@@ -342,20 +336,20 @@ $(window).scroll(function(obj) {
 $(document.body).bind('loaded-list', () => {
 
   $('.study-view-link').click((e) => {
-    
-    
+
+
     location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
     + '&name=' + $(e.target).parents('.card-div').find('a').html();
-    
+
   });
 
-  
+
   $( ".study-view-link" ).hover(
           function(e) {
           }, function(e) {
           }
   );
-  
+
 });
 
 
@@ -372,6 +366,9 @@ $(document.body).bind('loaded-categorytitle', () => {
     if($('.lcheck' + $(this).val()).is(":checked")){
       $(this).closest('div').next().find('input').prop('checked',true);
 
+      for(var c of $(this).closest('div').next().find('input')){
+        clsNo = jQuery.grep(clsNo, function(value) { return value != $(c).val(); });
+      }      
       for(var c of $(this).closest('div').next().find('input')){
         clsNo.push($(c).val());
       }
@@ -408,11 +405,7 @@ $(document.body).bind('loaded-smalltitle', () => {
     } else {
       var index = clsNo.indexOf($(this).val());
       clsNo.splice(index,1);
-
-      if($(this).parent().parent().find('input:checked').length == 0){
-
-        $(this).closest('div').parent().prev().find('input').prop('checked',false);
-      }
+      $(this).closest('div').parent().prev().find('input').prop('checked',false);
     }
     console.log(clsNo);
     searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -612,13 +605,13 @@ function nickCheck(str) {
 
 //목표체크
 $( "#goal" ).keyup(function(){
-  if($( "#goal" ).val().length > 25 ||
-          $( "#goal" ).val().length < 5 ){
+  if($( "#goal" ).val().length > 80 ||
+          $( "#goal" ).val().length < 30 ){
     $("#goal").attr("data-toggle","tooltip");
     $("#goal").attr("data-trigger","hover focus");
     $("#goal").attr("data-placement","bottom");
     $("#goal").attr("data-html", true);
-    $("#goal").attr("title","5자 이상 25자 사이로<br>목표를 입력해주세요!");
+    $("#goal").attr("title","30자 이상 80자 이하의<br>목표를 입력해주세요!");
     $('#goal').tooltip('enable');
     $('#goal').tooltip('show');
   } else{
@@ -665,12 +658,12 @@ $('#init-btn').click(function(e) {
   }
 
 //목표 체크
-  if($( "#goal" ).val().length > 25 ||
-          $( "#goal" ).val().length < 5 ){
+  if($( "#goal" ).val().length > 80 ||
+          $( "#goal" ).val().length < 30 ){
     Swal.fire({
       type: 'error',
       title: errorTitle,
-      text: '5자 이상 25자 이하의 목표를 입력해주세요!'
+      text: '30자 이상 80자 이하의 목표를 입력해주세요!'
     });
     return;
   }

@@ -434,6 +434,10 @@ insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_d
 values(24, 2, 2, 20190101, 20190510, 70);
 insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
 values(25, 2, 3, 20190101, 20190610, 100);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(26, 2, 2, 20190101, 20190610, 100);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(27, 2, 2, 20190101, 20190610, 100);
 
 insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
 values(30, 3, 1, 20190101, 20190110, 90);
@@ -447,6 +451,8 @@ insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_d
 values(34, 3, 2, 20190101, 20190510, 80);
 insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
 values(35, 3, 3, 20190101, 20190610, 100);
+insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
+values(37, 3, 1, 20190101, 20190610, 100);
 
 insert into sms_std_member(std_id, member_id, end_state_cls_id, join_date, end_date, atn_pct)
 values(40, 4, 1, 20190101, 20190115, 90);

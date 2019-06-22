@@ -85,21 +85,19 @@ function loadData(no) {
       $('#dayProgressText').html(Math.round((data.totalDateDiff - data.currentDateDiff)/data.totalDateDiff * 100) + '%');
     }
 
-    // 값을 넣어준 뒤, 프로그래스 바를 초기화해야 실행이 원활하게 된다.
-    var horizontalProgressBars = $.HSCore.components.HSProgressBar.init('.js-hr-progress-bar', {
-      direction: 'horizontal',
-      indicatorSelector: '.js-hr-progress-bar-indicator'
-    });
-    $(studyMemberGenerator(data)).appendTo('#studyMemberList');
+    var studyMemberList = new Object();
+    studyMemberList.list = new Array();
     
-
     for(var member of data.studyMembers){
       if(member.leader){
-        $('#studyLeader').append('<img class="ui avatar image" src="/studyboot/upload/images/member/'+ member.photo  + '">'+ member.member.nickName);
-        $('#applyModal').find('img').attr('src', '/studyboot/upload/images/member/'+ member.photo);
-        $("#memberRate").html('<div class="rateit g-pl-20" id="studyMemberRate" data-rateit-readonly="true"data-rateit-mode="font" style="font-size: 20px"data-rateit-resetable="false" data-rateit-value="'+member.rate+'"></div>')
+        $('#studyMemberList').append('<div class="g-pb-5"><img class="rounded-circle g-width-30" src="/studyboot/upload/images/member/'+ member.photo  + '"><span class="g-pl-10"><u>'+member.member.nickName+'</u></span><div class="pull-right"><div class="rateit g-pl-20 studyMemberRate" data-rateit-readonly="true"data-rateit-mode="font" style="font-size: 20px"data-rateit-resetable="false" data-rateit-value="'+member.rate+'"></div></div>');
+      } else{
+        studyMemberList.list.push(member);
       }
     }
+    
+    
+    $(studyMemberGenerator(studyMemberList)).appendTo('#studyMemberList');
 
     $('#personnel').html(data.nowPersonnel + '/' + data.personnel );
 
@@ -274,47 +272,34 @@ function loadChart(no) {
 
 
       var studyRateChartShow = new Chart(studyRateChart, {
-        type: 'line',
+        type: 'bar',
         data: {
-          labels: ['0점', '1점', '2점', '3점','4점', '5점'],
+          labels: ['백분위'],
           datasets: [{
-            borderColor: gradientStroke,
-            pointBorderColor: gradientStroke,
-            pointBackgroundColor: gradientStroke,
-            pointHoverBackgroundColor: gradientStroke,
-            pointHoverBorderColor: gradientStroke,
-            pointHoverRadius: 10,
-            pointHoverBorderWidth: 1,
-            pointRadius: 0,
-            fill: true,
-            backgroundColor: gradientFill,
+            borderColor: 'rgba(54, 162, 235, 0.4)',
+            backgroundColor: 'rgba(54, 162, 235, 0.1)',
             borderWidth: 1,
+            fill: true,
             data: [
-              0, studyChartCountData.rateOne, studyChartCountData.rateTwo, 
-              studyChartCountData.rateThree , studyChartCountData.rateFour, 0
+             100 - data.percentCount
               ]
           },
           {
-            borderColor: gradientStroke,
-            pointBorderColor: gradientStroke,
-            pointBackgroundColor: gradientStroke,
-            pointHoverBackgroundColor: gradientStroke,
-            pointHoverBorderColor: gradientStroke,
-            pointHoverRadius: 10,
-            pointHoverBorderWidth: 1,
-            pointRadius: 8,
-            backgroundColor: gradientFill,
+            borderColor: 'rgba(54, 162, 235, 0.7)',
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
             borderWidth: 1,
             fill: true,
-            data: [{
-              x: 2,
-              y: 20
-            }],
+            data: [
+              data.percentCount
+            ],
           }
           ]
         },
         options: {
           legend: false,
+          plugins: {
+            labels: false
+          },
           elements: {
             point: {
               pointStyle: 'circle'
@@ -322,7 +307,7 @@ function loadChart(no) {
           },
           responsive: true,
           title: {
-            display: true,
+            display: false,
             text: '스터디 평균 평점 그래프',
             fontStyle: 'normal',
             fontSize: 14,
@@ -341,12 +326,13 @@ function loadChart(no) {
               gridLines: {
                 display: true,
                 drawBorder: true,
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               scaleLabel: {
                 display: false,
                 labelString: 'Month'
-              }
+              },
+              stacked: true,
             }],
             yAxes: [{
               gridLines: {
@@ -360,7 +346,8 @@ function loadChart(no) {
               },
               ticks: {
                 display: false
-              }
+              },
+              stacked: true,
             }]
           }
         }
@@ -473,7 +460,7 @@ function loadChart(no) {
         }
       });
 
-      $('#finishAverage').html(data.finishPercentage + "% ");
+      $('#finishAverage').html(Math.round(data.finishPercentage) + "% ");
 
       var finishRateChart = $("#finishRateChart");
 
@@ -483,7 +470,7 @@ function loadChart(no) {
         data: {
 
           datasets: [{
-            data: [data.finishCount, data.dropCount, data.exileCount],
+            data: [Math.round(data.finishPercentage), Math.round(data.dropPercentage), Math.round(data.exilePercentage)],
             backgroundColor: [
               'rgba(54, 162, 235, 0.1)',
               'rgba(255, 99, 132, 0.1)',
@@ -497,7 +484,6 @@ function loadChart(no) {
                 borderWidth: 1
           }],
 
-          // These labels appear in the legend and in the tooltips when hovering different arcs
           labels: [
             '완료',
             '탈퇴',
@@ -507,7 +493,7 @@ function loadChart(no) {
         options: {
           title: {
             display: true,
-            text: '구성원 스터디 종료 정보',
+            text: '구성원 스터디 달성율',
             fontStyle: 'normal',
             fontSize: 14,
             padding: 20
@@ -528,7 +514,7 @@ function loadChart(no) {
         attendance += attendVal;
       }
       attendance = attendance/data.attendanceValue.length;
-      
+
       $('#attendAverage').html(Math.round(attendance) + "%");
 
       var attendRateChart = $("#attendRateChart");
@@ -611,6 +597,8 @@ function loadChart(no) {
                 labelString: 'Value'
               },
               ticks: {
+                min: 0,
+                max: 100,
                 display: false
               }
             }]
@@ -625,6 +613,14 @@ function loadChart(no) {
 
 $(document.body).bind('loaded-studyInfo', () => {
 
+  $("#board-div").attr('hidden',false);
+  
+  // 값을 넣어준 뒤, 프로그래스 바를 초기화해야 실행이 원활하게 된다.
+  var horizontalProgressBars = $.HSCore.components.HSProgressBar.init('.js-hr-progress-bar', {
+    direction: 'horizontal',
+    indicatorSelector: '.js-hr-progress-bar-indicator'
+  });
+  
   $('.ui.dropdown.memberDropdown')
   .dropdown({
     on: 'hover',
@@ -633,7 +629,7 @@ $(document.body).bind('loaded-studyInfo', () => {
     }
   });
 
-  $('#studyMemberRate').rateit();
+  $('.studyMemberRate').rateit();
 
   //차트를 준비합니다람쥐.
   loadChart(studyNo);
