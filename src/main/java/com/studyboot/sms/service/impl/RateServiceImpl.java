@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.MemberDao;
 import com.studyboot.sms.dao.RateDao;
 import com.studyboot.sms.domain.Member;
-import com.studyboot.sms.domain.Rate;
 import com.studyboot.sms.domain.RateLog;
 import com.studyboot.sms.service.RateService;
 

@@ -259,7 +259,11 @@ function loadData() {
   $.getJSON('../../app/json/member/detail',
       function(data) {
     
-    window.user = data;
+    if (data.status == 'fail') {
+      location.href ='/studyboot/html/auth/login.html';
+    }
+    
+    window.user = data.member;
     console.log(user);
     
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
@@ -825,8 +829,23 @@ $('#sb-member-withdrawal').click((e) => {
   
 });
 
+// 탈퇴
 function memberWithdrawal() {
   
+  $.getJSON('../../app/json/member/withdrawal',
+      function(obj) {
+    
+    if (obj.status == 'success') {
+      
+      Swal.fire({
+        type: 'success',
+        title: '정상적으로 회원 탈퇴 되었습니다!',
+      }).then((result) => {
+        location.href = '/studyboot/';
+      });
+    }
+    
+  });
 }
 
 

@@ -231,6 +231,22 @@ public class MemberServiceImpl implements MemberService {
     return newbie;
   }
 
+  
+  @Override
+  public int withdrawal(int no) {
+    
+    Member member = new Member();
+
+    member.setNo(no);
+    member.setEmail(UUID.randomUUID().toString().replace("-", "").substring(0, 15));
+    member.setNickName("Nick_" + UUID.randomUUID().toString().replace("-", "").substring(0, 6));
+    member.setPassword(UUID.randomUUID().toString().replace("-", "").substring(0, 10));
+    member.setName("탈퇴회원");
+    member.setPhoto("defaultphoto");
+    member.setWithdraw(true);
+    
+    return  memberDao.withdrawalUpdate(member);
+  }
 
 }
 

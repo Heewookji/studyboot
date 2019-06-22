@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,8 @@ import net.coobird.thumbnailator.name.Rename;
 @RequestMapping("/json/member")
 public class MemberController {
 
+  final static Logger logger = LogManager.getLogger(AuthController.class);
+  
   @Autowired MemberService memberService;
   @Autowired StudyMemberService studyMemberService;
   @Autowired RateService rateService;
@@ -44,14 +48,20 @@ public class MemberController {
   @Autowired AddressService addressService;
   
   
-  /*
-  @GetMapping("delete")
-  public Object delete(int no) {
+  @GetMapping("withdrawal")
+  public Object delete(HttpSession session) {
 
+    Member loginUser = (Member)session.getAttribute("loginUser");
     HashMap<String,Object> content = new HashMap<>();
+    
     try {
-      if (memberService.delete(no) == 0) 
-        throw new RuntimeException("해당 번호의 공간이 없습니다.");
+      if (memberService.withdrawal(loginUser.getNo()) == 0)
+        throw new RuntimeException("정상적으로 탈퇴되지 않았습니다.");
+      
+      logger.debug("세션 무효화시킴!");
+      logger.debug("loginUser: " + loginUser);
+      session.invalidate();
+
       content.put("status", "success");
 
     } catch (Exception e) {
@@ -60,7 +70,6 @@ public class MemberController {
     }
     return content;
   }
-   */
 
   // 회원의 스터디 목록
   @GetMapping("mystudy")
@@ -113,6 +122,13 @@ public class MemberController {
   public Object detail(HttpSession session) {
     
     Member loginUser = (Member) session.getAttribute("loginUser");
+    Map<String,Object> content = new HashMap<>();
+    
+    if (loginUser == null) {
+      content.put("status", "fail");
+      return content;
+    }
+    
     Member member = memberService.get(loginUser.getNo());
     member.setClsList(new ArrayList<>());
     
@@ -139,8 +155,10 @@ public class MemberController {
     if (member.getPhoto() == null) {
       member.setPhoto("defaultphoto");
     }
+    content.put("status", "success");
+    content.put("member", member);
     
-    return member;
+    return content;
   }
   
 

@@ -7,6 +7,9 @@ pickedStudyTemplateSrc = $('#picked-study-template').html(),
 pickedStudyGenerator = Handlebars.compile(pickedStudyTemplateSrc),
 appliedinit = false,
 pickedinit = false,
+doingStudyList,
+appliedStudyList,
+pickedStudyList,
 user;
 
 
@@ -25,16 +28,38 @@ function loadData() {
   $.getJSON('../../app/json/member/detail',
       function(data) {
     
+    if (data.status == 'fail') {
+      location.href ='/studyboot/html/auth/login.html';
+    }
+    
     console.log(data);
-    window.user = data;
+    window.user = data.member;
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');
     $('#inqryName').html(user.nickName);
     $('#inqryNo').val(user.no);
   });
 };
 
-
-
+// 별점 렌더링 함수
+function initStar(list) {
+  for(var e of list){
+    $('#std-rate-'+ e.no).rateit({
+      // min value
+      min: 0, 
+      // max value
+      max: 5, 
+      // 'bg', 'font'
+      mode: 'font', 
+      // size of star
+      starwidth: 50, 
+      // is readonly?
+      readonly: true, 
+      // is resetable?
+      resetable: false,
+      value: e.rate
+    });
+  }
+}
 
 // 로그인 유저의 스터디 데이터 가져오기
 function loadList() {
@@ -42,53 +67,33 @@ function loadList() {
   $.getJSON('../../app/json/member/mystudy', function(obj) {
     
     console.log(obj);
+    doingStudyList = obj.doingStudyList;
+    appliedStudyList = obj.appliedStudyList;
+    pickedStudyList = obj.pickedStudyList;
     
-    // 별점 준비용 함수
-    function initStar(list) {
-      for(var e of list){
-        $('#std-rate-'+ e.no).rateit({
-          // min value
-          min: 0, 
-          // max value
-          max: 5, 
-          // 'bg', 'font'
-          mode: 'font', 
-          // size of star
-          starwidth: 50, 
-          // is readonly?
-          readonly: true, 
-          // is resetable?
-          resetable: false,
-          value: e.rate
-        });
-      }
-    }
-    
-    if (obj.doingStudyList == null) {
+    if (doingStudyList == null) {
       studyIsEmpty('doingStudy');
       
     } else {
       $(doingStudyGenerator(obj)).appendTo($('#doingStudy .js-carousel'));
-      initStar(obj.doingStudyList);
+      initStar(window.doingStudyList);
     }
     
-    if (obj.appliedStudyList == null) {
+    if (appliedStudyList == null) {
       studyIsEmpty('appliedStudy');
       
     } else {
       $(appliedStudyGenerator(obj)).appendTo($('#appliedStudy .js-carousel'));
-      initStar(obj.appliedStudyList);
+      initStar(window.appliedStudyList);
     }
     
-    if (obj.pickedStudyList == null) {
+    if (pickedStudyList == null) {
       studyIsEmpty('pickedStudy');
       
     } else {
       $(pickedStudyGenerator(obj)).appendTo($('#pickedStudy .js-carousel'));
-      initStar(obj.pickedStudyList);
+      initStar(window.pickedStudyList);
     }
-    
-    
     
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-loadList');
@@ -141,23 +146,28 @@ $(document.body).bind('loaded-loadList', () => {
 // 진행중인 스터디 탭 이벤트 발생 시
 $('#doingStudyTab').on('shown.bs.tab', () => {
   $('#doingStudy .js-carousel').slick('unslick');
+  initStar(window.doingStudyList);
   $.HSCore.components.HSCarousel.init('#doingStudy .js-carousel');
 });
 
 // 신청한 스터디 탭 이벤트 발생 시
 $('#appliedStudyTab').on('shown.bs.tab', () => {
+  
   if (appliedinit) {
     $('#appliedStudy .js-carousel').slick('unslick');
   }
+  initStar(window.appliedStudyList);
   $.HSCore.components.HSCarousel.init('#appliedStudy .js-carousel');
   appliedinit = true;
 });
 
 // 찜한 스터디 탭 이벤트 발생 시
 $('#pickedStudyTab').on('shown.bs.tab', () => {
+  
   if (pickedinit) {
     $('#pickedStudy .js-carousel').slick('unslick');
   }
+  initStar(window.pickedStudyList);
   $.HSCore.components.HSCarousel.init('#pickedStudy .js-carousel');
   pickedinit = true;
 });

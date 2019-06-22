@@ -21,6 +21,7 @@ public interface MemberDao {
   List<String> findMemberNoByNickNameList(List<String> nickNames);
   List<Member> findAllRate();
   int updateRate(Map<String, Object> map);
+  int withdrawalUpdate(Member member);
 }
 
 

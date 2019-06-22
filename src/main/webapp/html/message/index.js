@@ -23,7 +23,7 @@ function loadData() {
   $.getJSON('../../app/json/member/detail',
       function(data) {
     
-    window.user = data;
+    window.user = data.member;
     console.log(user);
     
     $('#profilePhoto').attr('src', '/studyboot/upload/images/member/thumbnail.' + user.photo + '.jpg');

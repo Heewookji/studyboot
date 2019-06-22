@@ -19,33 +19,21 @@
     <result column="photo" property="photo"/>
     <result column="admin" property="admin"/>
     <result column="adr_lms" property="address"/>
+    <result column="withdraw" property="withdraw"/>
     <collection property="cls" ofType="string">
     <result column="cls_lms"/>
     </collection>
   </resultMap>
   
-  <sql id="default-columns">
-      member_id, 
-      nick_name, 
-      name,
-      email, 
-      tel,
-      admin,
-      adr_lms,
-      join_date,
-      rate,
-      photo,
-      birth
-  </sql>
   
   <select id="findAllRate" resultMap="memberMap">
     select
-      m.member_id,
-      m.rate,
-      c.cls_lms
+      member_id,
+      rate,
     from
-      sms_member m
-      left outer join sms_member_cls c on c.member_id = m.member_id
+      sms_member
+    where
+      withdraw = 0
   </select>
   
   <select id="findByKeyword" resultType="int" parameterType="map">
@@ -188,6 +176,7 @@
       m.rate,
       m.photo,
       m.birth,
+      m.withdraw,
       c.cls_lms
     from 
       sms_member m
@@ -222,6 +211,21 @@
         rate = #{rateAvg}
       where member_id = #{no}
   </update>
+  
+  <!-- 회원 탈퇴시 삭제하지 않고 정보만 업데이트 해준다. -->
+  <update id="withdrawalUpdate" parameterType="member">
+    update sms_member
+      set
+        nick_name = #{nickName},
+        name = #{name},
+        email = #{email},
+        photo = #{photo},
+        pwd = password(#{password}),
+        withdraw = #{withdraw}
+      where
+        member_id = #{no}
+  </update>
+  
   
 </mapper>
 

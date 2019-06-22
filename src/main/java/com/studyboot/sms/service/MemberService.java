@@ -22,5 +22,6 @@ public interface MemberService {
   List<Study> pickedStudyList(int no);
   int add(Member member);
   List<String> findMemberNoByNickNameList(String[] nickNames);
+  int withdrawal(int no);
   
 }

@@ -91,36 +91,42 @@ function loadRateData() {
         month2 = '0' + month2;  // ex) 02 ~ 06
       }
       
-      // 평점 기록에서 데이터 뽑아내기
-      data.rateLog.forEach(function(item) {
-        if (year2 == item.updateDate.split('-')[0] && // 업데이트 날짜의 년을 비교
-             month2 == item.updateDate.split('-')[1]) { // 업데이트 날짜의 월을 비교
-          
-          rateDataList.splice(dataIndex, 1, item.rate); // 순서대로 채운다.
-        }
-      });
+      if (data.rateLog != null) {
+        
+        // 평점 기록에서 데이터 뽑아내기
+        data.rateLog.forEach(function(item) {
+          if (year2 == item.updateDate.split('-')[0] && // 업데이트 날짜의 년을 비교
+               month2 == item.updateDate.split('-')[1]) { // 업데이트 날짜의 월을 비교
+            
+            rateDataList.splice(dataIndex, 1, item.rate); // 순서대로 채운다.
+          }
+        });
+      }
       
       var atnPct = 0;
       var count = 0;
       var atnValue = 0;
       
-      // 멤버 평가 정보(종료된 스터디)에서 출석률 뽑아내기
-      data.rateInfo.forEach(function(item) {
-        if (item.endDate != null && // 종료 날짜가 null이 아닌 값만 사용
-             year2 == item.endDate.split('-')[0] && // 종료 날짜의 년을 비교
-             month2 == item.endDate.split('-')[1]) { // 종료 날짜의 월을 비교
-          
-          atnPct += item.attendance;
-          count++;
+      if (data.rateLog != null) {
+        
+        // 멤버 평가 정보(종료된 스터디)에서 출석률 뽑아내기
+        data.rateInfo.forEach(function(item) {
+          if (item.endDate != null && // 종료 날짜가 null이 아닌 값만 사용
+               year2 == item.endDate.split('-')[0] && // 종료 날짜의 년을 비교
+               month2 == item.endDate.split('-')[1]) { // 종료 날짜의 월을 비교
+            
+            atnPct += item.attendance;
+            count++;
+          }
+        });
+      
+        atnValue = atnPct / count; // 같은 달 종료된 스터디의 평균 출석률
+        if (!isNaN(atnValue)) {
+          atnDataList.splice(dataIndex, 1, atnValue);
         }
-      });
       
-      atnValue = atnPct / count; // 같은 달 종료된 스터디의 평균 출석률
-      if (!isNaN(atnValue)) {
-        atnDataList.splice(dataIndex, 1, atnValue);
+        dataIndex++;
       }
-      
-      dataIndex++;
     }
     
     console.log(rateDataList);
@@ -285,7 +291,7 @@ $(document.body).bind('loaded-rateData', () => {
       options: {
           title: {
               display: true,
-              text: '참여한 스터디'
+              text: '스터디 달성률'
           },
           legend: {
               display: false

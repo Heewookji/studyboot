@@ -30,6 +30,8 @@ public class Member implements Cloneable, Serializable {
   private boolean admin;
   private String address;
   private String addressName;
+  private boolean withdraw;
+  
   
   @Override
   public String toString() {
@@ -37,7 +39,7 @@ public class Member implements Cloneable, Serializable {
         + ", nickName=" + nickName + ", email=" + email + ", photo=" + photo + ", tel=" + tel
         + ", cls=" + cls + ", clsList=" + clsList + ", birth=" + birth + ", registeredDate="
         + registeredDate + ", admin=" + admin + ", address=" + address + ", addressName="
-        + addressName + "]";
+        + addressName + ", withdraw=" + withdraw + "]";
   }
   public int getNo() {
     return no;
@@ -128,6 +130,12 @@ public class Member implements Cloneable, Serializable {
   }
   public void setAddressName(String addressName) {
     this.addressName = addressName;
+  }
+  public boolean isWithdraw() {
+    return withdraw;
+  }
+  public void setWithdraw(boolean withdraw) {
+    this.withdraw = withdraw;
   }
   
 }
