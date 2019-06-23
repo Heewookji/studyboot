@@ -203,7 +203,7 @@ public class MyStudyScheduleController {
         // 출석체크 후 출석률 업데이트!
         int allEventNumber = myStudyScheduleService.allEventCount(studyNo); // 모든 일정의 수
 
-        HashMap<String,Object> studyNoMemberNo = new HashMap<>(); // 탈퇴 탭
+        HashMap<String,Object> studyNoMemberNo = new HashMap<>();
         studyNoMemberNo.put("studyNo", studyNo);
         studyNoMemberNo.put("memberNo", memberNo.get(i));
 

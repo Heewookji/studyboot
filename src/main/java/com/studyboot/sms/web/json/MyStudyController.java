@@ -620,6 +620,18 @@ public class MyStudyController {
 
     return content;
   }
+  
+  @GetMapping("studyName")
+  public Object getStduyName(int studyNo) {
+    
+    System.out.println("스터디번호: " + studyNo);
+    String name = myStudyService.studyName(studyNo);
+    System.out.println("스터디네임: "+ name);
+    HashMap<String,Object> content = new HashMap<>();
+    content.put("name", name);
+    content.put("status", "success");
+    return content;
+  }
 
 }
 

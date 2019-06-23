@@ -23,5 +23,6 @@ public interface MemberService {
   int add(Member member);
   List<String> findMemberNoByNickNameList(String[] nickNames);
   int withdrawal(int no);
+  int findMemberNoByNickName(String nickName);
   
 }

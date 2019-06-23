@@ -166,10 +166,14 @@ public class MemberServiceImpl implements MemberService {
       nickNameList.add(nickName);
     }
     
-    System.out.println("==========================여기여기!!여기!!여기!!여기!!");
     return memberDao.findMemberNoByNickNameList(nickNameList);
   }
 
+  @Override
+  public int findMemberNoByNickName(String nickName) {
+
+      return memberDao.findMemberNoByNickName(nickName);
+    }
 
   @Override
   public Member getFacebookMember(String token) {
