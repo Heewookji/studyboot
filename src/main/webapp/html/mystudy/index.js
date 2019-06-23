@@ -148,6 +148,7 @@ function loadList(no) {
       $("#contents").load("/studyboot/html/mystudy/view.html", function(e) {
         $('#ntc-no').attr('data-no', ntcNo);
         $('#mem-no').attr('data-mem', memNo);
+        $('#view-drop').hide();
       });
       
     });
