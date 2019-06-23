@@ -223,6 +223,7 @@ function loadDetail(no) {
     updateTitleDate = obj.title;
 
     $('#schedleDetailTitle').html(updateTitleDate);
+    $('.study-name').html(obj.studyName);
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {
       $('#study-start-date').html(startM + "월" + startD + "일 " + startT + " ~ " + endT);
     } else {
