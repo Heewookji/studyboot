@@ -117,7 +117,7 @@
   </select>
 
 
-  <!-- 스터디 탈퇴 -->
+  <!-- 스터디 탈퇴, 추방 -->
   <update id="attendUpdate" parameterType="map">
     update
     sms_std_member

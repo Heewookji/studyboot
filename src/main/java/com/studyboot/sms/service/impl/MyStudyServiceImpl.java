@@ -163,6 +163,12 @@ public class MyStudyServiceImpl implements MyStudyService {
   //
   //
 
+  
+  @Override
+  public String studyName(int studyNo) {
+    
+    return studyDao.studyName(studyNo);
+  }
 }
 
 
