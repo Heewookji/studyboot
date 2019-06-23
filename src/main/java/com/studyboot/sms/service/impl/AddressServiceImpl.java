@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.studyboot.sms.dao.AddressDao;
 import com.studyboot.sms.domain.Address;
+import com.studyboot.sms.domain.Cls;
 import com.studyboot.sms.service.AddressService;
 
 @Service
@@ -36,7 +37,15 @@ public class AddressServiceImpl implements AddressService {
         a.setAddressSmallNo("");
       a.setAddressNo(a.getAddressLargeNo()+a.getAddressMediumNo()+a.getAddressSmallNo());
     }
-
+    
+    list.sort((Address str1, Address str2)->{
+      
+      if(str2.getName().equals("서울시")) {
+        return 0;
+      }
+      return str1.getName().compareToIgnoreCase(str2.getName());
+    });
+    
     return list;
   }
 

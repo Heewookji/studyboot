@@ -184,7 +184,6 @@ $(document.body).bind('loaded-user', () => {
   });
 
 $('#exampleModalCenter').on('shown.bs.modal', function (e) {
-  alert("modal shown!");
 });
 
 

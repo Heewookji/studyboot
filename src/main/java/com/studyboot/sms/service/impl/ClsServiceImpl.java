@@ -43,6 +43,14 @@ public class ClsServiceImpl implements ClsService {
 
       c.setClsNo(c.getClsLargeNo()+c.getClsMediumNo()+c.getClsSmallNo());
     }
+    
+    list.sort((Cls str1, Cls str2)->{
+      if(str1.getName().equals("기타")) {
+        return 0;
+      }
+      return str1.getName().compareToIgnoreCase(str2.getName());
+    });
+    
 
     return list;
   }
@@ -78,7 +86,7 @@ public class ClsServiceImpl implements ClsService {
         clsParam.put("length", 6);
         outputCls.add(clsDao.findClsName(clsParam));
     }
-
+    
     return outputCls;
 
   }
