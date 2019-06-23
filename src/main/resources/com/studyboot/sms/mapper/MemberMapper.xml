@@ -206,6 +206,15 @@
       </foreach>
   </select>
   
+  <select id="findMemberNoByNickName" resultType="int" parameterType="string">
+    select 
+      member_id 
+    from 
+      sms_member
+    where
+    nick_name = #{value}
+  </select>
+  
   <update id="updateRate" parameterType="map" >
     update sms_member
       set

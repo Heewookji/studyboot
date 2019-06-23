@@ -343,6 +343,23 @@ public class StudyRetireController {
     return content;
   }
 
+  @GetMapping("deport") //추방 메서드
+  public Object deport(String nickName, int studyNo, HttpSession session) {
+ 
+    Map<String, Object> deportMap = new HashMap<>();
+    SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+    
+    int memberNo =  memberService.findMemberNoByNickName(nickName);
+    
+    deportMap.put("endNo", 3);
+    deportMap.put("endDate", format.format(new Date()));
+    deportMap.put("memberNo", memberNo);
+    deportMap.put("studyNo", studyNo);
+    
+    studyMemberService.attendUpdate(deportMap);
+    
+    return null;
+  }
 }
 
 //for(int i = 0; i < studyMemberNoList.size(); i++) {

@@ -54,6 +54,8 @@ $(document.body).bind('loaded-nav', () => {
   });
   
   
+  
+  
 });
 
 /*
@@ -81,3 +83,10 @@ $(document.body).bind('messageAddModalLoad', () => {
   });
 });
 
+
+(function (nos) {
+$.getJSON('../../app/json/MyStudy/studyName?studyNo=' + nos, function(obj) {
+	  console.log(obj.name);
+	  $('#study-name').html(obj.name);
+});
+})(nos);

@@ -19,6 +19,7 @@ public interface MemberDao {
   int clsInsert(Map<String, Object> clsData);
   int clsDelete(int no);
   List<String> findMemberNoByNickNameList(List<String> nickNames);
+  int findMemberNoByNickName(String nickName);
   List<Member> findAllRate();
   int updateRate(Map<String, Object> map);
   int withdrawalUpdate(Member member);

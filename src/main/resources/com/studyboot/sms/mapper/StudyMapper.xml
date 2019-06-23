@@ -557,6 +557,14 @@ update sms_std set
       std_id = #{studyNo}
   </update>
 
+  <select id="studyName" resultType="string" parameterType="int">
+    select 
+      name
+    from 
+      sms_std
+    where
+      std_id = #{value}
+  </select>
 </mapper>
 
 
