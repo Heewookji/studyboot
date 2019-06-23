@@ -4,6 +4,8 @@ approvalTemplateSrc = $('#approval-list').html();
 
 var approvalGenerator = Handlebars.compile(approvalTemplateSrc);
 
+
+alert(nosss);
 var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 $('#startDate').datepicker({
   uiLibrary: 'bootstrap4',
