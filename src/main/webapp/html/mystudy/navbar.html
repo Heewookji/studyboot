@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="./retire.css">
 <link rel="stylesheet" href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet" href="../../css/common.css">
-
+<link href="/studyboot/js/Semantic-UI-master/dist/components/placeholder.min.css"
+ rel="stylesheet" type="text/css">
 
  <!-- 나의 평점 -->
 <div id="sb-history"></div>
@@ -46,14 +47,12 @@
   <!-- span 태그는 해당 게시판에 게시물이 알람 -->
   
   <!-- Overall -->
-  <a 
-    class="list-group-item list-group-item-action justify-content-between" style="text-align: center;">
-     <span id="study-name" style="color: blue;"><!-- <i class="icon-home g-pos-rel g-top-1 g-mr-8">
-     </i> --></span>
+  <a class="list-group-item list-group-item-action justify-content-between" style="text-align: center;">
+     <span id="navbar-study-name" class="study-name"></span>
       <span class="u-label g-font-size-11 g-bg-gray-dark-v2 g-rounded-20 g-px-10"></span>
   </a>
   <!-- End Overall -->
-  
+
   <!-- Comments -->
   <a class="list-group-item list-group-item-action justify-content-between" id="std-board"> <span><i
       class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>게시판</span> <span
@@ -227,6 +226,12 @@
  href="#">
  <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
   신고</a></li>
+ 
+<a   id="deport-{{member.nickName}}"class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14 navList-msg study-message" 
+ style="cursor: pointer;"data-toggle="modal"  nick-name={{member.nickName}}>
+ <i class="hs-admin-trash g-font-size-18 g-color-gray-light-v6 g-mr-10 g-mr-15--md"></i>
+  추방</a></li>
+ <li>
 </ul>
  </div>
  </div>

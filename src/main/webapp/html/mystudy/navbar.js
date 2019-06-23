@@ -38,8 +38,498 @@ $(document.body).bind('loaded-nav', () => {
 //    }
     var stdMemberListTemplateSrc = $('#study-memberList').html();
     var stdMemberListGenerator = Handlebars.compile(stdMemberListTemplateSrc);
-    $(stdMemberListGenerator(obj)).appendTo('#std-MemberList')
+//    $(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
 
+    if  (obj.list.length === 1) {
+    	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+    	
+        var memberCard =
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+       "<div class='ui column stackable grid'>" +
+        "<div class='column'>" +
+         "<div class='ui raised segment'>" +
+            "<div class='ui placeholder'>" +
+              "<div class='image header rounded-circle'>" +
+                "<div class='line'></div>" +
+                "<div class='line'></div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+       "</div>" +
+      "</li>" +
+      
+      "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+      "<div class='ui column stackable grid'>" +
+       "<div class='column'>" +
+        "<div class='ui raised segment'>" +
+           "<div class='ui placeholder'>" +
+             "<div class='image header'>" +
+               "<div class='line'></div>" +
+               "<div class='line'></div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+      "</div>" +
+     "</li>" +
+     
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+     "<div class='ui column stackable grid'>" +
+      "<div class='column'>" +
+       "<div class='ui raised segment'>" +
+          "<div class='ui placeholder'>" +
+            "<div class='image header'>" +
+              "<div class='line'></div>" +
+              "<div class='line'></div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+     "</div>" +
+    "</li>"+
+    
+    "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+    "<div class='ui column stackable grid'>" +
+     "<div class='column'>" +
+      "<div class='ui raised segment'>" +
+         "<div class='ui placeholder'>" +
+           "<div class='image header'>" +
+             "<div class='line'></div>" +
+             "<div class='line'></div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+     "</div>" +
+    "</div>" +
+   "</li>"+
+   
+   "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+   "<div class='ui column stackable grid'>" +
+    "<div class='column'>" +
+     "<div class='ui raised segment'>" +
+        "<div class='ui placeholder'>" +
+          "<div class='image header'>" +
+            "<div class='line'></div>" +
+            "<div class='line'></div>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+    "</div>" +
+   "</div>" +
+  "</li>"+
+  
+  "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+  "<div class='ui column stackable grid'>" +
+   "<div class='column'>" +
+    "<div class='ui raised segment'>" +
+       "<div class='ui placeholder'>" +
+         "<div class='image header'>" +
+           "<div class='line'></div>" +
+           "<div class='line'></div>" +
+         "</div>" +
+       "</div>" +
+     "</div>" +
+   "</div>" +
+  "</div>" +
+ "</li>"+
+ 
+ "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+ "<div class='ui column stackable grid'>" +
+  "<div class='column'>" +
+   "<div class='ui raised segment'>" +
+      "<div class='ui placeholder'>" +
+        "<div class='image header'>" +
+          "<div class='line'></div>" +
+          "<div class='line'></div>" +
+        "</div>" +
+      "</div>" +
+    "</div>" +
+  "</div>" +
+ "</div>" +
+"</li>";
+        
+       $("#std-MemberList").append(memberCard);
+        
+      } else if(obj.list.length === 2) {
+    	  
+    	   	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+        	
+            var memberCard =
+         "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+           "<div class='ui seven column stackable grid'>" +
+            "<div class='column'>" +
+             "<div class='ui raised segment'>" +
+                "<div class='ui placeholder'>" +
+                  "<div class='image header'>" +
+                    "<div class='line'></div>" +
+                    "<div class='line'></div>" +
+                  "</div>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+           "</div>" +
+          "</li>" +
+          
+          "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+          "<div class='ui column stackable grid'>" +
+           "<div class='column'>" +
+            "<div class='ui raised segment'>" +
+               "<div class='ui placeholder'>" +
+                 "<div class='image header'>" +
+                   "<div class='line'></div>" +
+                   "<div class='line'></div>" +
+                 "</div>" +
+               "</div>" +
+             "</div>" +
+           "</div>" +
+          "</div>" +
+         "</li>" +
+         
+         "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+         "<div class='ui column stackable grid'>" +
+          "<div class='column'>" +
+           "<div class='ui raised segment'>" +
+              "<div class='ui placeholder'>" +
+                "<div class='image header'>" +
+                  "<div class='line'></div>" +
+                  "<div class='line'></div>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+         "</div>" +
+        "</li>"+
+        
+        "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+        "<div class='ui column stackable grid'>" +
+         "<div class='column'>" +
+          "<div class='ui raised segment'>" +
+             "<div class='ui placeholder'>" +
+               "<div class='image header'>" +
+                 "<div class='line'></div>" +
+                 "<div class='line'></div>" +
+               "</div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+        "</div>" +
+       "</li>"+
+       
+       "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+       "<div class='ui column stackable grid'>" +
+        "<div class='column'>" +
+         "<div class='ui raised segment'>" +
+            "<div class='ui placeholder'>" +
+              "<div class='image header'>" +
+                "<div class='line'></div>" +
+                "<div class='line'></div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+       "</div>" +
+      "</li>"+
+      
+      "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+      "<div class='ui column stackable grid'>" +
+       "<div class='column'>" +
+        "<div class='ui raised segment'>" +
+           "<div class='ui placeholder'>" +
+             "<div class='image header'>" +
+               "<div class='line'></div>" +
+               "<div class='line'></div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+      "</div>" +
+     "</li>";
+    	  
+            $("#std-MemberList").append(memberCard);
+            
+      } else if(obj.list.length === 3) {
+    	  
+  	   	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+      	
+          var memberCard =
+       "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+         "<div class='ui seven column stackable grid'>" +
+          "<div class='column'>" +
+           "<div class='ui raised segment'>" +
+              "<div class='ui placeholder'>" +
+                "<div class='image header'>" +
+                  "<div class='line'></div>" +
+                  "<div class='line'></div>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+         "</div>" +
+        "</li>" +
+        
+        "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+        "<div class='ui column stackable grid'>" +
+         "<div class='column'>" +
+          "<div class='ui raised segment'>" +
+             "<div class='ui placeholder'>" +
+               "<div class='image header'>" +
+                 "<div class='line'></div>" +
+                 "<div class='line'></div>" +
+               "</div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+        "</div>" +
+       "</li>" +
+       
+       "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+       "<div class='ui column stackable grid'>" +
+        "<div class='column'>" +
+         "<div class='ui raised segment'>" +
+            "<div class='ui placeholder'>" +
+              "<div class='image header'>" +
+                "<div class='line'></div>" +
+                "<div class='line'></div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+       "</div>" +
+      "</li>"+
+      
+      "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+      "<div class='ui column stackable grid'>" +
+       "<div class='column'>" +
+        "<div class='ui raised segment'>" +
+           "<div class='ui placeholder'>" +
+             "<div class='image header'>" +
+               "<div class='line'></div>" +
+               "<div class='line'></div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+      "</div>" +
+     "</li>"+
+     
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+     "<div class='ui column stackable grid'>" +
+      "<div class='column'>" +
+       "<div class='ui raised segment'>" +
+          "<div class='ui placeholder'>" +
+            "<div class='image header'>" +
+              "<div class='line'></div>" +
+              "<div class='line'></div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+     "</div>" +
+    "</li>" ;
+          
+          $("#std-MemberList").append(memberCard);
+  	  
+    } else if(obj.list.length === 4) {
+  	  
+	   	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+    	
+        var memberCard =
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+       "<div class='ui seven column stackable grid'>" +
+        "<div class='column'>" +
+         "<div class='ui raised segment'>" +
+            "<div class='ui placeholder'>" +
+              "<div class='image header'>" +
+                "<div class='line'></div>" +
+                "<div class='line'></div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+       "</div>" +
+      "</li>" +
+      
+      "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+      "<div class='ui column stackable grid'>" +
+       "<div class='column'>" +
+        "<div class='ui raised segment'>" +
+           "<div class='ui placeholder'>" +
+             "<div class='image header'>" +
+               "<div class='line'></div>" +
+               "<div class='line'></div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+      "</div>" +
+     "</li>" +
+     
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+     "<div class='ui column stackable grid'>" +
+      "<div class='column'>" +
+       "<div class='ui raised segment'>" +
+          "<div class='ui placeholder'>" +
+            "<div class='image header'>" +
+              "<div class='line'></div>" +
+              "<div class='line'></div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+     "</div>" +
+    "</li>"+
+    
+    "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+    "<div class='ui column stackable grid'>" +
+     "<div class='column'>" +
+      "<div class='ui raised segment'>" +
+         "<div class='ui placeholder'>" +
+           "<div class='image header'>" +
+             "<div class='line'></div>" +
+             "<div class='line'></div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+     "</div>" +
+    "</div>" +
+   "</li>";
+        
+        $("#std-MemberList").append(memberCard);
+	  
+  } else if (obj.list.length === 5) {
+    	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+    	
+      var memberCard =
+    	  
+//    	  "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+//    "<div class='ui raised segment'>"+
+//      "<div class='row'>"+
+//       "<div class='col-2'>"+
+//        "<div class='ui placeholder rounded-circle g-height-40 g-width-40'>"+
+//         "<div class='image'></div>"+
+//        "</div>"+
+//       "</div>"+
+//       "<div class='col g-pl-20'>"+
+//        "<div class='ui placeholder'>"+
+//         "<div class='line' style='margin:9px 0px 9px 42px'></div>"+
+//         "<div class='line'></div>"+
+//         "</div>"+
+//        "</div>"+
+//       "</div>"+
+//      "</div>"+
+//     "</div>"+
+//     "</li>" +
+     
+   "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+     "<div class='ui olumn stackable grid'>" +
+      "<div class='column'>" +
+       "<div class='ui raised segment'>" +
+          "<div class='ui placeholder'>" +
+            "<div class='image header'>" +
+              "<div class='line'></div>" +
+              "<div class='line'></div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+     "</div>" +
+    "</li>" +
+    
+    "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+    "<div class='ui column stackable grid'>" +
+     "<div class='column'>" +
+      "<div class='ui raised segment'>" +
+         "<div class='ui placeholder'>" +
+           "<div class='image header'>" +
+             "<div class='line'></div>" +
+             "<div class='line'></div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+     "</div>" +
+    "</div>" +
+   "</li>" +
+   
+   "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+   "<div class='ui column stackable grid'>" +
+    "<div class='column'>" +
+     "<div class='ui raised segment'>" +
+        "<div class='ui placeholder'>" +
+          "<div class='image header'>" +
+            "<div class='line'></div>" +
+            "<div class='line'></div>" +
+          "</div>" +
+        "</div>" +
+      "</div>" +
+    "</div>" +
+   "</div>" +
+  "</li>";
+      
+      $("#std-MemberList").append(memberCard);
+      
+    } else if (obj.list.length === 6) {
+    	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+    	
+        var memberCard =
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+       "<div class='ui column stackable grid'>" +
+        "<div class='column'>" +
+         "<div class='ui raised segment'>" +
+            "<div class='ui placeholder'>" +
+              "<div class='image header'>" +
+                "<div class='line'></div>" +
+                "<div class='line'></div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+       "</div>" +
+      "</li>" +
+      
+      "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+      "<div class='ui column stackable grid'>" +
+       "<div class='column'>" +
+        "<div class='ui raised segment'>" +
+           "<div class='ui placeholder'>" +
+             "<div class='image header'>" +
+               "<div class='line'></div>" +
+               "<div class='line'></div>" +
+             "</div>" +
+           "</div>" +
+         "</div>" +
+       "</div>" +
+      "</div>" +
+     "</li>";
+        
+        $("#std-MemberList").append(memberCard);
+        
+      }   else if (obj.list.length === 7) {
+      	$(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
+    	
+        var memberCard =
+     "<li class='g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1'>"+
+       "<div class='ui column stackable grid'>" +
+        "<div class='column'>" +
+         "<div class='ui raised segment'>" +
+            "<div class='ui placeholder'>" +
+              "<div class='image header'>" +
+                "<div class='line'></div>" +
+                "<div class='line'></div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>" +
+       "</div>" +
+      "</li>";
+        
+        $("#std-MemberList").append(memberCard);
+        
+      } else {
+    	  $("#std-MemberList").append(memberCard);
+      }
+    
+    
      $(document.body).trigger('messageAddModalLoad');
     
     // 평점 꽂아주기 가입한 스터디 회원이 핸들바스를 통해 꽂힌 다음 모달창을 꽂아 준다.
@@ -83,10 +573,10 @@ $(document.body).bind('messageAddModalLoad', () => {
   });
 });
 
-
 (function (nos) {
 $.getJSON('../../app/json/MyStudy/studyName?studyNo=' + nos, function(obj) {
 	  console.log(obj.name);
-	  $('#study-name').html(obj.name);
+	  //$('#navbar-study-name').html(obj.name);
+	  //$('.study-name').html(obj.name);
 });
 })(nos);
