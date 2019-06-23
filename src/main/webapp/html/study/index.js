@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 16,
+pageSize = 12,
 addressNo,
 clsNo,
 rateValue = 3,
@@ -10,7 +10,6 @@ keyword,
 dayNo,
 errorTitle = '오! 이런..',
 dayCheckList = $('.day-checkbox input'),
-tbody = $('#card-div'),
 //card 리스트 출력 - 스터디 목록
 cardTemplateSrc = $('#card-template').html(),
 cardGenerator = Handlebars.compile(cardTemplateSrc),
@@ -28,9 +27,20 @@ templateSrcMediumAddress = $('#tr-template-madr').html(),
 trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 소분류
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
-trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
+trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress)
+nullCardTemplateSrc = $('#nullcard-template').html(),
+nullCardGenerator = Handlebars.compile(nullCardTemplateSrc)
+; 
 
 
+
+function sleep (delay) {
+  var start = new Date().getTime();
+  while (new Date().getTime() < start + delay);
+}
+function cardShow (element) {
+  $(element).shape('flip back');
+}
 
 
 //JSON 형식의 데이터 목록 가져오기
@@ -47,6 +57,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
           function(obj) {
 
 
+
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
             'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
@@ -60,29 +71,47 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     // 서버에서 넘겨준 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
     pageNo = obj.pageNo;
 
-    if (pageNo == 0){
-      return;
+
+
+    var inactive = $(".sides .side").not( '.active' );
+
+    if(pageNo == 0) {
+      for(var i = 0; i < pageSize; i++){
+        $(nullCardGenerator()).appendTo(inactive[i]);
+      }
+    } else{ 
+      if(obj.list.length == pageSize){
+        for(var i = 0; i < obj.list.length; i++){
+          $(cardGenerator(obj.list[i])).appendTo(inactive[i]);
+        }
+      }else{
+        for(var i = 0; i < obj.list.length; i++){
+          $(cardGenerator(obj.list[i])).appendTo(inactive[i]);
+        }
+        for(var i = obj.list.length; i < pageSize; i++){
+          $(nullCardGenerator()).appendTo(inactive[i]);
+        }
+      }
+      for(var e of obj.list){
+        $(".sides .side").not( '.active' ).find('#std-rate-'+e.no).rateit({
+          // min value
+          min: 0, 
+          // max value
+          max: 5, 
+          // 'bg', 'font'
+          mode: 'font', 
+          // size of star
+          starwidth: 50, 
+          // is readonly?
+          readonly: true, 
+          // is resetable?
+          resetable: false,
+          value: e.rate
+        });
+      }
     }
 
-    $(cardGenerator(obj)).appendTo(tbody);
-
-    for(var e of obj.list){
-      $('#std-rate-'+ e.no).rateit({
-        // min value
-        min: 0, 
-        // max value
-        max: 5, 
-        // 'bg', 'font'
-        mode: 'font', 
-        // size of star
-        starwidth: 50, 
-        // is readonly?
-        readonly: true, 
-        // is resetable?
-        resetable: false,
-        value: e.rate
-      });
-    }
+    
 
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
@@ -339,10 +368,17 @@ $(window).scroll(function(obj) {
 //스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
 $(document.body).bind('loaded-list', () => {
 
+  for(var el of $('.shape')){
+    cardShow(el);
+  }
+
+  $(".rateit").rateit();
+
+
   $('.study-view-link').click((e) => {
 
 
-    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
+    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('span.viewClick').attr("data-no")
     + '&name=' + $(e.target).parents('.card-div').find('a').html();
 
   });
@@ -365,6 +401,7 @@ $(document.body).bind('loaded-categorytitle', () => {
 
   $('.mcls-btn').click(function(e) {
 
+    $('.sides .side').not( '.active' ).html('');
 
     $('.mcls-btn').removeClass("g-color-primary");
     $('.mcls-btn').addClass("g-color-main");
@@ -372,9 +409,9 @@ $(document.body).bind('loaded-categorytitle', () => {
     $('.scls-btn').addClass("g-color-main");
 
     pageNo = 1; // 페이지 초기화
-    tbody.html(''); // 스터디 목록 초기화
     clsNo = $(e.target).attr('data-no'); // 카테고리 중분류 분류번호
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+
 
     $(e.target).removeClass("g-color-main");
     $(e.target).addClass("g-color-primary");
@@ -408,7 +445,7 @@ $(document.body).bind('loaded-smalltitle', () => {
 
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+    $('.sides .side').not( '.active' ).html('');
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 
@@ -427,11 +464,14 @@ $(document.body).bind('loaded-smalltitle', () => {
 
 //필터 - 지역 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-largeAddress', () => {
+
   $('.ladr-btn').click(function(e) {
+
+
 
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+    $('.sides .side').not( '.active' ).html('');
     $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#mediumAddressButton').html('시군구<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 중분류 이름 초기화
@@ -453,7 +493,7 @@ $(document.body).bind('loaded-mediumAddress', () => {
   $('.madr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+    $('.sides .side').not( '.active' ).html('');
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#smallAddressButton').html('동읍면<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 이름 초기화
     $('#smallAddressButton').removeClass('g-color-primary');
@@ -471,7 +511,7 @@ $(document.body).bind('loaded-smallAddress', () => {
   $('.sadr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+    $('.sides .side').not( '.active' ).html('');
     $('#smallAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 버튼 이름 변경
     $('#smallAddressButton').removeClass('g-color-main');
     $('#smallAddressButton').addClass('g-color-primary');
@@ -489,7 +529,7 @@ $('#large-tag').click(function(e) {
   $('#accordion-mcls .u-accordion__header a').addClass('g-color-main');
   e.preventDefault();
   pageNo = 1;
-  tbody.html('');
+  $('.sides .side').not( '.active' ).html('');
   clsNo = largeClsNo;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   $('#small-tag').remove();
@@ -505,7 +545,7 @@ $(document.body).bind('loaded-medium-tag', () => {
     $('.scls-btn').addClass("g-color-main");
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+    $('.sides .side').not( '.active' ).html('');
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $('#small-tag').remove();
@@ -542,7 +582,7 @@ $('#clearAddr').click(function(e){
   $('#smallAddressButton').removeClass('g-color-primary');
   $('#smallAddressButton').addClass('g-color-main');
   pageNo = 1;
-  tbody.html('');
+  $('.sides .side').not( '.active' ).html('');
   addressNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -552,7 +592,7 @@ $('#clearDay').click(function(e){
 
   $('.day-checkbox input').prop('checked',false);
   pageNo = 1;
-  tbody.html('');
+  $('.sides .side').not( '.active' ).html('');
   dayNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -562,7 +602,7 @@ $('#rateRange').on('DOMSubtreeModified', function() {
   if($('#rateRange').html().length >= 1){
     console.log($('#rateRange').html());
     pageNo = 1;
-    tbody.html('');
+    $('.sides .side').not( '.active' ).html('');
     rateValue = $('#rateRange').html();
     $.ajaxSetup({ async:false });
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -591,7 +631,7 @@ $('.day-checkbox input').change(function(e) {
   dayNo = sum;
 
   pageNo = 1; // 페이지 초기화
-  tbody.html(''); // 스터디 목록 초기화
+  $('.sides .side').not( '.active' ).html('');
 
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });

@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
 pageNo = 1,
-pageSize = 16,
+pageSize = 12,
 addressNo,
 clsNo = [],
 rateValue = 3,
