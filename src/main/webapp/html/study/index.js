@@ -7,6 +7,7 @@ rateValue = 3,
 largeClsNo,
 clsTitle,
 keyword,
+scrolled = false,
 dayNo,
 errorTitle = '오! 이런..',
 dayCheckList = $('.day-checkbox input'),
@@ -28,16 +29,16 @@ trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 소분류
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
 trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress)
+//빈카드 생성기
 nullCardTemplateSrc = $('#nullcard-template').html(),
-nullCardGenerator = Handlebars.compile(nullCardTemplateSrc)
+nullCardGenerator = Handlebars.compile(nullCardTemplateSrc),
+//무한스크롤 카드 생성기
+addCardTemplateSrc = $('#addcard-template').html(),
+addCardGenerator = Handlebars.compile(addCardTemplateSrc)
 ; 
 
 
 
-function sleep (delay) {
-  var start = new Date().getTime();
-  while (new Date().getTime() < start + delay);
-}
 function cardShow (element) {
   $(element).shape('flip back');
 }
@@ -56,6 +57,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
           function(obj) {
 
+    var inactive = $(".sides .side").not( '.active' );
 
 
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
@@ -68,18 +70,16 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     if (pageNo > obj.totalPage) {
       return;
     }
+
+
     // 서버에서 넘겨준 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
     pageNo = obj.pageNo;
 
 
 
-    var inactive = $(".sides .side").not( '.active' );
+    //일반 리스팅일때.
+    if(pageNo == 1){
 
-    if(pageNo == 0) {
-      for(var i = 0; i < pageSize; i++){
-        $(nullCardGenerator()).appendTo(inactive[i]);
-      }
-    } else{ 
       if(obj.list.length == pageSize){
         for(var i = 0; i < obj.list.length; i++){
           $(cardGenerator(obj.list[i])).appendTo(inactive[i]);
@@ -109,14 +109,87 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
           value: e.rate
         });
       }
+
+
+
+    } else {
+      if(pageNo == 0 &&
+              scrolled == true){
+        return;
+      }
+      //아예 결과값이 없을때.
+      if(pageNo == 0 &&
+              scrolled == false ) {
+        for(var i = 0; i < pageSize; i++){
+          $(nullCardGenerator()).appendTo(inactive[i]);
+        }
+        
+      } else{
+
+        //무한 스크롤일때.
+        //리스팅된 개수만큼 카드를 추가하고,돌린 후, 레이팅 초기화한다.
+        for(var e of obj.list){
+          $(addCardGenerator(e)).appendTo("#card-div");
+        }
+
+        for(var e of obj.list){
+          $(".sides .side").not( '.active' ).find('#std-rate-'+e.no).rateit({
+            // min value
+            min: 0, 
+            // max value
+            max: 5, 
+            // 'bg', 'font'
+            mode: 'font', 
+            // size of star
+            starwidth: 50, 
+            // is readonly?
+            readonly: true, 
+            // is resetable?
+            resetable: false,
+            value: e.rate
+          });
+        }
+        for(var e of obj.list){
+          cardShow($("#shape"+e.no));
+        }
+        $(document.body).trigger('loaded-addlist');
+        return;
+      }
     }
-
-    
-
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
   });
 };
+
+
+
+//스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
+$(document.body).bind('loaded-list', () => {
+
+  for(var el of $('.shape')){
+    cardShow(el);
+  }
+
+  $(".rateit").rateit();
+
+  $('.study-view-link').click((e) => {
+    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('span.viewClick').attr("data-no")
+    + '&name=' + $(e.target).parents('.card-div').find('a').html();
+  });
+
+});
+
+//스터디 스크롤 추가목록 로딩 완료 후 실행될 수 있는 이벤트
+$(document.body).bind('loaded-addlist', () => {
+  $(".rateit").rateit();
+
+  $('.study-view-link').click((e) => {
+    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('span.viewClick').attr("data-no")
+    + '&name=' + $(e.target).parents('.card-div').find('a').html();
+  });
+
+});
+
 
 
 
@@ -358,41 +431,6 @@ if (param) {
   });
 }
 
-//스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
-$(window).scroll(function(obj) {
-  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    loadList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-  }
-});
-
-//스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
-$(document.body).bind('loaded-list', () => {
-
-  for(var el of $('.shape')){
-    cardShow(el);
-  }
-
-  $(".rateit").rateit();
-
-
-  $('.study-view-link').click((e) => {
-
-
-    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('span.viewClick').attr("data-no")
-    + '&name=' + $(e.target).parents('.card-div').find('a').html();
-
-  });
-
-
-  $( ".study-view-link" ).hover(
-          function(e) {
-          }, function(e) {
-          }
-  );
-
-
-});
-
 
 //카테고리 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-categorytitle', () => {
@@ -401,7 +439,10 @@ $(document.body).bind('loaded-categorytitle', () => {
 
   $('.mcls-btn').click(function(e) {
 
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
 
     $('.mcls-btn').removeClass("g-color-primary");
     $('.mcls-btn').addClass("g-color-main");
@@ -445,7 +486,12 @@ $(document.body).bind('loaded-smalltitle', () => {
 
     e.preventDefault();
     pageNo = 1;
+
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 
@@ -471,7 +517,13 @@ $(document.body).bind('loaded-largeAddress', () => {
 
     e.preventDefault();
     pageNo = 1;
+    
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    
+    
     $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#mediumAddressButton').html('시군구<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 중분류 이름 초기화
@@ -493,7 +545,12 @@ $(document.body).bind('loaded-mediumAddress', () => {
   $('.madr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
+    
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#smallAddressButton').html('동읍면<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 이름 초기화
     $('#smallAddressButton').removeClass('g-color-primary');
@@ -511,7 +568,12 @@ $(document.body).bind('loaded-smallAddress', () => {
   $('.sadr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
+    
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    
     $('#smallAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 버튼 이름 변경
     $('#smallAddressButton').removeClass('g-color-main');
     $('#smallAddressButton').addClass('g-color-primary');
@@ -529,7 +591,12 @@ $('#large-tag').click(function(e) {
   $('#accordion-mcls .u-accordion__header a').addClass('g-color-main');
   e.preventDefault();
   pageNo = 1;
+  
+  //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
+  $('.added').remove();
+  scrolled = false;
+  
   clsNo = largeClsNo;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   $('#small-tag').remove();
@@ -545,7 +612,12 @@ $(document.body).bind('loaded-medium-tag', () => {
     $('.scls-btn').addClass("g-color-main");
     e.preventDefault();
     pageNo = 1;
+    
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $('#small-tag').remove();
@@ -582,7 +654,12 @@ $('#clearAddr').click(function(e){
   $('#smallAddressButton').removeClass('g-color-primary');
   $('#smallAddressButton').addClass('g-color-main');
   pageNo = 1;
+  
+  //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
+  $('.added').remove();
+  scrolled = false;
+  
   addressNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -592,7 +669,12 @@ $('#clearDay').click(function(e){
 
   $('.day-checkbox input').prop('checked',false);
   pageNo = 1;
+  
+  //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
+  $('.added').remove();
+  scrolled = false;
+  
   dayNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -602,7 +684,12 @@ $('#rateRange').on('DOMSubtreeModified', function() {
   if($('#rateRange').html().length >= 1){
     console.log($('#rateRange').html());
     pageNo = 1;
+    
+    //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    
     rateValue = $('#rateRange').html();
     $.ajaxSetup({ async:false });
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -631,8 +718,12 @@ $('.day-checkbox input').change(function(e) {
   dayNo = sum;
 
   pageNo = 1; // 페이지 초기화
+  
+  //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
-
+  $('.added').remove();
+  scrolled = false;
+  
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
@@ -846,11 +937,16 @@ $('#init-btn').click(function(e) {
     }
   });
 
-
 });
 
 
-
+//스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
+$(window).scroll(function(obj) {
+  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    scrolled = true;
+    loadList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  }
+});
 
 
 
