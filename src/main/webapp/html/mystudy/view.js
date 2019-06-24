@@ -8,7 +8,6 @@ $(document).ready(function() {
     //사용자 정보 받아오기
     $.getJSON('../../app/json/MyStudy/user?',
         function(obj) {
-
       user = obj.user;
     });
 

@@ -345,7 +345,7 @@ public class StudyRetireController {
 
   @GetMapping("deport") //추방 메서드
   public Object deport(String nickName, int studyNo, HttpSession session) {
- 
+    Map<String, Object> content = new HashMap<>();
     Map<String, Object> deportMap = new HashMap<>();
     SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
     
@@ -356,13 +356,18 @@ public class StudyRetireController {
     deportMap.put("memberNo", memberNo);
     deportMap.put("studyNo", studyNo);
     
-    studyMemberService.attendUpdate(deportMap);
     
-    return null;
+    try {
+      studyMemberService.attendUpdate(deportMap);
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    
+    return content;
   }
 }
 
-//for(int i = 0; i < studyMemberNoList.size(); i++) {
-//rateService.updateRate((int) studyMemberNoList.get(i));
-//}
+
 

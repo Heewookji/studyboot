@@ -629,7 +629,6 @@ public class MyStudyController {
     System.out.println("스터디네임: "+ name);
     HashMap<String,Object> content = new HashMap<>();
     content.put("name", name);
-    content.put("status", "success");
     return content;
   }
 
