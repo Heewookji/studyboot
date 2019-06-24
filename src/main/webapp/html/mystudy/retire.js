@@ -227,34 +227,35 @@ $('#retiree-rate-button').click(() => {
 /* --------------------------------------- 추방 --------------------------------------- */
 
 
-$('#deport-nick4').click((e) => {
-	  Swal.fire({
-		    title: '해당 멤버를 추방 하시겠습니?',
-		    type: 'warning',
-		    showCancelButton: true,
-		    confirmButtonColor: '#3085d6',
-		    cancelButtonColor: '#d33',
-		    confirmButtonText: '확인',
-		    cancelButtonText: '취소'
-		  }).then((result) => {
-		    if (result.value) {
-		    	
-		    	(function (myStudyNo) {
-		    		  $.getJSON('../../app/json/retireEvaluation/deport?studyNo=' + myStudyNo + '&nickName' +
-		    		      function(obj) {
-		    			  
-		    			  $("#message-add").load("/studyboot/html/message/messageAddModal.html", function(e) {
-		    				    $('.study-message').click((e) => {
-
-		    				      $('#message-add-nick').attr('nick-name',$(e.target).parents('.message-li').find('a').attr('nick-name'));
-		    				      $('#addModal').modal('show');
-		    				    });
-		    				  });
-		    			  
-		    		  });
-		    		}(myStudyNo));
-		    	
-		    }
-		  })
-});
+//$('#deport-nick4').click((e) => {
+//  alert("11");
+//	  Swal.fire({
+//		    title: '해당 멤버를 추방 하시겠습니까?',
+//		    type: 'warning',
+//		    showCancelButton: true,
+//		    confirmButtonColor: '#3085d6',
+//		    cancelButtonColor: '#d33',
+//		    confirmButtonText: '확인',
+//		    cancelButtonText: '취소'
+//		  }).then((result) => {
+//		    if (result.value) {
+//		    	
+//		    	(function (myStudyNo) {
+//		    		  $.getJSON('../../app/json/retireEvaluation/deport?studyNo=' + myStudyNo + '&nickName' +
+//		    		      function(obj) {
+//		    			  
+//		    			  $("#message-add").load("/studyboot/html/message/messageAddModal.html", function(e) {
+//		    				    $('.study-message').click((e) => {
+//
+//		    				      $('#message-add-nick').attr('nick-name',$(e.target).parents('.message-li').find('a').attr('nick-name'));
+//		    				      $('#addModal').modal('show');
+//		    				    });
+//		    				  });
+//		    			  
+//		    		  });
+//		    		}(myStudyNo));
+//		    	
+//		    }
+//		  })
+//});
 

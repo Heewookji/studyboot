@@ -148,6 +148,7 @@ public class StudyRetireController {
     } catch (Exception e) {
       content.put("status", "평가점수 입력 중 오류가 발생 하였습니다.");
       content.put("message", e.getMessage());
+      System.out.println(e.getMessage());
     }
 
 
@@ -345,11 +346,37 @@ public class StudyRetireController {
 
   @GetMapping("deport") //추방 메서드
   public Object deport(String nickName, int studyNo, HttpSession session) {
+    
     Map<String, Object> content = new HashMap<>();
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    // 리더 판단을 위한 코드
+    Map<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", studyNo);
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+    System.out.println("리더 ?? " + leaderYesOrNo);
+    if (leaderYesOrNo == false) {
+
+      content.put("status", "notleader");
+      return content;
+    } 
+    
+    content.put("leader", leaderYesOrNo);
+
+    
+    int memberNo =  memberService.findMemberNoByNickName(nickName);
+    
+    // 스터디 장 본인이 본인을 추방 하려 하면 리턴
+    if (memberNo == loginUser.getNo()) {
+      
+      content.put("status", "leader");
+      return content;
+    }
+    
     Map<String, Object> deportMap = new HashMap<>();
     SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
     
-    int memberNo =  memberService.findMemberNoByNickName(nickName);
     
     deportMap.put("endNo", 3);
     deportMap.put("endDate", format.format(new Date()));
@@ -360,6 +387,8 @@ public class StudyRetireController {
     try {
       studyMemberService.attendUpdate(deportMap);
       content.put("status", "success");
+      content.put("leader", leaderYesOrNo);
+      
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
