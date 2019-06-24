@@ -664,10 +664,7 @@ $(document.body).bind('study-deport', () => {
             }
           });
         }(myStudyNo));
-
       }
-
-
     })
   });
 
