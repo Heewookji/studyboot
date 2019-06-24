@@ -11,7 +11,7 @@ public class Inquiry implements Cloneable, Serializable {
   private int inquiryPersonNo;
   private int suspectPersonNo;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
   private Date createdDate;
  
   private String contents;

@@ -16,7 +16,7 @@ public class SpaceReview {
   
   private String review;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
   private Date registeredDate;
   
 

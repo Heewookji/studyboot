@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-//    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     plugins: [ 'interaction', 'dayGrid', 'bootstrap' ],
     themeSystem: 'bootstrap',
     locale: 'ko',
@@ -20,11 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     eventLimit: true, // allow "more" link when too many events
     editable: false,
     selectable: false,
-//    header: {
-//      left: 'prev,next today',
-//      center: 'title',
-//      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-//    },
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       $('#schdulDetailModal').modal('show');
       loadDetail(info.event.id);
