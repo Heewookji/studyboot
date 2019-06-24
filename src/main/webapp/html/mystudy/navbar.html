@@ -1,98 +1,120 @@
 <link rel="stylesheet" href="./retire.css">
-<link rel="stylesheet" href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
+<link rel="stylesheet"
+ href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet" href="../../css/common.css">
-<link href="/studyboot/js/Semantic-UI-master/dist/components/placeholder.min.css"
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/placeholder.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/image.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/card.min.css"
  rel="stylesheet" type="text/css">
 
- <!-- 나의 평점 -->
+<!-- 나의 평점 -->
 <div id="sb-history"></div>
-  <!-- 나의 평점 -->
+<!-- 나의 평점 -->
 
 
 <!-- 스터디 그룹 사진 -->
 <div id="study-profile-image" class="u-block-hover">
-  <figure>
-    <img class="img-fluid w-100 u-block-hover__main--zoom-v1" alt="Image Description" id="study-img">
-  </figure>
+ <figure>
+  <img class="img-fluid w-100 u-block-hover__main--zoom-v1"
+   alt="Image Description" id="study-img">
+ </figure>
 
-  <!-- Figure Caption -->
-  <figcaption class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
-    <div class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
-      <!-- Figure Social Icons -->
- <!--      <ul class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
+ <!-- Figure Caption -->
+ <figcaption
+  class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
+  <div
+   class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
+   <!-- Figure Social Icons -->
+   <!--      <ul class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
         <li class="list-inline-item align-middle g-mx-7">
           <a class="u-icon-v1 u-icon-size--md g-color-white" href="#">
             <i class="icon-settings u-line-icon-pro"></i>
           </a>
         </li>
       </ul> -->
-      
-      <ul class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
-        <li class="list-inline-item align-middle g-mx-7">
-        <label class="u-icon-v1 u-icon-size--md g-color-white">
-          <i class="icon-settings u-line-icon-pro g-cursor-pointer"></i>
-          <input type="file" class="sr-only" id="mystudyImageInput" name="image" accept="image/*">
-        </label></li>
-      </ul>
-      <!-- End Figure Social Icons -->
-    </div>
-  </figcaption>
-  <!-- End Figure Caption -->
-  <!-- User Info 스터디 이름과 해당 스터디 회원의 등급(원, 장)-->
+
+   <ul
+    class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
+    <li class="list-inline-item align-middle g-mx-7"><label
+     class="u-icon-v1 u-icon-size--md g-color-white"> <i
+      class="icon-settings u-line-icon-pro g-cursor-pointer"></i> <input
+      type="file" class="sr-only" id="mystudyImageInput" name="image"
+      accept="image/*">
+    </label></li>
+   </ul>
+   <!-- End Figure Social Icons -->
+  </div>
+ </figcaption>
+ <!-- End Figure Caption -->
+ <!-- User Info 스터디 이름과 해당 스터디 회원의 등급(원, 장)-->
 </div>
 <!-- User Image -->
 <!-- Sidebar Navigation -->
 <div class="list-group list-group-border-0 g-mb-40">
 
-  <!-- span 태그는 해당 게시판에 게시물이 알람 -->
-  
-  <!-- Overall -->
-  <a class="list-group-item list-group-item-action justify-content-between" style="text-align: center;">
-   <i class="icon-people g-color-primary g-pr-5"></i><span id="navbar-study-name" class="study-name lead"></span>
-      <span class="u-label g-font-size-11 g-bg-gray-dark-v2 g-rounded-20 g-px-10"></span>
-  </a>
-  <!-- End Overall -->
+ <!-- span 태그는 해당 게시판에 게시물이 알람 -->
 
-  <!-- Comments -->
-  <a class="list-group-item list-group-item-action justify-content-between" id="std-board"> <span><i
-      class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>게시판</span> <span
-    class="u-label g-font-size-11 g-bg-pink g-rounded-20 g-px-8"></span>
-  </a>
-  <!-- End Comments -->
+ <!-- Overall -->
+ <a
+  class="list-group-item list-group-item-action justify-content-between"
+  style="text-align: center;"> <i
+  class="icon-people g-color-primary g-pr-5"></i><span
+  id="navbar-study-name" class="study-name lead"></span> <span
+  class="u-label g-font-size-11 g-bg-gray-dark-v2 g-rounded-20 g-px-10"></span>
+ </a>
+ <!-- End Overall -->
 
-  <!-- My Projects -->
-  <a id="std-repository" style="cursor: pointer;"
-    class="list-group-item list-group-item-action justify-content-between"> <span><i
-      class="icon-layers g-pos-rel g-top-1 g-mr-8"></i> 자료실</span> <span
-    class="u-label g-font-size-11 g-bg-white g-color-main g-rounded-20 g-px-10"></span>
-  </a>
-  <!-- End My Projects -->
+ <!-- Comments -->
+ <a
+  class="list-group-item list-group-item-action justify-content-between"
+  id="std-board"> <span><i
+   class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>게시판</span> <span
+  class="u-label g-font-size-11 g-bg-pink g-rounded-20 g-px-8"></span>
+ </a>
+ <!-- End Comments -->
 
-  <!-- History -->
-  <a class="list-group-item list-group-item-action justify-content-between" id="retire-request" style="cursor:pointer">
-    <span><i class="icon-fire g-pos-rel g-top-1 g-mr-8"></i> 탈퇴신청</span>
-  </a>
-  <!-- End History -->
+ <!-- My Projects -->
+ <a id="std-repository" style="cursor: pointer;"
+  class="list-group-item list-group-item-action justify-content-between">
+  <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i> 자료실</span>
+  <span
+  class="u-label g-font-size-11 g-bg-white g-color-main g-rounded-20 g-px-10"></span>
+ </a>
+ <!-- End My Projects -->
 
-  <!-- Settings -->
-  <a id="std-management" style="cursor: pointer;"
-    class="list-group-item list-group-item-action justify-content-between"> <span><i
-      class="icon-settings g-pos-rel g-top-1 g-mr-8"></i>스터디 관리</span> <span
-    class="u-label g-font-size-11 g-bg-cyan g-rounded-20 g-px-8"></span></a>
-  <!-- End Settings -->
+ <!-- History -->
+ <a
+  class="list-group-item list-group-item-action justify-content-between"
+  id="retire-request" style="cursor: pointer"> <span><i
+   class="icon-fire g-pos-rel g-top-1 g-mr-8"></i> 탈퇴신청</span>
+ </a>
+ <!-- End History -->
+
+ <!-- Settings -->
+ <a id="std-management" style="cursor: pointer;"
+  class="list-group-item list-group-item-action justify-content-between">
+  <span><i class="icon-settings g-pos-rel g-top-1 g-mr-8"></i>스터디
+   관리</span> <span class="u-label g-font-size-11 g-bg-cyan g-rounded-20 g-px-8"></span>
+ </a>
+ <!-- End Settings -->
 </div>
 <!-- End Sidebar Navigation -->
 
 <!-- Project Progress  여기 div
              <div class="card border-0 rounded-0 g-mb-50"></div> -->
 <div class="col-lg" style="padding: 0px;">
-  <div id="shortcode1">
-    <div class="shortcode-html">
-      <!-- 스터디원 정보 -->
-      <ul class="list-unstyled" id="std-MemberList"></ul>
-    </div>
+ <div id="shortcode1">
+  <div class="shortcode-html">
+   <!-- 스터디원 정보 -->
+   <ul class="list-unstyled" id="std-MemberList"></ul>
+  </div>
 
-    <!--       Default dropright button
+  <!--       Default dropright button
 <div class="btn-group dropright">
   <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     이름
@@ -116,65 +138,108 @@
   </div>
 </div> -->
 
-  </div>
+ </div>
 </div>
 
 <!-- --------------------------------------------- 모달 --------------------------------------------- -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"
-  hidden="hidden" id="retire-modal">modal</button>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+ data-target=".bd-example-modal-lg" hidden="hidden" id="retire-modal">modal</button>
 
-<div id="retireRateModal" class="modal fade bd-example-modal-lg evaluation-star" tabindex="-1" role="dialog"
-  aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="schedleDetailHead">함께한 멤버들을 평가 해 주세요!</h4>
+<div id="retireRateModal12"
+ class="modal fade bd-example-modal-lg evaluation-star" tabindex="-1"
+ role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+ <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h4 class="modal-title" id="schedleDetailHead">함께한 멤버들을 평가 해
+     주세요!</h4>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          id="calendar-detail-close-modal-btn">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="col-lg-12">
-        <!-- User Contacts -->
-        <div class="row g-mb-20 g-mt-20" id="retire-evaluation"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary attend-close" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="retire-evaluation-btn">제출</button>
-      </div>
-    </div>
-
+    <button type="button" class="close" data-dismiss="modal"
+     aria-label="Close" id="calendar-detail-close-modal-btn">
+     <span aria-hidden="true">&times;</span>
+    </button>
+   </div>
+   <div class="col-lg-12">
+    <!-- User Contacts -->
+    <div class="row g-mb-20 g-mt-20" id="retire-evaluation"></div>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-secondary attend-close"
+     data-dismiss="modal">닫기</button>
+    <button type="button" class="btn btn-primary"
+     id="retire-evaluation-btn">제출</button>
+   </div>
   </div>
+
+ </div>
 </div>
+
+
+<div class="modal fade" id="retireRateModal" role="dialog"
+ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+  <div
+   class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
+   style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
+   <div class="modal-body">
+    <!-- Find a Course -->
+    <div>
+     <div class="ml-2">
+      <h1
+       class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20">함께한
+       멤버들을 평가 해 주세요!</h1>
+     </div>
+     <hr class="g-mb-5">
+     <div class="retireRateModalContents">
+</div>
+
+      <div class="col-4 ml-md-auto">
+       <button type="button"
+        class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14 g-rounded-30 g-py-10 ml-2 g-mt-0 g-mb-10"
+        id="init-btn">시작하기</button>
+      </div>
+      
+      
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+
 <!-- --------------------------------------------- 모달 --------------------------------------------- -->
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retireeRateModal"
-  id="retire-person-modal" hidden="hidden">Launch demo modal</button>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+ data-target="#retireeRateModal" id="retire-person-modal"
+ hidden="hidden">Launch demo modal</button>
 
-<!-- Modal --> <!-- tabinex 속성을 없애고 data-backdrop="static"을 줘서 모달 못끄게 설정 -->
-<div class="modal fade evaluation-star" id="retireeRateModal" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">함께 했던 스터디 원을 평가 해 주세요!</h5>
-      </div>
-      <div class="modal-body" id="retire-person-evaluation"></div>
-      <div class="modal-footer">
-        <button id="retiree-rate-button" type="button" class="btn btn-primary">제출</button>
-      </div>
-    </div>
+<!-- Modal -->
+<!-- tabinex 속성을 없애고 data-backdrop="static"을 줘서 모달 못끄게 설정 -->
+<div class="modal fade evaluation-star" id="retireeRateModal"
+ role="dialog" aria-labelledby="exampleModalCenterTitle"
+ aria-hidden="true" data-backdrop="static">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalCenterTitle">함께 했던 스터디
+     원을 평가 해 주세요!</h5>
+   </div>
+   <div class="modal-body" id="retire-person-evaluation"></div>
+   <div class="modal-footer">
+    <button id="retiree-rate-button" type="button"
+     class="btn btn-primary">제출</button>
+   </div>
   </div>
+ </div>
 </div>
 
 
 <!-- --------------------------------------------- 모달 --------------------------------------------- -->
-  <!--프로필 사진 변경하는 모달 -->
-  <div id="mystudy-imagesetting"></div>
-  
-  <div id="message-add"></div>
+<!--프로필 사진 변경하는 모달 -->
+<div id="mystudy-imagesetting"></div>
+
+<div id="message-add"></div>
 
 
 
@@ -239,8 +304,54 @@
 {{/each}}
 </script>
 
-<!-- 탈퇴 평가 리스트 -->
+
+
+
 <script id="retire-evaluation-list" type="text/x-handlebars-template">
+{{#each list}}
+<div class="row">
+      <div class="col g-mb-10">
+       <!-- Figure -->
+       <figure class="u-block-hover u-shadow-v19 g-rounded-4 g-pa-15">
+        <div class="d-flex justify-content-start">
+         <!-- Figure Image -->
+         <img class="g-width-80 g-height-80 rounded-circle g-mr-15"
+          src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg"
+          alt="Image Description">
+         <!-- Figure Image -->
+
+         <!-- Figure Info -->
+         <div class="d-block">
+          <div class="g-mb-5">
+           <h4 class="h5 g-mb-0">{{member.nickName}}</h4>
+           <em
+            class="d-block g-color-primary g-font-style-normal g-font-size-default">Employee</em>
+          </div>
+          <em
+           class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">{{name}}</em>
+         </div>
+         <!-- End Figure Info -->
+<div class="g-width-130">
+</div>
+
+         <div class="d-block g-pr-5">
+          <div class="g-pb-40">
+ </div>
+ <div id="retire-evaluation-{{member.nickName}}" class="rateit" data-rateit-mode="font" style="font-size: 35px"
+      data-rateit-resetable="false"></div>
+ </div>
+        </div>
+ 
+       </figure>
+       <!-- End Figure -->
+      </div>
+     </div>
+{{/each}}
+</script>
+
+
+<!-- 탈퇴 평가 리스트 -->
+<script id="retire-evaluation-list1" type="text/x-handlebars-template">
 {{#each list}}
 <div class="col-md-4 g-mb-30 g-mt-30">
   <figure
@@ -295,6 +406,9 @@
 {{/each}}
 </script>
 
+
+
 <script src="./retire.js"></script>
 <!-- <script src="/studyboot/html/message/messageAddModal.js"></script> -->
-<script src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+<script
+ src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>

@@ -14,13 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-//  plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
     plugins: [ 'interaction', 'dayGrid','bootstrap' ],
     themeSystem: 'bootstrap',
     locale: 'ko',
     defaultDate: new Date(),
     editable: true,
     eventLimit: true, // allow "more" link when too many events
+    eventLimitClick: 'popover',
+    eventLimitText: '더 보기',
     editable: false,  // 이벤트 드래그 막음
     selectable: true,
 //  header: {

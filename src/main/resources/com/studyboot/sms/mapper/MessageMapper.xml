@@ -67,14 +67,14 @@
       sms_msg c
       left outer join sms_member i on c.send_id = i.member_id
     <where>
+     recv_id = #{userNo}
     <if test="member_ids != null">
+     And (
      <foreach collection="member_ids" item="member_id" separator="or">
       send_id = 
       #{member_id}
      </foreach>
-    </if>
-    <if test="member_ids == null">
-     recv_id = #{userNo}
+     )
     </if>
     </where>
     order by 
@@ -95,15 +95,16 @@
       sms_msg c
       left outer join sms_member i on c.recv_id = i.member_id
     <where>
+    send_id = #{userNo}
     <if test="member_ids != null">
+     And (
      <foreach collection="member_ids" item="member_id" separator="or">
       recv_id = 
       #{member_id}
      </foreach>
+     )
     </if>
-    <if test="member_ids == null">
-     send_id = #{userNo}
-    </if>
+     
     </where>
     order by 
       msg_id desc

@@ -39,7 +39,6 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-nav', () => {
 
-  $('#retireRateModal').modal('show');
   
   
   $("#mystudy-imagesetting").load("/studyboot/html/mypage/imagesetting.html");

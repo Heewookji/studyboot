@@ -12,7 +12,7 @@ public class Message implements Cloneable, Serializable {
   private String contents;
   private String title;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
   private Date date;
   
   private Member messagePerson;

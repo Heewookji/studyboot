@@ -24,13 +24,13 @@ $(document).ready(function() {
   // 위쪽 빵 부스러기 적용할 때 기존껄 span 태그에서 리스트 태그로 바꿔서 적용시키기
   var $mystudy = $("<a class='u-link-v5 g-color-main g-color-primary--hover' " +
   		"href='/studyboot/html/mystudy/index.html?no=" + noss + "'>"
-      + "My study" + "</a><i class='fa fa-angle-right g-ml-7'></i>");
+      + "마이 스터디" + "</a><i class='fa fa-angle-right g-ml-7'></i>");
   $('#std-main').html($mystudy);
 
   // study board 빵부스러기 생성하기
   if($('#std-main2').val() == undefined){
     var $stdBoard = $("<li class='list-inline-item g-color-primary' id='std-main2'>"
-        + "<span>Study Board</span></li>");
+        + "<span>게시판</span></li>");
     $('#conts-list').append($stdBoard);
   }
 

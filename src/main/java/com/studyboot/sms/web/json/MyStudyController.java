@@ -474,6 +474,9 @@ public class MyStudyController {
     try {
       if (!studyService.checkFullCapacityByStudyNo(stdNo)) {
 
+        
+        System.out.println("if문 통과해서 try안으로 접근함");
+        
         // 현재 인원이 총원보다 작다면 스터디에 해댱 맴버를 추가시켜주고
         studyMemberService.addStudyMember(stdNo, memberNo, false);
         System.out.println(memberNo + "번 회원 가입승인 완료 add 시켜주기");
