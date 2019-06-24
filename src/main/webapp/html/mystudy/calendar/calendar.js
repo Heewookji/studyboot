@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
 //  plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-    plugins: [ 'interaction', 'dayGrid' ],
+    plugins: [ 'interaction', 'dayGrid','bootstrap' ],
+    themeSystem: 'bootstrap',
     locale: 'ko',
     defaultDate: new Date(),
     editable: true,

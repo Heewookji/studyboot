@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fullcalendar/bootstrap": "^4.2.0",
     "@fullcalendar/core": "^4.1.0",
-    "@fullcalendar/daygrid": "^4.1.0",
+    "@fullcalendar/daygrid": "^4.2.0",
     "@fullcalendar/interaction": "^4.1.0",
     "blueimp-file-upload": "^9.31.0",
     "bootstrap": "^4.3.1",
