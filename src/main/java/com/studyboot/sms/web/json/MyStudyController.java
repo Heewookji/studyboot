@@ -421,9 +421,22 @@ public class MyStudyController {
   public Object registerDelete(@RequestParam int stdNo,
       @RequestParam int memberNo,
       HttpSession session) {
+    
+    Map<String, Object> content = new HashMap<>();
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    // 리더 판단을 위한 코드
+    Map<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo",stdNo);
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+    if (leaderYesOrNo == false) {
+
+      content.put("status", "notleader");
+      return content;
+    } 
 
     System.out.println("스터디 번호=" + stdNo + "맴버번호=" + memberNo);
-    HashMap<String,Object> content = new HashMap<>();
     try {
       approvalService.delete(stdNo, memberNo);
       content.put("status", "삭제가 완료 되었습니다.");
@@ -440,9 +453,23 @@ public class MyStudyController {
   public Object register(@RequestParam int stdNo,
       @RequestParam int memberNo,
       HttpSession session) {
+    
+    Map<String, Object> content = new HashMap<>();
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    // 리더 판단을 위한 코드
+    Map<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo",stdNo);
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+    if (leaderYesOrNo == false) {
+
+      content.put("status", "notleader");
+      return content;
+    } 
+    
     System.out.println("register 접근" + "" +  stdNo + "" + memberNo);
 
-    HashMap<String,Object> content = new HashMap<>();
 
     try {
       if (!studyService.checkFullCapacityByStudyNo(stdNo)) {
@@ -465,6 +492,7 @@ public class MyStudyController {
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
+      System.out.println(e.getMessage());
     }
 
     return content;
@@ -599,9 +627,20 @@ public class MyStudyController {
   @PostMapping("stdUpdate")
   public Object stdUpdate(Study study, HttpSession session) {
 
-    System.out.println(study);
+    Map<String, Object> content = new HashMap<>();
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    // 리더 판단을 위한 코드
+    Map<String,Object> studyAndUserNo = new HashMap<>();
+    studyAndUserNo.put("loginUser", loginUser.getNo());
+    studyAndUserNo.put("studyNo", study.getNo());
+    boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
+    if (leaderYesOrNo == false) {
 
-    HashMap<String,Object> content = new HashMap<>();
+      content.put("status", "fail");
+      return content;
+    } 
+    
     Study studyOrgin = studyService.get(study.getNo());
     
     try {
