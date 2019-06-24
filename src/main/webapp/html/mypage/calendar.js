@@ -9,10 +9,12 @@ calendarMemberList;
 
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('sb-calendar');
+  
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
 //    plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-    plugins: [ 'interaction', 'dayGrid' ],
+    plugins: [ 'interaction', 'dayGrid', 'bootstrap' ],
+    themeSystem: 'bootstrap',
     locale: 'ko',
     defaultDate: new Date(),
     eventLimit: true, // allow "more" link when too many events

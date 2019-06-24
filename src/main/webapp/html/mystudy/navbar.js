@@ -3,7 +3,9 @@ nos = param.split('=')[1];
 
 $(document).ready(function() {
 
+  
   $("#min_nav_bar").load("/studyboot/html/mystudy/navbar.html", function() {
+    
     $('#std-board').attr("href", "/studyboot/html/mystudy/board.html?no=" + nos);
 
     $('#std-repository').click((e) => {
@@ -37,8 +39,12 @@ $(document).ready(function() {
 
 $(document.body).bind('loaded-nav', () => {
 
+  $('#retireRateModal').modal('show');
+  
+  
   $("#mystudy-imagesetting").load("/studyboot/html/mypage/imagesetting.html");
 
+  
   $.getJSON('../../app/json/MyStudy/studyphoto?no=' + nos,
       function(obj) {
 
