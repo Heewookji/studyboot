@@ -355,15 +355,11 @@ public class StudyRetireController {
     studyAndUserNo.put("loginUser", loginUser.getNo());
     studyAndUserNo.put("studyNo", studyNo);
     boolean leaderYesOrNo = studyMemberService.findStudyMemberLeader(studyAndUserNo);
-    System.out.println("리더 ?? " + leaderYesOrNo);
     if (leaderYesOrNo == false) {
 
       content.put("status", "notleader");
       return content;
     } 
-    
-    content.put("leader", leaderYesOrNo);
-
     
     int memberNo =  memberService.findMemberNoByNickName(nickName);
     

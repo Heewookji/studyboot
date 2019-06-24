@@ -11,9 +11,21 @@ $(document).ready(function() {
     });
 
     $('#std-management').click((e) => {
-      window.location.href = "/studyboot/html/mystudy/management.html?no=" + nos;
+      
+      if(window.leader == false) {
+          Swal.fire({
+            type: 'error',
+            title: errorTitle,
+            text: '스터디 관리 권한이 없습니다.',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          return;
+      } else {
+        window.location.href = "/studyboot/html/mystudy/management.html?no=" + nos;
+      }
+      
     });
-
 
     $(document.body).trigger('loaded-nav');
     $(document.body).trigger('study-name');
@@ -395,7 +407,7 @@ $(document.body).bind('loaded-nav', () => {
         "</div>" +
         "</div>" +
         "</li>";
-
+      
       $("#std-MemberList").append(memberCard);
 
     } else if (obj.list.length === 5) {
@@ -652,10 +664,6 @@ $(document.body).bind('study-deport', () => {
             }
           });
         }(myStudyNo));
-
-        
-
-
 
       }
 

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     defaultDate: new Date(),
     editable: true,
     eventLimit: true, // allow "more" link when too many events
-    //editable: false,   이걸 false로 두면 드래그앤 드롭 막는데, 커서 손가락 모양이 안됨
+    editable: false,  // 이벤트 드래그 막음
     selectable: true,
 //  header: {
 //  left: 'prev,next today',

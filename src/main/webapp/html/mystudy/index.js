@@ -25,8 +25,8 @@ function loadList(no) {
         " <div class='d-flex g-mt-2 g-mr-15'>" +
         " </div>" +
         " <div class='media-body'>" +
-        " <div class='d-flex justify-content-between'>" +
-        " <h5 class='h5 g-font-weight-600 g-color-black'  style='margin-top:12px;'>스터디 개설을 축하 드립니다. 게시글을 작성 해 보세요!</h5>" +
+        " <div class='d-flex justify-content-center'>" +
+        " <h5 class='h5 g-font-weight-400 g-color-black'  style='margin-top:12px;'>스터디 개설을 축하 드립니다. 게시글을 작성 해 보세요!</h5>" +
         " </div>" +
         " </div>" +
         " </li>" +
@@ -35,7 +35,7 @@ function loadList(no) {
         " <div class='d-flex g-mt-2 g-mr-15'>" +
         " </div>" +
         " <div class='media-body'>" +
-        " <div class='d-flex justify-content-between'>" +
+        " <div class='d-flex justify-content-center'>" +
         " </div>" +
         " </div>" +
         " </li>" +
