@@ -138,11 +138,16 @@ public class MyStudyController {
 
     for (int i = 0; i < studyMemberList.size(); i++) {
 
+      if (studyMemberList.get(i).getLeader() == true) {
+        studyMemberList.get(i).setMemberCls("스터디 장");
+      }
+      
+      
       if (loginUser.getNo() == (int) studyMemberList.get(i).getMemberNo()) {
         studyMemberList.remove(i);
       }
     }
-
+    System.out.println("스터디 탈퇴시 평가 멤버: " + studyMemberList);
     content.put("list", studyMemberList);
 
     return content;
@@ -337,22 +342,22 @@ public class MyStudyController {
     List<Amazon> amazon = new ArrayList<>();
 
     cont = amazonS3_Service.list(stdNo);
-    
+
     if(cont == null) {
       System.out.println("버킷에 파일이 없습니다.");
     } else {
-    for (int i = 0; i < cont.size(); i++) {
-      Amazon mazon = new Amazon();
-      mazon.setFileName(cont.get(i).key());
-      mazon.setFileSize(cont.get(i).size());
+      for (int i = 0; i < cont.size(); i++) {
+        Amazon mazon = new Amazon();
+        mazon.setFileName(cont.get(i).key());
+        mazon.setFileSize(cont.get(i).size());
 
-      String extenstion = cont.get(i).key().substring(cont.get(i).key().lastIndexOf(".")+1);
-      mazon.setExtenstion(extenstion);
-      System.out.println(extenstion);
-      amazon.add(mazon);
-    }
-    // 아마존 리스트를 실행하고 리턴값을 받아서 리턴된 맵 객체를 다시 리턴해준다.
-    content.put("list", amazon);
+        String extenstion = cont.get(i).key().substring(cont.get(i).key().lastIndexOf(".")+1);
+        mazon.setExtenstion(extenstion);
+        System.out.println(extenstion);
+        amazon.add(mazon);
+      }
+      // 아마존 리스트를 실행하고 리턴값을 받아서 리턴된 맵 객체를 다시 리턴해준다.
+      content.put("list", amazon);
     }
     return content;
   }
@@ -376,25 +381,25 @@ public class MyStudyController {
     return content;
   }
 
-//  @GetMapping("fileDownload")
-//  public Object fileDownload(
-//      @RequestParam String fileName,
-//      @RequestParam int studyNo,
-//      HttpSession session,
-//      OutputStream out) {
-//
-//    HashMap<String,Object> content = new HashMap<>();
-//
-//    try {
-//      amazonS3_Service.fileDownload(studyNo, fileName);
-//      content.put("status", "다운로드가 완료 되었습니다.");
-//    } catch (Exception e) {
-//      content.put("status", e.getMessage());
-//      content.put("message", e.getMessage());
-//    }
-//
-//    return content;
-//  }
+  //  @GetMapping("fileDownload")
+  //  public Object fileDownload(
+  //      @RequestParam String fileName,
+  //      @RequestParam int studyNo,
+  //      HttpSession session,
+  //      OutputStream out) {
+  //
+  //    HashMap<String,Object> content = new HashMap<>();
+  //
+  //    try {
+  //      amazonS3_Service.fileDownload(studyNo, fileName);
+  //      content.put("status", "다운로드가 완료 되었습니다.");
+  //    } catch (Exception e) {
+  //      content.put("status", e.getMessage());
+  //      content.put("message", e.getMessage());
+  //    }
+  //
+  //    return content;
+  //  }
 
   @GetMapping("mmntUpdate")
   public Object mmntUpdate(@RequestParam int no) {
@@ -421,10 +426,10 @@ public class MyStudyController {
   public Object registerDelete(@RequestParam int stdNo,
       @RequestParam int memberNo,
       HttpSession session) {
-    
+
     Map<String, Object> content = new HashMap<>();
     Member loginUser = (Member) session.getAttribute("loginUser");
-    
+
     // 리더 판단을 위한 코드
     Map<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
@@ -453,10 +458,10 @@ public class MyStudyController {
   public Object register(@RequestParam int stdNo,
       @RequestParam int memberNo,
       HttpSession session) {
-    
+
     Map<String, Object> content = new HashMap<>();
     Member loginUser = (Member) session.getAttribute("loginUser");
-    
+
     // 리더 판단을 위한 코드
     Map<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
@@ -467,16 +472,16 @@ public class MyStudyController {
       content.put("status", "notleader");
       return content;
     } 
-    
+
     System.out.println("register 접근" + "" +  stdNo + "" + memberNo);
 
 
     try {
       if (!studyService.checkFullCapacityByStudyNo(stdNo)) {
 
-        
+
         System.out.println("if문 통과해서 try안으로 접근함");
-        
+
         // 현재 인원이 총원보다 작다면 스터디에 해댱 맴버를 추가시켜주고
         studyMemberService.addStudyMember(stdNo, memberNo, false);
         System.out.println(memberNo + "번 회원 가입승인 완료 add 시켜주기");
@@ -632,7 +637,7 @@ public class MyStudyController {
 
     Map<String, Object> content = new HashMap<>();
     Member loginUser = (Member) session.getAttribute("loginUser");
-    
+
     // 리더 판단을 위한 코드
     Map<String,Object> studyAndUserNo = new HashMap<>();
     studyAndUserNo.put("loginUser", loginUser.getNo());
@@ -643,9 +648,9 @@ public class MyStudyController {
       content.put("status", "fail");
       return content;
     } 
-    
+
     Study studyOrgin = studyService.get(study.getNo());
-    
+
     try {
       studyOrgin.setNo(study.getNo());
       studyOrgin.setPersonnel(study.getPersonnel());
@@ -662,10 +667,10 @@ public class MyStudyController {
 
     return content;
   }
-  
+
   @GetMapping("studyName")
   public Object getStduyName(int studyNo) {
-    
+
     System.out.println("스터디번호: " + studyNo);
     String name = myStudyService.studyName(studyNo);
     System.out.println("스터디네임: "+ name);
