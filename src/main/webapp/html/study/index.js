@@ -124,6 +124,20 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
           $(nullCardGenerator()).appendTo(inactive[i]);
         }
         
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center'
+        });
+
+        Toast.fire({
+          title: '스터디가 없네요..',
+          confirmButtonText: '생성하기'
+        }).then((result) => {
+          if (result.value) {
+            $('#stdAddModal').modal('toggle');
+          }
+        })
+        
       } else{
 
         //무한 스크롤일때.
