@@ -26,8 +26,14 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
     console.log("evaluationMemberList: " + obj.list);
     evaluationMemberList = obj.list;
 
-    $(evaluationGenerator(obj)).appendTo('#retire-evaluation');
+    $(evaluationGenerator(obj)).appendTo('.retireRateModalContents');
     //  $(document.body).trigger('loaded-retireform');
+    
+
+    //////////////////////////////////////////
+    $('#retireRateModal').modal('show');
+    
+    
   });
 }(myStudyNo));
 
