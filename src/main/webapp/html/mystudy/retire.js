@@ -29,9 +29,6 @@ retirePersonEvaluation = Handlebars.compile(retirePersonEvaluationTemplateSrc);
     $(evaluationGenerator(obj)).appendTo('.retireRateModalContents');
     //  $(document.body).trigger('loaded-retireform');
     
-
-    //////////////////////////////////////////
-    $('#retireRateModal').modal('show');
     
     
   });

@@ -308,3 +308,11 @@ insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, admi
     insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, adr_lms)   
   values(9, password('1111'), 'wndus@naver.com', '이주연', '주연배우', '1993-08-20', '010-1111-1111','122216');
 
+  insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, adr_lms)   
+  values(10, password('1111'), 'elql1@naver.com', '디비1', '디비', '1993-08-20', '010-1111-1111','122216');
+  insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, adr_lms)   
+  values(11, password('1111'), 'elql2@naver.com', '디비2', '디비', '1993-08-20', '010-1111-1111','132116');
+    insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, adr_lms)   
+  values(12, password('1111'), 'elql3@naver.com', '디비3', '디비', '1993-08-20', '010-1111-1111','142215');
+    insert into sms_member (member_id, pwd, email, name, nick_name, birth, tel, adr_lms)   
+  values(13, password('1111'), 'elql4@naver.com', '디비4', '디비', '1993-08-20', '010-1111-1111','122215');
