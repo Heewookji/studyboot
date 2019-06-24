@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     locale: 'ko',
     defaultDate: new Date(),
     eventLimit: true, // allow "more" link when too many events
+    eventLimitClick: 'popover',
+    eventLimitText: '더 보기',
     editable: false,
     selectable: false,
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
