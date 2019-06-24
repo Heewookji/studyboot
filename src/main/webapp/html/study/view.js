@@ -26,7 +26,7 @@ if (param) {
 
   //이름 타이틀에 넣어준다.
   $('#studyNameHead').html(decodeURIComponent(name.split('=')[1]));
-
+  $("#message-add").load("/studyboot/html/message/messageAddModal.html");
 
 }
 
@@ -747,13 +747,9 @@ function applyClick() {
 function messageClick() {
   $('#sendMessage-btn').click(function(e) {
     e.preventDefault();
-  });
-}
-
-$("#message-add").load("/studyboot/html/message/messageAddModal.html", function(e) {
-  $('#sendMessage-btn').click((e) => {
-    
     $('#study-message-add-nick').attr('nick-name', leaderName);
     $('#addModal').modal('show');
   });
-});
+}
+
+

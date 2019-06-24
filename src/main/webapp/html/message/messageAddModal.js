@@ -20,7 +20,6 @@ if (messagePage === "mystudy") { // 현재 페이지가 mystudy 이면..
 
 //모달이 켜지기 전에 준비하는 함수
 $('#addModal').on('show.bs.modal', function (e) { 
-
   if(messagePage === "mystudy") { // 현재 페이지가 mystudy면 보내는이를 넣어준다.
     alert(messagePage);
     messageReceiver = $('#message-add-nick').attr('nick-name');
@@ -28,7 +27,6 @@ $('#addModal').on('show.bs.modal', function (e) {
     $('#recv_id').attr("readonly", true);
     
   } else if(messagePage === "study") { // 현재 페이지가 study면 보내는이를 넣어준다.
-    
     messageReceiver = $('#study-message-add-nick').attr('nick-name');
     $('#recv_id').attr("value", messageReceiver);
     $('#recv_id').attr("readonly", true);
