@@ -167,6 +167,7 @@ public class MemberController {
     
     Member loginUser = (Member) session.getAttribute("loginUser");
     member.setNo(loginUser.getNo());
+    member.setPhoto(loginUser.getPhoto());
     
     Map<String,Object> content = new HashMap<>();
     
