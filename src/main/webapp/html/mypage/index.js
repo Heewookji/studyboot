@@ -21,7 +21,7 @@ $( document ).ready(function() {
 
 
 loadData();
-loadList();
+loadStudyList();
 
 // 로그인 유저의 정보 가져오기
 function loadData() {
@@ -62,7 +62,7 @@ function initStar(list) {
 }
 
 // 로그인 유저의 스터디 데이터 가져오기
-function loadList() {
+function loadStudyList() {
 
   $.getJSON('../../app/json/member/mystudy', function(obj) {
     
@@ -71,7 +71,7 @@ function loadList() {
     appliedStudyList = obj.appliedStudyList;
     pickedStudyList = obj.pickedStudyList;
     
-    if (doingStudyList == null) {
+    if (doingStudyList == null || doingStudyList == undefined) {
       studyIsEmpty('doingStudy');
       
     } else {
@@ -79,7 +79,7 @@ function loadList() {
       initStar(window.doingStudyList);
     }
     
-    if (appliedStudyList == null) {
+    if (appliedStudyList == null || appliedStudyList == undefined) {
       studyIsEmpty('appliedStudy');
       
     } else {
@@ -87,7 +87,7 @@ function loadList() {
       initStar(window.appliedStudyList);
     }
     
-    if (pickedStudyList == null) {
+    if (pickedStudyList == null || pickedStudyList == undefined) {
       studyIsEmpty('pickedStudy');
       
     } else {
@@ -96,7 +96,7 @@ function loadList() {
     }
     
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
-    $(document.body).trigger('loaded-loadList');
+    $(document.body).trigger('loaded-loadStudyList');
   });
 };
 
@@ -122,7 +122,7 @@ function studyIsEmpty(study) {
 }
 
 // 스터디 리스트 가져온 후
-$(document.body).bind('loaded-loadList', () => {
+$(document.body).bind('loaded-loadStudyList', () => {
   
   $('.myStudy-view-link').click((e) => {
     location.href = '../mystudy/index.html?no=' + $(e.target).parents('.card-div').find('a').attr("data-no");
@@ -146,8 +146,11 @@ $(document.body).bind('loaded-loadList', () => {
 // 진행중인 스터디 탭 이벤트 발생 시
 $('#doingStudyTab').on('shown.bs.tab', () => {
   $('#doingStudy .js-carousel').slick('unslick');
-  initStar(window.doingStudyList);
   $.HSCore.components.HSCarousel.init('#doingStudy .js-carousel');
+  
+  if (window.doingStudyList != undefined && window.doingStudyList != null) {
+    initStar(window.doingStudyList);
+  }
 });
 
 // 신청한 스터디 탭 이벤트 발생 시
@@ -156,8 +159,11 @@ $('#appliedStudyTab').on('shown.bs.tab', () => {
   if (appliedinit) {
     $('#appliedStudy .js-carousel').slick('unslick');
   }
-  initStar(window.appliedStudyList);
   $.HSCore.components.HSCarousel.init('#appliedStudy .js-carousel');
+  
+  if (window.appliedStudyList != undefined && window.appliedStudyList != null) {
+    initStar(window.appliedStudyList);
+  }
   appliedinit = true;
 });
 
@@ -167,8 +173,11 @@ $('#pickedStudyTab').on('shown.bs.tab', () => {
   if (pickedinit) {
     $('#pickedStudy .js-carousel').slick('unslick');
   }
-  initStar(window.pickedStudyList);
   $.HSCore.components.HSCarousel.init('#pickedStudy .js-carousel');
+  
+  if (window.pickedStudyList != undefined && window.pickedStudyList != null) {
+    initStar(window.pickedStudyList);
+  }
   pickedinit = true;
 });
 
