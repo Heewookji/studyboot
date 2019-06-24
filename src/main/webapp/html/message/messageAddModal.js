@@ -22,10 +22,18 @@ if (messagePage === "mystudy") { // 현재 페이지가 mystudy 이면..
 $('#addModal').on('show.bs.modal', function (e) { 
 
   if(messagePage === "mystudy") { // 현재 페이지가 mystudy면 보내는이를 넣어준다.
+    alert(messagePage);
     messageReceiver = $('#message-add-nick').attr('nick-name');
     $('#recv_id').attr("value", messageReceiver);
     $('#recv_id').attr("readonly", true);
+    
+  } else if(messagePage === "study") { // 현재 페이지가 study면 보내는이를 넣어준다.
+    
+    messageReceiver = $('#study-message-add-nick').attr('nick-name');
+    $('#recv_id').attr("value", messageReceiver);
+    $('#recv_id').attr("readonly", true);
   }
+  
 });
 
 // 모달에서 보내기 버튼 누를때

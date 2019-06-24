@@ -10,7 +10,8 @@ memberAges,
 memberAge,
 finishData,
 dropData,
-exileData
+exileData,
+leaderName
 ;
 
 
@@ -90,6 +91,7 @@ function loadData(no) {
     
     for(var member of data.studyMembers){
       if(member.leader){
+        leaderName = member.member.nickName;
         $('#studyMemberList').append('<div class="g-pb-5"><img class="rounded-circle g-width-30" src="/studyboot/upload/images/member/'+ member.photo  + '"><span class="g-pl-10"><u>'+member.member.nickName+'</u></span><div class="pull-right"><div class="rateit g-pl-20 studyMemberRate" data-rateit-readonly="true"data-rateit-mode="font" style="font-size: 20px"data-rateit-resetable="false" data-rateit-value="'+member.rate+'"></div></div>');
       } else{
         studyMemberList.list.push(member);
@@ -748,4 +750,10 @@ function messageClick() {
   });
 }
 
-
+$("#message-add").load("/studyboot/html/message/messageAddModal.html", function(e) {
+  $('#sendMessage-btn').click((e) => {
+    
+    $('#study-message-add-nick').attr('nick-name', leaderName);
+    $('#addModal').modal('show');
+  });
+});
