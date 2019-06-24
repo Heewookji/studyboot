@@ -5,7 +5,7 @@ approvalTemplateSrc = $('#approval-list').html();
 var approvalGenerator = Handlebars.compile(approvalTemplateSrc);
 
 
-alert(nosss);
+//alert(nosss);
 var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 $('#startDate').datepicker({
   uiLibrary: 'bootstrap4',
@@ -118,7 +118,19 @@ $(document.body).bind('loaded-approval', () => {
     $.getJSON("../../app/json/MyStudy/registerDelete?stdNo=" + nosss + "&memberNo="
         + $(e.target).parents('.refuse').find('a').attr('data-no'),
         function(obj){
-      location.reload();
+      
+      if (obj.status === "notleader") {
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: "스터디 장만 가입 거절이 가능 합니다.",
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+      } else {
+        location.reload();
+      }
     });
   });
 
@@ -128,7 +140,19 @@ $(document.body).bind('loaded-approval', () => {
     $.getJSON("../../app/json/MyStudy/register?stdNo=" + nosss + "&memberNo="
         + $(e.target).parents('.refuse').find('a').attr('data-no'),
         function(obj){
-      location.reload();
+      
+      if (obj.status === "notleader") {
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: "스터디 장만 가입 승인이 가능 합니다.",
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+      } else {
+        location.reload();
+      }
     });
   });
 });
