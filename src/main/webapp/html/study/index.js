@@ -59,7 +59,16 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 
     var inactive = $(".sides .side").not( '.active' );
 
-
+    //목표의 길이 줄이기
+    if(obj.list != undefined){
+      for(var e of obj.list){
+        if(e.goal.length > 26){
+          e.goal = e.goal.slice(0, -(e.goal.length - 26))+"...";
+        }
+      }
+    }
+  
+    
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
             'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
@@ -457,6 +466,7 @@ $(document.body).bind('loaded-categorytitle', () => {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
 
     $('.mcls-btn').removeClass("g-color-primary");
     $('.mcls-btn').addClass("g-color-main");
@@ -505,6 +515,7 @@ $(document.body).bind('loaded-smalltitle', () => {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
 
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -536,6 +547,7 @@ $(document.body).bind('loaded-largeAddress', () => {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
     
     
     $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
@@ -564,6 +576,7 @@ $(document.body).bind('loaded-mediumAddress', () => {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
     
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#smallAddressButton').html('동읍면<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 이름 초기화
@@ -587,6 +600,7 @@ $(document.body).bind('loaded-smallAddress', () => {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
     
     $('#smallAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 버튼 이름 변경
     $('#smallAddressButton').removeClass('g-color-main');
@@ -610,6 +624,7 @@ $('#large-tag').click(function(e) {
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
+  Swal.close();
   
   clsNo = largeClsNo;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -631,6 +646,7 @@ $(document.body).bind('loaded-medium-tag', () => {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
     
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -673,6 +689,7 @@ $('#clearAddr').click(function(e){
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
+  Swal.close();
   
   addressNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -688,6 +705,7 @@ $('#clearDay').click(function(e){
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
+  Swal.close();
   
   dayNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -703,6 +721,7 @@ $('#rateRange').on('DOMSubtreeModified', function() {
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
+    Swal.close();
     
     rateValue = $('#rateRange').html();
     $.ajaxSetup({ async:false });
@@ -737,6 +756,7 @@ $('.day-checkbox input').change(function(e) {
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
+  Swal.close();
   
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -756,7 +776,7 @@ $( "#name" ).keyup(function(){
     $("#name").attr("data-trigger","hover focus");
     $("#name").attr("data-placement","bottom");
     $("#name").attr("data-html", true);
-    $("#name").attr("title","3~12자의 한글, 영문, 숫자만 <br>사용할 수 있습니다");
+    $("#name").attr("title","3~8자의 한글, 영문, 숫자만 <br>사용할 수 있습니다");
     $('#name').tooltip('enable');
     $('#name').tooltip('show');
   }
@@ -764,7 +784,7 @@ $( "#name" ).keyup(function(){
 
 //이름 체크
 function nickCheck(str) {
-  if(str.length < 3 || str.length > 12) {
+  if(str.length < 3 || str.length > 8) {
     return false;
   }
   var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]|\s/;
@@ -816,8 +836,9 @@ $('#contents').keyup(function(){
   }
 });
 
-
-
+$('#stdAddModal').on('show.bs.modal', function (e) {
+  Swal.close();
+})
 
 
 //시작하기 눌렀을 경우

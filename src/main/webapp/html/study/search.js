@@ -580,7 +580,7 @@ $( "#name" ).keyup(function(){
     $("#name").attr("data-trigger","hover focus");
     $("#name").attr("data-placement","bottom");
     $("#name").attr("data-html", true);
-    $("#name").attr("title","3~12자의 한글, 영문, 숫자만 <br>사용할 수 있습니다");
+    $("#name").attr("title","3~8자의 한글, 영문, 숫자만 <br>사용할 수 있습니다");
     $('#name').tooltip('enable');
     $('#name').tooltip('show');
   }
@@ -588,7 +588,7 @@ $( "#name" ).keyup(function(){
 
 //이름 체크
 function nickCheck(str) {
-  if(str.length < 3 || str.length > 12) {
+  if(str.length < 3 || str.length > 8) {
     return false;
   }
   var chk = /[0-9]|[a-z]|[A-Z]|[가-힣]|\s/;

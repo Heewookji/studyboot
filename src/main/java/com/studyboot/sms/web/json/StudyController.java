@@ -44,7 +44,16 @@ public class StudyController {
 
 
       if(study.getPhoto().equals("undefined")) {
-        study.setPhoto("default");
+        //기본 사진 넣어준다.
+        switch(study.getCls().substring(0, 2)) {
+          case "11": study.setPhoto("itdefault");break;
+          case "12": study.setPhoto("servicedefault");break;
+          case "13": study.setPhoto("financialdefault");break;
+          case "14": study.setPhoto("artdefault");break;
+          case "15": study.setPhoto("liberaldefault");break;
+          case "16": study.setPhoto("engineeringdefault");break;
+          case "17": study.setPhoto("foreigndefault");break;
+        }
       }
       studyService.add(study);
 

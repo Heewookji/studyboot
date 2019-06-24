@@ -50,8 +50,10 @@ public class MyStudyScheduleServiceImpl implements MyStudyScheduleService {
     List<Schedule> list = scheduleDao.findAllByAllStudy(params);
     System.out.println(list);
     
-    //                  보라색      빨간색    하늘색     똥색       ???
-    String[] colors = {"#9932CC", "#DC143C", "#B8860B", "#20B2AA", "#A0522D"};
+   
+    String[] colors = {"rgba(40, 155, 252,0.5)","rgba(255, 99, 132, 0.5)","rgba(166, 211, 56,0.5)",
+        "rgba(75, 192, 192, 0.5)","rgba(153, 102, 255, 0.5)" };
+    
     int colorIndex = 0;
     
     // 모든 스케줄 리스트에 스터디번호 별로 컬러를 삽입해준다.

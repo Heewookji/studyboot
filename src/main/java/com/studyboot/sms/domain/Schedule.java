@@ -11,7 +11,7 @@ public class Schedule {
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
   private String end;
   private String memo;
-  private String color;
+  private String color = "rgba(40, 155, 252,0.5)";
   private String studyName;
   
   private int studyNo;
