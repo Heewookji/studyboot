@@ -7,54 +7,54 @@
 <!-- Required Meta Tags Always Come First -->
 <meta charset="utf-8">
 <meta name="viewport"
- content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="../../Unify/favicon.ico">
 <!-- Google Fonts -->
 <link rel="stylesheet"
- href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
+  href="../../Unify/assets/vendor/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
+  href="../../Unify/assets/vendor/bootstrap/offcanvas.css">
 <!-- CSS Global Icons -->
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
+  href="../../Unify/assets/vendor/icon-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
+  href="../../Unify/assets/vendor/icon-line/css/simple-line-icons.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/icon-etlinefont/style.css">
+  href="../../Unify/assets/vendor/icon-etlinefont/style.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/icon-line-pro/style.css">
+  href="../../Unify/assets/vendor/icon-line-pro/style.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/icon-hs/style.css">
+  href="../../Unify/assets/vendor/icon-hs/style.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
+  href="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
+  href="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.css">
 <link rel="stylesheet" href="../../Unify/assets/vendor/animate.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
+  href="../../Unify/assets/vendor/hamburgers/hamburgers.min.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+  href="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
+  href="../../Unify/assets/vendor/slick-carousel/slick/slick.css">
 <link rel="stylesheet"
- href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
+  href="../../Unify/assets/vendor/fancybox/jquery.fancybox.css">
 
 <!-- CSS Unify -->
 <link rel="stylesheet" href="../../Unify/assets/css/unify.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet"
- href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
+  href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet"
- href="../../node_modules/cropperjs/dist/cropper.css">
+  href="../../node_modules/cropperjs/dist/cropper.css">
 
 <link rel='stylesheet' href='../../fullcalendar/core/main.css' />
 <link rel='stylesheet' href='../../fullcalendar/bootstrap/main.css' />
@@ -66,258 +66,276 @@
  -->
 <link rel="stylesheet" href="../../Unify/assets/css/custom.css">
 <link rel="stylesheet" href="/studyboot/css/common.css">
+<style type="text/css">
+  .fc-popover.fc-more-popover {
+    top: 115px;
+  }
+</style>
 
 </head>
 
 <body>
 
- <!-- Header -->
- <header id="js-header"
-  class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
-  data-header-fix-moment="300"> </header>
- <!-- End Header -->
+  <!-- Header -->
+  <header id="js-header"
+    class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance"
+    data-header-fix-moment="300"> </header>
+  <!-- End Header -->
 
- <!-- MyRate -->
- <div id="sb-history"></div>
- <!-- End MyRate -->
+  <!-- MyRate -->
+  <div id="sb-history"></div>
+  <!-- End MyRate -->
 
- <!-- imageSetting modal -->
- <div id="sb-imagesetting"></div>
- <!-- End imageSetting modal -->
+  <!-- imageSetting modal -->
+  <div id="sb-imagesetting"></div>
+  <!-- End imageSetting modal -->
 
- <!-- inquiry modal -->
- <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h5 class="modal-title" id="formTitle"></h5>
-     <button type="button" class="close" data-dismiss="modal"
-      aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
-    <div class="modal-body">
-     <form>
-      <div class="form-group sspctForm-Format std-invisible">
-       <label for="recipient-name" class="col-form-label">신고:</label> <span
-        class="form-control" id="sspctName"></span> <input type="hidden"
-        id="inqryNo"> <span class="std-invisible" id="inqryName"></span>
-       <input type="hidden" id="sspctNo"> <input type="hidden"
-        id="inqryClsNo">
+  <!-- inquiry modal -->
+  <div class="modal fade" id="inqryModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group sspctForm-Format std-invisible">
+              <label for="recipient-name" class="col-form-label">신고:</label>
+              <span class="form-control" id="sspctName"></span> <input
+                type="hidden" id="inqryNo"> <span
+                class="std-invisible" id="inqryName"></span> <input
+                type="hidden" id="sspctNo"> <input type="hidden"
+                id="inqryClsNo">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">내용:</label>
+              <input type="text" class="form-control" id="inqryContents">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-primary"
+            id="inqryAdd-btn">제출하기</button>
+        </div>
       </div>
-      <div class="form-group">
-       <label for="recipient-name" class="col-form-label">내용:</label> <input
-        type="text" class="form-control" id="inqryContents">
+    </div>
+  </div>
+  <!-- End inquiry modal -->
+
+
+  <!-- -------------------------------캘린더 모달------------------------------------- -->
+
+  <!-- 일정 디테일 모달 -->
+  <div class="modal fade" id="schdulDetailModal" tabindex="-1"
+    role="dialog" aria-labelledby="schedleDetailHead" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="schedleDetailTitle"></h4>
+          <!-- 일정 제목 -->
+
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close" id="calendar-detail-close-modal-btn">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-unstyled g-mb-25">
+
+            <li
+              class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-pb-15 g-height-50">
+              <!-- 일정 시작 시간 -->
+              <div class="col-md-2">
+                <span class="u-icon-v1 g-color-primary"><i
+                  class="fa fa-star-o"></i></span>
+              </div>
+              <div class="col-md-10">
+                <span id="study-name"></span>
+              </div>
+            </li>
+
+            <li
+              class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+              <!-- 일정 시작 시간 -->
+              <div class="col-md-2">
+                <span class="u-icon-v1 g-color-primary"><i
+                  class="icon-event"></i></span>
+              </div>
+              <div class="col-md-10">
+                <span id="study-start-date"></span>
+              </div>
+            </li>
+
+            <li
+              class="row d-flex align-items-center g-py-15 g-min-height-100">
+              <!-- 일정 내용 -->
+              <div class="col-md-2">
+                <span class="u-icon-v1 g-color-primary"><i
+                  class="fa fa-sticky-note-o"></i></span>
+              </div>
+              <div class="col-md-10">
+                <span id="event-detail"></span>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" id="event-close-btn">닫기</button>
+        </div>
       </div>
-     </form>
     </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">닫기</button>
-     <button type="button" class="btn btn-primary" id="inqryAdd-btn">제출하기</button>
-    </div>
-   </div>
   </div>
- </div>
- <!-- End inquiry modal -->
 
+  <!-- content -->
+  <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
 
- <!-- -------------------------------캘린더 모달------------------------------------- -->
-
- <!-- 일정 디테일 모달 -->
- <div class="modal fade" id="schdulDetailModal" tabindex="-1"
-  role="dialog" aria-labelledby="schedleDetailHead" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h4 class="modal-title" id="schedleDetailTitle"></h4>
-     <!-- 일정 제목 -->
-
-     <button type="button" class="close" data-dismiss="modal"
-      aria-label="Close" id="calendar-detail-close-modal-btn">
-      <span aria-hidden="true">&times;</span>
-     </button>
+    <!-- breadcrumb -->
+    <div class="row g-mb-30 col-lg-12">
+      <ul class="u-list-inline" id="conts-list">
+        <li class="list-inline-item g-mr-7"><a
+          class="u-link-v5 g-color-main g-color-primary--hover"
+          href="/studyboot/">홈</a> <i class="fa fa-angle-right g-ml-7"></i></li>
+        <li class="list-inline-item g-color-primary"><span>마이페이지</span>
+        </li>
+      </ul>
     </div>
-    <div class="modal-body">
-     <ul class="list-unstyled g-mb-25">
+    <!-- End breadcrumb -->
 
-      <li
-       class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-pb-15 g-height-50">
-       <!-- 일정 시작 시간 -->
-       <div class="col-md-2">
-        <span class="u-icon-v1 g-color-primary"><i
-         class="fa fa-star-o"></i></span>
-       </div>
-       <div class="col-md-10">
-        <span id="study-name"></span>
-       </div>
-      </li>
+    <div class="row">
+      <!-- Profile Sidebar -->
+      <div class="col-lg-3">
 
-      <li
-       class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-       <!-- 일정 시작 시간 -->
-       <div class="col-md-2">
-        <span class="u-icon-v1 g-color-primary"><i
-         class="icon-event"></i></span>
-       </div>
-       <div class="col-md-10">
-        <span id="study-start-date"></span>
-       </div>
-      </li>
+        <!-- User Image -->
+        <div class="u-block-hover g-pos-rel">
+          <figure>
+            <img id="profilePhoto"
+              class="img-fluid w-100 u-block-hover__main--zoom-v1"
+              alt="Image Description">
 
-      <li class="row d-flex align-items-center g-py-15 g-min-height-100">
-       <!-- 일정 내용 -->
-       <div class="col-md-2">
-        <span class="u-icon-v1 g-color-primary"><i
-         class="fa fa-sticky-note-o"></i></span>
-       </div>
-       <div class="col-md-10">
-        <span id="event-detail"></span>
-       </div>
-      </li>
+            <!-- Figure Caption -->
+            <figcaption
+              class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
+              <div
+                class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
+                <!-- Figure Social Icons -->
+                <ul
+                  class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
+                  <li class="list-inline-item align-middle g-mx-7"><label
+                    class="u-icon-v1 u-icon-size--md g-color-white">
+                      <i
+                      class="icon-settings u-line-icon-pro g-cursor-pointer"></i>
+                      <input type="file" class="sr-only" id="imageInput"
+                      name="image" accept="image/*">
+                  </label></li>
+                </ul>
+                <!-- End Figure Social Icons -->
+              </div>
+            </figcaption>
+          </figure>
+          <!-- End Figure Caption -->
 
-     </ul>
-    </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary"
-      data-dismiss="modal" id="event-close-btn">닫기</button>
-    </div>
-   </div>
-  </div>
- </div>
+        </div>
+        <!-- User Image -->
 
- <!-- content -->
- <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
+        <!-- Sidebar Navigation -->
+        <div class="list-group list-group-border-0 g-mb-40">
 
-  <!-- breadcrumb -->
-  <div class="row g-mb-30 col-lg-12">
-   <ul class="u-list-inline" id="conts-list">
-    <li class="list-inline-item g-mr-7"><a
-     class="u-link-v5 g-color-main g-color-primary--hover"
-     href="/studyboot/">홈</a> <i class="fa fa-angle-right g-ml-7"></i></li>
-    <li class="list-inline-item g-color-primary"><span>마이페이지</span>
-    </li>
-   </ul>
-  </div>
-  <!-- End breadcrumb -->
+          <!-- My StudyList -->
+          <a href="index.html"
+            class="list-group-item justify-content-between active">
+            <span><i
+              class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
+          </a>
+          <!-- End My StudyList -->
 
-  <div class="row">
-   <!-- Profile Sidebar -->
-   <div class="col-lg-3">
-    <!-- User Image -->
-    <div class="u-block-hover g-pos-rel">
-     <figure>
-      <img id="profilePhoto"
-       class="img-fluid w-100 u-block-hover__main--zoom-v1"
-       alt="Image Description">
+          <!-- My InfoSettings -->
+          <a href="view.html"
+            class="list-group-item list-group-item-action justify-content-between">
+            <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내
+              정보</span>
+          </a>
+          <!-- End My InfoSettings -->
 
-      <!-- Figure Caption -->
-      <figcaption
-       class="u-block-hover__additional--fade g-bg-black-opacity-0_5 g-pa-30">
-       <div
-        class="u-block-hover__additional--fade u-block-hover__additional--fade-up g-flex-middle">
-        <!-- Figure Social Icons -->
+          <!-- My rateInfo -->
+          <a href="#"
+            class="list-group-item list-group-item-action justify-content-between"
+            data-toggle="modal" data-target="#historyModal"> <span><i
+              class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
+          </a>
+          <!-- End My rateInfo -->
+
+          <!-- Message -->
+          <a href="../message/index.html"
+            class="list-group-item list-group-item-action justify-content-between">
+            <span><i
+              class="icon-envelope g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
+          </a>
+          <!-- End Message -->
+
+          <!-- Inquiry -->
+          <a href="#"
+            class="list-group-item list-group-item-action justify-content-between"
+            data-toggle="modal" data-target="#inqryModal"
+            id="inqryForm-btn"> <span><i
+              class="icon-question g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
+          </a>
+          <!-- End Inquiry -->
+        </div>
+        <!-- End Sidebar Navigation -->
+
+      </div>
+      <!-- End Profile Sidebar -->
+
+      <!-- mypage Main -->
+      <div class="col-lg-9 g-mb-30">
+        <!-- Nav tabs -->
         <ul
-         class="list-inline text-center g-flex-middle-item--bottom g-mb-20">
-         <li class="list-inline-item align-middle g-mx-7"><label
-          class="u-icon-v1 u-icon-size--md g-color-white"> <i
-           class="icon-settings u-line-icon-pro g-cursor-pointer"></i> <input
-           type="file" class="sr-only" id="imageInput" name="image"
-           accept="image/*">
-         </label></li>
+          class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
+          role="tablist"
+          data-target="nav-1-1-default-hor-left-underline"
+          data-tabs-mobile-type="slide-up-down"
+          data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
+          <li class="nav-item"><a class="nav-link g-py-10 active"
+            data-toggle="tab"
+            href="#nav-1-1-default-hor-left-underline--1" role="tab"
+            id="doingStudyTab">진행중인 스터디</a></li>
+          <li class="nav-item"><a class="nav-link g-py-10"
+            data-toggle="tab"
+            href="#nav-1-1-default-hor-left-underline--2" role="tab"
+            id="appliedStudyTab">신청한 스터디</a></li>
+          <li class="nav-item"><a class="nav-link g-py-10"
+            data-toggle="tab"
+            href="#nav-1-1-default-hor-left-underline--3" role="tab"
+            id="pickedStudyTab">찜한 스터디</a></li>
         </ul>
-        <!-- End Figure Social Icons -->
-       </div>
-      </figcaption>
-     </figure>
-     <!-- End Figure Caption -->
+        <!-- End Nav tabs -->
 
-    </div>
-    <!-- User Image -->
+        <!-- Tab panels -->
+        <div id="nav-1-1-default-hor-left-underline" class="tab-content">
 
-    <!-- Sidebar Navigation -->
-    <div class="list-group list-group-border-0 g-mb-40">
-
-     <!-- My StudyList -->
-     <a href="index.html"
-      class="list-group-item justify-content-between active"> <span><i
-       class="icon-bubbles g-pos-rel g-top-1 g-mr-8"></i>내 스터디</span>
-     </a>
-     <!-- End My StudyList -->
-
-     <!-- My InfoSettings -->
-     <a href="view.html"
-      class="list-group-item list-group-item-action justify-content-between">
-      <span><i class="icon-layers g-pos-rel g-top-1 g-mr-8"></i>내
-       정보</span>
-     </a>
-     <!-- End My InfoSettings -->
-
-     <!-- My rateInfo -->
-     <a href="#"
-      class="list-group-item list-group-item-action justify-content-between"
-      data-toggle="modal" data-target="#historyModal"> <span><i
-       class="icon-chart g-pos-rel g-top-1 g-mr-8"></i>내 평점</span>
-     </a>
-     <!-- End My rateInfo -->
-
-     <!-- Message -->
-     <a href="../message/index.html"
-      class="list-group-item list-group-item-action justify-content-between">
-      <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
-     </a>
-     <!-- End Message -->
-
-     <!-- Inquiry -->
-     <a href="#"
-      class="list-group-item list-group-item-action justify-content-between"
-      data-toggle="modal" data-target="#inqryModal" id="inqryForm-btn">
-      <span><i class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
-     </a>
-     <!-- End Inquiry -->
-    </div>
-    <!-- End Sidebar Navigation -->
-   </div>
-   <!-- End Profile Sidebar -->
-
-   <!-- mypage Main -->
-   <div class="col-lg-9 g-mb-30">
-    <!-- Nav tabs -->
-    <ul
-     class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
-     role="tablist" data-target="nav-1-1-default-hor-left-underline"
-     data-tabs-mobile-type="slide-up-down"
-     data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
-     <li class="nav-item"><a class="nav-link g-py-10 active"
-      data-toggle="tab" href="#nav-1-1-default-hor-left-underline--1"
-      role="tab" id="doingStudyTab">진행중인 스터디</a></li>
-     <li class="nav-item"><a class="nav-link g-py-10"
-      data-toggle="tab" href="#nav-1-1-default-hor-left-underline--2"
-      role="tab" id="appliedStudyTab">신청한 스터디</a></li>
-     <li class="nav-item"><a class="nav-link g-py-10"
-      data-toggle="tab" href="#nav-1-1-default-hor-left-underline--3"
-      role="tab" id="pickedStudyTab">찜한 스터디</a></li>
-    </ul>
-    <!-- End Nav tabs -->
-
-    <!-- Tab panels -->
-    <div id="nav-1-1-default-hor-left-underline" class="tab-content">
-
-     <!-- 진행중인 스터디 -->
-     <div class="tab-pane fade show active"
-      id="nav-1-1-default-hor-left-underline--1" role="tabpanel"
-      data-parent="#nav-1-1-default-hor-left-underline">
-      <!-- doingStudyList -->
-      <div class="container g-pb-50">
-       <div id="doingStudy" class="g-px-30--lg">
-        <div class="js-carousel u-carousel-v5 g-mx-minus-15"
-         data-slides-show="3" data-slides-scroll="1"
-         data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-         data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-         data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-         data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-         data-responsive='[{
+          <!-- 진행중인 스터디 -->
+          <div class="tab-pane fade show active"
+            id="nav-1-1-default-hor-left-underline--1" role="tabpanel"
+            data-parent="#nav-1-1-default-hor-left-underline">
+            <!-- doingStudyList -->
+            <div class="container g-pb-50">
+              <div id="doingStudy" class="g-px-30--lg">
+                <div class="js-carousel u-carousel-v5 g-mx-minus-15"
+                  data-slides-show="3" data-slides-scroll="1"
+                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+                  data-responsive='[{
                      "breakpoint": 992,
                      "settings": {
                        "slidesToShow": 2
@@ -333,27 +351,27 @@
                        "slidesToShow": 1
                      }
                    }]'>
-        </div>
-       </div>
-      </div>
-      <!-- End doingStudyList -->
-     </div>
-     <!-- End 진행중인 스터디 -->
+                </div>
+              </div>
+            </div>
+            <!-- End doingStudyList -->
+          </div>
+          <!-- End 진행중인 스터디 -->
 
-     <!-- 신청한 스터디 -->
-     <div class="tab-pane fade"
-      id="nav-1-1-default-hor-left-underline--2" role="tabpanel"
-      data-parent="#nav-1-1-default-hor-left-underline">
-      <!-- applied studyList -->
-      <div class="container g-pb-50">
-       <div id="appliedStudy" class="g-px-30--lg">
-        <div class="js-carousel u-carousel-v5 g-mx-minus-15"
-         data-slides-show="3" data-slides-scroll="1"
-         data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-         data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-         data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-         data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-         data-responsive='[{
+          <!-- 신청한 스터디 -->
+          <div class="tab-pane fade"
+            id="nav-1-1-default-hor-left-underline--2" role="tabpanel"
+            data-parent="#nav-1-1-default-hor-left-underline">
+            <!-- applied studyList -->
+            <div class="container g-pb-50">
+              <div id="appliedStudy" class="g-px-30--lg">
+                <div class="js-carousel u-carousel-v5 g-mx-minus-15"
+                  data-slides-show="3" data-slides-scroll="1"
+                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+                  data-responsive='[{
                      "breakpoint": 992,
                      "settings": {
                        "slidesToShow": 2
@@ -369,27 +387,27 @@
                        "slidesToShow": 1
                      }
                    }]'>
-        </div>
-       </div>
-      </div>
-      <!-- End applied studyList -->
-     </div>
-     <!-- End 신청한 스터디 -->
+                </div>
+              </div>
+            </div>
+            <!-- End applied studyList -->
+          </div>
+          <!-- End 신청한 스터디 -->
 
-     <!-- 찜한 스터디 -->
-     <div class="tab-pane fade"
-      id="nav-1-1-default-hor-left-underline--3" role="tabpanel"
-      data-parent="#nav-1-1-default-hor-left-underline">
-      <!-- pickedStudyList -->
-      <div class="container g-pb-50">
-       <div id="pickedStudy" class="g-px-30--lg">
-        <div class="js-carousel u-carousel-v5 g-mx-minus-15"
-         data-slides-show="3" data-slides-scroll="1"
-         data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
-         data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
-         data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
-         data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
-         data-responsive='[{
+          <!-- 찜한 스터디 -->
+          <div class="tab-pane fade"
+            id="nav-1-1-default-hor-left-underline--3" role="tabpanel"
+            data-parent="#nav-1-1-default-hor-left-underline">
+            <!-- pickedStudyList -->
+            <div class="container g-pb-50">
+              <div id="pickedStudy" class="g-px-30--lg">
+                <div class="js-carousel u-carousel-v5 g-mx-minus-15"
+                  data-slides-show="3" data-slides-scroll="1"
+                  data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
+                  data-arrow-left-classes="fa fa-angle-left g-left-0 g-ml-minus-50--lg"
+                  data-arrow-right-classes="fa fa-angle-right g-right-0 g-mr-minus-50--lg"
+                  data-pagi-classes="u-carousel-indicators-v35 g-pos-rel text-center g-mt-30"
+                  data-responsive='[{
                      "breakpoint": 992,
                      "settings": {
                        "slidesToShow": 2
@@ -405,31 +423,31 @@
                        "slidesToShow": 1
                      }
                    }]'>
-        </div>
-       </div>
-      </div>
-      <!-- End pickedStudyList -->
-     </div>
-     <!-- End 찜한 스터디 -->
+                </div>
+              </div>
+            </div>
+            <!-- End pickedStudyList -->
+          </div>
+          <!-- End 찜한 스터디 -->
 
+        </div>
+        <!-- End Tab panels -->
+
+        <hr class="g-pb-30">
+
+        <div id="sb-calendar"></div>
+      </div>
+      <!-- End mypage Main -->
     </div>
-    <!-- End Tab panels -->
-
-    <hr class="g-pb-30">
-
-    <div id="sb-calendar"></div>
-   </div>
-   <!-- End mypage Main -->
   </div>
- </div>
 
- <!-- footer -->
- <footer id="js-footer"></footer>
+  <!-- footer -->
+  <footer id="js-footer"></footer>
 
- <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 
- <!-- 진행중인 스터디 리스트 -->
- <script id="doing-study-template" type="text/x-handlebars-template">
+  <!-- 진행중인 스터디 리스트 -->
+  <script id="doing-study-template" type="text/x-handlebars-template">
 {{#each doingStudyList}}
 <div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div">
   <article class="u-shadow-v11 u-shadow-v41--hover">
@@ -456,8 +474,8 @@
 {{/each}}
   </script>
 
- <!-- 신청한 스터디 리스트 -->
- <script id="applied-study-template" type="text/x-handlebars-template">
+  <!-- 신청한 스터디 리스트 -->
+  <script id="applied-study-template" type="text/x-handlebars-template">
 {{#each appliedStudyList}}
 <div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div">
   <article class="u-shadow-v11 u-shadow-v41--hover">
@@ -484,8 +502,8 @@
 {{/each}}
   </script>
 
- <!-- 찜한 스터디 -->
- <script id="picked-study-template" type="text/x-handlebars-template">
+  <!-- 찜한 스터디 -->
+  <script id="picked-study-template" type="text/x-handlebars-template">
 {{#each pickedStudyList}}
 <div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div">
   <article class="u-shadow-v11 u-shadow-v41--hover">
@@ -512,64 +530,65 @@
 {{/each}}
   </script>
 
- <!-- JS Global Compulsory -->
- <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
- <script
-  src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
- <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
- <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
- <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
- <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
+  <!-- JS Global Compulsory -->
+  <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+  <script src="../../Unify/assets/vendor/popper.js/popper.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
+  <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
 
- <script
-  src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
- <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
- <script
-  src="../../node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
- <script src='../../node_modules/@fullcalendar/core/main.js'></script>
- <script src='../../fullcalendar/bootstrap/main.js'></script>
- <script src='../../node_modules/@fullcalendar/interaction/main.js'></script>
- <script src='../../node_modules/@fullcalendar/daygrid/main.js'></script>
- <script src='../../node_modules/@fullcalendar/core/locales/ko.js'></script>
- <!--   
+  <script
+    src="../../node_modules/jquery.rateit/scripts/jquery.rateit.min.js"></script>
+  <script src="../../node_modules/cropperjs/dist/cropper.min.js"></script>
+  <script
+    src="../../node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
+  <script src='../../node_modules/@fullcalendar/core/main.js'></script>
+  <script src='../../fullcalendar/bootstrap/main.js'></script>
+  <script src='../../node_modules/@fullcalendar/interaction/main.js'></script>
+  <script src='../../node_modules/@fullcalendar/daygrid/main.js'></script>
+  <script src='../../node_modules/@fullcalendar/core/locales/ko.js'></script>
+  <!--   
   <script src='../../fullcalendar/timegrid/main.js'></script>
   <script src='../../fullcalendar/list/main.js'></script>
    -->
 
- <!-- JS Implementing Plugins -->
- <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
- <script
-  src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
- <script
-  src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
- <script
-  src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
- <script
-  src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
- <script
-  src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
- <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
- <script src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
+  <!-- JS Implementing Plugins -->
+  <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/dzsscroller/scroller.js"></script>
+  <script
+    src="../../Unify/assets/vendor/dzsparallaxer/advancedscroller/plugin.js"></script>
+  <script
+    src="../../Unify/assets/vendor/masonry/dist/masonry.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script
+    src="../../Unify/assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="../../Unify/assets/vendor/slick-carousel/slick/slick.js"></script>
+  <script
+    src="../../Unify/assets/vendor/fancybox/jquery.fancybox.min.js"></script>
 
- <!-- JS Unify -->
- <script src="../../Unify/assets/js/hs.core.js"></script>
+  <!-- JS Unify -->
+  <script src="../../Unify/assets/js/hs.core.js"></script>
 
- <script src="../../Unify/assets/js/components/hs.header.js"></script>
- <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
+  <script src="../../Unify/assets/js/components/hs.header.js"></script>
+  <script src="../../Unify/assets/js/helpers/hs.hamburgers.js"></script>
 
- <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
- <script src="../../Unify/assets/js/components/hs.popup.js"></script>
- <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
+  <script src="../../Unify/assets/js/components/hs.dropdown.js"></script>
+  <script src="../../Unify/assets/js/components/hs.popup.js"></script>
+  <script src="../../Unify/assets/js/components/hs.carousel.js"></script>
 
- <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
+  <script src="../../Unify/assets/js/components/hs.go-to.js"></script>
 
- <!-- JS Custom -->
- <script src="../../Unify/assets/js/custom.js"></script>
- <script src="../header.js"></script>
- <script src="../footer.js"></script>
- <script src="index.js"></script>
- <script src="calendar.js"></script>
- <!-- JS Plugins Init. -->
+  <!-- JS Custom -->
+  <script src="../../Unify/assets/js/custom.js"></script>
+  <script src="../header.js"></script>
+  <script src="../footer.js"></script>
+  <script src="index.js"></script>
+  <script src="calendar.js"></script>
+  <!-- JS Plugins Init. -->
 
 
 </body>

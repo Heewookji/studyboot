@@ -21,10 +21,10 @@ public class Member implements Cloneable, Serializable {
   private List<String> cls;
   private List<Cls> clsList;
   
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
   private Date birth;
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
   private Date registeredDate;
 
   private boolean admin;

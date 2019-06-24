@@ -67,7 +67,7 @@
   <!-- 나의 평점 -->
   <div id="sb-history"></div>
   <!-- 나의 평점 -->
-  
+
   <!-- imageSetting modal -->
   <div id="sb-imagesetting"></div>
   <!-- End imageSetting modal -->
@@ -111,22 +111,101 @@
   </div>
   <!-- inquiry modal -->
   
+  <!-- 쪽지 디테일 -->
+  <div class="modal fade" id="viewModal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"
+      role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="nickName"></h5>
+          <span id="viewNo"></span>
+          <button type="button" class="close"
+            data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <span id="viewInquiryText"></span> <input
+              id="viewNo" type="hidden"></input>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal" id="detailClose-btn">닫기</button>
+          <button type="button" class="btn btn-primary"
+            id="messageRemove-btn">삭제하기</button>
+          <button type="button" class="btn btn-primary"
+            data-toggle="modal" data-target="#addModal"
+            id="msg-response">답장하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End 쪽지 디테일 -->
+
+  <!-- 쪽지 보내기 -->
+  <div class="modal fade" id="addModal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg"
+      role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formTitle" align="center"
+            style="width: 768px;">쪽지 보내기</h5>
+          <button type="button" class="close"
+            data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div
+              class="form-group sspctForm-Format std-invisible">
+              <label for="recipient-name" class="col-form-label">받는
+                회원</label> <input class="form-control" id="recv_id"
+                style="width: 300px;"></input> <input
+                type="hidden" id="sendNo"></input> <label
+                for="recipient-name" class="col-form-label">제목</label>
+              <input class="form-control" id="title"></input>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">내용</label>
+              <textarea style="width: 768px; height: 500px;"
+                class="form-control" id="message_contents"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-dismiss="modal">닫기</button>
+          <button type="button" class="btn btn-primary"
+            id="messageAdd-btn">보내기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End 쪽지 보내기 -->
+  
+  
   <!-- content -->
   <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-100">
-  
+
     <!-- breadcrumb -->
     <div class="row g-mb-30 col-lg-12">
-      <ul class="u-list-inline" id= "conts-list">
-        <li class="list-inline-item g-mr-7">
-          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/">홈</a>
-          <i class="fa fa-angle-right g-ml-7"></i>
+      <ul class="u-list-inline" id="conts-list">
+        <li class="list-inline-item g-mr-7"><a
+          class="u-link-v5 g-color-main g-color-primary--hover"
+          href="/studyboot/">홈</a> <i class="fa fa-angle-right g-ml-7"></i>
         </li>
-        <li class="list-inline-item g-mr-7">
-          <a class="u-link-v5 g-color-main g-color-primary--hover" href="/studyboot/html/mypage/">마이페이지</a>
-          <i class="fa fa-angle-right g-ml-7"></i>
-        </li>
-        <li class="list-inline-item g-color-primary">
-          <span>쪽지함</span>
+        <li class="list-inline-item g-mr-7"><a
+          class="u-link-v5 g-color-main g-color-primary--hover"
+          href="/studyboot/html/mypage/">마이페이지</a> <i
+          class="fa fa-angle-right g-ml-7"></i></li>
+        <li class="list-inline-item g-color-primary"><span>쪽지함</span>
         </li>
       </ul>
     </div>
@@ -196,7 +275,7 @@
           <!-- Message -->
           <a href="index.html"
             class="list-group-item justify-content-between active">
-            <span><i class="icon-home g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
+            <span><i class="icon-envelope g-pos-rel g-top-1 g-mr-8"></i>쪽지함</span>
           </a>
           <!-- End Message -->
 
@@ -205,7 +284,7 @@
             class="list-group-item list-group-item-action justify-content-between"
             data-toggle="modal" data-target="#inqryModal"
             id="inqryForm-btn"> <span><i
-              class="icon-fire g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
+              class="icon-question g-pos-rel g-top-1 g-mr-8"></i>문의하기</span>
           </a>
           <!-- End Inquiry -->
         </div>
@@ -215,192 +294,168 @@
 
       <!-- mypage Main -->
       <div class="col-lg-9 g-mb-50">
-      
-      <!-- Message 컨텐츠 시작 -->
-      <!-- Panel Header (상단 바)-->
-              <div class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0 g-mb-15">
-                <h3 class="h6 mb-0" style="text-align: center;">
-                    <i class="icon-settings g-pos-rel g-top-1 g-mr-8"></i>Message
-                  </h3>
-                <div class="dropdown g-mb-10 g-mb-0--md">
-                  <span class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5"
-                   id="messageForm-btn" data-toggle="modal" data-target="#addModal">
-                     <i class="et-icon-chat"></i> 쪽지보내기
-                    </span>
-                </div>
-              </div>
-              <!-- End Panel Header -->
-      
+
+        <!-- Message 컨텐츠 시작 -->
+        <!-- Panel Header (상단 바)-->
+        <div
+          class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0 g-mb-15">
+          <h3 class="h6 mb-0" style="text-align: center;">
+            <i class="icon-envelope g-pos-rel g-top-1 g-mr-8"></i>쪽지함
+          </h3>
+          <div class="dropdown g-mb-10 g-mb-0--md">
+            <span
+              class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5"
+              id="messageForm-btn" data-toggle="modal"
+              data-target="#addModal"> <i class="et-icon-chat"></i>
+              쪽지보내기
+            </span>
+          </div>
+        </div>
+        <!-- End Panel Header -->
+
         <!-- Nav tabs -->
-        <ul class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
+        <ul
+          class="nav nav-justified u-nav-v1-1 u-nav-primary g-brd-bottom--md g-brd-bottom-2 g-brd-primary g-mb-20"
           role="tablist"
           data-target="nav-1-1-default-hor-left-underline"
           data-tabs-mobile-type="slide-up-down"
           data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
           <li class="nav-item"><a class="nav-link g-py-10 active"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--1" 
-            role="tab" id="recvPage">받은 쪽지함</a></li>
+            href="#nav-1-1-default-hor-left-underline--1" role="tab"
+            id="recvPage">받은 쪽지함</a></li>
           <li class="nav-item"><a class="nav-link g-py-10"
             data-toggle="tab"
-            href="#nav-1-1-default-hor-left-underline--2" 
-            role="tab" id="sendPage">보낸 쪽지함</a></li>
+            href="#nav-1-1-default-hor-left-underline--2" role="tab"
+            id="sendPage">보낸 쪽지함</a></li>
         </ul>
         <!-- End Nav tabs -->
-        
+
         <!-- Tab panels -->
         <div id="nav-1-1-default-hor-left-underline" class="tab-content">
-        
-          <!-- 진행중인 스터디 -->
+
+          <!-- 받은 쪽지함 -->
           <div class="tab-pane fade show active"
             id="nav-1-1-default-hor-left-underline--1" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
 
-<!-- 보낸쪽지함 -->
-<nav class="navbar navbar-light">
-<!-- 
-recvPage
-sendPage
- -->
-      <div class="dropdown"></div>
+            <div class="row msg-list g-min-height-400 justify-content-center g-px-15">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th id=recv-check><input type="checkbox"
+                      name="allCheck" id="recv-checkAll" /></th>
+                    <th scope="col" id="message">보낸 회원</th>
+                    <th scope="col" class="check"
+                      style="text-align: center;">제목</th>
+                    <th scope="col" class="check"
+                      style="text-align: center;">날짜</th>
+                  </tr>
+                </thead>
 
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" id="message-search"
-          type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary my-2 my-sm-0"
-          id="message-search-btn" type="button">회원으로 검색</button>
-
-        <div class="col">
-        </div>
-
-      </form>
-    </nav>
-
-    <div class="msg-list g-min-height-400">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th id=check><input type="checkbox" name="allCheck"
-              id="checkAll" /></th>
-            <th scope="col" id="message">보낸 회원</th>
-            <th scope="col" class="check" style="text-align: center;">제목</th>
-            <th scope="col" class="check" style="text-align: center;">날짜</th>
-          </tr>
-        </thead>
-
-        <tbody id="recvList-data"></tbody>
-      </table>
-    </div>
-
-    <!-- .stdinqry-list -->
-    <div class="container">
-      <div class="row">
-        <div class="col"></div>
-        <div class="col-9">
-          <nav aria-label="목록 페이지 이동">
-            <ul class="pagination justify-content-center">
-              <li id="prevPage" class="page-item"><a
-                class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
-              <li id="currPage" class="page-item active"><span
-                class="page-link">1</span></li>
-              <li id="nextPage" class="page-item "><a
-                class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="col">
-          <button type="button" class="btn btn-outline-primary"
-            data-toggle="modal" id="msg-Delete-btn">삭제</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- .container -->
-
-  <div class="modal fade" id="viewModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"
-      role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="nickName"></h5>
-          <span id="viewNo"></span>
-          <button type="button" class="close" data-dismiss="modal"
-            aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>
-            <span id="viewInquiryText"></span> <input id="viewNo"
-              type="hidden"></input>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"
-            data-dismiss="modal" id="detailClose-btn">닫기</button>
-          <button type="button" class="btn btn-primary"
-            id="messageRemove-btn">삭제하기</button>
-          <button type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#addModal"
-            id="msg-response">답장하기</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"
-      role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="formTitle" align="center"
-            style="width: 768px;">쪽지 보내기</h5>
-          <button type="button" class="close" data-dismiss="modal"
-            aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group sspctForm-Format std-invisible">
-              <label for="recipient-name" class="col-form-label">받는
-                회원</label> <input class="form-control" id="recv_id"
-                style="width: 300px;"></input> <input type="hidden"
-                id="sendNo"></input> <label for="recipient-name"
-                class="col-form-label">제목</label> <input
-                class="form-control" id="title"></input>
+                <tbody id="recvList-data"></tbody>
+              </table>
+              <div id="none-recv-message" class="std-invisible">
+                <span class="g-font-size-18">받은 쪽지가 없습니다.</span>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">내용</label>
-              <textarea style="width: 768px; height: 500px;"
-                class="form-control" id="message_contents"></textarea>
+            <hr class="g-mt-0">
+            <div class="row">
+              <div class="col-3">
+                <form class="form-inline">
+                  <div class="input-group">
+                    <input
+                      class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-px-15"
+                      type="text" placeholder="닉네임" id="recv-search">
+                    <div class="input-group-append">
+                      <button type="button"
+                        class="btn g-bg-primary g-color-white g-rounded-right--10"
+                        id="recv-search-btn">검색</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-6">
+                <nav aria-label="목록 페이지 이동">
+                  <ul class="pagination justify-content-center">
+                    <li id="recv-prevPage" class="page-item"><a
+                      class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+                    <li id="recv-currPage" class="page-item active"><span
+                      class="page-link">1</span></li>
+                    <li id="recv-nextPage" class="page-item "><a
+                      class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-3 text-right">
+                <button type="button" class="btn btn-outline-primary"
+                  data-toggle="modal" id="recv-delete-btn">삭제</button>
+              </div>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary"
-            data-dismiss="modal">닫기</button>
-          <button type="button" class="btn btn-primary"
-            id="messageAdd-btn">보내기</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-         <!-- 여기까지 받은 쪽지함 ENDㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ --> 
-         
-         <!-- 밑에서 부터 보낸 쪽지함 시작ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ --> 
+          </div>
+          <!-- End 받은 쪽지함 -->
+          
+          
+          <!-- 보낸 쪽지함 -->
           <div class="tab-pane fade"
             id="nav-1-1-default-hor-left-underline--2" role="tabpanel"
             data-parent="#nav-1-1-default-hor-left-underline">
-            <!-- applied studyList -->
             
-            <p> ㅎㅇㅎㅇㅎㅇ
+            <div class="row msg-list g-min-height-400 justify-content-center g-px-15">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th id=send-check><input type="checkbox"
+                      name="allCheck" id="send-checkAll" /></th>
+                    <th scope="col" id="message">받은 회원</th>
+                    <th scope="col" class="check"
+                      style="text-align: center;">제목</th>
+                    <th scope="col" class="check"
+                      style="text-align: center;">날짜</th>
+                  </tr>
+                </thead>
+
+                <tbody id="sendList-data"></tbody>
+              </table>
+              <div id="none-send-message" class="std-invisible">
+                <span class="g-font-size-18">보낸 쪽지가 없습니다.</span>
+              </div>
             </div>
-  <!-- .container -->
+            <hr class="g-mt-0">
+            <div class="row">
+              <div class="col-3">
+                <form class="form-inline">
+                  <div class="input-group">
+                    <input
+                      class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-px-15"
+                      type="text" placeholder="닉네임" id="send-search">
+                    <div class="input-group-append">
+                      <button type="button"
+                        class="btn g-bg-primary g-color-white g-rounded-right--10"
+                        id="send-search-btn">검색</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-6">
+                <nav aria-label="목록 페이지 이동">
+                  <ul class="pagination justify-content-center">
+                    <li id="send-prevPage" class="page-item"><a
+                      class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+                    <li id="send-currPage" class="page-item active"><span
+                      class="page-link">1</span></li>
+                    <li id="send-nextPage" class="page-item "><a
+                      class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-3 text-right">
+                <button type="button" class="btn btn-outline-primary"
+                  data-toggle="modal" id="send-delete-btn">삭제</button>
+              </div>
+            </div>
+          </div>
+          <!-- End 보낸 쪽지함 -->
 
         </div>
         <!-- End Tab panels -->
@@ -415,11 +470,11 @@ sendPage
   <footer id="js-footer"></footer>
 
 
-  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. (보낸쪽지함)
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. (보낸쪽지함) -->
   <script id="ms-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-<th><input type="checkbox" name="listCheck" id="chk" value={{no}}></th>
+<th><input type="checkbox" name="listCheck" id="send-chk" value={{no}}></th>
   <td>
 <a href='#' class='sspctForm-btn'
  data-toggle="modal" 
@@ -435,13 +490,13 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
   <td align="center">{{date}}</td>
 </tr>
 {{/each}}
-</script> -->
+</script>
 
   <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. (받은 쪽지함) -->
   <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-<th><input type="checkbox" name="listCheck" id="chk" value={{no}}></th>
+<th><input type="checkbox" name="listCheck" id="recv-chk" value={{no}}></th>
 <td>
 <a href='#' class='sspctForm-btn'
  data-toggle="modal" 
@@ -465,16 +520,23 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
   <script src="../../Unify/assets/vendor/bootstrap/bootstrap.min.js"></script>
   <script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="../../Unify/assets/vendor/bootstrap/offcanvas.js"></script>
-  
-  <script src="../../node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
-  <script src="../../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script> 
-  <script src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+
+  <script
+    src="../../node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+  <script
+    src="../../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+  <script
+    src="../../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+  <script
+    src="../../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <script
+    src="../../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <script
+    src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+  <script
+    src="../../node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
   <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
-  
+
   <!-- JS Implementing Plugins -->
   <script src="../../Unify/assets/vendor/dzsparallaxer/dzsparallaxer.js"></script>
   <script
@@ -510,8 +572,8 @@ data-target="#viewModal" data-no='{{no}}'>{{title}}</a>
   <script src="index.js"></script>
   <script src="view.js"></script>
   <!-- JS Plugins Init. -->
-  
-  
+
+
 </body>
 </html>
 

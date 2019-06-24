@@ -25,8 +25,9 @@ public class MessageServiceImpl implements MessageService {
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("member_ids", memberNos);
     params.put("userNo", loginNo);
-
-    return messageDao.findAll(params);
+    List<Message> receiveList = messageDao.findAll(params);
+    
+    return receiveList;
   }
 
   @Override

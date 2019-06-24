@@ -26,6 +26,7 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 
   @Override
   public int addStudyMember(int studyNo, int memberNo, boolean leader) {
+    System.out.println("stdNo" + studyNo + "memberNo" + memberNo + "leader" + leader);
     Map<String,Object> params = new HashMap<>();
     params.put("studyNo", studyNo);
     params.put("memberNo", memberNo);

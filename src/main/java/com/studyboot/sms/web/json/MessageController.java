@@ -66,14 +66,16 @@ public class MessageController {
   }
 
   @GetMapping("delete2")
-  public Object delete2(int[] test) {
+  public Object delete2(int[] list) {
 
     HashMap<String,Object> content = new HashMap<>();
-    System.out.println(test.length);
     try {
       
-      for (int i = 0; i <= test.length; i++) {
-        messageService.delete(test[i]);
+      if (list.length < 1 || list == null) {
+        throw new RuntimeException("삭제할 쪽지가 없습니다.");
+      }
+      for (int i = 0; i < list.length; i++) {
+        messageService.delete(list[i]);
       }
       content.put("status", "success");
       
@@ -94,64 +96,69 @@ public class MessageController {
   }
 
 
-  @GetMapping("list")
-  public Object list(
+  @GetMapping("receiveList")
+  public Object receiveList(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
       @RequestParam String keyword,
       HttpSession session) {
     
     // 로그인한 유저의 정보를 담는다.
-    Member loginUser = (Member) session.getAttribute("loginUser"); 
-    int loginNo = loginUser.getNo();
-    System.out.println(loginNo);
-    
+    Member loginUser = (Member) session.getAttribute("loginUser");
     HashMap<String,Object> content = new HashMap<>();
-
-    List<Message> message;
-    List<Integer> memberNos = null;
-
-    if(!keyword.equals("undefined") && !keyword.equals("")) {
-      memberNos = memberService.findMemberNoMsg(keyword);
-
-      if (memberNos.size() == 0) {
+    
+    if (loginUser != null) {
+    
+      int loginNo = loginUser.getNo();
+      List<Message> message;
+      List<Integer> memberNos = null;
+  
+      if(!keyword.equals("undefined") && !keyword.equals("")) {
+        memberNos = memberService.findMemberNoMsg(keyword);
+  
+        if (memberNos.size() == 0) {
+          content.put("pageNo", 0);
+          return content;
+        }
+      }
+  
+      if (pageSize < 3 || pageSize > 8) 
+        pageSize = 3;
+  
+      int rowCount = messageService.size(memberNos, loginNo); 
+  
+      if (rowCount == 0) {
         content.put("pageNo", 0);
         return content;
       }
+  
+      int totalPage = rowCount / pageSize;
+  
+      if (rowCount % pageSize > 0)
+        totalPage++;
+  
+      if (pageNo < 1) 
+        pageNo = 1;
+      else if (pageNo > totalPage)
+        pageNo = totalPage;
+  
+      message = messageService.list(pageNo, pageSize, memberNos, loginNo);
+  
+      content.put("status", "success");
+      content.put("list", message);
+      content.put("pageNo", pageNo);
+      content.put("pageSize", pageSize);
+      content.put("totalPage", totalPage);
+      
+    } else {
+      content.put("status", "fail");
     }
-
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
-
-    int rowCount = messageService.size(memberNos, loginNo); 
-
-    if (rowCount == 0) {
-      content.put("pageNo", 0);
-      return content;
-    }
-
-    int totalPage = rowCount / pageSize;
-
-    if (rowCount % pageSize > 0)
-      totalPage++;
-
-    if (pageNo < 1) 
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-
-    message = messageService.list(pageNo, pageSize, memberNos, loginNo);
-
-    content.put("list", message);
-    content.put("pageNo", pageNo);
-    content.put("pageSize", pageSize);
-    content.put("totalPage", totalPage);
 
     return content;
   }
 
-  @GetMapping("listsend")
-  public Object list2(
+  @GetMapping("sendList")
+  public Object sendList(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
       @RequestParam String keyword,
@@ -160,49 +167,54 @@ public class MessageController {
 
     // 로그인한 유저의 정보를 담는다.
     Member loginUser = (Member) session.getAttribute("loginUser"); 
-    int loginNo = loginUser.getNo();
-    System.out.println(loginNo);
-    
     HashMap<String,Object> content = new HashMap<>();
-
-    List<Message> message;
-    List<Integer> memberNos = null;
-
-    if(!keyword.equals("undefined") && !keyword.equals("")) {
-      memberNos = memberService.findMemberNoMsg(keyword);
-
-      if (memberNos.size() == 0) {
+    
+    if (loginUser != null) {
+      
+      int loginNo = loginUser.getNo();
+      List<Message> message;
+      List<Integer> memberNos = null;
+  
+      if(!keyword.equals("undefined") && !keyword.equals("")) {
+        memberNos = memberService.findMemberNoMsg(keyword);
+  
+        if (memberNos.size() == 0) {
+          content.put("pageNo", 0);
+          return content;
+        }
+      }
+  
+      if (pageSize < 3 || pageSize > 8) 
+        pageSize = 3;
+  
+      int rowCount = messageService.size2(memberNos, loginNo); 
+  
+      if (rowCount == 0) {
         content.put("pageNo", 0);
         return content;
       }
+  
+      int totalPage = rowCount / pageSize;
+  
+      if (rowCount % pageSize > 0)
+        totalPage++;
+  
+      if (pageNo < 1) 
+        pageNo = 1;
+      else if (pageNo > totalPage)
+        pageNo = totalPage;
+  
+      message = messageService.list2(pageNo, pageSize, memberNos, loginNo);
+  
+      content.put("status", "success");
+      content.put("list", message);
+      content.put("pageNo", pageNo);
+      content.put("pageSize", pageSize);
+      content.put("totalPage", totalPage);
+
+    } else {
+      content.put("status", "fail");
     }
-
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
-
-    int rowCount = messageService.size2(memberNos, loginNo); 
-
-    if (rowCount == 0) {
-      content.put("pageNo", 0);
-      return content;
-    }
-
-    int totalPage = rowCount / pageSize;
-
-    if (rowCount % pageSize > 0)
-      totalPage++;
-
-    if (pageNo < 1) 
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-
-    message = messageService.list2(pageNo, pageSize, memberNos, loginNo);
-
-    content.put("list", message);
-    content.put("pageNo", pageNo);
-    content.put("pageSize", pageSize);
-    content.put("totalPage", totalPage);
 
     return content;
   }
