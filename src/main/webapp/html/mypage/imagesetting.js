@@ -2,8 +2,6 @@
 var image = document.getElementById('updateImage'),
 imageInput,
 avatar = $('#profilePhoto'),
-cropBoxData,
-canvasData,
 cropper,
 URL = window.URL || window.webkitURL,
 originalImageURL,
@@ -12,22 +10,20 @@ uploadedImageURL,
 $alert = $('.alert'),
 $modal = $('#imageModal'),
 // cropper options
-options = {
-    viewMode: 3,
-    dragMode: 'move',
-    aspectRatio: 1/1,
-    guides: false,
-    background: false,
-    ready: function () {
-        cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
-      }
-  };
+options = {};
+
 var page = location.href.split('/')[5],
       studyNo;
-
 if (page === "mystudy") { // 현재 페이지가 mystudy 이면..
   imageInput = document.getElementById('mystudyImageInput');
   studyNo =  location.href.split('?')[1].split('=')[1];
+  options = {
+      viewMode: 3,
+      dragMode: 'move',
+      aspectRatio: 4/3,
+      guides: false,
+      background: false
+    };
   
   (function (myStudyNo) { // 스터디 장 판단
     $.getJSON('../../app/json/MyStudy/leader?no=' + studyNo,
@@ -43,6 +39,13 @@ if (page === "mystudy") { // 현재 페이지가 mystudy 이면..
   
 } else {
   imageInput = document.getElementById('imageInput');
+  options = {
+      viewMode: 3,
+      dragMode: 'move',
+      aspectRatio: 1/1,
+      guides: false,
+      background: false
+    };
 }
 
 // mystudy 페이지 인지 mypage인지 구분하여 모달의 변경 버튼을 바꾼다.
