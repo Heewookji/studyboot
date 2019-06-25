@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     selectable: false,
     eventClick: function(info) { // event란? 일정 하나하나를 event라 한다. , 일정을 눌렀을때 일어나는 함수
       $('#schdulDetailModal').modal('show');
-      loadDetail(info.event.id);
+      loadDetail(info.event.id, info.event.backgroundColor);
     },
 
     events: '../../app/json/mystudyschedule/allSchedules',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //일정 디테일 출력을 처리할 함수
-function loadDetail(no) {
+function loadDetail(no, color) {
   $.getJSON('../../app/json/mystudyschedule/detail?no=' + no, function(obj) {
 
     console.log(obj);
@@ -49,6 +49,7 @@ function loadDetail(no) {
     var endT = obj.end.substring(11, 16); // 시간
 
     $('#schedleDetailTitle').html(obj.title);
+    $('#schedleDetailTitle').parent().css('background-color', color);
     $('#study-name').html(obj.studyName);
     $('#event-detail').html(obj.memo);
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {

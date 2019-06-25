@@ -223,11 +223,18 @@ $sendCheckAll.change(function () {
 
 $(document.body).bind('loaded-list', () => {
   
-$('#messageForm-btn').click((e) => {
+$('#messageForm-btn1').click((e) => {
 $('#recv_id').val("");
 $('#message_contents').val("");
 $('#title').val("");
 $('.sspctForm-Format').removeClass('std-invisible');
+});
+
+$('#messageForm-btn2').click((e) => {
+  $('#recv_id').val("");
+  $('#message_contents').val("");
+  $('#title').val("");
+  $('.sspctForm-Format').removeClass('std-invisible');
 });
 
 $('.sspctForm-btn').click((e) => {
