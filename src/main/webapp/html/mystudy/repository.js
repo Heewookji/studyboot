@@ -8,8 +8,8 @@ $(document).ready(function() {
   // 게시판으로 진입했을 때 탭 색깔 활성화
   $(document.body).bind('loaded-nav', () => {
     $('#std-repository').removeClass('list-group-item list-group-item-action justify-content-between');
-    $('#std-repository').addClass('list-group-item justify-content-between active');
-
+    $('#std-repository').addClass('list-group-item justify-content-between active minee');
+    $('.minee').attr('style', "cursor: pointer; color: white;");
   });
 
   // 위쪽 빵 부스러기 적용할 때 기존껄 span 태그에서 리스트 태그로 바꿔서 적용시키기
