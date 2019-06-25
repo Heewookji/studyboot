@@ -195,3 +195,172 @@ function getCurrentScrollPercentage(){
 }
 
 
+
+
+
+
+$('.study-view-link').click((e) => {
+  location.href = '/studyboot/html/study/view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
+  + '&name=' + $(e.target).parents('.card-div').find('a').html();
+});
+
+
+// hottest
+$('#std-rate-1111').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.7
+});
+
+$('#std-rate-1112').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.5
+});
+
+$('#std-rate-1113').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4
+});
+
+$('#std-rate-1114').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4
+});
+
+$('#std-rate-1115').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 3.7
+});
+
+
+// highest
+$('#std-rate-2221').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.8
+});
+
+$('#std-rate-2222').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.7
+});
+
+$('#std-rate-2223').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.6
+});
+
+$('#std-rate-2224').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.5
+});
+
+$('#std-rate-2225').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4.5
+});
+
+
+// nearest
+$('#std-rate-3331').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4
+});
+
+$('#std-rate-3332').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 4
+});
+
+$('#std-rate-3333').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 3.8
+});
+
+$('#std-rate-3334').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 3.3
+});
+
+$('#std-rate-3335').rateit({
+  min: 0, 
+  max: 5, 
+  mode: 'font', 
+  starwidth: 50, 
+  readonly: true, 
+  resetable: false,
+  value: 3
+});
+
+
+
+
+
