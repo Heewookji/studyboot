@@ -19,19 +19,27 @@ if (messagePage === "mystudy") { // 현재 페이지가 mystudy 이면..
 }
 
 //모달이 켜지기 전에 준비하는 함수
-$('#addModal').on('show.bs.modal', function (e) { 
+$('#addModal').on('show.bs.modal', function (e) {
+  
+  $('#title').val('');
+  $('#message_contents').val('');
+  
+  
   if(messagePage === "mystudy") { // 현재 페이지가 mystudy면 보내는이를 넣어준다.
-    alert(messagePage);
+    $('#formTitle').html('쪽지 보내기');
+ 
     messageReceiver = $('#message-add-nick').attr('nick-name');
     $('#recv_id').attr("value", messageReceiver);
     $('#recv_id').attr("readonly", true);
     
   } else if(messagePage === "study") { // 현재 페이지가 study면 보내는이를 넣어준다.
+    $('#formTitle').html('쪽지 보내기');
     messageReceiver = $('#study-message-add-nick').attr('nick-name');
     $('#recv_id').attr("value", messageReceiver);
     $('#recv_id').attr("readonly", true);
+  } else if(messagePage === "message") { // 현재 페이지가 message면 보내는이를 넣어준다.
+    $('#formTitle').html('쪽지 보내기');
   }
-  
 });
 
 // 모달에서 보내기 버튼 누를때
@@ -48,11 +56,25 @@ $('#messageAdd-btn').click((e) => {
     success: function(data){
       var obj = JSON.parse(data);
       
-      if (messagePage == "mystudy" || messagePage == "study") { // 현재 페이지가 mystudy면 쪽지 보내고 리로드 안함
-        $('#addModal').modal('hide');
-      } else {
-        location.reload();
-      }
+      
+      const Toast = Swal.mixin({
+        toast: true,
+        showConfirmButton: false,
+        timer: 1000
+      });
+      Toast.fire({
+        type: 'success',
+        title: '메시지를 보냈습니다!'
+      }).then((result) => {
+        
+        if (messagePage == "mystudy" || messagePage == "study") { // 현재 페이지가 mystudy면 쪽지 보내고 리로드 안함
+          $('#addModal').modal('hide');
+        } else {
+          location.reload();
+        }
+        
+      });
+     
     },
     error: function(){
       Swal.fire({

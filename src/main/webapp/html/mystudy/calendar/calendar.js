@@ -96,7 +96,7 @@ $(document.body).bind('dateClick', () => {
   $('#schedule-edt').attr("value", "");
   $('#schedule-memo').empty();
 
-  $('#schedule-add-btn').show(); // 모달의 수정 버튼 보이게
+  $('#schedule-add-btn').parent('div').show(); // 모달의 수정 버튼 보이게
   $('#schedule-update-btn').hide(); // 모달의 수정 버튼 숨김
 
   $('#calendar-add-modal-btn').click();
@@ -318,7 +318,7 @@ $('#event-update-btn').click(() => {
   resetForm();
 
   $('#schedule-update-btn').show(); // 모달의 수정 버튼 보이게
-  $('#schedule-add-btn').hide(); // 모달의 등록 버튼 숨김
+  $('#schedule-add-btn').parent('div').hide(); // 모달의 등록 버튼 숨김
 
   $('#calendar-add-modal-btn').click(); // 수정하는 모달 띄움
   $('#event-close-btn').click(); // 디테일 모달 닫고,

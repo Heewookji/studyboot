@@ -17,6 +17,9 @@ templateSrcSend = $('#ms-template').html();
 $( document ).ready(function() {
   $("#sb-history").load("../mypage/rateInfo.html");
   $("#sb-imagesetting").load("../mypage/imagesetting.html");
+  $("#message-addform").load("/studyboot/html/message/messageAddModal.html");
+  loadList(1);
+  loadList2(1);
 });
 
 
@@ -178,8 +181,7 @@ $('#send-search-btn').click((e) => {
   loadList2(1, sendKeyword);
 });
 
-loadList(1);
-loadList2(1);
+
 
 // 체크박스 설정
 var $recvCheckAll = $('#recv-checkAll');
@@ -224,6 +226,9 @@ $sendCheckAll.change(function () {
 $(document.body).bind('loaded-list', () => {
   
 $('#messageForm-btn1').click((e) => {
+  
+  $('#addModal').modal('show');
+  
 $('#recv_id').val("");
 $('#message_contents').val("");
 $('#title').val("");
@@ -231,6 +236,9 @@ $('.sspctForm-Format').removeClass('std-invisible');
 });
 
 $('#messageForm-btn2').click((e) => {
+  
+  $('#addModal').modal('show');
+  
   $('#recv_id').val("");
   $('#message_contents').val("");
   $('#title').val("");
@@ -253,39 +261,6 @@ $('#msg-response').click((e) => {
 
 });
 
-$('#messageAdd-btn').click((e) => {
-  $.ajax({
-    url:'../../app/json/message/add',
-    type: 'post',
-    dataType: 'text',
-    data: {
-    nickName : $(recv_id).val(),
-    title: $(title).val(),
-    contents: $(message_contents).val()
-    },
-    success: function(data){
-      Swal.fire({
-        type: 'success',
-        title: '전송 완료',
-        showConfirmButton: false,
-        timer: 1500
-      }).then((result) => {
-        location.reload();
-      });
-    },
-    error: function(){
-      Swal.fire({
-        type: 'error',
-        title: '닉네임을 확인 하세요!',
-        showConfirmButton: false,
-        timer: 1500
-      }).then((result) => {
-        $(recv_id).val("");
-      });
-      
-    }
-  });
-});
 
 
 $('#recv-delete-btn').click((e) => {
@@ -383,6 +358,7 @@ $('#inqryForm-btn').click((e) => {
 $('#inqryModal').on('hidden.bs.modal', () => {
   $('#inqryContents').val('');
 });
+
 
 // inquiry add
 $('#inqryAdd-btn').click((e) => {

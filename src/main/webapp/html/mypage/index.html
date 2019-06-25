@@ -139,16 +139,14 @@
   <!-- End inquiry modal -->
 
 
-  <!-- -------------------------------캘린더 모달------------------------------------- -->
+  <!-- -------------------------------캘린더 모달------------------------------------- 
 
-  <!-- 일정 디테일 모달 -->
   <div class="modal fade" id="schdulDetailModal" tabindex="-1"
     role="dialog" aria-labelledby="schedleDetailHead" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="schedleDetailTitle"></h4>
-          <!-- 일정 제목 -->
 
           <button type="button" class="close" data-dismiss="modal"
             aria-label="Close" id="calendar-detail-close-modal-btn">
@@ -160,7 +158,6 @@
 
             <li
               class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-pb-15 g-height-50">
-              <!-- 일정 시작 시간 -->
               <div class="col-md-2">
                 <span class="u-icon-v1 g-color-primary"><i
                   class="fa fa-star-o"></i></span>
@@ -172,7 +169,6 @@
 
             <li
               class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-              <!-- 일정 시작 시간 -->
               <div class="col-md-2">
                 <span class="u-icon-v1 g-color-primary"><i
                   class="icon-event"></i></span>
@@ -184,7 +180,6 @@
 
             <li
               class="row d-flex align-items-center g-py-15 g-min-height-100">
-              <!-- 일정 내용 -->
               <div class="col-md-2">
                 <span class="u-icon-v1 g-color-primary"><i
                   class="fa fa-sticky-note-o"></i></span>
@@ -203,6 +198,80 @@
       </div>
     </div>
   </div>
+-->
+
+
+ <div class="modal fade" id="schdulDetailModal" role="dialog"
+  aria-labelledby="schedleDetailHead" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div
+    class="modal-content g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30" id="cal-modal-bg">
+    <div class="modal-body">
+     <!-- Find a Course -->
+     <div>
+      <div class="ml-2">
+       <h1
+        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
+        id="schedleDetailTitle"></h1>
+      </div>
+      <hr class="g-mb-5">
+
+      <div class="g-pa-10">
+
+       <ul class="list-unstyled g-mb-25">
+        <li class="row d-flex align-items-center">
+         <!-- 일정 시작 시간 -->
+         <div class="col">
+          <span class="u-icon-v1 g-color-primary"><i
+           class="fa fa-star-o"></i></span>
+         </div>
+         <div class="col-md-10">
+          <span id="study-name"></span>
+         </div>
+        </li>
+        <hr>
+        <li class="row d-flex align-items-center">
+         <!-- 일정 시작 시간 -->
+         <div class="col-md-2">
+          <span class="u-icon-v1 g-color-primary"><i
+           class="icon-event"></i></span>
+         </div>
+         <div class="col-md-10">
+          <span id="study-start-date"></span>
+         </div>
+        </li>
+        <hr>
+        <li class="row d-flex align-items-center">
+         <!-- 일정 내용 -->
+         <div class="col-md-2">
+          <span class="u-icon-v1 g-color-primary"><i
+           class="fa fa-sticky-note-o"></i></span>
+         </div>
+         <div class="col-md-10">
+          <span id="event-detail"></span>
+         </div>
+        </li>
+
+       </ul>
+    </div>
+
+       <div class="modal-footer">
+        <button type="button"
+         class="btn btn-md u-btn-outline-bluegray g-rounded-50"
+         data-dismiss="modal">닫기</button>
+       </div>
+  
+
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+
+
+
+
 
   <!-- content -->
   <div class="container g-pt-70 g-pb-30 g-mt-110 g-mb-50">

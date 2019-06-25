@@ -1,46 +1,66 @@
 
-<!-- message add modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+<!-- Modal -->
+ <div class="modal fade" id="addModal" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="formTitle" align="center" style="width: 768px;">쪽지 보내기</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div
+    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
+    style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
+    <div class="modal-body">
+     <!-- Find a Course -->
+     <div>
+        <div class="ml-2">
+       <h1
+        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
+        id="formTitle"></h1>
       </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group sspctForm-Format">
-          <!-- class="form-group sspctForm-Format std-invisible" -->
-            <label for="recv_id" class="col-form-label">받는 회원</label> 
-            <input class="form-control" id="recv_id"  type="text"></input>
-            
-            <label for="sendNo" class="col-form-label"></label>
-            <input type="hidden"  id="sendNo"></input> 
-            
-            <label for="title" class="col-form-label">제목</label> 
-            <input class="form-control" id="title"  type="text"></input>
-            
-          </div>
-          
-          <div class="form-group">
-            <label for="message_contents" class="col-form-label">내용</label>
-            <textarea class="form-control"
+      <hr class="g-mb-5">
+      
+      <form action="add" class="study-add-form g-pa-15">
+       <!-- Text Input -->
+       <div class="row sspctForm-Format">
+        <div class="form-group g-mb-20 col">
+         <label class="g-mb-10" for="recv_id">받는 회원</label>
+         <input class="form-control form-control-md rounded"
+          id="recv_id" type='text'>
+        </div>
+       </div>
+       
+         <input class="form-control form-control-md rounded"
+          id="sendNo" type='hidden'>
+       
+       <div class="row sspctForm-Format">
+        <div class="form-group g-mb-20 col">
+         <label class="g-mb-10" for="title">제목</label>
+         <input class="form-control form-control-md rounded"
+          id="title" type='text'>
+        </div>
+       </div>
+       
+        <div class="row sspctForm-Format">
+        <div class="form-group g-mb-20 col">
+            <label for="message_contents" class="g-mb-10">내용</label>
+            <textarea class="form-control form-control-md rounded"
               id="message_contents"></textarea>
           </div>
-          
-        </form>
-      </div>
+       </div>
+       
+       <!-- End Text Input -->
+      </form>
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="messageAdd-btn">보내기</button>
+       <button type="button"
+        class="btn btn-md u-btn-primary g-rounded-50" id="messageAdd-btn">보내기</button>
+       <button type="button"
+        class="btn btn-md u-btn-outline-bluegray g-rounded-50"
+        data-dismiss="modal">취소</button>
       </div>
+     </div>
     </div>
+   </div>
   </div>
-</div>
-<!-- message add modal -->
+ </div>
+
 
 
 <div id="message-add-nick" ></div>

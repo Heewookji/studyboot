@@ -49,7 +49,8 @@ function loadDetail(no, color) {
     var endT = obj.end.substring(11, 16); // 시간
 
     $('#schedleDetailTitle').html(obj.title);
-    $('#schedleDetailTitle').parent().css('background-color', color);
+    $('#schedleDetailTitle').css('color', color);
+    $('.u-icon-v1 i').css('color',color);
     $('#study-name').html(obj.studyName);
     $('#event-detail').html(obj.memo);
     if(obj.start.substring(0, 10) === obj.end.substring(0, 10)) {

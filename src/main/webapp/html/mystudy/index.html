@@ -99,8 +99,7 @@
       <div
        class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0 g-mb-15">
        <h3 class="h6 mb-0">
-        <i class="icon-layers g-pos-rel g-top-1 g-mr-5"></i> Study
-        announcement
+        <i class="icon-layers g-pos-rel g-top-1 g-mr-5"></i> 스터디 공지사항
        </h3>
        <div class="dropdown g-mb-10 g-mb-0--md">
         <a id="ntc-board"><span
@@ -165,9 +164,93 @@
 
 
 
-<div class="modal fade" id="exampleModal" role="dialog"
-  aria-labelledby="schedule-add-head" aria-hidden="true"
-  tabindex="-1">
+
+
+
+
+
+
+ <div class="modal fade" id="schdulDetailModal" role="dialog"
+  aria-labelledby="schedleDetailHead" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div
+    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
+    style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
+    <div class="modal-body">
+     <!-- Find a Course -->
+     <div>
+      <div class="ml-2">
+       <h1
+        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
+        id="schedleDetailTitle"></h1>
+      </div>
+      <hr class="g-mb-5">
+
+      <div class="g-pa-10">
+
+       <ul class="list-unstyled g-mb-25">
+        <li class="row d-flex align-items-center">
+         <!-- 일정 시작 시간 -->
+         <div class="col">
+          <span class="u-icon-v1 g-color-primary"><i
+           class="fa fa-star-o"></i></span>
+         </div>
+         <div class="col-md-10">
+          <span class="study-name"></span>
+         </div>
+        </li>
+        <hr>
+        <li class="row d-flex align-items-center">
+         <!-- 일정 시작 시간 -->
+         <div class="col-md-2">
+          <span class="u-icon-v1 g-color-primary"><i
+           class="icon-event"></i></span>
+         </div>
+         <div class="col-md-10">
+          <span id="study-start-date"></span>
+         </div>
+        </li>
+        <hr>
+        <li class="row d-flex align-items-center">
+         <!-- 일정 내용 -->
+         <div class="col-md-2">
+          <span class="u-icon-v1 g-color-primary"><i
+           class="fa fa-sticky-note-o"></i></span>
+         </div>
+         <div class="col-md-10">
+          <span id="event-detail"></span>
+         </div>
+        </li>
+
+       </ul>
+    </div>
+
+       <div class="modal-footer">
+        <button type="button"
+         class="btn btn-md u-btn-primary g-rounded-50"
+         id="event-attend-btn">출석</button>
+        <button type="button"
+         class="btn btn-md u-btn-primary g-rounded-50"
+         id="event-update-btn">수정</button>
+        <button type="button"
+         class="btn btn-md u-btn-primary g-rounded-50"
+         id="event-delete-btn">삭제</button>
+        <button type="button"
+         class="btn btn-md u-btn-outline-bluegray g-rounded-50"
+         data-dismiss="modal">닫기</button>
+       </div>
+  
+
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+
+
+ <div class="modal fade" id="exampleModal" role="dialog"
+  aria-labelledby="schedule-add-head" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div
     class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
@@ -181,27 +264,29 @@
         id="schedule-add-head"></h1>
       </div>
       <hr class="g-mb-5">
-      
-      
-    <form id="schedul-submit-form" class="study-add-form g-pa-10">
-    
-    
-     <div class="form-group g-mb-20">
-         <label class="g-mb-10" for="schedule-name">일정 제목</label> 
-         <input class="form-control form-control-md rounded" id="schedule-title"
-          type="text" placeholder="일정 제목을 입력해주세요!">
-          </div>
-        
-          <div class="form-group g-mb-20">
-       <label for="schedule-sdt" class="col-form-label g-mb-5">시작 일시</label> <input
-        type="datetime-local" class="form-control g-height-40" id="schedule-sdt">
-      </div>
-      <div class="form-group g-mb-25">
-       <label for="schedule-edt" class="col-form-label g-mb-5">종료 일시</label> <input
-        type="datetime-local" class="form-control g-height-40" id="schedule-edt">
-      </div>
-      
-        <!-- Textarea -->
+
+
+      <form id="schedul-submit-form" class="study-add-form g-pa-10">
+
+
+       <div class="form-group g-mb-20">
+        <label class="g-mb-10" for="schedule-name">일정 제목</label> <input
+         class="form-control form-control-md rounded"
+         id="schedule-title" type="text" placeholder="일정 제목을 입력해주세요!">
+       </div>
+
+       <div class="form-group g-mb-20">
+        <label for="schedule-sdt" class="col-form-label g-mb-5">시작
+         일시</label> <input type="datetime-local"
+         class="form-control g-height-40" id="schedule-sdt">
+       </div>
+       <div class="form-group g-mb-25">
+        <label for="schedule-edt" class="col-form-label g-mb-5">종료
+         일시</label> <input type="datetime-local"
+         class="form-control g-height-40" id="schedule-edt">
+       </div>
+
+       <!-- Textarea -->
        <div class="form-group g-mb-20">
         <label class="g-mb-10" for="schedule-memo">내용</label>
         <div class="rounded">
@@ -210,9 +295,9 @@
           placeholder="일정에 대한 설명을 적어주세요!"></textarea>
         </div>
        </div>
-      
+
       </form>
-      
+
       <div class="row justify-content-end">
        <div class="col-3 g-pr-0">
         <button type="button"
@@ -235,143 +320,12 @@
    </div>
   </div>
  </div>
- 
- 
- <!-- 일정 등록 모달 -->
- <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-  aria-labelledby="schedule-add-head" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h4 class="modal-title" id="schedule-add-head"></h4>
-     <button type="button" class="close schedule-close-btn"
-      data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
-    <div class="modal-body">
-     <form id="schedul-submit-form">
-      <div class="form-group">
-       <label for="schedule-name" class="col-form-label">일정 제목:</label>
-       <input type="text" class="form-control" id="schedule-title">
-      </div>
-      <div class="form-group">
-       <label for="schedule-sdt" class="col-form-label">시작 일시:</label> <input
-        type="datetime-local" class="form-control" id="schedule-sdt">
-      </div>
-      <div class="form-group">
-       <label for="schedule-edt" class="col-form-label">종료 일시:</label> <input
-        type="datetime-local" class="form-control" id="schedule-edt">
-      </div>
-      <div class="form-group">
-       <label for="schedule-memo" class="col-form-label">일정 내용:</label>
-       <textarea class="form-control" id="schedule-memo"></textarea>
-      </div>
-     </form>
-    </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary schedule-close-btn"
-      data-dismiss="modal">닫기</button>
-     <button type="button" class="btn btn-primary"
-      id="schedule-update-btn">수정</button>
-     <button type="button" class="btn btn-primary" id="schedule-add-btn">등록</button>
-    </div>
-   </div>
-  </div>
- </div>
 
-
-
-
-
-
-<div class="modal fade" id="schdulDetailModal" role="dialog"
-  aria-labelledby="schedleDetailHead" aria-hidden="true"
-  tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-   <div
-    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
-    style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
-    <div class="modal-body">
-     <!-- Find a Course -->
-     <div>
-      <div class="ml-2">
-       <h1
-        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
-        id="schedleDetailTitle"></h1>
-      </div>
-      <hr class="g-mb-5">
-      
-   <ul class="list-unstyled g-mb-25">
-      <li
-       class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-pb-15 g-height-50">
-       <!-- 일정 시작 시간 -->
-       <div class="col-md-2">
-        <span class="u-icon-v1 g-color-primary"><i
-         class="fa fa-star-o"></i></span>
-       </div>
-       <div class="col-md-10">
-        <span class="study-name"></span>
-       </div>
-      </li>
-
-      <li
-       class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
-       <!-- 일정 시작 시간 -->
-       <div class="col-md-2">
-        <span class="u-icon-v1 g-color-primary"><i
-         class="icon-event"></i></span>
-       </div>
-       <div class="col-md-10">
-        <span id="study-start-date"></span>
-       </div>
-      </li>
-
-      <li class="row d-flex align-items-center g-py-15 g-min-height-100">
-       <!-- 일정 내용 -->
-       <div class="col-md-2">
-        <span class="u-icon-v1 g-color-primary"><i
-         class="fa fa-sticky-note-o"></i></span>
-       </div>
-       <div class="col-md-10">
-        <span id="event-detail"></span>
-       </div>
-      </li>
-
-     </ul>
-      
-      <div class="row justify-content-end">
-      <div class="col-3 g-pr-0">
-       <div class="col-3 g-mr-5">
-        <button type="button"
-         class="btn btn-block u-shadow-v19 u-shadow-v19 u-btn-outline-bluegray g-font-size-14 g-rounded-30 g-py-10 g-mt-0 g-mb-10"
-         data-dismiss="modal">닫기</button>
-       </div>
-       <div class="col-3 g-pr-0">
-        <button type="button"
-         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
-         id="event-delete-btn">삭제</button>
-       </div>
-        <button type="button"
-         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
-         id="event-update-btn">수정</button>
-       </div>
-       <div class="col-3 g-pr-0">
-        <button type="button"
-         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
-         id="event-attend-btn">출석</button>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div>
- </div>
 
 
  <!-- 일정 디테일 모달 -->
- <div class="modal fade" id="schdulDetailModal1" tabindex="-1"
-  role="dialog" aria-labelledby="schedleDetailHead" aria-hidden="true">
+ <div class="modal fade" id="schdulDetailModal1" role="dialog"
+  aria-labelledby="schedleDetailHead" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div class="modal-content">
     <div class="modal-header">
@@ -432,15 +386,14 @@
    </div>
   </div>
  </div>
- 
- 
- 
- 
- 
-<!--  출석 모달 -->
+
+
+
+
+
+ <!--  출석 모달 -->
  <div class="modal fade" id="exampleModalScrollable" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
-  tabindex="-1">
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div
     class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
@@ -474,10 +427,8 @@
    </div>
   </div>
  </div>
- <!--  출석 모달 -->
-
- <footer id="js-footer"> </footer> <script id="attend-member1"
-  type="text/x-handlebars-template">
+ <!--  출석 모달 --> <footer id="js-footer"> </footer> <script
+  id="attend-member1" type="text/x-handlebars-template">
 {{#each list}}
   <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
     <div class="media">
