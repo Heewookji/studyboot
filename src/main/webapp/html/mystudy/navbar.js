@@ -6,6 +6,7 @@ $(document).ready(function() {
   
   $("#min_nav_bar").load("/studyboot/html/mystudy/navbar.html", function() {
     
+    
     $('#std-board').attr("href", "/studyboot/html/mystudy/board.html?no=" + nos);
 
     $('#std-repository').click((e) => {
