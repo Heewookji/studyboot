@@ -296,22 +296,6 @@
       <div class="col-lg-9 g-mb-50">
 
         <!-- Message 컨텐츠 시작 -->
-        <!-- Panel Header (상단 바)-->
-        <div
-          class="card-header d-flex align-items-center justify-content-between g-bg-gray-light-v5 border-0 g-mb-15">
-          <h3 class="h6 mb-0" style="text-align: center;">
-            <i class="icon-envelope g-pos-rel g-top-1 g-mr-8"></i>쪽지함
-          </h3>
-          <div class="dropdown g-mb-10 g-mb-0--md">
-            <span
-              class="d-block g-color-primary--hover g-cursor-pointer g-mr-minus-5 g-pa-5"
-              id="messageForm-btn" data-toggle="modal"
-              data-target="#addModal"> <i class="et-icon-chat"></i>
-              쪽지보내기
-            </span>
-          </div>
-        </div>
-        <!-- End Panel Header -->
 
         <!-- Nav tabs -->
         <ul
@@ -389,7 +373,9 @@
               </div>
               <div class="col-3 text-right">
                 <button type="button" class="btn btn-outline-primary"
-                  data-toggle="modal" id="recv-delete-btn">삭제</button>
+                  data-toggle="modal" data-target="#addModal" id="messageForm-btn1">보내기</button>
+                <button type="button" class="btn btn-outline-primary"
+                  id="recv-delete-btn">삭제</button>
               </div>
             </div>
           </div>
@@ -451,7 +437,9 @@
               </div>
               <div class="col-3 text-right">
                 <button type="button" class="btn btn-outline-primary"
-                  data-toggle="modal" id="send-delete-btn">삭제</button>
+                  data-toggle="modal" data-target="#addModal" id="messageForm-btn2">보내기</button>
+                <button type="button" class="btn btn-outline-primary"
+                  id="send-delete-btn">삭제</button>
               </div>
             </div>
           </div>

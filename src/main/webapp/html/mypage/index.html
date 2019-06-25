@@ -55,6 +55,15 @@
   href="/studyboot/node_modules/jquery.rateit/scripts/rateit.css">
 <link rel="stylesheet"
   href="../../node_modules/cropperjs/dist/cropper.css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/icon.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/message.min.css"
+ rel="stylesheet" type="text/css">
+<link
+ href="/studyboot/js/Semantic-UI-master/dist/components/placeholder.min.css"
+ rel="stylesheet" type="text/css">
 
 <link rel='stylesheet' href='../../fullcalendar/core/main.css' />
 <link rel='stylesheet' href='../../fullcalendar/bootstrap/main.css' />
@@ -329,6 +338,11 @@
             <!-- doingStudyList -->
             <div class="container g-pb-50">
               <div id="doingStudy" class="g-px-30--lg">
+                <div class="ui message g-mb-0">
+                  <div class="text-center">
+                    <span>&nbsp;&nbsp;</span>
+                  </div>
+                </div>
                 <div class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
@@ -365,6 +379,11 @@
             <!-- applied studyList -->
             <div class="container g-pb-50">
               <div id="appliedStudy" class="g-px-30--lg">
+                <div class="ui message g-mb-0">
+                  <div class="text-center">
+                    <span>&nbsp;&nbsp;</span>
+                  </div>
+                </div>
                 <div class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
@@ -401,6 +420,11 @@
             <!-- pickedStudyList -->
             <div class="container g-pb-50">
               <div id="pickedStudy" class="g-px-30--lg">
+                <div class="ui message g-mb-0">
+                  <div class="text-center">
+                    <span>&nbsp;&nbsp;</span>
+                  </div>
+                </div>
                 <div class="js-carousel u-carousel-v5 g-mx-minus-15"
                   data-slides-show="3" data-slides-scroll="1"
                   data-arrows-classes="u-icon-v3 u-icon-size--sm g-absolute-centered--y g-color-primary g-color-white--hover g-bg-primary-opacity-0_1 g-bg-primary--hover rounded-circle g-pa-11"
@@ -530,6 +554,19 @@
 {{/each}}
   </script>
 
+  <script id="empty-study-template" type="text/x-handlebars-template">
+<div class="js-slide g-flex-centered rounded g-mx-15 g-my-30 card-div" style="width: 230px;">
+           <article class="u-shadow-v11">
+           <div class="ui placeholder" style="width: 230px; height: 160px;"><div class="image"></div></div>
+           <div class="g-bg-white g-pa-20 g-pb-30">
+           <div class="ui placeholder"><div class="header"><div class="line g-pb-10"></div>
+           <div class="short line g-pb-10"></div><div class="short line"></div></div>
+           <div class="paragraph"><div class="line g-pb-5"></div></div>
+           <div class="paragraph"><div class="line"></div></div>
+           <div class="paragraph"><div class="line"></div></div>
+           </div></div></article></div>
+  </script>
+
   <!-- JS Global Compulsory -->
   <script src="../../Unify/assets/vendor/jquery/jquery.min.js"></script>
   <script
@@ -549,6 +586,7 @@
   <script src='../../node_modules/@fullcalendar/interaction/main.js'></script>
   <script src='../../node_modules/@fullcalendar/daygrid/main.js'></script>
   <script src='../../node_modules/@fullcalendar/core/locales/ko.js'></script>
+  
   <!--   
   <script src='../../fullcalendar/timegrid/main.js'></script>
   <script src='../../fullcalendar/list/main.js'></script>
