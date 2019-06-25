@@ -451,7 +451,7 @@ function resetForm() {
       function(obj) {
 
     calendarMemberList = obj.list;
-    $(attendGenerator(obj)).appendTo('#study-list-modal');
+    $(attendGenerator(obj)).appendTo('.study-list-modal');
   });
 }(studyNo));
 
@@ -496,6 +496,8 @@ $('#event-attend-btn').click(() => {
   })
 
 });
+
+
 
 //닉네임을 서버로 보내서 멤버 id로 바꾸고 그것으로 출석을 하는 클릭 이벤트
 $('#attend-btn').click(() => {

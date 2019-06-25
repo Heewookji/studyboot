@@ -177,7 +177,7 @@ $('#retireeRateModal').on('shown.bs.modal', function (e) {
     if (obj.retire.length != 0 && obj.retire != "x") {
       //모달창 띄워서 평가하기
       $('#retire-person-modal').click();
-      $(retirePersonEvaluation(obj)).appendTo('#retire-person-evaluation');
+      $(retirePersonEvaluation(obj)).appendTo('.retire-person-evaluation');
     }
 
     $(document.body).trigger('retiree-evaluation-star');

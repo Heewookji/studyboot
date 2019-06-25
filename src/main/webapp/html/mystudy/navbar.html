@@ -145,34 +145,6 @@
 <button type="button" class="btn btn-primary" data-toggle="modal"
  data-target="#retireRateModal" hidden="hidden" id="retire-modal">modal</button>
 
-<div id="retireRateModal12"
- class="modal fade bd-example-modal-lg evaluation-star" tabindex="-1"
- role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
- <div class="modal-dialog modal-lg">
-  <div class="modal-content">
-   <div class="modal-header">
-    <h4 class="modal-title" id="schedleDetailHead">함께한 멤버들을 평가 해
-     주세요!</h4>
-
-    <button type="button" class="close" data-dismiss="modal"
-     aria-label="Close" id="calendar-detail-close-modal-btn">
-     <span aria-hidden="true">&times;</span>
-    </button>
-   </div>
-   <div class="col-lg-12">
-    <!-- User Contacts -->
-    <div class="row g-mb-20 g-mt-20" id="retire-evaluation"></div>
-   </div>
-   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary attend-close"
-     data-dismiss="modal">닫기</button>
-    <button type="button" class="btn btn-primary"
-     id="retire-evaluation-btn12">제출</button>
-   </div>
-  </div>
-
- </div>
-</div>
 
 
 <div class="modal fade" id="retireRateModal" role="dialog"
@@ -187,7 +159,7 @@
      <div class="ml-2">
       <h1
        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20">함께한
-       멤버들을 평가 해 주세요!</h1>
+       멤버들을 평가해주세요!</h1>
      </div>
      <hr class="g-mb-5">
      <div class="retireRateModalContents"></div>
@@ -197,7 +169,6 @@
        class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14 g-rounded-30 g-py-10 ml-2 g-mt-0 g-mb-10"
        id="retire-evaluation-btn">탈퇴하기</button>
      </div>
-
 
     </div>
    </div>
@@ -213,30 +184,9 @@
  data-target="#retireeRateModal" id="retire-person-modal"
  hidden="hidden">Launch demo modal</button>
 
-<!-- Modal -->
-<!-- tabinex 속성을 없애고 data-backdrop="static"을 줘서 모달 못끄게 설정 -->
-<div class="modal fade evaluation-star" id="retireeRateModal12"
- role="dialog" aria-labelledby="exampleModalCenterTitle"
- aria-hidden="true" data-backdrop="static">
- <div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
-   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalCenterTitle">함께 했던 스터디
-     원을 평가 해 주세요!</h5>
-   </div>
-   <div class="modal-body" id="retire-person-evaluation"></div>
-   <div class="modal-footer">
-    <button id="retiree-rate-button" type="button"
-     class="btn btn-primary">제출</button>
-   </div>
-  </div>
- </div>
-</div>
 
-
-
-<div class="modal fade" id="retireeRateModal" role="dialog"
- aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade evaluation-star" id="retireeRateModal" role="dialog"
+ aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
  <div class="modal-dialog modal-dialog-centered" role="document">
   <div
    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
@@ -246,15 +196,14 @@
     <div>
      <div class="ml-2">
       <h1
-       class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20">함께
-       했던 스터디 원을 평가 해 주세요!</h1>
+       class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20">함께했던 멤버를 평가해주세요!</h1>
      </div>
      <hr class="g-mb-5">
-     <div class="retireRateModalContents"></div>
+     <div class="retire-person-evaluation"></div>
      <div class="col-4 ml-md-auto">
       <button type="button"
        class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14 g-rounded-30 g-py-10 ml-2 g-mt-0 g-mb-10"
-       id="retire-evaluation-btn">탈퇴하기</button>
+       type="button" id="retiree-rate-button">제출하기</button>
      </div>
 
 
@@ -289,6 +238,7 @@
 {{/each}}
 </script>
 -->
+
 
 <!-- 스터디원 리스트 드롭다운 추가 -->
 <script id="study-memberList" type="text/x-handlebars-template">
@@ -371,7 +321,6 @@
       data-rateit-resetable="false"></div>
  </div>
         </div>
- 
        </figure>
        <!-- End Figure -->
       </div>
@@ -380,34 +329,7 @@
 </script>
 
 
-<!-- 탈퇴 평가 리스트 -->
-<script id="retire-evaluation-list1" type="text/x-handlebars-template">
-{{#each list}}
-<div class="col-md-4 g-mb-30 g-mt-30">
-  <figure
-    class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-cyan--hover g-transition-0_2 text-center">
-    <div class="g-py-40 g-px-20">
-      <!-- Figure Image -->
-      <img class="g-width-100 g-height-100 rounded-circle g-mb-20"
-        src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg" alt="Image Description">
-
-      <h4 class="h5 g-mb-5">{{name}}</h4>
-      <div class="d-block">
-        <span class="g-color-cyan g-font-size-default g-mr-3"> <i class="icon-user"></i>
-        </span> <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{member.nickName}}</em>
-      </div>
-    </div>
-
-    <hr class="g-brd-gray-light-v4 g-my-0">
-
-    <div id="retire-evaluation-{{member.nickName}}" class="rateit" data-rateit-mode="font" style="font-size: 30px"
-      data-rateit-resetable="false"></div>
-  </figure>
-</div>
-{{/each}}
-</script>
-
-<script id="retiree-evaluation-list" type="text/x-handlebars-template">
+<script id="retiree-evaluation-list1" type="text/x-handlebars-template">
 {{#each retire}}
  <div class="col-md-4 g-mb-30 g-mt-30">
 <div id="rateit{{nickName}}" data-rateit-mode="font"  style="font-size:30px" data-rateit-resetable="false">
@@ -437,7 +359,7 @@
 </script>
 
 <script id="retiree-evaluation-list" type="text/x-handlebars-template">
-{{#each list}}
+{{#each retire}}
 <div class="row">
  <div class="col g-mb-10">
   <!-- Figure -->
@@ -452,7 +374,7 @@
     <!-- Figure Info -->
     <div class="d-block">
      <div class="g-mb-5">
-      <h4 class="h5 g-mb-0">{{member.nickName}}</h4>
+      <h4 class="h5 g-mb-0">{{nickName}}</h4>
       <em
        class="d-block g-color-primary g-font-style-normal g-font-size-default  g-width-60">{{memberCls}}</em>
      </div>
@@ -464,7 +386,7 @@
 
     <div class="d-block g-pr-5">
      <div class="g-pb-40"></div>
-     <div id="retire-evaluation-{{member.nickName}}" class="rateit"
+     <div id="rateit-{{nickName}}" class="rateit"
       data-rateit-mode="font" style="font-size: 35px"
       data-rateit-resetable="false"></div>
     </div>

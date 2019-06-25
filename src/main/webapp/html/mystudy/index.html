@@ -72,14 +72,13 @@
    <ul class="u-list-inline" id="conts-list">
     <li class="list-inline-item g-mr-7"><a
      class="u-link-v5 g-color-main g-color-primary--hover"
-     href="/studyboot/">홈</a> <i class="fa fa-angle-right g-ml-7"></i>
-    </li>
+     href="/studyboot/">홈</a> <i class="fa fa-angle-right g-ml-7"></i></li>
     <li class="list-inline-item g-mr-7"><a
      class="u-link-v5 g-color-main g-color-primary--hover"
      href="/studyboot/html/mypage/">마이 페이지</a> <i
      class="fa fa-angle-right g-ml-7"></i></li>
-    <li class="list-inline-item g-color-primary" id="std-main"><span>마이 스터디
-      </span></li>
+    <li class="list-inline-item g-color-primary" id="std-main"><span>마이
+      스터디 </span></li>
    </ul>
   </div>
  </section>
@@ -164,9 +163,83 @@
   data-target="#exampleModalScrollable" hidden="hidden"></button>
 
 
+
+
+<div class="modal fade" id="exampleModal" role="dialog"
+  aria-labelledby="schedule-add-head" aria-hidden="true"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div
+    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
+    style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
+    <div class="modal-body">
+     <!-- Find a Course -->
+     <div>
+      <div class="ml-2">
+       <h1
+        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
+        id="schedule-add-head"></h1>
+      </div>
+      <hr class="g-mb-5">
+      
+      
+    <form id="schedul-submit-form" class="study-add-form g-pa-10">
+    
+    
+     <div class="form-group g-mb-20">
+         <label class="g-mb-10" for="schedule-name">일정 제목</label> 
+         <input class="form-control form-control-md rounded" id="schedule-title"
+          type="text" placeholder="일정 제목을 입력해주세요!">
+          </div>
+        
+          <div class="form-group g-mb-20">
+       <label for="schedule-sdt" class="col-form-label g-mb-5">시작 일시</label> <input
+        type="datetime-local" class="form-control g-height-40" id="schedule-sdt">
+      </div>
+      <div class="form-group g-mb-25">
+       <label for="schedule-edt" class="col-form-label g-mb-5">종료 일시</label> <input
+        type="datetime-local" class="form-control g-height-40" id="schedule-edt">
+      </div>
+      
+        <!-- Textarea -->
+       <div class="form-group g-mb-20">
+        <label class="g-mb-10" for="schedule-memo">내용</label>
+        <div class="rounded">
+         <textarea id="schedule-memo"
+          class="form-control form-control-md g-resize-none" rows="5"
+          placeholder="일정에 대한 설명을 적어주세요!"></textarea>
+        </div>
+       </div>
+      
+      </form>
+      
+      <div class="row justify-content-end">
+       <div class="col-3 g-pr-0">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
+         id="schedule-update-btn">수정</button>
+       </div>
+       <div class="col-3 g-pr-0">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
+         id="schedule-add-btn">등록</button>
+       </div>
+       <div class="col-3 g-mr-5">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 u-btn-outline-bluegray g-font-size-14 g-rounded-30 g-py-10 g-mt-0 g-mb-10"
+         data-dismiss="modal">닫기</button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ 
+ 
  <!-- 일정 등록 모달 -->
- <div class="modal fade" id="exampleModal" tabindex="-1"
-  role="dialog" aria-labelledby="schedule-add-head" aria-hidden="true">
+ <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+  aria-labelledby="schedule-add-head" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div class="modal-content">
     <div class="modal-header">
@@ -207,8 +280,97 @@
   </div>
  </div>
 
- <!-- 일정 디테일 모달 --> 
- <div class="modal fade" id="schdulDetailModal" tabindex="-1"
+
+
+
+
+
+<div class="modal fade" id="schdulDetailModal" role="dialog"
+  aria-labelledby="schedleDetailHead" aria-hidden="true"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div
+    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
+    style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
+    <div class="modal-body">
+     <!-- Find a Course -->
+     <div>
+      <div class="ml-2">
+       <h1
+        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
+        id="schedleDetailTitle"></h1>
+      </div>
+      <hr class="g-mb-5">
+      
+   <ul class="list-unstyled g-mb-25">
+      <li
+       class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-pb-15 g-height-50">
+       <!-- 일정 시작 시간 -->
+       <div class="col-md-2">
+        <span class="u-icon-v1 g-color-primary"><i
+         class="fa fa-star-o"></i></span>
+       </div>
+       <div class="col-md-10">
+        <span class="study-name"></span>
+       </div>
+      </li>
+
+      <li
+       class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-py-15 g-height-100">
+       <!-- 일정 시작 시간 -->
+       <div class="col-md-2">
+        <span class="u-icon-v1 g-color-primary"><i
+         class="icon-event"></i></span>
+       </div>
+       <div class="col-md-10">
+        <span id="study-start-date"></span>
+       </div>
+      </li>
+
+      <li class="row d-flex align-items-center g-py-15 g-min-height-100">
+       <!-- 일정 내용 -->
+       <div class="col-md-2">
+        <span class="u-icon-v1 g-color-primary"><i
+         class="fa fa-sticky-note-o"></i></span>
+       </div>
+       <div class="col-md-10">
+        <span id="event-detail"></span>
+       </div>
+      </li>
+
+     </ul>
+      
+      <div class="row justify-content-end">
+      <div class="col-3 g-pr-0">
+       <div class="col-3 g-mr-5">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 u-btn-outline-bluegray g-font-size-14 g-rounded-30 g-py-10 g-mt-0 g-mb-10"
+         data-dismiss="modal">닫기</button>
+       </div>
+       <div class="col-3 g-pr-0">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
+         id="event-delete-btn">삭제</button>
+       </div>
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
+         id="event-update-btn">수정</button>
+       </div>
+       <div class="col-3 g-pr-0">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
+         id="event-attend-btn">출석</button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+
+ <!-- 일정 디테일 모달 -->
+ <div class="modal fade" id="schdulDetailModal1" tabindex="-1"
   role="dialog" aria-labelledby="schedleDetailHead" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div class="modal-content">
@@ -223,7 +385,6 @@
     </div>
     <div class="modal-body">
      <ul class="list-unstyled g-mb-25">
-
       <li
        class="row d-flex align-items-center g-brd-bottom g-brd-gray-light-v4 g-pb-15 g-height-50">
        <!-- 일정 시작 시간 -->
@@ -271,41 +432,51 @@
    </div>
   </div>
  </div>
-<!-- 일정 디테일 모달 -->
-
-
- <!-- 일정 출석 체크 모달  -->
- <div class="modal fade" id="exampleModalScrollable"
-  tabindex="-1" role="dialog" aria-labelledby="attend-head"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
-   role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h3 class="modal-title" id="attend-head"></h3>
-     <button type="button" class="close attend-close"
-      data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
+ 
+ 
+ 
+ 
+ 
+<!--  출석 모달 -->
+ <div class="modal fade" id="exampleModalScrollable" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div
+    class="modal-content g-bg-img-hero g-bg-pos-top-center g-pos-rel g-z-index-1 g-rounded-30"
+    style="background-image: url(/studyboot/Unify/assets/include/svg/svg-bg5.svg);">
     <div class="modal-body">
-     <form id="attend-form">
-      <ul class="list-unstyled" id="study-list-modal">
-      </ul>
-     </form>
-    </div>
-    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary attend-close"
-      data-dismiss="modal">닫기</button>
-     <button type="button" class="btn btn-primary" id="attend-btn">출석</button>
+     <!-- Find a Course -->
+     <div>
+      <div class="ml-2">
+       <h1
+        class="g-color-black g-font-weight-600 g-font-size-30 g-pt-10 g-pr-20 g-pl-20"
+        id="attend-head"></h1>
+      </div>
+      <hr class="g-mb-5">
+      <form id="attend-form">
+       <div class="study-list-modal"></div>
+      </form>
+      <div class="row justify-content-end">
+       <div class="col-3 g-pr-0">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 g-color-white g-bg-primary g-font-size-14  g-rounded-30 g-py-10  g-mt-0 g-mb-10"
+         id="attend-btn">출석</button>
+       </div>
+       <div class="col-3 g-mr-5">
+        <button type="button"
+         class="btn btn-block u-shadow-v19 u-shadow-v19 u-btn-outline-bluegray g-font-size-14 g-rounded-30 g-py-10 g-mt-0 g-mb-10"
+         data-dismiss="modal">닫기</button>
+       </div>
+      </div>
+     </div>
     </div>
    </div>
   </div>
  </div>
+ <!--  출석 모달 -->
 
-
-
- <footer id="js-footer"> </footer> <script id="attend-member"
+ <footer id="js-footer"> </footer> <script id="attend-member1"
   type="text/x-handlebars-template">
 {{#each list}}
   <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
@@ -338,6 +509,51 @@
       </div>
     </div>
   </li>
+{{/each}}
+</script> <script id="attend-member" type="text/x-handlebars-template">
+{{#each list}}
+<div class="row">
+ <div class="col g-mb-10">
+  <!-- Figure -->
+  <figure class="u-block-hover u-shadow-v19 g-rounded-4 g-pa-15">
+   <div class="d-flex justify-content-start">
+    <!-- Figure Image -->
+    <img class="g-width-80 g-height-80 rounded-circle g-mr-15"
+     src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg"
+     alt="Image Description">
+    <!-- Figure Image -->
+
+    <!-- Figure Info -->
+    <div class="d-block">
+     <div class="g-mb-5">
+      <h4 class="h5 g-mb-0">{{member.nickName}}</h4>
+      <em
+       class="d-block g-color-primary g-font-style-normal g-font-size-default  g-width-60">{{memberCls}}</em>
+     </div>
+     <em
+      class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">{{name}}</em>
+    </div>
+    <!-- End Figure Info -->
+    <div class="g-width-250"></div>
+
+    <div class="d-block g-pr-5">
+     <div class="g-pb-40"></div>
+
+<label class="u-check" for="calmember{{memberNo}}">
+        <input class="g-hidden-xs-up g-pos-abs g-top-10 g-left-10 attend-checkbox attend-check" 
+type="checkbox" name="attend-check" id="calmember{{memberNo}}" value={{member.nickName}}>
+        <div class="u-check-icon-checkbox-v3 g-bg-primary--checked" >
+          <i class="fa fa-check g-absolute-centered g-color-white g-show-check"></i>
+          <i class="fa fa-plus g-absolute-centered g-color-primary g-hide-check"></i>
+        </div>
+      </label>
+    </div>
+   </div>
+
+  </figure>
+  <!-- End Figure -->
+ </div>
+</div>
 {{/each}}
 </script> <!-- 메인 공지사항 리스트 --> <script id="ntc-list"
   type="text/x-handlebars-template">
@@ -417,7 +633,7 @@ src="/studyboot/upload/images/member/thumbnail.{{member.photo}}.jpg" alt="Image 
 
  <script src='/studyboot/node_modules/@fullcalendar/core/main.js'></script>
  <script src='/studyboot/node_modules/@fullcalendar/interaction/main.js'></script>
-  <script src='../../fullcalendar/bootstrap/main.js'></script>
+ <script src='../../fullcalendar/bootstrap/main.js'></script>
  <script src='/studyboot/node_modules/@fullcalendar/daygrid/main.js'></script>
  <script src='/studyboot/node_modules/@fullcalendar/core/locales/ko.js'></script>
  <!-- 
