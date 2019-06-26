@@ -204,6 +204,7 @@ public class MemberController {
       loginUser.setBirth(member.getBirth());
       loginUser.setAddress(member.getAddress());
       loginUser.setCls(member.getCls());
+      loginUser.setPhoto("defaultphoto");
       if (memberService.update(loginUser) == 0) 
         throw new RuntimeException("해당 번호의 회원이 없습니다.");
       

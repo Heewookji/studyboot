@@ -9,7 +9,8 @@ $(document).on('ready', function () {
           {
             clientId: "SfQg5WbbEwfRelyDmqBo",
             callbackUrl: "http://localhost:8080/studyboot/html/auth/naverlogincallback.html",
-            isPopup: true /* 팝업을 통한 연동처리 여부 */
+            isPopup: true, /* 팝업을 통한 연동처리 여부 */
+            loginButton: {color: "green", type: 1, height: 31}
           }
   );
   /* 설정정보를 초기화하고 연동을 준비 */
@@ -24,7 +25,7 @@ $(document).on('ready', function () {
       xfbml      : true,
       version    : 'v3.3'
     });
-    FB.AppEvents.logPageView();   
+    FB.AppEvents.logPageView();  
   };
 
   //동적 스크립트 생성

@@ -84,12 +84,14 @@ $(document.body).bind('loaded-header', () => {
   $(window).scroll(function(obj) {
     const currentScrollPercentage = getCurrentScrollPercentage()
 
-    if(currentScrollPercentage > 50){
+    if(currentScrollPercentage > 38){
       $('#header-child').prop('hidden', false);
       $('#header-search').prop('hidden', false);
+      $('.navbar-brand').prop('hidden', false);
     }else{
       $('#header-child').prop('hidden', true);
       $('#header-search').prop('hidden', true);
+      $('.navbar-brand').prop('hidden', true);
     }
   });
 
