@@ -107,6 +107,9 @@
       nick_name = #{nickName},
       photo = #{photo},
       adr_lms = #{address}
+      <if test="birth != null">
+      , birth = #{birth}
+      </if>
     where member_id = #{no}
   </update>
   
