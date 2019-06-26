@@ -121,6 +121,13 @@ public class MyStudyController {
     Study study = studyService.getStudyPhoto(no);
     List<StudyMember> list = studyMemberService.findStudyMember(no);
 
+    for (int i = 0; i < list.size(); i++) {
+
+      if (list.get(i).getLeader() == true) {
+        list.get(i).setMemberCls("스터디장");
+      }
+    }
+      
     content.put("list", list);
     content.put("study", study);
 
@@ -139,7 +146,7 @@ public class MyStudyController {
     for (int i = 0; i < studyMemberList.size(); i++) {
 
       if (studyMemberList.get(i).getLeader() == true) {
-        studyMemberList.get(i).setMemberCls("스터디 장");
+        studyMemberList.get(i).setMemberCls("스터디장");
       }
       
       

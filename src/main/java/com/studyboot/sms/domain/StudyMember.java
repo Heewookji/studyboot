@@ -22,7 +22,7 @@ public class StudyMember extends Member {
   private String studyName;
   private Member member;
   
-  private String memberCls = "스터디 원";
+  private String memberCls = "스터디원";
 
   @Override
   public String toString() {
