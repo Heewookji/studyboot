@@ -90,7 +90,6 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.updatePassword(member);
       }
       int count = memberDao.update(member);
-      
       memberDao.clsDelete(member.getNo());
       
       if (member.getCls().size() != 0) {
