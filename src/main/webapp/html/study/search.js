@@ -5,13 +5,12 @@ addressNo,
 clsNo = [],
 rateValue = 3,
 largeClsNo,
-mediumClsNo,
 clsTitle,
-errorTitle = '오! 이런..',
-dayNo,
-dayCheckList = $('.day-checkbox input'),
 keyword,
-tbody = $('#card-div'),
+scrolled = false,
+dayNo,
+errorTitle = '오! 이런..',
+dayCheckList = $('.day-checkbox input'),
 //card 리스트 출력 - 스터디 목록
 cardTemplateSrc = $('#card-template').html(),
 cardGenerator = Handlebars.compile(cardTemplateSrc),
@@ -29,11 +28,19 @@ templateSrcMediumAddress = $('#tr-template-madr').html(),
 trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 소분류
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
-trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress); 
+trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress),
+//빈카드 생성기
+nullCardTemplateSrc = $('#nullcard-template').html(),
+nullCardGenerator = Handlebars.compile(nullCardTemplateSrc),
+//무한스크롤 카드 생성기
+addCardTemplateSrc = $('#addcard-template').html(),
+addCardGenerator = Handlebars.compile(addCardTemplateSrc)
+; 
 
 
-
-
+function cardShow (element) {
+  $(element).shape('flip back');
+}
 
 
 //JSON 형식의 데이터 목록 가져오기
@@ -48,6 +55,17 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
           + '&dayNo=' + dayNo,
 
           function(obj) {
+    
+    var inactive = $(".sides .side").not( '.active' );
+    
+    //목표의 길이 줄이기
+    if(obj.list != undefined){
+      for(var e of obj.list){
+        if(e.goal.length > 26){
+          e.goal = e.goal.slice(0, -(e.goal.length - 26))+"...";
+        }
+      }
+    }
 
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
@@ -65,37 +83,140 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
     // 서버에서 넘겨준 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
     pageNo = obj.pageNo;
 
-    if (pageNo == 0){
-      return;
+  //일반 리스팅일때.
+    if(pageNo == 1){
+
+      if(obj.list.length == pageSize){
+        for(var i = 0; i < obj.list.length; i++){
+          $(cardGenerator(obj.list[i])).appendTo(inactive[i]);
+        }
+      }else{
+        for(var i = 0; i < obj.list.length; i++){
+          $(cardGenerator(obj.list[i])).appendTo(inactive[i]);
+        }
+        for(var i = obj.list.length; i < pageSize; i++){
+          $(nullCardGenerator()).appendTo(inactive[i]);
+        }
+      }
+      for(var e of obj.list){
+        $(".sides .side").not( '.active' ).find('#std-rate-'+e.no).rateit({
+          // min value
+          min: 0, 
+          // max value
+          max: 5, 
+          // 'bg', 'font'
+          mode: 'font', 
+          // size of star
+          starwidth: 50, 
+          // is readonly?
+          readonly: true, 
+          // is resetable?
+          resetable: false,
+          value: e.rate
+        });
+      }
+
+    } else {
+      if(pageNo == 0 &&
+              scrolled == true){
+        return;
+      }
+      //아예 결과값이 없을때.
+      if(pageNo == 0 &&
+              scrolled == false ) {
+        for(var i = 0; i < pageSize; i++){
+          $(nullCardGenerator()).appendTo(inactive[i]);
+        }
+        
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center'
+        });
+
+        Toast.fire({
+          title: '스터디가 없네요..',
+          confirmButtonText: '생성하기'
+        }).then((result) => {
+          if (result.value) {
+            $('#stdAddModal').modal('toggle');
+          }
+        })
+        
+      } else{
+
+        //무한 스크롤일때.
+        //리스팅된 개수만큼 카드를 추가하고,돌린 후, 레이팅 초기화한다.
+        for(var e of obj.list){
+          $(addCardGenerator(e)).appendTo("#card-div");
+        }
+
+        for(var e of obj.list){
+          $(".sides .side").not( '.active' ).find('#std-rate-'+e.no).rateit({
+            // min value
+            min: 0, 
+            // max value
+            max: 5, 
+            // 'bg', 'font'
+            mode: 'font', 
+            // size of star
+            starwidth: 50, 
+            // is readonly?
+            readonly: true, 
+            // is resetable?
+            resetable: false,
+            value: e.rate
+          });
+        }
+        for(var e of obj.list){
+          cardShow($("#shape"+e.no));
+        }
+        $(document.body).trigger('loaded-addlist');
+        return;
+      }
     }
-
-    $(cardGenerator(obj)).appendTo(tbody);
-
-    for(var e of obj.list){
-      $('#std-rate-'+ e.no).rateit({
-        // min value
-        min: 0, 
-        // max value
-        max: 5, 
-        // 'bg', 'font'
-        mode: 'font', 
-        // size of star
-        starwidth: 50, 
-        // is readonly?
-        readonly: true, 
-        // is resetable?
-        resetable: false,
-        value: e.rate
-      });
-    }
-
-
     // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
     $(document.body).trigger('loaded-list');
   });
 };
 
 
+
+//스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
+$(document.body).bind('loaded-list', () => {
+
+for(var el of $('.shape')){
+  cardShow(el);
+}
+
+$(".rateit").rateit();
+
+$('.study-view-link').click((e) => {
+  location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('span.viewClick').attr("data-no")
+  + '&name=' + $(e.target).parents('.card-div').find('a').html();
+});
+
+});
+
+//스터디 스크롤 추가목록 로딩 완료 후 실행될 수 있는 이벤트
+$(document.body).bind('loaded-addlist', () => {
+$(".rateit").rateit();
+
+$('.study-view-link').click((e) => {
+  location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('span.viewClick').attr("data-no")
+  + '&name=' + $(e.target).parents('.card-div').find('a').html();
+});
+
+});
+
+//카테고리 분류 로딩 함수
+function loadCategoryTitle(clsNo) {
+  $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
+          function(obj) {
+    $(trGeneratorMediumCls(obj)).appendTo('#accordion-mcls');
+
+    $(document.body).trigger('loaded-categorytitle');
+  });
+};
 
 //생성 모달의 카테고리 분류 로딩 함수
 function loadModalCategory() {
@@ -251,15 +372,6 @@ function loadModalAddress() {
   });
 };
 
-//카테고리 분류 로딩 함수
-function loadCategoryTitle(clsNo) {
-  $.getJSON('../../app/json/study/category?clsNo=' + clsNo,
-          function(obj) {
-    $(trGeneratorMediumCls(obj)).appendTo('#accordion-mcls');
-
-    $(document.body).trigger('loaded-categorytitle');
-  });
-};
 
 //카테고리 하위 분류 로딩 함수
 function loadSmallTitle(clsNo) {
@@ -325,33 +437,6 @@ if (param) {
   });
 }
 
-//스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
-$(window).scroll(function(obj) {
-  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    searchList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-  }
-});
-
-//스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
-$(document.body).bind('loaded-list', () => {
-
-  $('.study-view-link').click((e) => {
-
-
-    location.href = 'view.html?studyno=' + $(e.target).parents('.card-div').find('a').attr("data-no")
-    + '&name=' + $(e.target).parents('.card-div').find('a').html();
-
-  });
-
-
-  $( ".study-view-link" ).hover(
-          function(e) {
-          }, function(e) {
-          }
-  );
-
-});
-
 
 //카테고리 분류 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-categorytitle', () => {
@@ -361,7 +446,11 @@ $(document.body).bind('loaded-categorytitle', () => {
   $('.lcls-checkbox input').change(function(e) {
 
     pageNo = 1; // 페이지 초기화
-    tbody.html(''); // 스터디 목록 초기화
+  //테이블 비우기
+    $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    Swal.close();
 
     if($('.lcheck' + $(this).val()).is(":checked")){
       $(this).closest('div').next().find('input').prop('checked',true);
@@ -392,7 +481,11 @@ $(document.body).bind('loaded-smalltitle', () => {
   $('.smallTitle input').change(function(e) {
 
     pageNo = 1; // 페이지 초기화
-    tbody.html(''); // 스터디 목록 초기화
+  //테이블 비우기
+    $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    Swal.close();
 
 
     if($('.mcheck' + $(this).val()).is(":checked")){
@@ -419,7 +512,13 @@ $(document.body).bind('loaded-largeAddress', () => {
 
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+    
+  //테이블 비우기
+    $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    Swal.close();
+    
     $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#mediumAddressButton').html('시군구<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 중분류 이름 초기화
@@ -441,7 +540,13 @@ $(document.body).bind('loaded-mediumAddress', () => {
   $('.madr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+
+  //테이블 비우기
+    $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    Swal.close();
+    
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#smallAddressButton').html('동읍면<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 이름 초기화
     $('#smallAddressButton').removeClass('g-color-primary');
@@ -459,7 +564,13 @@ $(document.body).bind('loaded-smallAddress', () => {
   $('.sadr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
-    tbody.html('');
+
+  //테이블 비우기
+    $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    Swal.close();
+    
     $('#smallAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 버튼 이름 변경
     $('#smallAddressButton').removeClass('g-color-main');
     $('#smallAddressButton').addClass('g-color-primary');
@@ -468,21 +579,7 @@ $(document.body).bind('loaded-smallAddress', () => {
   });
 });
 
-$(document.body).bind('loaded-medium-tag', () => {
-  $('#medium-tag').click(function(e) {
-    $('#medium-tag i').remove();
-    $('.scls-btn').removeClass('g-color-primary');
-    $('.scls-btn').addClass("g-color-main");
-    e.preventDefault();
-    pageNo = 1;
-    tbody.html('');
-    clsNo = $(e.target).attr('data-no');
-    searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
-    $('#small-tag').remove();
-    $('#medium-tag a').removeClass('g-color-primary--hover');
-    $('#medium-tag a').removeAttr('href');
-  });
-});
+
 //새로고침 아이콘
 $('#clearAddr').hover(function(e){
   $(e.target).addClass('fa-spin');
@@ -512,7 +609,12 @@ $('#clearAddr').click(function(e){
   $('#smallAddressButton').removeClass('g-color-primary');
   $('#smallAddressButton').addClass('g-color-main');
   pageNo = 1;
-  tbody.html('');
+  
+//테이블 비우기
+  $('.sides .side').not( '.active' ).html('');
+  $('.added').remove();
+  scrolled = false;
+  Swal.close();
   addressNo = undefined;
   searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -522,7 +624,13 @@ $('#clearDay').click(function(e){
 
   $('.day-checkbox input').prop('checked',false);
   pageNo = 1;
-  tbody.html('');
+
+//테이블 비우기
+  $('.sides .side').not( '.active' ).html('');
+  $('.added').remove();
+  scrolled = false;
+  Swal.close();
+  
   dayNo = undefined;
   searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -532,19 +640,18 @@ $('#rateRange').on('DOMSubtreeModified', function() {
   if($('#rateRange').html().length >= 1){
     console.log($('#rateRange').html());
     pageNo = 1;
-    tbody.html('');
+
+  //테이블 비우기
+    $('.sides .side').not( '.active' ).html('');
+    $('.added').remove();
+    scrolled = false;
+    Swal.close();
+    
     rateValue = $('#rateRange').html();
     $.ajaxSetup({ async:false });
     searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $.ajaxSetup({ async:true });
   }
-});
-
-//검색 필터
-$('#search-btn').click((e) => {
-  pageNo = 1;
-  keyword = $("#study-search").val();
-  window.location.href = './search.html?keyword=' + keyword;
 });
 
 
@@ -561,8 +668,13 @@ $('.day-checkbox input').change(function(e) {
   dayNo = sum;
 
   pageNo = 1; // 페이지 초기화
-  tbody.html(''); // 스터디 목록 초기화
 
+//테이블 비우기
+  $('.sides .side').not( '.active' ).html('');
+  $('.added').remove();
+  scrolled = false;
+  Swal.close();
+  
   searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
@@ -778,3 +890,10 @@ $('#init-btn').click(function(e) {
 
 });
 
+
+//스크롤이 끝에 닿으면 감지해서 자동으로 게시물을 출력하도록 했음 -무한스크롤-
+$(window).scroll(function(obj) {
+  if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    searchList(++pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
+  }
+});

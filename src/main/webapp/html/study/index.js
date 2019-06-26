@@ -28,7 +28,7 @@ templateSrcMediumAddress = $('#tr-template-madr').html(),
 trGeneratorMediumAddress = Handlebars.compile(templateSrcMediumAddress),
 //script 태그에서 템플릿 데이터를 꺼낸다. - 지역 소분류
 templateSrcSmallAddress = $('#tr-template-sadr').html(),
-trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress)
+trGeneratorSmallAddress = Handlebars.compile(templateSrcSmallAddress),
 //빈카드 생성기
 nullCardTemplateSrc = $('#nullcard-template').html(),
 nullCardGenerator = Handlebars.compile(nullCardTemplateSrc),
@@ -118,7 +118,6 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
           value: e.rate
         });
       }
-
 
 
     } else {
@@ -535,11 +534,8 @@ $(document.body).bind('loaded-smalltitle', () => {
 
 //필터 - 지역 로딩 완료 후 실행 될 수 있는 클릭 이벤트 함수
 $(document.body).bind('loaded-largeAddress', () => {
-
   $('.ladr-btn').click(function(e) {
-
-
-
+
     e.preventDefault();
     pageNo = 1;
     
@@ -654,7 +650,9 @@ $(document.body).bind('loaded-medium-tag', () => {
     $('#medium-tag a').removeClass('g-color-primary--hover');
     $('#medium-tag a').removeAttr('href');
   });
-});
+}
+
+);
 //새로고침 아이콘
 $('#clearAddr').hover(function(e){
   $(e.target).addClass('fa-spin');
@@ -690,7 +688,6 @@ $('#clearAddr').click(function(e){
   $('.added').remove();
   scrolled = false;
   Swal.close();
-  
   addressNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -728,13 +725,6 @@ $('#rateRange').on('DOMSubtreeModified', function() {
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $.ajaxSetup({ async:true });
   }
-});
-
-//검색 필터
-$('#search-btn').click((e) => {
-  pageNo = 1;
-  keyword = $("#study-search").val();
-  window.location.href = './search.html?keyword=' + keyword;
 });
 
 
