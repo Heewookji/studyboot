@@ -30,6 +30,8 @@ $(document).ready(function() {
 function loadFileList(nossss) {
   $.getJSON('../../app/json/MyStudy/fileList?stdNo=' + nossss,
       function(obj){
+    
+    console.log(obj);
 
     // 핸들바스를 통해서 가져온 리스트 업핸드 해주기
     $(fileGenerator(obj)).appendTo('#amazon-file');

@@ -1,4 +1,6 @@
-var userInit = true;
+var userInit = true,
+errorTitle = "오! 이런.."
+  ;
 
 $( document ).ready(function() {
   $("#js-header").load("./indexheader.html", function(){
@@ -16,7 +18,7 @@ $( document ).ready(function() {
       keyword = $("#study-search").val();
       window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
     });
-    
+
     $("#study-search").keydown((e) => {
       if(e.keyCode == 13)
         $('#search-btn').click();
@@ -27,7 +29,7 @@ $( document ).ready(function() {
       keyword = $("#main-search").val();
       window.location.href = '/studyboot/html/study/search.html?keyword=' + keyword;
     });
-    
+
     $("#main-search").keydown((e) => {
       if(e.keyCode == 13)
         $('#main-search-btn').click();
@@ -73,7 +75,7 @@ $(document.body).bind('loaded-header', () => {
 
   // initialization of carousel
   $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
-  
+
 });
 
 
@@ -90,16 +92,11 @@ $(document.body).bind('loaded-header', () => {
       $('#header-search').prop('hidden', true);
     }
   });
-});
 
-
-
-$(document.body).bind('loaded-header', () => {
 //로그인 사용자 불러온다.
   loadLoginUser();
-
-
 });
+
 
 
 function loadLoginUser() {
@@ -113,7 +110,7 @@ function loadLoginUser() {
     if (obj.status == 'success') {
       var user = obj.user;
       notLoginState.addClass('std-invisible');
-      
+
       $("#nickname").html(user.nickName);
       if(user.photo == null){
         $('#hd-thumbnail').attr('src', '/studyboot/upload/images/member/defaultphoto');
@@ -128,26 +125,26 @@ function loadLoginUser() {
       }
       $('#myDropdown').append("<div class=\"divider\"></div><div class=\"item\" id=\"logout\">로그아웃</div>");
 
-//      관리자라면 관리자 페이지버튼 드롭다운에 추가
+//    관리자라면 관리자 페이지버튼 드롭다운에 추가
       if(obj.user.admin){
         $("#std-dropdown").append("<div class=\"divider\"></div>" + 
-                "<div class=\"item\" id=\"logout\">관리자</div>");
+        "<div class=\"item\" id=\"logout\">관리자</div>");
       }
-      
+
       $('.my-study').click((e) => {
         window.location.href = '/studyboot/html/mystudy/index.html?no=' + $(e.target).attr('my-study-no');
       });
-      
+
       $('#logout').click((e) => {
         e.preventDefault();
         $.getJSON('/studyboot/app/json/auth/logout',
-            function(obj) {
+                function(obj) {
           location.href = "/studyboot"
         });
         window.localStorage.removeItem("user");
       });
-      
-      
+
+
       $('.ui.dropdown.std-login')
       .dropdown({
         on: 'hover',
@@ -162,32 +159,23 @@ function loadLoginUser() {
     } else {
       loginState.addClass('std-invisible');
     }
-    
+
     $(document.body).trigger('loaded-user');
-    
+
   });
-  
+
 }
 
 $(document.body).bind('loaded-user', () => {
-  
+
+  loadModalCategory();
+  loadModalAddress();
+
   if(!userInit){
     $('#initModal-btn').click();
-    }
-  
-  $('#init-btn').click((e) => {
-    //서버에 송신
-    
-    
-  });
- 
-  });
+  }
 
-$('#exampleModalCenter').on('shown.bs.modal', function (e) {
 });
-
-
-
 
 
 function getCurrentScrollPercentage(){
@@ -205,7 +193,7 @@ $('.study-view-link').click((e) => {
 });
 
 
-// hottest
+//hottest
 $('#std-rate-1111').rateit({
   min: 0, 
   max: 5, 
@@ -257,7 +245,7 @@ $('#std-rate-1115').rateit({
 });
 
 
-// highest
+//highest
 $('#std-rate-2221').rateit({
   min: 0, 
   max: 5, 
@@ -309,7 +297,7 @@ $('#std-rate-2225').rateit({
 });
 
 
-// nearest
+//nearest
 $('#std-rate-3331').rateit({
   min: 0, 
   max: 5, 
@@ -359,6 +347,269 @@ $('#std-rate-3335').rateit({
   resetable: false,
   value: 3
 });
+
+
+
+//생성 모달의 카테고리 분류 로딩 함수
+function loadModalCategory() {
+
+
+  $.getJSON('/studyboot/app/json/study/category?clsNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.clsNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.lcls')
+    .dropdown({
+      placeholder: '대분류',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.mcls')
+        .dropdown({
+          placeholder: '중분류',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.scls')
+        .dropdown({
+          placeholder: '소분류',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+        $.getJSON('/studyboot/app/json/study/category?clsNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.clsNo;
+          }
+          $('.ui.dropdown.mcls')
+          .dropdown({
+            placeholder: '중분류',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('/studyboot/app/json/study/category?clsNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.clsNo;
+                }
+                $('.ui.dropdown.scls')
+                .dropdown({
+                  placeholder: '소분류',
+                  on: 'hover',
+                  values: objs.list,
+                  onChange: function(value, text, $selectedItem) {
+
+                    if(text == undefined)
+                      return;
+
+                    if($('#tag div').length != 0){
+                      for(var val of $('#tag div')){
+
+                        if($(val).attr('data-no') == value){
+                          return;
+                        }
+                        if($('#tag div').length == 3){
+                          return;
+                        }
+                      }
+                    } 
+
+                    $('#tag').append('<div class="ui label" data-no="'+value+'">'+text+'<i class="delete icon"></i></div>');
+
+                    $('.ui.label i').click(function(e){
+                      $(e.target).parent().remove();
+                    });
+
+                  }
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
+
+//생성 모달의 카테고리 분류 로딩 함수
+function loadModalAddress() {
+
+
+  $.getJSON('/studyboot/app/json/study/addresscategory?addressNo=',
+          function(obj) {
+
+
+    for(var e of obj.list){
+      e.value = e.addressNo;
+    }
+
+    //분류 드롭다운
+    $('.ui.dropdown.laddr')
+    .dropdown({
+      placeholder: '시도',
+      on: 'hover',
+      values: obj.list,
+      onChange: function(value, text, $selectedItem) {
+
+        $('.ui.dropdown.maddr')
+        .dropdown({
+          placeholder: '시군구',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        $('.ui.dropdown.saddr')
+        .dropdown({
+          placeholder: '동읍면',
+          on: 'hover',
+          values: [
+            ]
+        })
+        ;
+
+        if(value.length != 2){
+          return;
+        }
+
+        $.getJSON('/studyboot/app/json/study/addresscategory?addressNo=' + value,
+                function(objm) {
+          for(var e of objm.list){
+            e.value = e.addressNo;
+          }
+          $('.ui.dropdown.maddr')
+          .dropdown({
+            placeholder: '시군구',
+            on: 'hover',
+            values: objm.list,
+            onChange: function(value, text, $selectedItem) {
+              if(value.length != 4){
+                return;
+              }
+              $.getJSON('/studyboot/app/json/study/addresscategory?addressNo=' + value,
+                      function(objs) {
+                for(var e of objs.list){
+                  e.value = e.addressNo;
+                }
+                $('.ui.dropdown.saddr')
+                .dropdown({
+                  placeholder: '동읍면',
+                  on: 'hover',
+                  values: objs.list
+                });
+
+              });
+            }
+          });
+        });
+      }
+    });
+  });
+};
+
+
+//서버에 송신
+$('#init-btn').click((e) => {
+
+  var clsNo = [];
+
+  for(var a of $('#tag div')){
+    clsNo.push($(a).attr('data-no'));
+  }
+
+//관심분야 확인
+  if($('#tag div').length != 3){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '관심 분야를 3개 입력해주세요!'
+    });
+    return;
+  }
+
+//활동 지역 확인
+  if($('.saddr').find(".selected").attr('data-value') == null ||
+          $('.saddr').find(".selected").attr('data-value') == undefined){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '활동 지역을 입력해주세요!'
+    });
+    return;
+  }
+
+//생년월일 체크
+  if(!birthCheck($("#birth").val())){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '올바른 생년월일을 입력해주세요!'
+    });
+    return;
+  }
+
+
+//모두 통과한다면, URI인코딩 방식으로 전송
+  jQuery.ajax({
+    url:"/studyboot/app/json/member/initUpdate",
+    type:"POST",
+    data:  "birth=" + encodeURIComponent($("#birth").val()) +
+    "&cls=" + encodeURIComponent(clsNo) +  
+    "&address=" + encodeURIComponent($('.saddr').find(".selected").attr('data-value')),
+    contentType: "application/x-www-form-urlencoded",
+    success: function(data) {
+      if (data.status == 'success') {
+        Swal.fire({
+          type: 'success',
+          title: '정보 입력을 완료했습니다!',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          location.reload();
+        }
+        );
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: errorTitle,
+          text: '정보 입력에 실패했습니다!' + data.message
+        });
+      }
+    }
+  });
+
+});
+
+//날짜 체크
+function birthCheck(str){
+
+  var format = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+  if(format.test(str)){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 
 
