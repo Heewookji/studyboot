@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#event-update-btn').hide();
         $('#event-delete-btn').hide();
 
-        $('#event-close-btn').show();
+        //$('#event-close-btn').show();
       } else { // 그 외의 회원일 경우 닫기 버튼만 안보이고 모든 버튼 보이기
         $('#calendar-detail-modal-btn').click();
         // $('#event-attend-btn').show();
         $('#event-update-btn').show();
         $('#event-delete-btn').show();
 
-        $('#event-close-btn').hide();
+        //$('#event-close-btn').hide();
       }
 
       loadDetail(info.event.id);

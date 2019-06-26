@@ -148,7 +148,7 @@
  <!-- 일정 등록 버튼 -->
  <button id="calendar-add-modal-btn" type="button"
   class="btn btn-primary" data-toggle="modal"
-  data-target="#exampleModal" data-whatever="@getbootstrap"
+  data-target="#calendarAddModal" data-whatever="@getbootstrap"
   hidden="hidden">일정 추가</button>
 
  <!-- 일정 디테일 버튼 -->
@@ -190,7 +190,6 @@
 
        <ul class="list-unstyled g-mb-25">
         <li class="row d-flex align-items-center">
-         <!-- 일정 시작 시간 -->
          <div class="col">
           <span class="u-icon-v1 g-color-primary"><i
            class="fa fa-star-o"></i></span>
@@ -237,6 +236,7 @@
          id="event-delete-btn">삭제</button>
         <button type="button"
          class="btn btn-md u-btn-outline-bluegray g-rounded-50"
+         id="event-close-btn"
          data-dismiss="modal">닫기</button>
        </div>
   
@@ -249,7 +249,7 @@
 
 
 
- <div class="modal fade" id="exampleModal" role="dialog"
+ <div class="modal fade" id="calendarAddModal" role="dialog"
   aria-labelledby="schedule-add-head" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
    <div
@@ -418,7 +418,7 @@
        </div>
        <div class="col-3 g-mr-5">
         <button type="button"
-         class="btn btn-block u-shadow-v19 u-shadow-v19 u-btn-outline-bluegray g-font-size-14 g-rounded-30 g-py-10 g-mt-0 g-mb-10"
+         class="attend-close btn btn-block u-shadow-v19 u-shadow-v19 u-btn-outline-bluegray g-font-size-14 g-rounded-30 g-py-10 g-mt-0 g-mb-10"
          data-dismiss="modal">닫기</button>
        </div>
       </div>
@@ -427,8 +427,10 @@
    </div>
   </div>
  </div>
- <!--  출석 모달 --> <footer id="js-footer"> </footer> <script
-  id="attend-member1" type="text/x-handlebars-template">
+ <!--  출석 모달 --> 
+ <footer id="js-footer"> </footer> 
+ 
+ <script id="attend-member1" type="text/x-handlebars-template">
 {{#each list}}
   <li class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-minus-1">
     <div class="media">
