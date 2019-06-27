@@ -1,6 +1,8 @@
 package com.studyboot.sms.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.studyboot.sms.dao.MemberDao;
 import com.studyboot.sms.dao.StudyDao;
+import com.studyboot.sms.dao.StudyMemberDao;
 import com.studyboot.sms.domain.Member;
 import com.studyboot.sms.domain.Study;
 import com.studyboot.sms.service.MemberService;
@@ -22,12 +25,15 @@ public class MemberServiceImpl implements MemberService {
 
   MemberDao memberDao;
   StudyDao studyDao;
+  StudyMemberDao studyMemberDao;
 
   public MemberServiceImpl(
       MemberDao memberDao,
-      StudyDao studyDao) {
+      StudyDao studyDao,
+      StudyMemberDao studyMemberDao) {
     this.memberDao = memberDao;
     this.studyDao = studyDao;
+    this.studyMemberDao = studyMemberDao;
   }
 
 
@@ -239,7 +245,21 @@ public class MemberServiceImpl implements MemberService {
   public int withdrawal(int no) {
     
     Member member = new Member();
-
+    Map<String,Object> map = new HashMap<>();
+    SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+    List<Integer> studyNos = studyMemberDao.findStudyNoByMemberNo(no);
+    
+    System.out.println(studyNos);
+    
+    map.put("endNo", 4);
+    map.put("endDate", format.format(new Date()));
+    map.put("memberNo", no);
+    
+    for (Integer i : studyNos) {
+      map.put("studyNo", i);
+      studyMemberDao.attendUpdate(map);
+    }
+    
     member.setNo(no);
     member.setEmail(UUID.randomUUID().toString().replace("-", "").substring(0, 15));
     member.setNickName("Nick_" + UUID.randomUUID().toString().replace("-", "").substring(0, 6));
@@ -247,6 +267,7 @@ public class MemberServiceImpl implements MemberService {
     member.setName("탈퇴회원");
     member.setPhoto("defaultphoto");
     member.setWithdraw(true);
+    
     
     return  memberDao.withdrawalUpdate(member);
   }

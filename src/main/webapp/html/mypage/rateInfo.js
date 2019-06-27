@@ -1,4 +1,5 @@
-var myBarChart,
+var myLineChart,
+myBarChart,
 myPieChart,
 rateDataset,
 atnDataset,
@@ -201,7 +202,7 @@ $(document.body).bind('loaded-rateData', () => {
   
   
   var ctx = $('#rate-barChart');
-  myBarChart = new Chart(ctx, {
+  myLineChart = new Chart(ctx, {
       type: 'line',
       data: barChartData1,
       options: {
