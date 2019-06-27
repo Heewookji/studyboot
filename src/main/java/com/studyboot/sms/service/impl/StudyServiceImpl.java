@@ -161,15 +161,16 @@ public class StudyServiceImpl implements StudyService {
         dayStrList.add(dayStr);
       }
     });
-
+    
     dayStrList.sort((String str1, String str2)->{
-      if(dayMap.get(str1) > dayMap.get(str2)) {
-        return 0;
-      } else {
+      if( dayMap.get(str1) > dayMap.get(str2)) {
         return 1;
+      } else if(dayMap.get(str1) < dayMap.get(str2)){
+        return -1;
+      } else {
+        return 0;
       }
     });
-
     study.setDayStrList(dayStrList);
 
 
