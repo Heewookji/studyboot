@@ -29,6 +29,7 @@
     <association property="member" javaType="member">
       <id column="members_id" property="no" />
       <result column="members_nick" property="nickName" />
+      <result column="name" property="name" />
     </association>
   </resultMap>
 
@@ -62,23 +63,21 @@
   <!-- 스터디 구성원들 가져오기 -->
   <select id="findStudyMembersByNo" resultMap="studyMemberMap" parameterType="int">
     select
-    m.member_id,
-    m.rate,
-    m.birth,
-    m.name,
-    m.photo,
-    m.nick_name as members_nick,
-    sm.leader,
-    sm.atn_pct
+      m.member_id,
+      sm.member_id,
+      m.rate,
+      m.birth,
+      m.name,
+      m.photo,
+      m.nick_name as members_nick,
+      sm.leader,
+      sm.atn_pct
     from
-    sms_std_member sm
-    inner join
-    sms_member m on sm.member_id =
-    m.member_id
+      sms_std_member sm inner join sms_member m on sm.member_id = m.member_id
     where
-    sm.std_id = #{no}
-    and
-    end_state_cls_id is null
+      sm.std_id = #{no}
+        and
+      end_state_cls_id is null
   </select>
 
 
