@@ -1,4 +1,6 @@
-var errorTitle = '오! 이런..';
+var errorTitle = '오! 이런..'
+login = false
+  ;
 
 $( document ).ready(function() {
   $("#js-header").load("/studyboot/html/header.html", function(){
@@ -124,8 +126,12 @@ function loadLoginUser() {
         action: 'hide'
       });
 
+      login = true;
+      localStorage.setItem('login', login);
+      
     } else {
       loginState.addClass('std-invisible');
+      localStorage.setItem('login', login);
     }
   });
 }

@@ -180,6 +180,22 @@ function searchList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
 };
 
 
+$('#addModal-btn').click(function(e) {
+  e.preventDefault();
+  Swal.close();
+  var login = localStorage.getItem('login');
+  
+  if(login == 'false'){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '로그인 해주세요!'
+    });
+  } else {
+    $('#stdAddModal').modal('show');
+  }
+});
+
 
 //스터디 목록 로딩 완료 후 실행될 수 있는 스터디 상세 클릭 이벤트 함수
 $(document.body).bind('loaded-list', () => {
