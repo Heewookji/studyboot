@@ -370,6 +370,7 @@ function loadHistory(pn, userNo) {
       }
 
     } else{
+      $('#noneHistory').removeClass('std-invisible');
       currSpan.html(data.pageNo);
       prevPage.addClass('disabled');
       nextPage.addClass('disabled');
