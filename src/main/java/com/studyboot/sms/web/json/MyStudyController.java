@@ -126,8 +126,12 @@ public class MyStudyController {
       if (list.get(i).getLeader() == true) {
         list.get(i).setMemberCls("스터디장");
       }
-    }
       
+      if (list.get(i).getMember().getName().equals("탈퇴회원")) {
+        list.remove(i);
+      }
+    }
+
     content.put("list", list);
     content.put("study", study);
 
