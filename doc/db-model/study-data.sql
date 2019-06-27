@@ -195,6 +195,7 @@ insert into sms_std_cls_s(cls_s_id, cls_m_id, cls_l_id, name) values(12, 14, 16,
 insert into sms_end_state_cls(end_state_cls_id, name) values(1, "완료");
 insert into sms_end_state_cls(end_state_cls_id, name) values(2, "탈퇴");
 insert into sms_end_state_cls(end_state_cls_id, name) values(3, "추방");
+insert into sms_end_state_cls(end_state_cls_id, name) values(4, "회원탈퇴");
 
 
 

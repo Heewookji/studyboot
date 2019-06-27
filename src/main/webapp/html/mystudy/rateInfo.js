@@ -1,4 +1,5 @@
-var myBarChart,
+var myLineChart,
+myBarChart,
 myPieChart,
 rateDataset,
 atnDataset,
@@ -15,7 +16,8 @@ currSpan = $('#history-currPage > span'),
 //핸들바스로 데이터 준비
 historytemplateSrc = $('#history-template').html(),
 historyGenerator = Handlebars.compile(historytemplateSrc),
-rateInit = true;
+rateInit = true,
+firstRender = false;
 
 var userNo;
 
@@ -212,10 +214,16 @@ $(document.body).bind('loaded-rateData', () => {
       labels: monthLabel,
       datasets: [atnDataset],
   };
-
-
+  
+  // 첫번째 렌더링시 전에 만든 차트를 없앰
+  if (firstRender) {
+    myLineChart.destroy();
+    myBarChart.destroy();
+    myPieChart.destroy();
+  }
+  
   var ctx = $('#rate-barChart');
-  myBarChart = new Chart(ctx, {
+  myLineChart = new Chart(ctx, {
     type: 'line',
     data: barChartData1,
     options: {
@@ -227,7 +235,19 @@ $(document.body).bind('loaded-rateData', () => {
         text: '평점'
       },
       scales: {
+        xAxes: [{
+          gridLines: {
+            display: true,
+            drawBorder: true,
+            drawOnChartArea: false,
+          }
+        }],
         yAxes: [{
+          gridLines: {
+            display: true,
+            drawBorder: true,
+            drawOnChartArea: false,
+          },
           ticks: {
             beginAtZero: true,
             max: 5
@@ -236,7 +256,7 @@ $(document.body).bind('loaded-rateData', () => {
       }
     }
   });
-
+  
   var ctx = $('#atn-barChart');
   myBarChart = new Chart(ctx, {
     type: 'bar',
@@ -253,12 +273,24 @@ $(document.body).bind('loaded-rateData', () => {
         labels: false
       },
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            max: 100
-          }
-        }]
+        xAxes: [{
+          gridLines: {
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: false,
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: false,
+            },
+            ticks: {
+              beginAtZero: true,
+              max: 100
+            }
+          }]
       }
     }
   });
@@ -272,27 +304,33 @@ $(document.body).bind('loaded-rateData', () => {
       datasets: [{
         data: [finishData, dropData, exileData],
         backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 206, 86)'
-          ]
-      }]
+          'rgba(54, 162, 235, 0.1)',
+          'rgba(255, 99, 132, 0.1)',
+          'rgba(255, 206, 86, 0.1)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(255, 206, 86, 0.7)'
+            ],
+            borderWidth: 1
+    }]
     },
     options: {
       title: {
         display: true,
-        text: '참여한 스터디'
+        text: '스터디 달성률'
       },
       legend: {
         display: false
       },
-      plugin: {
-        labels: {
-          render: 'percentage'
-        }
+      plugins: {
+        labels: false
       }
     }
   });
+  
+  firstRender = true;
 
 });
 
@@ -309,6 +347,7 @@ function loadHistory(pn, userNo) {
     if(data.pageNo != 0){
 
       pageNo = data.pageNo;
+      $('#noneHistory').addClass('std-invisible');
 
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(historyGenerator(data)).appendTo('#history-tbody');
