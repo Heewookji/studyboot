@@ -545,7 +545,7 @@ $(document.body).bind('loaded-nav', () => {
       $("#std-MemberList").append(memberCard);
 
     } else {
-      $("#std-MemberList").append(memberCard);
+      $(stdMemberListGenerator(obj)).appendTo('#std-MemberList');
     }
 
     $(document.body).trigger('messageAddModalLoad');

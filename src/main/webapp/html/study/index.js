@@ -67,8 +67,8 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
         }
       }
     }
-  
-    
+
+
     console.log('rowCount='+ obj.rowCount,'pageNo=' + obj.pageNo,'pageSize=' + obj.pageSize,
             'totalPage=' + obj.totalPage, 'clsNo=' + clsNo, 'addressNo=' + addressNo,
             'rateValue=' + rateValue, 'keyword=' + keyword , 'dayNo=' + dayNo);
@@ -131,7 +131,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
         for(var i = 0; i < pageSize; i++){
           $(nullCardGenerator()).appendTo(inactive[i]);
         }
-        
+
         const Toast = Swal.mixin({
           toast: true,
           position: 'center'
@@ -145,7 +145,7 @@ function loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo) {
             $('#stdAddModal').modal('toggle');
           }
         })
-        
+
       } else{
 
         //무한 스크롤일때.
@@ -538,14 +538,14 @@ $(document.body).bind('loaded-largeAddress', () => {
 
     e.preventDefault();
     pageNo = 1;
-    
+
     //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
     Swal.close();
-    
-    
+
+
     $('.mediumAddress').html(''); // 지역 중분류 목록 초기화
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#mediumAddressButton').html('시군구<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 중분류 이름 초기화
@@ -567,13 +567,13 @@ $(document.body).bind('loaded-mediumAddress', () => {
   $('.madr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
-    
+
     //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
     Swal.close();
-    
+
     $('.smallAddress').html(''); // 지역 소분류 목록 초기화
     $('#smallAddressButton').html('동읍면<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 이름 초기화
     $('#smallAddressButton').removeClass('g-color-primary');
@@ -591,13 +591,13 @@ $(document.body).bind('loaded-smallAddress', () => {
   $('.sadr-btn').click(function(e) {
     e.preventDefault();
     pageNo = 1;
-    
+
     //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
     Swal.close();
-    
+
     $('#smallAddressButton').html($(e.target).text()+'<i class="g-right-0 g-pos-abs g-pr-10 fa fa-angle-down"></i>'); // 지역 소분류 버튼 이름 변경
     $('#smallAddressButton').removeClass('g-color-main');
     $('#smallAddressButton').addClass('g-color-primary');
@@ -615,13 +615,13 @@ $('#large-tag').click(function(e) {
   $('#accordion-mcls .u-accordion__header a').addClass('g-color-main');
   e.preventDefault();
   pageNo = 1;
-  
+
   //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
   Swal.close();
-  
+
   clsNo = largeClsNo;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
   $('#small-tag').remove();
@@ -637,13 +637,13 @@ $(document.body).bind('loaded-medium-tag', () => {
     $('.scls-btn').addClass("g-color-main");
     e.preventDefault();
     pageNo = 1;
-    
+
     //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
     Swal.close();
-    
+
     clsNo = $(e.target).attr('data-no');
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
     $('#small-tag').remove();
@@ -682,7 +682,7 @@ $('#clearAddr').click(function(e){
   $('#smallAddressButton').removeClass('g-color-primary');
   $('#smallAddressButton').addClass('g-color-main');
   pageNo = 1;
-  
+
   //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
@@ -697,13 +697,13 @@ $('#clearDay').click(function(e){
 
   $('.day-checkbox input').prop('checked',false);
   pageNo = 1;
-  
+
   //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
   Swal.close();
-  
+
   dayNo = undefined;
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
@@ -713,13 +713,13 @@ $('#rateRange').on('DOMSubtreeModified', function() {
   if($('#rateRange').html().length >= 1){
     console.log($('#rateRange').html());
     pageNo = 1;
-    
+
     //테이블 비우기
     $('.sides .side').not( '.active' ).html('');
     $('.added').remove();
     scrolled = false;
     Swal.close();
-    
+
     rateValue = $('#rateRange').html();
     $.ajaxSetup({ async:false });
     loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
@@ -741,13 +741,13 @@ $('.day-checkbox input').change(function(e) {
   dayNo = sum;
 
   pageNo = 1; // 페이지 초기화
-  
+
   //테이블 비우기
   $('.sides .side').not( '.active' ).html('');
   $('.added').remove();
   scrolled = false;
   Swal.close();
-  
+
   loadList(pageNo, clsNo, addressNo, rateValue, keyword, dayNo);
 });
 
@@ -826,9 +826,22 @@ $('#contents').keyup(function(){
   }
 });
 
-$('#stdAddModal').on('show.bs.modal', function (e) {
+$('#addModal-btn').click(function(e) {
+  e.preventDefault();
   Swal.close();
-})
+  var login = localStorage.getItem('login');
+  
+  if(login == 'false'){
+    Swal.fire({
+      type: 'error',
+      title: errorTitle,
+      text: '로그인 해주세요!'
+    });
+  } else {
+    $('#stdAddModal').modal('show');
+  }
+});
+
 
 
 //시작하기 눌렀을 경우
