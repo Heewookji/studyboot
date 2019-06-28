@@ -527,6 +527,13 @@ public class MyStudyController {
       List<StudyMember> rateInfo = studyMemberService.rateInfo(userNo);
       List<RateLog> rateLog = rateService.list(userNo);
 
+      if(rateInfo.size() == 0) {
+        content.put("member",  memberService.get(userNo));
+        content.put("status", "success");
+        content.put("state", "member");
+        return content;
+      }
+      
       if(rateInfo != null) {
         content.put("rateInfo", rateInfo);
       }

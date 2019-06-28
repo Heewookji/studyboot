@@ -303,7 +303,7 @@
          <!-- Figure Info -->
          <div class="d-block">
           <div class="g-mb-5">
-           <h4 class="h5 g-mb-0">{{member.nickName}}</h4>
+           <h4 class="h5 g-mb-0 g-width-100">{{member.nickName}}</h4>
            <em
             class="d-block g-color-primary g-font-style-normal g-font-size-default  g-width-60">{{memberCls}}</em>
           </div>
@@ -329,35 +329,6 @@
 </script>
 
 
-<script id="retiree-evaluation-list1" type="text/x-handlebars-template">
-{{#each retire}}
- <div class="col-md-4 g-mb-30 g-mt-30">
-<div id="rateit{{nickName}}" data-rateit-mode="font"  style="font-size:30px" data-rateit-resetable="false">
-</div>
-
-  <figure
-    class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-cyan--hover g-transition-0_2 text-center">
-    <div class="g-py-40 g-px-20">
-      <!-- Figure Image -->
-      <img class="g-width-100 g-height-100 rounded-circle g-mb-20"
-        src="/studyboot/upload/images/member/thumbnail.{{photo}}.jpg" alt="Image Description">
-
-      <h4 class="h5 g-mb-5">{{name}}</h4>
-      <div class="d-block">
-        <span class="g-color-cyan g-font-size-default g-mr-3"> <i class="icon-user"></i>
-        </span> <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{nickName}}</em>
-      </div>  
-    </div>
-
-    <hr class="g-brd-gray-light-v4 g-my-0">
-
-    <div id="rateit-{{nickName}}" class="rateit" data-rateit-mode="font" style="font-size: 30px"
-      data-rateit-resetable="false"></div>
-  </figure>
-</div>
-{{/each}}
-</script>
-
 <script id="retiree-evaluation-list" type="text/x-handlebars-template">
 {{#each retire}}
 <div class="row">
@@ -374,7 +345,7 @@
     <!-- Figure Info -->
     <div class="d-block g-mt-15">
      <div class="g-mb-5">
-      <h4 class="h5 g-mb-0">{{nickName}}</h4>
+      <h4 class="h5 g-mb-0 g-width-100">{{nickName}}</h4>
       <em
        class="d-block g-color-primary g-font-style-normal g-font-size-default  g-width-60">{{memberCls}}</em>
      </div>
